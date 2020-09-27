@@ -63,19 +63,24 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes,
 });
-router.onError;
-router.beforeEach((from, to, next) => {
-  let user = sessionStorage.getItem("zzaAAb");
 
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
+router.beforeEach((to,from, next) => {
+  let user = JSON.parse(sessionStorage.getItem("zzaAAb"));
+
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    
     if (user != null) {
+      
       next();
     } else {
+      console.log("user null");
       next({
+        name:"Login",
         redirect: "/login",
       });
     }
   } else {
+    console.log("ga butuh");
     next();
   }
 });
