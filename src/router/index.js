@@ -27,7 +27,7 @@ const routes = [
     path: "/dashboard",
     component: Dashboard,
     meta: {
-      requiresAuth: true,
+      requiresAuth: false,
     },
     children: [
       {
@@ -70,7 +70,7 @@ router.beforeEach((to,from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     
     if (user != null) {
-      
+
       next();
     } else {
       console.log("user null");

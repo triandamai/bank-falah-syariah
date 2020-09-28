@@ -62,6 +62,7 @@ const auth = {
           setTimeout(() => {
             state.snackbar = false;
             state.loading = false;
+            router.push({ path: "/dashboard" });
           }, 2000);
         });
     },
