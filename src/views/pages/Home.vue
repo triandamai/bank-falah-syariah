@@ -1,4 +1,5 @@
 <template>
+<div>
   <v-container>
     <v-row>
       <template v-for="n in 4">
@@ -11,12 +12,16 @@
         </v-col>
       </template>
     </v-row>
+  
   </v-container>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "Home"
+  name: "Home",
+  components:{
+  }
 };
 </script>
 

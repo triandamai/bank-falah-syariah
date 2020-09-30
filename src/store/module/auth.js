@@ -1,5 +1,5 @@
-import { HTTP } from "./services";
-import router from "../router/index";
+import { HTTP } from "../services";
+import router from "../../router/index";
 const auth = {
   namespace: true,
   // eslint-disable-next-line
