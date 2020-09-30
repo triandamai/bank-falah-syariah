@@ -17,9 +17,9 @@
                 <v-spacer> </v-spacer>
                 <v-text-field
                   class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2"
-                  v-model="search"
+                  v-model="cari"
                   append-icon="mdi-magnify"
-                  label="Search"
+                  label="Cari.."
                   single-line
                   small
                   hide-details
@@ -28,14 +28,14 @@
             </v-card-title>
             <v-data-table
               :headers="headers"
-              :items="desserts"
+              :items="datapegawai"
               item-key="name"
               class="elevation-1"
-              :search="search"
+              :search="cari"
               :custom-filter="filterOnlyCapsText"
               show-select
               loading
-              loading-text="Loading... Please wait"
+              loading-text="Mengambil data...."
             >
               <template v-slot:[`item.actions`]="{ item }">
                 <v-icon small class="mr-2" @click="editItem(item)">
@@ -63,38 +63,26 @@ export default {
   },
   data: function() {
     return {
-      search: "",
+      cari: "",
       calories: "",
-      loading: true,
-      desserts: [
-        {
-          id: "000002",
-          nip: "000003",
-          nama: "Trian damai",
-          jk: "LAKI-LAKI",
-          jabatan: "Officer",
-          status: "AKTIF"
-        }
-      ]
+      loading: true
     };
   },
   computed: {
+    datapegawai() {
+      return this.$store.getters.getdatapegawai;
+    },
     headers() {
       return [
         {
           text: "ID PEGAWAI",
           align: "start",
-          sortable: false,
+          sortable: true,
           value: "id"
         },
         {
           text: "NIP",
           value: "nip"
-          //   filter: (value) => {
-          //     if (!this.calories) return true;
-
-          //     return value < parseInt(this.calories);
-          //   },
         },
         { text: "NAMA LENGKAP", value: "nama" },
         { text: "JENIS KELAMIN", value: "jk" },
@@ -110,10 +98,7 @@ export default {
         value != null &&
         search != null &&
         typeof value === "string" &&
-        value
-          .toString()
-          .toLocaleUpperCase()
-          .indexOf(search) !== -1
+        value.toString().indexOf(search) !== -1
       );
     },
     editItem(item) {

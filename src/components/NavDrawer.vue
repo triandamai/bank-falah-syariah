@@ -5,9 +5,9 @@
         <v-img :src="require('../assets/logo-aksioma.png')"></v-img>
       </v-list-item-avatar>
       <v-list-item-content>
-        <v-list-item-title>Aksioma V.3</v-list-item-title>
+        <v-list-item-title>Aksioma</v-list-item-title>
         <v-list-item-subtitle>
-          subtext
+          version 1.0
         </v-list-item-subtitle>
       </v-list-item-content>
       <v-btn icon @click.stop="changemini">
@@ -68,7 +68,7 @@ export default {
       {
         title: "Dashboard",
         icon: "mdi-view-dashboard-outline",
-        link: "/home",
+        link: "/home"
       },
       {
         title: "User",
@@ -78,26 +78,26 @@ export default {
           {
             title: "Data Pegawai",
             icon: "mdi-card-account-details-star-outline ",
-            link: "/data-pegawai",
+            link: "/data-pegawai"
           },
           { title: "Data User", icon: "mdi-group", link: "/data-user" },
           {
             title: "Akses Teller",
             icon: "mdi-card-account-details-outline",
-            link: "/akses-teller",
+            link: "/akses-teller"
           },
           {
             title: "Data Jabatan",
             icon: "mdi-account-network-outline",
-            link: "/data-jabatan",
+            link: "/data-jabatan"
           },
           {
             title: "Role Akses",
             icon: "mdi-account-arrow-right-outline",
-            link: "/role-akses",
+            link: "/role-akses"
           },
-          { title: "Menu", icon: "mdi-menu", link: "/menu" },
-        ],
+          { title: "Menu", icon: "mdi-menu", link: "/menu" }
+        ]
       },
       {
         title: "Data Master",
@@ -109,26 +109,26 @@ export default {
           {
             title: "Kolektibilitas",
             icon: "mdi-clipboard-file-outline",
-            link: "/kolektibilitas",
+            link: "/kolektibilitas"
           },
           {
             title: "pengaturan",
             icon: "mdi-cog-sync-outline",
-            link: "/pengaturan",
+            link: "/pengaturan"
           },
           { title: "Program", icon: "mdi-code-braces", link: "/program" },
           { title: "Jaminan", icon: "mdi-form-select", link: "/jaminan" },
           {
             title: "Distribusi Basil COA",
             icon: "mdi-tournament",
-            link: "/distribusi-basil-coa",
+            link: "/distribusi-basil-coa"
           },
           {
             title: "Jenis Transaksi",
             icon: "mdi-newspaper-variant-multiple-outline",
-            link: "/jenis-transaksi",
-          },
-        ],
+            link: "/jenis-transaksi"
+          }
+        ]
       },
       {
         title: "Data Anggota",
@@ -138,19 +138,19 @@ export default {
           {
             title: "Anggota",
             icon: "mdi-account-group-outline",
-            link: "/anggota",
+            link: "/anggota"
           },
           {
             title: "Aktivasi Nasabah",
             icon: "mdi-account-reactivate-outline",
-            link: "/aktivasi-nasabah",
+            link: "/aktivasi-nasabah"
           },
           {
             title: "Rekening",
             icon: "mdi-ballot-recount-outline",
-            link: "/rekening",
-          },
-        ],
+            link: "/rekening"
+          }
+        ]
       },
       {
         title: "Transaksi Teller",
@@ -160,19 +160,19 @@ export default {
           {
             title: "Simpanan",
             icon: "mdi-content-save-all-outline",
-            link: "/teller-simpnanan",
+            link: "/teller-simpnanan"
           },
           {
             title: "Pembiayaan",
             icon: "mdi-contactless-payment-circle-outline",
-            link: "/teller-pembiayaan",
+            link: "/teller-pembiayaan"
           },
           {
             title: "Simpana Berjangka",
             icon: "mdi-currency-usd-circle-outline",
-            link: "/simpanan-berjangka",
-          },
-        ],
+            link: "/simpanan-berjangka"
+          }
+        ]
       },
       {
         title: "Transaksi Umum",
@@ -182,20 +182,20 @@ export default {
           {
             title: "Kas Keluar/Masuk",
             icon: "mdi-account-box-multiple-outline",
-            link: "/kas-keluar-masuk",
+            link: "/kas-keluar-masuk"
           },
           {
             title: "Transaksi Lainnya",
             icon: "mdi-transition",
-            link: "/transaksi-lain",
+            link: "/transaksi-lain"
           },
           { title: "Selisih Kas", icon: "mdi-home-city", link: "/selisih-kas" },
           {
             title: "Transaksi Antar Kas",
             icon: "mdi-card-plus-outline",
-            link: "/transaksi-antar-kas",
-          },
-        ],
+            link: "/transaksi-antar-kas"
+          }
+        ]
       },
       {
         title: "Accounting",
@@ -205,14 +205,14 @@ export default {
           {
             title: "Masukan Jurnal",
             icon: "mdi-file-replace-outline",
-            link: "/masukkan-jurnal",
+            link: "/masukkan-jurnal"
           },
           {
             title: "Jurnal Umum",
             icon: "mdi-file-refresh-outline",
-            link: "/jurnal-umum",
-          },
-        ],
+            link: "/jurnal-umum"
+          }
+        ]
       },
       {
         title: "Otomasi",
@@ -222,19 +222,19 @@ export default {
           {
             title: "Distribusi Profit",
             icon: "mdi-progress-upload",
-            link: "/distribusi-profit",
+            link: "/distribusi-profit"
           },
           {
             title: "End of Year",
             icon: "mdi-layers-triple-outline",
-            link: "/end-of-year",
+            link: "/end-of-year"
           },
           {
             title: "Backup Data",
             icon: "mdi-arrange-send-to-back",
-            link: "/backup-data",
-          },
-        ],
+            link: "/backup-data"
+          }
+        ]
       },
       {
         title: "Laporan",
@@ -244,36 +244,36 @@ export default {
           {
             title: "Keuangan",
             icon: "mdi-account-details-outline",
-            link: "/keuangan",
+            link: "/keuangan"
           },
           {
             title: "Anggota",
             icon: "mdi-account-supervisor-outline",
-            link: "/laporan-anggota",
+            link: "/laporan-anggota"
           },
           { title: "NPF", icon: "mdi-home-city", link: "/npf" },
           { title: "Simpanan", icon: "mdi-home-city", link: "/simpanan" },
           {
             title: "Simpanan Berjangka",
             icon: "mdi-home-city",
-            link: "/laporan-simpanan-berjangka",
+            link: "/laporan-simpanan-berjangka"
           },
           { title: "Pembiayaan", icon: "mdi-home-city", link: "/pembiayaan" },
-          { title: "Teller", icon: "mdi-home-city", link: "/teller" },
-        ],
-      },
-    ],
+          { title: "Teller", icon: "mdi-home-city", link: "/teller" }
+        ]
+      }
+    ]
   }),
   computed: {
     mini() {
       return this.$store.getters.getminimenu;
-    },
+    }
   },
   methods: {
     changemini: function() {
       this.$store.dispatch("actionminimenu", !this.mini);
-    },
-  },
+    }
+  }
 };
 </script>
 

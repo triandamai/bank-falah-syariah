@@ -26,7 +26,7 @@ const auth = {
     },
   },
   mutations: {
-    proseslogin(state, data) {
+    login(state, data) {
       state.loading = true;
       HTTP.post("/users/login", data)
         .then((result) => {
@@ -66,12 +66,22 @@ const auth = {
           }, 2000);
         });
     },
+    logout(state, data) {
+      setTimeout(() => {
+        router.replace({
+          path: "/login",
+        });
+      }, 200);
+    },
   },
   // eslint-disable-next-line
   //dari component ke action terus ke mutation
   actions: {
     proseslogin(context, data) {
-      context.commit("proseslogin", data);
+      context.commit("login", data);
+    },
+    proseslogout(context, data) {
+      context.commit("logout", data);
     },
   },
 };

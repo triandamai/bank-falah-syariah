@@ -55,7 +55,7 @@
 
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="primary" text @click="menu = !menu">
+          <v-btn color="primary" text @click="signOut">
             Keluar
           </v-btn>
         </v-card-actions>
@@ -79,6 +79,10 @@ export default {
   methods: {
     changemini: function() {
       this.$store.dispatch("actionminimenu", !this.mini);
+    },
+    signOut: function() {
+      this.menu = !this.menu;
+      this.$store.dispatch("proseslogout", {});
     }
   }
 };

@@ -19,7 +19,7 @@
                   class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2"
                   v-model="search"
                   append-icon="mdi-magnify"
-                  label="Search"
+                  label="Cari Pegawai"
                   single-line
                   small
                   hide-details
@@ -35,7 +35,7 @@
               :custom-filter="filterOnlyCapsText"
               show-select
               loading
-              loading-text="Loading... Please wait"
+              loading-text="Mengambil Data "
             >
               <template v-slot:[`item.actions`]="{ item }">
                 <v-icon small class="mr-2" @click="editItem(item)">
@@ -68,9 +68,9 @@ export default {
           nama: "Trian damai",
           jk: "LAKI-LAKI",
           jabatan: "Officer",
-          status: "AKTIF",
-        },
-      ],
+          status: "AKTIF"
+        }
+      ]
     };
   },
   computed: {
@@ -80,11 +80,11 @@ export default {
           text: "ID PEGAWAI",
           align: "start",
           sortable: false,
-          value: "id",
+          value: "id"
         },
         {
           text: "NIP",
-          value: "nip",
+          value: "nip"
           //   filter: (value) => {
           //     if (!this.calories) return true;
 
@@ -95,9 +95,9 @@ export default {
         { text: "JENIS KELAMIN", value: "jk" },
         { text: "JABATAN", value: "jabatan" },
         { text: "STATUS", value: "status" },
-        { text: "AKSI", value: "actions", sortable: false },
+        { text: "AKSI", value: "actions", sortable: false }
       ];
-    },
+    }
   },
   methods: {
     filterOnlyCapsText(value, search, item) {
@@ -121,8 +121,8 @@ export default {
       const index = this.desserts.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
         this.desserts.splice(index, 1);
-    },
-  },
+    }
+  }
 };
 </script>
 
