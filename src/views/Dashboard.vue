@@ -10,7 +10,9 @@
     <navdrawer></navdrawer>
     <appbar></appbar>
     <v-main class="grey lighten-4">
-      <router-view />
+      <transition>
+        <router-view />
+      </transition>
     </v-main>
     <footer></footer>
   </v-app>

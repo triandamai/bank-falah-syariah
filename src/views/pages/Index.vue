@@ -46,22 +46,16 @@
 
             <v-card-actions>
               <v-row>
-                <v-btn
-                  color="primary"
-                  class="col col-sm-6 col-xs-12 col-md-6 col-lg-6"
-                  small
-                  text
-                >
-                  Ubah Profil
-                </v-btn>
-                <v-btn
-                  color="primary"
-                  class="col col-sm-6 col-xs-12 col-md-6 col-lg-6"
-                  small
-                  text
-                >
-                  Ubah Password
-                </v-btn>
+                <v-col class="col-sm-4 col-xs-12 col-md-4 col-lg-4 ml-2 mr-2">
+                  <v-btn color="primary" small text>
+                    Ubah Profil
+                  </v-btn>
+                </v-col>
+                <v-col class="col-sm-4 col-xs-12 col-md-4 col-lg-4 mr-2 ml-2">
+                  <v-btn color="primary" small text>
+                    Ubah Password
+                  </v-btn>
+                </v-col>
               </v-row>
             </v-card-actions>
           </v-card>

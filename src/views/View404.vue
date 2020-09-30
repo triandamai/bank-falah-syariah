@@ -1,10 +1,9 @@
-<template><p>404</p> </template>
+<template><p>404</p></template>
 
 <script>
 export default {
-  name: "View404"
+  name: "View404",
 };
 </script>
 
-<style>
-</style>
+<style></style>

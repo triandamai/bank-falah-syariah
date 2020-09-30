@@ -19,18 +19,18 @@
 
     <v-list dense nav>
       <div v-for="(item, index) in items" :key="index">
-        <v-list-item v-if="!item.haschild" :to="baseUrl + item.link" link>
+        <v-list-item v-if="!item.haschild" :to="baseUrl + item.link" link small>
           <v-list-item-icon small>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
 
           <v-list-item-content>
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title small>{{ item.title }}</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
         <v-list-group v-else>
           <template v-slot:activator>
-            <v-list-item-icon>
+            <v-list-item-icon small>
               <v-icon>{{ item.icon }}</v-icon>
             </v-list-item-icon>
 
@@ -42,6 +42,7 @@
             v-for="(sub, i) in item.sub"
             :key="i"
             :to="baseUrl + sub.link"
+            small
             link
           >
             <v-list-item-icon>
@@ -73,160 +74,192 @@ export default {
         title: "User",
         icon: "mdi-account-check-outline",
         haschild: true,
-        link: "/dashboard",
         sub: [
           {
             title: "Data Pegawai",
             icon: "mdi-card-account-details-star-outline ",
-            link: "/datapegawai",
+            link: "/data-pegawai",
           },
-          { title: "Data User", icon: "mdi-group", link: "/datauser" },
+          { title: "Data User", icon: "mdi-group", link: "/data-user" },
           {
             title: "Akses Teller",
             icon: "mdi-card-account-details-outline",
-            link: "/datapegawai",
+            link: "/akses-teller",
           },
           {
             title: "Data Jabatan",
             icon: "mdi-account-network-outline",
-            link: "/datapegawai",
+            link: "/data-jabatan",
           },
           {
             title: "Role Akses",
             icon: "mdi-account-arrow-right-outline",
-            link: "/datapegawai",
+            link: "/role-akses",
           },
-          { title: "Menu", icon: "mdi-menu", link: "/datapegawai" },
+          { title: "Menu", icon: "mdi-menu", link: "/menu" },
         ],
       },
       {
         title: "Data Master",
         icon: "mdi-file-document-multiple-outline",
-        link: "/datapegawai",
         haschild: true,
         sub: [
-          { title: "COA", icon: "mdi-home-city", link: "/datapegawai" },
-          { title: "Produk", icon: "mdi-home-city", link: "/datapegawai" },
+          { title: "COA", icon: "mdi-coat-rack", link: "/coa" },
+          { title: "Produk", icon: "mdi-cube-outline", link: "/produk" },
           {
             title: "Kolektibilitas",
-            icon: "mdi-home-city",
-            link: "/datapegawai",
+            icon: "mdi-clipboard-file-outline",
+            link: "/kolektibilitas",
           },
-          { title: "pengaturan", icon: "mdi-home-city", link: "/datapegawai" },
-          { title: "Program", icon: "mdi-home-city", link: "/datapegawai" },
-          { title: "Jaminan", icon: "mdi-home-city", link: "/datapegawai" },
+          {
+            title: "pengaturan",
+            icon: "mdi-cog-sync-outline",
+            link: "/pengaturan",
+          },
+          { title: "Program", icon: "mdi-code-braces", link: "/program" },
+          { title: "Jaminan", icon: "mdi-form-select", link: "/jaminan" },
           {
             title: "Distribusi Basil COA",
-            icon: "mdi-home-city",
-            link: "/datapegawai",
+            icon: "mdi-tournament",
+            link: "/distribusi-basil-coa",
           },
           {
             title: "Jenis Transaksi",
-            icon: "mdi-home-city",
-            link: "/datapegawai",
+            icon: "mdi-newspaper-variant-multiple-outline",
+            link: "/jenis-transaksi",
           },
         ],
       },
       {
         title: "Data Anggota",
         icon: "mdi-account-group-outline",
-        link: "/datapegawai",
         haschild: true,
         sub: [
-          { title: "Anggota", icon: "mdi-home-city", link: "/datapegawai" },
+          {
+            title: "Anggota",
+            icon: "mdi-account-group-outline",
+            link: "/anggota",
+          },
           {
             title: "Aktivasi Nasabah",
-            icon: "mdi-home-city",
-            link: "/datapegawai",
+            icon: "mdi-account-reactivate-outline",
+            link: "/aktivasi-nasabah",
           },
-          { title: "Rekening", icon: "mdi-home-city", link: "/datapegawai" },
+          {
+            title: "Rekening",
+            icon: "mdi-ballot-recount-outline",
+            link: "/rekening",
+          },
         ],
       },
       {
         title: "Transaksi Teller",
         icon: "mdi-contactless-payment-circle-outline",
-        link: "/datapegawai",
         haschild: true,
         sub: [
-          { title: "Simpanan", icon: "mdi-home-city", link: "/datapegawai" },
-          { title: "Pembiayaan", icon: "mdi-home-city", link: "/datapegawai" },
+          {
+            title: "Simpanan",
+            icon: "mdi-content-save-all-outline",
+            link: "/teller-simpnanan",
+          },
+          {
+            title: "Pembiayaan",
+            icon: "mdi-contactless-payment-circle-outline",
+            link: "/teller-pembiayaan",
+          },
           {
             title: "Simpana Berjangka",
-            icon: "mdi-home-city",
-            link: "/datapegawai",
+            icon: "mdi-currency-usd-circle-outline",
+            link: "/simpanan-berjangka",
           },
         ],
       },
       {
         title: "Transaksi Umum",
         icon: "mdi-contactless-payment-circle-outline",
-        link: "/datapegawai",
         haschild: true,
         sub: [
           {
             title: "Kas Keluar/Masuk",
-            icon: "mdi-home-city",
-            link: "/datapegawai",
+            icon: "mdi-account-box-multiple-outline",
+            link: "/kas-keluar-masuk",
           },
           {
             title: "Transaksi Lainnya",
-            icon: "mdi-home-city",
-            link: "/datapegawai",
+            icon: "mdi-transition",
+            link: "/transaksi-lain",
           },
-          { title: "Selisih Kas", icon: "mdi-home-city" },
+          { title: "Selisih Kas", icon: "mdi-home-city", link: "/selisih-kas" },
           {
             title: "Transaksi Antar Kas",
-            icon: "mdi-home-city",
-            link: "/datapegawai",
+            icon: "mdi-card-plus-outline",
+            link: "/transaksi-antar-kas",
           },
         ],
       },
       {
         title: "Accounting",
         icon: "mdi-calculator-variant-outline",
-        link: "/datapegawai",
         haschild: true,
         sub: [
           {
             title: "Masukan Jurnal",
-            icon: "mdi-home-city",
-            link: "/datapegawai",
+            icon: "mdi-file-replace-outline",
+            link: "/masukkan-jurnal",
           },
-          { title: "Jurnal Umum", icon: "mdi-home-city", link: "/datapegawai" },
+          {
+            title: "Jurnal Umum",
+            icon: "mdi-file-refresh-outline",
+            link: "/jurnal-umum",
+          },
         ],
       },
       {
         title: "Otomasi",
         icon: "mdi-sync",
-        link: "/datapegawai",
         haschild: true,
         sub: [
           {
             title: "Distribusi Profit",
-            icon: "mdi-home-city",
-            link: "/datapegawai",
+            icon: "mdi-progress-upload",
+            link: "/distribusi-profit",
           },
-          { title: "End of Year", icon: "mdi-home-city", link: "/datapegawai" },
-          { title: "Backup Data", icon: "mdi-home-city", link: "/datapegawai" },
+          {
+            title: "End of Year",
+            icon: "mdi-layers-triple-outline",
+            link: "/end-of-year",
+          },
+          {
+            title: "Backup Data",
+            icon: "mdi-arrange-send-to-back",
+            link: "/backup-data",
+          },
         ],
       },
       {
         title: "Laporan",
         icon: "mdi-file-document-outline",
-        link: "/datapegawai",
         haschild: true,
         sub: [
-          { title: "Keuangan", icon: "mdi-home-city", link: "/datapegawai" },
-          { title: "Anggota", icon: "mdi-home-city", link: "/datapegawai" },
-          { title: "NPF", icon: "mdi-home-city", link: "/datapegawai" },
-          { title: "Simpanan", icon: "mdi-home-city", link: "/datapegawai" },
+          {
+            title: "Keuangan",
+            icon: "mdi-account-details-outline",
+            link: "/keuangan",
+          },
+          {
+            title: "Anggota",
+            icon: "mdi-account-supervisor-outline",
+            link: "/laporan-anggota",
+          },
+          { title: "NPF", icon: "mdi-home-city", link: "/npf" },
+          { title: "Simpanan", icon: "mdi-home-city", link: "/simpanan" },
           {
             title: "Simpanan Berjangka",
             icon: "mdi-home-city",
-            link: "/datapegawai",
+            link: "/laporan-simpanan-berjangka",
           },
-          { title: "Pembiayaan", icon: "mdi-home-city", link: "/datapegawai" },
-          { title: "Teller", icon: "mdi-home-city", link: "/datapegawai" },
+          { title: "Pembiayaan", icon: "mdi-home-city", link: "/pembiayaan" },
+          { title: "Teller", icon: "mdi-home-city", link: "/teller" },
         ],
       },
     ],

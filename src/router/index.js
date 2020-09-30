@@ -55,179 +55,179 @@ const routes = [
       },
       {
         path: "akses-teller",
-        name: "DataUser",
+        name: "AkssTeller",
         component: DataUser,
       },
       {
         path: "data-jabatan",
-        name: "DataUser",
+        name: "DataJabatan",
         component: DataUser,
       },
       {
         path: "role-akses",
-        name: "DataUser",
+        name: "RoleAkses",
         component: DataUser,
       },
       {
         path: "menu",
-        name: "DataUser",
+        name: "Menu",
         component: DataUser,
       },
       //data master
       {
         path: "coa",
-        name: "DataUser",
+        name: "COA",
         component: DataUser,
       },
       {
         path: "produk",
-        name: "DataUser",
+        name: "Produk",
         component: DataUser,
       },
       {
         path: "kolektibilitas",
-        name: "DataUser",
+        name: "Kolektibilitas",
         component: DataUser,
       },
       {
         path: "pengaturan",
-        name: "DataUser",
+        name: "Pengaturan",
         component: DataUser,
       },
       {
         path: "program",
-        name: "DataUser",
+        name: "Program",
         component: DataUser,
       },
       {
         path: "jaminan",
-        name: "DataUser",
+        name: "Jaminan",
         component: DataUser,
       },
       {
         path: "ditribusi-basil-coa",
-        name: "DataUser",
+        name: "DistribusiBasilCOA",
         component: DataUser,
       },
       {
         path: "jenis-transaksi",
-        name: "DataUser",
+        name: "JenisTransaksi",
         component: DataUser,
       },
       //anggota
       {
         path: "anggota",
-        name: "DataUser",
+        name: "Anggota",
         component: DataUser,
       },
       {
         path: "aktivasi-nasabah",
-        name: "DataUser",
+        name: "AKtivasiNasabah",
         component: DataUser,
       },
       {
         path: "rekening",
-        name: "DataUser",
+        name: "Rekening",
         component: DataUser,
       },
       //transaksi teller
       {
-        path: "simpanan",
-        name: "DataUser",
+        path: "teller-simpanan",
+        name: "TellerSimpanan",
         component: DataUser,
       },
       {
-        path: "pembiayaan",
-        name: "DataUser",
+        path: "teller-pembiayaan",
+        name: "TellerPembiayaan",
         component: DataUser,
       },
       {
         path: "simpanan-berjangka",
-        name: "DataUser",
+        name: "SimpananBerjangka",
         component: DataUser,
       },
       //transaksi umum
       {
         path: "kas-keluar-masuk",
-        name: "DataUser",
+        name: "KasKeluarMasuk",
         component: DataUser,
       },
       {
         path: "transaksi-lain",
-        name: "DataUser",
+        name: "TransaksiLain",
         component: DataUser,
       },
       {
         path: "selisih-kas",
-        name: "DataUser",
+        name: "SelisihKas",
         component: DataUser,
       },
       {
         path: "transaksi-antar-kas",
-        name: "DataUser",
+        name: "TransaksiAntarKas",
         component: DataUser,
       },
       //accounting
       {
         path: "masukkan-jurnal",
-        name: "DataUser",
+        name: "MasukkanJurnal",
         component: DataUser,
       },
       {
         path: "jurnal-umum",
-        name: "DataUser",
+        name: "JurnalUmum",
         component: DataUser,
       },
       //otomasi
       {
         path: "distribusi-profit",
-        name: "DataUser",
+        name: "DistribusiProfit",
         component: DataUser,
       },
       {
         path: "end-of-year",
-        name: "DataUser",
+        name: "EOY",
         component: DataUser,
       },
       {
         path: "backup-data",
-        name: "DataUser",
+        name: "BackupData",
         component: DataUser,
       },
       //laporan
       {
         path: "keuangan",
-        name: "DataUser",
+        name: "Keuangan",
         component: DataUser,
       },
       {
-        path: "anggota",
-        name: "DataUser",
+        path: "laporan-anggota",
+        name: "LaporanAnggota",
         component: DataUser,
       },
       {
         path: "npf",
-        name: "DataUser",
+        name: "NPF",
         component: DataUser,
       },
       {
         path: "simpanan",
-        name: "DataUser",
+        name: "Simpanan",
         component: DataUser,
       },
       {
-        path: "simapanan-brjangka",
-        name: "DataUser",
+        path: "laporan-simpanan-berjangka",
+        name: "LaporanSimpananBerjangka",
         component: DataUser,
       },
       {
         path: "pembiayaan",
-        name: "DataUser",
+        name: "Pembiayaan",
         component: DataUser,
       },
       {
         path: "teller",
-        name: "DataUser",
+        name: "Tellar",
         component: DataUser,
       },
       //no akses
