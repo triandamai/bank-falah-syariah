@@ -10,7 +10,7 @@
             <v-card-title>
               <v-row>
                 <v-col class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2">
-                  <v-btn color="primary" dark small>
+                  <v-btn color="primary" dark small @click="tambahpegawai">
                     Tambah Pegawai
                   </v-btn>
                 </v-col>
@@ -50,12 +50,17 @@
         </v-col>
       </v-row>
     </v-container>
+    <tambah-pegawai></tambah-pegawai>
   </div>
 </template>
 
 <script>
+import TambahPegawai from "../../components/TambahPegawai.vue";
 export default {
   name: "DataPegawai",
+  components: {
+    TambahPegawai
+  },
   data: function() {
     return {
       search: "",
@@ -68,9 +73,9 @@ export default {
           nama: "Trian damai",
           jk: "LAKI-LAKI",
           jabatan: "Officer",
-          status: "AKTIF",
-        },
-      ],
+          status: "AKTIF"
+        }
+      ]
     };
   },
   computed: {
@@ -80,11 +85,11 @@ export default {
           text: "ID PEGAWAI",
           align: "start",
           sortable: false,
-          value: "id",
+          value: "id"
         },
         {
           text: "NIP",
-          value: "nip",
+          value: "nip"
           //   filter: (value) => {
           //     if (!this.calories) return true;
 
@@ -95,9 +100,9 @@ export default {
         { text: "JENIS KELAMIN", value: "jk" },
         { text: "JABATAN", value: "jabatan" },
         { text: "STATUS", value: "status" },
-        { text: "AKSI", value: "actions", sortable: false },
+        { text: "AKSI", value: "actions", sortable: false }
       ];
-    },
+    }
   },
   methods: {
     filterOnlyCapsText(value, search, item) {
@@ -122,7 +127,10 @@ export default {
       confirm("Are you sure you want to delete this item?") &&
         this.desserts.splice(index, 1);
     },
-  },
+    tambahpegawai() {
+      this.$store.dispatch("actiontambahpegawai", true);
+    }
+  }
 };
 </script>
 

@@ -69,20 +69,18 @@ import store from "../store/index";
 export default {
   name: "Appbar",
   data: () => ({
-    menu: false,
-    on: false,
-    attrs: false,
+    menu: false
   }),
   computed: {
     mini() {
       return this.$store.getters.getminimenu;
-    },
+    }
   },
   methods: {
     changemini: function() {
       this.$store.dispatch("actionminimenu", !this.mini);
-    },
-  },
+    }
+  }
 };
 </script>
 
