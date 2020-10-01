@@ -1,4 +1,5 @@
 import { HTTP } from "../services";
+import { KEY_USER } from "../variable";
 import router from "../../router/index";
 const auth = {
   namespace: true,
@@ -30,10 +31,9 @@ const auth = {
       state.loading = true;
       HTTP.post("/users/login", data)
         .then((result) => {
-          console.log(result.data.data);
           state.snackbar = true;
           if (result?.data?.status == 200) {
-            localStorage.setItem("zzab", result.data.data[0]);
+            sessionStorage.setItem(KEY_USER, result.data.data[0]);
             state.message = "Berhasil Masuk";
             state.user = result.data.data[0];
             setTimeout(() => {
@@ -54,7 +54,6 @@ const auth = {
         })
         // eslint-disable-next-line
         .catch((err) => {
-          console.log(err);
           state.snackbar = true;
           state.message = "Gagal Masuk";
         })

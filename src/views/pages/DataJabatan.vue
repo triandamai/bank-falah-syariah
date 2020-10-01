@@ -3,23 +3,23 @@
     <v-container>
       <v-row>
         <v-col class="col-12 col-xs-12 col-sm-12 col-md12 col-lg-12">
-          <strong>Data Pegawai</strong>
+          <strong>Data Jabatan</strong>
         </v-col>
         <v-col class="col-12 col-xs-12 col-sm-12 col-md12 col-lg-12">
           <v-card>
             <v-card-title>
               <v-row>
                 <v-col class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2">
-                  <v-btn color="primary" dark small @click="tambahPegawai">
-                    Tambah Pegawai
+                  <v-btn color="primary" dark small @click="tambahJabatan">
+                    Tambah Jabatan
                   </v-btn>
                 </v-col>
                 <v-spacer> </v-spacer>
                 <v-text-field
                   class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2"
-                  v-model="cari"
+                  v-model="search"
                   append-icon="mdi-magnify"
-                  label="Cari.."
+                  label="Cari User"
                   single-line
                   small
                   hide-details
@@ -28,14 +28,14 @@
             </v-card-title>
             <v-data-table
               :headers="headers"
-              :items="datapegawai"
+              :items="data"
               item-key="name"
               class="elevation-1"
-              :search="cari"
+              :search="search"
               :custom-filter="filterOnlyCapsText"
               show-select
               loading
-              loading-text="Mengambil data...."
+              loading-text="Mengambil Data "
             >
               <template v-slot:[`item.actions`]="{ item }">
                 <v-icon small class="mr-2" @click="editItem(item)">
@@ -50,30 +50,32 @@
         </v-col>
       </v-row>
     </v-container>
-    <tambah-pegawai></tambah-pegawai>
+    <TambahJabatan></TambahJabatan>
   </div>
 </template>
 
 <script>
-import TambahPegawai from "../../components/TambahPegawai.vue";
+import TambahJabatan from "../../components/TambahJabatan.vue";
 export default {
-  name: "DataPegawai",
+  name: "DataUser",
   components: {
-    TambahPegawai
+    TambahJabatan
   },
   data: function() {
     return {
-      cari: "",
-      calories: "",
+      search: "",
       loading: true
     };
   },
   computed: {
-    datapegawai() {
-      return this.$store.getters.getdatapegawai;
+    data() {
+      return this.$store.getters.getdatajabatan;
+    },
+    dialog() {
+      return this.$store.getters.getdialogtambahjabatan;
     },
     headers() {
-      return this.$store.getters.getheaderdatapegawai;
+      return this.$store.getters.getheaderdatajabatan;
     }
   },
   methods: {
@@ -96,8 +98,8 @@ export default {
       confirm("Are you sure you want to delete this item?") &&
         this.desserts.splice(index, 1);
     },
-    tambahPegawai() {
-      this.$store.dispatch("showdialogtambahpegawai", true);
+    tambahJabatan() {
+      this.$store.dispatch("showdialogtambahjabatan", !this.dialog);
     }
   }
 };

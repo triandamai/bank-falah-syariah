@@ -11,7 +11,7 @@
           <v-btn icon dark @click="hidedialog">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>Tambah Pegawai</v-toolbar-title>
+          <v-toolbar-title>Tambah User</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn dark text @click="hidedialog">
@@ -88,15 +88,15 @@
 
 <script>
 export default {
-  name: "TambahPegawai",
+  name: "TambahUser",
   computed: {
     dialog() {
-      return this.$store.getters.getdialogtambahpegawai;
+      return this.$store.getters.getdialogtambahuser;
     }
   },
   methods: {
     hidedialog() {
-      this.$store.dispatch("showdialogtambahpegawai", !this.dialog);
+      this.$store.dispatch("showdialogtambahuser", !this.dialog);
     }
   }
 };

@@ -3,15 +3,15 @@
     <v-container>
       <v-row>
         <v-col class="col-12 col-xs-12 col-sm-12 col-md12 col-lg-12">
-          <strong>Data Pegawai</strong>
+          <strong>Data User</strong>
         </v-col>
         <v-col class="col-12 col-xs-12 col-sm-12 col-md12 col-lg-12">
           <v-card>
             <v-card-title>
               <v-row>
                 <v-col class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2">
-                  <v-btn color="primary" dark small>
-                    Tambah Pegawai
+                  <v-btn color="primary" dark small @click="tambahUser">
+                    Tambah User
                   </v-btn>
                 </v-col>
                 <v-spacer> </v-spacer>
@@ -19,7 +19,7 @@
                   class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2"
                   v-model="search"
                   append-icon="mdi-magnify"
-                  label="Cari Pegawai"
+                  label="Cari User"
                   single-line
                   small
                   hide-details
@@ -28,7 +28,7 @@
             </v-card-title>
             <v-data-table
               :headers="headers"
-              :items="desserts"
+              :items="data"
               item-key="name"
               class="elevation-1"
               :search="search"
@@ -50,53 +50,32 @@
         </v-col>
       </v-row>
     </v-container>
+    <TambahUser></TambahUser>
   </div>
 </template>
 
 <script>
+import TambahUser from "../../components/TambahUser.vue";
 export default {
   name: "DataUser",
+  components: {
+    TambahUser
+  },
   data: function() {
     return {
       search: "",
-      calories: "",
-      loading: true,
-      desserts: [
-        {
-          id: "000002",
-          nip: "000003",
-          nama: "Trian damai",
-          jk: "LAKI-LAKI",
-          jabatan: "Officer",
-          status: "AKTIF"
-        }
-      ]
+      loading: true
     };
   },
   computed: {
+    data() {
+      return this.$store.getters.getdatauser;
+    },
+    dialog() {
+      return this.$store.getters.getdialogtambahuser;
+    },
     headers() {
-      return [
-        {
-          text: "ID PEGAWAI",
-          align: "start",
-          sortable: false,
-          value: "id"
-        },
-        {
-          text: "NIP",
-          value: "nip"
-          //   filter: (value) => {
-          //     if (!this.calories) return true;
-
-          //     return value < parseInt(this.calories);
-          //   },
-        },
-        { text: "NAMA LENGKAP", value: "nama" },
-        { text: "JENIS KELAMIN", value: "jk" },
-        { text: "JABATAN", value: "jabatan" },
-        { text: "STATUS", value: "status" },
-        { text: "AKSI", value: "actions", sortable: false }
-      ];
+      return this.$store.getters.getheaderdatauser;
     }
   },
   methods: {
@@ -105,10 +84,7 @@ export default {
         value != null &&
         search != null &&
         typeof value === "string" &&
-        value
-          .toString()
-          .toLocaleUpperCase()
-          .indexOf(search) !== -1
+        value.toString().indexOf(search) !== -1
       );
     },
     editItem(item) {
@@ -121,6 +97,9 @@ export default {
       const index = this.desserts.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
         this.desserts.splice(index, 1);
+    },
+    tambahUser() {
+      this.$store.dispatch("showdialogtambahuser", !this.dialog);
     }
   }
 };
