@@ -9,11 +9,14 @@ import Login from "../views/Login.vue";
 //page
 import Home from "../views/pages/Home.vue";
 import NotFound from "../views/pages/NotFound.vue";
-import View404 from "../views/View404.vue";
+import View404 from "../views/Notfound.vue";
 import Index from "../views/pages/Index.vue";
 import DataPegawai from "../views/pages/DataPegawai.vue";
 import DataUser from "../views/pages/DataUser.vue";
 import DataJabatan from "../views/pages/DataJabatan.vue";
+import DataAksesTeller from "../views/pages/DataAksesTeller.vue";
+import RoleAkses from "../views/pages/RoleAkses.vue";
+import Menu from "../views/pages/Menu.vue";
 
 Vue.use(VueRouter);
 
@@ -58,22 +61,22 @@ const routes = [
       {
         path: "akses-teller",
         name: "AkssTeller",
-        component: DataJabatan,
+        component: DataAksesTeller,
       },
       {
         path: "data-jabatan",
         name: "DataJabatan",
-        component: DataUser,
+        component: DataJabatan,
       },
       {
         path: "role-akses",
         name: "RoleAkses",
-        component: DataUser,
+        component: RoleAkses,
       },
       {
         path: "menu",
         name: "Menu",
-        component: DataUser,
+        component: Menu,
       },
       //data master
       {

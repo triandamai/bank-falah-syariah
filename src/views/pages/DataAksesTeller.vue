@@ -3,15 +3,15 @@
     <v-container>
       <v-row>
         <v-col class="col-12 col-xs-12 col-sm-12 col-md12 col-lg-12">
-          <strong>Data Pegawai</strong>
+          <strong>Data Akses Teller</strong>
         </v-col>
         <v-col class="col-12 col-xs-12 col-sm-12 col-md12 col-lg-12">
           <v-card>
             <v-card-title>
               <v-row>
                 <v-col class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2">
-                  <v-btn color="primary" dark small>
-                    Tambah Pegawai
+                  <v-btn color="primary" dark small @click="tambahaksesteller">
+                    Tambah Akses
                   </v-btn>
                 </v-col>
                 <v-spacer> </v-spacer>
@@ -19,7 +19,7 @@
                   class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2"
                   v-model="search"
                   append-icon="mdi-magnify"
-                  label="Search"
+                  label="Cari"
                   single-line
                   small
                   hide-details
@@ -28,7 +28,7 @@
             </v-card-title>
             <v-data-table
               :headers="headers"
-              :items="desserts"
+              :items="data"
               item-key="name"
               class="elevation-1"
               :search="search"
@@ -50,54 +50,33 @@
         </v-col>
       </v-row>
     </v-container>
+    <tambah-akses-teller></tambah-akses-teller>
   </div>
 </template>
 
 <script>
+import TambahAksesTeller from "../../components/TambahAksesTeller.vue";
 export default {
   name: "DataUser",
+  components: {
+    TambahAksesTeller
+  },
   data: function() {
     return {
       search: "",
-      calories: "",
-      loading: true,
-      desserts: [
-        {
-          id: "000002",
-          nip: "000003",
-          nama: "Trian damai",
-          jk: "LAKI-LAKI",
-          jabatan: "Officer",
-          status: "AKTIF",
-        },
-      ],
+      loading: true
     };
   },
   computed: {
-    headers() {
-      return [
-        {
-          text: "ID PEGAWAI",
-          align: "start",
-          sortable: false,
-          value: "id",
-        },
-        {
-          text: "NIP",
-          value: "nip",
-          //   filter: (value) => {
-          //     if (!this.calories) return true;
-
-          //     return value < parseInt(this.calories);
-          //   },
-        },
-        { text: "NAMA LENGKAP", value: "nama" },
-        { text: "JENIS KELAMIN", value: "jk" },
-        { text: "JABATAN", value: "jabatan" },
-        { text: "STATUS", value: "status" },
-        { text: "AKSI", value: "actions", sortable: false },
-      ];
+    data() {
+      return this.$store.getters.getdataaksesteller;
     },
+    headers() {
+      return this.$store.getters.getheaderaksesteller;
+    },
+    dialog() {
+      return this.$store.getters.getdialogtambahaksesteller;
+    }
   },
   methods: {
     filterOnlyCapsText(value, search, item) {
@@ -122,7 +101,10 @@ export default {
       confirm("Are you sure you want to delete this item?") &&
         this.desserts.splice(index, 1);
     },
-  },
+    tambahaksesteller() {
+      this.$store.dispatch("showdialogtambahaksesteller", !this.dialog);
+    }
+  }
 };
 </script>
 

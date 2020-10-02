@@ -59,6 +59,22 @@
               </v-row>
             </v-card-actions>
           </v-card>
+
+          <v-card class="mt-5">
+            <v-card-title>Pertumbuhan Anggota</v-card-title>
+            <vue-funnel-graph
+              :width="width"
+              :height="height"
+              :labels="labels"
+              :values="values"
+              :colors="colors"
+              :sub-labels="subLabels"
+              :direction="direction"
+              :gradient-direction="gradientDirection"
+              :animated="true"
+              :display-percentage="true"
+            ></vue-funnel-graph>
+          </v-card>
         </v-col>
       </v-row>
     </v-container>
@@ -66,31 +82,33 @@
 </template>
 
 <script>
+import { VueFunnelGraph } from "vue-funnel-graph-js";
 export default {
   name: "Index",
   data: () => ({
-    messages: [
-      {
-        from: "You",
-        message: "Sure, I'll see you later.",
-        time: "10:42am",
-        color: "deep-purple lighten-1",
-      },
-      {
-        from: "John Doe",
-        message: "Yeah, sure. Does 1:00pm work?",
-        time: "10:37am",
-        color: "green",
-      },
-      {
-        from: "You",
-        message: "Did you still want to grab lunch today?",
-        time: "9:47am",
-        color: "deep-purple lighten-1",
-      },
+    labels: ["Calon Anggota", "Anggota", "Anggota Luar Biasa"],
+    subLabels: ["50", "60", "70", "80", "90"],
+    values: [
+      // with the given Labels and SubLabels here's what the values represent:
+      //
+      // Direct, Social, Ads
+      //    |      |     |
+      //    v      v     v
+      [3000, 2500, 6500, 5678, 567, 56], // Segments of "Impressions" from top to bottom
+      [3000, 1700, 1000, 954, 678, 567], // Segments of "Add To Cart"
+      [600, 200, 130, 100, 90, 80] // Segments of "Buy"
     ],
+    colors: [
+      ["#FFB178", "#FF3C8E"], // color set for "Impressions" segment
+      ["#A0BBFF", "#EC77FF"], // color set for "Add To Cart" segment
+      ["#A0F9FF", "#7795FF"] // color set for "Buy" segment
+    ],
+    direction: "horizontal",
+    gradientDirection: "horizontal",
+    height: 200,
+    width: 400
   }),
-  components: {},
+  components: { VueFunnelGraph }
 };
 </script>
 

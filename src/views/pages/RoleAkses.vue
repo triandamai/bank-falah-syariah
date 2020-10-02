@@ -3,34 +3,31 @@
     <v-container>
       <v-row>
         <v-col class="col-12 col-xs-12 col-sm-12 col-md12 col-lg-12">
-          <strong>Data Jabatan</strong>
+          <strong>Role Akses</strong>
         </v-col>
         <v-col class="col-12 col-xs-12 col-sm-12 col-md12 col-lg-12">
           <v-card>
-            <v-card-title>
-              <v-row>
-                <v-col class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2">
-                  <v-btn color="primary" dark small @click="tambahJabatan">
-                    Tambah Jabatan
-                  </v-btn>
-                </v-col>
-                <v-spacer> </v-spacer>
-                <v-text-field
-                  class="col-xs-12 col-sm-6 col-md-6 col-lg-6 mb-2"
-                  v-model="search"
-                  append-icon="mdi-magnify"
-                  label="Cari User"
-                  single-line
-                  small
-                  hide-details
-                ></v-text-field>
-              </v-row>
-            </v-card-title>
+            <v-tabs
+              dark
+              background-color="primary"
+              show-arrows
+              small
+              dense
+              flat
+            >
+              <v-tabs-slider color="teal lighten-3"></v-tabs-slider>
+
+              <v-tab v-for="(item, i) in tab" :key="i" :href="'#tab-' + i">
+                {{ item.name }}
+              </v-tab>
+            </v-tabs>
+          </v-card>
+          <v-card class="mt-5">
             <v-data-table
               :headers="headers"
               :items="data"
               item-key="name"
-              class="elevation-1"
+              class="elevation-1 py-2"
               :search="search"
               :custom-filter="filterOnlyCapsText"
               show-select
@@ -50,32 +47,61 @@
         </v-col>
       </v-row>
     </v-container>
-    <tambah-jabatan></tambah-jabatan>
+    <TambahJabatan></TambahJabatan>
   </div>
 </template>
 
 <script>
-import TambahJabatan from "../../components/TambahJabatan.vue";
 export default {
-  name: "DataUser",
-  components: {
-    TambahJabatan
-  },
+  name: "RoleAkses",
+
   data: function() {
     return {
       search: "",
-      loading: true
+      loading: true,
+      tab: [
+        {
+          id: 1,
+          name: "Admin User"
+        },
+        {
+          id: 2,
+          name: "Admin Master"
+        },
+        {
+          id: 1,
+          name: "Admin Register"
+        },
+        {
+          id: 1,
+          name: "Admin Teller"
+        },
+        {
+          id: 1,
+          name: "Admin Umum"
+        },
+        {
+          id: 1,
+          name: "Admin Accounting"
+        },
+        {
+          id: 1,
+          name: "Admin Otomasi"
+        },
+        {
+          id: 1,
+          name: "Admin Manajer"
+        }
+      ]
     };
   },
   computed: {
     data() {
-      return this.$store.getters.getdatajabatan;
+      return this.$store.getters.getdataroleakses;
     },
-    dialog() {
-      return this.$store.getters.getdialogtambahjabatan;
-    },
+
     headers() {
-      return this.$store.getters.getheaderdatajabatan;
+      return this.$store.getters.getheaderroleakses;
     }
   },
   methods: {
@@ -97,9 +123,6 @@ export default {
       const index = this.desserts.indexOf(item);
       confirm("Are you sure you want to delete this item?") &&
         this.desserts.splice(index, 1);
-    },
-    tambahJabatan() {
-      this.$store.dispatch("showdialogtambahjabatan", !this.dialog);
     }
   }
 };
