@@ -1,3 +1,5 @@
+import { HTTP } from "../services";
+import { KEY_USER, KEY_LAST_PEGAWAI } from "../variable";
 const user = {
   namespace: true,
   // eslint-disable-next-line
@@ -203,10 +205,30 @@ const user = {
     dialogtambahaksesteller(state, data) {
       state.dialogtambahaksesteller = data;
     },
-    simpanpegawai(state, data) {},
-    simpanjabatan(state, data) {},
-    simpanuser(state, data) {},
-    simpanaksesteller(state, data) {},
+    simpanpegawai(state, data) {
+      HTTP.post("", data)
+        .then((res) => {})
+        .catch((err) => {})
+        .finally(() => {});
+    },
+    simpanjabatan(state, data) {
+      HTTP.post("", data)
+        .then((res) => {})
+        .catch((err) => {})
+        .finally(() => {});
+    },
+    simpanuser(state, data) {
+      HTTP.post("", data)
+        .then((res) => {})
+        .catch((err) => {})
+        .finally(() => {});
+    },
+    simpanaksesteller(state, data) {
+      HTTP.post("", data)
+        .then((res) => {})
+        .catch((err) => {})
+        .finally(() => {});
+    },
   },
   // eslint-disable-next-line
   actions: {
