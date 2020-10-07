@@ -2,10 +2,10 @@
   <v-navigation-drawer dense :mini-variant="mini" bottom permanent app>
     <v-list-item class="px-2">
       <v-list-item-avatar tile>
-        <v-img :src="require('../assets/logo-aksioma.png')"></v-img>
+        <v-img :src="require('../assets/PBS.png')"></v-img>
       </v-list-item-avatar>
       <v-list-item-content>
-        <v-list-item-title>Aksioma</v-list-item-title>
+        <v-list-item-title>BSS</v-list-item-title>
         <v-list-item-subtitle>
           version 1.0
         </v-list-item-subtitle>

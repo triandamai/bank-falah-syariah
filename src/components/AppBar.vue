@@ -6,7 +6,7 @@
       @click="changemini"
     ></v-app-bar-nav-icon>
 
-    <v-toolbar-title class="white--text">Aksioma</v-toolbar-title>
+    <v-toolbar-title class="white--text">BSS</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-menu
       v-model="menu"
@@ -26,7 +26,7 @@
         >
           <v-spacer></v-spacer>
           <v-avatar tile color="primary" class="rounded-md mr-1" size="20">
-            <v-img :src="require('../assets/logo-aksioma.png')"></v-img>
+            <v-icon>mdi-account-circle-outline</v-icon>
           </v-avatar>
           Akun
         </v-btn>
