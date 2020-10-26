@@ -4,14 +4,16 @@ import Router from "vue-router";
 Vue.use(Router);
 
 export default new Router({
-  mode: "history",
+  mode: process.env.IS_ELECTRON ? "hash" : "history",
   base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
       redirect: "/dashboard",
       component: () => import("@/view/layout/Layout"),
-
+      meta: {
+        requiresAuth: true,
+      },
       children: [
         {
           path: "/dashboard",
@@ -46,7 +48,7 @@ export default new Router({
             {
               // the 404 route, when none of the above matches
               path: "/404",
-              name: "404",
+              name: "error1",
               component: () => import("@/view/pages/error/Error-1.vue"),
             },
           ],
@@ -78,7 +80,7 @@ export default new Router({
             {
               // the 404 route, when none of the above matches
               path: "/404",
-              name: "404",
+              name: "error2",
               component: () => import("@/view/pages/error/Error-1.vue"),
             },
           ],
@@ -110,7 +112,7 @@ export default new Router({
             {
               // the 404 route, when none of the above matches
               path: "/404",
-              name: "404",
+              name: "error4",
               component: () => import("@/view/pages/error/Error-1.vue"),
             },
           ],
@@ -138,7 +140,7 @@ export default new Router({
         {
           // the 404 route, when none of the above matches
           path: "/404",
-          name: "404",
+          name: "error5",
           component: () => import("@/view/pages/error/Error-1.vue"),
         },
       ],
