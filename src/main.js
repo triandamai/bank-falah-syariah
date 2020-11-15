@@ -6,7 +6,7 @@ import ApiService from "@/core/services/api.service";
 import MockService from "@/core/mock/mock.service";
 import { VERIFY_AUTH } from "@/core/services/store/auth.module";
 import { RESET_LAYOUT_CONFIG } from "@/core/services/store/config.module";
-import { getToken } from "@core/services/jwt.service.js";
+// import { getToken } from "@/core/services/jwt.service.js";
 
 import VueTour from "vue-tour";
 require("vue-tour/dist/vue-tour.css");
@@ -39,19 +39,19 @@ ApiService.init();
 MockService.init();
 
 router.beforeEach((to, from, next) => {
-  const user = getToken();
-  if (to.matched.some((route) => route.meta.requiresAuth)) {
-    if (user) {
-      next();
-    } else {
-      next({
-        name: "login",
-        redirect: "/login",
-      });
-    }
-  }
+  //const user = getToken();
+  // if (to.matched.some(route => route.meta.requiresAuth)) {
+  //   if (user) {
+  //     next();
+  //   } else {
+  //     next({
+  //       name: "login",
+  //       redirect: "/login"
+  //     });
+  //   }
+  // }
   // Ensure we checked auth before each page load.
-  //Promise.all([store.dispatch(VERIFY_AUTH)]).then(next);
+  Promise.all([store.dispatch(VERIFY_AUTH)]).then(next);
 
   // Scroll page to top on every route change
 
@@ -69,5 +69,5 @@ new Vue({
   store,
   i18n,
   vuetify,
-  render: (h) => h(App),
+  render: h => h(App)
 }).$mount("#app");
