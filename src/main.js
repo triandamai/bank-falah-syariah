@@ -1,12 +1,11 @@
+/* eslint-disable */
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "@/core/services/store";
+import store from "./store/index";
 import ApiService from "@/core/services/api.service";
-import MockService from "@/core/mock/mock.service";
-import { VERIFY_AUTH } from "@/core/services/store/auth.module";
-import { RESET_LAYOUT_CONFIG } from "@/core/services/store/config.module";
-// import { getToken } from "@/core/services/jwt.service.js";
+import { RESET_LAYOUT_CONFIG } from "./store";
+import { getUser } from "@/core/services/jwt.service.js";
 
 import VueTour from "vue-tour";
 require("vue-tour/dist/vue-tour.css");
@@ -36,27 +35,28 @@ import "@mdi/font/css/materialdesignicons.css";
 ApiService.init();
 
 // Remove this to disable mock API
-MockService.init();
+// MockService.init();
 
 router.beforeEach((to, from, next) => {
-  //const user = getToken();
-  // if (to.matched.some(route => route.meta.requiresAuth)) {
-  //   if (user) {
-  //     next();
-  //   } else {
-  //     next({
-  //       name: "login",
-  //       redirect: "/login"
-  //     });
-  //   }
-  // }
+  const user = getUser();
+  if (to.matched.some((route) => route.meta.requiresAuth)) {
+    if (user) {
+      next();
+    } else {
+      next({
+        path: "/auth",
+      });
+    }
+  } else {
+    next();
+  }
   // Ensure we checked auth before each page load.
-  Promise.all([store.dispatch(VERIFY_AUTH)]).then(next);
+  //Promise.all([store.dispatch(VERIFY_AUTH)]).then(next);
 
   // Scroll page to top on every route change
 
   // reset config to initial state
-  store.dispatch(RESET_LAYOUT_CONFIG);
+  store.dispatch(RESET_LAYOUT_CONFIG, "");
 
   setTimeout(() => {
     window.scrollTo(0, 0);
@@ -69,5 +69,5 @@ new Vue({
   store,
   i18n,
   vuetify,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");

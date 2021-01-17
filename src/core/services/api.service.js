@@ -9,7 +9,8 @@ import JwtService from "@/core/services/jwt.service";
 const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
-    Vue.axios.defaults.baseURL = "http://localhost";
+    Vue.axios.defaults.baseURL = "http://localhost:8000";
+    this.setHeader();
   },
 
   /**
@@ -19,10 +20,13 @@ const ApiService = {
     Vue.axios.defaults.headers.common[
       "Authorization"
     ] = `Token ${JwtService.getToken()}`;
+    Vue.axios.defaults.headers.common["Access-Controll-Allow-Origin"] = "*";
+    Vue.axios.defaults.responseType = "json";
+    Vue.axios.defaults.headers.common["Content-Type"] = "application/json";
   },
 
   query(resource, params) {
-    return Vue.axios.get(resource, params).catch(error => {
+    return Vue.axios.get(resource, params).catch((error) => {
       // console.log(error);
       throw new Error(`[KT] ApiService ${error}`);
     });
@@ -35,7 +39,7 @@ const ApiService = {
    * @returns {*}
    */
   get(resource, slug = "") {
-    return Vue.axios.get(`${resource}/${slug}`).catch(error => {
+    return Vue.axios.get(`${resource}/${slug}`).catch((error) => {
       // console.log(error);
       throw new Error(`[KT] ApiService ${error}`);
     });
@@ -48,6 +52,7 @@ const ApiService = {
    * @returns {*}
    */
   post(resource, params) {
+    console.log(Vue.axios.baseURL + resource);
     return Vue.axios.post(`${resource}`, params);
   },
 
@@ -78,11 +83,11 @@ const ApiService = {
    * @returns {*}
    */
   delete(resource) {
-    return Vue.axios.delete(resource).catch(error => {
+    return Vue.axios.delete(resource).catch((error) => {
       // console.log(error);
       throw new Error(`[RWV] ApiService ${error}`);
     });
-  }
+  },
 };
 
 export default ApiService;

@@ -9,23 +9,32 @@ export default new Router({
   routes: [
     {
       path: "/",
-      redirect: "/dashboard",
-      component: () => import("@/view/layout/Layout"),
+      component: () => import("@/view/pages/Layout"),
       meta: {
         requiresAuth: true,
       },
       children: [
         {
-          path: "/dashboard",
+          path: "",
+          redirect: "home",
+        },
+        {
+          path: "home",
           name: "dashboard",
           component: () => import("@/view/pages/Dashboard.vue"),
+          meta: {
+            requiresAuth: true,
+          },
         },
 
         {
-          path: "/akun",
-          name: "vuetify",
+          path: "akun",
           component: () => import("@/view/pages/akun/AkunMain.vue"),
           children: [
+            {
+              path: "",
+              redirect: "data",
+            },
             {
               path: "data",
               name: "vuetify-alerts",
@@ -54,24 +63,23 @@ export default new Router({
           ],
         },
         {
-          path: "/nasabah",
-          name: "wizard",
-          component: () => import("@/view/pages/nasabah/NasabahMain.vue"),
+          path: "nasabah",
+          component: () => import("@/view/pages/nasabah/Nasabah.vue"),
           children: [
             {
               path: "data",
               name: "wizard-1",
-              component: () => import("@/view/pages/nasabah/Nasabah.vue"),
+              component: () => import("@/view/pages/nasabah/DataNasabah.vue"),
             },
             {
               path: "ubah",
               name: "wizard-2",
-              component: () => import("@/view/pages/Tambah.vue"),
+              component: () => import("@/view/pages/nasabah/TambahNasabah.vue"),
             },
             {
               path: "tambah",
               name: "wizard-3",
-              component: () => import("@/view/pages/Tambah.vue"),
+              component: () => import("@/view/pages/nasabah/TambahNasabah.vue"),
             },
             {
               path: "*",
@@ -86,8 +94,7 @@ export default new Router({
           ],
         },
         {
-          path: "/tabungan",
-          name: "tabungan",
+          path: "tabungan",
           component: () => import("@/view/pages/tabungan/TabunganMain.vue"),
           children: [
             {
@@ -119,27 +126,32 @@ export default new Router({
         },
       ],
     },
+
     {
-      path: "/",
+      path: "/auth",
       component: () => import("@/view/pages/auth/Auth"),
       children: [
         {
+          path: "",
+          redirect: "login",
+        },
+        {
           name: "login",
-          path: "/login",
+          path: "login",
           component: () => import("@/view/pages/auth/Login"),
         },
         {
           name: "register",
-          path: "/register",
+          path: "register",
           component: () => import("@/view/pages/auth/Register"),
         },
         {
           path: "*",
-          redirect: "/404",
+          redirect: "404",
         },
         {
           // the 404 route, when none of the above matches
-          path: "/404",
+          path: "404",
           name: "error5",
           component: () => import("@/view/pages/error/Error-1.vue"),
         },

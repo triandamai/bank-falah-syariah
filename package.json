@@ -12,7 +12,8 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "rtl": "webpack --config webpack-rtl.config.js"
+    "rtl": "webpack --config webpack-rtl.config.js",
+    "heroku-postbuild": ""
   },
   "main": "background.js",
   "dependencies": {

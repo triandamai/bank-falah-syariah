@@ -435,7 +435,7 @@
 </style>
 
 <script>
-import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
+import { SET_BREADCRUMB } from "../../store";
 import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
@@ -445,13 +445,13 @@ export default {
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [
       { title: "Wizard" },
-      { title: "Wizard-1" }
+      { title: "Wizard-1" },
     ]);
 
     // Initialize form wizard
     const wizard = new KTWizard("kt_wizard_v1", {
       startStep: 1, // initial active step number
-      clickableSteps: true // allow step clicking
+      clickableSteps: true, // allow step clicking
     });
 
     // Validation before going to next page
@@ -474,9 +474,9 @@ export default {
         title: "",
         text: "The application has been successfully submitted!",
         icon: "success",
-        confirmButtonClass: "btn btn-secondary"
+        confirmButtonClass: "btn btn-secondary",
       });
-    }
-  }
+    },
+  },
 };
 </script>

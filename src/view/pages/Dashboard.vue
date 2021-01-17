@@ -2,17 +2,17 @@
   <div>
     <!--begin::Dashboard-->
     <div class="row">
-      <div class="col-xl-12">
-        <EngageWidget1></EngageWidget1>
+      <div class="col-xl-12" style="margin-top:15px;">
+        <banner-warning-aktivasi-dashboard />
       </div>
     </div>
 
     <div class="row">
       <div class="col-xl-8">
-        <ListWidget5></ListWidget5>
+        <chart-dashboard />
       </div>
       <div class="col-xl-4">
-        <AdvancedTableWidget2></AdvancedTableWidget2>
+        <list-user-dashboard />
       </div>
     </div>
 
@@ -21,19 +21,17 @@
 </template>
 
 <script>
-import { SET_BREADCRUMB } from "@/core/services/store/breadcrumbs.module";
-import AdvancedTableWidget2 from "@/view/content/widgets/advance-table/Widget2.vue";
-import EngageWidget1 from "@/view/content/widgets/engage/Widget1.vue";
-import ListWidget5 from "@/view/content/widgets/list/Widget5.vue";
+import { SET_BREADCRUMB } from "../../store";
+import BannerWarningAktivasiDashboard from "../components/BannerWarningAktivasiDashboard.vue";
+import ChartDashboard from "../components/ChartDashboard.vue";
+import ListUserDashboard from "../components/ListUserDashboard.vue";
 
 export default {
   name: "dashboard",
-
   components: {
-    AdvancedTableWidget2,
-    EngageWidget1,
-
-    ListWidget5
+    ListUserDashboard,
+    ChartDashboard,
+    BannerWarningAktivasiDashboard,
   },
   mounted() {
     this.$store.dispatch(SET_BREADCRUMB, [{ title: "Dashboard" }]);
@@ -63,7 +61,7 @@ export default {
 
       // set clicked tab index to bootstrap tab
       return parseInt(event.target.getAttribute("data-tab"));
-    }
-  }
+    },
+  },
 };
 </script>

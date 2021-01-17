@@ -1,0 +1,121 @@
+/* eslint-disable */
+import ApiService from "../../core/services/api.service";
+import JwtService from "../../core/services/jwt.service";
+
+// action types
+export const VERIFY_AUTH = "verifyAuth";
+export const LOGIN = "login";
+export const LOGOUT = "logout";
+export const REGISTER = "register";
+export const UPDATE_USER = "updateUser";
+
+// mutation types
+export const PURGE_AUTH = "logOut";
+export const SET_AUTH = "setUser";
+export const SET_ERROR = "setError";
+
+const state = {
+  errors: null,
+  user: JwtService.getUser(),
+  isAuthenticated: !!JwtService.getToken(),
+};
+
+const getters = {
+  currentUser(state) {
+    return state.user;
+  },
+  isAuthenticated(state) {
+    return state.isAuthenticated;
+  },
+};
+
+const actions = {
+  [LOGIN](context, credentials) {
+    return new Promise((resolve, reject) => {
+      ApiService.post("login", credentials)
+        .then((res) => {
+          console.log(res);
+          if (res.status == 200 || 201) {
+            context.commit(SET_AUTH, res.data);
+            resolve(true);
+          } else {
+            context.commit(SET_ERROR, res);
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          context.commit(SET_ERROR, e.response.message);
+          resolve(false);
+        });
+    });
+  },
+  [LOGOUT](context) {
+    context.commit(PURGE_AUTH);
+  },
+  [REGISTER](context, credentials) {
+    return new Promise((resolve, reject) => {
+      ApiService.post("users", { user: credentials })
+        .then(({ data }) => {
+          context.commit(SET_AUTH, data);
+          resolve(data);
+        })
+        .catch(({ response }) => {
+          context.commit(SET_ERROR, response.data.errors);
+          reject(response);
+        });
+    });
+  },
+  [VERIFY_AUTH](context) {
+    if (JwtService.getToken()) {
+      ApiService.setHeader();
+      ApiService.get("verify")
+        .then(({ data }) => {
+          context.commit(SET_AUTH, data);
+        })
+        .catch(({ response }) => {
+          context.commit(SET_ERROR, response.data.errors);
+        });
+    } else {
+      context.commit(PURGE_AUTH);
+    }
+  },
+  [UPDATE_USER](context, payload) {
+    const { email, username, password, image, bio } = payload;
+    const user = { email, username, bio, image };
+    if (password) {
+      user.password = password;
+    }
+
+    return ApiService.put("user", user).then(({ data }) => {
+      context.commit(SET_AUTH, data);
+      return data;
+    });
+  },
+};
+
+const mutations = {
+  [SET_ERROR](state, error) {
+    state.errors = error;
+  },
+  [SET_AUTH](state, data) {
+    state.isAuthenticated = true;
+    state.user = data.data;
+    state.errors = {};
+    JwtService.setUser(data.data);
+    JwtService.saveToken(data.token_type + " " + data.token);
+  },
+  [PURGE_AUTH](state) {
+    state.isAuthenticated = false;
+    state.user = {};
+    state.errors = {};
+    JwtService.dropUser();
+    JwtService.destroyToken();
+  },
+};
+
+export default {
+  state,
+  actions,
+  mutations,
+  getters,
+};

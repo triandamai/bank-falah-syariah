@@ -1,3 +1,4 @@
+/* eslint-disable */
 <template>
   <div>
     <!--begin::Content header-->
@@ -26,7 +27,7 @@
       </div>
 
       <!--begin::Form-->
-      <b-form class="form" @submit.stop.prevent="onSubmit">
+      <b-form class="form" @submit.prevent="onSubmit">
         <div role="alert" class="alert alert-info">
           <div class="alert-text">
             Gunakan akun username <strong>admin@demo.com</strong> dan password
@@ -36,7 +37,7 @@
 
         <div
           role="alert"
-          v-bind:class="{ show: errors.length }"
+          v-bind:class="{ show: errors ? errors.length : false }"
           class="alert fade alert-danger"
         >
           <div class="alert-text" v-for="(error, i) in errors" :key="i">
@@ -55,6 +56,7 @@
             name="example-input-1"
             v-model="$v.form.email.$model"
             :state="validateState('email')"
+            placeholder="username"
             aria-describedby="input-1-live-feedback"
           ></b-form-input>
 
@@ -71,6 +73,7 @@
           <b-form-input
             class="form-control form-control-solid h-auto py-5 px-6"
             type="password"
+            placeholder="Password"
             id="example-input-2"
             name="example-input-2"
             v-model="$v.form.password.$model"
@@ -116,8 +119,9 @@
 </style>
 
 <script>
+/* eslint-disable*/
 import { mapState } from "vuex";
-import { LOGIN, LOGOUT } from "@/core/services/store/auth.module";
+import { LOGIN, LOGOUT } from "../../../store/module/auth.module";
 
 import { validationMixin } from "vuelidate";
 import { email, minLength, required } from "vuelidate/lib/validators";
@@ -129,22 +133,22 @@ export default {
     return {
       // Remove this dummy login info
       form: {
-        email: "admin@demo.com",
-        password: "demo"
-      }
+        email: "",
+        password: "",
+      },
     };
   },
   validations: {
     form: {
       email: {
         required,
-        email
+        minLength: minLength(1),
       },
       password: {
         required,
-        minLength: minLength(3)
-      }
-    }
+        minLength: minLength(3),
+      },
+    },
   },
   methods: {
     validateState(name) {
@@ -154,7 +158,7 @@ export default {
     resetForm() {
       this.form = {
         email: null,
-        password: null
+        password: null,
       };
 
       this.$nextTick(() => {
@@ -181,9 +185,14 @@ export default {
       setTimeout(() => {
         // send login request
         this.$store
-          .dispatch(LOGIN, { email, password })
+          .dispatch(LOGIN, { username: email, password: password })
           // go to which page after successfully login
-          .then(() => this.$router.push({ name: "dashboard" }));
+          .then((result) => {
+            if (result) {
+              this.$router.push({ name: "dashboard" });
+            } else {
+            }
+          });
 
         submitButton.classList.remove(
           "spinner",
@@ -191,12 +200,12 @@ export default {
           "spinner-right"
         );
       }, 2000);
-    }
+    },
   },
   computed: {
     ...mapState({
-      errors: state => state.auth.errors
-    })
-  }
+      errors: (state) => state.auth.errors,
+    }),
+  },
 };
 </script>

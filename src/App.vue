@@ -22,7 +22,7 @@
 </style>
 
 <script>
-import { OVERRIDE_LAYOUT_CONFIG } from "@/core/services/store/config.module";
+import { OVERRIDE_LAYOUT_CONFIG } from "./store";
 
 export default {
   name: "MetronicVue",
@@ -32,6 +32,6 @@ export default {
      * remove this to use config only from static json (@/core/config/layout.config.json)
      */
     this.$store.dispatch(OVERRIDE_LAYOUT_CONFIG);
-  }
+  },
 };
 </script>

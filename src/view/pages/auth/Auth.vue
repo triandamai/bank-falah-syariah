@@ -13,7 +13,11 @@
         <div class="d-flex flex-row-fluid flex-column justify-content-between">
           <!--begin: Aside header -->
           <a href="#" class="flex-column-auto">
-            <img src="media/logos/ssb.png" width="50%" height="90%" />
+            <img
+              :src="require('../../../assets/images/ssb.png')"
+              width="50%"
+              height="90%"
+            />
           </a>
           <!--end: Aside header -->
           <!--begin: Aside content -->
@@ -73,11 +77,11 @@ export default {
   methods: {},
   computed: {
     ...mapState({
-      errors: state => state.auth.errors
+      errors: (state) => state.auth.errors,
     }),
     backgroundImage() {
       return process.env.BASE_URL + "media/bg/bg-4.jpg";
-    }
-  }
+    },
+  },
 };
 </script>

@@ -1,10 +1,10 @@
 import objectPath from "object-path";
 import {
   ADD_BODY_CLASSNAME,
-  REMOVE_BODY_CLASSNAME
-} from "@/core/services/store/htmlclass.module";
-import store from "@/core/services/store";
-import { ADD_CLASSNAME } from "@/core/services/store/htmlclass.module";
+  REMOVE_BODY_CLASSNAME,
+  ADD_CLASSNAME,
+} from "../../store/module/htmlclass.module";
+import store from "../../store/index";
 
 const HtmlClass = {
   config: null,
@@ -38,7 +38,7 @@ const HtmlClass = {
         .toString();
       if (_selfBodyClass) {
         const bodyClasses = _selfBodyClass.split(" ");
-        bodyClasses.forEach(cssClass => {
+        bodyClasses.forEach((cssClass) => {
           store.dispatch(ADD_BODY_CLASSNAME, cssClass);
         });
       }
@@ -67,7 +67,7 @@ const HtmlClass = {
       store.dispatch(ADD_BODY_CLASSNAME, "header-fixed");
       store.dispatch(ADD_CLASSNAME, {
         position: "header",
-        className: "header-fixed"
+        className: "header-fixed",
       });
     } else {
       store.dispatch(ADD_BODY_CLASSNAME, "header-static");
@@ -77,7 +77,7 @@ const HtmlClass = {
       store.dispatch(ADD_BODY_CLASSNAME, "header-mobile-fixed");
       store.dispatch(ADD_CLASSNAME, {
         position: "header_mobile",
-        className: "header-mobile-fixed"
+        className: "header-mobile-fixed",
       });
     }
 
@@ -87,14 +87,14 @@ const HtmlClass = {
         className: `header-menu-layout-${objectPath.get(
           this.config,
           "header.menu.self.layout"
-        )}`
+        )}`,
       });
 
       // Menu
       if (objectPath.get(this.config, "header.menu.self.root-arrow")) {
         store.dispatch(ADD_CLASSNAME, {
           position: "header_menu",
-          className: "header-menu-root-arrow"
+          className: "header-menu-root-arrow",
         });
       }
     }
@@ -146,7 +146,7 @@ const HtmlClass = {
       store.dispatch(ADD_BODY_CLASSNAME, "aside-fixed");
       store.dispatch(ADD_CLASSNAME, {
         position: "aside",
-        className: "aside-fixed"
+        className: "aside-fixed",
       });
     } else {
       store.dispatch(ADD_BODY_CLASSNAME, "aside-static");
@@ -161,7 +161,7 @@ const HtmlClass = {
     if (objectPath.get(this.config, "aside.menu.dropdown")) {
       store.dispatch(ADD_CLASSNAME, {
         position: "aside_menu",
-        className: "aside-menu-dropdown"
+        className: "aside-menu-dropdown",
       });
     }
   },
@@ -174,7 +174,7 @@ const HtmlClass = {
     if (objectPath.get(this.config, "footer.fixed")) {
       store.dispatch(ADD_BODY_CLASSNAME, "footer-fixed");
     }
-  }
+  },
 };
 
 export default HtmlClass;

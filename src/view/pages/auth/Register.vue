@@ -120,8 +120,7 @@
 
 <script>
 import { mapState } from "vuex";
-import { REGISTER } from "@/core/services/store/auth.module";
-import { LOGOUT } from "@/core/services/store/auth.module";
+import { REGISTER, LOGOUT } from "../../../store/module/auth.module";
 
 import { validationMixin } from "vuelidate";
 import { email, required, minLength } from "vuelidate/lib/validators";
@@ -134,25 +133,25 @@ export default {
       // Remove this dummy login info
       form: {
         email: "admin@demo.com",
-        password: "demo"
-      }
+        password: "demo",
+      },
     };
   },
   validations: {
     form: {
       username: {
         required,
-        minLength: minLength(3)
+        minLength: minLength(3),
       },
       email: {
         required,
-        email
+        email,
       },
       password: {
         required,
-        minLength: minLength(3)
-      }
-    }
+        minLength: minLength(3),
+      },
+    },
   },
   methods: {
     validateState(name) {
@@ -163,7 +162,7 @@ export default {
       this.form = {
         username: null,
         email: null,
-        password: null
+        password: null,
       };
 
       this.$nextTick(() => {
@@ -194,7 +193,7 @@ export default {
           .dispatch(REGISTER, {
             email: email,
             password: password,
-            username: username
+            username: username,
           })
           .then(() => this.$router.push({ name: "dashboard" }));
 
@@ -204,12 +203,12 @@ export default {
           "spinner-right"
         );
       }, 2000);
-    }
+    },
   },
   computed: {
     ...mapState({
-      errors: state => state.auth.errors
-    })
-  }
+      errors: (state) => state.auth.errors,
+    }),
+  },
 };
 </script>
