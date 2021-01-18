@@ -114,7 +114,7 @@ export default {
   },
   mounted() {
     // Init Quick User Panel
-    console.log(getUser());
+    //  console.log(getUser());
     KTLayoutQuickUser.init(this.$refs["kt_quick_user"]);
   },
   methods: {

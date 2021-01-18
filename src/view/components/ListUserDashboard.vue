@@ -44,12 +44,12 @@
 </template>
 
 <script>
-import Dropdown5 from "@/view/content/dropdown/Dropdown5.vue";
+import Dropdown5 from "../components/content/CreateAction.vue";
 
 export default {
   name: "widget-2",
   components: {
-    Dropdown5
+    Dropdown5,
   },
   data() {
     return {
@@ -57,30 +57,30 @@ export default {
         {
           title: "Ricky Hunt",
           desc: "Business Analyst",
-          svg: "media/svg/avatars/004-boy-1.svg"
+          svg: "media/svg/avatars/004-boy-1.svg",
         },
         {
           title: "Anne Clarc",
           desc: "Creative Director",
-          svg: "media/svg/avatars/002-girl.svg"
+          svg: "media/svg/avatars/002-girl.svg",
         },
         {
           title: "Kristaps Zumman",
           desc: "Lead Developer",
-          svg: "media/svg/avatars/007-boy-2.svg"
+          svg: "media/svg/avatars/007-boy-2.svg",
         },
         {
           title: "Randy Trent",
           desc: "Backend Developer",
-          svg: "media/svg/avatars/008-boy-3.svg"
+          svg: "media/svg/avatars/008-boy-3.svg",
         },
         {
           title: "Carles Puyol",
           desc: "Project Manager",
-          svg: "media/svg/avatars/009-boy-4.svg"
-        }
-      ]
+          svg: "media/svg/avatars/009-boy-4.svg",
+        },
+      ],
     };
-  }
+  },
 };
 </script>

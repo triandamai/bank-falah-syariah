@@ -55,7 +55,6 @@ export default new Router({
               redirect: "/404",
             },
             {
-              // the 404 route, when none of the above matches
               path: "/404",
               name: "error1",
               component: () => import("@/view/pages/error/Error-1.vue"),
@@ -92,6 +91,21 @@ export default new Router({
               component: () => import("@/view/pages/error/Error-1.vue"),
             },
           ],
+        },
+        {
+          path: "menu",
+          name: "MenuSystem",
+          component: () => import("@/view/pages/system/MenuSystem.vue"),
+        },
+        {
+          path: "pages",
+          name: "PageSystem",
+          component: () => import("@/view/pages/system/PageSystem.vue"),
+        },
+        {
+          path: "rekening",
+          name: "rekening",
+          component: () => import("@/view/pages/system/PageSystem.vue"),
         },
         {
           path: "tabungan",
