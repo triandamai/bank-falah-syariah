@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import { menu } from "../../../store/utils/headers";
+import { menu } from "../../../store";
 export default {
   name: "KTMenu",
   data: () => {

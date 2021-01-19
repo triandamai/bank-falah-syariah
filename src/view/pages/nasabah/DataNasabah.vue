@@ -38,7 +38,7 @@
             Nutrition
             <v-spacer></v-spacer>
             <v-text-field
-              v-model="code4.search"
+              v-model="datatable.search"
               append-icon="search"
               label="Search"
               single-line
@@ -48,9 +48,9 @@
           <v-data-table
             flat
             class="elevation-0"
-            :headers="code4.headers"
+            :headers="datatable.headers"
             :items="nasabah"
-            :search="code4.search"
+            :search="datatable.search"
           ></v-data-table>
         </v-card>
       </div>
@@ -71,7 +71,7 @@ import { mapState } from "vuex";
 export default {
   data() {
     return {
-      code4: {
+      datatable: {
         search: "",
         headers: headerdatanasabah,
       },
