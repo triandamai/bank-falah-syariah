@@ -1,8 +1,9 @@
 <template>
-  <div>System/Menu</div>
+  <router-view />
 </template>
+
 <script>
 export default {
-  name: "MenuSystem",
+  name: "MasterData",
 };
 </script>

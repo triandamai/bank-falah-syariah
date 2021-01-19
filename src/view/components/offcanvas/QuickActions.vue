@@ -24,7 +24,7 @@
         <h3 class="font-weight-bold m-0">
           Aksi Cepat
           <small class="text-muted font-size-sm ml-2"
-            >finance &amp; reports</small
+            >shortcut &amp; jalan pintas</small
           >
         </h3>
         <a
@@ -38,157 +38,25 @@
       <!--end::Header-->
       <!--begin::Content-->
       <div class="offcanvas-content pr-5 mr-n5">
-        <div class="row gutter-b">
+        <div
+          v-for="(item, index) in quickActions"
+          :key="index"
+          class="row gutter-b"
+        >
           <!--begin::Item-->
-          <div class="col-6">
+          <div v-for="(sub, idx) in item" :key="idx" class="col-6">
             <a
               href="#"
               class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
             >
               <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
                 <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Euro.svg-->
-                <inline-svg
-                  :src="
-                    require('../../../assets/images/svg/icons/Shopping/Euro.svg')
-                  "
-                />
+                <inline-svg :src="sub.menu_icon" />
                 <!--end::Svg Icon-->
               </span>
-              <span class="d-block font-weight-bold font-size-h6 mt-2"
-                >Akuntansi</span
-              >
-            </a>
-          </div>
-          <!--end::Item-->
-          <!--begin::Item-->
-          <div class="col-6">
-            <a
-              href="#"
-              class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
-            >
-              <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
-                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Mail-attachment.svg-->
-                <inline-svg
-                  :src="
-                    require('../../../assets/images/svg/icons/Communication/Mail-attachment.svg')
-                  "
-                />
-                <!--end::Svg Icon-->
-              </span>
-              <span class="d-block font-weight-bold font-size-h6 mt-2"
-                >Nasabah</span
-              >
-            </a>
-          </div>
-          <!--end::Item-->
-        </div>
-        <div class="row gutter-b">
-          <!--begin::Item-->
-          <div class="col-6">
-            <a
-              href="#"
-              class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
-            >
-              <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
-                <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Box2.svg-->
-                <inline-svg
-                  :src="
-                    require('../../../assets/images/svg/icons/Shopping/Box2.svg')
-                  "
-                />
-                <!--end::Svg Icon-->
-              </span>
-              <span class="d-block font-weight-bold font-size-h6 mt-2"
-                >Tabungan</span
-              >
-            </a>
-          </div>
-          <!--end::Item-->
-          <!--begin::Item-->
-          <div class="col-6">
-            <a
-              href="#"
-              class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
-            >
-              <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
-                <!--begin::Svg Icon | path:assets/media/svg/icons/Communication/Group.svg-->
-                <inline-svg
-                  :src="
-                    require('../../../assets/images/svg/icons/Communication/Group.svg')
-                  "
-                />
-                <!--end::Svg Icon-->
-              </span>
-              <span class="d-block font-weight-bold font-size-h6 mt-2"
-                >Akun</span
-              >
-            </a>
-          </div>
-          <!--end::Item-->
-        </div>
-        <div class="row gutter-b">
-          <!--begin::Item-->
-          <div class="col-6">
-            <a
-              href="#"
-              class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
-            >
-              <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
-                <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Chart-bar1.svg-->
-                <inline-svg
-                  :src="
-                    require('../../../assets/images/svg/icons/Shopping/Chart-bar1.svg')
-                  "
-                />
-                <!--end::Svg Icon-->
-              </span>
-              <span class="d-block font-weight-bold font-size-h6 mt-2"
-                >Email</span
-              >
-            </a>
-          </div>
-          <!--end::Item-->
-          <!--begin::Item-->
-          <div class="col-6">
-            <a
-              href="#"
-              class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
-            >
-              <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
-                <!--begin::Svg Icon | path:assets/media/svg/icons/Design/Color-profile.svg-->
-                <inline-svg
-                  :src="
-                    require('../../../assets/images/svg/icons/Design/Color-profile.svg')
-                  "
-                />
-                <!--end::Svg Icon-->
-              </span>
-              <span class="d-block font-weight-bold font-size-h6 mt-2"
-                >Pengaturan</span
-              >
-            </a>
-          </div>
-          <!--end::Item-->
-        </div>
-        <div class="row">
-          <!--begin::Item-->
-          <div class="col-6">
-            <a
-              href="#"
-              class="btn btn-block btn-light btn-hover-primary text-dark-50 text-center py-10 px-5"
-            >
-              <span class="svg-icon svg-icon-3x svg-icon-primary m-0">
-                <!--begin::Svg Icon | path:assets/media/svg/icons/Shopping/Euro.svg-->
-                <inline-svg
-                  :src="
-                    require('../../../assets/images/svg/icons/Shopping/Euro.svg')
-                  "
-                />
-                <!--end::Svg Icon-->
-              </span>
-              <span class="d-block font-weight-bold font-size-h6 mt-2"
-                >Laporan</span
-              >
+              <span class="d-block font-weight-bold font-size-h6 mt-2">{{
+                sub.menu_name
+              }}</span>
             </a>
           </div>
           <!--end::Item-->
@@ -201,8 +69,14 @@
 
 <script>
 import KTLayoutQuickUser from "@/assets/js/layout/extended/quick-actions.js";
+import { quickAction } from "../../../store";
 export default {
   name: "KTQuickActions",
+  data: () => {
+    return {
+      quickActions: quickAction,
+    };
+  },
   mounted() {
     // Init Quick User Panel
     KTLayoutQuickUser.init(this.$refs["kt_quick_actions"]);

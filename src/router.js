@@ -1,15 +1,10 @@
+/*eslint-disable*/
 import Vue from "vue";
 import Router from "vue-router";
 
 Vue.use(Router);
 
-export default new Router({
-  mode: process.env.IS_ELECTRON ? "hash" : "history",
-  base: process.env.BASE_URL,
-  routes: routes,
-});
-
-const routes = [
+let routes = [
   {
     path: "/",
     component: () => import("@/view/pages/Layout"),
@@ -23,7 +18,7 @@ const routes = [
       },
       {
         path: "home",
-        name: "dashboard",
+        name: "Dashboard",
         component: () => import("@/view/pages/Dashboard.vue"),
         meta: {
           requiresAuth: true,
@@ -33,6 +28,9 @@ const routes = [
       {
         path: "akun",
         component: () => import("@/view/pages/akun/AkunMain.vue"),
+        meta: {
+          requiresAuth: true,
+        },
         children: [
           {
             path: "",
@@ -40,104 +38,202 @@ const routes = [
           },
           {
             path: "data",
-            name: "vuetify-alerts",
+            name: "DataAkun",
             component: () => import("@/view/pages/akun/Akun.vue"),
           },
           {
             path: "tambah",
-            name: "vuetify-avatars",
+            name: "TambahAkun",
             component: () => import("@/view/pages/Tambah.vue"),
           },
           {
             path: "ubah",
-            name: "vuetify-badges",
+            name: "UbahAkun",
             component: () => import("@/view/pages/Tambah.vue"),
           },
           {
             path: "*",
-            redirect: "/404",
-          },
-          {
-            path: "/404",
-            name: "error1",
-            component: () => import("@/view/pages/error/Error-1.vue"),
+            name: "AkunNotFound",
+            component: () => import("@/view/pages/error/NotFound.vue"),
           },
         ],
       },
       {
         path: "nasabah",
         component: () => import("@/view/pages/nasabah/Nasabah.vue"),
+        meta: {
+          requiresAuth: true,
+        },
         children: [
           {
+            path: "",
+            redirect: "data",
+          },
+          {
             path: "data",
-            name: "wizard-1",
+            name: "DataNasabah",
             component: () => import("@/view/pages/nasabah/DataNasabah.vue"),
           },
           {
             path: "ubah",
-            name: "wizard-2",
+            name: "UbahNasabah",
             component: () => import("@/view/pages/nasabah/TambahNasabah.vue"),
           },
           {
             path: "tambah",
-            name: "wizard-3",
+            name: "TambahNasabah",
             component: () => import("@/view/pages/nasabah/TambahNasabah.vue"),
           },
+
           {
+            // the 404 route, when none of the above matches
             path: "*",
-            redirect: "/404",
+            name: "NasabahNotFound",
+            component: () => import("@/view/pages/error/NotFound.vue"),
+          },
+        ],
+      },
+
+      {
+        path: "system",
+        component: () => import("@/view/pages/system/System.vue"),
+        meta: {
+          requiresAuth: true,
+        },
+        children: [
+          {
+            path: "",
+            redirect: "page",
+          },
+          {
+            path: "page",
+            name: "PageSystem",
+            component: () => import("@/view/pages/system/PageSystem.vue"),
+          },
+          {
+            path: "menu",
+            name: "MenuSystem",
+            component: () => import("@/view/pages/system/MenuSystem.vue"),
           },
           {
             // the 404 route, when none of the above matches
-            path: "/404",
-            name: "error2",
-            component: () => import("@/view/pages/error/Error-1.vue"),
+            path: "*",
+            name: "SystemNotFound",
+            component: () => import("@/view/pages/error/NotFound.vue"),
           },
         ],
       },
       {
-        path: "menu",
-        name: "MenuSystem",
-        component: () => import("@/view/pages/system/MenuSystem.vue"),
-      },
-      {
-        path: "pages",
-        name: "PageSystem",
-        component: () => import("@/view/pages/system/PageSystem.vue"),
+        path: "master",
+        component: () => import("@/view/pages/master/MasterData.vue"),
+        meta: {
+          requiresAuth: true,
+        },
+        children: [
+          {
+            path: "",
+            redirect: "akad",
+          },
+          {
+            path: "akad",
+            name: "MasterData",
+            component: () => import("@/view/pages/master/Akad.vue"),
+            children: [],
+          },
+          {
+            path: "jenistransaksi",
+            name: "JenisTransaksi",
+            component: () => import("@/view/pages/master/JenisTransaksi.vue"),
+            children: [],
+          },
+          {
+            path: "produk",
+            name: "Produk",
+            component: () => import("@/view/pages/master/Produk.vue"),
+            children: [],
+          },
+          {
+            path: "jabatan",
+            name: "Jabatan",
+            component: () => import("@/view/pages/master/Jabatan.vue"),
+            children: [],
+          },
+          {
+            path: "pegawai",
+            name: "Pegawai",
+            component: () => import("@/view/pages/master/Pegawai.vue"),
+            children: [],
+          },
+          {
+            // the 404 route, when none of the above matches
+            path: "*",
+            name: "AkadNotFound",
+            component: () => import("@/view/pages/error/NotFound.vue"),
+          },
+        ],
       },
       {
         path: "rekening",
-        name: "rekening",
-        component: () => import("@/view/pages/system/PageSystem.vue"),
+        component: () => import("@/view/pages/rekening/Rekening.vue"),
+        meta: {
+          requiresAuth: true,
+        },
+        children: [
+          {
+            path: "",
+            redirect: "deposito",
+          },
+          {
+            path: "deposito",
+            name: "RekeningDeposito",
+            component: () => import("@/view/pages/rekening/Deposito.vue"),
+          },
+          {
+            path: "pembiayaan",
+            name: "RekeningPembiayaan",
+            component: () => import("@/view/pages/rekening/Pembiayaan.vue"),
+          },
+          {
+            path: "simpanan",
+            name: "RekeningSimpanan",
+            component: () => import("@/view/pages/rekening/Simpanan.vue"),
+          },
+          {
+            // the 404 route, when none of the above matches
+            path: "*",
+            name: "RekeningNotFound",
+            component: () => import("@/view/pages/error/NotFound.vue"),
+          },
+        ],
       },
       {
         path: "tabungan",
         component: () => import("@/view/pages/tabungan/TabunganMain.vue"),
+        meta: {
+          requiresAuth: true,
+        },
         children: [
           {
             path: "data",
-            name: "data-tabungan",
+            name: "DataTabungan",
             component: () => import("@/view/pages/tabungan/Tabungan.vue"),
           },
           {
             path: "ubah",
-            name: "ubah",
+            name: "UbahTabungan",
             component: () => import("@/view/pages/Tambah.vue"),
           },
           {
             path: "tambah",
-            name: "tambah-3",
+            name: "TambahTabungan",
             component: () => import("@/view/pages/Tambah.vue"),
           },
-          {
-            path: "*",
-            redirect: "/404",
-          },
+
           {
             // the 404 route, when none of the above matches
-            path: "/404",
-            name: "error4",
-            component: () => import("@/view/pages/error/Error-1.vue"),
+            path: "*",
+            name: "TabunganNotFound",
+            component: () => import("@/view/pages/error/NotFound.vue"),
           },
         ],
       },
@@ -154,66 +250,85 @@ const routes = [
       },
       {
         name: "login",
-        path: "login",
+        path: "Login",
         component: () => import("@/view/pages/auth/Login"),
       },
       {
         name: "register",
-        path: "register",
+        path: "Register",
         component: () => import("@/view/pages/auth/Register"),
       },
       {
-        path: "*",
-        redirect: "404",
-      },
-      {
         // the 404 route, when none of the above matches
-        path: "404",
-        name: "error5",
-        component: () => import("@/view/pages/error/Error-1.vue"),
+        path: "*",
+        name: "AuthError",
+        component: () => import("@/view/pages/error/NotFound.vue"),
       },
     ],
   },
-
-  {
-    path: "*",
-    redirect: "/404",
-  },
   {
     // the 404 route, when none of the above matches
-    path: "/404",
+    path: "*",
     name: "404",
-    component: () => import("@/view/pages/error/Error-1.vue"),
+    component: () => import("@/view/pages/error/NotFound.vue"),
   },
 ];
 
 const availableRoute = () => {
   let routeAvail = [];
   routes.map((route) => {
-    let isParent = false;
-    if (route.children) {
-      isParent = true;
-      route.children.map((child) => {
+    if (!route.redirect) {
+      if (route.children) {
+        route.children.map((child) => {
+          if (!child.redirect) {
+            if (child.children) {
+              child.children.map((subchild) => {
+                if (!child.redirect) {
+                  let sub = {
+                    path:
+                      route.path == "/"
+                        ? "/" + child.path + "/" + subchild.path
+                        : route.path + "/" + child.path + "/" + subchild.path,
+                    name: subchild.name,
+                    status: true,
+                    isParent: false,
+                  };
+                  routeAvail.push(sub);
+                }
+              });
+            } else {
+              let childroute = {
+                path:
+                  route.path == "/"
+                    ? route.path + child.path
+                    : route.path + "/" + child.path,
+                name: child.name,
+                status: true,
+                isParent: false,
+              };
+              routeAvail.push(childroute);
+            }
+          }
+        });
+      } else {
         let childroute = {
-          path: child.path,
-          name: child.name,
+          path: route.path,
+          name: route.name,
           status: true,
           isParent: false,
         };
         routeAvail.push(childroute);
-      });
-    } else {
-      isParent = false;
+      }
     }
-    let single = {
-      path: route.path,
-      name: route.name,
-      status: true,
-      isParent: false,
-    };
-    routeAvail.push(single);
   });
+
   return routeAvail;
 };
 
+export default new Router({
+  mode: process.env.IS_ELECTRON ? "hash" : "history",
+  base: process.env.BASE_URL,
+  routes: routes,
+});
+// console.log(availableRoute());
 export { routes, availableRoute };

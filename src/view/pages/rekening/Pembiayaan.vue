@@ -1,8 +1,8 @@
 <template>
-  <div>System/Menu</div>
+  <div>Under Construction</div>
 </template>
 <script>
 export default {
-  name: "MenuSystem",
+  name: "Pembiayaan",
 };
 </script>

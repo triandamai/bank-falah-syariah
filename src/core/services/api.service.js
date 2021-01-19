@@ -19,7 +19,7 @@ const ApiService = {
   setHeader() {
     Vue.axios.defaults.headers.common[
       "Authorization"
-    ] = `Token ${JwtService.getToken()}`;
+    ] = `Bearer ${JwtService.getToken()}`;
     Vue.axios.defaults.headers.common["Access-Controll-Allow-Origin"] = "*";
     Vue.axios.defaults.responseType = "json";
     Vue.axios.defaults.headers.common["Content-Type"] = "application/json";

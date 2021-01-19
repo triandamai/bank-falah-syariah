@@ -26,4 +26,5 @@ export * from "./module/htmlclass.module";
 export * from "./module/nasabah.module";
 export * from "./utils/country";
 export * from "./utils/headers";
+export * from "./utils/menu";
 export * from "../core/services/jwt.service";
