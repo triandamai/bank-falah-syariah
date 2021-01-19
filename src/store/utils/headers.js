@@ -21,6 +21,7 @@ const menu = [
     menu_icon: "",
     menu_url: "",
     menu_parent_id: null,
+    privilages: ["super"],
     menu_description: "System for super",
     children: [
       {
@@ -30,6 +31,7 @@ const menu = [
         menu_url: "/menu",
         menu_parent_id: 1,
         menu_description: "System for super",
+        privilages: ["super"],
         children: [],
       },
       {
@@ -39,6 +41,7 @@ const menu = [
         menu_url: "/page",
         menu_parent_id: 1,
         menu_description: "System for super",
+        privilages: ["super"],
         children: [],
       },
     ],
@@ -50,6 +53,7 @@ const menu = [
     menu_url: "/nasabah/data",
     menu_parent_id: null,
     menu_description: "System for super",
+    privilages: ["super"],
     children: [],
   },
   {
@@ -59,6 +63,7 @@ const menu = [
     menu_url: "/menu",
     menu_parent_id: null,
     menu_description: "System for super",
+    privilages: ["super"],
     children: [
       {
         id: 1,
@@ -67,6 +72,7 @@ const menu = [
         menu_url: "/menu",
         menu_parent_id: 3,
         menu_description: "System for super",
+        privilages: ["super"],
         children: [],
       },
     ],
@@ -78,6 +84,7 @@ const menu = [
     menu_url: "/menu",
     menu_parent_id: null,
     menu_description: "System for super",
+    privilages: ["super"],
     children: [
       {
         id: 1,
@@ -86,6 +93,7 @@ const menu = [
         menu_url: "/menu",
         menu_parent_id: 4,
         menu_description: "System for super",
+        privilages: ["super"],
         children: [],
       },
     ],
