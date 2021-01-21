@@ -116,6 +116,26 @@ let routes = [
             component: () => import("@/view/pages/system/MenuSystem.vue"),
           },
           {
+            path: "user",
+            name: "userSystem",
+            component: () => import("@/view/pages/system/UserSystem.vue"),
+          },
+          {
+            path: "group",
+            name: "GroupSystem",
+            component: () => import("@/view/pages/system/GroupSystem.vue"),
+          },
+          {
+            path: "role",
+            name: "RoleSystem",
+            component: () => import("@/view/pages/system/RoleSystem.vue"),
+          },
+          {
+            path: "adduser",
+            name: "Adduser",
+            component: () => import("@/view/pages/system/TambahUser.vue"),
+          },
+          {
             // the 404 route, when none of the above matches
             path: "*",
             name: "SystemNotFound",
@@ -249,13 +269,13 @@ let routes = [
         redirect: "login",
       },
       {
-        name: "login",
-        path: "Login",
+        name: "Login",
+        path: "login",
         component: () => import("@/view/pages/auth/Login"),
       },
       {
-        name: "register",
-        path: "Register",
+        name: "Register",
+        path: "register",
         component: () => import("@/view/pages/auth/Register"),
       },
       {

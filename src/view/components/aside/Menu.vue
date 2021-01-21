@@ -104,7 +104,7 @@
 <script>
 import { menu } from "../../../store";
 export default {
-  name: "KTMenu",
+  name: "Menu",
   data: () => {
     return {
       menus: menu,

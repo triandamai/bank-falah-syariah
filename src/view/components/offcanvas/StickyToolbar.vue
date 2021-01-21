@@ -27,6 +27,6 @@
 
 <script>
 export default {
-  name: "KTStickyToolbar"
+  name: "StickyToolbar",
 };
 </script>

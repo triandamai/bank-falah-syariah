@@ -128,7 +128,7 @@ import { email, minLength, required } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
-  name: "login",
+  name: "Login",
   data() {
     return {
       // Remove this dummy login info
@@ -189,8 +189,7 @@ export default {
           // go to which page after successfully login
           .then((result) => {
             if (result) {
-              this.$router.push({ name: "dashboard" });
-            } else {
+              this.$router.push({ path: "/home" });
             }
           });
 

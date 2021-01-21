@@ -13,13 +13,13 @@
         </span>
       </div>
       <div class="alert-text">
-        <router-link to="/nasabah/tambah">
+        <router-link to="/system/adduser">
           <b-button class="mr-3" variant="success"
-            >Tambahkan Nasabah Baru</b-button
+            >Tambahkan User Baru</b-button
           >
         </router-link>
 
-        <b>Data Nasabah</b>
+        <b>Data User</b>
 
         <!-- <a
           class="font-weight-bold"
@@ -38,7 +38,7 @@
             Nutrition
             <v-spacer></v-spacer>
             <v-text-field
-              v-model="datatable.search"
+              v-model="user.search"
               append-icon="search"
               label="Search"
               single-line
@@ -48,56 +48,54 @@
           <v-data-table
             flat
             class="elevation-0"
-            :headers="datatable.headers"
-            :items="nasabah"
-            :search="datatable.search"
-          ></v-data-table>
+            :headers="user.headers"
+            :items="users"
+            :search="user.search"
+            ><template v-slot:[`item.active`]="{ item }">
+              {{ item.active == 1 ? "aktif" : "nonaktif" }}
+            </template>
+            <template v-slot:[`item.last_login`]="{ item }">
+              {{
+                item.last_login != "" ? item.last_login : "belum ada aktivitas"
+              }}
+            </template>
+          </v-data-table>
         </v-card>
       </div>
     </div>
   </div>
 </template>
-
 <script>
-/* eslint-disable */
-import {
-  SET_BREADCRUMB,
-  ACTION_GET_NASABAH,
-  headerdatanasabah,
-} from "../../../store";
-
+import { headerdatausers, ACTION_GET_USER } from "..";
 import { mapState } from "vuex";
-
 export default {
-  data() {
+  name: "User",
+  data: () => {
     return {
-      datatable: {
+      user: {
+        headers: headerdatausers,
         search: "",
-        headers: headerdatanasabah,
       },
     };
   },
   computed: {
     ...mapState({
-      nasabah: (state) => {
-        return state.nasabah.datanasabah;
+      users: (state) => {
+        //  console.log(state);
+        return state.system.datausers;
       },
     }),
   },
-  components: {},
   created() {
-    this.getNasabah();
+    this.getUsers();
   },
   methods: {
-    getNasabah() {
-      this.$store
-        .dispatch(ACTION_GET_NASABAH)
-        .then((res) => {
-          if (res) {
-            this.getNasabah();
-          }
-        })
-        .catch((e) => {});
+    getUsers() {
+      this.$store.dispatch(ACTION_GET_USER).then((res) => {
+        if (res) {
+          this.getUsers();
+        }
+      });
     },
   },
 };

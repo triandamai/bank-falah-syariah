@@ -127,7 +127,7 @@ import { email, required, minLength } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
-  name: "register",
+  name: "Register",
   data() {
     return {
       // Remove this dummy login info

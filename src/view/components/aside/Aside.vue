@@ -38,7 +38,7 @@ import KTLayoutAsideMenu from "@/assets/js/layout/base/aside-menu.js";
 import KTMenu from "./Menu.vue";
 
 export default {
-  name: "KTAside",
+  name: "Aside",
   data() {
     return {
       insideTm: 0,

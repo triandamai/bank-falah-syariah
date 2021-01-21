@@ -34,7 +34,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "KTFooter",
+  name: "Footer",
   computed: {
     ...mapGetters(["layoutConfig"]),
 

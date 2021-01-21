@@ -65,7 +65,7 @@ import { mapGetters } from "vuex";
 import KTLayoutHeaderTopbar from "@/assets/js/layout/base/header-topbar.js";
 
 export default {
-  name: "KTHeaderMobile",
+  name: "HeaderMobile",
   components: {},
   mounted() {
     // Init Header Topbar For Mobile Mode

@@ -63,7 +63,7 @@ import Loader from "../components/content/Loader.vue";
 import { ADD_BODY_CLASSNAME, REMOVE_BODY_CLASSNAME } from "../../store";
 
 export default {
-  name: "Layout",
+  name: "MainLayout",
   components: {
     Aside,
     Header,

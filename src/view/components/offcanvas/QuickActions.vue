@@ -71,7 +71,7 @@
 import KTLayoutQuickUser from "@/assets/js/layout/extended/quick-actions.js";
 import { quickAction } from "../../../store";
 export default {
-  name: "KTQuickActions",
+  name: "AksiCepat",
   data: () => {
     return {
       quickActions: quickAction,

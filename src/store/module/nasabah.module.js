@@ -1,7 +1,6 @@
 /* eslint-disable */
 
 import ApiService from "../../core/services/api.service";
-import JwtService from "../../core/services/jwt.service";
 // action types
 
 export const ACTION_TAMBAH_NASABAH = "updateUser";
@@ -30,6 +29,12 @@ const actions = {
         .then((res) => {
           //    console.log(res.data.data);
           if (res.status == 200 || res.status == 201) {
+            if (res.data.current_page >= res.data.last_page) {
+              //jangan ambil data lagi
+              resolve(false);
+            } else {
+              resolve(true);
+            }
             res.data.data.map((item) => {
               let data = {
                 id: item.id,
@@ -47,9 +52,12 @@ const actions = {
               commit(MUTATION_TAMBAH_DATA_NASABAH, data);
             });
           } else {
+            resolve(false);
           }
         })
-        .catch((e) => {});
+        .catch((e) => {
+          resolve(false);
+        });
     });
   },
   [ACTION_TAMBAH_NASABAH](context, data) {
@@ -81,11 +89,15 @@ const actions = {
 
 const mutations = {
   [MUTATION_SET_ERROR](state, data) {
-    state.errors = error;
+    state.errors = data;
   },
   [MUTATION_TAMBAH_DATA_NASABAH](state, data) {
-    if (!state.datanasabah.includes(data, 0)) return;
-    state.datanasabah.push(data);
+    var exsts = state.datanasabah.some((nasabah) => {
+      return nasabah.id == data.id;
+    });
+    if (!exsts) {
+      state.datanasabah.push(data);
+    }
   },
   [MUTATION_UBAH_DATA_NASABAH](state, error) {},
 };

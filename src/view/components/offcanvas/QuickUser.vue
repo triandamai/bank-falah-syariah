@@ -106,7 +106,7 @@ import KTLayoutQuickUser from "@/assets/js/layout/extended/quick-user.js";
 import KTOffcanvas from "@/assets/js/components/offcanvas.js";
 
 export default {
-  name: "KTQuickUser",
+  name: "Profil",
   data() {
     return {
       user: getUser(),
@@ -121,7 +121,7 @@ export default {
     onLogout() {
       this.$store
         .dispatch(LOGOUT)
-        .then(() => this.$router.push({ name: "login" }));
+        .then(() => this.$router.push({ path: "/auth/login" }));
     },
     closeOffcanvas() {
       new KTOffcanvas(KTLayoutQuickUser.getElement()).hide();

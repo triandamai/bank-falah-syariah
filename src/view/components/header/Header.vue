@@ -109,7 +109,7 @@ import KTTopbar from "./Topbar.vue";
 import KTLayoutHeader from "@/assets/js/layout/base/header.js";
 
 export default {
-  name: "KTHeader",
+  name: "Header",
 
   components: {
     KTTopbar,
