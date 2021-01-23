@@ -26,6 +26,7 @@
                   <label>Username</label>
                   <input
                     type="text"
+                    v-model="username"
                     class="form-control form-control-solid form-control-lg"
                     placeholder="Contoh: Purwokerto selatan,Banyumas"
                   />
@@ -37,6 +38,7 @@
                   <label>Password</label>
                   <input
                     type="password"
+                    v-model="password"
                     class="form-control form-control-solid form-control-lg"
                     placeholder="Contoh:Xdsrcs"
                   />
@@ -48,6 +50,7 @@
                   <label>Email</label>
                   <input
                     type="email"
+                    v-model="email"
                     class="form-control form-control-solid form-control-lg"
                     placeholder="Contoh: bakaranproject@contoh.com"
                   />
@@ -59,10 +62,17 @@
                     <div class="form-group">
                       <label>Role</label>
                       <select
+                        v-model="role"
                         class="form-control form-control-solid form-control-lg"
                       >
                         <option value="">Pilih</option>
-                        <option value="AF">1</option>
+
+                        <option
+                          v-for="(role, index) in roles"
+                          :key="index"
+                          :value="role.id"
+                          >{{ role.name }}</option
+                        >
                       </select>
                     </div>
                   </div>
@@ -70,10 +80,16 @@
                     <div class="form-group">
                       <label>Group</label>
                       <select
+                        v-model="group"
                         class="form-control form-control-solid form-control-lg"
                       >
                         <option value="">Pilih</option>
-                        <option value="AF">1</option>
+                        <option
+                          v-for="(group, index) in groups"
+                          :key="index"
+                          :value="group.id"
+                          >{{ group.name }}</option
+                        >
                       </select>
                     </div>
                   </div>
@@ -117,13 +133,67 @@
 
 <script>
 /*eslint-disable*/
-import KTUtil from "@/assets/js/components/util";
-import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
+import { mapState } from "vuex";
+import { ACTION_GET_GROUP, ACTION_GET_ROLE } from "..";
 
 export default {
   name: "TambahUser",
-  mounted() {},
+  created() {
+    this.getRoles();
+    this.getGroups();
+  },
+  computed: {
+    ...mapState({
+      groups: (state) => {
+        return state.system.datagroups;
+      },
+      roles: (state) => {
+        return state.system.dataroles;
+      },
+    }),
+    //form
+    username: {
+      get() {
+        return this.$store.state.system.userform.username;
+      },
+      set(val) {
+        this.$store.commit("setFormUsername", val);
+      },
+    },
+    password: {
+      get() {
+        return this.$store.state.system.userform.password;
+      },
+      set(val) {
+        this.$store.commit("setFormPassword", val);
+      },
+    },
+    email: {
+      get() {
+        return this.$store.state.system.userform.email;
+      },
+      set(val) {
+        this.$store.commit("setFormEmail", val);
+      },
+    },
+    role: {
+      get() {
+        return this.$store.state.system.userform.role;
+      },
+      set(val) {
+        this.$store.commit("setFormRole", val);
+      },
+    },
+    group: {
+      get() {
+        return this.$store.state.system.userform.group;
+      },
+      set(val) {
+        this.$store.commit("setFormGroup", val);
+      },
+    },
+  },
   methods: {
     submit: function() {
       Swal.fire({
@@ -131,6 +201,18 @@ export default {
         text: "The application has been successfully submitted!",
         icon: "success",
         confirmButtonClass: "btn btn-secondary",
+      });
+    },
+    getRoles() {
+      this.$store.dispatch(ACTION_GET_ROLE).then((res) => {
+        if (!res) return;
+        this.getRoles();
+      });
+    },
+    getGroups() {
+      this.$store.dispatch(ACTION_GET_GROUP).then((res) => {
+        if (!res) return;
+        this.getGroups();
       });
     },
   },

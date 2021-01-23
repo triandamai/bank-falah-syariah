@@ -13,6 +13,14 @@ const state = {
   datausers: [],
   datagroups: [],
   dataroles: [],
+  userform: {
+    username: "",
+    password: "",
+    email: "",
+    role: "",
+    group: "",
+  },
+  groupsfrom: {},
   error: "",
   currentpage: 0,
   lastpage: "",
@@ -116,6 +124,22 @@ const mutations = {
     if (!exist) {
       state.dataroles.push(data);
     }
+  },
+  //non type mutation all must be cameCase
+  setFormUsername(state, val) {
+    state.userform.username = val;
+  },
+  setFormPassword(state, val) {
+    state.userform.password = val;
+  },
+  setFormEmail(state, val) {
+    state.userform.email = val;
+  },
+  setFormRole(state, val) {
+    state.userform.role = val;
+  },
+  setFormGroup(state, val) {
+    state.userform.group = val;
   },
 };
 

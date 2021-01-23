@@ -1,7 +1,6 @@
 <template>
   <v-card flat>
     <v-toolbar color="primary" dark flat>
-      <v-icon>mdi-silverware</v-icon>
       <v-toolbar-title>Menu Administrator</v-toolbar-title>
     </v-toolbar>
 
@@ -12,25 +11,24 @@
             v-for="(route, index) in routes"
             :key="index"
             flat
-            v-show="route.name"
           >
             <v-expansion-panel>
               <v-expansion-panel-header v-slot="{ open }">
                 <v-row no-gutters>
-                  <v-col cols="4">
-                    {{ route.name }}
+                  <v-col cols="4" class="text-left">
+                    {{ route.menu_name }}
                   </v-col>
                   <v-col cols="8" class="text--secondary">
                     <v-fade-transition leave-absolute>
                       <span v-if="open" key="0">
-                        Pilih role untuk {{ route.name }}
+                        Pilih role untuk {{ route.menu_name }}
                       </span>
                     </v-fade-transition>
                   </v-col>
                 </v-row>
               </v-expansion-panel-header>
               <v-expansion-panel-content>
-                <b-form-group :label="'path: ' + route.path">
+                <b-form-group :label="'path: ' + route.menu_url">
                   <b-form-checkbox-group
                     id="checkbox-group-2"
                     v-model="selected"
@@ -91,11 +89,11 @@
 </template>
 <script>
 /*eslint-disable*/
-import { availableRoute } from "../../../router";
+import { menu } from "..";
 export default {
   name: "MenuSystem",
   data: () => ({
-    routes: availableRoute(),
+    routes: menu,
     breweries: [],
     isLoading: false,
     tree: [],
@@ -105,6 +103,9 @@ export default {
     options: ["Admin", "Super"],
   }),
 
+  mounted() {
+    console.log(menu);
+  },
   methods: {},
 };
 </script>
