@@ -82,7 +82,8 @@
 </template>
 <script>
 /*eslint-disable*/
-import { headerdatausers, ACTION_GET_USER } from "..";
+import Swal from "sweetalert2";
+import { headerdatausers, ACTION_GET_USER, ACTION_DELETE_USER } from "..";
 import { mapState } from "vuex";
 export default {
   name: "User",
@@ -117,7 +118,25 @@ export default {
       if (!isActive) return "red";
       else return "green";
     },
-    deleteUser(user) {},
+    deleteUser(user) {
+      Swal.fire({
+        title: "Yakin menghapus " + user.username + " ?",
+        text: "User yang dihapus akan hilang permanen!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Oke, hapus!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$store.dispatch(ACTION_DELETE_USER, user).then((res) => {
+            if (res) {
+              Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            }
+          });
+        }
+      });
+    },
   },
 };
 </script>

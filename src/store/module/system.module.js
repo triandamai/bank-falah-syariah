@@ -1,13 +1,14 @@
 /*eslint-disable*/
-
 import ApiService from "../../core/services/api.service";
 
 export const ACTION_GET_USER = "GETUSER";
 export const ACTION_GET_ROLE = "GETROLE";
 export const ACTION_GET_GROUP = "GETGROUP";
 export const ACTION_POST_USER = "POSTUSER";
+export const ACTION_DELETE_USER = "DELETEUSER";
 
 export const MUTATION_POST_DATA = "POSTDATA";
+export const MUTATION_DELETE_USER = "DELETEUSER";
 export const MUTATION_ADD_USER = "ADDUSER";
 export const MUTATION_ADD_ROLE = "ADDROLE";
 export const MUTATION_ADD_GROUP = "ADDGROUP";
@@ -141,6 +142,22 @@ const actions = {
         })
     );
   },
+  [ACTION_DELETE_USER]({ commit }, user) {
+    return new Promise((resolve) => {
+      ApiService.delete(`user/${user.id}`)
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            resolve(true);
+            commit(MUTATION_DELETE_USER, user);
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          resolve(false);
+        });
+    });
+  },
 };
 const mutations = {
   [MUTATION_ADD_USER](state, data) {
@@ -176,6 +193,10 @@ const mutations = {
         state.userform.error = !success;
         break;
     }
+  },
+  [MUTATION_DELETE_USER](state, user) {
+    var index = state.datausers.map((user) => user.id).indexOf(user.id);
+    state.datausers.splice(index);
   },
   //non type mutation all must be cameCase
   setFormUsername(state, val) {

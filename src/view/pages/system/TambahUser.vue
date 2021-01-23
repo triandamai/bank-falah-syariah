@@ -198,6 +198,11 @@ export default {
     submit: function() {
       this.$store.dispatch(ACTION_POST_USER).then((res) => {
         if (res) {
+          this.username = "";
+          this.password = "";
+          this.email = "";
+          this.role = "";
+          this.group = "";
           Swal.fire({
             title: "",
             text: "User berhasil ditambah!",
