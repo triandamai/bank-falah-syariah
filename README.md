@@ -27,3 +27,167 @@ yarn lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+#DOC
+
+Menu yang tersedia saat ini
+
+```javascript
+route = [
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+  {
+    name: "Dashboard",
+    path: "/home",
+    privilages: ["super"],
+  },
+];
+```

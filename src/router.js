@@ -273,11 +273,7 @@ let routes = [
         path: "login",
         component: () => import("@/view/pages/auth/Login"),
       },
-      {
-        name: "Register",
-        path: "register",
-        component: () => import("@/view/pages/auth/Register"),
-      },
+
       {
         // the 404 route, when none of the above matches
         path: "*",
