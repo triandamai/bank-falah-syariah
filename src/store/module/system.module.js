@@ -13,6 +13,7 @@ export const MUTATION_DELETE_USER = "DELETEUSER";
 export const MUTATION_ADD_USER = "ADDUSER";
 export const MUTATION_ADD_ROLE = "ADDROLE";
 export const MUTATION_ADD_GROUP = "ADDGROUP";
+export const MUTATION_SET_FORM_USER = "SETFORM";
 
 const state = {
   datausers: [],
@@ -235,6 +236,14 @@ const mutations = {
   [MUTATION_DELETE_USER](state, user) {
     var index = state.datausers.map((user) => user.id).indexOf(user.id);
     state.datausers.splice(index);
+  },
+  [MUTATION_SET_FORM_USER](state, user) {
+    console.log(user);
+    state.userform.username = user.username;
+    state.userform.password = user.password;
+    state.userform.email = user.email;
+    state.userform.role = user.role_id;
+    state.userform.group = user.group_id;
   },
   //non type mutation all must be cameCase
   setFormUsername(state, val) {

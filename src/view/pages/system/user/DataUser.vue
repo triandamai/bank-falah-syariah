@@ -87,7 +87,7 @@
 import Swal from "sweetalert2";
 import { headerdatausers, ACTION_GET_USER, ACTION_DELETE_USER } from "../..";
 import { mapState } from "vuex";
-import { ACTION_PUT_USER } from "../../../../store";
+import { ACTION_PUT_USER, MUTATION_SET_FORM_USER } from "../../../../store";
 export default {
   name: "User",
   data: () => {
@@ -152,6 +152,7 @@ export default {
         cancelButtonText: "Ga jadi",
       }).then((result) => {
         if (result.isConfirmed) {
+          this.$store.commit(MUTATION_SET_FORM_USER, user);
           this.$router.push({ path: "/system/user/ubah" });
         }
       });

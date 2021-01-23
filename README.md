@@ -29,6 +29,9 @@ yarn lint
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
 #DOC
+Note
+
+1. Butuh Get Data User Dengan Detail Role id dan Group id
 
 Routing yang tersedia saat ini
 
