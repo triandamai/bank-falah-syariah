@@ -5,6 +5,7 @@ export const ACTION_GET_USER = "GETUSER";
 export const ACTION_GET_ROLE = "GETROLE";
 export const ACTION_GET_GROUP = "GETGROUP";
 export const ACTION_POST_USER = "POSTUSER";
+export const ACTION_PUT_USER = "PUTUSER";
 export const ACTION_DELETE_USER = "DELETEUSER";
 
 export const MUTATION_POST_DATA = "POSTDATA";
@@ -108,6 +109,43 @@ const actions = {
   [ACTION_POST_USER]({ commit, state }) {
     return new Promise((resolve) =>
       ApiService.post("user", {
+        username: state.userform.username,
+        email: state.userform.email,
+        active: 1,
+        password: state.userform.password,
+        role_id: state.userform.role,
+        group_id: state.userform.group,
+      })
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            resolve(true);
+            commit(MUTATION_POST_DATA, {
+              success: true,
+              message: "Berhasil menambah user",
+              form: "user",
+            });
+          } else {
+            commit(MUTATION_POST_DATA, {
+              success: false,
+              message: "Gagal menambah user",
+              form: "user",
+            });
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          commit(MUTATION_POST_DATA, {
+            success: true,
+            message: e.data.message,
+            form: "user",
+          });
+          resolve(false);
+        })
+    );
+  },
+  [ACTION_PUT_USER]({ commit, state }) {
+    return new Promise((resolve) =>
+      ApiService.put("user", {
         username: state.userform.username,
         email: state.userform.email,
         active: 1,

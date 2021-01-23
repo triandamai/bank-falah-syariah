@@ -126,15 +126,39 @@ let routes = [
             component: () => import("@/view/pages/system/GroupSystem.vue"),
           },
           {
+            path: "user",
+            component: () => import("@/view/pages/system/UserSystem.vue"),
+            children: [
+              {
+                path: "",
+                redirect: "data",
+              },
+              {
+                path: "data",
+                name: "DataUser",
+                component: () =>
+                  import("@/view/pages/system/user/DataUser.vue"),
+              },
+              {
+                path: "tambah",
+                name: "Adduser",
+                component: () =>
+                  import("@/view/pages/system/user/TambahUser.vue"),
+              },
+              {
+                path: "ubah",
+                name: "UbahUser",
+                component: () =>
+                  import("@/view/pages/system/user/UbahUser.vue"),
+              },
+            ],
+          },
+          {
             path: "role",
             name: "RoleSystem",
             component: () => import("@/view/pages/system/RoleSystem.vue"),
           },
-          {
-            path: "adduser",
-            name: "Adduser",
-            component: () => import("@/view/pages/system/TambahUser.vue"),
-          },
+
           {
             // the 404 route, when none of the above matches
             path: "*",

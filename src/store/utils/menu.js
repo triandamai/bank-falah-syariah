@@ -33,7 +33,7 @@ const menu = [
         id: 1,
         menu_name: "User",
         menu_icon: "",
-        menu_url: "/system/user",
+        menu_url: "/system/user/data",
         menu_parent_id: 1,
         menu_description: "System for super",
         privilages: ["super"],
