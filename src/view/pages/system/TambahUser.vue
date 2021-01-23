@@ -135,7 +135,7 @@
 /*eslint-disable*/
 import Swal from "sweetalert2";
 import { mapState } from "vuex";
-import { ACTION_GET_GROUP, ACTION_GET_ROLE } from "..";
+import { ACTION_GET_GROUP, ACTION_GET_ROLE, ACTION_POST_USER } from "..";
 
 export default {
   name: "TambahUser",
@@ -196,11 +196,26 @@ export default {
   },
   methods: {
     submit: function() {
-      Swal.fire({
-        title: "",
-        text: "The application has been successfully submitted!",
-        icon: "success",
-        confirmButtonClass: "btn btn-secondary",
+      this.$store.dispatch(ACTION_POST_USER).then((res) => {
+        if (res) {
+          Swal.fire({
+            title: "",
+            text: "User berhasil ditambah!",
+            icon: "success",
+            confirmButtonText: "Oke",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.$router.go(-1);
+            }
+          });
+        } else {
+          Swal.fire({
+            title: "",
+            text: "Maaf gagal menambah user, coba lagi nanti!",
+            icon: "error",
+            confirmButtonText: "Coba lagi",
+          });
+        }
       });
     },
     getRoles() {

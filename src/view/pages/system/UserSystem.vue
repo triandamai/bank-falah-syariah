@@ -51,13 +51,28 @@
             :headers="user.headers"
             :items="users"
             :search="user.search"
-            ><template v-slot:[`item.active`]="{ item }">
-              {{ item.active == 1 ? "aktif" : "nonaktif" }}
+            data-app
+          >
+            <template v-slot:[`item.active`]="{ item }">
+              <v-chip :color="getColor(item.active == 1)">
+                {{ item.active == 1 ? "aktif" : "nonaktif" }}
+              </v-chip>
             </template>
             <template v-slot:[`item.last_login`]="{ item }">
               {{
                 item.last_login != "" ? item.last_login : "belum ada aktivitas"
               }}
+            </template>
+            <template v-slot:[`item.action`]="{ item }">
+              <b-button-toolbar
+                aria-label="Toolbar with button groups and dropdown menu"
+              >
+                <b-button-group class="mx-1">
+                  <b-button>Ubah</b-button>
+                  <b-button>Detail</b-button>
+                  <b-button @click="deleteUser(item)">Hapus</b-button>
+                </b-button-group>
+              </b-button-toolbar>
             </template>
           </v-data-table>
         </v-card>
@@ -66,6 +81,7 @@
   </div>
 </template>
 <script>
+/*eslint-disable*/
 import { headerdatausers, ACTION_GET_USER } from "..";
 import { mapState } from "vuex";
 export default {
@@ -97,6 +113,19 @@ export default {
         }
       });
     },
+    getColor(isActive) {
+      if (!isActive) return "red";
+      else return "green";
+    },
+    deleteUser(user) {},
   },
 };
 </script>
+<style scoped>
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+</style>

@@ -32,7 +32,7 @@ const headerdatausers = [
   {
     text: "Status",
     align: "left",
-    sortable: false,
+    sortable: true,
     value: "active",
   },
   {

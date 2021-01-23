@@ -5,6 +5,9 @@ import ApiService from "../../core/services/api.service";
 export const ACTION_GET_USER = "GETUSER";
 export const ACTION_GET_ROLE = "GETROLE";
 export const ACTION_GET_GROUP = "GETGROUP";
+export const ACTION_POST_USER = "POSTUSER";
+
+export const MUTATION_POST_DATA = "POSTDATA";
 export const MUTATION_ADD_USER = "ADDUSER";
 export const MUTATION_ADD_ROLE = "ADDROLE";
 export const MUTATION_ADD_GROUP = "ADDGROUP";
@@ -19,6 +22,8 @@ const state = {
     email: "",
     role: "",
     group: "",
+    error: false,
+    message: "",
   },
   groupsfrom: {},
   error: "",
@@ -99,6 +104,43 @@ const actions = {
         });
     });
   },
+  [ACTION_POST_USER]({ commit, state }) {
+    return new Promise((resolve) =>
+      ApiService.post("user", {
+        username: state.userform.username,
+        email: state.userform.email,
+        active: 1,
+        password: state.userform.password,
+        role_id: state.userform.role,
+        group_id: state.userform.group,
+      })
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            resolve(true);
+            commit(MUTATION_POST_DATA, {
+              success: true,
+              message: "Berhasil menambah user",
+              form: "user",
+            });
+          } else {
+            commit(MUTATION_POST_DATA, {
+              success: false,
+              message: "Gagal menambah user",
+              form: "user",
+            });
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          commit(MUTATION_POST_DATA, {
+            success: true,
+            message: e.data.message,
+            form: "user",
+          });
+          resolve(false);
+        })
+    );
+  },
 };
 const mutations = {
   [MUTATION_ADD_USER](state, data) {
@@ -123,6 +165,16 @@ const mutations = {
     });
     if (!exist) {
       state.dataroles.push(data);
+    }
+  },
+  [MUTATION_POST_DATA](state, { message, success, form }) {
+    switch (form) {
+      case "group":
+        break;
+      case "user":
+        state.userform.message = message;
+        state.userform.error = !success;
+        break;
     }
   },
   //non type mutation all must be cameCase
