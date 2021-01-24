@@ -58,7 +58,7 @@
   </div>
 </template>
 <script>
-import { headerdatanasabah } from "..";
+import { headerdatanasabah } from "@/store";
 export default {
   name: "Simpanan",
   data: () => {

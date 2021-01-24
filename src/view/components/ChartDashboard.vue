@@ -70,7 +70,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: "widget-5",
+  name: "CartDashboard",
   components: {},
   data() {
     return {
@@ -78,17 +78,17 @@ export default {
       series: [
         {
           name: "Net Profit",
-          data: [44, 55, 57, 56, 61, 58]
+          data: [44, 55, 57, 56, 61, 58],
         },
         {
           name: "Revenue",
-          data: [76, 85, 101, 98, 87, 105]
-        }
-      ]
+          data: [76, 85, 101, 98, 87, 105],
+        },
+      ],
     };
   },
   computed: {
-    ...mapGetters(["layoutConfig"])
+    ...mapGetters({ layoutConfig: "config/layoutConfig" }),
   },
   mounted() {
     // reference; kt_mixed_widget_1_chart
@@ -97,101 +97,101 @@ export default {
         type: "bar",
         height: 350,
         toolbar: {
-          show: false
-        }
+          show: false,
+        },
       },
       plotOptions: {
         bar: {
           horizontal: false,
           columnWidth: ["30%"],
-          endingShape: "rounded"
-        }
+          endingShape: "rounded",
+        },
       },
       legend: {
-        show: false
+        show: false,
       },
       dataLabels: {
-        enabled: false
+        enabled: false,
       },
       stroke: {
         show: true,
         width: 2,
-        colors: ["transparent"]
+        colors: ["transparent"],
       },
       xaxis: {
         categories: ["Feb", "Mar", "Apr", "May", "Jun", "Jul"],
         axisBorder: {
-          show: false
+          show: false,
         },
         axisTicks: {
-          show: false
+          show: false,
         },
         labels: {
           style: {
             colors: this.layoutConfig("colors.gray.gray-500"),
             fontSize: "12px",
-            fontFamily: this.layoutConfig("font-family")
-          }
-        }
+            fontFamily: this.layoutConfig("font-family"),
+          },
+        },
       },
       yaxis: {
         labels: {
           style: {
             colors: this.layoutConfig("colors.gray.gray-500"),
             fontSize: "12px",
-            fontFamily: this.layoutConfig("font-family")
-          }
-        }
+            fontFamily: this.layoutConfig("font-family"),
+          },
+        },
       },
       fill: {
-        opacity: 1
+        opacity: 1,
       },
       states: {
         normal: {
           filter: {
             type: "none",
-            value: 0
-          }
+            value: 0,
+          },
         },
         hover: {
           filter: {
             type: "none",
-            value: 0
-          }
+            value: 0,
+          },
         },
         active: {
           allowMultipleDataPointsSelection: false,
           filter: {
             type: "none",
-            value: 0
-          }
-        }
+            value: 0,
+          },
+        },
       },
       tooltip: {
         style: {
           fontSize: "12px",
-          fontFamily: this.layoutConfig("font-family")
+          fontFamily: this.layoutConfig("font-family"),
         },
         y: {
           formatter: function(val) {
             return "$" + val + " thousands";
-          }
-        }
+          },
+        },
       },
       colors: [
         this.layoutConfig("colors.theme.base.warning"),
-        this.layoutConfig("colors.gray.gray-300")
+        this.layoutConfig("colors.gray.gray-300"),
       ],
       grid: {
         borderColor: this.layoutConfig("colors.gray.gray-200"),
         strokeDashArray: 4,
         yaxis: {
           lines: {
-            show: true
-          }
-        }
-      }
+            show: true,
+          },
+        },
+      },
     };
-  }
+  },
 };
 </script>

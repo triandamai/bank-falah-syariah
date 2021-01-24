@@ -36,6 +36,6 @@
 
 <script>
 export default {
-  name: "widget-1",
+  name: "BannerAktivasi",
 };
 </script>

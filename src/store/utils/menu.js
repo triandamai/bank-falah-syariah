@@ -180,7 +180,7 @@ const quickAction = [
     {
       id: 1,
       menu_name: "Akuntansi",
-      menu_icon: require("../../assets/images/svg/icons/Shopping/Euro.svg"),
+      menu_icon: require("@/assets/images/svg/icons/Shopping/Euro.svg"),
       menu_url: "/",
       menu_parent_id: null,
       privilages: ["super"],
@@ -189,7 +189,7 @@ const quickAction = [
     {
       id: 1,
       menu_name: "Nasabah",
-      menu_icon: require("../../assets/images/svg/icons/Communication/Mail-attachment.svg"),
+      menu_icon: require("@/assets/images/svg/icons/Communication/Mail-attachment.svg"),
       menu_url: "",
       menu_parent_id: null,
       privilages: ["super"],
@@ -200,7 +200,7 @@ const quickAction = [
     {
       id: 1,
       menu_name: "Tabungan",
-      menu_icon: require("../../assets/images/svg/icons/Shopping/Box2.svg"),
+      menu_icon: require("@/assets/images/svg/icons/Shopping/Box2.svg"),
       menu_url: "",
       menu_parent_id: null,
       privilages: ["super"],
@@ -209,7 +209,7 @@ const quickAction = [
     {
       id: 1,
       menu_name: "Akun",
-      menu_icon: require("../../assets/images/svg/icons/Communication/Group.svg"),
+      menu_icon: require("@/assets/images/svg/icons/Communication/Group.svg"),
       menu_url: "",
       menu_parent_id: null,
       privilages: ["super"],
@@ -220,7 +220,7 @@ const quickAction = [
     {
       id: 1,
       menu_name: "Email",
-      menu_icon: require("../../assets/images/svg/icons/Shopping/Chart-bar1.svg"),
+      menu_icon: require("@/assets/images/svg/icons/Shopping/Chart-bar1.svg"),
       menu_url: "",
       menu_parent_id: null,
       privilages: ["super"],
@@ -229,7 +229,7 @@ const quickAction = [
     {
       id: 1,
       menu_name: "Pengaturan",
-      menu_icon: require("../../assets/images/svg/icons/Design/Color-profile.svg"),
+      menu_icon: require("@/assets/images/svg/icons/Design/Color-profile.svg"),
       menu_url: "",
       menu_parent_id: null,
       privilages: ["super"],
@@ -240,7 +240,7 @@ const quickAction = [
     {
       id: 1,
       menu_name: "Laporan",
-      menu_icon: require("../../assets/images/svg/icons/Shopping/Euro.svg"),
+      menu_icon: require("@/assets/images/svg/icons/Shopping/Euro.svg"),
       menu_url: "",
       menu_parent_id: null,
       privilages: ["super"],

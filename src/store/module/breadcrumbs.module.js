@@ -6,8 +6,9 @@ export const SET_BREADCRUMB = "setBreadcrumb";
 export const ADD_BREADCRUMB = "addBreadcrumb";
 
 export default {
+  namespaced: true,
   state: {
-    breadcrumbs: []
+    breadcrumbs: [],
   },
   getters: {
     /**
@@ -29,7 +30,7 @@ export default {
       if (last && last.title) {
         return last.title;
       }
-    }
+    },
   },
   actions: {
     /**
@@ -48,11 +49,11 @@ export default {
      */
     [ADD_BREADCRUMB](state, payload) {
       if (typeof payload === "object") {
-        payload.forEach(item => state.commit(APPEND_BREADCRUM, item));
+        payload.forEach((item) => state.commit(APPEND_BREADCRUM, item));
       } else {
         state.commit(APPEND_BREADCRUM, payload);
       }
-    }
+    },
   },
   mutations: {
     [APPEND_BREADCRUM](state, payload) {
@@ -60,6 +61,6 @@ export default {
     },
     [SET_BREADCRUMB](state, payload) {
       state.breadcrumbs = payload;
-    }
-  }
+    },
+  },
 };

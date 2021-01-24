@@ -20,9 +20,7 @@
           <span class="svg-icon svg-icon-xxl svg-icon-dark-75">
             <!--begin::Svg Icon | path:assets/media/svg/icons/Text/Align-left.svg-->
             <inline-svg
-              :src="
-                require('../../../assets/images/svg/icons/Text/Align-left.svg')
-              "
+              :src="require('@/assets/images/svg/icons/Text/Align-left.svg')"
             />
             <!--end::Svg Icon-->
           </span>
@@ -32,7 +30,7 @@
           <router-link to="/">
             <img
               alt="Logo"
-              :src="require('../../../assets/images/ssb.png')"
+              :src="require('@/assets/images/ssb.png')"
               class="logo-sticky max-h-35px"
             />
           </router-link>
@@ -52,7 +50,7 @@
                     <!--begin::Svg Icon | path:assets/media/svg/icons/General/Search.svg-->
                     <inline-svg
                       :src="
-                        require('../../../assets/images/svg/icons/General/Search.svg')
+                        require('@/assets/images/svg/icons/General/Search.svg')
                       "
                     />
                     <!--end::Svg Icon-->
@@ -97,7 +95,7 @@
         <!--end::Desktop Search-->
       </div>
 
-      <KTTopbar></KTTopbar>
+      <topbar />
     </div>
   </div>
   <!-- end:: Header -->
@@ -105,21 +103,19 @@
 
 <script>
 import { mapGetters } from "vuex";
-import KTTopbar from "./Topbar.vue";
 import KTLayoutHeader from "@/assets/js/layout/base/header.js";
 
 export default {
   name: "Header",
-
-  components: {
-    KTTopbar,
-  },
-  mounted() {
+  Topbarounted() {
     // Init Desktop & Mobile Headers
     KTLayoutHeader.init("kt_header", "kt_header_mobile");
   },
   computed: {
-    ...mapGetters(["layoutConfig", "getClasses"]),
+    ...mapGetters({
+      layoutConfig: "config/layoutConfig",
+      getClasses: "htmlclass/getClasses",
+    }),
 
     /**
      * Check if the header menu is enabled

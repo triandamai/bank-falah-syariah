@@ -8,7 +8,7 @@
       <div class="alert-icon">
         <span class="svg-icon svg-icon-lg">
           <inline-svg
-            :src="require('../../../assets/images/svg/icons/Tools/Compass.svg')"
+            :src="require('@/assets/images/svg/icons/Tools/Compass.svg')"
           />
         </span>
       </div>
@@ -60,11 +60,7 @@
 
 <script>
 /* eslint-disable */
-import {
-  SET_BREADCRUMB,
-  ACTION_GET_NASABAH,
-  headerdatanasabah,
-} from "../../../store";
+import { ACTION_GET_NASABAH, headerdatanasabah } from "@/store";
 
 import { mapState } from "vuex";
 
@@ -91,7 +87,7 @@ export default {
   methods: {
     getNasabah() {
       this.$store
-        .dispatch(ACTION_GET_NASABAH)
+        .dispatch("nasabah/" + ACTION_GET_NASABAH)
         .then((res) => {
           if (res) {
             this.getNasabah();

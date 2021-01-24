@@ -112,8 +112,6 @@
 
 <script>
 export default {
-  name: "JalanPintas",
-  components: {},
-  mounted() {},
+  name: "DropdownCreate",
 };
 </script>

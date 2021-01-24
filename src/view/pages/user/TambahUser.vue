@@ -30,15 +30,12 @@
 <script>
 /*eslint-disable*/
 import Swal from "sweetalert2";
-import { ACTION_POST_USER, MUTATION_CLEAR_FORM_USER } from "..";
+import { ACTION_POST_USER, MUTATION_CLEAR_FORM_USER } from "@/store";
 import { mapState } from "vuex";
-import FormUser from "../../components/form/FormUser.vue";
 
 export default {
   name: "TambahUser",
-  components: {
-    FormUser,
-  },
+
   computed: {
     ...mapState({
       message: (state) => state.system.userform.message,
@@ -46,9 +43,9 @@ export default {
   },
   methods: {
     submit(val) {
-      this.$store.dispatch(ACTION_POST_USER).then((res) => {
+      this.$store.dispatch("system/" + ACTION_POST_USER).then((res) => {
         if (res) {
-          this.$store.commit(MUTATION_CLEAR_FORM_USER);
+          this.$store.commit("system/" + MUTATION_CLEAR_FORM_USER);
           Swal.fire({
             title: "",
             text: this.message,

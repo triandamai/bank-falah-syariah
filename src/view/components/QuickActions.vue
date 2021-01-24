@@ -4,9 +4,7 @@
       <a href="#" class="btn btn-icon btn-sm btn-clean btn-text-dark-75">
         <span class="svg-icon svg-icon-lg">
           <inline-svg
-            :src="
-              require('../../../assets/images/svg/icons/Layout/Layout4.svg')
-            "
+            :src="require('@/assets/images/svg/icons/Layout/Layout4.svg')"
           />
         </span>
       </a>
@@ -69,7 +67,7 @@
 
 <script>
 import KTLayoutQuickUser from "@/assets/js/layout/extended/quick-actions.js";
-import { quickAction } from "../../../store";
+import { quickAction } from "@/store";
 export default {
   name: "AksiCepat",
   data: () => {

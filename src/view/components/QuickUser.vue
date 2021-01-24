@@ -6,7 +6,7 @@
     >
       <span class="svg-icon svg-icon-lg">
         <inline-svg
-          :src="require('../../../assets/images/svg/icons/General/User.svg')"
+          :src="require('@/assets/images/svg/icons/General/User.svg')"
         />
       </span>
     </div>
@@ -61,7 +61,7 @@
                       <!--begin::Svg Icon-->
                       <inline-svg
                         :src="
-                          require('../../../assets/images/svg/icons/Communication/Mail-notification.svg')
+                          require('@/assets/images/svg/icons/Communication/Mail-notification.svg')
                         "
                       />
                       <!--end::Svg Icon-->
@@ -101,7 +101,7 @@
 
 <script>
 /*eslint-disable*/
-import { LOGOUT, getUser } from "../../../store";
+import { LOGOUT, getUser } from "@/store";
 import KTLayoutQuickUser from "@/assets/js/layout/extended/quick-user.js";
 import KTOffcanvas from "@/assets/js/components/offcanvas.js";
 

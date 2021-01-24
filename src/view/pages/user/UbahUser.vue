@@ -30,15 +30,12 @@
 <script>
 /*eslint-disable*/
 import Swal from "sweetalert2";
-import { ACTION_PUT_USER, MUTATION_CLEAR_FORM_USER } from "..";
-import FormUser from "../../components/form/FormUser.vue";
+import { ACTION_PUT_USER, MUTATION_CLEAR_FORM_USER } from "@/store";
+
 import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "TambahUser",
-  components: {
-    FormUser,
-  },
   created() {
     if (!this.userformvalidation) {
       this.$router.go(-1);
@@ -48,11 +45,11 @@ export default {
     ...mapState({
       message: (state) => state.system.userform.message,
     }),
-    ...mapGetters(["userformvalidation"]),
+    ...mapGetters({ userformvalidation: "userformvalidation" }),
   },
   methods: {
     submit(val) {
-      this.$store.dispatch(ACTION_PUT_USER).then((res) => {
+      this.$store.dispatch("system/" + ACTION_PUT_USER).then((res) => {
         if (res) {
           Swal.fire({
             title: "Berhasil",
@@ -61,7 +58,7 @@ export default {
             confirmButtonText: "Oke",
           }).then((result) => {
             if (result.isConfirmed) {
-              this.$store.dispatch(MUTATION_CLEAR_FORM_USER);
+              this.$store.dispatch("system/" + MUTATION_CLEAR_FORM_USER);
               this.$router.go(-1);
             }
           });

@@ -48,23 +48,10 @@
 </style>
 
 <script>
-import SearchDefault from "../../components/offcanvas/DropdownCreate.vue";
-import QuickUser from "../../components/offcanvas/QuickUser.vue";
-// import KTQuickPanel from "@/view/layout/extras/offcanvas/QuickPanel.vue";
-import QuickActions from "../../components/offcanvas/QuickActions.vue";
-import QuickNotifications from "../../components/offcanvas/QuickNotifications.vue";
-
 export default {
-  name: "KTTopbar",
+  name: "Topbar",
   data() {
     return {};
-  },
-  components: {
-    SearchDefault,
-    QuickUser,
-    // KTQuickPanel,
-    QuickActions,
-    QuickNotifications,
   },
   methods: {},
   computed: {

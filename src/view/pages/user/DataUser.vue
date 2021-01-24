@@ -88,7 +88,7 @@ import {
   ACTION_GET_USER,
   MUTATION_SET_FORM_USER,
   ACTION_DELETE_USER,
-} from "..";
+} from "@/store";
 import { mapState } from "vuex";
 export default {
   name: "User",
@@ -113,7 +113,7 @@ export default {
   },
   methods: {
     getUsers() {
-      this.$store.dispatch(ACTION_GET_USER).then((res) => {
+      this.$store.dispatch("system/" + ACTION_GET_USER).then((res) => {
         if (res) {
           this.getUsers();
         }
@@ -134,11 +134,13 @@ export default {
         confirmButtonText: "Oke, hapus!",
       }).then((result) => {
         if (result.isConfirmed) {
-          this.$store.dispatch(ACTION_DELETE_USER, user).then((res) => {
-            if (res) {
-              Swal.fire("Deleted!", "Your file has been deleted.", "success");
-            }
-          });
+          this.$store
+            .dispatch("system/" + ACTION_DELETE_USER, user)
+            .then((res) => {
+              if (res) {
+                Swal.fire("Deleted!", "Your file has been deleted.", "success");
+              }
+            });
         }
       });
     },
@@ -154,7 +156,7 @@ export default {
         cancelButtonText: "Ga jadi",
       }).then((result) => {
         if (result.isConfirmed) {
-          this.$store.commit(MUTATION_SET_FORM_USER, user);
+          this.$store.commit("system/" + MUTATION_SET_FORM_USER, user);
           this.$router.push({ path: "/user/ubah" });
         }
       });

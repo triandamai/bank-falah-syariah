@@ -102,7 +102,7 @@
 </template>
 
 <script>
-import { menu } from "../../../store";
+import { menu } from "@/store";
 export default {
   name: "Menu",
   data: () => {

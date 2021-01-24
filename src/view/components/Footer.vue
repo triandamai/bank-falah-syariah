@@ -36,7 +36,7 @@ import { mapGetters } from "vuex";
 export default {
   name: "Footer",
   computed: {
-    ...mapGetters(["layoutConfig"]),
+    ...mapGetters({ layoutConfig: "config/layoutConfig" }),
 
     /**
      * Check if footer container is fluid

@@ -236,7 +236,7 @@
   </div>
 </template>
 <script>
-import { country } from "../../../store/utils/country";
+import { country } from "@/store";
 export default {
   data: () => {
     return {

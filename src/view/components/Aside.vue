@@ -23,7 +23,7 @@
           class="aside-menu scroll"
           style="max-height: 90vh; position: relative;"
         >
-          <KTMenu></KTMenu>
+          <Menu />
         </perfect-scrollbar>
       </div>
     </div>
@@ -35,7 +35,6 @@
 import { mapGetters } from "vuex";
 import KTLayoutAside from "@/assets/js/layout/base/aside.js";
 import KTLayoutAsideMenu from "@/assets/js/layout/base/aside-menu.js";
-import KTMenu from "./Menu.vue";
 
 export default {
   name: "Aside",
@@ -45,9 +44,7 @@ export default {
       outsideTm: 0,
     };
   },
-  components: {
-    KTMenu,
-  },
+
   mounted() {
     this.$nextTick(() => {
       // Init Aside
@@ -58,7 +55,10 @@ export default {
     });
   },
   computed: {
-    ...mapGetters(["layoutConfig", "getClasses"]),
+    ...mapGetters({
+      layoutConfig: "config/layoutConfig",
+      getClasses: "htmlclass/getClasses",
+    }),
 
     /**
      * Get extra classes for menu based on the options

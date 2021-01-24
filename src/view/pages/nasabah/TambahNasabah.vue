@@ -30,14 +30,8 @@ import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
 
-import Stepper from "../../components/Stepper.vue";
-import FormNasabah from "../../components/form/FormNasabah.vue";
 export default {
   name: "Wizard-2",
-  components: {
-    Stepper,
-    FormNasabah,
-  },
   data() {
     return {
       steps: [

@@ -7,7 +7,7 @@ Vue.use(Router);
 let routes = [
   {
     path: "/",
-    component: () => import("@/view/pages/Layout"),
+    component: () => import("@/view/pages/Layout.vue"),
     meta: {
       requiresAuth: true,
     },
@@ -44,12 +44,12 @@ let routes = [
           {
             path: "tambah",
             name: "TambahAkun",
-            component: () => import("@/view/pages/Tambah.vue"),
+            component: () => import("@/view/pages/akun/Akun.vue"),
           },
           {
             path: "ubah",
             name: "UbahAkun",
-            component: () => import("@/view/pages/Tambah.vue"),
+            component: () => import("@/view/pages/akun/Akun.vue"),
           },
           {
             path: "*",
@@ -257,12 +257,12 @@ let routes = [
           {
             path: "ubah",
             name: "UbahTabungan",
-            component: () => import("@/view/pages/Tambah.vue"),
+            component: () => import("@/view/pages/tabungan/Tabungan.vue"),
           },
           {
             path: "tambah",
             name: "TambahTabungan",
-            component: () => import("@/view/pages/Tambah.vue"),
+            component: () => import("@/view/pages/tabungan/Tabungan.vue"),
           },
 
           {

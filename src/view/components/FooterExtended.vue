@@ -138,14 +138,14 @@ import { mapGetters } from "vuex";
 export default {
   name: "KTFooter",
   computed: {
-    ...mapGetters(["layoutConfig"]),
+    ...mapGetters({ layoutConfig: "config/layoutConfig" }),
 
     /**
      * Check if footer container is fluid
      */
     widthFluid() {
       return this.layoutConfig("footer.width") === "fluid";
-    }
-  }
+    },
+  },
 };
 </script>

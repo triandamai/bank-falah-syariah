@@ -3,7 +3,7 @@
   <div id="kt_scrolltop" ref="kt_scrolltop" class="scrolltop">
     <span class="svg-icon">
       <inline-svg
-        :src="require('../../../assets/images/svg/icons/Navigation/Up-2.svg')"
+        :src="require('@/assets/images/svg/icons/Navigation/Up-2.svg')"
       />
     </span>
   </div>

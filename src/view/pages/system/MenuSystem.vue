@@ -89,7 +89,7 @@
 </template>
 <script>
 /*eslint-disable*/
-import { menu } from "..";
+import { menu } from "@/store";
 export default {
   name: "MenuSystem",
   data: () => ({

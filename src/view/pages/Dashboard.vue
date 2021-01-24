@@ -21,20 +21,14 @@
 </template>
 
 <script>
-import { SET_BREADCRUMB } from "../../store";
-import BannerWarningAktivasiDashboard from "../components/BannerWarningAktivasiDashboard.vue";
-import ChartDashboard from "../components/ChartDashboard.vue";
-import ListUserDashboard from "../components/ListUserDashboard.vue";
+import { SET_BREADCRUMB } from "@/store";
 
 export default {
   name: "dashboard",
-  components: {
-    ListUserDashboard,
-    ChartDashboard,
-    BannerWarningAktivasiDashboard,
-  },
   mounted() {
-    this.$store.dispatch(SET_BREADCRUMB, [{ title: "Dashboard" }]);
+    this.$store.dispatch("breadcrumbs/" + SET_BREADCRUMB, [
+      { title: "Dashboard" },
+    ]);
   },
   methods: {
     setActiveTab1(event) {

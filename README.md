@@ -24,6 +24,27 @@ Issue
 `[FIX]`
 `[ISSUE]`
 
+### project structure
+
+```java
+public
+src
+  assets
+  core
+    i8n //internasionalization
+    mock //service for testing without backend
+    plugins
+    services
+  store
+    module
+    utils
+  view
+      components
+      pages
+        ...
+
+```
+
 Menu
 
 ```javascript

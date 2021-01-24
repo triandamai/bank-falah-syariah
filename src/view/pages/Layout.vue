@@ -50,32 +50,16 @@
 </template>
 
 <script>
-/*disable-eslint*/
+/*eslint-disable*/
 import { mapGetters } from "vuex";
-import Aside from "../components/aside/Aside.vue";
-import Header from "../components/header/Header.vue";
-import HeaderMobile from "../components/header/HeaderMobile.vue";
-import Footer from "../components/footer/Footer.vue";
 import HtmlClass from "@/core/services/htmlclass.service";
-import StickyToolbar from "../components/offcanvas/StickyToolbar.vue";
-import ScrollTop from "../components/offcanvas/ScrollTop.vue";
-import Loader from "../components/content/Loader.vue";
-import { ADD_BODY_CLASSNAME, REMOVE_BODY_CLASSNAME } from "../../store";
+import { ADD_BODY_CLASSNAME, REMOVE_BODY_CLASSNAME } from "@/store";
 
 export default {
   name: "MainLayout",
-  components: {
-    Aside,
-    Header,
-    HeaderMobile,
-    Footer,
-    StickyToolbar,
-    ScrollTop,
-    Loader,
-  },
   beforeMount() {
     // show page loading
-    this.$store.dispatch(ADD_BODY_CLASSNAME, "page-loading");
+    this.$store.dispatch("htmlclass/" + ADD_BODY_CLASSNAME, "page-loading");
 
     // initialize html element classes
     HtmlClass.init(this.layoutConfig());
@@ -89,8 +73,11 @@ export default {
     // Simulate the delay page loading
     setTimeout(() => {
       // Remove page loader after some time
-      this.$store.dispatch(REMOVE_BODY_CLASSNAME, "page-loading");
-    }, 2000);
+      this.$store.dispatch(
+        "htmlclass/" + REMOVE_BODY_CLASSNAME,
+        "page-loading"
+      );
+    }, 600);
   },
   methods: {
     footerLayout(type) {
@@ -98,12 +85,12 @@ export default {
     },
   },
   computed: {
-    ...mapGetters([
-      "isAuthenticated",
-      "breadcrumbs",
-      "pageTitle",
-      "layoutConfig",
-    ]),
+    ...mapGetters({
+      isAuthenticated: "auth/isAuthenticated",
+      breadcrumbs: "breadcrumbs/breadcrumbs",
+      pageTitle: "breadcrumbs/pageTitle",
+      layoutConfig: "config/layoutConfig",
+    }),
 
     /**
      * Check if the page loader is enabled

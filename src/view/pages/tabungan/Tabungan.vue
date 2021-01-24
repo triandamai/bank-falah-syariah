@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { SET_BREADCRUMB } from "../../../store";
+import { SET_BREADCRUMB } from "@/store";
 
 export default {
   data() {
@@ -160,7 +160,7 @@ export default {
   },
   components: {},
   mounted() {
-    this.$store.dispatch(SET_BREADCRUMB, [
+    this.$store.dispatch("breadcrumbs/" + SET_BREADCRUMB, [
       { title: "Vuetify", route: "alerts" },
       { title: "Tables", route: "simple-tables" },
       { title: "Data Tables" },

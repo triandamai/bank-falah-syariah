@@ -8,7 +8,7 @@
     <a href="/">
       <img
         alt="Logo"
-        :src="require('../../../assets/images/ssb.png')"
+        :src="require('@/assets/images/ssb.png')"
         class="logo-default max-h-30px"
       />
     </a>
@@ -32,9 +32,7 @@
       >
         <span>
           <inline-svg
-            :src="
-              require('../../../assets/images/svg/icons/Text/Align-left.svg')
-            "
+            :src="require('@/assets/images/svg/icons/Text/Align-left.svg')"
           />
         </span>
       </button>
@@ -49,7 +47,7 @@
           <!--begin::Svg Icon | path:svg/icons/General/User.svg-->
           <inline-svg
             class="svg-icon"
-            :src="require('../../../assets/images/svg/icons/General/User.svg')"
+            :src="require('@/assets/images/svg/icons/General/User.svg')"
           />
           <!--end::Svg Icon-->
         </span>
@@ -66,13 +64,15 @@ import KTLayoutHeaderTopbar from "@/assets/js/layout/base/header-topbar.js";
 
 export default {
   name: "HeaderMobile",
-  components: {},
   mounted() {
     // Init Header Topbar For Mobile Mode
     KTLayoutHeaderTopbar.init(this.$refs["kt_header_mobile_topbar_toggle"]);
   },
   computed: {
-    ...mapGetters(["layoutConfig", "getClasses"]),
+    ...mapGetters({
+      layoutConfig: "config/layoutConfig",
+      getClasses: "htmlclass/getClasses",
+    }),
 
     /**
      * Get header logo

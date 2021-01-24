@@ -8,7 +8,7 @@
       <div class="alert-icon">
         <span class="svg-icon svg-icon-lg">
           <inline-svg
-            :src="require('../../../assets/images/svg/icons/Tools/Compass.svg')"
+            :src="require('@/assets/images/svg/icons/Tools/Compass.svg')"
           />
         </span>
       </div>
@@ -115,7 +115,7 @@
   </div>
 </template>
 <script>
-import { headergroups, ACTION_GET_GROUP } from "..";
+import { headergroups, ACTION_GET_GROUP } from "@/store";
 import { mapState } from "vuex";
 export default {
   name: "Group",
@@ -141,7 +141,7 @@ export default {
   },
   methods: {
     getGrups() {
-      this.$store.dispatch(ACTION_GET_GROUP).then((res) => {
+      this.$store.dispatch("system/" + ACTION_GET_GROUP).then((res) => {
         if (res) {
           this.getGrups();
         }

@@ -22,7 +22,7 @@
 </style>
 
 <script>
-import { OVERRIDE_LAYOUT_CONFIG } from "./store";
+import { OVERRIDE_LAYOUT_CONFIG } from "@/store";
 
 export default {
   name: "BakaranProject",
@@ -31,7 +31,8 @@ export default {
      * this is to override the layout config using saved data from localStorage
      * remove this to use config only from static json (@/core/config/layout.config.json)
      */
-    this.$store.dispatch(OVERRIDE_LAYOUT_CONFIG);
+
+    this.$store.dispatch("config/" + OVERRIDE_LAYOUT_CONFIG);
   },
 };
 </script>

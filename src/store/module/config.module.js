@@ -11,6 +11,7 @@ export const OVERRIDE_PAGE_LAYOUT_CONFIG = "overridePageLayoutConfig";
 // mutation types
 
 export default {
+  namespaced: true,
   state: {
     config: config,
     initial: config,

@@ -8,7 +8,7 @@
       <div class="alert-icon">
         <span class="svg-icon svg-icon-lg">
           <inline-svg
-            :src="require('../../../assets/images/svg/icons/Tools/Compass.svg')"
+            :src="require('@/assets/images/svg/icons/Tools/Compass.svg')"
           />
         </span>
       </div>
@@ -58,7 +58,7 @@
   </div>
 </template>
 <script>
-import { headerdatanasabah } from "..";
+import { headerdatanasabah } from "@/store";
 export default {
   name: "Deposito",
   data: () => {

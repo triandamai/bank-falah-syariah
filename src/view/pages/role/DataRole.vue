@@ -8,7 +8,7 @@
       <div class="alert-icon">
         <span class="svg-icon svg-icon-lg">
           <inline-svg
-            :src="require('../../../assets/images/svg/icons/Tools/Compass.svg')"
+            :src="require('@/assets/images/svg/icons/Tools/Compass.svg')"
           />
         </span>
       </div>
@@ -115,7 +115,7 @@
   </div>
 </template>
 <script>
-import { headerroles, ACTION_GET_ROLE } from "..";
+import { headerroles, ACTION_GET_ROLE } from "@/store";
 import { mapState } from "vuex";
 export default {
   name: "RoleSystem",
@@ -141,7 +141,7 @@ export default {
   },
   methods: {
     getUsers() {
-      this.$store.dispatch(ACTION_GET_ROLE).then((res) => {
+      this.$store.dispatch("system/" + ACTION_GET_ROLE).then((res) => {
         if (res) {
           this.getUsers();
         }

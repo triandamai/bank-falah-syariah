@@ -7,8 +7,6 @@ import ApiService from "@/core/services/api.service";
 import { RESET_LAYOUT_CONFIG } from "./store";
 import { getUser } from "@/core/services/jwt.service.js";
 
-import VueTour from "vue-tour";
-require("vue-tour/dist/vue-tour.css");
 Vue.config.productionTip = false;
 
 // Global 3rd party plugins
@@ -30,6 +28,24 @@ import "@/core/plugins/inline-svg";
 import "@/core/plugins/apexcharts";
 import "@/core/plugins/metronic";
 import "@mdi/font/css/materialdesignicons.css";
+//registring components
+import { upperFirst, camelCase } from "lodash";
+const requireComponent = require.context(
+  "./view/components",
+  false,
+  /[\w-]+\.vue$/
+);
+
+requireComponent.keys().forEach((fileName) => {
+  //get comp config
+  const componentConfig = requireComponent(fileName);
+  //get PascalCase name
+  const componentName = upperFirst(
+    camelCase(fileName.replace(/^\.\//, "").replace(/\.\w+$/, ""))
+  );
+
+  Vue.component(componentName, componentConfig.default || componentConfig);
+});
 
 // API service init
 ApiService.init();
@@ -50,19 +66,15 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-  // Ensure we checked auth before each page load.
-  //Promise.all([store.dispatch(VERIFY_AUTH)]).then(next);
-
-  // Scroll page to top on every route change
 
   // reset config to initial state
-  store.dispatch(RESET_LAYOUT_CONFIG, "");
+  store.dispatch("config/" + RESET_LAYOUT_CONFIG, "");
 
+  // Scroll page to top on every route change
   setTimeout(() => {
     window.scrollTo(0, 0);
   }, 100);
 });
-Vue.use(VueTour);
 
 new Vue({
   router,

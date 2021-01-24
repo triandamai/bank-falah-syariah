@@ -112,7 +112,7 @@ import {
   ACTION_GET_GROUP,
   ACTION_GET_ROLE,
   MUTATION_CLEAR_FORM_USER,
-} from "..";
+} from "@/store";
 
 export default {
   name: "FormUser",
@@ -138,7 +138,7 @@ export default {
         return this.$store.state.system.userform.username;
       },
       set(val) {
-        this.$store.commit("setFormUsername", val);
+        this.$store.commit("system/setFormUsername", val);
       },
     },
     password: {
@@ -146,7 +146,7 @@ export default {
         return this.$store.state.system.userform.password;
       },
       set(val) {
-        this.$store.commit("setFormPassword", val);
+        this.$store.commit("system/setFormPassword", val);
       },
     },
     email: {
@@ -154,7 +154,7 @@ export default {
         return this.$store.state.system.userform.email;
       },
       set(val) {
-        this.$store.commit("setFormEmail", val);
+        this.$store.commit("system/setFormEmail", val);
       },
     },
     role: {
@@ -162,7 +162,7 @@ export default {
         return this.$store.state.system.userform.role;
       },
       set(val) {
-        this.$store.commit("setFormRole", val);
+        this.$store.commit("system/setFormRole", val);
       },
     },
     group: {
@@ -170,25 +170,25 @@ export default {
         return this.$store.state.system.userform.group;
       },
       set(val) {
-        this.$store.commit("setFormGroup", val);
+        this.$store.commit("system/setFormGroup", val);
       },
     },
   },
   methods: {
     getRoles() {
-      this.$store.dispatch(ACTION_GET_ROLE).then((res) => {
+      this.$store.dispatch("system/" + ACTION_GET_ROLE).then((res) => {
         if (!res) return;
         this.getRoles();
       });
     },
     getGroups() {
-      this.$store.dispatch(ACTION_GET_GROUP).then((res) => {
+      this.$store.dispatch("system/" + ACTION_GET_GROUP).then((res) => {
         if (!res) return;
         this.getGroups();
       });
     },
     cancel() {
-      this.$store.commit(MUTATION_CLEAR_FORM_USER);
+      this.$store.commit("system/" + MUTATION_CLEAR_FORM_USER);
       this.$router.go(-1);
     },
     submit() {

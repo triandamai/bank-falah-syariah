@@ -6,7 +6,7 @@
     <div class="card-header border-0">
       <h3 class="card-title font-weight-bolder text-success">People</h3>
       <div class="card-toolbar">
-        <Dropdown5></Dropdown5>
+        <dropdown-create />
       </div>
     </div>
     <!--end::Header-->
@@ -44,13 +44,8 @@
 </template>
 
 <script>
-import Dropdown5 from "../components/content/CreateAction.vue";
-
 export default {
-  name: "widget-2",
-  components: {
-    Dropdown5,
-  },
+  name: "ListUserDasboard",
   data() {
     return {
       list: [
