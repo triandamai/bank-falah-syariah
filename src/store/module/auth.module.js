@@ -12,7 +12,8 @@ export const SET_AUTH = "setUser";
 export const SET_ERROR = "setError";
 
 const state = {
-  errors: null,
+  error: false,
+  message: "",
   user: JwtService.getUser(),
   isAuthenticated: !!JwtService.getToken(),
 };
@@ -33,14 +34,24 @@ const actions = {
         .then((res) => {
           if (res.status == 200 || 201) {
             commit(SET_AUTH, res.data);
+            commit(SET_ERROR, {
+              message: res.data.message || "Berhasil !",
+              error: false,
+            });
             resolve(true);
           } else {
-            commit(SET_ERROR, res);
+            commit(SET_ERROR, {
+              message: res.data.message || "Gagal coba lagi nanti!",
+              error: true,
+            });
             resolve(false);
           }
         })
         .catch((e) => {
-          commit(SET_ERROR, e.response.message);
+          commit(SET_ERROR, {
+            error: true,
+            message: e.response.message || "Gagal coba lagi nanti!",
+          });
           resolve(false);
         });
     });
@@ -51,8 +62,9 @@ const actions = {
 };
 
 const mutations = {
-  [SET_ERROR](state, error) {
-    state.errors = error;
+  [SET_ERROR](state, { error, message }) {
+    state.error = error;
+    state.message = message;
   },
   [SET_AUTH](state, data) {
     state.isAuthenticated = true;

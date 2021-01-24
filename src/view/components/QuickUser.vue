@@ -120,7 +120,7 @@ export default {
   methods: {
     onLogout() {
       this.$store
-        .dispatch(LOGOUT)
+        .dispatch("auth/" + LOGOUT)
         .then(() => this.$router.push({ path: "/auth/login" }));
     },
     closeOffcanvas() {

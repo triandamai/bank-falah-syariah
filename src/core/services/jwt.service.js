@@ -1,13 +1,16 @@
 /* eslint-disable */
-const ID_TOKEN_KEY = "id_token";
-const USER_KEY = "zxsas";
+import CryptoJS from "crypto-js";
+const ID_TOKEN_KEY = "f6da7ebas9c00s";
+const USER_KEY = "z0xk7sasd3";
 
 export const getToken = () => {
-  return window.sessionStorage.getItem(ID_TOKEN_KEY);
+  return window.sessionStorage.getItem(ID_TOKEN_KEY)
+    ? aesDecrypt(window.sessionStorage.getItem(ID_TOKEN_KEY))
+    : null;
 };
 
 export const saveToken = (token) => {
-  window.sessionStorage.setItem(ID_TOKEN_KEY, token);
+  window.sessionStorage.setItem(ID_TOKEN_KEY, aesEncrypt(token));
 };
 
 export const destroyToken = () => {
@@ -15,15 +18,27 @@ export const destroyToken = () => {
 };
 
 export const getUser = () => {
-  return JSON.parse(window.sessionStorage.getItem(USER_KEY));
+  return window.sessionStorage.getItem(USER_KEY)
+    ? JSON.parse(aesDecrypt(window.sessionStorage.getItem(USER_KEY)))
+    : null;
 };
 
 export const setUser = (user) => {
-  window.sessionStorage.setItem(USER_KEY, JSON.stringify(user));
+  window.sessionStorage.setItem(USER_KEY, aesEncrypt(JSON.stringify(user)));
 };
 export const dropUser = () => {
   window.sessionStorage.removeItem(USER_KEY);
 };
+const key = "82f2ceed4c503896c8a291e560bd4325";
+const iv = "bakaranprojectbismillah";
+const aesEncrypt = (text) =>
+  CryptoJS.AES.encrypt(text, CryptoJS.enc.Utf8.parse(key).toString(), {
+    iv: CryptoJS.enc.Utf8.parse(iv).toString(),
+  }).toString();
+const aesDecrypt = (text) =>
+  CryptoJS.AES.decrypt(text, CryptoJS.enc.Utf8.parse(key).toString(), {
+    iv: CryptoJS.enc.Utf8.parse(iv).toString(),
+  }).toString(CryptoJS.enc.Utf8);
 
 export default {
   getToken,

@@ -2,9 +2,8 @@
 import Vue from "vue";
 import App from "./App.vue";
 import router from "./router";
-import store from "./store";
+import store, { RESET_LAYOUT_CONFIG } from "@/store";
 import ApiService from "@/core/services/api.service";
-import { RESET_LAYOUT_CONFIG } from "./store";
 import { getUser } from "@/core/services/jwt.service.js";
 
 Vue.config.productionTip = false;
@@ -28,6 +27,7 @@ import "@/core/plugins/inline-svg";
 import "@/core/plugins/apexcharts";
 import "@/core/plugins/metronic";
 import "@mdi/font/css/materialdesignicons.css";
+
 //registring components
 import { upperFirst, camelCase } from "lodash";
 const requireComponent = require.context(

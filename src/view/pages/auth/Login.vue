@@ -25,25 +25,17 @@
           Masukkan Username dan Password milik Anda
         </p>
       </div>
-
+      <b-alert :show="error" dismissible variant="danger">{{
+        message
+      }}</b-alert>
       <!--begin::Form-->
       <b-form class="form" @submit.prevent="onSubmit">
-        <div role="alert" class="alert alert-info">
+        <!-- <div role="alert" class="alert alert-info">
           <div class="alert-text">
             Gunakan akun username <strong>admin@demo.com</strong> dan password
             <strong>demo</strong> untuk melanjutkan.
           </div>
-        </div>
-
-        <div
-          role="alert"
-          v-bind:class="{ show: errors ? errors.length : false }"
-          class="alert fade alert-danger"
-        >
-          <div class="alert-text" v-for="(error, i) in errors" :key="i">
-            {{ error }}
-          </div>
-        </div>
+        </div> -->
 
         <b-form-group
           id="example-input-group-1"
@@ -61,7 +53,7 @@
           ></b-form-input>
 
           <b-form-invalid-feedback id="input-1-live-feedback">
-            Gunakan format -mail yang sesuai!.
+            Tidak boleh kosong!.
           </b-form-invalid-feedback>
         </b-form-group>
 
@@ -99,7 +91,8 @@
           </a> -->
           <button
             ref="kt_login_signin_submit"
-            class="btn btn-primary font-weight-bold px-9 py-4 my-3 font-size-3"
+            class="btn font-weight-bold px-9 py-4 my-3 font-size-3"
+            :class="error ? 'btn-primary' : 'btn-success'"
           >
             Masuk Sekarang
           </button>
@@ -121,10 +114,10 @@
 <script>
 /* eslint-disable*/
 import { mapState } from "vuex";
-import { LOGIN, LOGOUT } from "@/store";
+import { LOGIN, LOGOUT, SET_ERROR } from "@/store";
 
 import { validationMixin } from "vuelidate";
-import { email, minLength, required } from "vuelidate/lib/validators";
+import { minLength, required } from "vuelidate/lib/validators";
 
 export default {
   mixins: [validationMixin],
@@ -138,6 +131,7 @@ export default {
       },
     };
   },
+
   validations: {
     form: {
       email: {
@@ -201,9 +195,13 @@ export default {
       }, 2000);
     },
   },
+  created() {
+    this.$store.commit("auth/" + SET_ERROR, { error: false, message: "" });
+  },
   computed: {
     ...mapState({
-      errors: (state) => state.auth.errors,
+      error: (state) => state.auth.error,
+      message: (state) => state.auth.message,
     }),
   },
 };

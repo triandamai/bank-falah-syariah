@@ -14,7 +14,7 @@
           <!--begin: Aside header -->
           <a href="#" class="flex-column-auto">
             <img
-              :src="require('../../../assets/images/ssb.png')"
+              :src="require('@/assets/images/ssb.png')"
               width="50%"
               height="90%"
             />
