@@ -7,6 +7,7 @@ import config from "./module/config.module";
 import breadcrumbs from "./module/breadcrumbs.module";
 import nasabah from "./module/nasabah.module";
 import system from "./module/system.module";
+import master from "./module/master.module";
 
 Vue.use(Vuex);
 
@@ -18,6 +19,7 @@ export default new Vuex.Store({
     breadcrumbs,
     nasabah,
     system,
+    master,
   },
 });
 
