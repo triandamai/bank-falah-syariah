@@ -53,7 +53,7 @@ const headerroles = [
 const headergroups = [
   { text: "No", value: "id" },
   { text: "Nama Role", sortable: true, value: "name" },
-  { text: "Deskripsi", value: "description" },
+  { text: "Deskripsi", sortable: true, value: "description" },
   { text: "Aktivitas", value: "updated_at" },
   { text: "Aksi", value: "action" },
 ];

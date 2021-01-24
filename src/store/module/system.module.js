@@ -1,5 +1,6 @@
 /*eslint-disable*/
 import ApiService from "../../core/services/api.service";
+import { headerdatausers, headergroups, headerroles } from "../utils/headers";
 
 export const ACTION_GET_USER = "GETUSER";
 export const ACTION_GET_ROLE = "GETROLE";
@@ -19,11 +20,27 @@ export const MUTATION_CLEAR_FORM_USER = "CLEARFORMUSER";
 const state = {
   datausers: [],
   user: {
+    header: headerdatausers,
+    search: "",
     current_page: 0,
     last_page: 0,
   },
   datagroups: [],
+  group: {
+    header: headergroups,
+    search: "",
+    current_page: 0,
+    last_page: 0,
+    dialog: false,
+  },
   dataroles: [],
+  role: {
+    header: headerroles,
+    search: "",
+    current_page: 0,
+    last_page: 0,
+    dialog: false,
+  },
   userform: {
     id: "",
     username: "",
@@ -283,6 +300,21 @@ const mutations = {
   },
   setFormGroup(state, val) {
     state.userform.group = val;
+  },
+  setUserSearch(state, val) {
+    state.user.search = val;
+  },
+  setGroupSearch(state, val) {
+    state.group.search = val;
+  },
+  setRoleSearch(state, val) {
+    state.role.search = val;
+  },
+  showGroupDialog(state, val) {
+    state.group.dialog = val;
+  },
+  showRoleDialog(state, val) {
+    state.role.dialog = val;
   },
 };
 

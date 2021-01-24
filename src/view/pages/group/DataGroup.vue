@@ -36,7 +36,7 @@
             Group
             <v-spacer></v-spacer>
             <v-text-field
-              v-model="user.search"
+              v-model="search"
               append-icon="search"
               label="Search"
               single-line
@@ -46,9 +46,9 @@
           <v-data-table
             flat
             class="elevation-0"
-            :headers="user.headers"
-            :items="users"
-            :search="user.search"
+            :headers="header"
+            :items="groups"
+            :search="search"
             ><template v-slot:[`item.active`]="{ item }">
               {{ item.active == 1 ? "aktif" : "nonaktif" }}
             </template>
@@ -115,26 +115,32 @@
   </div>
 </template>
 <script>
-import { headergroups, ACTION_GET_GROUP } from "@/store";
+/*eslint-disable*/
+import { ACTION_GET_GROUP } from "@/store";
 import { mapState } from "vuex";
 export default {
   name: "Group",
-  data: () => {
-    return {
-      dialog: false,
-      user: {
-        headers: headergroups,
-        search: "",
-      },
-    };
-  },
   computed: {
     ...mapState({
-      users: (state) => {
-        //  console.log(state);
-        return state.system.datagroups;
-      },
+      groups: (state) => state.system.datagroups,
+      header: (state) => state.system.group.header,
     }),
+    dialog: {
+      get() {
+        return this.$store.state.system.group.dialog;
+      },
+      set(val) {
+        this.$store.commit("system/showGroupDialog", val);
+      },
+    },
+    search: {
+      get() {
+        return this.$store.state.system.group.search;
+      },
+      set(val) {
+        this.$store.commit("system/setGroupSearch", val);
+      },
+    },
   },
   created() {
     this.getGrups();

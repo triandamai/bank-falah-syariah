@@ -8,7 +8,7 @@
       <div class="alert-icon">
         <span class="svg-icon svg-icon-lg">
           <inline-svg
-            :src="require('../../../assets/images/svg/icons/Tools/Compass.svg')"
+            :src="require('@/assets/images/svg/icons/Tools/Compass.svg')"
           />
         </span>
       </div>
@@ -38,7 +38,7 @@
             Nutrition
             <v-spacer></v-spacer>
             <v-text-field
-              v-model="user.search"
+              v-model="search"
               append-icon="search"
               label="Search"
               single-line
@@ -48,9 +48,9 @@
           <v-data-table
             flat
             class="elevation-0"
-            :headers="user.headers"
+            :headers="header"
             :items="users"
-            :search="user.search"
+            :search="search"
             data-app
           >
             <template v-slot:[`item.active`]="{ item }">
@@ -84,7 +84,6 @@
 /*eslint-disable*/
 import Swal from "sweetalert2";
 import {
-  headerdatausers,
   ACTION_GET_USER,
   MUTATION_SET_FORM_USER,
   ACTION_DELETE_USER,
@@ -92,21 +91,19 @@ import {
 import { mapState } from "vuex";
 export default {
   name: "User",
-  data: () => {
-    return {
-      user: {
-        headers: headerdatausers,
-        search: "",
-      },
-    };
-  },
   computed: {
     ...mapState({
-      users: (state) => {
-        //  console.log(state);
-        return state.system.datausers;
-      },
+      users: (state) => state.system.datausers,
+      header: (state) => state.system.user.header,
     }),
+    search: {
+      get() {
+        return this.$store.state.system.user.search;
+      },
+      set(val) {
+        this.$store.commit("system/setUserSearch", val);
+      },
+    },
   },
   created() {
     this.getUsers();
