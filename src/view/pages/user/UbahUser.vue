@@ -12,7 +12,7 @@
         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
           <div class="col-xl-12 col-xxl-7">
             <!--begin: Wizard Form-->
-            <form-user @buttonsubmit="submit" />
+            <form-user :isEdit="true" @buttonsubmit="submit" />
             <!--end: Wizard Form-->
           </div>
         </div>
@@ -30,38 +30,45 @@
 <script>
 /*eslint-disable*/
 import Swal from "sweetalert2";
-import { ACTION_POST_USER } from "../..";
-import FormUser from "../../../components/form/FormUser.vue";
+import { ACTION_PUT_USER, MUTATION_CLEAR_FORM_USER } from "..";
+import FormUser from "../../components/form/FormUser.vue";
+import { mapState, mapGetters } from "vuex";
 
 export default {
   name: "TambahUser",
   components: {
     FormUser,
   },
-  computed: {},
+  created() {
+    if (!this.userformvalidation) {
+      this.$router.go(-1);
+    }
+  },
+  computed: {
+    ...mapState({
+      message: (state) => state.system.userform.message,
+    }),
+    ...mapGetters(["userformvalidation"]),
+  },
   methods: {
     submit(val) {
-      this.$store.dispatch(ACTION_POST_USER).then((res) => {
+      this.$store.dispatch(ACTION_PUT_USER).then((res) => {
         if (res) {
-          this.username = "";
-          this.password = "";
-          this.email = "";
-          this.role = "";
-          this.group = "";
           Swal.fire({
-            title: "",
-            text: "User berhasil ditambah!",
+            title: "Berhasil",
+            text: this.message,
             icon: "success",
             confirmButtonText: "Oke",
           }).then((result) => {
             if (result.isConfirmed) {
+              this.$store.dispatch(MUTATION_CLEAR_FORM_USER);
               this.$router.go(-1);
             }
           });
         } else {
           Swal.fire({
-            title: "",
-            text: "Maaf gagal menambah user, coba lagi nanti!",
+            title: "Gagal",
+            text: this.message,
             icon: "error",
             confirmButtonText: "Coba lagi",
           });

@@ -8,14 +8,12 @@
       <div class="alert-icon">
         <span class="svg-icon svg-icon-lg">
           <inline-svg
-            :src="
-              require('../../../../assets/images/svg/icons/Tools/Compass.svg')
-            "
+            :src="require('../../../assets/images/svg/icons/Tools/Compass.svg')"
           />
         </span>
       </div>
       <div class="alert-text">
-        <router-link to="/system/user/tambah">
+        <router-link to="/user/tambah">
           <b-button class="mr-3" variant="success"
             >Tambahkan User Baru</b-button
           >
@@ -85,9 +83,13 @@
 <script>
 /*eslint-disable*/
 import Swal from "sweetalert2";
-import { headerdatausers, ACTION_GET_USER, ACTION_DELETE_USER } from "../..";
+import {
+  headerdatausers,
+  ACTION_GET_USER,
+  MUTATION_SET_FORM_USER,
+  ACTION_DELETE_USER,
+} from "..";
 import { mapState } from "vuex";
-import { ACTION_PUT_USER, MUTATION_SET_FORM_USER } from "../../../../store";
 export default {
   name: "User",
   data: () => {
@@ -153,7 +155,7 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.$store.commit(MUTATION_SET_FORM_USER, user);
-          this.$router.push({ path: "/system/user/ubah" });
+          this.$router.push({ path: "/user/ubah" });
         }
       });
     },

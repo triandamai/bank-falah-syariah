@@ -12,7 +12,7 @@
         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
           <div class="col-xl-12 col-xxl-7">
             <!--begin: Wizard Form-->
-            <form-user @buttonsubmit="submit" />
+            <form-user :isEdit="false" @buttonsubmit="submit" />
             <!--end: Wizard Form-->
           </div>
         </div>
@@ -30,27 +30,28 @@
 <script>
 /*eslint-disable*/
 import Swal from "sweetalert2";
-import { ACTION_PUT_USER } from "../..";
-import FormUser from "../../../components/form/FormUser.vue";
+import { ACTION_POST_USER, MUTATION_CLEAR_FORM_USER } from "..";
+import { mapState } from "vuex";
+import FormUser from "../../components/form/FormUser.vue";
 
 export default {
   name: "TambahUser",
   components: {
     FormUser,
   },
-  computed: {},
+  computed: {
+    ...mapState({
+      message: (state) => state.system.userform.message,
+    }),
+  },
   methods: {
     submit(val) {
-      this.$store.dispatch(ACTION_PUT_USER).then((res) => {
+      this.$store.dispatch(ACTION_POST_USER).then((res) => {
         if (res) {
-          this.username = "";
-          this.password = "";
-          this.email = "";
-          this.role = "";
-          this.group = "";
+          this.$store.commit(MUTATION_CLEAR_FORM_USER);
           Swal.fire({
             title: "",
-            text: "User berhasil ditambah!",
+            text: this.message,
             icon: "success",
             confirmButtonText: "Oke",
           }).then((result) => {
@@ -61,7 +62,7 @@ export default {
         } else {
           Swal.fire({
             title: "",
-            text: "Maaf gagal menambah user, coba lagi nanti!",
+            text: this.message,
             icon: "error",
             confirmButtonText: "Coba lagi",
           });

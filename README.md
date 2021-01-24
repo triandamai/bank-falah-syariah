@@ -33,7 +33,11 @@ Note
 
 1. Butuh Get Data User Dengan Detail Role id dan Group id
 
-Routing yang tersedia saat ini
+Issue
+
+1. Update user password required(harusnya opsional)
+
+   Routing yang tersedia saat ini
 
 ```javascript
 route = [

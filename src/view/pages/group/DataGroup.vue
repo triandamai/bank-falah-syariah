@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div data-app>
     <b-alert
       show
       variant="light"
@@ -13,13 +13,11 @@
         </span>
       </div>
       <div class="alert-text">
-        <router-link to="/system/adduser">
-          <b-button class="mr-3" variant="success"
-            >Tambahkan User Baru</b-button
-          >
-        </router-link>
+        <b-button @click="dialog = !dialog" class="mr-3" variant="success"
+          >Tambahkan Group Baru</b-button
+        >
 
-        <b>Data User</b>
+        <b>Data User Group</b>
 
         <!-- <a
           class="font-weight-bold"
@@ -30,12 +28,12 @@
         </a> -->
       </div>
     </b-alert>
-
+    <!-- TABLE -->
     <div class="row">
       <div class="col-md-12">
         <v-card>
           <v-card-title>
-            Nutrition
+            Group
             <v-spacer></v-spacer>
             <v-text-field
               v-model="user.search"
@@ -59,10 +57,61 @@
                 item.last_login != "" ? item.last_login : "belum ada aktivitas"
               }}
             </template>
+            <template v-slot:[`item.action`]="{ item }">
+              <b-button-toolbar
+                aria-label="Toolbar with button groups and dropdown menu"
+              >
+                <b-button-group class="mx-1">
+                  <b-button @click="dialog = !dialog">Ubah</b-button>
+                  <b-button>Detail</b-button>
+                  <b-button @click="deleteUser(item)">Hapus</b-button>
+                </b-button-group>
+              </b-button-toolbar>
+            </template>
           </v-data-table>
         </v-card>
       </div>
     </div>
+    <!-- DIALOG -->
+    <v-row justify="center">
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <v-card>
+          <v-card-title>
+            <span class="headline">User Profile</span>
+          </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                    type="text"
+                    label="Nama*"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    label="Deskripsi*"
+                    type="text"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+            <small>*indicates required field</small>
+          </v-card-text>
+          <v-card-actions>
+            <v-spacer></v-spacer>
+            <v-btn color="blue darken-1" text @click="dialog = false"
+              >Close</v-btn
+            >
+            <v-btn color="blue darken-1" text @click="dialog = false"
+              >Save</v-btn
+            >
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
+    </v-row>
   </div>
 </template>
 <script>
@@ -72,6 +121,7 @@ export default {
   name: "Group",
   data: () => {
     return {
+      dialog: false,
       user: {
         headers: headergroups,
         search: "",

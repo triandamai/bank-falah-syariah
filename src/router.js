@@ -115,55 +115,47 @@ let routes = [
             name: "MenuSystem",
             component: () => import("@/view/pages/system/MenuSystem.vue"),
           },
-          {
-            path: "user",
-            name: "userSystem",
-            component: () => import("@/view/pages/system/UserSystem.vue"),
-          },
-          {
-            path: "group",
-            name: "GroupSystem",
-            component: () => import("@/view/pages/system/GroupSystem.vue"),
-          },
-          {
-            path: "user",
-            component: () => import("@/view/pages/system/UserSystem.vue"),
-            children: [
-              {
-                path: "",
-                redirect: "data",
-              },
-              {
-                path: "data",
-                name: "DataUser",
-                component: () =>
-                  import("@/view/pages/system/user/DataUser.vue"),
-              },
-              {
-                path: "tambah",
-                name: "Adduser",
-                component: () =>
-                  import("@/view/pages/system/user/TambahUser.vue"),
-              },
-              {
-                path: "ubah",
-                name: "UbahUser",
-                component: () =>
-                  import("@/view/pages/system/user/UbahUser.vue"),
-              },
-            ],
-          },
-          {
-            path: "role",
-            name: "RoleSystem",
-            component: () => import("@/view/pages/system/RoleSystem.vue"),
-          },
 
           {
             // the 404 route, when none of the above matches
             path: "*",
             name: "SystemNotFound",
             component: () => import("@/view/pages/error/NotFound.vue"),
+          },
+        ],
+      },
+      {
+        path: "group",
+        name: "Group",
+        component: () => import("@/view/pages/group/DataGroup.vue"),
+      },
+      {
+        path: "role",
+        name: "RoleSystem",
+        component: () => import("@/view/pages/role/DataRole.vue"),
+      },
+      {
+        path: "user",
+        component: () => import("@/view/pages/user/UserSystem.vue"),
+        children: [
+          {
+            path: "",
+            redirect: "data",
+          },
+          {
+            path: "data",
+            name: "DataUser",
+            component: () => import("@/view/pages/user/DataUser.vue"),
+          },
+          {
+            path: "tambah",
+            name: "Adduser",
+            component: () => import("@/view/pages/user/TambahUser.vue"),
+          },
+          {
+            path: "ubah",
+            name: "UbahUser",
+            component: () => import("@/view/pages/user/UbahUser.vue"),
           },
         ],
       },

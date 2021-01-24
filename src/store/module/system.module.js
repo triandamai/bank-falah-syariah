@@ -14,12 +14,18 @@ export const MUTATION_ADD_USER = "ADDUSER";
 export const MUTATION_ADD_ROLE = "ADDROLE";
 export const MUTATION_ADD_GROUP = "ADDGROUP";
 export const MUTATION_SET_FORM_USER = "SETFORM";
+export const MUTATION_CLEAR_FORM_USER = "CLEARFORMUSER";
 
 const state = {
   datausers: [],
+  user: {
+    current_page: 0,
+    last_page: 0,
+  },
   datagroups: [],
   dataroles: [],
   userform: {
+    id: "",
     username: "",
     password: "",
     email: "",
@@ -29,15 +35,22 @@ const state = {
     message: "",
   },
   groupsfrom: {},
-  error: "",
-  currentpage: 0,
-  lastpage: "",
 };
-const getters = {};
+const getters = {
+  userformvalidation: (state, getters) => {
+    return (
+      state.userform.username != "" &&
+      state.userform.email != "" &&
+      state.userform.role != "" &&
+      state.userform.group != ""
+    );
+  },
+};
 const actions = {
   [ACTION_GET_USER]({ commit, state }, param) {
     return new Promise((resolve) => {
-      let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
+      let page =
+        state.user.currentpage >= 1 ? "" : `?page=${state.user.currentpage}`;
       ApiService.get(`users${page}`)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
@@ -137,7 +150,7 @@ const actions = {
         .catch((e) => {
           commit(MUTATION_POST_DATA, {
             success: true,
-            message: e.data.message,
+            message: e.response.data.message,
             form: "user",
           });
           resolve(false);
@@ -146,7 +159,7 @@ const actions = {
   },
   [ACTION_PUT_USER]({ commit, state }) {
     return new Promise((resolve) =>
-      ApiService.put("user", {
+      ApiService.put("user/" + state.userform.id, {
         username: state.userform.username,
         email: state.userform.email,
         active: 1,
@@ -172,9 +185,10 @@ const actions = {
           }
         })
         .catch((e) => {
+          console.log(e);
           commit(MUTATION_POST_DATA, {
             success: true,
-            message: e.data.message,
+            message: e.response.data.message,
             form: "user",
           });
           resolve(false);
@@ -238,12 +252,21 @@ const mutations = {
     state.datausers.splice(index);
   },
   [MUTATION_SET_FORM_USER](state, user) {
-    console.log(user);
+    // console.log(user);
+    state.userform.id = user.id;
     state.userform.username = user.username;
     state.userform.password = user.password;
     state.userform.email = user.email;
-    state.userform.role = user.role_id;
-    state.userform.group = user.group_id;
+    state.userform.role = user.role[0].id;
+    state.userform.group = user.group[0].id;
+  },
+  [MUTATION_CLEAR_FORM_USER](state) {
+    state.userform.id = "";
+    state.userform.username = "";
+    state.userform.password = "";
+    state.userform.email = "";
+    state.userform.role = "";
+    state.userform.group = "";
   },
   //non type mutation all must be cameCase
   setFormUsername(state, val) {

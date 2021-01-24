@@ -1,5 +1,5 @@
 <template>
-  <form class="form" id="kt_form" @submit.prevent="$emit('buttonsubmit', true)">
+  <form class="form" id="kt_form" @submit.prevent="submit">
     <!--begin: Wizard Step 1-->
     <div
       class="pb-5"
@@ -19,7 +19,7 @@
         />
         <span class="form-text text-muted">Masukkan alamat user.</span>
       </div>
-      <div class="form-group">
+      <div v-show="!isEdit" class="form-group">
         <label>Password</label>
         <input
           type="password"
@@ -28,8 +28,8 @@
           placeholder="Contoh:Xdsrcs"
         />
         <span class="form-text text-muted">
-          Kunci keamanan yang akan digunakan user.</span
-        >
+          Kunci keamanan yang akan digunakan user.
+        </span>
       </div>
       <div class="form-group">
         <label>Email</label>
@@ -86,6 +86,8 @@
     <div class="d-flex justify-content-between border-top pt-10">
       <div class="mr-2">
         <button
+          @click="cancel"
+          type="button"
           class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
         >
           Batal
@@ -106,10 +108,17 @@
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
-import { ACTION_GET_GROUP, ACTION_GET_ROLE } from "..";
+import {
+  ACTION_GET_GROUP,
+  ACTION_GET_ROLE,
+  MUTATION_CLEAR_FORM_USER,
+} from "..";
 
 export default {
-  name: "FORMUSER",
+  name: "FormUser",
+  props: {
+    isEdit: Boolean,
+  },
   created() {
     this.getRoles();
     this.getGroups();
@@ -177,6 +186,27 @@ export default {
         if (!res) return;
         this.getGroups();
       });
+    },
+    cancel() {
+      this.$store.commit(MUTATION_CLEAR_FORM_USER);
+      this.$router.go(-1);
+    },
+    submit() {
+      if (this.isEdit) {
+        if (this.username && this.email && this.role && this.group) {
+          this.$emit("buttonsubmit", true);
+        }
+      } else {
+        if (
+          this.username &&
+          this.password &&
+          this.email &&
+          this.role &&
+          this.group
+        ) {
+          this.$emit("buttonsubmit", true);
+        }
+      }
     },
   },
 };
