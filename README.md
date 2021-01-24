@@ -14,10 +14,200 @@ Issue
 
 1. Update user password required(harusnya opsional)
 
-   Routing yang tersedia saat ini
+### contributing
+
+`[UPDATE]`
+`[NEW]`
+`[MERGE]`
+`[MINOR]`
+`[CHORE]`
+`[FIX]`
+`[ISSUE]`
+
+Menu
 
 ```javascript
-route = [
+const menu = [
+  {
+    id: 1,
+    menu_name: "System",
+    menu_icon: "",
+    menu_url: "/system",
+    menu_parent_id: null,
+    privilages: ["super"],
+    menu_description: "System for super",
+    children: [
+      {
+        id: 1,
+        menu_name: "Menu",
+        menu_icon: "",
+        menu_url: "/system/menu",
+        menu_parent_id: 1,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+      {
+        id: 1,
+        menu_name: "Page",
+        menu_icon: "",
+        menu_url: "/system/page",
+        menu_parent_id: 1,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+      {
+        id: 1,
+        menu_name: "User",
+        menu_icon: "",
+        menu_url: "/user",
+        menu_parent_id: 1,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+      {
+        id: 1,
+        menu_name: "Group",
+        menu_icon: "",
+        menu_url: "/group",
+        menu_parent_id: 1,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+      {
+        id: 1,
+        menu_name: "Role",
+        menu_icon: "",
+        menu_url: "/role",
+        menu_parent_id: 1,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+    ],
+  },
+  {
+    id: 2,
+    menu_name: "Nasabah",
+    menu_icon: "",
+    menu_url: "/nasabah",
+    menu_parent_id: null,
+    menu_description: "System for super",
+    privilages: ["super"],
+    children: [],
+  },
+  {
+    id: 3,
+    menu_name: "Master Data",
+    menu_icon: "",
+    menu_url: "/master",
+    menu_parent_id: null,
+    menu_description: "System for super",
+    privilages: ["super"],
+    children: [
+      {
+        id: 1,
+        menu_name: "Akad",
+        menu_icon: "",
+        menu_url: "/master/akad",
+        menu_parent_id: 3,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+      {
+        id: 1,
+        menu_name: "Jenis Transaksi",
+        menu_icon: "",
+        menu_url: "/master/jenistransaksi",
+        menu_parent_id: 3,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+      {
+        id: 1,
+        menu_name: "Produk",
+        menu_icon: "",
+        menu_url: "/master/produk",
+        menu_parent_id: 3,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+      {
+        id: 1,
+        menu_name: "Jabatan",
+        menu_icon: "",
+        menu_url: "/master/jabatan",
+        menu_parent_id: 3,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+      {
+        id: 1,
+        menu_name: "Pegawai",
+        menu_icon: "",
+        menu_url: "/master/pegawai",
+        menu_parent_id: 3,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+    ],
+  },
+  {
+    id: 4,
+    menu_name: "Rekening",
+    menu_icon: "",
+    menu_url: "/rekening",
+    menu_parent_id: null,
+    menu_description: "System for super",
+    privilages: ["super"],
+    children: [
+      {
+        id: 1,
+        menu_name: "Deposito",
+        menu_icon: "",
+        menu_url: "/rekening/deposito",
+        menu_parent_id: 4,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+      {
+        id: 1,
+        menu_name: "Pembiayaan",
+        menu_icon: "",
+        menu_url: "/rekening/pembiayaan",
+        menu_parent_id: 3,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+      {
+        id: 1,
+        menu_name: "Simpanan",
+        menu_icon: "",
+        menu_url: "/rekening/simpanan",
+        menu_parent_id: 3,
+        menu_description: "System for super",
+        privilages: ["super"],
+        children: [],
+      },
+    ],
+  },
+];
+```
+
+Routing yang tersedia saat ini
+
+```javascript
+const route = [
   {
     name: "Dashboard",
     path: "/home",
