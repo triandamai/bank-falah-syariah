@@ -64,7 +64,7 @@
                 <b-button-group class="mx-1">
                   <b-button @click="dialog = !dialog">Ubah</b-button>
                   <b-button>Detail</b-button>
-                  <b-button @click="deleteUser(item)">Hapus</b-button>
+                  <b-button @click="deleteGroup(item)">Hapus</b-button>
                 </b-button-group>
               </b-button-toolbar>
             </template>
@@ -118,6 +118,7 @@
 /*eslint-disable*/
 import { ACTION_GET_GROUP } from "@/store";
 import { mapState } from "vuex";
+import Swal from "sweetalert2";
 export default {
   name: "Group",
   computed: {
@@ -150,6 +151,20 @@ export default {
       this.$store.dispatch("system/" + ACTION_GET_GROUP).then((res) => {
         if (res) {
           this.getGrups();
+        }
+      });
+    },
+    deleteGroup(group) {
+      Swal.fire({
+        title: "Yakin menghapus " + group.name + " ?",
+        text: "User yang dihapus akan hilang permanen!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Oke, hapus!",
+      }).then((result) => {
+        if (result.isConfirmed) {
         }
       });
     },

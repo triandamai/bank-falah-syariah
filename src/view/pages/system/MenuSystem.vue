@@ -104,7 +104,7 @@ export default {
   }),
 
   mounted() {
-    console.log(menu);
+    // console.log(menu);
   },
   methods: {},
 };

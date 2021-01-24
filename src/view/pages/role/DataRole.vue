@@ -36,7 +36,7 @@
             Nutrition
             <v-spacer></v-spacer>
             <v-text-field
-              v-model="user.search"
+              v-model="search"
               append-icon="search"
               label="Search"
               single-line
@@ -46,9 +46,9 @@
           <v-data-table
             flat
             class="elevation-0"
-            :headers="user.headers"
-            :items="users"
-            :search="user.search"
+            :headers="header"
+            :items="roles"
+            :search="search"
             ><template v-slot:[`item.active`]="{ item }">
               {{ item.active == 1 ? "aktif" : "nonaktif" }}
             </template>
@@ -64,7 +64,7 @@
                 <b-button-group class="mx-1">
                   <b-button @click="dialog = !dialog">Ubah</b-button>
                   <b-button>Detail</b-button>
-                  <b-button @click="deleteUser(item)">Hapus</b-button>
+                  <b-button @click="deleteRole(item)">Hapus</b-button>
                 </b-button-group>
               </b-button-toolbar>
             </template>
@@ -115,26 +115,33 @@
   </div>
 </template>
 <script>
-import { headerroles, ACTION_GET_ROLE } from "@/store";
+/*eslint-disable*/
+import { ACTION_GET_ROLE } from "@/store";
 import { mapState } from "vuex";
+import Swal from "sweetalert2";
 export default {
   name: "RoleSystem",
-  data: () => {
-    return {
-      dialog: false,
-      user: {
-        headers: headerroles,
-        search: "",
-      },
-    };
-  },
   computed: {
     ...mapState({
-      users: (state) => {
-        //  console.log(state);
-        return state.system.dataroles;
-      },
+      roles: (state) => state.system.dataroles,
+      header: (state) => state.system.role.header,
     }),
+    search: {
+      get() {
+        return this.$store.state.system.role.search;
+      },
+      set(val) {
+        this.$store.commit("system/setRoleSearch", val);
+      },
+    },
+    dialog: {
+      get() {
+        return this.$store.state.system.role.dialog;
+      },
+      set(val) {
+        this.$store.commit("system/showRoleDialog", val);
+      },
+    },
   },
   created() {
     this.getUsers();
@@ -144,6 +151,20 @@ export default {
       this.$store.dispatch("system/" + ACTION_GET_ROLE).then((res) => {
         if (res) {
           this.getUsers();
+        }
+      });
+    },
+    deleteRole(role) {
+      Swal.fire({
+        title: "Yakin menghapus " + role.name + " ?",
+        text: "User yang dihapus akan hilang permanen!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Oke, hapus!",
+      }).then((result) => {
+        if (result.isConfirmed) {
         }
       });
     },
