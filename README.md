@@ -1,34 +1,11 @@
 # bank-falah-syariah
 
-## Project setup
-
-```
-yarn install
-```
-
-### Compiles and hot-reloads for development
-
-```
-yarn serve
-```
-
-### Compiles and minifies for production
-
-```
-yarn build
-```
-
-### Lints and fixes files
-
-```
-yarn lint
-```
-
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
-#DOC
+### DOC
+
 Note
 
 1. Butuh Get Data User Dengan Detail Role id dan Group id
