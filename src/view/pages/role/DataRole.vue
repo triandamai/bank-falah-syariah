@@ -47,7 +47,7 @@
             flat
             class="elevation-0"
             :headers="header"
-            :items="roles"
+            :items="items"
             :search="search"
             ><template v-slot:[`item.active`]="{ item }">
               {{ item.active == 1 ? "aktif" : "nonaktif" }}
@@ -123,7 +123,7 @@ export default {
   name: "RoleSystem",
   computed: {
     ...mapState({
-      roles: (state) => state.system.dataroles,
+      items: (state) => state.system.dataroles,
       header: (state) => state.system.role.header,
     }),
     search: {

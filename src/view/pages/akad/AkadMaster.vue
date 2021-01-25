@@ -1,9 +1,8 @@
 <template>
   <router-view />
 </template>
-
 <script>
 export default {
-  name: "MasterData",
+  name: "DataAkad",
 };
 </script>

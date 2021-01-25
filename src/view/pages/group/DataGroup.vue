@@ -47,7 +47,7 @@
             flat
             class="elevation-0"
             :headers="header"
-            :items="groups"
+            :items="items"
             :search="search"
             ><template v-slot:[`item.active`]="{ item }">
               {{ item.active == 1 ? "aktif" : "nonaktif" }}
@@ -123,7 +123,7 @@ export default {
   name: "Group",
   computed: {
     ...mapState({
-      groups: (state) => state.system.datagroups,
+      items: (state) => state.system.datagroups,
       header: (state) => state.system.group.header,
     }),
     dialog: {

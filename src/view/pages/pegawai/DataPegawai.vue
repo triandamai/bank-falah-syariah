@@ -15,11 +15,11 @@
       <div class="alert-text">
         <router-link to="/user/tambah">
           <b-button class="mr-3" variant="success"
-            >Tambahkan User Baru</b-button
+            >Tambahkan Akad Baru</b-button
           >
         </router-link>
 
-        <b>Data User</b>
+        <b>Data Akad</b>
 
         <!-- <a
           class="font-weight-bold"
@@ -82,90 +82,22 @@
 </template>
 <script>
 /*eslint-disable*/
-import Swal from "sweetalert2";
-import {
-  ACTION_GET_USER,
-  MUTATION_SET_FORM_USER,
-  ACTION_DELETE_USER,
-} from "@/store";
 import { mapState } from "vuex";
 export default {
-  name: "User",
+  name: "DataAkad",
   computed: {
     ...mapState({
-      items: (state) => state.system.datausers,
-      header: (state) => state.system.user.header,
+      header: (state) => state.master.pegawai.header,
+      items: (state) => state.master.datapegawai,
     }),
     search: {
       get() {
-        return this.$store.state.system.user.search;
+        return this.$store.state.master.pegawai.search;
       },
       set(val) {
-        this.$store.commit("system/setUserSearch", val);
+        this.$store.commit("master/setPegawaiSearch", val);
       },
-    },
-  },
-  created() {
-    this.getUsers();
-  },
-  methods: {
-    getUsers() {
-      this.$store.dispatch("system/" + ACTION_GET_USER).then((res) => {
-        if (res) {
-          this.getUsers();
-        }
-      });
-    },
-    getColor(isActive) {
-      if (!isActive) return "red";
-      else return "green";
-    },
-    deleteUser(user) {
-      Swal.fire({
-        title: "Yakin menghapus " + user.username + " ?",
-        text: "User yang dihapus akan hilang permanen!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Oke, hapus!",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.$store
-            .dispatch("system/" + ACTION_DELETE_USER, user)
-            .then((res) => {
-              if (res) {
-                Swal.fire("Deleted!", "Your file has been deleted.", "success");
-              }
-            });
-        }
-      });
-    },
-    editUser(user) {
-      Swal.fire({
-        title: "Rubah data " + user.username + " ?",
-        text: "Anda akan di arahkan ke halaman edit data!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Oke, lanjut!",
-        cancelButtonText: "Ga jadi",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          this.$store.commit("system/" + MUTATION_SET_FORM_USER, user);
-          this.$router.push({ path: "/user/ubah" });
-        }
-      });
     },
   },
 };
 </script>
-<style scoped>
-.red {
-  color: red;
-}
-.green {
-  color: green;
-}
-</style>
