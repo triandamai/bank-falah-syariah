@@ -42,7 +42,7 @@
           id="kt_quick_search_inline"
         >
           <!--begin::Form-->
-          <form method="get" class="quick-search-form">
+          <form method="get" @submit.prevent="" class="quick-search-form">
             <div class="input-group rounded bg-light">
               <div class="input-group-prepend">
                 <span class="input-group-text">

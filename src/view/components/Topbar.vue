@@ -2,7 +2,6 @@
   <!-- begin:: Header Topbar -->
   <div class="topbar">
     <!--begin: Search -->
-    <search-default />
 
     <!--begin: Quick panel toggle -->
     <!-- <KTQuickPanel></KTQuickPanel> -->

@@ -8,6 +8,7 @@ import breadcrumbs from "./module/breadcrumbs.module";
 import nasabah from "./module/nasabah.module";
 import system from "./module/system.module";
 import master from "./module/master.module";
+import rekening from "./module/rekening.module";
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ export default new Vuex.Store({
     nasabah,
     system,
     master,
+    rekening,
   },
 });
 

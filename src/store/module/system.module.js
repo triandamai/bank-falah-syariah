@@ -1,6 +1,10 @@
 /*eslint-disable*/
 import ApiService from "../../core/services/api.service";
-import { headerdatausers, headergroups, headerroles } from "../utils/headers";
+import {
+  headerdatauser,
+  headerdatagroup,
+  headerdatarole,
+} from "../utils/headers";
 
 export const ACTION_GET_USER = "GETUSER";
 export const ACTION_GET_ROLE = "GETROLE";
@@ -20,14 +24,14 @@ export const MUTATION_CLEAR_FORM_USER = "CLEARFORMUSER";
 const state = {
   datausers: [],
   user: {
-    header: headerdatausers,
+    header: headerdatauser,
     search: "",
     current_page: 0,
     last_page: 0,
   },
   datagroups: [],
   group: {
-    header: headergroups,
+    header: headerdatagroup,
     search: "",
     current_page: 0,
     last_page: 0,
@@ -35,7 +39,7 @@ const state = {
   },
   dataroles: [],
   role: {
-    header: headerroles,
+    header: headerdatarole,
     search: "",
     current_page: 0,
     last_page: 0,
