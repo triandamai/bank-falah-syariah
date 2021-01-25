@@ -177,26 +177,67 @@ let routes = [
       },
       {
         path: "jenistransaksi",
-        name: "JenisTransaksi",
         component: () =>
           import("@/view/pages/jenistransaksi/JenisTransaksi.vue"),
-        children: [],
+        meta: {
+          requiresAuth: true,
+        },
+        children: [
+          {
+            path: "",
+            redirect: "data",
+          },
+          {
+            path: "data",
+            name: "DataJenisTransaksi",
+            component: () =>
+              import("@/view/pages/jenistransaksi/DataJenisTransaksi.vue"),
+          },
+        ],
       },
       {
         path: "produk",
-        name: "Produk",
+
         component: () => import("@/view/pages/produk/Produk.vue"),
-        children: [],
+        meta: {
+          requiresAuth: true,
+        },
+        children: [
+          {
+            path: "",
+            redirect: "data",
+          },
+          {
+            path: "data",
+            name: "DataProduk",
+            component: () => import("@/view/pages/produk/DataProduk.vue"),
+          },
+        ],
       },
       {
         path: "jabatan",
-        name: "Jabatan",
         component: () => import("@/view/pages/jabatan/Jabatan.vue"),
-        children: [],
+        meta: {
+          requiresAuth: true,
+        },
+        children: [
+          {
+            path: "",
+            redirect: "data",
+          },
+          {
+            path: "data",
+            name: "DataJabatan",
+            component: () => import("@/view/pages/jabatan/DataJabatan.vue"),
+          },
+        ],
       },
       {
         path: "pegawai",
         component: () => import("@/view/pages/pegawai/Pegawai.vue"),
+        meta: {
+          requiresAuth: true,
+        },
         children: [
           { path: "", redirect: "data" },
           {
@@ -214,18 +255,58 @@ let routes = [
        */
       {
         path: "deposito",
-        name: "RekeningDeposito",
         component: () => import("@/view/pages/deposito/Deposito.vue"),
+        meta: {
+          requiresAuth: true,
+        },
+        children: [
+          {
+            path: "",
+            redirect: "data",
+          },
+          {
+            path: "data",
+            name: "DataDeposito",
+            component: () => import("@/view/pages/deposito/DataDeposito.vue"),
+          },
+        ],
       },
       {
         path: "pembiayaan",
-        name: "RekeningPembiayaan",
         component: () => import("@/view/pages/pembiayaan/Pembiayaan.vue"),
+        meta: {
+          requiresAuth: true,
+        },
+        children: [
+          {
+            path: "",
+            redirect: "data",
+          },
+          {
+            path: "data",
+            name: "DataPembiayaan",
+            component: () =>
+              import("@/view/pages/pembiayaan/DataPembiayaan.vue"),
+          },
+        ],
       },
       {
         path: "simpanan",
-        name: "RekeningSimpanan",
         component: () => import("@/view/pages/simpanan/Simpanan.vue"),
+        meta: {
+          requiresAuth: true,
+        },
+        children: [
+          {
+            path: "",
+            redirect: "data",
+          },
+          {
+            path: "data",
+            name: "DataSimpanan",
+            component: () => import("@/view/pages/simpanan/DataSimpanan.vue"),
+          },
+        ],
       },
     ],
   },
