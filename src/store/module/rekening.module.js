@@ -11,7 +11,9 @@ export const ACTION_GET_SIMPANAN = "GETSIMPANAN";
 export const MUTATION_ADD_DEPOSITO = "MGETDEPOSITO";
 export const MUTATION_ADD_PEMBIAYAAN = "MGETPEMBIAYAAN";
 export const MUTATION_ADD_SIMPANAN = "MGETSIMPANAN";
-
+export const MUTATION_DELETE_SIMPANAN = "DSIMPANAN";
+export const MUTATION_DELETE_PEMBIAYAAN = "DPEMBIAYAAN";
+export const MUTATION_DELTE_DEPOSITO = "DDEPOSITO";
 const state = {
   datadeposito: [],
   deposito: {
@@ -122,6 +124,24 @@ const mutations = {
     if (!exist) {
       state.datasimpanan.push(data);
     }
+  },
+  [MUTATION_DELETE_PEMBIAYAAN](state, data) {
+    var index = state.datapembiayaan
+      .map((pembiayaan) => pembiayaan.id)
+      .indexOf(data.id);
+    state.datapembiayaan.splice(index);
+  },
+  [MUTATION_DELETE_SIMPANAN](state, data) {
+    var index = state.datasimpanan
+      .map((simpanan) => simpanan.id)
+      .indexOf(data.id);
+    state.datasimpanan.splice(index);
+  },
+  [MUTATION_DELTE_DEPOSITO](state, data) {
+    var index = state.datadeposito
+      .map((deposito) => deposito.id)
+      .indexOf(data.id);
+    state.datadeposito.splice(index);
   },
   //not type
   setPembiayaanSearch(state, val) {
