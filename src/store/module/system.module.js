@@ -141,6 +141,11 @@ const actions = {
         });
     });
   },
+  /***
+   * Send User and save
+   * @param user{}
+   * @return boolean is saved? then commit to datauser
+   */
   [ACTION_POST_USER]({ commit, state }) {
     return new Promise((resolve) =>
       ApiService.post("user", {
@@ -225,6 +230,11 @@ const actions = {
         })
     );
   },
+  /***
+   * SDelete user
+   * @param user{}
+   * @return boolean is saved? then commit remove user from data user by index
+   */
   [ACTION_DELETE_USER]({ commit }, user) {
     return new Promise((resolve) => {
       ApiService.delete(`user/${user.id}`)
@@ -243,6 +253,11 @@ const actions = {
   },
 };
 const mutations = {
+  /***
+   * Add user to data user
+   * @param user{}
+   * @return data user add one by one
+   */
   [MUTATION_ADD_USER](state, data) {
     var exist = state.datausers.some((field) => {
       return field.id == data.id;
@@ -277,10 +292,20 @@ const mutations = {
         break;
     }
   },
+  /***
+   * delete user y index
+   * @param user{}
+   * @return remove user by index
+   */
   [MUTATION_DELETE_USER](state, user) {
     var index = state.datausers.map((user) => user.id).indexOf(user.id);
     state.datausers.splice(index);
   },
+  /***
+   * Send User and save
+   * @param user{}
+   * @return boolean is saved? then commit to datauser
+   */
   [MUTATION_SET_FORM_USER](state, user) {
     // console.log(user);
     state.userform.id = user.id;
@@ -290,6 +315,11 @@ const mutations = {
     state.userform.role = user.role[0].id;
     state.userform.group = user.group[0].id;
   },
+  /***
+   * Send User and save
+   * @param user{}
+   * @return boolean is saved? then commit to datauser
+   */
   [MUTATION_CLEAR_FORM_USER](state) {
     state.userform.id = "";
     state.userform.username = "";
