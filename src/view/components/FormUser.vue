@@ -108,16 +108,19 @@
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
-import {
-  ACTION_GET_GROUP,
-  ACTION_GET_ROLE,
-  MUTATION_CLEAR_FORM_USER,
-} from "@/store";
+import { ACTION_GET_DATA_SYSTEM, SUSER } from "@/store";
 
 export default {
   name: "FormUser",
   props: {
     isEdit: Boolean,
+  },
+  data: {
+    username: "",
+    password: "",
+    email: "",
+    role: "",
+    group: "",
   },
   created() {
     this.getRoles();
@@ -133,63 +136,39 @@ export default {
       },
     }),
     //form
-    username: {
-      get() {
-        return this.$store.state.system.userform.username;
-      },
-      set(val) {
-        this.$store.commit("system/setFormUsername", val);
-      },
-    },
-    password: {
-      get() {
-        return this.$store.state.system.userform.password;
-      },
-      set(val) {
-        this.$store.commit("system/setFormPassword", val);
-      },
-    },
-    email: {
-      get() {
-        return this.$store.state.system.userform.email;
-      },
-      set(val) {
-        this.$store.commit("system/setFormEmail", val);
-      },
-    },
-    role: {
-      get() {
-        return this.$store.state.system.userform.role;
-      },
-      set(val) {
-        this.$store.commit("system/setFormRole", val);
-      },
-    },
-    group: {
-      get() {
-        return this.$store.state.system.userform.group;
-      },
-      set(val) {
-        this.$store.commit("system/setFormGroup", val);
-      },
-    },
   },
   methods: {
     getRoles() {
-      this.$store.dispatch("system/" + ACTION_GET_ROLE).then((res) => {
-        if (!res) return;
-        this.getRoles();
-      });
+      this.$store
+        .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
+          systemtype: SUSER,
+          path: "roles",
+        })
+        .then((res) => {
+          if (!res) return;
+          this.getRoles();
+        });
     },
     getGroups() {
-      this.$store.dispatch("system/" + ACTION_GET_GROUP).then((res) => {
-        if (!res) return;
-        this.getGroups();
-      });
+      this.$store
+        .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
+          systemtype: SUSER,
+          path: "groups",
+        })
+        .then((res) => {
+          if (!res) return;
+          this.getGroups();
+        });
     },
     cancel() {
-      this.$store.commit("system/" + MUTATION_CLEAR_FORM_USER);
       this.$router.go(-1);
+    },
+    clear() {
+      this.username = "";
+      this.password = "";
+      this.email = "";
+      this.role = "";
+      this.group = "";
     },
     submit() {
       if (this.isEdit) {

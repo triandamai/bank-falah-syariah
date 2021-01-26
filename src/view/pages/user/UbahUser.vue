@@ -30,7 +30,7 @@
 <script>
 /*eslint-disable*/
 import Swal from "sweetalert2";
-import { ACTION_PUT_USER, MUTATION_CLEAR_FORM_USER } from "@/store";
+import { ACTION_PUT_DATA_SYSTEM, SUSER } from "@/store";
 
 import { mapState, mapGetters } from "vuex";
 
@@ -49,28 +49,33 @@ export default {
   },
   methods: {
     submit(val) {
-      this.$store.dispatch("system/" + ACTION_PUT_USER).then((res) => {
-        if (res) {
-          Swal.fire({
-            title: "Berhasil",
-            text: this.message,
-            icon: "success",
-            confirmButtonText: "Oke",
-          }).then((result) => {
-            if (result.isConfirmed) {
-              this.$store.dispatch("system/" + MUTATION_CLEAR_FORM_USER);
-              this.$router.go(-1);
-            }
-          });
-        } else {
-          Swal.fire({
-            title: "Gagal",
-            text: this.message,
-            icon: "error",
-            confirmButtonText: "Coba lagi",
-          });
-        }
-      });
+      this.$store
+        .dispatch("system/" + ACTION_PUT_DATA_SYSTEM, {
+          systemtype: SUSER,
+          path: "user",
+          val,
+        })
+        .then((res) => {
+          if (res) {
+            Swal.fire({
+              title: "Berhasil",
+              text: res,
+              icon: "success",
+              confirmButtonText: "Oke",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.$router.go(-1);
+              }
+            });
+          } else {
+            Swal.fire({
+              title: "Gagal",
+              text: res,
+              icon: "error",
+              confirmButtonText: "Coba lagi",
+            });
+          }
+        });
     },
   },
 };

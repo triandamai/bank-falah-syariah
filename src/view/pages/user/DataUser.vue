@@ -85,9 +85,10 @@
 import Swal from "sweetalert2";
 import {
   ACTION_GET_DATA_SYSTEM,
+  ACTION_POST_DATA_SYSTEM,
+  ACTION_PUT_DATA_SYSTEM,
+  ACTION_DELETE_DATA_SYSTEM,
   SUSER,
-  MUTATION_SET_FORM_USER,
-  ACTION_DELETE_USER,
 } from "@/store";
 import { mapState } from "vuex";
 export default {
@@ -138,7 +139,11 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.$store
-            .dispatch("system/" + ACTION_DELETE_USER, user)
+            .dispatch("system/" + ACTION_DELETE_DATA_SYSTEM, {
+              systemtype: SUSER,
+              path: "user",
+              body: user,
+            })
             .then((res) => {
               if (res) {
                 Swal.fire("Deleted!", "Your file has been deleted.", "success");

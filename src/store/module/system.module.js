@@ -16,14 +16,6 @@ export const MUTATION_ADD_DATA_SYSTEM = "MADDDATASYSTEM";
 export const MUTATION_PUT_DATA_SYSTEM = "MPUTDATASYSTEM";
 export const MUTATION_DELETE_DATA_SYSTEM = "MDDATASYSTEM";
 
-export const MUTATION_POST_DATA = "POSTDATA";
-export const MUTATION_DELETE_USER = "DELETEUSER";
-export const MUTATION_ADD_USER = "ADDUSER";
-export const MUTATION_ADD_ROLE = "ADDROLE";
-export const MUTATION_ADD_GROUP = "ADDGROUP";
-export const MUTATION_SET_FORM_USER = "SETFORM";
-export const MUTATION_CLEAR_FORM_USER = "CLEARFORMUSER";
-
 export const SUSER = "USER";
 export const SROLE = "ROLE";
 export const SGROUP = "SGROUP";
@@ -155,17 +147,20 @@ const actions = {
     });
   },
   /***
-   * SDelete user
-   * @param user{}
+   * delete data
+   * @param {systemtype,path,body}
    * @return boolean is saved? then commit remove user from data user by index
    */
-  [ACTION_DELETE_DATA_SYSTEM]({ commit }, user) {
+  [ACTION_DELETE_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
     return new Promise((resolve) => {
-      ApiService.delete(`user/${user.id}`)
+      ApiService.delete(`${path}/${body.id}`)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
             resolve(true);
-            commit(MUTATION_DELETE_USER, user);
+            commit(MUTATION_DELETE_DATA_SYSTEM, {
+              systemtype: systemtype,
+              data: body,
+            });
           } else {
             resolve(false);
           }
@@ -238,13 +233,25 @@ const mutations = {
   },
 
   /***
-   * delete user y index
-   * @param user{}
+   * delete data y index
+   * @param {systemtype,data}
    * @return remove user by index
    */
-  [MUTATION_DELETE_DATA_SYSTEM](state, user) {
-    var index = state.datausers.map((user) => user.id).indexOf(user.id);
-    state.datausers.splice(index);
+  [MUTATION_DELETE_DATA_SYSTEM](state, { systemtype, data }) {
+    switch (systemtype) {
+      case SUSER:
+        var index = state.datausers.map((user) => user.id).indexOf(data.id);
+        state.datausers.splice(index);
+        break;
+      case SGROUP:
+        var index = state.datagroups.map((group) => group.id).indexOf(data.id);
+        state.datagroups.splice(index);
+        break;
+      case SROLE:
+        var index = state.dataroles.map((role) => role.id).indexOf(data.id);
+        state.dataroles.splice(index);
+        break;
+    }
   },
 
   //non type mutation all must be cameCase
