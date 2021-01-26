@@ -192,16 +192,31 @@ const actions = {
    *
    */
   [ACTION_PUT_USER]({ commit, state }) {
-    return new Promise((resolve) =>
-      ApiService.put("user/" + state.userform.id, {
-        username: state.userform.username,
-        email: state.userform.email,
-        active: 1,
-        //perlu di lihat dari sisi service
-        password: "defaultpassword", //state.userform.password,
-        role_id: state.userform.role,
-        group_id: state.userform.group,
-      })
+    return new Promise((resolve) => {
+      let dataforupload = {};
+      //jika password tidak kosong
+      if (state.userform.password) {
+        dataforupload = {
+          username: state.userform.username,
+          email: state.userform.email,
+          active: 1,
+          //perlu di lihat dari sisi service
+          password: state.userform.password,
+          role_id: state.userform.role,
+          group_id: state.userform.group,
+        };
+      } else {
+        //jika password kosong
+        dataforupload = {
+          username: state.userform.username,
+          email: state.userform.email,
+          active: 1,
+          role_id: state.userform.role,
+          group_id: state.userform.group,
+        };
+      }
+
+      ApiService.put("user/" + state.userform.id, dataforupload)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
             resolve(true);
@@ -227,8 +242,8 @@ const actions = {
             form: "user",
           });
           resolve(false);
-        })
-    );
+        });
+    });
   },
   /***
    * SDelete user
