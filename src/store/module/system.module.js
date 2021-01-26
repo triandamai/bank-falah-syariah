@@ -100,7 +100,7 @@ const actions = {
    * @return boolean is saved? then commit to datauser
    */
   [ACTION_POST_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
-    return new Promise((resolve) =>
+    return new Promise((resolve) => {
       ApiService.post(`${path}`, body)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
@@ -121,8 +121,8 @@ const actions = {
             success: false,
             message: e.response.data.message ?? "Gagal coba lagi nanti !",
           });
-        })
-    );
+        });
+    });
   },
   /***
    * Edit User
@@ -176,7 +176,7 @@ const actions = {
             resolve({ success: true, message: "Berhasil menghapus!" });
           } else {
             resolve({
-              success: dalse,
+              success: false,
               message: res.data.message ?? "Gagal coba lagi nanti",
             });
           }
@@ -236,17 +236,17 @@ const mutations = {
     switch (systemtype) {
       case SUSER:
         var index = state.datausers.map((user) => user.id).indexOf(olddata.id);
-        state.datausers[index] = data;
+        Object.assign(state.datausers[index], data);
         break;
       case SGROUP:
         var index = state.datagroups
           .map((group) => group.id)
           .indexOf(olddata.id);
-        state.datagroups[index] = data;
+        Object.assign(state.datagroups[index], data);
         break;
       case SROLE:
         var index = state.dataroles.map((role) => role.id).indexOf(olddata.id);
-        state.dataroles[index] = data;
+        Object.assign(state.dataroles[index], data);
         break;
     }
   },
