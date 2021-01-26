@@ -42,6 +42,11 @@ const state = {
 };
 const getters = {};
 const actions = {
+  /***
+   * Add deposito
+   *
+   *
+   */
   [ACTION_GET_DEPOSITO]() {
     return new Promise((resolve) => {
       ApiService.get("")
