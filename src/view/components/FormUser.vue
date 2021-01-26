@@ -108,26 +108,24 @@
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
-import { ACTION_GET_DATA_SYSTEM, SUSER } from "@/store";
+import { ACTION_GET_DATA_SYSTEM, SGROUP, SROLE, SUSER } from "@/store";
 
 export default {
   name: "FormUser",
   props: {
     isEdit: Boolean,
-    user: Object,
   },
-  data: {
-    id: user.id,
-    username: user.username,
-    password: user.password,
-    email: user.email,
-    role: user.role_id,
-    group: user.group_id,
+  data: () => {
+    return {
+      id: "",
+      username: "",
+      password: "",
+      email: "",
+      role: "",
+      group: "",
+    };
   },
-  created() {
-    this.getRoles();
-    this.getGroups();
-  },
+
   computed: {
     ...mapState({
       groups: (state) => {
@@ -139,12 +137,36 @@ export default {
     }),
     //form
   },
+  created() {
+    if (this.$route.params.id) {
+      this.getUserById(this.$route.params.id);
+    }
+    this.getRoles();
+    this.getGroups();
+  },
   methods: {
-    getRoles() {
+    getUserById(id) {
       this.$store
         .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
           systemtype: SUSER,
+          path: `user/${id}`,
+          id: id,
+        })
+        .then(() => {
+          this.id = this.$store.state.system.datausers[0].id;
+          this.username = this.$store.state.system.datausers[0].username;
+          this.password = this.$store.state.system.datausers[0].password;
+          this.email = this.$store.state.system.datausers[0].email;
+          this.role = this.$store.state.system.datausers[0].role[0].id;
+          this.group = this.$store.state.system.datausers[0].group[0].id;
+        });
+    },
+    getRoles() {
+      this.$store
+        .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
+          systemtype: SROLE,
           path: "roles",
+          id: null,
         })
         .then((res) => {
           if (!res) return;
@@ -154,8 +176,9 @@ export default {
     getGroups() {
       this.$store
         .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
-          systemtype: SUSER,
+          systemtype: SGROUP,
           path: "groups",
+          id: null,
         })
         .then((res) => {
           if (!res) return;
@@ -180,7 +203,10 @@ export default {
             username: this.username,
             email: this.email,
             role_id: this.role,
-            group_id: group_id,
+            group_id: this.group,
+            //try use pass
+            password: "admin123",
+            active: 1,
           });
         }
       } else {
@@ -192,11 +218,13 @@ export default {
           this.group
         ) {
           this.$emit("buttonsubmit", {
+            id: this.id,
             username: this.username,
             email: this.email,
             role_id: this.role,
             group_id: this.group,
             password: this.password,
+            active: 1,
           });
         }
       }

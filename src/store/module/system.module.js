@@ -45,32 +45,28 @@ const state = {
     dialog: false,
   },
 };
-const getters = {
-  getUserById(id) {
-    return state.datausers.map((user) => (user.id == id ? user : null));
-  },
-};
+
 const actions = {
   /***
    * get data
    * @param {systemtype,path}
-   *
+   * @returns promise
    *
    */
-  [ACTION_GET_DATA_SYSTEM]({ commit, state }, { systemtype, path }) {
+  [ACTION_GET_DATA_SYSTEM]({ commit, state }, { systemtype, path, id }) {
     return new Promise((resolve) => {
       //get pagination
-      let page =
-        systemtype == SGROUP
-          ? state.group.current_page
-          : systemtype == SUSER
-          ? state.user.current_page
-          : systemtype == SROLE
-          ? state.role.current_page
-          : 0;
+      let page = `?page=`;
+      systemtype == SGROUP
+        ? state.group.current_page
+        : systemtype == SUSER
+        ? state.user.current_page
+        : systemtype == SROLE
+        ? state.role.current_page
+        : 0;
       let stillPaging = false;
       //get
-      ApiService.get(`${path}?page=${page}`)
+      ApiService.get(`${path}${page}`)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
             if (res.data.current_page >= res.data.last_page) {
@@ -112,13 +108,19 @@ const actions = {
               systemtype: systemtype,
               data: res.data.data[0],
             });
-            resolve(true);
+            resolve({ success: true, message: "Berhasil menambah!" });
           } else {
-            resolve(false);
+            resolve({
+              success: false,
+              message: res.data.message ?? "Gagal coba lagi nanti !",
+            });
           }
         })
         .catch((e) => {
-          resolve(false);
+          resolve({
+            success: false,
+            message: e.response.data.message ?? "Gagal coba lagi nanti !",
+          });
         })
     );
   },
@@ -127,12 +129,13 @@ const actions = {
    * !password cannot be null(but in this case update only few form)
    * !not finish yet
    * @param user{}
-   * @return update data user then commit to mutation
+   * @return  promise update data user then commit to mutation
+   * @returns {success,message}
    *
    */
-  [ACTION_PUT_DATA_SYSTEM]({ commit, state }, { systemtype, path, body }) {
+  [ACTION_PUT_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
     return new Promise((resolve) => {
-      ApiService.put(`${path}/${body.id}` + state.userform.id, dataforupload)
+      ApiService.put(`${path}/${body.id}`, body)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_PUT_DATA_SYSTEM, {
@@ -140,13 +143,19 @@ const actions = {
               data: res.data.data[0],
               olddata: body,
             });
-            resolve(true);
+            resolve({ success: true, message: "Berhasil mengubah!" });
           } else {
-            resolve(false);
+            resolve({
+              success: false,
+              message: res.data.message ?? "Gagal coba lagi nanti",
+            });
           }
         })
         .catch((e) => {
-          resolve(false);
+          resolve({
+            success: false,
+            message: e.response.data.message ?? "Gaga coba lagi nanti",
+          });
         });
     });
   },
@@ -160,17 +169,23 @@ const actions = {
       ApiService.delete(`${path}/${body.id}`)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
-            resolve(true);
             commit(MUTATION_DELETE_DATA_SYSTEM, {
               systemtype: systemtype,
               data: body,
             });
+            resolve({ success: true, message: "Berhasil menghapus!" });
           } else {
-            resolve(false);
+            resolve({
+              success: dalse,
+              message: res.data.message ?? "Gagal coba lagi nanti",
+            });
           }
         })
         .catch((e) => {
-          resolve(false);
+          resolve({
+            success: true,
+            message: e.response.data.message ?? "Berhasil mengubah!",
+          });
         });
     });
   },
@@ -276,4 +291,4 @@ const mutations = {
   },
 };
 
-export default { namespaced: true, state, getters, actions, mutations };
+export default { namespaced: true, state, actions, mutations };

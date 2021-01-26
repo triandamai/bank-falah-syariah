@@ -12,7 +12,7 @@
         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
           <div class="col-xl-12 col-xxl-7">
             <!--begin: Wizard Form-->
-            <form-user :isEdit="false" :user="null" @buttonsubmit="submit" />
+            <form-user :isEdit="false" @buttonsubmit="submit" />
             <!--end: Wizard Form-->
           </div>
         </div>
@@ -30,7 +30,7 @@
 <script>
 /*eslint-disable*/
 import Swal from "sweetalert2";
-import { ACTION_POST_DATA_SYSTEM } from "@/store";
+import { ACTION_POST_DATA_SYSTEM, SUSER } from "@/store";
 import { mapState } from "vuex";
 
 export default {
@@ -49,11 +49,11 @@ export default {
           path: "user",
           body: val,
         })
-        .then((res) => {
-          if (res) {
+        .then(({ success, message }) => {
+          if (success) {
             Swal.fire({
               title: "",
-              text: res,
+              text: message,
               icon: "success",
               confirmButtonText: "Oke",
             }).then((result) => {
@@ -64,7 +64,7 @@ export default {
           } else {
             Swal.fire({
               title: "",
-              text: res,
+              text: message,
               icon: "error",
               confirmButtonText: "Coba lagi",
             });

@@ -85,8 +85,6 @@
 import Swal from "sweetalert2";
 import {
   ACTION_GET_DATA_SYSTEM,
-  ACTION_POST_DATA_SYSTEM,
-  ACTION_PUT_DATA_SYSTEM,
   ACTION_DELETE_DATA_SYSTEM,
   SUSER,
 } from "@/store";
@@ -144,9 +142,9 @@ export default {
               path: "user",
               body: user,
             })
-            .then((res) => {
-              if (res) {
-                Swal.fire("Deleted!", "Your file has been deleted.", "success");
+            .then(({ success, message }) => {
+              if (success) {
+                Swal.fire("Dihapus!", message, "success");
               }
             });
         }
