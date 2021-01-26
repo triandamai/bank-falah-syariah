@@ -5,33 +5,28 @@ import {
   headerdatasimpanan,
   headerdatapembiayaan,
 } from "../utils/headers";
-export const ACTION_GET_DEPOSITO = "GETDEPOSITO";
-export const ACTION_GET_PEMBIAYAAN = "GETPEMBIAYAAN";
-export const ACTION_GET_SIMPANAN = "GETSIMPANAN";
+export const ACTION_GET_DATA = "GETDATAREKENING";
 
-export const ACTION_POST_DEPOSITO = "PETDEPOSITO";
-export const ACTION_POST_PEMBIAYAAN = "PETPEMBIAYAAN";
-export const ACTION_POST_SIMPANAN = "PETSIMPANAN";
+export const ACTION_POST_DATA = "POSTREKENINGDATA";
 
-export const ACTION_PUT_DEPOSITO = "GETDEPOSITO";
-export const ACTION_PUT_PEMBIAYAAN = "GETPEMBIAYAAN";
-export const ACTION_PUT_SIMPANAN = "GETSIMPANAN";
+export const ACTION_PUT_DATA = "PUTDATAREKENING";
 
-export const ACTION_DELETE_DEPOSITO = "GETDEPOSITO";
-export const ACTION_DELETE_PEMBIAYAAN = "GETPEMBIAYAAN";
-export const ACTION_DELETE_SIMPANAN = "GETSIMPANAN";
+export const ACTION_DELETE_DATA = "DELETEDATAREKENING";
 
-export const MUTATION_ADD_DEPOSITO = "MGETDEPOSITO";
-export const MUTATION_ADD_PEMBIAYAAN = "MGETPEMBIAYAAN";
-export const MUTATION_ADD_SIMPANAN = "MGETSIMPANAN";
+export const MUTATION_ADD_DATA = "MADDDATAREKENING";
 
-export const MUTATION_DELETE_SIMPANAN = "DSIMPANAN";
-export const MUTATION_DELETE_PEMBIAYAAN = "DPEMBIAYAAN";
-export const MUTATION_DELETE_DEPOSITO = "DDEPOSITO";
+export const MUTATION_DELETE_DATA = "MDELETEDATAREKENING";
 
-export const MUTATION_UPDATE_SIMPANAN = "DSIMPANAN";
-export const MUTATION_UPDATE_PEMBIAYAAN = "DPEMBIAYAAN";
-export const MUTATION_UPDATE_DEPOSITO = "DDEPOSITO";
+export const MUTATION_UPDATE_DATA = "MUPDATEREKENING";
+/***
+ *
+ * type Action
+ *
+ */
+export const RSIMPANAN = "SIMPANAN";
+export const RDEPOSITO = "DEPOSITO";
+export const RPEMBIAYAAN = "PEMBIAYAAN";
+
 const state = {
   datadeposito: [],
   deposito: {
@@ -61,83 +56,62 @@ const state = {
 const getters = {};
 const actions = {
   /***
-   * get all data deposito
-   *
+   * get all data rekekning deposito/pembiayaansimpanan
+   * @param {rekeningtype,path}
    *
    */
-  [ACTION_GET_DEPOSITO]() {
+  [ACTION_GET_DEPOSITO]({ commit, state }, { rekeningtype, path }) {
     return new Promise((resolve) => {
-      ApiService.get("")
+      //cek pagination (get current page)
+      let page =
+        rekeningtype === RSIMPANAN
+          ? state.simpanan.current_page
+          : rekeningtype === RDEPOSITO
+          ? state.simpanan.current_page
+          : rekeningtype === RPEMBIAYAAN
+          ? state.current_page
+          : 0;
+      //for mutation the pagination going forward or stop
+      let stillPaging = false;
+      //get
+      ApiService.get(`${path}?page=${page}`)
         .then((res) => {
+          //success
           if (res.status == 200 || res.status == 201) {
             if (res.data.current_page >= res.data.last_page) {
               resolve(false);
+              stillPaging = false;
             } else {
               resolve(true);
+              stillPaging = true;
             }
+            res.data.data.map((item) => {
+              commit(MUTATION_ADD_DATA, {
+                rekeningtype: rekeningtype,
+                item: item,
+                page: stillPaging,
+              });
+            });
           } else {
+            //failed
             resolve(false);
           }
         })
         .catch((e) => {
+          //failes
           resolve(false);
         });
     });
   },
-  /***
-   * get all data pembiayaan
-   *
-   */
-  [ACTION_GET_PEMBIAYAAN]() {
-    return new Promise((resolve) => {
-      ApiService.get("")
-        .then((res) => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              resolve(false);
-            } else {
-              resolve(true);
-            }
-          } else {
-            resolve(false);
-          }
-        })
-        .catch((e) => {
-          resolve(false);
-        });
-    });
-  },
-  /***
-   * get all data simpanan
-   *
-   */
-  [ACTION_GET_SIMPANAN]() {
-    return new Promise((resolve) => {
-      ApiService.get("")
-        .then((res) => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              resolve(false);
-            } else {
-              resolve(true);
-            }
-          } else {
-            resolve(false);
-          }
-        })
-        .catch((e) => {
-          resolve(false);
-        });
-    });
-  },
+
   /***
    * save new deposito
    *
    *
    */
-  [ACTION_POST_DEPOSITO]() {
+  [ACTION_POST_DEPOSITO]({ commit }, { path, body }) {
     return new Promise((resolve) => {
-      ApiService.get("")
+      ApiService.post(`${path}`)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
             if (res.data.current_page >= res.data.last_page) {
@@ -158,48 +132,7 @@ const actions = {
    * save new pembiayaan
    *
    */
-  [ACTION_POST_PEMBIAYAAN]() {
-    return new Promise((resolve) => {
-      ApiService.get("")
-        .then((res) => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              resolve(false);
-            } else {
-              resolve(true);
-            }
-          } else {
-            resolve(false);
-          }
-        })
-        .catch((e) => {
-          resolve(false);
-        });
-    });
-  },
-  /***
-   * save new simpanan
-   *
-   */
-  [ACTION_POST_SIMPANAN]() {
-    return new Promise((resolve) => {
-      ApiService.get("")
-        .then((res) => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              resolve(false);
-            } else {
-              resolve(true);
-            }
-          } else {
-            resolve(false);
-          }
-        })
-        .catch((e) => {
-          resolve(false);
-        });
-    });
-  },
+
   /***
    * update/edit deposito
    *
@@ -227,52 +160,6 @@ const actions = {
    * update/edit pembiayaan
    *
    */
-  [ACTION_PUT_PEMBIAYAAN]() {
-    return new Promise((resolve) => {
-      ApiService.get("")
-        .then((res) => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              resolve(false);
-            } else {
-              resolve(true);
-            }
-          } else {
-            resolve(false);
-          }
-        })
-        .catch((e) => {
-          resolve(false);
-        });
-    });
-  },
-  /***
-   * update/edit simpanna
-   *
-   */
-  [ACTION_PUT_SIMPANAN]() {
-    return new Promise((resolve) => {
-      ApiService.get("")
-        .then((res) => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              resolve(false);
-            } else {
-              resolve(true);
-            }
-          } else {
-            resolve(false);
-          }
-        })
-        .catch((e) => {
-          resolve(false);
-        });
-    });
-  },
-  /***
-   * delete deposito
-   *
-   */
   [ACTION_DELETE_DEPOSITO]() {
     return new Promise((resolve) => {
       ApiService.get("")
@@ -296,86 +183,52 @@ const actions = {
    * delete pembiayaan
    *
    */
-  [ACTION_DELETE_PEMBIAYAAN]() {
-    return new Promise((resolve) => {
-      ApiService.get("")
-        .then((res) => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              resolve(false);
-            } else {
-              resolve(true);
-            }
-          } else {
-            resolve(false);
-          }
-        })
-        .catch((e) => {
-          resolve(false);
-        });
-    });
-  },
-  /***
-   * delete simpanan
-   *
-   */
-  [ACTION_DELETE_SIMPANAN]() {
-    return new Promise((resolve) => {
-      ApiService.get("")
-        .then((res) => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              resolve(false);
-            } else {
-              resolve(true);
-            }
-          } else {
-            resolve(false);
-          }
-        })
-        .catch((e) => {
-          resolve(false);
-        });
-    });
-  },
 };
 const mutations = {
-  [MUTATION_ADD_DEPOSITO](state, data) {
-    var exist = state.datadeposito.some((deposito) => {
-      return deposito.id == data.id;
-    });
-    if (!exist) {
-      state.datadeposito.push(data);
+  /***
+   * Rekening
+   * @param {rekeknigntype,item}
+   */
+  [MUTATION_ADD_DATA](state, { rekeningtype, item, page }) {
+    //push data with type rekening assosiated
+    switch (rekeningtype) {
+      case RPEMBIAYAAN:
+        var exist = state.datapembiayaan.some((pembiayaan) => {
+          return pembiayaan.id == item.id;
+        });
+        //assume the data/item is doesnt exist
+        if (!exist) {
+          state.datapembiayaan.push(item);
+        }
+        //pagination if still other page
+        state.pembiayaan.current_page = page
+          ? state.pembiayaan.current_page++
+          : 0;
+        break;
+      case RSIMPANAN:
+        var exist = state.datasimpanan.some((simpanan) => {
+          return simpanan.id == item.id;
+        });
+        //assume the data/item is doesnt exist
+        if (!exist) {
+          state.datasimpanan.push(item);
+        }
+        //pagination
+        state.simpanan.current_page = page ? state.simpanan.current_page++ : 0;
+        break;
+      case RDEPOSITO:
+        var exist = state.datadeposito.some((deposito) => {
+          return deposito.id == item.id;
+        });
+        //assume the data/item is doesnt exist
+        if (!exist) {
+          state.datadeposito.push(item);
+        }
+        state.deposito.current_page = page ? state.deposito.current_page : 0;
+        break;
     }
   },
-  [MUTATION_ADD_PEMBIAYAAN](state, data) {
-    var exist = state.datapembiayaan.some((pembiayaan) => {
-      return pembiayaan.id == data.id;
-    });
-    if (!exist) {
-      state.datapembiayaan.push(data);
-    }
-  },
-  [MUTATION_ADD_SIMPANAN](state, data) {
-    var exist = state.datasimpanan.some((simpanan) => {
-      return simpanan.id == data.id;
-    });
-    if (!exist) {
-      state.datasimpanan.push(data);
-    }
-  },
-  [MUTATION_DELETE_PEMBIAYAAN](state, data) {
-    var index = state.datapembiayaan
-      .map((pembiayaan) => pembiayaan.id)
-      .indexOf(data.id);
-    state.datapembiayaan.splice(index);
-  },
-  [MUTATION_DELETE_SIMPANAN](state, data) {
-    var index = state.datasimpanan
-      .map((simpanan) => simpanan.id)
-      .indexOf(data.id);
-    state.datasimpanan.splice(index);
-  },
+
   [MUTATION_DELTE_DEPOSITO](state, data) {
     var index = state.datadeposito
       .map((deposito) => deposito.id)
