@@ -178,13 +178,22 @@ const actions = {
         })
     );
   },
+  /***
+   * Edit User
+   * !password cannot be null(but in this case update only few form)
+   * !not finish yet
+   * @param user{}
+   * @return update data user then commit to mutation
+   *
+   */
   [ACTION_PUT_USER]({ commit, state }) {
     return new Promise((resolve) =>
       ApiService.put("user/" + state.userform.id, {
         username: state.userform.username,
         email: state.userform.email,
         active: 1,
-        password: state.userform.password,
+        //perlu di lihat dari sisi service
+        password: "defaultpassword", //state.userform.password,
         role_id: state.userform.role,
         group_id: state.userform.group,
       })
