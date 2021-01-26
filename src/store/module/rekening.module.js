@@ -1,24 +1,23 @@
 /*eslint-disable*/
-import { stat } from "original-fs";
 import ApiService from "../../core/services/api.service";
 import {
   headerdatadeposito,
   headerdatasimpanan,
   headerdatapembiayaan,
 } from "../utils/headers";
-export const ACTION_GET_DATA = "GETDATAREKENING";
+export const ACTION_GET_DATA_REKENING = "GETDATAREKENING";
 
-export const ACTION_POST_DATA = "POSTREKENINGDATA";
+export const ACTION_POST_DATA_REKENING = "POSTREKENINGDATA";
 
-export const ACTION_PUT_DATA = "PUTDATAREKENING";
+export const ACTION_PUT_DATA_REKENING = "PUTDATAREKENING";
 
-export const ACTION_DELETE_DATA = "DELETEDATAREKENING";
+export const ACTION_DELETE_DATA_REKENING = "DELETEDATAREKENING";
 
-export const MUTATION_ADD_DATA = "MADDDATAREKENING";
+export const MUTATION_ADD_DATA_REKENING = "MADDDATAREKENING";
 
-export const MUTATION_DELETE_DATA = "MDELETEDATAREKENING";
+export const MUTATION_DELETE_DATA_REKENING = "MDELETEDATAREKENING";
 
-export const MUTATION_UPDATE_DATA = "MUPDATEREKENING";
+export const MUTATION_UPDATE_DATA_REKENING = "MUPDATEREKENING";
 /***
  *
  * type Action
@@ -87,7 +86,7 @@ const actions = {
               stillPaging = true;
             }
             res.data.data.map((item) => {
-              commit(MUTATION_ADD_DATA, {
+              commit(MUTATION_ADD_DATA_REKENING, {
                 rekeningtype: rekeningtype,
                 item: item,
                 page: stillPaging,
@@ -110,12 +109,12 @@ const actions = {
    *  @param {rekeningtype,path,body}
    *
    */
-  [ACTION_POST_DATA]({ commit }, { rekeningtype, path, body }) {
+  [ACTION_POST_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
     return new Promise((resolve) => {
       ApiService.post(`${path}`, body)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
-            commit(MUTATION_ADD_DATA, {
+            commit(MUTATION_ADD_DATA_REKENING, {
               rekeningtype: rekeningtype,
               item: res.data.data[0],
               page: false,
@@ -134,12 +133,12 @@ const actions = {
    * update/edit data
    * @param {rekeningtype,path,body}
    */
-  [ACTION_PUT_DATA]({ commit }, { rekeningtype, path, body }) {
+  [ACTION_PUT_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
     return new Promise((resolve) => {
       ApiService.put(`${path}`, body)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
-            commit(MUTATION_UPDATE_DATA, {
+            commit(MUTATION_UPDATE_DATA_REKENING, {
               rekeningtype: rekeningtype,
               data: res.data.data[0],
               olddata: body,
@@ -157,12 +156,12 @@ const actions = {
    * delete pembiayaan
    * @param {rekeningtype,body,path}
    */
-  [ACTION_DELETE_DATA]({ commit }, { rekeningtype, path, body }) {
+  [ACTION_DELETE_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
     return new Promise((resolve) => {
       ApiService.delete(`${path}`)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
-            commit(MUTATION_DELETE_DATA, {
+            commit(MUTATION_DELETE_DATA_REKENING, {
               rekeningtype: rekeningtype,
               data: body,
             });
@@ -187,7 +186,7 @@ const mutations = {
    * @param item}
    * @returns each data array will increment smoothly
    */
-  [MUTATION_ADD_DATA](state, { rekeningtype, item, page }) {
+  [MUTATION_ADD_DATA_REKENING](state, { rekeningtype, item, page }) {
     //push data with type rekening assosiated
     switch (rekeningtype) {
       case RPEMBIAYAAN:
@@ -237,7 +236,7 @@ const mutations = {
    * @param olddata}
    * @returns update data
    */
-  [MUTATION_UPDATE_DATA](state, { rekeningtype, data, olddata }) {
+  [MUTATION_UPDATE_DATA_REKENING](state, { rekeningtype, data, olddata }) {
     //get type rekening
     switch (rekeningtype) {
       case RSIMPANAN:
@@ -265,7 +264,7 @@ const mutations = {
    * delete data
    * @param {rekenigntype,data}
    */
-  [MUTATION_DELETE_DATA](state, { rekeningtype, data }) {
+  [MUTATION_DELETE_DATA_REKENING](state, { rekeningtype, data }) {
     switch (rekeningtype) {
       case RDEPOSITO:
         var index = state.datadeposito
