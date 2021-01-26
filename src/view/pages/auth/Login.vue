@@ -159,8 +159,13 @@ export default {
         this.$v.$reset();
       });
     },
+    /***
+     * Button Login submited
+     *
+     */
     onSubmit() {
       this.$v.form.$touch();
+      //check for validation
       if (this.$v.form.$anyError) {
         return;
       }
@@ -168,7 +173,7 @@ export default {
       const email = this.$v.form.email.$model;
       const password = this.$v.form.password.$model;
 
-      // clear existing errors
+      // clear existing data and token before login
       this.$store.dispatch("auth/" + LOGOUT);
 
       // set spinner to submit button
@@ -196,8 +201,13 @@ export default {
     },
   },
   created() {
+    //set state to normal every page created
     this.$store.commit("auth/" + SET_ERROR, { error: false, message: "" });
   },
+  /***
+   * get state from store
+   *
+   */
   computed: {
     ...mapState({
       error: (state) => state.auth.error,

@@ -28,6 +28,12 @@ const getters = {
 };
 
 const actions = {
+  /***
+   * Login
+   * @param credentials{username,password}
+   * @return action login
+   *
+   */
   [LOGIN]({ commit }, credentials) {
     return new Promise((resolve, reject) => {
       ApiService.post("login", credentials)
@@ -56,6 +62,12 @@ const actions = {
         });
     });
   },
+  /***
+   * Logout
+   * @param
+   * @return action logout
+   *
+   */
   [LOGOUT]({ commit }) {
     commit(PURGE_AUTH);
   },
