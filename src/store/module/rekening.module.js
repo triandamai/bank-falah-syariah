@@ -107,16 +107,16 @@ const actions = {
 
   /***
    * save data
-   *  @param {rekeknigntype,path,body}
+   *  @param {rekeningtype,path,body}
    *
    */
-  [ACTION_POST_DATA]({ commit }, { rekeknigntype, path, body }) {
+  [ACTION_POST_DATA]({ commit }, { rekeningtype, path, body }) {
     return new Promise((resolve) => {
       ApiService.post(`${path}`, body)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_ADD_DATA, {
-              rekeknigntype: rekeknigntype,
+              rekeningtype: rekeningtype,
               item: res.data.data[0],
               page: false,
             });
@@ -132,15 +132,15 @@ const actions = {
   },
   /***
    * update/edit data
-   * @param {rekeknigntype,path,body}
+   * @param {rekeningtype,path,body}
    */
-  [ACTION_PUT_DATA]({ commit }, { rekeknigntype, path, body }) {
+  [ACTION_PUT_DATA]({ commit }, { rekeningtype, path, body }) {
     return new Promise((resolve) => {
       ApiService.put(`${path}`, body)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
-            commit({
-              rekeknigntype: rekeknigntype,
+            commit(MUTATION_UPDATE_DATA, {
+              rekeningtype: rekeningtype,
               data: res.data.data[0],
               olddata: body,
             });
@@ -154,19 +154,18 @@ const actions = {
     });
   },
   /***
-   * update/edit pembiayaan
-   *
+   * delete pembiayaan
+   * @param {rekeningtype,body,path}
    */
-  [ACTION_DELETE_DEPOSITO]() {
+  [ACTION_DELETE_DATA]({ commit }, { rekeningtype, path, body }) {
     return new Promise((resolve) => {
-      ApiService.get("")
+      ApiService.delete(`${path}`)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              resolve(false);
-            } else {
-              resolve(true);
-            }
+            commit(MUTATION_DELETE_DATA, {
+              rekeningtype: rekeningtype,
+              data: body,
+            });
           } else {
             resolve(false);
           }
@@ -184,7 +183,7 @@ const actions = {
 const mutations = {
   /***
    * Rekening add data dynamicly
-   * {@param rekeknigntype
+   * {@param rekeningtype
    * @param item}
    * @returns each data array will increment smoothly
    */
@@ -233,14 +232,14 @@ const mutations = {
   },
   /***
    * update data
-   * {@param rekeknigntype,
+   * {@param rekeningtype,
    * @param data
    * @param olddata}
    * @returns update data
    */
-  [MUTATION_UPDATE_DATA](state, { rekeknigntype, data, olddata }) {
+  [MUTATION_UPDATE_DATA](state, { rekeningtype, data, olddata }) {
     //get type rekening
-    switch (rekeknigntype) {
+    switch (rekeningtype) {
       case RSIMPANAN:
         //update to data
         var index = state.datasimpanan
@@ -262,11 +261,31 @@ const mutations = {
         break;
     }
   },
-  [MUTATION_DELTE_DEPOSITO](state, data) {
-    var index = state.datadeposito
-      .map((deposito) => deposito.id)
-      .indexOf(data.id);
-    state.datadeposito.splice(index);
+  /***
+   * delete data
+   * @param {rekenigntype,data}
+   */
+  [MUTATION_DELETE_DATA](state, { rekeningtype, data }) {
+    switch (rekeningtype) {
+      case RDEPOSITO:
+        var index = state.datadeposito
+          .map((deposito) => deposito.id)
+          .indexOf(data.id);
+        state.datadeposito.splice(index);
+        break;
+      case RPEMBIAYAAN:
+        var index = state.datapembiayaan
+          .map((deposito) => deposito.id)
+          .indexOf(data.id);
+        state.datapembiayaan.splice(index);
+        break;
+      case RSIMPANAN:
+        var index = state.datasimpanan
+          .map((deposito) => deposito.id)
+          .indexOf(data.id);
+        state.datasimpanan.splice(index);
+        break;
+    }
   },
   //not type
   setPembiayaanSearch(state, val) {
