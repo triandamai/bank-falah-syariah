@@ -1,4 +1,5 @@
 /*eslint-disable*/
+
 import ApiService from "../../core/services/api.service";
 import {
   headerdatauser,
@@ -6,12 +7,14 @@ import {
   headerdatarole,
 } from "../utils/headers";
 
-export const ACTION_GET_USER = "GETUSER";
-export const ACTION_GET_ROLE = "GETROLE";
-export const ACTION_GET_GROUP = "GETGROUP";
-export const ACTION_POST_USER = "POSTUSER";
-export const ACTION_PUT_USER = "PUTUSER";
-export const ACTION_DELETE_USER = "DELETEUSER";
+export const ACTION_GET_DATA_SYSTEM = "GETDATASYSTEM";
+export const ACTION_POST_DATA_SYSTEM = "POGETDATASYSTEM";
+export const ACTION_PUT_DATA_SYSTEM = "PUGETDATASYSTEM";
+export const ACTION_DELETE_DATA_SYSTEM = "DGETDATASYSTEM";
+
+export const MUTATION_ADD_DATA_SYSTEM = "MADDDATASYSTEM";
+export const MUTATION_PUT_DATA_SYSTEM = "MPUTDATASYSTEM";
+export const MUTATION_DELETE_DATA_SYSTEM = "MDDATASYSTEM";
 
 export const MUTATION_POST_DATA = "POSTDATA";
 export const MUTATION_DELETE_USER = "DELETEUSER";
@@ -20,6 +23,10 @@ export const MUTATION_ADD_ROLE = "ADDROLE";
 export const MUTATION_ADD_GROUP = "ADDGROUP";
 export const MUTATION_SET_FORM_USER = "SETFORM";
 export const MUTATION_CLEAR_FORM_USER = "CLEARFORMUSER";
+
+export const SUSER = "USER";
+export const SROLE = "ROLE";
+export const SGROUP = "SGROUP";
 
 const state = {
   datausers: [],
@@ -45,44 +52,45 @@ const state = {
     last_page: 0,
     dialog: false,
   },
-  userform: {
-    id: "",
-    username: "",
-    password: "",
-    email: "",
-    role: "",
-    group: "",
-    error: false,
-    message: "",
-  },
-  groupsfrom: {},
 };
-const getters = {
-  userformvalidation: (state, getters) => {
-    return (
-      state.userform.username != "" &&
-      state.userform.email != "" &&
-      state.userform.role != "" &&
-      state.userform.group != ""
-    );
-  },
-};
+
 const actions = {
-  [ACTION_GET_USER]({ commit, state }, param) {
+  /***
+   * get data
+   * @param {systemtype,path}
+   *
+   *
+   */
+  [ACTION_GET_DATA_SYSTEM]({ commit, state }, { systemtype, path }) {
     return new Promise((resolve) => {
+      //get pagination
       let page =
-        state.user.currentpage >= 1 ? "" : `?page=${state.user.currentpage}`;
-      ApiService.get(`users${page}`)
+        systemtype == SGROUP
+          ? state.group.current_page
+          : systemtype == SUSER
+          ? state.user.current_page
+          : systemtype == SROLE
+          ? state.role.current_page
+          : 0;
+      let stillPaging = false;
+      //get
+      ApiService.get(`${path}?page=${page}`)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
             if (res.data.current_page >= res.data.last_page) {
               //jangan ambil data lagi
               resolve(false);
+              stillPaging = false;
             } else {
               resolve(true);
+              stillPaging = true;
             }
             res.data.data.map((item) => {
-              commit(MUTATION_ADD_USER, item);
+              commit(MUTATION_ADD_DATA_SYSTEM, {
+                systemtype: systemtype,
+                data: item,
+                page: stillPaging,
+              });
             });
           } else {
             resolve(false);
@@ -93,92 +101,27 @@ const actions = {
         });
     });
   },
-  [ACTION_GET_GROUP]({ commit, state }) {
-    return new Promise((resolve) => {
-      let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
-      ApiService.get(`groups${page}`)
-        .then((res) => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              //jangan ambil data lagi
-              resolve(false);
-            } else {
-              resolve(true);
-            }
-            res.data.data.map((item) => {
-              commit(MUTATION_ADD_GROUP, item);
-            });
-          } else {
-            resolve(false);
-          }
-        })
-        .catch((e) => {
-          resolve(false);
-        });
-    });
-  },
-  [ACTION_GET_ROLE]({ commit, state }) {
-    return new Promise((resolve) => {
-      let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
-      ApiService.get(`roles${page}`)
-        .then((res) => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              //jangan ambil data lagi
-              resolve(false);
-            } else {
-              resolve(true);
-            }
-            res.data.data.map((item) => {
-              commit(MUTATION_ADD_ROLE, item);
-            });
-          } else {
-            resolve(false);
-          }
-        })
-        .catch((e) => {
-          resolve(false);
-        });
-    });
-  },
+
   /***
    * Send User and save
-   * @param user{}
+   * @param {}
    * @return boolean is saved? then commit to datauser
    */
-  [ACTION_POST_USER]({ commit, state }) {
+  [ACTION_POST_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
     return new Promise((resolve) =>
-      ApiService.post("user", {
-        username: state.userform.username,
-        email: state.userform.email,
-        active: 1,
-        password: state.userform.password,
-        role_id: state.userform.role,
-        group_id: state.userform.group,
-      })
+      ApiService.post(`${path}`, body)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
+            commit(MUTATION_ADD_DATA_SYSTEM, {
+              systemtype: systemtype,
+              data: res.data.data[0],
+            });
             resolve(true);
-            commit(MUTATION_POST_DATA, {
-              success: true,
-              message: "Berhasil menambah user",
-              form: "user",
-            });
           } else {
-            commit(MUTATION_POST_DATA, {
-              success: false,
-              message: "Gagal menambah user",
-              form: "user",
-            });
             resolve(false);
           }
         })
         .catch((e) => {
-          commit(MUTATION_POST_DATA, {
-            success: true,
-            message: e.response.data.message,
-            form: "user",
-          });
           resolve(false);
         })
     );
@@ -191,56 +134,22 @@ const actions = {
    * @return update data user then commit to mutation
    *
    */
-  [ACTION_PUT_USER]({ commit, state }) {
+  [ACTION_PUT_DATA_SYSTEM]({ commit, state }, { systemtype, path, body }) {
     return new Promise((resolve) => {
-      let dataforupload = {};
-      //jika password tidak kosong
-      if (state.userform.password) {
-        dataforupload = {
-          username: state.userform.username,
-          email: state.userform.email,
-          active: 1,
-          //perlu di lihat dari sisi service
-          password: state.userform.password,
-          role_id: state.userform.role,
-          group_id: state.userform.group,
-        };
-      } else {
-        //jika password kosong tidak ada password
-        dataforupload = {
-          username: state.userform.username,
-          email: state.userform.email,
-          active: 1,
-          role_id: state.userform.role,
-          group_id: state.userform.group,
-        };
-      }
-
-      ApiService.put("user/" + state.userform.id, dataforupload)
+      ApiService.put(`${path}/${body.id}` + state.userform.id, dataforupload)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
+            commit(MUTATION_PUT_DATA_SYSTEM, {
+              systemtype: systemtype,
+              data: res.data.data[0],
+              olddata: body,
+            });
             resolve(true);
-            commit(MUTATION_POST_DATA, {
-              success: true,
-              message: "Berhasil menambah user",
-              form: "user",
-            });
           } else {
-            commit(MUTATION_POST_DATA, {
-              success: false,
-              message: "Gagal menambah user",
-              form: "user",
-            });
             resolve(false);
           }
         })
         .catch((e) => {
-          console.log(e);
-          commit(MUTATION_POST_DATA, {
-            success: true,
-            message: e.response.data.message,
-            form: "user",
-          });
           resolve(false);
         });
     });
@@ -250,7 +159,7 @@ const actions = {
    * @param user{}
    * @return boolean is saved? then commit remove user from data user by index
    */
-  [ACTION_DELETE_USER]({ commit }, user) {
+  [ACTION_DELETE_DATA_SYSTEM]({ commit }, user) {
     return new Promise((resolve) => {
       ApiService.delete(`user/${user.id}`)
         .then((res) => {
@@ -269,96 +178,76 @@ const actions = {
 };
 const mutations = {
   /***
-   * Add user to data user
-   * @param user{}
+   * Add data
+   * @param {systemtype,data}
    * @return data user add one by one
+   * @todo if exist and data change sholud update
    */
-  [MUTATION_ADD_USER](state, data) {
-    var exist = state.datausers.some((field) => {
-      return field.id == data.id;
-    });
-    if (!exist) {
-      state.datausers.push(data);
-    }
-  },
-  [MUTATION_ADD_GROUP](state, data) {
-    var exist = state.datagroups.some((group) => {
-      return group.id == data.id;
-    });
-    if (!exist) {
-      state.datagroups.push(data);
-    }
-  },
-  [MUTATION_ADD_ROLE](state, data) {
-    var exist = state.dataroles.some((role) => {
-      return role.id == data.id;
-    });
-    if (!exist) {
-      state.dataroles.push(data);
-    }
-  },
-  [MUTATION_POST_DATA](state, { message, success, form }) {
-    switch (form) {
-      case "group":
+  [MUTATION_ADD_DATA_SYSTEM](state, { systemtype, data, page }) {
+    switch (systemtype) {
+      case SUSER:
+        var exist = state.datausers.some((user) => {
+          return user.id == data.id;
+        });
+        if (!exist) {
+          state.datausers.push(data);
+        }
+        page ? state.user.current_page++ : null;
         break;
-      case "user":
-        state.userform.message = message;
-        state.userform.error = !success;
+      case SROLE:
+        var exist = state.dataroles.some((role) => {
+          return role.id == data.id;
+        });
+        if (!exist) {
+          state.dataroles.push(data);
+        }
+        page ? state.role.current_page++ : null;
+        break;
+      case SGROUP:
+        var exist = state.datagroups.some((group) => {
+          return group.id == data.id;
+        });
+        if (!exist) {
+          state.datagroups.push(data);
+        }
+        page ? state.group.current_page++ : null;
         break;
     }
   },
+  /***
+   * add updated data to existing data
+   *@param {systemtype,data,olddata}
+   */
+  [MUTATION_PUT_DATA_SYSTEM](state, { systemtype, data, olddata }) {
+    switch (systemtype) {
+      case SUSER:
+        var index = state.datausers.map((user) => user.id).indexOf(olddata.id);
+        state.datausers[index] = data;
+        break;
+      case SGROUP:
+        var index = state.datagroups
+          .map((group) => group.id)
+          .indexOf(olddata.id);
+        state.datagroups[index] = data;
+        break;
+      case SROLE:
+        var index = state.dataroles.map((role) => role.id).indexOf(olddata.id);
+        state.dataroles[index] = data;
+        break;
+    }
+  },
+
   /***
    * delete user y index
    * @param user{}
    * @return remove user by index
    */
-  [MUTATION_DELETE_USER](state, user) {
+  [MUTATION_DELETE_DATA_SYSTEM](state, user) {
     var index = state.datausers.map((user) => user.id).indexOf(user.id);
     state.datausers.splice(index);
   },
-  /***
-   * Send User and save
-   * @param user{}
-   * @return boolean is saved? then commit to datauser
-   */
-  [MUTATION_SET_FORM_USER](state, user) {
-    // console.log(user);
-    state.userform.id = user.id;
-    state.userform.username = user.username;
-    state.userform.password = user.password;
-    state.userform.email = user.email;
-    state.userform.role = user.role[0].id;
-    state.userform.group = user.group[0].id;
-  },
-  /***
-   * Send User and save
-   * @param user{}
-   * @return boolean is saved? then commit to datauser
-   */
-  [MUTATION_CLEAR_FORM_USER](state) {
-    state.userform.id = "";
-    state.userform.username = "";
-    state.userform.password = "";
-    state.userform.email = "";
-    state.userform.role = "";
-    state.userform.group = "";
-  },
+
   //non type mutation all must be cameCase
-  setFormUsername(state, val) {
-    state.userform.username = val;
-  },
-  setFormPassword(state, val) {
-    state.userform.password = val;
-  },
-  setFormEmail(state, val) {
-    state.userform.email = val;
-  },
-  setFormRole(state, val) {
-    state.userform.role = val;
-  },
-  setFormGroup(state, val) {
-    state.userform.group = val;
-  },
   setUserSearch(state, val) {
     state.user.search = val;
   },
@@ -376,4 +265,4 @@ const mutations = {
   },
 };
 
-export default { namespaced: true, state, getters, actions, mutations };
+export default { namespaced: true, state, actions, mutations };

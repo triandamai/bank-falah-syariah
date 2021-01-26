@@ -60,7 +60,7 @@ const actions = {
    * @param {rekeningtype,path}
    *
    */
-  [ACTION_GET_DEPOSITO]({ commit, state }, { rekeningtype, path }) {
+  [ACTION_GET_DATA_REKENING]({ commit, state }, { rekeningtype, path }) {
     return new Promise((resolve) => {
       //cek pagination (get current page)
       let page =
@@ -135,7 +135,7 @@ const actions = {
    */
   [ACTION_PUT_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
     return new Promise((resolve) => {
-      ApiService.put(`${path}`, body)
+      ApiService.put(`${path}/${body.id}`, body)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_UPDATE_DATA_REKENING, {
@@ -158,7 +158,7 @@ const actions = {
    */
   [ACTION_DELETE_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
     return new Promise((resolve) => {
-      ApiService.delete(`${path}`)
+      ApiService.delete(`${path}/${body.id}`)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_DELETE_DATA_REKENING, {

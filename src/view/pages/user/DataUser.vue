@@ -84,7 +84,8 @@
 /*eslint-disable*/
 import Swal from "sweetalert2";
 import {
-  ACTION_GET_USER,
+  ACTION_GET_DATA_SYSTEM,
+  SUSER,
   MUTATION_SET_FORM_USER,
   ACTION_DELETE_USER,
 } from "@/store";
@@ -110,11 +111,16 @@ export default {
   },
   methods: {
     getUsers() {
-      this.$store.dispatch("system/" + ACTION_GET_USER).then((res) => {
-        if (res) {
-          this.getUsers();
-        }
-      });
+      this.$store
+        .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
+          systemtype: SUSER,
+          path: "users",
+        })
+        .then((res) => {
+          if (res) {
+            this.getUsers();
+          }
+        });
     },
     getColor(isActive) {
       if (!isActive) return "red";
