@@ -12,7 +12,7 @@
         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
           <div class="col-xl-12 col-xxl-7">
             <!--begin: Wizard Form-->
-            <form-user :isEdit="true" @buttonsubmit="submit" />
+            <form-user :isEdit="true" :user="user" @buttonsubmit="submit" />
             <!--end: Wizard Form-->
           </div>
         </div>
@@ -32,20 +32,27 @@
 import Swal from "sweetalert2";
 import { ACTION_PUT_DATA_SYSTEM, SUSER } from "@/store";
 
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "TambahUser",
+  data: {
+    user: {},
+  },
   created() {
     if (!this.userformvalidation) {
       this.$router.go(-1);
+    }
+    if (!this.$router.params.id) {
+      this.user = this.$store.getters.system.getUserById(
+        this.$router.params.id
+      );
     }
   },
   computed: {
     ...mapState({
       message: (state) => state.system.userform.message,
     }),
-    ...mapGetters({ userformvalidation: "userformvalidation" }),
   },
   methods: {
     submit(val) {

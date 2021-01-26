@@ -149,7 +149,7 @@ let routes = [
             component: () => import("@/view/pages/user/TambahUser.vue"),
           },
           {
-            path: "ubah",
+            path: "ubah/:id",
             name: "UbahUser",
             component: () => import("@/view/pages/user/UbahUser.vue"),
           },

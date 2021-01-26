@@ -164,8 +164,7 @@ export default {
         cancelButtonText: "Ga jadi",
       }).then((result) => {
         if (result.isConfirmed) {
-          this.$store.commit("system/" + MUTATION_SET_FORM_USER, user);
-          this.$router.push({ path: "/user/ubah" });
+          this.$router.push({ path: "/user/ubah/" + user.id });
         }
       });
     },

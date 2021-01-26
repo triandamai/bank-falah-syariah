@@ -45,7 +45,11 @@ const state = {
     dialog: false,
   },
 };
-
+const getters = {
+  getUserById(id) {
+    return state.datausers.map((user) => (user.id == id ? user : null));
+  },
+};
 const actions = {
   /***
    * get data
@@ -272,4 +276,4 @@ const mutations = {
   },
 };
 
-export default { namespaced: true, state, actions, mutations };
+export default { namespaced: true, state, getters, actions, mutations };

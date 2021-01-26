@@ -114,13 +114,15 @@ export default {
   name: "FormUser",
   props: {
     isEdit: Boolean,
+    user: Object,
   },
   data: {
-    username: "",
-    password: "",
-    email: "",
-    role: "",
-    group: "",
+    id: user.id,
+    username: user.username,
+    password: user.password,
+    email: user.email,
+    role: user.role_id,
+    group: user.group_id,
   },
   created() {
     this.getRoles();
@@ -173,7 +175,13 @@ export default {
     submit() {
       if (this.isEdit) {
         if (this.username && this.email && this.role && this.group) {
-          this.$emit("buttonsubmit", true);
+          this.$emit("buttonsubmit", {
+            id: this.id,
+            username: this.username,
+            email: this.email,
+            role_id: this.role,
+            group_id: group_id,
+          });
         }
       } else {
         if (
@@ -183,7 +191,13 @@ export default {
           this.role &&
           this.group
         ) {
-          this.$emit("buttonsubmit", true);
+          this.$emit("buttonsubmit", {
+            username: this.username,
+            email: this.email,
+            role_id: this.role,
+            group_id: this.group,
+            password: this.password,
+          });
         }
       }
     },
