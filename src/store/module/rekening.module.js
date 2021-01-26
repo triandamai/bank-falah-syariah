@@ -1,4 +1,5 @@
 /*eslint-disable*/
+import { stat } from "original-fs";
 import ApiService from "../../core/services/api.service";
 import {
   headerdatadeposito,
@@ -130,19 +131,19 @@ const actions = {
     });
   },
   /***
-   * update/edit deposito
-   *
+   * update/edit data
+   * @param {rekeknigntype,path,body}
    */
-  [ACTION_PUT_DATA]() {
+  [ACTION_PUT_DATA]({ commit }, { rekeknigntype, path, body }) {
     return new Promise((resolve) => {
-      ApiService.get("")
+      ApiService.put(`${path}`, body)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
-              resolve(false);
-            } else {
-              resolve(true);
-            }
+            commit({
+              rekeknigntype: rekeknigntype,
+              data: res.data.data[0],
+              olddata: body,
+            });
           } else {
             resolve(false);
           }
@@ -183,7 +184,8 @@ const actions = {
 const mutations = {
   /***
    * Rekening add data dynamicly
-   * @param {rekeknigntype,item}
+   * {@param rekeknigntype
+   * @param item}
    * @returns each data array will increment smoothly
    */
   [MUTATION_ADD_DATA](state, { rekeningtype, item, page }) {
@@ -229,7 +231,37 @@ const mutations = {
         break;
     }
   },
-
+  /***
+   * update data
+   * {@param rekeknigntype,
+   * @param data
+   * @param olddata}
+   * @returns update data
+   */
+  [MUTATION_UPDATE_DATA](state, { rekeknigntype, data, olddata }) {
+    //get type rekening
+    switch (rekeknigntype) {
+      case RSIMPANAN:
+        //update to data
+        var index = state.datasimpanan
+          .map((simpanan) => simpanan.id)
+          .indexOf(olddata.id);
+        state.datasimpanan[index] = data;
+        break;
+      case RDEPOSITO:
+        var index = state.datadeposito
+          .map((deposito) => deposito.id)
+          .indexOf(olddata.id);
+        state.datadeposito[index] = data;
+        break;
+      case RPEMBIAYAAN:
+        var index = state.datapembiayaan
+          .map((pembiayaan) => pembiayaan.id)
+          .indexOf(olddata.id);
+        state.datapembiayaan[index] = data;
+        break;
+    }
+  },
   [MUTATION_DELTE_DEPOSITO](state, data) {
     var index = state.datadeposito
       .map((deposito) => deposito.id)
