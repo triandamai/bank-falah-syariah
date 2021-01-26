@@ -8,12 +8,30 @@ import {
 export const ACTION_GET_DEPOSITO = "GETDEPOSITO";
 export const ACTION_GET_PEMBIAYAAN = "GETPEMBIAYAAN";
 export const ACTION_GET_SIMPANAN = "GETSIMPANAN";
+
+export const ACTION_POST_DEPOSITO = "PETDEPOSITO";
+export const ACTION_POST_PEMBIAYAAN = "PETPEMBIAYAAN";
+export const ACTION_POST_SIMPANAN = "PETSIMPANAN";
+
+export const ACTION_PUT_DEPOSITO = "GETDEPOSITO";
+export const ACTION_PUT_PEMBIAYAAN = "GETPEMBIAYAAN";
+export const ACTION_PUT_SIMPANAN = "GETSIMPANAN";
+
+export const ACTION_DELETE_DEPOSITO = "GETDEPOSITO";
+export const ACTION_DELETE_PEMBIAYAAN = "GETPEMBIAYAAN";
+export const ACTION_DELETE_SIMPANAN = "GETSIMPANAN";
+
 export const MUTATION_ADD_DEPOSITO = "MGETDEPOSITO";
 export const MUTATION_ADD_PEMBIAYAAN = "MGETPEMBIAYAAN";
 export const MUTATION_ADD_SIMPANAN = "MGETSIMPANAN";
+
 export const MUTATION_DELETE_SIMPANAN = "DSIMPANAN";
 export const MUTATION_DELETE_PEMBIAYAAN = "DPEMBIAYAAN";
-export const MUTATION_DELTE_DEPOSITO = "DDEPOSITO";
+export const MUTATION_DELETE_DEPOSITO = "DDEPOSITO";
+
+export const MUTATION_UPDATE_SIMPANAN = "DSIMPANAN";
+export const MUTATION_UPDATE_PEMBIAYAAN = "DPEMBIAYAAN";
+export const MUTATION_UPDATE_DEPOSITO = "DDEPOSITO";
 const state = {
   datadeposito: [],
   deposito: {
@@ -43,7 +61,7 @@ const state = {
 const getters = {};
 const actions = {
   /***
-   * Add deposito
+   * get all data deposito
    *
    *
    */
@@ -66,6 +84,10 @@ const actions = {
         });
     });
   },
+  /***
+   * get all data pembiayaan
+   *
+   */
   [ACTION_GET_PEMBIAYAAN]() {
     return new Promise((resolve) => {
       ApiService.get("")
@@ -85,7 +107,219 @@ const actions = {
         });
     });
   },
+  /***
+   * get all data simpanan
+   *
+   */
   [ACTION_GET_SIMPANAN]() {
+    return new Promise((resolve) => {
+      ApiService.get("")
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            if (res.data.current_page >= res.data.last_page) {
+              resolve(false);
+            } else {
+              resolve(true);
+            }
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          resolve(false);
+        });
+    });
+  },
+  /***
+   * save new deposito
+   *
+   *
+   */
+  [ACTION_POST_DEPOSITO]() {
+    return new Promise((resolve) => {
+      ApiService.get("")
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            if (res.data.current_page >= res.data.last_page) {
+              resolve(false);
+            } else {
+              resolve(true);
+            }
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          resolve(false);
+        });
+    });
+  },
+  /**
+   * save new pembiayaan
+   *
+   */
+  [ACTION_POST_PEMBIAYAAN]() {
+    return new Promise((resolve) => {
+      ApiService.get("")
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            if (res.data.current_page >= res.data.last_page) {
+              resolve(false);
+            } else {
+              resolve(true);
+            }
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          resolve(false);
+        });
+    });
+  },
+  /***
+   * save new simpanan
+   *
+   */
+  [ACTION_POST_SIMPANAN]() {
+    return new Promise((resolve) => {
+      ApiService.get("")
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            if (res.data.current_page >= res.data.last_page) {
+              resolve(false);
+            } else {
+              resolve(true);
+            }
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          resolve(false);
+        });
+    });
+  },
+  /***
+   * update/edit deposito
+   *
+   */
+  [ACTION_PUT_DEPOSITO]() {
+    return new Promise((resolve) => {
+      ApiService.get("")
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            if (res.data.current_page >= res.data.last_page) {
+              resolve(false);
+            } else {
+              resolve(true);
+            }
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          resolve(false);
+        });
+    });
+  },
+  /***
+   * update/edit pembiayaan
+   *
+   */
+  [ACTION_PUT_PEMBIAYAAN]() {
+    return new Promise((resolve) => {
+      ApiService.get("")
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            if (res.data.current_page >= res.data.last_page) {
+              resolve(false);
+            } else {
+              resolve(true);
+            }
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          resolve(false);
+        });
+    });
+  },
+  /***
+   * update/edit simpanna
+   *
+   */
+  [ACTION_PUT_SIMPANAN]() {
+    return new Promise((resolve) => {
+      ApiService.get("")
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            if (res.data.current_page >= res.data.last_page) {
+              resolve(false);
+            } else {
+              resolve(true);
+            }
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          resolve(false);
+        });
+    });
+  },
+  /***
+   * delete deposito
+   *
+   */
+  [ACTION_DELETE_DEPOSITO]() {
+    return new Promise((resolve) => {
+      ApiService.get("")
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            if (res.data.current_page >= res.data.last_page) {
+              resolve(false);
+            } else {
+              resolve(true);
+            }
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          resolve(false);
+        });
+    });
+  },
+  /***
+   * delete pembiayaan
+   *
+   */
+  [ACTION_DELETE_PEMBIAYAAN]() {
+    return new Promise((resolve) => {
+      ApiService.get("")
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            if (res.data.current_page >= res.data.last_page) {
+              resolve(false);
+            } else {
+              resolve(true);
+            }
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          resolve(false);
+        });
+    });
+  },
+  /***
+   * delete simpanan
+   *
+   */
+  [ACTION_DELETE_SIMPANAN]() {
     return new Promise((resolve) => {
       ApiService.get("")
         .then((res) => {
