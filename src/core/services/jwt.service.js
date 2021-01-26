@@ -29,12 +29,29 @@ export const setUser = (user) => {
 export const dropUser = () => {
   window.sessionStorage.removeItem(USER_KEY);
 };
+
+/***
+ * Ecryption for local data(token and user data)
+ *
+ */
 const key = "82f2ceed4c503896c8a291e560bd4325";
 const iv = "bakaranprojectbismillah";
+/***
+ * Ecnrypt
+ * @param text string to encrypt
+ * @return string chiper
+ *
+ */
 const aesEncrypt = (text) =>
   CryptoJS.AES.encrypt(text, CryptoJS.enc.Utf8.parse(key).toString(), {
     iv: CryptoJS.enc.Utf8.parse(iv).toString(),
   }).toString();
+/***
+ * Ecnrypt
+ * @param text string to decrypt
+ * @return string real text
+ *
+ */
 const aesDecrypt = (text) =>
   CryptoJS.AES.decrypt(text, CryptoJS.enc.Utf8.parse(key).toString(), {
     iv: CryptoJS.enc.Utf8.parse(iv).toString(),
