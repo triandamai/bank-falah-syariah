@@ -244,13 +244,13 @@ const mutations = {
         var index = state.datasimpanan
           .map((simpanan) => simpanan.id)
           .indexOf(olddata.id);
-        state.datasimpanan[index] = data;
+
         break;
       case RDEPOSITO:
         var index = state.datadeposito
           .map((deposito) => deposito.id)
           .indexOf(olddata.id);
-        state.datadeposito[index] = data;
+
         break;
       case RPEMBIAYAAN:
         var index = state.datapembiayaan

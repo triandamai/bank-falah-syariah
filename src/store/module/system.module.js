@@ -49,8 +49,9 @@ const state = {
 const actions = {
   /***
    * get data
-   * @param {systemtype,path}
-   * @returns promise
+   * @param {systemtype,path,id}
+   * @todo
+   * @returns promise true/false if true get data always repeat until last_page
    *
    */
   [ACTION_GET_DATA_SYSTEM]({ commit, state }, { systemtype, path, id }) {
@@ -96,8 +97,9 @@ const actions = {
 
   /***
    * Send User and save
-   * @param {}
+   * @param {systemtype,path,body}
    * @return boolean is saved? then commit to datauser
+   * @returns {success,message}
    */
   [ACTION_POST_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
     return new Promise((resolve) => {
@@ -236,17 +238,17 @@ const mutations = {
     switch (systemtype) {
       case SUSER:
         var index = state.datausers.map((user) => user.id).indexOf(olddata.id);
-        Object.assign(state.datausers[index], data);
+
         break;
       case SGROUP:
         var index = state.datagroups
           .map((group) => group.id)
           .indexOf(olddata.id);
-        Object.assign(state.datagroups[index], data);
+
         break;
       case SROLE:
         var index = state.dataroles.map((role) => role.id).indexOf(olddata.id);
-        Object.assign(state.dataroles[index], data);
+
         break;
     }
   },
