@@ -206,7 +206,7 @@ const actions = {
           group_id: state.userform.group,
         };
       } else {
-        //jika password kosong
+        //jika password kosong tidak ada password
         dataforupload = {
           username: state.userform.username,
           email: state.userform.email,
