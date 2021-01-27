@@ -238,17 +238,17 @@ const mutations = {
     switch (systemtype) {
       case SUSER:
         var index = state.datausers.map((user) => user.id).indexOf(olddata.id);
-
+        Object.assign(state.datausers[index], data);
         break;
       case SGROUP:
         var index = state.datagroups
           .map((group) => group.id)
           .indexOf(olddata.id);
-
+        Object.assign(state.datagroups[index], data);
         break;
       case SROLE:
         var index = state.dataroles.map((role) => role.id).indexOf(olddata.id);
-
+        Object.assign(state.dataroles[index], data);
         break;
     }
   },
