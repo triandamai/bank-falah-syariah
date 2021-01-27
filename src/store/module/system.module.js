@@ -57,14 +57,14 @@ const actions = {
   [ACTION_GET_DATA_SYSTEM]({ commit, state }, { systemtype, path, id }) {
     return new Promise((resolve) => {
       //get pagination
-      let page = `?page=`;
-      systemtype == SGROUP
-        ? state.group.current_page
-        : systemtype == SUSER
-        ? state.user.current_page
-        : systemtype == SROLE
-        ? state.role.current_page
-        : 0;
+      let page =
+        `?page=` + systemtype == SGROUP
+          ? state.group.current_page
+          : systemtype == SUSER
+          ? state.user.current_page
+          : systemtype == SROLE
+          ? state.role.current_page
+          : 0;
       let stillPaging = false;
       //get
       ApiService.get(`${path}${page}`)

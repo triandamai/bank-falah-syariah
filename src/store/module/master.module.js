@@ -1,4 +1,6 @@
 /*eslint-disable*/
+
+import ApiService from "../../core/services/api.service";
 import {
   headerdataakad,
   headerdatajenistransaksi,
@@ -7,42 +9,23 @@ import {
   headerdatajabatan,
 } from "../utils/headers";
 
-export const ACTION_GET_AKAD = "GETAKAD";
-export const ACTION_GET_JENIS_TRANSAKSI = "GETJENISTRANSAKSI";
-export const ACTION_GET_PRODUK = "GETPRODUK";
-export const ACTION_GET_JABATAN = "GETJABATAN";
-export const ACTION_GET_PEGAWAI = "GETPEGAWAI";
+export const ACTION_GET_DATA_MASTER = "GETMASTERDATA";
 
-export const ACTION_POST_AKAD = "GETAKAD";
-export const ACTION_POST_JENIS_TRANSAKSI = "GETJENISTRANSAKSI";
-export const ACTION_POST_PRODUK = "GETPRODUK";
-export const ACTION_POST_JABATAN = "GETJABATAN";
-export const ACTION_POST_PEGAWAI = "GETPEGAWAI";
+export const ACTION_POST_DATA_MASTER = "POSTMASTERDATA";
 
-export const ACTION_PUT_AKAD = "GETAKAD";
-export const ACTION_PUT_JENIS_TRANSAKSI = "GETJENISTRANSAKSI";
-export const ACTION_PUT_PRODUK = "GETPRODUK";
-export const ACTION_PUT_JABATAN = "GETJABATAN";
-export const ACTION_PUT_PEGAWAI = "GETPEGAWAI";
+export const ACTION_PUT_DATA_MASTER = "PUTMASTERDATA";
 
-//mutation
-export const MUTATION_ADD_AKAD = "MGETAKAD";
-export const MUTATION_ADD_JENIS_TRANSAKSI = "MGETJENISTRANSAKSI";
-export const MUTATION_ADD_PRODUK = "MGETPRODUK";
-export const MUTATION_ADD_JABATAN = "MGETJABATAN";
-export const MUTATION_ADD_PEGAWAI = "MGETPEGAWAI";
+export const ACTION_DELETE_DATA_MASTER = "DELETEMASTERDATA";
 
-export const MUTATION_EDIT_AKAD = "MGETAKAD";
-export const MUTATION_EDIT_JENIS_TRANSAKSI = "MGETJENISTRANSAKSI";
-export const MUTATION_EDIT_PRODUK = "MGETPRODUK";
-export const MUTATION_EDIT_JABATAN = "MGETJABATAN";
-export const MUTATION_EDIT_PEGAWAI = "MGETPEGAWAI";
+export const MUTATION_ADD_DATA_MASTER = "MADDDATAMASTER";
+export const MUTATION_PUT_DATA_MASTER = "MPUTDATAMASTER";
+export const MUTATION_DELETE_DATA_MASTER = "DELETEMASTERDATA";
 
-export const MUTATION_DELETE_AKAD = "DGETAKAD";
-export const MUTATION_DELETE_JENIS_TRANSAKSI = "DGETJENISTRANSAKSI";
-export const MUTATION_DELETE_PRODUK = "DGETPRODUK";
-export const MUTATION_DELETE_JABATAN = "DGETJABATAN";
-export const MUTATION_DELETE_PEGAWAI = "DGETPEGAWAI";
+export const MAKAD = "MAKAD";
+export const MPRODUK = "MPRODUK";
+export const MJABATAN = "MJABATAN";
+export const MPEGAWAI = "MPEGAWAI";
+export const MJENISTRANSAKSI = "MJEBISTRANSAKSI";
 
 const state = {
   dataakad: [],
@@ -96,23 +79,110 @@ const state = {
 };
 const getters = {};
 const actions = {
-  [ACTION_GET_AKAD]() {},
-  [ACTION_GET_JABATAN]() {},
-  [ACTION_GET_JENIS_TRANSAKSI]() {},
-  [ACTION_GET_PEGAWAI]() {},
-  [ACTION_GET_PRODUK]() {},
+  /***
+   * get data
+   * @param {mastertype,path,id}
+   *
+   */
+  [ACTION_GET_DATA_MASTER]({ commit, state }, { mastertype, path, id }) {
+    return new Promise((resolve) => {
+      let page = `?page=`;
+      let stillPaging = false;
+      switch (mastertype) {
+        case MAKAD:
+          page += state.akad.current_page;
+          break;
+        case MJABATAN:
+          page += state.jabatan.current_page;
+          break;
+        case MPEGAWAI:
+          page += state.pegawai.current_page;
+          break;
+        case MPRODUK:
+          page += state.produk.current_page;
+          break;
+        case MJENISTRANSAKSI:
+          page += state.current_page;
+          break;
+      }
+      ApiService.get(`${path}${page}`)
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            if (res.data.current_page >= res.data.last_page) {
+              resolve(false);
+              stillPaging = fasle;
+            } else {
+              resolve(true);
+              stillPaging = true;
+            }
+            res.data.data.map((item) => {
+              commit(MUTATION_ADD_DATA_MASTER, {
+                mastertype: mastertype,
+                data: item,
+                page: stillPaging,
+              });
+            });
+          } else {
+            resolve(false);
+          }
+        })
+        .catch((e) => {
+          resolve(false);
+        });
+    });
+  },
 };
 const mutations = {
-  [MUTATION_ADD_AKAD](state, data) {},
-  [MUTATION_ADD_JABATAN](state, data) {},
-  [MUTATION_ADD_JENIS_TRANSAKSI](state, data) {},
-  [MUTATION_ADD_PEGAWAI](state, data) {},
-  [MUTATION_ADD_PRODUK](state, data) {},
-  [MUTATION_DELETE_AKAD](state, data) {},
-  [MUTATION_DELETE_JABATAN](state, data) {},
-  [MUTATION_DELETE_PEGAWAI](state, data) {},
-  [MUTATION_DELETE_PRODUK](state, data) {},
-  [MUTATION_DELETE_JENIS_TRANSAKSI](state, data) {},
+  /***
+   * adding data to each state
+   *
+   */
+  [MUTATION_ADD_DATA_MASTER](state, { mastertype, data, page }) {
+    switch (mastertype) {
+      case MAKAD:
+        var exist = state.dataakad.some((akad) => {
+          return akad.id == data.id;
+        });
+        if (!exist) {
+          state.dataakad.push(data);
+        }
+        page ? state.akad.current_page++ : null;
+        break;
+      case MJABATAN:
+        var exist = state.datajabatan.some((jabatan) => {
+          return jabatan.id == data.id;
+        });
+        if (!exist) {
+          state.datajabatan.push(data);
+        }
+        page ? state.jabatan.current_page++ : null;
+        break;
+      case MJENISTRANSAKSI:
+        var exist = state.datajenistransaksi.some((jenis) => {
+          return jenistransaksi.id == data.id;
+        });
+        if (!exist) {
+          state.datajenistransaksi.push(data);
+        }
+        page ? state.jenistransaksi.current_page++ : null;
+        break;
+      case MPEGAWAI:
+        var exist = state.datapegawai.some((pegawai) => {
+          return pegawai.id == data.id;
+        });
+        if (!exist) {
+          state.datapegawai.push(data);
+        }
+        page ? state.pegawai.current_page++ : null;
+        break;
+      case MPRODUK:
+        var exist = state.dataproduk.some((produk) => {
+          return produk.id == data.id;
+        });
+        page ? state.produk.current_page++ : null;
+        break;
+    }
+  },
   //not type
   setAkadSearch(state, val) {
     state.akad.search = val;
