@@ -82,10 +82,12 @@ const actions = {
   /***
    * get data
    * @param {mastertype,path,id}
-   *
+   * @returns prmise true/false
+   * and add data to array smoothly
    */
   [ACTION_GET_DATA_MASTER]({ commit, state }, { mastertype, path, id }) {
     return new Promise((resolve) => {
+      //get current page
       let page = `?page=`;
       let stillPaging = false;
       switch (mastertype) {
@@ -131,11 +133,81 @@ const actions = {
         });
     });
   },
+  /***
+   * send data to server
+   * @param {mastertype,path,body}
+   * @returns save data to server the add to array store
+   * @returns {success,message}
+   *
+   */
+  [ACTION_POST_DATA_MASTER]({ commit }, { mastertype, path, body }) {
+    return new Promise((resolve) => {
+      ApiService.post(`${path}`, body)
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            commit(MUTATION_ADD_DATA_MASTER, {
+              mastertype: mastertype,
+              data: res.data.data[0],
+            });
+            resolve({ success: true, message: "Berhasil menambah data" });
+          } else {
+            resolve({
+              success: false,
+              message: res.data.message ?? "Gagal coba lagi nanti",
+            });
+          }
+        })
+        .catch((e) => {
+          resolve({
+            success: false,
+            message: e.response.data.message ?? "Gagal coba lagi nanti",
+          });
+        });
+    });
+  },
+  /****
+   * Put data master
+   * @param {mastertype,path,body}
+   * update data to server the notify the data was changed
+   * @returns
+   *
+   */
+  [ACTION_PUT_DATA_MASTER]({ commit }, { mastertype, path, body }) {
+    return new Promise((resolve) => {
+      ApiService.put(`${path}/${body.id}`, body)
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            commit(MUTATION_PUT_DATA_MASTER, {
+              systemtype: systemtype,
+              data: res.data.data[0],
+              olddata: body,
+            });
+            resolve({ success: true, message: "Berhasil mengubah!" });
+          } else {
+            resolve({
+              success: false,
+              message: res.data.message ?? "Gagal coba lagi nanti",
+            });
+          }
+        })
+        .catch((e) => {
+          resolve({
+            success: false,
+            message: e.response.data.message ?? "Gaga coba lagi nanti",
+          });
+        });
+    });
+  },
+  /***
+   * delete data
+   *
+   */
 };
 const mutations = {
   /***
    * adding data to each state
-   *
+   * @param {mastertype,data,page}
+   * @returns data will be add one -by one
    */
   [MUTATION_ADD_DATA_MASTER](state, { mastertype, data, page }) {
     switch (mastertype) {
@@ -180,6 +252,45 @@ const mutations = {
           return produk.id == data.id;
         });
         page ? state.produk.current_page++ : null;
+        break;
+    }
+  },
+  /***
+   * Update data
+   * @param {mastertype,data,olddata}
+   * update item inside array state data
+   * @returns change reactivly
+   *
+   */
+  [MUTATION_PUT_DATA_MASTER](state, { mastertype, data, olddata }) {
+    switch (mastertype) {
+      case MAKAD:
+        var index = state.dataakad.map((akad) => akad.id).indexOf(olddata.id);
+        Object.assign(state.dataakad[index], data);
+        break;
+      case MJABATAN:
+        var index = state.datajabatan
+          .map((jabatan) => jabatan.id)
+          .indexOf(olddata.id);
+        Object.assign(state.datajabatan[index], data);
+        break;
+      case MJENISTRANSAKSI:
+        var index = state.datajenistransaksi
+          .map((jenis) => jenis.id)
+          .indexOf(olddata.id);
+        Object.assign(state.datajenistransaksi[index], data);
+        break;
+      case MPEGAWAI:
+        var index = state.datapegawai
+          .map((pegawai) => pegawai.id)
+          .indexOf(olddata.id);
+        Object.assign(state.datapegawai[index], data);
+        break;
+      case MPRODUK:
+        var index = state.dataproduk
+          .map((produk) => produk.id)
+          .indexOf(olddata.id);
+        Object.assign(state.dataproduk[index], data);
         break;
     }
   },
