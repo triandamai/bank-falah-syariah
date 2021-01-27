@@ -256,7 +256,7 @@ const mutations = {
         var index = state.datapembiayaan
           .map((pembiayaan) => pembiayaan.id)
           .indexOf(olddata.id);
-        state.datapembiayaan[index] = data;
+
         break;
     }
   },
