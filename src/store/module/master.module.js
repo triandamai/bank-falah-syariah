@@ -200,8 +200,35 @@ const actions = {
   },
   /***
    * delete data
-   *
+   * @param {mastertype,path,body}
+   * @returns delete data by id
+   * @returns if success it will update data no need reload data from service
    */
+  [ACTION_DELETE_DATA_MASTER]({ commit }, { mastertype, path, body }) {
+    return new Promise((resolve) => {
+      ApiService.delete(`${path}/${body.id}`)
+        .then((res) => {
+          if (res.status == 200 || res.status == 201) {
+            commit(MUTATION_DELETE_DATA_MASTER, {
+              systemtype: systemtype,
+              data: body,
+            });
+            resolve({ success: true, message: "Berhasil menghapus!" });
+          } else {
+            resolve({
+              success: false,
+              message: res.data.message ?? "Gagal coba lagi nanti",
+            });
+          }
+        })
+        .catch((e) => {
+          resolve({
+            success: true,
+            message: e.response.data.message ?? "Berhasil mengubah!",
+          });
+        });
+    });
+  },
 };
 const mutations = {
   /***
@@ -294,6 +321,44 @@ const mutations = {
         break;
     }
   },
+  /***
+   * delete data y index
+   * @param {systemtype,data}
+   * @return remove data by index
+   */
+  [MUTATION_DELETE_DATA_MASTER](state, { mastertype, data }) {
+    switch (mastertype) {
+      case MAKAD:
+        var index = state.dataakad.map((akad) => akad.id).indexOf(data.id);
+        state.dataakad.splice(index);
+        break;
+      case MJABATAN:
+        var index = state.datajabatan
+          .map((jabatan) => jabatan.id)
+          .indexOf(data.id);
+        state.datajabatan.splice(index);
+        break;
+      case MJENISTRANSAKSI:
+        var index = state.datajenistransaksi
+          .map((jenis) => jenis.id)
+          .indexOf(data.id);
+        state.datajenistransaksi.splice(index);
+        break;
+      case MPEGAWAI:
+        var index = state.datapegawai
+          .map((pegawai) => pegawai.id)
+          .indexOf(data.id);
+        state.dataproduk.splice(index);
+        break;
+      case MPRODUK:
+        var index = state.dataproduk
+          .map((produk) => produk.id)
+          .indexOf(data.id);
+        state.dataproduk.splice(index);
+        break;
+    }
+  },
+
   //not type
   setAkadSearch(state, val) {
     state.akad.search = val;
