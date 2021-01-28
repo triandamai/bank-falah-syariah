@@ -13,14 +13,26 @@
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
     "rtl": "webpack --config webpack-rtl.config.js",
-    "heroku-postbuild": ""
+    "heroku-postbuild": "",
+    "test": "jest"
   },
   "main": "background.js",
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "vue"
+    ],
+    "transform": {
+      ".*\\.(vue)$": "vue-jest"
+    }
+  },
   "dependencies": {
     "@babel/polyfill": "^7.4.4",
     "@fortawesome/fontawesome-free": "^5.13.0",
     "@mdi/font": "^3.6.95",
     "@popperjs/core": "^2.4.0",
+    "@vue/cli-plugin-unit-jest": "^4.5.11",
     "apexcharts": "^3.19.0",
     "axios": "^0.19.2",
     "axios-mock-adapter": "^1.18.1",
@@ -58,6 +70,8 @@
     "@vue/cli-plugin-eslint": "^4.3.1",
     "@vue/cli-service": "^4.3.1",
     "@vue/eslint-config-prettier": "^4.0.1",
+    "@vue/server-test-utils": "^1.1.2",
+    "@vue/test-utils": "^1.1.2",
     "babel-eslint": "^10.0.3",
     "electron": "^9.0.0",
     "electron-devtools-installer": "^3.1.0",
@@ -68,7 +82,8 @@
     "sass-loader": "^8.0.2",
     "vue-cli-plugin-electron-builder": "~2.0.0-rc.4",
     "vue-cli-plugin-vuetify": "^2.0.5",
-    "vue-template-compiler": "^2.6.11",
+    "vue-jest": "^3.0.7",
+    "vue-template-compiler": "^2.6.12",
     "vuetify-loader": "^1.3.0",
     "webpack-cli": "^3.3.11",
     "webpack-messages": "^2.0.4",
