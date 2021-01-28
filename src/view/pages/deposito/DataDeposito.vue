@@ -13,7 +13,7 @@
         </span>
       </div>
       <div class="alert-text">
-        <router-link to="/user/tambah">
+        <router-link to="/deposito/tambah">
           <b-button class="mr-3" variant="success"
             >Tambahkan Akad Baru</b-button
           >
@@ -68,9 +68,9 @@
                 aria-label="Toolbar with button groups and dropdown menu"
               >
                 <b-button-group class="mx-1">
-                  <b-button @click="editUser(item)">Ubah</b-button>
+                  <b-button @click="editDeposito(item)">Ubah</b-button>
                   <b-button>Detail</b-button>
-                  <b-button @click="deleteUser(item)">Hapus</b-button>
+                  <b-button @click="deleteDeposito(item)">Hapus</b-button>
                 </b-button-group>
               </b-button-toolbar>
             </template>
@@ -83,6 +83,7 @@
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
+import { ACTION_DELETE_DATA_REKENING, RDEPOSITO } from "../../../store";
 export default {
   name: "DataAkad",
   computed: {
@@ -97,6 +98,51 @@ export default {
       set(val) {
         this.$store.commit("master/setDepositoSearch", val);
       },
+    },
+  },
+  methods: {
+    editDeposito(deposito) {
+      Swal.fire({
+        title: "Rubah data " + deposito.nasabah + " ?",
+        text: "Anda akan di arahkan ke halaman edit data!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Oke, lanjut!",
+        cancelButtonText: "Ga jadi",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$router.push({ path: "/deposito/ubah/" + deposito.id });
+        }
+      });
+    },
+    deleteDeposito(deposito) {
+      wal
+        .fire({
+          title: "Yakin menghapus " + deposito.id + " ?",
+          text: "User yang dihapus akan hilang permanen!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Oke, hapus!",
+        })
+        .then((result) => {
+          if (result.isConfirmed) {
+            this.$store
+              .dispatch("rekening/" + ACTION_DELETE_DATA_REKENING, {
+                systemtype: RDEPOSITO,
+                path: "deposito",
+                body: {},
+              })
+              .then(({ success, message }) => {
+                if (success) {
+                  Swal.fire("Dihapus!", message, "success");
+                }
+              });
+          }
+        });
     },
   },
 };

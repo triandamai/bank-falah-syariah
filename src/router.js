@@ -197,7 +197,6 @@ let routes = [
       },
       {
         path: "produk",
-
         component: () => import("@/view/pages/produk/Produk.vue"),
         meta: {
           requiresAuth: true,
@@ -268,6 +267,16 @@ let routes = [
             path: "data",
             name: "DataDeposito",
             component: () => import("@/view/pages/deposito/DataDeposito.vue"),
+          },
+          {
+            path: "tambah",
+            name: "TambahDeposito",
+            component: () => import("@/view/pages/deposito/TambahDeposito.vue"),
+          },
+          {
+            path: "ubah/:id",
+            name: "UbahDeposito",
+            component: () => import("@/view/pages/deposito/UbahDeposito.vue"),
           },
         ],
       },

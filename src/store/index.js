@@ -32,6 +32,7 @@ export * from "./module/htmlclass.module";
 export * from "./module/nasabah.module";
 export * from "./module/system.module";
 export * from "./module/master.module";
+export * from "./module/rekening.module";
 export * from "./utils/country";
 export * from "./utils/headers";
 export * from "./utils/menu";
