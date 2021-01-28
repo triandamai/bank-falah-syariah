@@ -215,6 +215,10 @@ export default {
   },
   created() {},
   methods: {
+    /***
+     * get produk and always get if res = true
+     *
+     */
     getProduk() {
       this.$store
         .dispatch("master/" + ACTION_GET_DATA_MASTER, {
@@ -227,6 +231,11 @@ export default {
           }
         });
     },
+    /***
+     *
+     * save data to serice for update or post
+     *
+     * */
     saveProduk() {
       if (this.isEdit) {
         //edit
