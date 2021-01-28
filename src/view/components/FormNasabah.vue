@@ -1,3 +1,9 @@
+<!--
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ --->
 <template>
   <div class="wizard-body py-8 px-8 py-lg-20 px-lg-10">
     <!--begin: Wizard Form-->

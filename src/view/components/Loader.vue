@@ -1,3 +1,9 @@
+<!--
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ --->
 <template>
   <!-- begin::Page loader -->
   <div class="page-loader page-loader-logo">
@@ -12,7 +18,7 @@ export default {
   name: "Loader",
   props: {
     logo: String,
-    spinnerClass: String
-  }
+    spinnerClass: String,
+  },
 };
 </script>

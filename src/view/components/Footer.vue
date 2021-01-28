@@ -1,3 +1,9 @@
+<!--
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ --->
 <template>
   <!-- begin:: Footer -->
   <div class="footer py-4 d-flex flex-lg-column" id="kt_footer">

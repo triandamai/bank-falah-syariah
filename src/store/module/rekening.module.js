@@ -1,10 +1,19 @@
 /*eslint-disable*/
+/***
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ */
 import ApiService from "../../core/services/api.service";
 import {
   headerdatadeposito,
   headerdatasimpanan,
   headerdatapembiayaan,
 } from "../utils/headers";
+/***
+ * dspatch type
+ */
 export const ACTION_GET_DATA_REKENING = "GETDATAREKENING";
 
 export const ACTION_POST_DATA_REKENING = "POSTREKENINGDATA";
@@ -58,23 +67,30 @@ const actions = {
   /***
    * get all data rekekning deposito/pembiayaansimpanan
    * @param {rekeningtype,path}
+   *  @returns data array and after success adding to @global data array
    *
    */
   [ACTION_GET_DATA_REKENING]({ commit, state }, { rekeningtype, path }) {
     return new Promise((resolve) => {
       //cek pagination (get current page)
-      let page =
-        rekeningtype === RSIMPANAN
-          ? state.simpanan.current_page
-          : rekeningtype === RDEPOSITO
-          ? state.simpanan.current_page
-          : rekeningtype === RPEMBIAYAAN
-          ? state.current_page
-          : 0;
+      let page = `?page=`;
       //for mutation the pagination going forward or stop
       let stillPaging = false;
+
+      switch (rekeningtype) {
+        case RSIMPANAN:
+          page += state.simpanan.current_page;
+          break;
+        case RDEPOSITO:
+          page += state.deposito.current_page;
+          break;
+        case RPEMBIAYAAN:
+          page += state.pembiayaan.current_page;
+          break;
+      }
+
       //get
-      ApiService.get(`${path}?page=${page}`)
+      ApiService.get(`${path}${page}`)
         .then((res) => {
           //success
           if (res.status == 200 || res.status == 201) {

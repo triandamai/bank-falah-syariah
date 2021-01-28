@@ -1,9 +1,15 @@
+<!--
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ --->
 <template>
   <div class="d-flex flex-column flex-root">
     <div
       class="error error-5 d-flex flex-row-fluid bgi-size-cover bgi-position-center"
       :style="{
-        backgroundImage: `url(${backgroundImage})`
+        backgroundImage: `url(${backgroundImage})`,
       }"
     >
       <!-- begin:: Content -->
@@ -39,7 +45,7 @@ export default {
   computed: {
     backgroundImage() {
       return process.env.BASE_URL + "media/error/bg5.jpg";
-    }
-  }
+    },
+  },
 };
 </script>

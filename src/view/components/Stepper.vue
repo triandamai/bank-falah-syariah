@@ -1,3 +1,9 @@
+<!--
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ --->
 <template>
   <!--begin: Wizard Nav -->
   <div class="wizard-nav border-right py-8 px-8 py-lg-20 px-lg-10">

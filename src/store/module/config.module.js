@@ -1,3 +1,9 @@
+/***
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ */
 import objectPath from "object-path";
 import merge from "deepmerge";
 import config from "../../core/config/layout.config.json";

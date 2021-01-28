@@ -1,3 +1,9 @@
+<!--
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ --->
 <template>
   <div class="card card-custom card-transparent">
     <div class="card-body p-0">
@@ -730,12 +736,10 @@ import Swal from "sweetalert2";
 export default {
   name: "Aktivasi",
   mounted() {
- 
-
     // Initialize form wizard
     const wizard = new KTWizard("kt_wizard_v4", {
       startStep: 1, // initial active step number
-      clickableSteps: true // allow step clicking
+      clickableSteps: true, // allow step clicking
     });
 
     // Validation before going to next page
@@ -758,9 +762,9 @@ export default {
         title: "",
         text: "The application has been successfully submitted!",
         icon: "success",
-        confirmButtonClass: "btn btn-secondary"
+        confirmButtonClass: "btn btn-secondary",
       });
-    }
-  }
+    },
+  },
 };
 </script>

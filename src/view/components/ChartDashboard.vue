@@ -1,3 +1,9 @@
+<!--
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ --->
 <template>
   <div
     class="card card-custom bg-gray-100 gutter-b card-stretch card-shadowless"
