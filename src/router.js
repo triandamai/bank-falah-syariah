@@ -297,6 +297,18 @@ let routes = [
             component: () =>
               import("@/view/pages/pembiayaan/DataPembiayaan.vue"),
           },
+          {
+            path: "tambah",
+            name: "TambahPembiayaan",
+            component: () =>
+              import("@/view/pages/pembiayaan/TambahPembiayaan.vue"),
+          },
+          {
+            path: "ubah",
+            name: "UbahPembiayaan",
+            component: () =>
+              import("@/view/pages/pembiayaan/UbahPembiayaan.vue"),
+          },
         ],
       },
       {
