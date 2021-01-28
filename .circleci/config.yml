@@ -1,10 +1,29 @@
-version: 2.1
-orbs:
-  node: circleci/node@3.0.0
-workflows:
-  node-tests:
-    jobs:
-      - test
-      - run:
-        name: test
+version: 2
+jobs:
+  build:
+    docker:
+    - image: circleci/node:11.8-browsers
+    steps:
+    - checkout # special step to check out source code to working directory
+    - restore_cache: # special step to restore the dependency cache
+        key: dependency-cache-{{ checksum "package.json" }}
+    - run:
+        name: install npm dependencies
+        command: npm install
+    - save_cache: # special step to save the dependency cache
+        key: dependency-cache-{{ checksum "package.json" }}
+        paths:
+        - ./node_modules
+    - run:
+        name: starting a development server
+        command: npm run dev
+        background: true
+    - run: # loop, sleep 0.1 second and check ip 8080 every loop
+        name: waiting for server to be responsive (for e2e)
+        command: |
+            while ! nc -z localhost 8080; do
+              sleep 0.1
+            done
+    - run:
+        name: running unit tests
         command: npm run test
