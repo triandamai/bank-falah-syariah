@@ -15,15 +15,5 @@ jobs:
         paths:
         - ./node_modules
     - run:
-        name: starting a development server
-        command: npm run dev
-        background: true
-    - run: # loop, sleep 0.1 second and check ip 8080 every loop
-        name: waiting for server to be responsive (for e2e)
-        command: |
-            while ! nc -z localhost 8080; do
-              sleep 0.1
-            done
-    - run:
         name: running unit tests
         command: npm run test
