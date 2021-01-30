@@ -22,9 +22,9 @@
     <!--begin::Signin-->
     <div class="login-form login-signin">
       <div class="text-center mb-10 mb-lg-20">
-        <h3 class="font-size-h1">Masuk</h3>
+        <h3 class="font-size-h1">Aktivasi Aplikasi</h3>
         <p class="text-muted font-weight-semi-bold">
-          Masukkan Username dan Password milik Anda
+          MMasukkan Key aktivasi yang Anda dapatkan
         </p>
       </div>
       <b-alert :show="error" dismissible variant="danger">{{
@@ -39,18 +39,11 @@
           </div>
         </div> -->
 
-        <b-input-group>
-          <template v-slot:prepend>
-            <b-input-group-text>Key</b-input-group-text>
-          </template>
+        <b-input-group prepend="Key" class="mt-3">
           <b-form-input></b-form-input>
-
-          <template v-slot:append>
-            <b-dropdown text="" variant="success">
-              <b-dropdown-item>Action A</b-dropdown-item>
-              <b-dropdown-item>Action B</b-dropdown-item>
-            </b-dropdown>
-          </template>
+          <b-input-group-append>
+            <b-button variant="info">Aktifkan</b-button>
+          </b-input-group-append>
         </b-input-group>
       </b-form>
       <!--end::Form-->
