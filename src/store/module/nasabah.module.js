@@ -16,7 +16,7 @@ export const ACTION_GET_NASABAH = "getNasabah";
 export const MUTATION_SET_ERROR = "setError";
 export const MUTATION_TAMBAH_DATA_NASABAH = "tambahnasabah";
 export const MUTATION_UBAH_DATA_NASABAH = "tambah nasabah";
-
+//
 const state = {
   errors: null,
   currentpage: 0,

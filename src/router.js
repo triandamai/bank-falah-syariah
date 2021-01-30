@@ -347,11 +347,15 @@ let routes = [
         redirect: "login",
       },
       {
-        name: "Login",
         path: "login",
+        name: "Login",
         component: () => import("@/view/pages/auth/Login"),
       },
-
+      {
+        path: "aktivasi",
+        name: "AktivasiAkun",
+        component: () => import("@/view/pages/auth/Aktivasi"),
+      },
       {
         // the 404 route, when none of the above matches
         path: "*",
