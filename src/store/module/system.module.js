@@ -5,6 +5,7 @@
  * 28 Jan 2021 - 10:14
  *
  */
+import { stat } from "original-fs";
 import ApiService from "../../core/services/api.service";
 import {
   headerdatauser,
@@ -62,16 +63,21 @@ const actions = {
   [ACTION_GET_DATA_SYSTEM]({ commit, state }, { systemtype, path, id }) {
     return new Promise((resolve) => {
       //get pagination
-      let page =
-        `?page=` + systemtype == SGROUP
-          ? state.group.current_page
-          : systemtype == SUSER
-          ? state.user.current_page
-          : systemtype == SROLE
-          ? state.role.current_page
-          : 0;
+      let page = `?page=`;
       let stillPaging = false;
-      //get
+      //proper way to get pagination t service maybe :-)
+      switch (systemtype) {
+        case SGROUP:
+          page += state.group.current_page;
+          break;
+        case SUSER:
+          page += state.user.current_page;
+          break;
+        case SROLE:
+          page += state.role.current_page;
+          break;
+      }
+
       ApiService.get(`${path}${page}`)
         .then((res) => {
           if (res.status == 200 || res.status == 201) {
