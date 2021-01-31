@@ -3,74 +3,40 @@
     <v-toolbar color="primary" dark flat>
       <v-toolbar-title>Menu Administrator</v-toolbar-title>
     </v-toolbar>
-
-    <v-row>
+    <v-card-text>
       <v-col>
-        <v-card-text>
-          <v-expansion-panels
-            v-for="(route, index) in routes"
-            :key="index"
-            flat
-          >
-            <v-expansion-panel>
-              <v-expansion-panel-header v-slot="{ open }">
-                <v-row no-gutters>
-                  <v-col cols="4" class="text-left">
-                    {{ route.menu_name }}
-                  </v-col>
-                  <v-col cols="8" class="text--secondary">
-                    <v-fade-transition leave-absolute>
-                      <span v-if="open" key="0">
-                        Pilih role untuk {{ route.menu_name }}
-                      </span>
-                    </v-fade-transition>
-                  </v-col>
-                </v-row>
-              </v-expansion-panel-header>
-              <v-expansion-panel-content>
-                <b-form-group :label="'path: ' + route.menu_url">
-                  <b-form-checkbox-group
-                    id="checkbox-group-2"
-                    v-model="selected"
-                    name="flavour-2"
-                  >
-                    <b-form-checkbox value="orange">Orange</b-form-checkbox>
-                    <b-form-checkbox value="apple">Apple</b-form-checkbox>
-                    <b-form-checkbox value="pineapple"
-                      >Pineapple</b-form-checkbox
-                    >
-                    <b-form-checkbox value="grape">Grape</b-form-checkbox>
-                  </b-form-checkbox-group>
-                </b-form-group>
-              </v-expansion-panel-content>
-            </v-expansion-panel>
-          </v-expansion-panels>
-        </v-card-text>
+        <v-data-table
+          flat
+          class="elevation-0"
+          :headers="header"
+          :items="items"
+          :search="search"
+          data-app
+        >
+          <template v-slot:[`item.active`]="{ item }">
+            <v-chip :color="getColor(item.active == 1)">
+              {{ item.active == 1 ? "aktif" : "nonaktif" }}
+            </v-chip>
+          </template>
+          <template v-slot:[`item.last_login`]="{ item }">
+            {{
+              item.last_login != "" ? item.last_login : "belum ada aktivitas"
+            }}
+          </template>
+          <template v-slot:[`item.action`]="{ item }">
+            <b-button-toolbar
+              aria-label="Toolbar with button groups and dropdown menu"
+            >
+              <b-button-group class="mx-1">
+                <b-button @click="editUser(item)">Ubah</b-button>
+                <b-button>Detail</b-button>
+                <b-button @click="deleteUser(item)">Hapus</b-button>
+              </b-button-group>
+            </b-button-toolbar>
+          </template>
+        </v-data-table>
       </v-col>
-
-      <v-divider vertical></v-divider>
-
-      <v-col cols="12" md="6">
-        <v-card-text>
-          <div
-            v-if="tree.length === 0"
-            key="title"
-            class="title font-weight-light grey--text pa-4 text-center"
-          >
-            Pilih role yang boleh mengakses
-          </div>
-
-          <v-scroll-x-transition group hide-on-leave>
-            <v-card-text v-for="(selection, i) in tree" :key="i">
-              <div class="title font-weight-light grey--text pa-4 text-center">
-                Select your favorite breweries
-              </div>
-            </v-card-text>
-          </v-scroll-x-transition>
-        </v-card-text>
-      </v-col>
-    </v-row>
-
+    </v-card-text>
     <v-divider></v-divider>
 
     <v-card-actions>
@@ -89,22 +55,23 @@
 </template>
 <script>
 /*eslint-disable*/
-import { menu } from "@/store";
+import { defaultMenu } from "@/store";
 export default {
   name: "MenuSystem",
   data: () => ({
-    routes: menu,
-    breweries: [],
-    isLoading: false,
-    tree: [],
-    types: [],
-    open: false,
-    selected: [],
-    options: ["Admin", "Super"],
+    header: [
+      { text: "URL", value: "path" },
+      { text: "Name", value: "name" },
+      { text: "Deskripsi", value: "description" },
+      { text: "Grup", value: "privilages" },
+      { text: "Aksi", value: "action" },
+    ],
+    items: defaultMenu(),
+    search: "",
   }),
 
   mounted() {
-    // console.log(menu);
+    console.log(defaultMenu());
   },
   methods: {},
 };

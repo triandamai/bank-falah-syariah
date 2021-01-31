@@ -7,7 +7,7 @@
  */
 const menu = [
   {
-    id: 2,
+    id: 1,
     menu_name: "Nasabah",
     menu_icon: "",
     menu_url: "/nasabah",
@@ -17,7 +17,7 @@ const menu = [
     children: [],
   },
   {
-    id: 3,
+    id: 2,
     menu_name: "Master Data",
     menu_icon: "",
     menu_url: "/master",
@@ -30,7 +30,7 @@ const menu = [
         menu_name: "Akad",
         menu_icon: "",
         menu_url: "/akad",
-        menu_parent_id: 3,
+        menu_parent_id: 2,
         menu_description: "System for super",
         privilages: ["super"],
         children: [],
@@ -40,7 +40,7 @@ const menu = [
         menu_name: "Jenis Transaksi",
         menu_icon: "",
         menu_url: "/jenistransaksi",
-        menu_parent_id: 3,
+        menu_parent_id: 2,
         menu_description: "System for super",
         privilages: ["super"],
         children: [],
@@ -50,7 +50,7 @@ const menu = [
         menu_name: "Produk",
         menu_icon: "",
         menu_url: "/produk",
-        menu_parent_id: 3,
+        menu_parent_id: 2,
         menu_description: "System for super",
         privilages: ["super"],
         children: [],
@@ -60,7 +60,7 @@ const menu = [
         menu_name: "Jabatan",
         menu_icon: "",
         menu_url: "/jabatan",
-        menu_parent_id: 3,
+        menu_parent_id: 2,
         menu_description: "System for super",
         privilages: ["super"],
         children: [],
@@ -70,7 +70,7 @@ const menu = [
         menu_name: "Pegawai",
         menu_icon: "",
         menu_url: "/pegawai",
-        menu_parent_id: 3,
+        menu_parent_id: 2,
         menu_description: "System for super",
         privilages: ["super"],
         children: [],
@@ -181,6 +181,27 @@ const menu = [
   },
 ];
 
+const defaultMenu = () => {
+  let result = [];
+  menu.forEach((parent) => {
+    result.push({
+      path: parent.menu_url,
+      name: parent.menu_name,
+      description: parent.menu_description,
+      privilages: parent.privilages,
+    });
+    parent.children.forEach((children) => {
+      result.push({
+        path: children.menu_url,
+        name: children.menu_name,
+        description: children.menu_description,
+        privilages: children.privilages,
+      });
+    });
+  });
+  return result;
+};
+
 const quickAction = [
   [
     {
@@ -255,4 +276,4 @@ const quickAction = [
   ],
 ];
 
-export { quickAction, menu };
+export { quickAction, menu, defaultMenu };
