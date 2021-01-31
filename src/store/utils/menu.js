@@ -137,16 +137,7 @@ const menu = [
         privilages: ["super"],
         children: [],
       },
-      {
-        id: 1,
-        menu_name: "Page",
-        menu_icon: "",
-        menu_url: "/page",
-        menu_parent_id: 1,
-        menu_description: "System for super",
-        privilages: ["super"],
-        children: [],
-      },
+
       {
         id: 1,
         menu_name: "User",
@@ -164,7 +155,7 @@ const menu = [
         menu_url: "/group",
         menu_parent_id: 1,
         menu_description: "System for super",
-        privilages: ["super"],
+        privilages: ["super", "admin"],
         children: [],
       },
       {

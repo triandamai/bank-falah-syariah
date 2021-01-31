@@ -77,24 +77,7 @@ let routes = [
        * System
        *
        */
-      {
-        path: "page",
-        component: () => import("@/view/pages/page/Page.vue"),
-        meta: {
-          requiresAuth: true,
-        },
-        children: [
-          {
-            path: "",
-            redirect: "data",
-          },
-          {
-            path: "data",
-            name: "DataPage",
-            component: () => import("@/view/pages/page/DataPage.vue"),
-          },
-        ],
-      },
+
       {
         path: "menu",
         component: () => import("@/view/pages/menu/Menu.vue"),
