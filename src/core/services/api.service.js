@@ -9,7 +9,7 @@ import JwtService from "@/core/services/jwt.service";
 const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
-    Vue.axios.defaults.baseURL = "http://localhost:8000";
+
     this.setHeader();
   },
 
@@ -17,6 +17,7 @@ const ApiService = {
    * Set the default HTTP request headers
    */
   setHeader() {
+    Vue.axios.defaults.baseURL = "http://localhost:8000";
     Vue.axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${JwtService.getToken()}`;
