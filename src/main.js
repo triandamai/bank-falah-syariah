@@ -36,6 +36,8 @@ import "@mdi/font/css/materialdesignicons.css";
 
 //registring components
 import { upperFirst, camelCase } from "lodash";
+
+import './assets/tailwind.css'
 const requireComponent = require.context(
   "./view/components",
   false,
