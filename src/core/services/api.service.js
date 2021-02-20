@@ -25,7 +25,8 @@ const ApiService = {
       "http://localhost:8000";
     Vue.axios.defaults.headers.common["Accept"] = "application/json";
     Vue.axios.defaults.responseType = "json";
-    Vue.axios.defaults.headers.common["Content-Type"] = "application/json";
+    Vue.axios.defaults.headers.common["Content-Type"] =
+      "multipart/form-datanpm";
   },
 
   query(resource, params) {
@@ -55,7 +56,11 @@ const ApiService = {
    * @returns {*}
    */
   post(resource, params) {
-    return Vue.axios.post(`${resource}`, params);
+    return axios.post(`http://localhost:8000/${resource}`, params, {
+      headers: {
+        "Content-Type": "multipart/form-data"
+      }
+    });
   },
 
   /**

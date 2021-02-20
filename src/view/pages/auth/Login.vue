@@ -177,7 +177,9 @@ export default {
 
       const email = this.$v.form.email.$model;
       const password = this.$v.form.password.$model;
-
+      const formData = new FormData();
+      formData.append("username", email);
+      formData.append("password", password);
       // clear existing data and token before login
       this.$store.dispatch("auth/" + LOGOUT);
 

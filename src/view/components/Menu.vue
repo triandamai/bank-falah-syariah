@@ -5,7 +5,7 @@
  *
  --->
 <template>
-  <ul class="menu-nav bg-gray-200">
+  <ul class="menu-nav">
     <!-- ====HOME==== -->
     <router-link
       to="/home"

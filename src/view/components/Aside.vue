@@ -7,19 +7,19 @@
 <template>
   <!-- begin:: Aside -->
   <div
-    class="aside aside-left aside-fixed d-flex flex-column flex-row-auto bg-gray-800"
+    class="aside aside-left aside-fixed d-flex flex-column flex-row-auto"
     id="kt_aside"
     ref="kt_aside"
   >
     <!-- begin:: Aside Menu -->
     <div
-      class="aside-menu-wrapper flex-column-fluid bg-gray-200"
+      class="aside-menu-wrapper flex-column-fluid"
       id="kt_aside_menu_wrapper"
     >
       <div
         ref="kt_aside_menu"
         id="kt_aside_menu"
-        class="aside-menu min-h-lg-800px bg-gray-200"
+        class="aside-menu min-h-lg-800px"
         data-menu-vertical="1"
         data-menu-dropdown-timeout="500"
         v-bind:class="asideMenuClass"

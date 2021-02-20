@@ -21,7 +21,7 @@ const state = {
   error: false,
   message: "",
   user: JwtService.getUser(),
-  isAuthenticated: !!JwtService.getToken(),
+  isAuthenticated: !!JwtService.getToken()
 };
 
 const getters = {
@@ -30,7 +30,7 @@ const getters = {
   },
   isAuthenticated(state) {
     return state.isAuthenticated;
-  },
+  }
 };
 
 const actions = {
@@ -43,28 +43,30 @@ const actions = {
   [LOGIN]({ commit }, credentials) {
     return new Promise((resolve, reject) => {
       ApiService.post("login", credentials)
-        .then((res) => {
-          if (res.status == 200 || 201) {
-            commit(SET_AUTH, res.data);
-            commit(SET_ERROR, {
-              message: res.data.message || "Berhasil !",
-              error: false,
-            });
-            resolve(true);
-          } else {
-            commit(SET_ERROR, {
-              message: res.data.message || "Gagal coba lagi nanti!",
-              error: true,
-            });
-            resolve(false);
-          }
+        .then(res => {
+          console.log(res);
+          // if (res.status == 200 || 201) {
+          //   commit(SET_AUTH, res.data);
+          //   commit(SET_ERROR, {
+          //     message: res.data.message || "Berhasil !",
+          //     error: false,
+          //   });
+          //   resolve(true);
+          // } else {
+          //   commit(SET_ERROR, {
+          //     message: res.data.message || "Gagal coba lagi nanti!",
+          //     error: true,
+          //   });
+          //   resolve(false);
+          // }
         })
-        .catch((e) => {
-          commit(SET_ERROR, {
-            error: true,
-            message: e.response.message || "Gagal coba lagi nanti!",
-          });
-          resolve(false);
+        .catch(e => {
+          console.log(e);
+          // commit(SET_ERROR, {
+          //   error: true,
+          //   message: e.response.message || "Gagal coba lagi nanti!"
+          // });
+          // resolve(false);
         });
     });
   },
@@ -76,7 +78,7 @@ const actions = {
    */
   [LOGOUT]({ commit }) {
     commit(PURGE_AUTH);
-  },
+  }
 };
 
 const mutations = {
@@ -97,7 +99,7 @@ const mutations = {
     state.errors = {};
     JwtService.dropUser();
     JwtService.destroyToken();
-  },
+  }
 };
 
 export default {
@@ -105,5 +107,5 @@ export default {
   state,
   actions,
   mutations,
-  getters,
+  getters
 };
