@@ -42,7 +42,10 @@ const actions = {
    */
   [LOGIN]({ commit }, credentials) {
     return new Promise((resolve, reject) => {
-      ApiService.post("login", credentials)
+      let formData = new FormData();
+      formData.append("username", credentials.username);
+      formData.append("password", credentials.password);
+      ApiService.post("login", formData)
         .then(res => {
           console.log(res);
           // if (res.status == 200 || 201) {
