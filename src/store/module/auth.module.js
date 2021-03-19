@@ -21,7 +21,7 @@ const state = {
   error: false,
   message: "",
   user: JwtService.getUser(),
-  isAuthenticated: !!JwtService.getToken()
+  isAuthenticated: !!JwtService.getToken(),
 };
 
 const getters = {
@@ -30,7 +30,7 @@ const getters = {
   },
   isAuthenticated(state) {
     return state.isAuthenticated;
-  }
+  },
 };
 
 const actions = {
@@ -42,28 +42,31 @@ const actions = {
    */
   [LOGIN]({ commit }, credentials) {
     return new Promise((resolve, reject) => {
-      let formData = new FormData();
-      formData.append("username", credentials.username);
-      formData.append("password", credentials.password);
-      ApiService.post("login", formData)
-        .then(res => {
-          console.log(res);
-          // if (res.status == 200 || 201) {
-          //   commit(SET_AUTH, res.data);
-          //   commit(SET_ERROR, {
-          //     message: res.data.message || "Berhasil !",
-          //     error: false,
-          //   });
-          //   resolve(true);
-          // } else {
-          //   commit(SET_ERROR, {
-          //     message: res.data.message || "Gagal coba lagi nanti!",
-          //     error: true,
-          //   });
-          //   resolve(false);
-          // }
+      // let formData = new FormData();
+      // formData.append("username", credentials.username);
+      // formData.append("password", credentials.password);
+      ApiService.post("login", {
+        username: credentials.username,
+        password: credentials.password,
+      })
+        .then((res) => {
+          // console.log(res);
+          if (res.status == 200 || 201) {
+            commit(SET_AUTH, res.data);
+            commit(SET_ERROR, {
+              message: res.data.message || "Berhasil !",
+              error: false,
+            });
+            resolve(true);
+          } else {
+            commit(SET_ERROR, {
+              message: res.data.message || "Gagal coba lagi nanti!",
+              error: true,
+            });
+            resolve(false);
+          }
         })
-        .catch(e => {
+        .catch((e) => {
           console.log(e);
           // commit(SET_ERROR, {
           //   error: true,
@@ -81,7 +84,7 @@ const actions = {
    */
   [LOGOUT]({ commit }) {
     commit(PURGE_AUTH);
-  }
+  },
 };
 
 const mutations = {
@@ -102,7 +105,7 @@ const mutations = {
     state.errors = {};
     JwtService.dropUser();
     JwtService.destroyToken();
-  }
+  },
 };
 
 export default {
@@ -110,5 +113,5 @@ export default {
   state,
   actions,
   mutations,
-  getters
+  getters,
 };
