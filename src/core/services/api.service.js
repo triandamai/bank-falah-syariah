@@ -21,11 +21,6 @@ const ApiService = {
     Vue.axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${JwtService.getToken()}`;
-    Vue.axios.defaults.headers.common["Access-Control-Allow-Origin"] =
-      "http://localhost:8000";
-    Vue.axios.defaults.headers.common["Accept"] = "application/json";
-    Vue.axios.defaults.responseType = "json";
-    Vue.axios.defaults.headers.common["Content-Type"] = "multipart/form-data";
   },
 
   query(resource, params) {
@@ -57,8 +52,8 @@ const ApiService = {
   post(resource, params) {
     return fetch(`http://localhost:8000/${resource}`, {
       method: "POST",
-      body: params,
-      headers: { "Content-Type": "multipart/form-data" }
+      body: params //JSON.stringify(params)
+      // headers: { "Content-Type": "multipart/form-data" }
     }).then(res => res.json());
     // return Vue.axios.post(`${resource}`, params, {
     //   headers: {
