@@ -7,7 +7,7 @@
 
     <Loader v-if="loaderEnabled" v-bind:logo="loaderLogo" />
 
-    <div class="d-flex flex-row flex-column-fluid page">
+    <div class="d-flex flex-row flex-column-fluid page " dark>
       <div id="kt_wrapper" class="d-flex flex-column flex-row-fluid wrapper">
         <!-- begin:: Header -->
         <Header />

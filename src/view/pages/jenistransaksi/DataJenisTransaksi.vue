@@ -13,11 +13,17 @@
         </span>
       </div>
       <div class="alert-text">
-        <router-link to="/user/tambah">
-          <b-button class="mr-3" variant="success"
-            >Tambahkan Akad Baru</b-button
-          >
-        </router-link>
+        <b-button
+          @click="
+            {
+              dialog = true;
+              isEdit = false;
+            }
+          "
+          class="mr-3"
+          variant="success"
+          >Tambahkan Akad Baru</b-button
+        >
 
         <b>Data Akad</b>
 
@@ -78,13 +84,80 @@
         </v-card>
       </div>
     </div>
+    <!-- DIALOG -->
+    <v-row justify="center">
+      <v-dialog v-model="dialog" persistent max-width="600px">
+        <v-card>
+          <form @submit.prevent="saveTransaksi">
+            <v-card-title>
+              <span class="headline">User Profile</span>
+            </v-card-title>
+            <v-card-text>
+              <v-container>
+                <v-row>
+                  <v-col cols="12">
+                    <v-text-field
+                      type="text"
+                      label="Nama Transaksi*"
+                      v-model="nama_transaksi"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      type="text"
+                      label="Kode Transaksi*"
+                      v-model="kode_transaksi"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                </v-row>
+              </v-container>
+              <small>*indicates required field</small>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                color="blue darken-1"
+                type="button"
+                text
+                @click="
+                  {
+                    dialog = false;
+                    isEdit = false;
+                    name = null;
+                    description = null;
+                  }
+                "
+                >Close</v-btn
+              >
+              <v-btn color="blue darken-1" type="submit" text>Save</v-btn>
+            </v-card-actions>
+          </form>
+        </v-card>
+      </v-dialog>
+    </v-row>
   </div>
 </template>
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
+import {
+  MJENISTRANSAKSI,
+  ACTION_POST_DATA_MASTER,
+  ACTION_GET_DATA_MASTER,
+} from "../../../store/index";
 export default {
   name: "DataAkad",
+  data: () => {
+    return {
+      nama_transaksi: "",
+      kode_transaksi: "",
+      id_transaksi: "",
+      dialog: false,
+      isEdit: false,
+    };
+  },
   computed: {
     ...mapState({
       header: (state) => state.master.jenistransaksi.header,
@@ -97,6 +170,41 @@ export default {
       set(val) {
         this.$store.commit("master/setjenisTransaksiSearch", val);
       },
+    },
+  },
+  created() {
+    this.getTransaksi();
+  },
+  methods: {
+    getTransaksi() {
+      this.$store
+        .dispatch("master/" + ACTION_GET_DATA_MASTER, {
+          mastertype: MJENISTRANSAKSI,
+          path: "jenis-transaksi",
+        })
+        .then((res) => {
+          if (res) return this.getTransaksi();
+        });
+    },
+    saveTransaksi() {
+      if (this.isEdit) {
+        //edit
+      } else {
+        //upload
+        this.$store
+          .dispatch("master/" + ACTION_POST_DATA_MASTER, {
+            mastertype: MJENISTRANSAKSI,
+            path: "/jenis-transaksi",
+            body: {
+              nama_transaksi: this.nama_transaksi,
+              kode_transaksi: this.kode_transaksi,
+            },
+          })
+          .then(({ success, message }) => {
+            console.log(success);
+            console.log(message);
+          });
+      }
     },
   },
 };

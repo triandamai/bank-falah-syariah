@@ -160,7 +160,6 @@ let routes = [
             path: "data",
             name: "DataAkad",
             component: () => import("@/view/pages/akad/DataAkad.vue"),
-            children: [],
           },
         ],
       },

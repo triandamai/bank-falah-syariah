@@ -16,6 +16,7 @@ const ApiService = {
 
   /**
    * Set the default HTTP request headers
+   *
    */
   setHeader() {
     Vue.axios.defaults.baseURL = "http://localhost:8000";
@@ -23,14 +24,12 @@ const ApiService = {
       "Authorization"
     ] = `Bearer ${JwtService.getToken()}`;
   },
-
   query(resource, params) {
     return Vue.axios.get(resource, params).catch((error) => {
       // console.log(error);
       throw new Error(`[KT] ApiService ${error}`);
     });
   },
-
   /**
    * Send the GET HTTP request
    * @param resource

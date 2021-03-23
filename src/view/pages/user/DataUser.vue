@@ -33,7 +33,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <v-card>
+        <v-card dark>
           <v-card-title>
             Nutrition
             <v-spacer></v-spacer>

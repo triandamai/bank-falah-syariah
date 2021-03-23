@@ -2,7 +2,6 @@
   <div>
     <b-alert
       show
-      variant="light"
       class="alert alert-custom alert-white alert-shadow fade show gutter-b"
     >
       <div class="alert-icon">
@@ -33,7 +32,7 @@
 
     <div class="row">
       <div class="col-md-12">
-        <v-card>
+        <v-card class="" dark>
           <v-card-title>
             Nutrition
             <v-spacer></v-spacer>
@@ -47,7 +46,6 @@
           </v-card-title>
           <v-data-table
             flat
-            class="elevation-0"
             :headers="datatable.headers"
             :items="nasabah"
             :search="datatable.search"

@@ -1,7 +1,7 @@
 <template>
   <div>
-    <v-card flat>
-      <v-toolbar color="primary" dark flat>
+    <v-card flat dark>
+      <v-toolbar color="primary" flat>
         <v-toolbar-title>Menu Administrator</v-toolbar-title>
       </v-toolbar>
       <v-card-text>

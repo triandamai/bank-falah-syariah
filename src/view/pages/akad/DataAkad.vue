@@ -178,7 +178,7 @@ export default {
       tipe_akad: "",
       nama_akad: "",
       kode_akad: "",
-      active: "",
+      active: "1",
       id: "",
       dialog: false,
       isEdit: false,
@@ -219,7 +219,13 @@ export default {
         this.$store
           .dispatch("master/" + ACTION_PUT_DATA_MASTER, {
             mastertype: MAKAD,
-            path: "akad",
+            path: "akad/",
+            body: {
+              nama_akad: this.nama_akad,
+              tipe_akad: this.tipe_akad,
+              kode_akad: this.kode_akad,
+              active: this.active,
+            },
           })
           .then(({ success, message }) => {
             if (success) {
@@ -249,6 +255,12 @@ export default {
           .dispatch("master/" + ACTION_POST_DATA_MASTER, {
             mastertype: MAKAD,
             path: "akad",
+            body: {
+              nama_akad: this.nama_akad,
+              tipe_akad: this.tipe_akad,
+              kode_akad: this.kode_akad,
+              active: this.active,
+            },
           })
           .then(({ success, message }) => {
             if (success) {

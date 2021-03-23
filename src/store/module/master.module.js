@@ -109,7 +109,7 @@ const actions = {
           page += state.produk.current_page;
           break;
         case MJENISTRANSAKSI:
-          page += state.current_page;
+          page += state.jenistransaksi.current_page;
           break;
       }
       ApiService.get(`${path}${page}`)
@@ -122,6 +122,7 @@ const actions = {
               resolve(true);
               stillPaging = true;
             }
+            console.log("ex");
             res.data.data.map((item) => {
               commit(MUTATION_ADD_DATA_MASTER, {
                 mastertype: mastertype,
@@ -262,8 +263,9 @@ const mutations = {
         page ? state.jabatan.current_page++ : null;
         break;
       case MJENISTRANSAKSI:
+        console.log(data);
         var exist = state.datajenistransaksi.some((jenis) => {
-          return jenistransaksi.id == data.id;
+          return jenis.id == data.id;
         });
         if (!exist) {
           state.datajenistransaksi.push(data);
