@@ -13,17 +13,19 @@
       data-wizard-state="current"
     >
       <h3 class="mb-10 font-weight-bold text-dark">
-        Atur user yang akan ditambahkan
+        Menambahkan Rekening Deposito
       </h3>
       <div class="form-group">
         <label>Nasabah</label>
         <input
           type="text"
           class="form-control form-control-solid form-control-lg"
-          placeholder="Contoh: Purwokerto selatan,Banyumas"
+          placeholder="Contoh: Zaenur Rochman"
           @click="dialoguser = !dialoguser"
         />
-        <span class="form-text text-muted">Masukkan alamat user.</span>
+        <span class="form-text text-muted"
+          >Masukkan Nasaba a=yang akan dibuat rekening.</span
+        >
       </div>
 
       <div class="form-group">
@@ -31,37 +33,37 @@
         <input
           type="text"
           class="form-control form-control-solid form-control-lg"
-          placeholder="Contoh: bakaranproject@contoh.com"
+          placeholder="Trian Damai"
           @click="dialognasabah = !dialognasabah"
         />
-        <span class="form-text text-muted">Email aktif user.</span>
+        <span class="form-text text-muted">Pegawai yang melayani.</span>
       </div>
       <div class="form-group">
         <label>Tanggal Pembuatan</label>
         <input
           type="date"
           class="form-control form-control-solid form-control-lg"
-          placeholder="Contoh:john.wick@reeves.com"
+          placeholder="Contoh:01-04-202"
         />
-        <span class="form-text text-muted">Pilih tanggal lahir.</span>
+        <span class="form-text text-muted">Pilih tanggal pembuatan.</span>
       </div>
       <div class="form-group">
         <label>Tanggal jatuh Tempo</label>
         <input
           type="date"
           class="form-control form-control-solid form-control-lg"
-          placeholder="Contoh:john.wick@reeves.com"
+          placeholder="Contoh: 01-04-2021"
         />
-        <span class="form-text text-muted">Pilih tanggal lahir.</span>
+        <span class="form-text text-muted">Pilih tanggal jatuh tempo.</span>
       </div>
       <div class="form-group">
         <label>Nilai Deposito</label>
         <input
           type="number"
           class="form-control form-control-solid form-control-lg"
-          placeholder="Contoh: Purwokerto selatan,Banyumas"
+          placeholder="Contoh: Rp 10 000"
         />
-        <span class="form-text text-muted">Masukkan alamat user.</span>
+        <span class="form-text text-muted">Masukkan Nilai deposito user.</span>
       </div>
     </div>
 
