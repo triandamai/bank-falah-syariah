@@ -71,7 +71,6 @@
     <div class="d-flex justify-content-between border-top pt-10">
       <div class="mr-2">
         <button
-          @click="cancel"
           type="button"
           class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
         >
@@ -104,7 +103,7 @@
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
-import { ACTION_GET_DATA_SYSTEM, SGROUP, SROLE, SUSER } from "@/store";
+import { ACTION_GET_DATA_SYSTEM, SUSER } from "@/store";
 
 export default {
   name: "FormUser",
@@ -134,10 +133,21 @@ export default {
   },
   created() {
     if (this.$route.params.id) {
-      this.getUserById(this.$route.params.id);
+      // this.getUserById(this.$route.params.id);
     }
+    this.getUsers();
   },
   methods: {
+    getUsers() {
+      this.$store
+        .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
+          systemtye: SUSER,
+          path: "users",
+        })
+        .then((res) => {
+          if (res) this.getUsers();
+        });
+    },
     submit() {
       if (this.isEdit) {
         if (this.username && this.email && this.role && this.group) {

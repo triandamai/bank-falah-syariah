@@ -89,11 +89,7 @@
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
-import {
-  ACTION_DELETE_DATA_REKENING,
-  RDEPOSITO,
-  ACTION_GET_DATA_REKENING,
-} from "../../../store";
+import { ACTION_DELETE_DATA_REKENING, RDEPOSITO } from "../../../store";
 export default {
   name: "DataAkad",
   computed: {
@@ -110,8 +106,8 @@ export default {
       },
     },
   },
+
   methods: {
-    getDeposito() {},
     editDeposito(deposito) {
       Swal.fire({
         title: "Rubah data " + deposito.nasabah + " ?",
@@ -129,31 +125,29 @@ export default {
       });
     },
     deleteDeposito(deposito) {
-      wal
-        .fire({
-          title: "Yakin menghapus " + deposito.id + " ?",
-          text: "User yang dihapus akan hilang permanen!",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonColor: "#3085d6",
-          cancelButtonColor: "#d33",
-          confirmButtonText: "Oke, hapus!",
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            this.$store
-              .dispatch("rekening/" + ACTION_DELETE_DATA_REKENING, {
-                systemtype: RDEPOSITO,
-                path: "deposito",
-                body: {},
-              })
-              .then(({ success, message }) => {
-                if (success) {
-                  Swal.fire("Dihapus!", message, "success");
-                }
-              });
-          }
-        });
+      Swal.fire({
+        title: "Yakin menghapus " + deposito.id + " ?",
+        text: "User yang dihapus akan hilang permanen!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Oke, hapus!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$store
+            .dispatch("rekening/" + ACTION_DELETE_DATA_REKENING, {
+              systemtype: RDEPOSITO,
+              path: "deposito",
+              body: {},
+            })
+            .then(({ success, message }) => {
+              if (success) {
+                Swal.fire("Dihapus!", message, "success");
+              }
+            });
+        }
+      });
     },
   },
 };
