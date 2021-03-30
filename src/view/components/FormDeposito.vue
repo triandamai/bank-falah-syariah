@@ -21,7 +21,7 @@
           type="text"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: Purwokerto selatan,Banyumas"
-          @click="dialog = !dialog"
+          @click="dialoguser = !dialoguser"
         />
         <span class="form-text text-muted">Masukkan alamat user.</span>
       </div>
@@ -32,6 +32,7 @@
           type="text"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: bakaranproject@contoh.com"
+          @click="dialognasabah = !dialognasabah"
         />
         <span class="form-text text-muted">Email aktif user.</span>
       </div>
@@ -88,6 +89,16 @@
     </div>
     <!--end: Wizard Actions -->
     <!-- <v-row justify="center"> -->
+    <dialog-user
+      :show="dialoguser"
+      @choose="dialoguser = !dialoguser"
+      @close="dialoguser = !dialoguser"
+    />
+    <dialog-nasabah
+      :show="dialognasabah"
+      @close="dialognasabah = !dialognasabah"
+      @choose="dialognasabah = !dialognasabah"
+    />
   </form>
 </template>
 <script>
@@ -97,9 +108,6 @@ import { ACTION_GET_DATA_SYSTEM, SGROUP, SROLE, SUSER } from "@/store";
 
 export default {
   name: "FormUser",
-  props: {
-    isEdit: Boolean,
-  },
   data: () => {
     return {
       id: "",
@@ -108,7 +116,8 @@ export default {
       email: "",
       role: "",
       group: "",
-      dialog: false,
+      dialoguser: false,
+      dialognasabah: false,
     };
   },
 
@@ -127,60 +136,8 @@ export default {
     if (this.$route.params.id) {
       this.getUserById(this.$route.params.id);
     }
-    this.getRoles();
-    this.getGroups();
   },
   methods: {
-    getUserById(id) {
-      this.$store
-        .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
-          systemtype: SUSER,
-          path: `user/${id}`,
-          id: id,
-        })
-        .then(() => {
-          this.id = this.$store.state.system.datausers[0].id;
-          this.username = this.$store.state.system.datausers[0].username;
-          this.password = this.$store.state.system.datausers[0].password;
-          this.email = this.$store.state.system.datausers[0].email;
-          this.role = this.$store.state.system.datausers[0].role[0].id;
-          this.group = this.$store.state.system.datausers[0].group[0].id;
-        });
-    },
-    getRoles() {
-      this.$store
-        .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
-          systemtype: SROLE,
-          path: "roles",
-          id: null,
-        })
-        .then((res) => {
-          if (!res) return;
-          this.getRoles();
-        });
-    },
-    getGroups() {
-      this.$store
-        .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
-          systemtype: SGROUP,
-          path: "groups",
-          id: null,
-        })
-        .then((res) => {
-          if (!res) return;
-          this.getGroups();
-        });
-    },
-    cancel() {
-      this.$router.go(-1);
-    },
-    clear() {
-      this.username = "";
-      this.password = "";
-      this.email = "";
-      this.role = "";
-      this.group = "";
-    },
     submit() {
       if (this.isEdit) {
         if (this.username && this.email && this.role && this.group) {
