@@ -7,7 +7,7 @@
 
     <Loader v-if="loaderEnabled" v-bind:logo="loaderLogo" />
 
-    <div class="d-flex flex-row flex-column-fluid page " dark>
+    <div class="d-flex flex-row flex-column-fluid page" dark>
       <div id="kt_wrapper" class="d-flex flex-column flex-row-fluid wrapper">
         <!-- begin:: Header -->
         <Header />
@@ -16,7 +16,7 @@
         <!-- begin:: Content -->
         <div
           id="kt_content"
-          class="content d-flex flex-column flex-column-fluid"
+          class="content d-flex flex-column flex-column-fluid bg-gray-100"
         >
           <!-- begin:: Content Body -->
           <div class="d-flex flex-column-fluid">

@@ -89,7 +89,11 @@
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
-import { ACTION_DELETE_DATA_REKENING, RDEPOSITO } from "../../../store";
+import {
+  ACTION_DELETE_DATA_REKENING,
+  RDEPOSITO,
+  ACTION_GET_DATA_REKENING,
+} from "../../../store";
 export default {
   name: "DataAkad",
   computed: {
@@ -107,6 +111,7 @@ export default {
     },
   },
   methods: {
+    getDeposito() {},
     editDeposito(deposito) {
       Swal.fire({
         title: "Rubah data " + deposito.nasabah + " ?",
