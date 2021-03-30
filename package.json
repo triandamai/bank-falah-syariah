@@ -56,7 +56,7 @@
     "vue-tour": "^1.5.0",
     "vue2-perfect-scrollbar": "^1.5.0",
     "vuelidate": "^0.7.5",
-    "vuetify": "^2.2.26",
+    "vuetify": "^2.4.8",
     "vuex": "^3.3.0"
   },
   "devDependencies": {

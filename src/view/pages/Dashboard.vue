@@ -2,7 +2,7 @@
   <div>
     <!--begin::Dashboard-->
     <div class="row">
-      <div class="col-xl-12" style="margin-top:15px;">
+      <div class="col-xl-12" style="margin-top: 15px">
         <banner-warning-aktivasi-dashboard />
       </div>
     </div>

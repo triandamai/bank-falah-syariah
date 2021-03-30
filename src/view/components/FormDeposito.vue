@@ -16,76 +16,54 @@
         Atur user yang akan ditambahkan
       </h3>
       <div class="form-group">
-        <label>Username</label>
+        <label>Nasabah</label>
         <input
           type="text"
-          v-model="username"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: Purwokerto selatan,Banyumas"
+          @click="dialog = !dialog"
         />
         <span class="form-text text-muted">Masukkan alamat user.</span>
       </div>
-      <div v-show="!isEdit" class="form-group">
-        <label>Password</label>
-        <input
-          type="password"
-          v-model="password"
-          class="form-control form-control-solid form-control-lg"
-          placeholder="Contoh:Xdsrcs"
-        />
-        <span class="form-text text-muted">
-          Kunci keamanan yang akan digunakan user.
-        </span>
-      </div>
+
       <div class="form-group">
-        <label>Email</label>
+        <label>Pegawai</label>
         <input
-          type="email"
-          v-model="email"
+          type="text"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: bakaranproject@contoh.com"
         />
         <span class="form-text text-muted">Email aktif user.</span>
       </div>
-
-      <div class="row">
-        <div class="col-xl-6">
-          <div class="form-group">
-            <label>Role</label>
-            <select
-              v-model="role"
-              class="form-control form-control-solid form-control-lg"
-            >
-              <option value="">Pilih</option>
-
-              <option
-                v-for="(role, index) in roles"
-                :key="index"
-                :value="role.id"
-                >{{ role.name }}</option
-              >
-            </select>
-          </div>
-        </div>
-        <div class="col-xl-6">
-          <div class="form-group">
-            <label>Group</label>
-            <select
-              v-model="group"
-              class="form-control form-control-solid form-control-lg"
-            >
-              <option value="">Pilih</option>
-              <option
-                v-for="(group, index) in groups"
-                :key="index"
-                :value="group.id"
-                >{{ group.name }}</option
-              >
-            </select>
-          </div>
-        </div>
+      <div class="form-group">
+        <label>Tanggal Pembuatan</label>
+        <input
+          type="date"
+          class="form-control form-control-solid form-control-lg"
+          placeholder="Contoh:john.wick@reeves.com"
+        />
+        <span class="form-text text-muted">Pilih tanggal lahir.</span>
+      </div>
+      <div class="form-group">
+        <label>Tanggal jatuh Tempo</label>
+        <input
+          type="date"
+          class="form-control form-control-solid form-control-lg"
+          placeholder="Contoh:john.wick@reeves.com"
+        />
+        <span class="form-text text-muted">Pilih tanggal lahir.</span>
+      </div>
+      <div class="form-group">
+        <label>Nilai Deposito</label>
+        <input
+          type="number"
+          class="form-control form-control-solid form-control-lg"
+          placeholder="Contoh: Purwokerto selatan,Banyumas"
+        />
+        <span class="form-text text-muted">Masukkan alamat user.</span>
       </div>
     </div>
+
     <!--end: Wizard Step 1-->
 
     <!--begin: Wizard Actions -->
@@ -109,6 +87,7 @@
       </div>
     </div>
     <!--end: Wizard Actions -->
+    <!-- <v-row justify="center"> -->
   </form>
 </template>
 <script>
@@ -129,6 +108,7 @@ export default {
       email: "",
       role: "",
       group: "",
+      dialog: false,
     };
   },
 

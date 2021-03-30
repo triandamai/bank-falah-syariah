@@ -6,7 +6,7 @@
  --->
 <template>
   <div
-    class="card card-custom bg-gray-100 gutter-b card-stretch card-shadowless"
+    class="card card-custom bg-white gutter-b card-stretch card-shadowless bg-white"
   >
     <!--begin::Header-->
     <div class="card-header h-auto border-0">
@@ -179,7 +179,7 @@ export default {
           fontFamily: this.layoutConfig("font-family"),
         },
         y: {
-          formatter: function(val) {
+          formatter: function (val) {
             return "$" + val + " thousands";
           },
         },

@@ -5,7 +5,7 @@
  *
  --->
 <template>
-  <div class="card card-custom gutter-b card-stretch card-shadowless">
+  <div class="card card-custom gutter-b card-stretch card-shadowless bg-white">
     <div class="card-body p-0 d-flex">
       <div
         class="d-flex align-items-start justify-content-start flex-grow-1 bg-light-warning p-8 card-rounded flex-grow-1 position-relative"

@@ -1,6 +1,6 @@
 /*eslint-disable*/
 <template>
-  <div class="d-flex flex-column flex-root" v-if="isAuthenticated">
+  <div class="d-flex flex-column flex-root" v-if="isAuthenticated" data-app>
     <!-- begin:: Header Mobile -->
     <header-mobile />
     <!-- end:: Header Mobile -->

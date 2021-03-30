@@ -62,8 +62,9 @@
                 v-for="(role, index) in roles"
                 :key="index"
                 :value="role.id"
-                >{{ role.name }}</option
               >
+                {{ role.name }}
+              </option>
             </select>
           </div>
         </div>
@@ -79,8 +80,9 @@
                 v-for="(group, index) in groups"
                 :key="index"
                 :value="group.id"
-                >{{ group.name }}</option
               >
+                {{ group.name }}
+              </option>
             </select>
           </div>
         </div>
