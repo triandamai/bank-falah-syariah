@@ -13,13 +13,13 @@
         </span>
       </div>
       <div class="alert-text">
-        <router-link to="/user/tambah">
+        <router-link to="/pembiayaan/tambah">
           <b-button class="mr-3" variant="success"
-            >Tambahkan Akad Baru</b-button
+            >Tambahkan Rekening Pembiayaan</b-button
           >
         </router-link>
 
-        <b>Data Akad</b>
+        <b>Data Rekening Pembiayaan</b>
 
         <!-- <a
           class="font-weight-bold"

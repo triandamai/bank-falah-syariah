@@ -12,7 +12,7 @@
         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
           <div class="col-xl-12 col-xxl-7">
             <!--begin: Wizard Form-->
-            <form-user :isEdit="false" @buttonsubmit="submit" />
+            <form-deposito :isEdit="false" @buttonsubmit="submit" />
             <!--end: Wizard Form-->
           </div>
         </div>
