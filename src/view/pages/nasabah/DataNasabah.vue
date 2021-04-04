@@ -34,7 +34,7 @@
       <div class="col-md-12">
         <v-card class="" dark>
           <v-card-title>
-            Nutrition
+            Nasabah
             <v-spacer></v-spacer>
             <v-text-field
               v-model="datatable.search"

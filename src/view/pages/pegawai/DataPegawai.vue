@@ -14,12 +14,10 @@
       </div>
       <div class="alert-text">
         <router-link to="/user/tambah">
-          <b-button class="mr-3" variant="success"
-            >Tambahkan Akad Baru</b-button
-          >
+          <b-button class="mr-3" variant="success">Tambahkan Pegawai</b-button>
         </router-link>
 
-        <b>Data Akad</b>
+        <b>Data Pegawai</b>
 
         <!-- <a
           class="font-weight-bold"
@@ -35,7 +33,7 @@
       <div class="col-md-12">
         <v-card>
           <v-card-title>
-            Nutrition
+            Pegawai
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"

@@ -27,10 +27,10 @@
           "
           class="mr-3"
           variant="success"
-          >Tambahkan Akad Baru</b-button
+          >Tambahkan Produk Baru</b-button
         >
 
-        <b>Data Akad</b>
+        <b>Data Produk</b>
 
         <!-- <a
           class="font-weight-bold"
@@ -46,7 +46,7 @@
       <div class="col-md-12">
         <v-card>
           <v-card-title>
-            Nutrition
+            Produk
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"

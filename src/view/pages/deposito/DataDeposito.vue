@@ -21,11 +21,11 @@
       <div class="alert-text">
         <router-link to="/deposito/tambah">
           <b-button class="mr-3" variant="success"
-            >Tambahkan Akad Baru</b-button
+            >Tambahkan Rekening Deposito</b-button
           >
         </router-link>
 
-        <b>Data Akad</b>
+        <b>Rekening Deposito</b>
 
         <!-- <a
           class="font-weight-bold"
@@ -41,7 +41,7 @@
       <div class="col-md-12">
         <v-card>
           <v-card-title>
-            Nutrition
+            Deposito
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"

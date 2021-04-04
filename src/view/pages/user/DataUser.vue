@@ -35,7 +35,7 @@
       <div class="col-md-12">
         <v-card dark>
           <v-card-title>
-            Nutrition
+            User
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"
