@@ -15,12 +15,12 @@ let routes = [
     path: "/",
     component: () => import("@/view/pages/Layout.vue"),
     meta: {
-      requiresAuth: true,
+      requiresAuth: true
     },
     children: [
       {
         path: "",
-        redirect: "home",
+        redirect: "home"
       },
       /***
        *
@@ -31,8 +31,8 @@ let routes = [
         name: "Dashboard",
         component: () => import("@/view/pages/Dashboard.vue"),
         meta: {
-          requiresAuth: true,
-        },
+          requiresAuth: true
+        }
       },
       /***
        *
@@ -42,36 +42,36 @@ let routes = [
         path: "nasabah",
         component: () => import("@/view/pages/nasabah/Nasabah.vue"),
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         },
         children: [
           {
             path: "",
-            redirect: "data",
+            redirect: "data"
           },
           {
             path: "data",
             name: "DataNasabah",
-            component: () => import("@/view/pages/nasabah/DataNasabah.vue"),
+            component: () => import("@/view/pages/nasabah/DataNasabah.vue")
           },
           {
             path: "ubah",
             name: "UbahNasabah",
-            component: () => import("@/view/pages/nasabah/TambahNasabah.vue"),
+            component: () => import("@/view/pages/nasabah/TambahNasabah.vue")
           },
           {
             path: "tambah",
             name: "TambahNasabah",
-            component: () => import("@/view/pages/nasabah/TambahNasabah.vue"),
+            component: () => import("@/view/pages/nasabah/TambahNasabah.vue")
           },
 
           {
             // the 404 route, when none of the above matches
             path: "*",
             name: "NasabahNotFound",
-            component: () => import("@/view/pages/error/NotFound.vue"),
-          },
-        ],
+            component: () => import("@/view/pages/error/NotFound.vue")
+          }
+        ]
       },
       /***
        * System
@@ -82,42 +82,42 @@ let routes = [
         path: "menu",
         component: () => import("@/view/pages/menu/Menu.vue"),
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         },
         children: [
           {
             path: "",
-            redirect: "data",
+            redirect: "data"
           },
           {
             path: "data",
             name: "DataMenu",
-            component: () => import("@/view/pages/menu/DataMenu.vue"),
-          },
-        ],
+            component: () => import("@/view/pages/menu/DataMenu.vue")
+          }
+        ]
       },
       {
         path: "group",
         component: () => import("@/view/pages/group/Group.vue"),
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         },
         children: [
           {
             path: "",
-            redirect: "data",
+            redirect: "data"
           },
           {
             path: "data",
             name: "DataGroup",
-            component: () => import("@/view/pages/group/DataGroup.vue"),
-          },
-        ],
+            component: () => import("@/view/pages/group/DataGroup.vue")
+          }
+        ]
       },
       {
         path: "role",
         name: "RoleSystem",
-        component: () => import("@/view/pages/role/DataRole.vue"),
+        component: () => import("@/view/pages/role/DataRole.vue")
       },
       {
         path: "user",
@@ -125,24 +125,24 @@ let routes = [
         children: [
           {
             path: "",
-            redirect: "data",
+            redirect: "data"
           },
           {
             path: "data",
             name: "DataUser",
-            component: () => import("@/view/pages/user/DataUser.vue"),
+            component: () => import("@/view/pages/user/DataUser.vue")
           },
           {
             path: "tambah",
             name: "Adduser",
-            component: () => import("@/view/pages/user/TambahUser.vue"),
+            component: () => import("@/view/pages/user/TambahUser.vue")
           },
           {
             path: "ubah/:id",
             name: "UbahUser",
-            component: () => import("@/view/pages/user/UbahUser.vue"),
-          },
-        ],
+            component: () => import("@/view/pages/user/UbahUser.vue")
+          }
+        ]
       },
       /***
        * Master
@@ -154,76 +154,76 @@ let routes = [
         children: [
           {
             path: "",
-            redirect: "data",
+            redirect: "data"
           },
           {
             path: "data",
             name: "DataAkad",
-            component: () => import("@/view/pages/akad/DataAkad.vue"),
-          },
-        ],
+            component: () => import("@/view/pages/akad/DataAkad.vue")
+          }
+        ]
       },
       {
         path: "jenistransaksi",
         component: () =>
           import("@/view/pages/jenistransaksi/JenisTransaksi.vue"),
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         },
         children: [
           {
             path: "",
-            redirect: "data",
+            redirect: "data"
           },
           {
             path: "data",
             name: "DataJenisTransaksi",
             component: () =>
-              import("@/view/pages/jenistransaksi/DataJenisTransaksi.vue"),
-          },
-        ],
+              import("@/view/pages/jenistransaksi/DataJenisTransaksi.vue")
+          }
+        ]
       },
       {
         path: "produk",
         component: () => import("@/view/pages/produk/Produk.vue"),
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         },
         children: [
           {
             path: "",
-            redirect: "data",
+            redirect: "data"
           },
           {
             path: "data",
             name: "DataProduk",
-            component: () => import("@/view/pages/produk/DataProduk.vue"),
-          },
-        ],
+            component: () => import("@/view/pages/produk/DataProduk.vue")
+          }
+        ]
       },
       {
         path: "jabatan",
         component: () => import("@/view/pages/jabatan/Jabatan.vue"),
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         },
         children: [
           {
             path: "",
-            redirect: "data",
+            redirect: "data"
           },
           {
             path: "data",
             name: "DataJabatan",
-            component: () => import("@/view/pages/jabatan/DataJabatan.vue"),
-          },
-        ],
+            component: () => import("@/view/pages/jabatan/DataJabatan.vue")
+          }
+        ]
       },
       {
         path: "pegawai",
         component: () => import("@/view/pages/pegawai/Pegawai.vue"),
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         },
         children: [
           { path: "", redirect: "data" },
@@ -231,9 +231,9 @@ let routes = [
             path: "data",
             name: "DataPegawai",
             component: () => import("@/view/pages/pegawai/DataPegawai.vue"),
-            children: [],
-          },
-        ],
+            children: []
+          }
+        ]
       },
       /***
        * Rekening
@@ -244,80 +244,85 @@ let routes = [
         path: "deposito",
         component: () => import("@/view/pages/deposito/Deposito.vue"),
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         },
         children: [
           {
             path: "",
-            redirect: "data",
+            redirect: "data"
           },
           {
             path: "data",
             name: "DataDeposito",
-            component: () => import("@/view/pages/deposito/DataDeposito.vue"),
+            component: () => import("@/view/pages/deposito/DataDeposito.vue")
           },
           {
             path: "tambah",
             name: "TambahDeposito",
-            component: () => import("@/view/pages/deposito/TambahDeposito.vue"),
+            component: () => import("@/view/pages/deposito/TambahDeposito.vue")
           },
           {
             path: "ubah/:id",
             name: "UbahDeposito",
-            component: () => import("@/view/pages/deposito/UbahDeposito.vue"),
-          },
-        ],
+            component: () => import("@/view/pages/deposito/UbahDeposito.vue")
+          }
+        ]
       },
       {
         path: "pembiayaan",
         component: () => import("@/view/pages/pembiayaan/Pembiayaan.vue"),
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         },
         children: [
           {
             path: "",
-            redirect: "data",
+            redirect: "data"
           },
           {
             path: "data",
             name: "DataPembiayaan",
             component: () =>
-              import("@/view/pages/pembiayaan/DataPembiayaan.vue"),
+              import("@/view/pages/pembiayaan/DataPembiayaan.vue")
           },
           {
             path: "tambah",
             name: "TambahPembiayaan",
             component: () =>
-              import("@/view/pages/pembiayaan/TambahPembiayaan.vue"),
+              import("@/view/pages/pembiayaan/TambahPembiayaan.vue")
           },
           {
             path: "ubah",
             name: "UbahPembiayaan",
             component: () =>
-              import("@/view/pages/pembiayaan/UbahPembiayaan.vue"),
-          },
-        ],
+              import("@/view/pages/pembiayaan/UbahPembiayaan.vue")
+          }
+        ]
       },
       {
         path: "simpanan",
         component: () => import("@/view/pages/simpanan/Simpanan.vue"),
         meta: {
-          requiresAuth: true,
+          requiresAuth: true
         },
         children: [
           {
             path: "",
-            redirect: "data",
+            redirect: "data"
           },
           {
             path: "data",
             name: "DataSimpanan",
-            component: () => import("@/view/pages/simpanan/DataSimpanan.vue"),
+            component: () => import("@/view/pages/simpanan/DataSimpanan.vue")
           },
-        ],
-      },
-    ],
+          {
+            path: "tambah",
+            name: "TambahSimpanan",
+            component: () => import("@/view/pages/simpanan/TambahSimpanan.vue")
+          }
+        ]
+      }
+    ]
   },
   //auth
   {
@@ -326,32 +331,32 @@ let routes = [
     children: [
       {
         path: "",
-        redirect: "login",
+        redirect: "login"
       },
       {
         path: "login",
         name: "Login",
-        component: () => import("@/view/pages/auth/Login"),
+        component: () => import("@/view/pages/auth/Login")
       },
       {
         path: "aktivasi",
         name: "AktivasiAkun",
-        component: () => import("@/view/pages/auth/Aktivasi"),
+        component: () => import("@/view/pages/auth/Aktivasi")
       },
       {
         // the 404 route, when none of the above matches
         path: "*",
         name: "AuthError",
-        component: () => import("@/view/pages/error/NotFound.vue"),
-      },
-    ],
+        component: () => import("@/view/pages/error/NotFound.vue")
+      }
+    ]
   },
   {
     // the 404 route, when none of the above matches
     path: "*",
     name: "404",
-    component: () => import("@/view/pages/error/NotFound.vue"),
-  },
+    component: () => import("@/view/pages/error/NotFound.vue")
+  }
 ];
 
 const availableRoute = [];
@@ -359,7 +364,7 @@ const availableRoute = [];
 export default new Router({
   mode: process.env.IS_ELECTRON ? "hash" : "history",
   base: process.env.BASE_URL,
-  routes: routes,
+  routes: routes
 });
 // console.log(availableRoute());
 export { routes, availableRoute };

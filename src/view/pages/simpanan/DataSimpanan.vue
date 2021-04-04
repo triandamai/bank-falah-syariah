@@ -13,7 +13,7 @@
         </span>
       </div>
       <div class="alert-text">
-        <router-link to="/user/tambah">
+        <router-link to="/simpanan/tambah">
           <b-button class="mr-3" variant="success"
             >Tambahkan Akad Baru</b-button
           >

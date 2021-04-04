@@ -49,49 +49,13 @@
         <span class="form-text text-muted">Produk yang dipakai.</span>
       </div>
       <div class="form-group">
-        <label>Tanggal Pencairan</label>
+        <label>Tanggal Pembuatan</label>
         <input
           type="date"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh:01-04-202"
         />
         <span class="form-text text-muted">Pilih tanggal pencairan.</span>
-      </div>
-      <div class="form-group">
-        <label>jatuh Tempo</label>
-        <input
-          type="date"
-          class="form-control form-control-solid form-control-lg"
-          placeholder="Contoh: 01-04-2021"
-        />
-        <span class="form-text text-muted">Pilih tanggal jatuh tempo.</span>
-      </div>
-      <div class="form-group">
-        <label>Lama Angsuran</label>
-        <input
-          type="number"
-          class="form-control form-control-solid form-control-lg"
-          placeholder="Contoh: Rp 10 000"
-        />
-        <span class="form-text text-muted">Masukkan durasi angsuran.</span>
-      </div>
-      <div class="form-group">
-        <label>Tipe Angsuran</label>
-        <input
-          type="number"
-          class="form-control form-control-solid form-control-lg"
-          placeholder="Contoh: Rp 10 000"
-        />
-        <span class="form-text text-muted">Masukkan Tipe Angsuran.</span>
-      </div>
-      <div class="form-group">
-        <label>Modal</label>
-        <input
-          type="number"
-          class="form-control form-control-solid form-control-lg"
-          placeholder="Contoh: Rp 10 000"
-        />
-        <span class="form-text text-muted">Masukkan jumlah modal.</span>
       </div>
     </div>
 
@@ -220,4 +184,10 @@ export default {
     },
   },
 };
+/**
+ * tgl_buka
+ * nasabah_id
+ * produk_id
+ * pegawai_id
+ */
 </script>
