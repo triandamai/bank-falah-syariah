@@ -25,7 +25,7 @@ const ApiService = {
     ] = `Bearer ${JwtService.getToken()}`;
   },
   query(resource, params) {
-    return Vue.axios.get(resource, params).catch((error) => {
+    return Vue.axios.get(resource, params).catch(error => {
       // console.log(error);
       throw new Error(`[KT] ApiService ${error}`);
     });
@@ -37,7 +37,7 @@ const ApiService = {
    * @returns {*}
    */
   get(resource, slug = "") {
-    return Vue.axios.get(`${resource}/${slug}`).catch((error) => {
+    return Vue.axios.get(`${resource}/${slug}`).catch(error => {
       // console.log(error);
       throw new Error(`[KT] ApiService ${error}`);
     });
@@ -66,8 +66,8 @@ const ApiService = {
     // });
     return Vue.axios.post(`${resource}`, params, {
       headers: {
-        "Content-Type": "application/json",
-      },
+        "Content-Type": "application/json"
+      }
     });
   },
 
@@ -98,11 +98,11 @@ const ApiService = {
    * @returns {*}
    */
   delete(resource) {
-    return Vue.axios.delete(resource).catch((error) => {
+    return Vue.axios.delete(resource).catch(error => {
       // console.log(error);
       throw new Error(`[RWV] ApiService ${error}`);
     });
-  },
+  }
 };
 
 export default ApiService;

@@ -21,7 +21,7 @@ const state = {
   errors: null,
   currentpage: 0,
   lastpage: "",
-  datanasabah: [],
+  datanasabah: []
 };
 
 const getters = {};
@@ -31,7 +31,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
       ApiService.get(`nasabah${page}`)
-        .then((res) => {
+        .then(res => {
           //    console.log(res.data.data);
           if (res.status == 200 || res.status == 201) {
             if (res.data.current_page >= res.data.last_page) {
@@ -40,7 +40,7 @@ const actions = {
             } else {
               resolve(true);
             }
-            res.data.data.map((item) => {
+            res.data.data.map(item => {
               let data = {
                 id: item.id,
                 kode_nasabah: item.kode_nasabah,
@@ -51,7 +51,7 @@ const actions = {
                 tanggal_lahir: item.tanggal_lahir,
                 alamat: item.alamat,
                 no_hp: item.no_hp,
-                status: item.active,
+                status: item.active
               };
 
               commit(MUTATION_TAMBAH_DATA_NASABAH, data);
@@ -60,14 +60,14 @@ const actions = {
             resolve(false);
           }
         })
-        .catch((e) => {
+        .catch(e => {
           resolve(false);
         });
     });
   },
   [ACTION_TAMBAH_NASABAH](context, data) {
     return new Promise((resolve, reject) => {
-      ApiService.post("users", { user: data })
+      ApiService.post("nasabah", data)
         .then(({ data }) => {
           context.commit(MUTATION_TAMBAH_DATA_NASABAH, data);
           resolve(data);
@@ -89,7 +89,7 @@ const actions = {
           reject(response);
         });
     });
-  },
+  }
 };
 
 const mutations = {
@@ -97,14 +97,14 @@ const mutations = {
     state.errors = data;
   },
   [MUTATION_TAMBAH_DATA_NASABAH](state, data) {
-    var exsts = state.datanasabah.some((nasabah) => {
+    var exsts = state.datanasabah.some(nasabah => {
       return nasabah.id == data.id;
     });
     if (!exsts) {
       state.datanasabah.push(data);
     }
   },
-  [MUTATION_UBAH_DATA_NASABAH](state, error) {},
+  [MUTATION_UBAH_DATA_NASABAH](state, error) {}
 };
 
 export default {
@@ -112,5 +112,5 @@ export default {
   state,
   actions,
   mutations,
-  getters,
+  getters
 };

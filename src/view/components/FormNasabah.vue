@@ -5,20 +5,18 @@
  *
  --->
 <template>
-  <div class="wizard-body py-8 px-8 py-lg-20 px-lg-10">
+  <div class="px-8 py-8 wizard-body py-lg-20 px-lg-10">
     <!--begin: Wizard Form-->
     <div class="row">
       <div class="offset-xxl-2 col-xxl-8">
-        <form class="form" id="kt_form" @submit.prevent="$emit('submit', true)">
+        <form class="form" id="kt_form" @submit.prevent="onSubmit">
           <!--begin: Wizard Step 1-->
           <div
             class="pb-5"
             data-wizard-type="step-content"
             data-wizard-state="current"
           >
-            <h4 class="mb-10 font-weight-bold text-dark">
-              Lengkapi Biodata
-            </h4>
+            <h4 class="mb-10 font-weight-bold text-dark">Lengkapi Biodata</h4>
             <div class="form-group">
               <label>Nama Lengkap</label>
               <input
@@ -48,8 +46,8 @@
                 class="form-control form-control-solid form-control-lg"
               >
                 <option value="">Pilih</option>
-                <option value="LAKI_LAKI">Laki-Laki</option>
-                <option value="PEREMPUAN">Perempuan</option>
+                <option value="L">Laki-Laki</option>
+                <option value="P">Perempuan</option>
               </select>
               <span class="form-text text-muted">Pilih jenis kelamin.</span>
             </div>
@@ -117,20 +115,6 @@
             <div class="row">
               <div class="col-xl-6">
                 <div class="form-group">
-                  <label>Kode Pos</label>
-                  <input
-                    type="text"
-                    class="form-control form-control-solid form-control-lg"
-                    v-model="KodePos"
-                    placeholder="Contoh: 77372"
-                  />
-                  <span class="form-text text-muted"
-                    >Isikan Kode Pos dari alamat.</span
-                  >
-                </div>
-              </div>
-              <div class="col-xl-6">
-                <div class="form-group">
                   <label>Kota</label>
                   <input
                     type="text"
@@ -168,8 +152,9 @@
                       v-for="(item, index) in country"
                       :key="index"
                       value="item.code"
-                      >{{ item.name }}</option
                     >
+                      {{ item.name }}
+                    </option>
                   </select>
                   <span class="form-text text-muted">Masukkan Negara.</span>
                 </div>
@@ -180,13 +165,9 @@
 
           <!--begin: Wizard Step 3-->
           <div class="pb-5" data-wizard-type="step-content">
-            <h4 class="mb-10 font-weight-bold text-dark">
-              Review Biodata
-            </h4>
-            <div class="border-bottom mb-5 pb-5">
-              <div class="font-weight-bold mb-3">
-                Detail Akun:
-              </div>
+            <h4 class="mb-10 font-weight-bold text-dark">Review Biodata</h4>
+            <div class="pb-5 mb-5 border-bottom">
+              <div class="mb-3 font-weight-bold">Detail Akun:</div>
               <div class="line-height-md">
                 {{ NamaLengkap }}
                 <br />{{ NamaPanggilan }}
@@ -195,10 +176,8 @@
                 Tempat&Tanggal Lahir: {{ TempatLahir + "-" + TanggalLahir }}
               </div>
             </div>
-            <div class="border-bottom mb-5 pb-5">
-              <div class="font-weight-bold mb-3">
-                Alamat
-              </div>
+            <div class="pb-5 mb-5 border-bottom">
+              <div class="mb-3 font-weight-bold">Alamat</div>
               <div class="line-height-md">
                 {{ Alamat }}
 
@@ -209,10 +188,10 @@
           <!--end: Wizard Step 6-->
 
           <!--begin: Wizard Actions -->
-          <div class="d-flex justify-content-between border-top pt-10">
+          <div class="pt-10 d-flex justify-content-between border-top">
             <div class="mr-2">
               <button
-                class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
+                class="py-4 btn btn-light-primary font-weight-bold text-uppercase px-9"
                 data-wizard-type="action-prev"
               >
                 Sebelumnya
@@ -221,13 +200,14 @@
             <div>
               <button
                 type="submit"
-                class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
+                @click="onSubmit"
+                class="py-4 btn btn-success font-weight-bold text-uppercase px-9"
                 data-wizard-type="action-submit"
               >
                 Simpan
               </button>
               <button
-                class="btn btn-primary font-weight-bold text-uppercase px-9 py-4"
+                class="py-4 btn btn-primary font-weight-bold text-uppercase px-9"
                 data-wizard-type="action-next"
               >
                 Selanjutnya
@@ -252,7 +232,6 @@ export default {
       TempatLahir: "",
       TanggalLahir: "",
       NomerTelepon: "",
-      KodePos: "",
       Alamat: "",
       Kota: "",
       Kabupaten: "",
@@ -262,9 +241,21 @@ export default {
   },
   methods: {
     onSubmit() {
-      if (!this.check()) {
-        return;
-      }
+      console.log("up");
+
+      const body = {
+        kode_nasabah: `${Date.now()}`,
+        nama_lengkap: this.NamaLengkap,
+        nama_panggilan: this.NamaPanggilan,
+        jenis_kelamin: this.JenisKelamin,
+        tempat_lahir: this.TempatLahir,
+        tanggal_lahir: this.TanggalLahir,
+        no_hp: this.NomerTelepon,
+        alamat: this.Alamat,
+
+        active: 1,
+      };
+      this.$emit("submit", body);
     },
     check() {
       return (
@@ -273,19 +264,7 @@ export default {
         !this.NamaPanggilan == null &&
         !this.NamaPanggilan == "" &&
         !this.JenisKelamin == null &&
-        !this.JenisKelamin == "" &&
-        !this.NomerTelepon == null &&
-        !this.NomerTelepon == "" &&
-        !this.KodePos == null &&
-        !this.KodePos == "" &&
-        !this.Alamat == null &&
-        !this.Alamat == "" &&
-        !this.Kabupaten == null &&
-        !this.Kabupaten == "" &&
-        !this.Kota == null &&
-        !this.Kota == "" &&
-        !this.Negara == null &&
-        !this.Negara == ""
+        !this.JenisKelamin == ""
       );
     },
   },

@@ -106,7 +106,6 @@
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
-import { ACTION_GET_DATA_SYSTEM, SUSER } from "@/store";
 import { getUser } from "../../core/services/jwt.service";
 
 export default {

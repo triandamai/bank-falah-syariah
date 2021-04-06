@@ -1,6 +1,6 @@
 <template>
   <div class="card card-custom">
-    <div class="card-body p-0">
+    <div class="p-0 card-body">
       <!--begin: Wizard-->
       <div
         class="wizard wizard-2"
@@ -26,9 +26,11 @@
 </style>
 
 <script>
+/*eslint-disable*/
 import KTUtil from "@/assets/js/components/util";
 import KTWizard from "@/assets/js/components/wizard";
 import Swal from "sweetalert2";
+import { ACTION_TAMBAH_NASABAH } from "../../../store";
 
 export default {
   name: "Wizard-2",
@@ -61,27 +63,31 @@ export default {
     });
 
     // Validation before going to next page
-    wizard.on("beforeNext", function(/*wizardObj*/) {
+    wizard.on("beforeNext", function (/*wizardObj*/) {
       // validate the form and use below function to stop the wizard's step
       // wizardObj.stop();
     });
 
     // Change event
-    wizard.on("change", function(/*wizardObj*/) {
+    wizard.on("change", function (/*wizardObj*/) {
       setTimeout(() => {
         KTUtil.scrollTop();
       }, 500);
     });
   },
   methods: {
-    submit: function(e) {
-      e.preventDefault();
-      Swal.fire({
-        title: "",
-        text: "The application has been successfully submitted!",
-        icon: "success",
-        confirmButtonClass: "btn btn-secondary",
-      });
+    submit: function (body) {
+      console.log(body);
+      this.$store
+        .dispatch("nasabah/" + ACTION_TAMBAH_NASABAH, body)
+        .then((res) => {
+          Swal.fire({
+            title: "",
+            text: "The application has been successfully submitted!",
+            icon: "success",
+            confirmButtonClass: "btn btn-secondary",
+          });
+        });
     },
   },
 };
