@@ -9,7 +9,7 @@ import ApiService from "../../core/services/api.service";
 import {
   headerdatadeposito,
   headerdatasimpanan,
-  headerdatapembiayaan,
+  headerdatapembiayaan
 } from "../utils/headers";
 /***
  * dspatch type
@@ -43,7 +43,7 @@ const state = {
     header: headerdatadeposito,
     dialog: false,
     current_page: 0,
-    last_page: 0,
+    last_page: 0
   },
   datapembiayaan: [],
   pembiayaan: {
@@ -51,7 +51,7 @@ const state = {
     header: headerdatapembiayaan,
     dialog: false,
     current_page: 0,
-    last_page: 0,
+    last_page: 0
   },
   datasimpanan: [],
   simpanan: {
@@ -59,8 +59,8 @@ const state = {
     header: headerdatasimpanan,
     dialog: false,
     current_page: 0,
-    last_page: 0,
-  },
+    last_page: 0
+  }
 };
 const getters = {};
 const actions = {
@@ -71,7 +71,7 @@ const actions = {
    *
    */
   [ACTION_GET_DATA_REKENING]({ commit, state }, { rekeningtype, path }) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       //cek pagination (get current page)
       let page = `?page=`;
       //for mutation the pagination going forward or stop
@@ -91,7 +91,7 @@ const actions = {
 
       //get
       ApiService.get(`${path}${page}`)
-        .then((res) => {
+        .then(res => {
           //success
           if (res.status == 200 || res.status == 201) {
             if (res.data.current_page >= res.data.last_page) {
@@ -101,11 +101,11 @@ const actions = {
               resolve(true);
               stillPaging = true;
             }
-            res.data.data.map((item) => {
+            res.data.data.map(item => {
               commit(MUTATION_ADD_DATA_REKENING, {
                 rekeningtype: rekeningtype,
                 item: item,
-                page: stillPaging,
+                page: stillPaging
               });
             });
           } else {
@@ -113,7 +113,7 @@ const actions = {
             resolve(false);
           }
         })
-        .catch((e) => {
+        .catch(e => {
           //failes
           resolve(false);
         });
@@ -126,21 +126,21 @@ const actions = {
    *
    */
   [ACTION_POST_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       ApiService.post(`${path}`, body)
-        .then((res) => {
+        .then(res => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_ADD_DATA_REKENING, {
               rekeningtype: rekeningtype,
               item: res.data.data[0],
-              page: false,
+              page: false
             });
             resolve(true);
           } else {
             resolve(false);
           }
         })
-        .catch((e) => {
+        .catch(e => {
           resolve(false);
         });
     });
@@ -150,20 +150,20 @@ const actions = {
    * @param {rekeningtype,path,body}
    */
   [ACTION_PUT_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       ApiService.put(`${path}/${body.id}`, body)
-        .then((res) => {
+        .then(res => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_UPDATE_DATA_REKENING, {
               rekeningtype: rekeningtype,
               data: res.data.data[0],
-              olddata: body,
+              olddata: body
             });
           } else {
             resolve(false);
           }
         })
-        .catch((e) => {
+        .catch(e => {
           resolve(false);
         });
     });
@@ -173,23 +173,23 @@ const actions = {
    * @param {rekeningtype,body,path}
    */
   [ACTION_DELETE_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       ApiService.delete(`${path}/${body.id}`)
-        .then((res) => {
+        .then(res => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_DELETE_DATA_REKENING, {
               rekeningtype: rekeningtype,
-              data: body,
+              data: body
             });
           } else {
             resolve(false);
           }
         })
-        .catch((e) => {
+        .catch(e => {
           resolve(false);
         });
     });
-  },
+  }
   /***
    * delete pembiayaan
    *
@@ -206,7 +206,7 @@ const mutations = {
     //push data with type rekening assosiated
     switch (rekeningtype) {
       case RPEMBIAYAAN:
-        var exist = state.datapembiayaan.some((pembiayaan) => {
+        var exist = state.datapembiayaan.some(pembiayaan => {
           return pembiayaan.id == item.id;
         });
         //assume the data/item is doesnt exist
@@ -219,7 +219,7 @@ const mutations = {
           : null;
         break;
       case RSIMPANAN:
-        var exist = state.datasimpanan.some((simpanan) => {
+        var exist = state.datasimpanan.some(simpanan => {
           return simpanan.id == item.id;
         });
         //assume the data/item is doesnt exist
@@ -232,7 +232,7 @@ const mutations = {
           : null;
         break;
       case RDEPOSITO:
-        var exist = state.datadeposito.some((deposito) => {
+        var exist = state.datadeposito.some(deposito => {
           return deposito.id == item.id;
         });
         //assume the data/item is doesnt exist
@@ -258,19 +258,19 @@ const mutations = {
       case RSIMPANAN:
         //update to data
         var index = state.datasimpanan
-          .map((simpanan) => simpanan.id)
+          .map(simpanan => simpanan.id)
           .indexOf(olddata.id);
         Object.assign(state.datasimpanan[index], data);
         break;
       case RDEPOSITO:
         var index = state.datadeposito
-          .map((deposito) => deposito.id)
+          .map(deposito => deposito.id)
           .indexOf(olddata.id);
         Object.assign(state.datadeposito[index], data);
         break;
       case RPEMBIAYAAN:
         var index = state.datapembiayaan
-          .map((pembiayaan) => pembiayaan.id)
+          .map(pembiayaan => pembiayaan.id)
           .indexOf(olddata.id);
         Object.assign(state.datapembiayaan[index], data);
 
@@ -285,19 +285,19 @@ const mutations = {
     switch (rekeningtype) {
       case RDEPOSITO:
         var index = state.datadeposito
-          .map((deposito) => deposito.id)
+          .map(deposito => deposito.id)
           .indexOf(data.id);
         state.datadeposito.splice(index);
         break;
       case RPEMBIAYAAN:
         var index = state.datapembiayaan
-          .map((deposito) => deposito.id)
+          .map(deposito => deposito.id)
           .indexOf(data.id);
         state.datapembiayaan.splice(index);
         break;
       case RSIMPANAN:
         var index = state.datasimpanan
-          .map((deposito) => deposito.id)
+          .map(deposito => deposito.id)
           .indexOf(data.id);
         state.datasimpanan.splice(index);
         break;
@@ -312,6 +312,6 @@ const mutations = {
   },
   setDepositoSearch(state, val) {
     state.deposito.search = val;
-  },
+  }
 };
-export default { namespaed: true, state, getters, actions, mutations };
+export default { namespaced: true, state, getters, actions, mutations };

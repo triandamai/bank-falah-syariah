@@ -89,7 +89,11 @@
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
-import { ACTION_DELETE_DATA_REKENING, RDEPOSITO } from "../../../store";
+import {
+  ACTION_DELETE_DATA_REKENING,
+  ACTION_GET_DATA_REKENING,
+  RDEPOSITO,
+} from "../../../store";
 export default {
   name: "DataAkad",
   computed: {
@@ -106,8 +110,22 @@ export default {
       },
     },
   },
-
+  created() {
+    this.getDeposito();
+  },
   methods: {
+    getDeposito() {
+      this.$store
+        .dispatch("rekening/" + ACTION_GET_DATA_REKENING, {
+          rekeningtype: RDEPOSITO,
+          path: "/rekening_deposito",
+        })
+        .then((res) => {
+          if (res) {
+            this.getDepostio();
+          }
+        });
+    },
     editDeposito(deposito) {
       Swal.fire({
         title: "Rubah data " + deposito.nasabah + " ?",
