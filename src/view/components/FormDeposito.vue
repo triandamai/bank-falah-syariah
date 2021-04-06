@@ -32,6 +32,7 @@
         <label>Pegawai</label>
         <input
           type="text"
+          v-model="pegawai_name"
           class="form-control form-control-solid form-control-lg"
           placeholder="Trian Damai"
           @click="dialognasabah = !dialognasabah"
@@ -70,11 +71,11 @@
     <!--end: Wizard Step 1-->
 
     <!--begin: Wizard Actions -->
-    <div class="d-flex justify-content-between border-top pt-10">
+    <div class="pt-10 d-flex justify-content-between border-top">
       <div class="mr-2">
         <button
           type="button"
-          class="btn btn-light-primary font-weight-bold text-uppercase px-9 py-4"
+          class="py-4 btn btn-light-primary font-weight-bold text-uppercase px-9"
         >
           Batal
         </button>
@@ -82,7 +83,7 @@
       <div>
         <button
           type="submit"
-          class="btn btn-success font-weight-bold text-uppercase px-9 py-4"
+          class="py-4 btn btn-success font-weight-bold text-uppercase px-9"
         >
           Simpan
         </button>
@@ -106,19 +107,16 @@
 /*eslint-disable*/
 import { mapState } from "vuex";
 import { ACTION_GET_DATA_SYSTEM, SUSER } from "@/store";
+import { getUser } from "../../core/services/jwt.service";
 
 export default {
   name: "FormUser",
   data: () => {
     return {
-      id: "",
-      username: "",
-      password: "",
-      email: "",
-      role: "",
-      group: "",
-      dialoguser: false,
-      dialognasabah: false,
+      nasabah_id: "",
+      nasabah_name: "",
+      pegawai_id: "",
+      pegawai_name: "",
     };
   },
 
@@ -137,19 +135,14 @@ export default {
     if (this.$route.params.id) {
       // this.getUserById(this.$route.params.id);
     }
-    this.getUsers();
+
+    const pegawai = getUser();
+    this.pegawai_name = pegawai.username;
+    this.pegawai_id = pegawai.id;
+
+    this.console.log(getUser());
   },
   methods: {
-    getUsers() {
-      this.$store
-        .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
-          systemtye: SUSER,
-          path: "users",
-        })
-        .then((res) => {
-          if (res) this.getUsers();
-        });
-    },
     submit() {
       if (this.isEdit) {
         if (this.username && this.email && this.role && this.group) {
