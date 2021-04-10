@@ -116,6 +116,8 @@ export default {
       nasabah_name: "",
       pegawai_id: "",
       pegawai_name: "",
+      dialoguser: false,
+      dialognasabah: false,
     };
   },
 

@@ -38,8 +38,7 @@ export default {
   },
   computed: {
     ...mapState({
-      items: (state) => state.system.datausers,
-      header: (state) => state.system.user.header,
+      items: (state) => state.nasabah.datanasabah,
     }),
   },
 
