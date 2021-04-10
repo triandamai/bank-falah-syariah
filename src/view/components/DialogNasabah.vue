@@ -41,7 +41,9 @@ export default {
       items: (state) => state.nasabah.datanasabah,
     }),
   },
-
+  created() {
+    console.log(this.items);
+  },
   methods: {
     close() {
       this.$emit("close", true);
