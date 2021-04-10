@@ -139,7 +139,7 @@ export default {
     this.pegawai_name = pegawai.username;
     this.pegawai_id = pegawai.id;
 
-    this.console.log(getUser());
+    console.log(getUser());
   },
   methods: {
     submit() {

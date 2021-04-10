@@ -27,7 +27,7 @@ import Vue from "vue";
 // https://github.com/vuetifyjs/vuetify/issues/9999
 const ignoreWarnMessage = `The .native modifier for v-on is only valid on components but it was used on <div>.`;
 // eslint-disable-next-line no-unused-vars
-Vue.config.warnHandler = function(msg, vm, trace) {
+Vue.config.warnHandler = function (msg, vm, trace) {
   if (msg === ignoreWarnMessage) {
     msg = null;
     vm = null;
@@ -36,6 +36,6 @@ Vue.config.warnHandler = function(msg, vm, trace) {
 };
 
 export default {
-  components: {}
+  components: {},
 };
 </script>

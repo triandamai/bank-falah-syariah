@@ -244,7 +244,7 @@ export default {
       console.log("up");
 
       const body = {
-        kode_nasabah: `${Date.now()}`,
+        kode_nasabah: `123`,
         nama_lengkap: this.NamaLengkap,
         nama_panggilan: this.NamaPanggilan,
         jenis_kelamin: this.JenisKelamin,
