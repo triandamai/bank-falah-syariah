@@ -189,7 +189,7 @@ export default {
           produk_id: this.produk.id,
           nasabah_id: this.nasabah_id,
           pegawai_id: this.pegawai_id,
-          nila_deposito: this.nilai,
+          nilai_deposito: this.nilai,
         });
         // }
       } else {
@@ -208,7 +208,7 @@ export default {
           produk_id: this.produk.id,
           nasabah_id: this.nasabah_id,
           pegawai_id: this.pegawai_id,
-          nila_deposito: this.nilai,
+          nilai_deposito: this.nilai,
         });
         // }
       }
