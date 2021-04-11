@@ -13,7 +13,7 @@
       data-wizard-state="current"
     >
       <h3 class="mb-10 font-weight-bold text-dark">
-        Menambahkan Rekening Deposito
+        Menambahkan Rekening Pembiayaan
       </h3>
       <div class="form-group">
         <label>Nasabah</label>
@@ -21,7 +21,8 @@
           type="text"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: Zaenur Rochman"
-          @click="dialoguser = !dialoguser"
+          v-model="nasabah.nama_lengkap"
+          @click="dialognasabah = !dialognasabah"
         />
         <span class="form-text text-muted"
           >Masukkan Nasaba ayang akan dibuat rekening.</span
@@ -32,9 +33,9 @@
         <label>Pegawai</label>
         <input
           type="text"
+          v-model="pegawai_name"
           class="form-control form-control-solid form-control-lg"
           placeholder="Trian Damai"
-          @click="dialognasabah = !dialognasabah"
         />
         <span class="form-text text-muted">Pegawai yang melayani.</span>
       </div>
@@ -42,9 +43,10 @@
         <label>Produk</label>
         <input
           type="text"
+          v-model="produk.nama_produk"
           class="form-control form-control-solid form-control-lg"
           placeholder="Trian Damai"
-          @click="dialogpembiayaan = !dialogpembiayaan"
+          @click="dialogproduk = !dialogproduk"
         />
         <span class="form-text text-muted">Produk yang dipakai.</span>
       </div>
@@ -52,6 +54,7 @@
         <label>Tanggal Pencairan</label>
         <input
           type="date"
+          v-model="tgl_pencairan"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh:01-04-202"
         />
@@ -61,33 +64,40 @@
         <label>jatuh Tempo</label>
         <input
           type="date"
+          v-model="tgl_jatuh_tempo"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: 01-04-2021"
         />
         <span class="form-text text-muted">Pilih tanggal jatuh tempo.</span>
       </div>
+
+      <div class="form-group">
+        <label>Tipe Angsuran</label>
+        <select
+          v-model="tipe_angsuran"
+          class="form-control form-control-solid form-control-lg"
+        >
+          <option value="0" selected>Pilih Tipe</option>
+          <option value="1">Minguan</option>
+          <option value="2">Harian</option>
+        </select>
+        <span class="form-text text-muted">Masukkan Negara.</span>
+      </div>
       <div class="form-group">
         <label>Lama Angsuran</label>
         <input
           type="number"
+          v-model="lama_angsuran"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: Rp 10 000"
         />
         <span class="form-text text-muted">Masukkan durasi angsuran.</span>
       </div>
       <div class="form-group">
-        <label>Tipe Angsuran</label>
-        <input
-          type="number"
-          class="form-control form-control-solid form-control-lg"
-          placeholder="Contoh: Rp 10 000"
-        />
-        <span class="form-text text-muted">Masukkan Tipe Angsuran.</span>
-      </div>
-      <div class="form-group">
         <label>Modal</label>
         <input
           type="number"
+          v-model="modal"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: Rp 10 000"
         />
@@ -110,6 +120,7 @@
       <div>
         <button
           type="submit"
+          @click="submit"
           class="py-4 btn btn-success font-weight-bold text-uppercase px-9"
         >
           Simpan
@@ -118,41 +129,42 @@
     </div>
     <!--end: Wizard Actions -->
     <!-- <v-row justify="center"> -->
-    <dialog-user
-      :show="dialoguser"
-      @choose="dialoguser = !dialoguser"
-      @close="dialoguser = !dialoguser"
-    />
+
     <dialog-nasabah
       :show="dialognasabah"
       @close="dialognasabah = !dialognasabah"
-      @choose="dialognasabah = !dialognasabah"
+      @choose="onNasabahChoose"
     />
     <dialog-produk
-      :show="dialogpembiayaan"
-      @close="dialogpembiayaan = !dialogpembiayaan"
-      @choose="dialogpembiayaan = !dialogpembiayaan"
+      :show="dialogproduk"
+      @close="dialogproduk = !dialogproduk"
+      @choose="onProdukChoose"
     />
   </form>
 </template>
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
-import { ACTION_GET_DATA_SYSTEM, SUSER } from "@/store";
+import { getUser } from "../../store";
 
 export default {
   name: "FormUser",
+  props: ["isEdit"],
   data: () => {
     return {
-      id: "",
-      username: "",
-      password: "",
-      email: "",
-      role: "",
-      group: "",
-      dialoguser: false,
+      tgl_pencairan: "",
+      tgl_jatuh_tempo: "",
+      nasabah_id: "",
+      produk_id: "",
+      pegawai_id: "",
+      lama_angsuran: "",
+      tipe_angsuran: "0",
+      modal: "",
+      pegawai_name: "",
+      nasabah: {},
+      produk: {},
       dialognasabah: false,
-      dialogpembiayaan: false,
+      dialogproduk: false,
     };
   },
 
@@ -168,54 +180,46 @@ export default {
     //form
   },
   created() {
-    if (this.$route.params.id) {
-      // this.getUserById(this.$route.params.id);
-    }
-    this.getUsers();
+    const user = getUser();
+    this.pegawai_name = user.username;
+    this.pegawai_id = user.id;
   },
   methods: {
-    getUsers() {
-      this.$store
-        .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
-          systemtye: SUSER,
-          path: "users",
-        })
-        .then((res) => {
-          if (res) this.getUsers();
-        });
+    onProdukChoose(produk) {
+      this.dialogproduk = !this.dialogproduk;
+      this.produk_id = produk.id;
+      this.produk = produk;
+    },
+    onNasabahChoose(nasabah) {
+      this.dialognasabah = !this.dialognasabah;
+      this.nasabah_id = nasabah.id;
+      this.nasabah = nasabah;
     },
     submit() {
       if (this.isEdit) {
-        if (this.username && this.email && this.role && this.group) {
-          this.$emit("buttonsubmit", {
-            id: this.id,
-            username: this.username,
-            email: this.email,
-            role_id: this.role,
-            group_id: this.group,
-            //try use pass
-            password: "admin123",
-            active: 1,
-          });
-        }
+        // if (this.username && this.email && this.role && this.group) {
+        this.$emit("onsubmit", {
+          tgl_pencairan: this.tgl_pencairan,
+          tgl_jatuh_tempo: this.tgl_jatuh_tempo,
+          nasabah_id: this.nasabah_id,
+          produk_id: this.produk_id,
+          pegawai_id: this.pegawai_id,
+          lama_angsuran: this.lama_angsuran,
+          tipe_angsuran: this.tipe_angsuran,
+          modal: this.modal,
+        });
+        // }
       } else {
-        if (
-          this.username &&
-          this.password &&
-          this.email &&
-          this.role &&
-          this.group
-        ) {
-          this.$emit("buttonsubmit", {
-            id: this.id,
-            username: this.username,
-            email: this.email,
-            role_id: this.role,
-            group_id: this.group,
-            password: this.password,
-            active: 1,
-          });
-        }
+        this.$emit("onsubmit", {
+          tgl_pencairan: this.tgl_pencairan,
+          tgl_jatuh_tempo: this.tgl_jatuh_tempo,
+          nasabah_id: this.nasabah_id,
+          produk_id: this.produk_id,
+          pegawai_id: this.pegawai_id,
+          lama_angsuran: this.lama_angsuran,
+          tipe_angsuran: this.tipe_angsuran,
+          modal: this.modal,
+        });
       }
     },
   },

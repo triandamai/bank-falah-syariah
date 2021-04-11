@@ -12,7 +12,7 @@
         <div class="row justify-content-center my-10 px-8 my-lg-15 px-lg-10">
           <div class="col-xl-12 col-xxl-7">
             <!--begin: Wizard Form-->
-            <form-deposito :isEdit="false" @buttonsubmit="submit" />
+            <form-pembiayaan :isEdit="false" @onsubmit="submit" />
             <!--end: Wizard Form-->
           </div>
         </div>
@@ -43,10 +43,11 @@ export default {
   },
   methods: {
     submit(val) {
+      console.log(val);
       this.$store
-        .dispatch("system/" + ACTION_POST_DATA_REKENING, {
+        .dispatch("rekening/" + ACTION_POST_DATA_REKENING, {
           systemtype: RPEMBIAYAAN,
-          path: "pembiayaan",
+          path: "rekening_pembiayaan",
           body: val,
         })
         .then(({ success, message }) => {
