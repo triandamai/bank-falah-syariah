@@ -49,7 +49,19 @@
             :headers="datatable.headers"
             :items="nasabah"
             :search="datatable.search"
-          ></v-data-table>
+          >
+            <template v-slot:[`item.action`]="{ item }">
+              <b-button-toolbar
+                aria-label="Toolbar with button groups and dropdown menu"
+              >
+                <b-button-group class="mx-1">
+                  <b-button @click="editNasabah(item)">Ubah</b-button>
+                  <b-button @click="editNasabah(item)">Detail</b-button>
+                  <b-button>Hapus</b-button>
+                </b-button-group>
+              </b-button-toolbar>
+            </template>
+          </v-data-table>
         </v-card>
       </div>
     </div>
@@ -93,6 +105,9 @@ export default {
         })
         .catch((e) => {});
     },
+
+    editNasabah(val) {},
+    deleteNasabah(val) {},
   },
 };
 </script>

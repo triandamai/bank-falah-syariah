@@ -1,15 +1,15 @@
 <template>
   <v-dialog v-model="show" @click:outside="close" scrollable max-width="300px">
     <v-card>
-      <v-card-title>Select Country</v-card-title>
+      <v-card-title>Pilih Nasabah</v-card-title>
       <v-divider></v-divider>
       <v-card-text style="height: 300px">
-        <v-radio-group column>
+        <v-radio-group column v-model="value">
           <v-radio
             v-for="(item, index) in items"
             :key="index"
-            label="Bahamas, The"
-            value="bahamas"
+            :label="item.nama_lengkap"
+            :value="item"
           ></v-radio>
         </v-radio-group>
       </v-card-text>
@@ -23,10 +23,12 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import { ACTION_GET_NASABAH } from "../../store";
 export default {
   props: ["show"],
   data: () => ({
     dialog: false,
+    value: {},
   }),
   watch: {
     show: {
@@ -42,14 +44,21 @@ export default {
     }),
   },
   created() {
-    console.log(this.items);
+    this.getAllNasabah();
   },
   methods: {
+    getAllNasabah() {
+      this.$store.dispatch("nasabah/" + ACTION_GET_NASABAH).then((res) => {
+        if (res) {
+          this.getAllNasabah();
+        }
+      });
+    },
     close() {
       this.$emit("close", true);
     },
     choose() {
-      this.$emit("choose", true);
+      this.$emit("choose", this.value);
     },
   },
 };

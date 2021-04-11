@@ -19,7 +19,7 @@
           <div class="col-xl-12 col-xxl-7">
             <!--begin: Wizard Form-->
 
-            <form-deposito :isEdit="false" @buttonSubmit="submit" />
+            <form-deposito :isEdit="false" @submit="submit" />
             <!--end: Wizard Form-->
           </div>
         </div>
@@ -37,7 +37,7 @@
 <script>
 /*eslint-disable*/
 import Swal from "sweetalert2";
-import { ACTION_POST_DATA_SYSTEM, SUSER } from "@/store";
+import { ACTION_POST_DATA_REKENING, RDEPOSITO } from "../../../store";
 import { mapState } from "vuex";
 
 export default {
@@ -50,10 +50,11 @@ export default {
   },
   methods: {
     submit(val) {
+      console.log(val);
       this.$store
-        .dispatch("system/" + ACTION_POST_DATA_SYSTEM, {
-          systemtype: SUSER,
-          path: "user",
+        .dispatch("rekening/" + ACTION_POST_DATA_REKENING, {
+          systemtype: RDEPOSITO,
+          path: "rekening_deposito",
           body: val,
         })
         .then(({ success, message }) => {

@@ -21,7 +21,8 @@
           type="text"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: Zaenur Rochman"
-          @click="dialoguser = !dialoguser"
+          v-model="nasabah_name"
+          @click="dialognasabah = !dialognasabah"
         />
         <span class="form-text text-muted"
           >Masukkan Nasaba a=yang akan dibuat rekening.</span
@@ -35,7 +36,6 @@
           v-model="pegawai_name"
           class="form-control form-control-solid form-control-lg"
           placeholder="Trian Damai"
-          @click="dialognasabah = !dialognasabah"
         />
         <span class="form-text text-muted">Pegawai yang melayani.</span>
       </div>
@@ -45,6 +45,7 @@
           type="date"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh:01-04-202"
+          v-model="tanggal_buka"
         />
         <span class="form-text text-muted">Pilih tanggal pembuatan.</span>
       </div>
@@ -54,6 +55,7 @@
           type="date"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: 01-04-2021"
+          v-model="tanggal_tempo"
         />
         <span class="form-text text-muted">Pilih tanggal jatuh tempo.</span>
       </div>
@@ -63,6 +65,7 @@
           type="number"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: Rp 10 000"
+          v-model="nilai"
         />
         <span class="form-text text-muted">Masukkan Nilai deposito user.</span>
       </div>
@@ -91,15 +94,11 @@
     </div>
     <!--end: Wizard Actions -->
     <!-- <v-row justify="center"> -->
-    <dialog-user
-      :show="dialoguser"
-      @choose="dialoguser = !dialoguser"
-      @close="dialoguser = !dialoguser"
-    />
+
     <dialog-nasabah
       :show="dialognasabah"
       @close="dialognasabah = !dialognasabah"
-      @choose="dialognasabah = !dialognasabah"
+      @choose="ondialogChoose"
     />
   </form>
 </template>
@@ -112,10 +111,14 @@ export default {
   name: "FormUser",
   data: () => {
     return {
+      id: "",
       nasabah_id: "",
       nasabah_name: "",
       pegawai_id: "",
       pegawai_name: "",
+      tanggal_buka: "",
+      tanggal_tempo: "",
+      nilai: "",
       dialoguser: false,
       dialognasabah: false,
     };
@@ -141,41 +144,44 @@ export default {
     this.pegawai_name = pegawai.username;
     this.pegawai_id = pegawai.id;
 
-    console.log(getUser());
+    // console.log(getUser());
   },
   methods: {
+    ondialogChoose(nasabah) {
+      this.dialognasabah = !this.dialognasabah;
+      this.nasabah_id = nasabah.id;
+      this.nasabah_name = nasabah.nama_lengkap;
+    },
     submit() {
       if (this.isEdit) {
-        if (this.username && this.email && this.role && this.group) {
-          this.$emit("buttonsubmit", {
-            id: this.id,
-            username: this.username,
-            email: this.email,
-            role_id: this.role,
-            group_id: this.group,
-            //try use pass
-            password: "admin123",
-            active: 1,
-          });
-        }
+        // if (this.username && this.email && this.role && this.group) {
+        this.$emit("submit", {
+          id: this.id,
+          tgl_buka: this.tanggal_buka,
+          tgl_jatuh_tempo: this.tanggal_tempo,
+          nasabah_id: this.nasabah_id,
+          pegawai_id: this.pegawai_id,
+          nila_deposito: this.nilai,
+        });
+        // }
       } else {
-        if (
-          this.username &&
-          this.password &&
-          this.email &&
-          this.role &&
-          this.group
-        ) {
-          this.$emit("buttonsubmit", {
-            id: this.id,
-            username: this.username,
-            email: this.email,
-            role_id: this.role,
-            group_id: this.group,
-            password: this.password,
-            active: 1,
-          });
-        }
+        // if (
+        //   this.username &&
+        //   this.password &&
+        //   this.email &&
+        //   this.role &&
+        //   this.group
+        // ) {
+
+        this.$emit("submit", {
+          id: this.id,
+          tgl_buka: this.tanggal_buka,
+          tgl_jatuh_tempo: this.tanggal_tempo,
+          nasabah_id: this.nasabah_id,
+          pegawai_id: this.pegawai_id,
+          nila_deposito: this.nilai,
+        });
+        // }
       }
     },
   },

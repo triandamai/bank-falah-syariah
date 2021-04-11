@@ -11,7 +11,7 @@ import {
   headerdatajenistransaksi,
   headerdataproduk,
   headerdatapegawai,
-  headerdatajabatan,
+  headerdatajabatan
 } from "../utils/headers";
 
 export const ACTION_GET_DATA_MASTER = "GETMASTERDATA";
@@ -39,20 +39,20 @@ const state = {
     header: headerdataakad,
     dialog: false,
     current_page: 0,
-    last_page: 0,
+    last_page: 0
   },
   formakad: {
     tipe_akad: "",
     nama_akad: "",
     kode_akad: "",
-    active: "",
+    active: ""
   },
   datajenistransaksi: [],
   jenistransaksi: {
     search: "",
     header: headerdatajenistransaksi,
     current_page: 0,
-    last_page: 0,
+    last_page: 0
   },
   formjenistransaksi: {},
   dataproduk: [],
@@ -60,7 +60,7 @@ const state = {
     search: "",
     header: headerdataproduk,
     current_page: 0,
-    last_page: 0,
+    last_page: 0
   },
   formproduk: {},
   datajabatan: [],
@@ -69,7 +69,7 @@ const state = {
     header: headerdatajabatan,
     dialog: false,
     current_page: 0,
-    last_page: 0,
+    last_page: 0
   },
   formjabatan: {},
   datapegawai: [],
@@ -78,9 +78,9 @@ const state = {
     header: headerdatapegawai,
     dialog: false,
     current_page: 0,
-    last_page: 0,
+    last_page: 0
   },
-  formpegawai: {},
+  formpegawai: {}
 };
 const getters = {};
 const actions = {
@@ -91,7 +91,7 @@ const actions = {
    * and add data to array smoothly
    */
   [ACTION_GET_DATA_MASTER]({ commit, state }, { mastertype, path, id }) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       //get current page
       let page = `?page=`;
       let stillPaging = false;
@@ -113,28 +113,28 @@ const actions = {
           break;
       }
       ApiService.get(`${path}${page}`)
-        .then((res) => {
+        .then(res => {
           if (res.status == 200 || res.status == 201) {
             if (res.data.current_page >= res.data.last_page) {
               resolve(false);
-              stillPaging = fasle;
+              stillPaging = false;
             } else {
               resolve(true);
               stillPaging = true;
             }
             console.log("ex");
-            res.data.data.map((item) => {
+            res.data.data.map(item => {
               commit(MUTATION_ADD_DATA_MASTER, {
                 mastertype: mastertype,
                 data: item,
-                page: stillPaging,
+                page: stillPaging
               });
             });
           } else {
             resolve(false);
           }
         })
-        .catch((e) => {
+        .catch(e => {
           resolve(false);
         });
     });
@@ -147,26 +147,26 @@ const actions = {
    *
    */
   [ACTION_POST_DATA_MASTER]({ commit }, { mastertype, path, body }) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       ApiService.post(`${path}`, body)
-        .then((res) => {
+        .then(res => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_ADD_DATA_MASTER, {
               mastertype: mastertype,
-              data: res.data.data[0],
+              data: res.data.data[0]
             });
             resolve({ success: true, message: "Berhasil menambah data" });
           } else {
             resolve({
               success: false,
-              message: res.data.message ?? "Gagal coba lagi nanti",
+              message: res.data.message ?? "Gagal coba lagi nanti"
             });
           }
         })
-        .catch((e) => {
+        .catch(e => {
           resolve({
             success: false,
-            message: e.response.data.message ?? "Gagal coba lagi nanti",
+            message: e.response.data.message ?? "Gagal coba lagi nanti"
           });
         });
     });
@@ -179,27 +179,27 @@ const actions = {
    *
    */
   [ACTION_PUT_DATA_MASTER]({ commit }, { mastertype, path, body }) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       ApiService.put(`${path}/${body.id}`, body)
-        .then((res) => {
+        .then(res => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_PUT_DATA_MASTER, {
               systemtype: systemtype,
               data: res.data.data[0],
-              olddata: body,
+              olddata: body
             });
             resolve({ success: true, message: "Berhasil mengubah!" });
           } else {
             resolve({
               success: false,
-              message: res.data.message ?? "Gagal coba lagi nanti",
+              message: res.data.message ?? "Gagal coba lagi nanti"
             });
           }
         })
-        .catch((e) => {
+        .catch(e => {
           resolve({
             success: false,
-            message: e.response.data.message ?? "Gaga coba lagi nanti",
+            message: e.response.data.message ?? "Gaga coba lagi nanti"
           });
         });
     });
@@ -211,30 +211,30 @@ const actions = {
    * @returns if success it will update data no need reload data from service
    */
   [ACTION_DELETE_DATA_MASTER]({ commit }, { mastertype, path, body }) {
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       ApiService.delete(`${path}/${body.id}`)
-        .then((res) => {
+        .then(res => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_DELETE_DATA_MASTER, {
               systemtype: systemtype,
-              data: body,
+              data: body
             });
             resolve({ success: true, message: "Berhasil menghapus!" });
           } else {
             resolve({
               success: false,
-              message: res.data.message ?? "Gagal coba lagi nanti",
+              message: res.data.message ?? "Gagal coba lagi nanti"
             });
           }
         })
-        .catch((e) => {
+        .catch(e => {
           resolve({
             success: true,
-            message: e.response.data.message ?? "Berhasil mengubah!",
+            message: e.response.data.message ?? "Berhasil mengubah!"
           });
         });
     });
-  },
+  }
 };
 const mutations = {
   /***
@@ -245,7 +245,7 @@ const mutations = {
   [MUTATION_ADD_DATA_MASTER](state, { mastertype, data, page }) {
     switch (mastertype) {
       case MAKAD:
-        var exist = state.dataakad.some((akad) => {
+        var exist = state.dataakad.some(akad => {
           return akad.id == data.id;
         });
         if (!exist) {
@@ -254,7 +254,7 @@ const mutations = {
         page ? state.akad.current_page++ : null;
         break;
       case MJABATAN:
-        var exist = state.datajabatan.some((jabatan) => {
+        var exist = state.datajabatan.some(jabatan => {
           return jabatan.id == data.id;
         });
         if (!exist) {
@@ -264,7 +264,7 @@ const mutations = {
         break;
       case MJENISTRANSAKSI:
         console.log(data);
-        var exist = state.datajenistransaksi.some((jenis) => {
+        var exist = state.datajenistransaksi.some(jenis => {
           return jenis.id == data.id;
         });
         if (!exist) {
@@ -273,7 +273,7 @@ const mutations = {
         page ? state.jenistransaksi.current_page++ : null;
         break;
       case MPEGAWAI:
-        var exist = state.datapegawai.some((pegawai) => {
+        var exist = state.datapegawai.some(pegawai => {
           return pegawai.id == data.id;
         });
         if (!exist) {
@@ -282,7 +282,7 @@ const mutations = {
         page ? state.pegawai.current_page++ : null;
         break;
       case MPRODUK:
-        var exist = state.dataproduk.some((produk) => {
+        var exist = state.dataproduk.some(produk => {
           return produk.id == data.id;
         });
         page ? state.produk.current_page++ : null;
@@ -299,30 +299,30 @@ const mutations = {
   [MUTATION_PUT_DATA_MASTER](state, { mastertype, data, olddata }) {
     switch (mastertype) {
       case MAKAD:
-        var index = state.dataakad.map((akad) => akad.id).indexOf(olddata.id);
+        var index = state.dataakad.map(akad => akad.id).indexOf(olddata.id);
         Object.assign(state.dataakad[index], data);
         break;
       case MJABATAN:
         var index = state.datajabatan
-          .map((jabatan) => jabatan.id)
+          .map(jabatan => jabatan.id)
           .indexOf(olddata.id);
         Object.assign(state.datajabatan[index], data);
         break;
       case MJENISTRANSAKSI:
         var index = state.datajenistransaksi
-          .map((jenis) => jenis.id)
+          .map(jenis => jenis.id)
           .indexOf(olddata.id);
         Object.assign(state.datajenistransaksi[index], data);
         break;
       case MPEGAWAI:
         var index = state.datapegawai
-          .map((pegawai) => pegawai.id)
+          .map(pegawai => pegawai.id)
           .indexOf(olddata.id);
         Object.assign(state.datapegawai[index], data);
         break;
       case MPRODUK:
         var index = state.dataproduk
-          .map((produk) => produk.id)
+          .map(produk => produk.id)
           .indexOf(olddata.id);
         Object.assign(state.dataproduk[index], data);
         break;
@@ -336,31 +336,29 @@ const mutations = {
   [MUTATION_DELETE_DATA_MASTER](state, { mastertype, data }) {
     switch (mastertype) {
       case MAKAD:
-        var index = state.dataakad.map((akad) => akad.id).indexOf(data.id);
+        var index = state.dataakad.map(akad => akad.id).indexOf(data.id);
         state.dataakad.splice(index);
         break;
       case MJABATAN:
         var index = state.datajabatan
-          .map((jabatan) => jabatan.id)
+          .map(jabatan => jabatan.id)
           .indexOf(data.id);
         state.datajabatan.splice(index);
         break;
       case MJENISTRANSAKSI:
         var index = state.datajenistransaksi
-          .map((jenis) => jenis.id)
+          .map(jenis => jenis.id)
           .indexOf(data.id);
         state.datajenistransaksi.splice(index);
         break;
       case MPEGAWAI:
         var index = state.datapegawai
-          .map((pegawai) => pegawai.id)
+          .map(pegawai => pegawai.id)
           .indexOf(data.id);
         state.dataproduk.splice(index);
         break;
       case MPRODUK:
-        var index = state.dataproduk
-          .map((produk) => produk.id)
-          .indexOf(data.id);
+        var index = state.dataproduk.map(produk => produk.id).indexOf(data.id);
         state.dataproduk.splice(index);
         break;
     }
@@ -381,7 +379,7 @@ const mutations = {
   },
   setJabatanSearch(state, val) {
     state.jabatan.search = val;
-  },
+  }
 };
 
 export default {
@@ -389,5 +387,5 @@ export default {
   state,
   getters,
   actions,
-  mutations,
+  mutations
 };

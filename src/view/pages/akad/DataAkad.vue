@@ -66,7 +66,7 @@
             data-app
           >
             <template v-slot:[`item.active`]="{ item }">
-              <v-chip :color="getColor(item.active == 1)">
+              <v-chip>
                 {{ item.active == 1 ? "aktif" : "nonaktif" }}
               </v-chip>
             </template>
@@ -120,6 +120,14 @@
                   <v-col cols="12">
                     <v-text-field
                       type="text"
+                      label="Kode*"
+                      v-model="kode_akad"
+                      required
+                    ></v-text-field>
+                  </v-col>
+                  <v-col cols="12">
+                    <v-text-field
+                      type="text"
                       label="Nama*"
                       v-model="nama_akad"
                       required
@@ -128,7 +136,7 @@
                   <v-col cols="12">
                     <v-text-field
                       label="Deskripsi*"
-                      v-model="kode_akad"
+                      v-model="dekripsi_akad"
                       type="text"
                       required
                     ></v-text-field>
@@ -171,6 +179,8 @@ import {
   ACTION_PUT_DATA_MASTER,
   ACTION_DELETE_DATA_MASTER,
 } from "../../../store";
+import Swal from "sweetalert2";
+
 export default {
   name: "DataAkad",
   data: () => {
@@ -178,6 +188,7 @@ export default {
       tipe_akad: "",
       nama_akad: "",
       kode_akad: "",
+      dekripsi_akad: "",
       active: "1",
       id: "",
       dialog: false,
@@ -219,7 +230,7 @@ export default {
         this.$store
           .dispatch("master/" + ACTION_PUT_DATA_MASTER, {
             mastertype: MAKAD,
-            path: "akad/",
+            path: "akad",
             body: {
               nama_akad: this.nama_akad,
               tipe_akad: this.tipe_akad,

@@ -125,7 +125,7 @@
                     <v-text-field
                       type="text"
                       label="Nama*"
-                      v-model="kode_produk"
+                      v-model="nama_produk"
                       required
                     ></v-text-field>
                   </v-col>
