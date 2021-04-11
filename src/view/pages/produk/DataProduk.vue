@@ -108,7 +108,7 @@
         <v-card>
           <form @submit.prevent="saveProduk">
             <v-card-title>
-              <span class="headline">User Profile</span>
+              <span class="headline">Tambah Produk Baru</span>
             </v-card-title>
             <v-card-text>
               <v-container>
@@ -141,7 +141,8 @@
                     <v-text-field
                       type="text"
                       label="Akad*"
-                      v-model="akad_id"
+                      v-model="akad_nama"
+                      @click="dialogakad = true"
                       required
                     ></v-text-field>
                   </v-col>
@@ -174,6 +175,12 @@
         </v-card>
       </v-dialog>
     </v-row>
+    <!--  -->
+    <dialog-akad
+      :show="dialogakad"
+      @close="dialogakad = !dialogakad"
+      @choose="ondialogChoose"
+    />
   </div>
 </template>
 <script>
@@ -186,6 +193,8 @@ import {
   ACTION_PUT_DATA_MASTER,
   MPRODUK,
 } from "../../../store";
+
+import Swal from "sweetalert2";
 export default {
   name: "DataAkad",
   data: () => {
@@ -193,10 +202,12 @@ export default {
       tipe_produk: "",
       kode_produk: "",
       nama_produk: "",
-      akad_id: "",
+      akad_nama: "",
       id: "",
       dialog: false,
       isEdit: false,
+      dialogakad: false,
+      akad: {},
     };
   },
   computed: {
@@ -213,7 +224,9 @@ export default {
       },
     },
   },
-  created() {},
+  created() {
+    this.getProduk();
+  },
   methods: {
     /***
      * get produk and always get if res = true
@@ -231,6 +244,12 @@ export default {
           }
         });
     },
+    ondialogChoose(data) {
+      this.dialogakad = !this.dialogakad;
+      this.akad_nama = data.nama_akad;
+      this.akad = data;
+      console.log(data);
+    },
     /***
      *
      * save data to serice for update or post
@@ -243,7 +262,12 @@ export default {
           .dispatch("master/" + ACTION_PUT_DATA_MASTER, {
             mastertype: MPRODUK,
             path: "produk",
-            body: {},
+            body: {
+              tipe_produk: this.tipe_produk,
+              kode_produk: this.kode_produk,
+              nama_produk: this.nama_produk,
+              akad_id: this.akad.id,
+            },
           })
           .then(({ success, message }) => {
             if (success) {
@@ -282,7 +306,12 @@ export default {
           .dispatch("master/" + ACTION_POST_DATA_MASTER, {
             mastertype: MPRODUK,
             path: "produk",
-            body: {},
+            body: {
+              tipe_produk: this.tipe_produk,
+              kode_produk: this.kode_produk,
+              nama_produk: this.nama_produk,
+              akad_id: this.akad.id,
+            },
           })
           .then(({ success, message }) => {
             if (success) {

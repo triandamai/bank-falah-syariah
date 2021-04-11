@@ -285,6 +285,9 @@ const mutations = {
         var exist = state.dataproduk.some(produk => {
           return produk.id == data.id;
         });
+        if (!exist) {
+          state.dataproduk.push(data);
+        }
         page ? state.produk.current_page++ : null;
         break;
     }
