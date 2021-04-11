@@ -25,8 +25,6 @@
           >
         </router-link>
 
-        <b>Rekening Deposito</b>
-
         <!-- <a
           class="font-weight-bold"
           href="https://vuetifyjs.com/en/components/data-tables"

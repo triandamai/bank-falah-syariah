@@ -45,7 +45,7 @@
       <!--end::Header Menu Mobile Toggle-->
       <!--begin::Topbar Mobile Toggle-->
       <button
-        class="btn btn-hover-text-primary p-0 ml-3"
+        class="btn btn-hover-text-primary my-2 mt-4"
         id="kt_header_mobile_topbar_toggle"
         ref="kt_header_mobile_topbar_toggle"
       >

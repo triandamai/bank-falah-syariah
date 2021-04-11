@@ -19,7 +19,7 @@
       <div class="d-none d-lg-flex align-items-center mr-3">
         <!--begin::Aside Toggle-->
         <button
-          class="btn btn-icon aside-toggle ml-n3 mr-10"
+          class="btn btn-icon ml-n3"
           id="kt_aside_desktop_toggle"
           ref="kt_aside_desktop_toggle"
         >
