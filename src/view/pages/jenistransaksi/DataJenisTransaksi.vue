@@ -22,10 +22,8 @@
           "
           class="mr-3"
           variant="success"
-          >Tambahkan Akad Baru</b-button
+          >Tambahkan Jenis Transaksi</b-button
         >
-
-        <b>Data Akad</b>
 
         <!-- <a
           class="font-weight-bold"
@@ -41,7 +39,7 @@
       <div class="col-md-12">
         <v-card>
           <v-card-title>
-            Nutrition
+            Jenis Transaksi
             <v-spacer></v-spacer>
             <v-text-field
               v-model="search"
@@ -74,9 +72,9 @@
                 aria-label="Toolbar with button groups and dropdown menu"
               >
                 <b-button-group class="mx-1">
-                  <b-button @click="editUser(item)">Ubah</b-button>
-                  <b-button>Detail</b-button>
-                  <b-button @click="deleteUser(item)">Hapus</b-button>
+                  <b-button @click="toggleEdit(item)">Ubah</b-button>
+
+                  <b-button @click="toggleDelete(item)">Hapus</b-button>
                 </b-button-group>
               </b-button-toolbar>
             </template>
@@ -90,7 +88,7 @@
         <v-card>
           <form @submit.prevent="saveTransaksi">
             <v-card-title>
-              <span class="headline">User Profile</span>
+              <span class="headline">Tambahkan Jenis Transaksi</span>
             </v-card-title>
             <v-card-text>
               <v-container>
@@ -113,7 +111,7 @@
                   </v-col>
                 </v-row>
               </v-container>
-              <small>*indicates required field</small>
+              <small>*wajib diisi</small>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -123,10 +121,11 @@
                 text
                 @click="
                   {
+                    nama_transaksi = '';
+                    kode_transaksi = '';
+                    id_transaksi = '';
                     dialog = false;
                     isEdit = false;
-                    name = null;
-                    description = null;
                   }
                 "
                 >Close</v-btn
@@ -146,7 +145,9 @@ import { mapState } from "vuex";
 import {
   MJENISTRANSAKSI,
   ACTION_POST_DATA_MASTER,
+  ACTION_PUT_DATA_MASTER,
   ACTION_GET_DATA_MASTER,
+  ACTION_DELETE_DATA_MASTER,
 } from "../../../store/index";
 export default {
   name: "DataAkad",
@@ -187,15 +188,69 @@ export default {
           if (res) return this.getTransaksi();
         });
     },
+    toggleEdit(jenistransaksi) {
+      this.dialog = !this.dialog;
+      this.nama_transaksi = jenistransaksi.nama_transaksi;
+      this.kode_transaksi = jenistransaksi.kode_transaksi;
+      this.id_transaksi = jenistransaksi.id;
+      this.isEdit = true;
+    },
+    toggleDelete(jenistransaksi) {
+      Swal.fire({
+        title: "Yakin menghapus " + jenistransaksi.nama_transaksi + " ?",
+        text: "Data akann dihapus permanen!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Oke, hapus!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          this.$store
+            .dispatch("master/" + ACTION_DELETE_DATA_MASTER, {
+              mastertype: MJENISTRANSAKSI,
+              path: "jenis-transaksi",
+              body: jenistransaksi,
+            })
+            .then(({ success, message }) => {
+              if (success) {
+                Swal.fire("Dihapus!", message, "success");
+              }
+            });
+        }
+      });
+    },
     saveTransaksi() {
       if (this.isEdit) {
         //edit
+        this.$store
+          .dispatch("master/" + ACTION_PUT_DATA_MASTER, {
+            mastertype: MJENISTRANSAKSI,
+            path: `jenis-transaksi`,
+            body: {
+              id: this.id_transaksi,
+              nama_transaksi: this.nama_transaksi,
+              kode_transaksi: this.kode_transaksi,
+            },
+          })
+          .then(({ success, message }) => {
+            Swal.fire({
+              title: "",
+              text: message,
+              icon: "success",
+              confirmButtonText: "Oke",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.dialog = !this.dialog;
+              }
+            });
+          });
       } else {
         //upload
         this.$store
           .dispatch("master/" + ACTION_POST_DATA_MASTER, {
             mastertype: MJENISTRANSAKSI,
-            path: "/jenis-transaksi",
+            path: "jenis-transaksi",
             body: {
               nama_transaksi: this.nama_transaksi,
               kode_transaksi: this.kode_transaksi,

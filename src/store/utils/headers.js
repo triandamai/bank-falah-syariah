@@ -67,7 +67,11 @@ export const headerdataakad = [
   { text: "No", value: "id" },
   { text: "Nama", value: "nama_akad" },
   { text: "Kode", value: "kode_akad" },
-  { text: "Status", value: "active" }
+  { text: "Status", value: "active" },
+  {
+    text: "Aksi",
+    value: "action"
+  }
 ];
 export const headerdatajenistransaksi = [
   { text: "No", value: "id" },
@@ -82,6 +86,10 @@ export const headerdatajenistransaksi = [
   {
     text: "Dibuat pada",
     value: "created_at"
+  },
+  {
+    text: "Aksi",
+    value: "action"
   }
 ];
 export const headerdataproduk = [

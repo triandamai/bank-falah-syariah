@@ -80,17 +80,9 @@
                 aria-label="Toolbar with button groups and dropdown menu"
               >
                 <b-button-group class="mx-1">
-                  <b-button
-                    @click="
-                      {
-                        isEdit = true;
-                        dialog = true;
-                      }
-                    "
-                    >Ubah</b-button
-                  >
-                  <b-button>Detail</b-button>
-                  <b-button @click="deleteAkad(item)">Hapus</b-button>
+                  <b-button @click="toggleEditAkad(item)">Ubah</b-button>
+
+                  <b-button @click="toggleDeleteAkad(item)">Hapus</b-button>
                 </b-button-group>
               </b-button-toolbar>
             </template>
@@ -133,14 +125,6 @@
                       required
                     ></v-text-field>
                   </v-col>
-                  <v-col cols="12">
-                    <v-text-field
-                      label="Deskripsi*"
-                      v-model="dekripsi_akad"
-                      type="text"
-                      required
-                    ></v-text-field>
-                  </v-col>
                 </v-row>
               </v-container>
               <small>*indicates required field</small>
@@ -155,8 +139,10 @@
                   {
                     dialog = false;
                     isEdit = false;
-                    name = null;
-                    description = null;
+                    tipe_akad = '';
+                    nama_akad = '';
+                    kode_akad = '';
+                    id = '';
                   }
                 "
                 >Close</v-btn
@@ -188,7 +174,6 @@ export default {
       tipe_akad: "",
       nama_akad: "",
       kode_akad: "",
-      dekripsi_akad: "",
       active: "1",
       id: "",
       dialog: false,
@@ -225,6 +210,14 @@ export default {
           }
         });
     },
+    toggleEditAkad(akad) {
+      this.dialog = !this.dialog;
+      this.isEdit = true;
+      this.tipe_akad = akad.tipe_akad;
+      this.nama_akad = akad.nama_akad;
+      this.kode_akad = akad.kode_akad;
+      this.id = akad.id;
+    },
     saveAkad() {
       if (this.isEdit) {
         this.$store
@@ -232,6 +225,7 @@ export default {
             mastertype: MAKAD,
             path: "akad",
             body: {
+              id: this.id,
               nama_akad: this.nama_akad,
               tipe_akad: this.tipe_akad,
               kode_akad: this.kode_akad,
@@ -247,6 +241,7 @@ export default {
                 confirmButtonText: "Oke",
               }).then((result) => {
                 if (result.isConfirmed) {
+                  this.dialog = !this.dialog;
                 }
               });
             } else {
@@ -257,6 +252,7 @@ export default {
                 confirmButtonText: "Oke",
               }).then((result) => {
                 if (result.isConfirmed) {
+                  this.dialog = !this.dialog;
                 }
               });
             }
@@ -282,10 +278,7 @@ export default {
                 confirmButtonText: "Oke",
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.dialog = "";
-                  this.description = "";
-                  this.isEdit = false;
-                  this.id = "";
+                  this.dialog = !this.dialog;
                 }
               });
             } else {
@@ -296,20 +289,17 @@ export default {
                 confirmButtonText: "Oke",
               }).then((result) => {
                 if (result.isConfirmed) {
-                  this.dialog = "";
-                  this.description = "";
-                  this.isEdit = false;
-                  this.id = "";
+                  this.dialog = !this.dialog;
                 }
               });
             }
           });
       }
     },
-    deleteAkad(akad) {
+    toggleDeleteAkad(akad) {
       Swal.fire({
-        title: "Yakin menghapus " + akad.name + " ?",
-        text: "User yang dihapus akan hilang permanen!",
+        title: "Yakin menghapus " + akad.nama_akad + " ?",
+        text: "Data akan dihapus permanen!",
         icon: "warning",
         showCancelButton: true,
         confirmButtonColor: "#3085d6",
@@ -318,7 +308,11 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.$store
-            .dispatch("master/" + ACTION_DELETE_DATA_MASTER, {})
+            .dispatch("master/" + ACTION_DELETE_DATA_MASTER, {
+              mastertype: MAKAD,
+              path: "akad",
+              body: akad,
+            })
             .then(({ success, message }) => {
               if (success) {
                 Swal.fire({

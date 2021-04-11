@@ -184,7 +184,7 @@ const actions = {
         .then(res => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_PUT_DATA_MASTER, {
-              systemtype: systemtype,
+              mastertype: mastertype,
               data: res.data.data[0],
               olddata: body
             });
@@ -216,7 +216,7 @@ const actions = {
         .then(res => {
           if (res.status == 200 || res.status == 201) {
             commit(MUTATION_DELETE_DATA_MASTER, {
-              systemtype: systemtype,
+              mastertype: mastertype,
               data: body
             });
             resolve({ success: true, message: "Berhasil menghapus!" });
@@ -312,6 +312,7 @@ const mutations = {
         Object.assign(state.datajabatan[index], data);
         break;
       case MJENISTRANSAKSI:
+        console.log(mastertype);
         var index = state.datajenistransaksi
           .map(jenis => jenis.id)
           .indexOf(olddata.id);
