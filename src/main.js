@@ -63,6 +63,7 @@ ApiService.init();
 
 router.beforeEach((to, from, next) => {
   const user = getUser();
+  ApiService.setHeader();
   if (to.matched.some(route => route.meta.requiresAuth)) {
     if (user) {
       next();

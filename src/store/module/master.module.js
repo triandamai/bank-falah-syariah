@@ -263,7 +263,7 @@ const mutations = {
         page ? state.jabatan.current_page++ : null;
         break;
       case MJENISTRANSAKSI:
-        console.log(data);
+        // console.log(data);
         var exist = state.datajenistransaksi.some(jenis => {
           return jenis.id == data.id;
         });

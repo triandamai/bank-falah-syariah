@@ -199,7 +199,7 @@ export default {
       if (this.isEdit) {
         // if (this.username && this.email && this.role && this.group) {
         this.$emit("onsubmit", {
-          tgl_pencairan: this.tgl_pencairan,
+          tgl_pencarian: this.tgl_pencairan,
           tgl_jatuh_tempo: this.tgl_jatuh_tempo,
           nasabah_id: this.nasabah_id,
           produk_id: this.produk_id,
@@ -211,7 +211,7 @@ export default {
         // }
       } else {
         this.$emit("onsubmit", {
-          tgl_pencairan: this.tgl_pencairan,
+          tgl_pencarian: this.tgl_pencairan,
           tgl_jatuh_tempo: this.tgl_jatuh_tempo,
           nasabah_id: this.nasabah_id,
           produk_id: this.produk_id,

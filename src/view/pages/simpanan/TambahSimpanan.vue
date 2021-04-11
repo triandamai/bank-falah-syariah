@@ -30,7 +30,7 @@
 <script>
 /*eslint-disable*/
 import Swal from "sweetalert2";
-import { ACTION_POST_DATA_REKENING, RPEMBIAYAAN } from "../../../store";
+import { ACTION_POST_DATA_REKENING, RSIMPANAN } from "../../../store";
 import { mapState } from "vuex";
 
 export default {
@@ -44,9 +44,9 @@ export default {
   methods: {
     submit(val) {
       this.$store
-        .dispatch("system/" + ACTION_POST_DATA_REKENING, {
-          systemtype: RPEMBIAYAAN,
-          path: "pembiayaan",
+        .dispatch("rekening/" + ACTION_POST_DATA_REKENING, {
+          systemtype: RSIMPANAN,
+          path: "rekening_simpanan",
           body: val,
         })
         .then(({ success, message }) => {

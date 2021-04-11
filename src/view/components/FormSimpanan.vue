@@ -13,15 +13,16 @@
       data-wizard-state="current"
     >
       <h3 class="mb-10 font-weight-bold text-dark">
-        Menambahkan Rekening Deposito
+        Menambahkan Rekening Simpanan
       </h3>
       <div class="form-group">
         <label>Nasabah</label>
         <input
           type="text"
+          v-model="nasabah.nama_lengkap"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh: Zaenur Rochman"
-          @click="dialoguser = !dialoguser"
+          @click="dialognasabah = !dialognasabah"
         />
         <span class="form-text text-muted"
           >Masukkan Nasaba ayang akan dibuat rekening.</span
@@ -32,9 +33,9 @@
         <label>Pegawai</label>
         <input
           type="text"
+          v-model="pegawai_name"
           class="form-control form-control-solid form-control-lg"
           placeholder="Trian Damai"
-          @click="dialognasabah = !dialognasabah"
         />
         <span class="form-text text-muted">Pegawai yang melayani.</span>
       </div>
@@ -42,9 +43,10 @@
         <label>Produk</label>
         <input
           type="text"
+          v-model="produk.nama_produk"
           class="form-control form-control-solid form-control-lg"
           placeholder="Trian Damai"
-          @click="dialogpembiayaan = !dialogpembiayaan"
+          @click="dialogproduk = !dialogproduk"
         />
         <span class="form-text text-muted">Produk yang dipakai.</span>
       </div>
@@ -52,6 +54,7 @@
         <label>Tanggal Pembuatan</label>
         <input
           type="date"
+          v-model="tgl_buka"
           class="form-control form-control-solid form-control-lg"
           placeholder="Contoh:01-04-202"
         />
@@ -82,41 +85,36 @@
     </div>
     <!--end: Wizard Actions -->
     <!-- <v-row justify="center"> -->
-    <dialog-user
-      :show="dialoguser"
-      @choose="dialoguser = !dialoguser"
-      @close="dialoguser = !dialoguser"
-    />
+
     <dialog-nasabah
       :show="dialognasabah"
       @close="dialognasabah = !dialognasabah"
-      @choose="dialognasabah = !dialognasabah"
+      @choose="onNasabahChoose"
     />
     <dialog-produk
-      :show="dialogpembiayaan"
-      @close="dialogpembiayaan = !dialogpembiayaan"
-      @choose="dialogpembiayaan = !dialogpembiayaan"
+      :show="dialogproduk"
+      @close="dialogproduk = !dialogproduk"
+      @choose="onProdukChoose"
     />
   </form>
 </template>
 <script>
 /*eslint-disable*/
 import { mapState } from "vuex";
-import { ACTION_GET_DATA_SYSTEM, SUSER } from "@/store";
+import { getUser } from "../../store";
 
 export default {
   name: "FormUser",
+  props: ["isEdit"],
   data: () => {
     return {
-      id: "",
-      username: "",
-      password: "",
-      email: "",
-      role: "",
-      group: "",
-      dialoguser: false,
+      produk: {},
+      nasabah: {},
+      pegawai_id: "",
+      pegawai_name: "",
+      tgl_buka: "",
       dialognasabah: false,
-      dialogpembiayaan: false,
+      dialogproduk: false,
     };
   },
 
@@ -132,54 +130,34 @@ export default {
     //form
   },
   created() {
-    if (this.$route.params.id) {
-      // this.getUserById(this.$route.params.id);
-    }
-    this.getUsers();
+    const user = getUser();
+    this.pegawai_id = user.id;
+    this.pegawai_name = user.username;
   },
   methods: {
-    getUsers() {
-      this.$store
-        .dispatch("system/" + ACTION_GET_DATA_SYSTEM, {
-          systemtye: SUSER,
-          path: "users",
-        })
-        .then((res) => {
-          if (res) this.getUsers();
-        });
+    onNasabahChoose(nasabah) {
+      this.dialognasabah = !this.dialognasabah;
+      this.nasabah = nasabah;
+    },
+    onProdukChoose(produk) {
+      this.dialogproduk = !this.dialogproduk;
+      this.produk = produk;
     },
     submit() {
       if (this.isEdit) {
-        if (this.username && this.email && this.role && this.group) {
-          this.$emit("buttonsubmit", {
-            id: this.id,
-            username: this.username,
-            email: this.email,
-            role_id: this.role,
-            group_id: this.group,
-            //try use pass
-            password: "admin123",
-            active: 1,
-          });
-        }
+        this.$emit("buttonsubmit", {
+          tgl_buka: this.tgl_buka,
+          nasabah_id: this.nasabah.id,
+          pegawai_id: this.pegawai_id,
+          produk_id: this.produk.id,
+        });
       } else {
-        if (
-          this.username &&
-          this.password &&
-          this.email &&
-          this.role &&
-          this.group
-        ) {
-          this.$emit("buttonsubmit", {
-            id: this.id,
-            username: this.username,
-            email: this.email,
-            role_id: this.role,
-            group_id: this.group,
-            password: this.password,
-            active: 1,
-          });
-        }
+        this.$emit("buttonsubmit", {
+          tgl_buka: this.tgl_buka,
+          nasabah_id: this.nasabah.id,
+          pegawai_id: this.pegawai_id,
+          produk_id: this.produk.id,
+        });
       }
     },
   },

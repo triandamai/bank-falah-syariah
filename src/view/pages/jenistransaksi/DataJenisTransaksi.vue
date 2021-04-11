@@ -140,6 +140,7 @@
   </div>
 </template>
 <script>
+import Swal from "sweetalert2";
 /*eslint-disable*/
 import { mapState } from "vuex";
 import {
@@ -201,8 +202,16 @@ export default {
             },
           })
           .then(({ success, message }) => {
-            console.log(success);
-            console.log(message);
+            Swal.fire({
+              title: "",
+              text: message,
+              icon: "success",
+              confirmButtonText: "Oke",
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.dialog = !this.dialog;
+              }
+            });
           });
       }
     },
