@@ -28,7 +28,7 @@ import vuetify from "@/core/plugins/vuetify";
 import "@/core/plugins/portal-vue";
 import "@/core/plugins/bootstrap-vue";
 import "@/core/plugins/perfect-scrollbar";
-import "@/core/plugins/highlight-js";
+// import "@/core/plugins/highlight-js";
 import "@/core/plugins/inline-svg";
 import "@/core/plugins/apexcharts";
 import "@/core/plugins/metronic";
@@ -37,14 +37,14 @@ import "@mdi/font/css/materialdesignicons.css";
 //registring components
 import { upperFirst, camelCase } from "lodash";
 
-import './assets/tailwind.css'
+import "./assets/tailwind.css";
 const requireComponent = require.context(
   "./view/components",
   false,
   /[\w-]+\.vue$/
 );
 
-requireComponent.keys().forEach((fileName) => {
+requireComponent.keys().forEach(fileName => {
   //get comp config
   const componentConfig = requireComponent(fileName);
   //get PascalCase name
@@ -63,12 +63,12 @@ ApiService.init();
 
 router.beforeEach((to, from, next) => {
   const user = getUser();
-  if (to.matched.some((route) => route.meta.requiresAuth)) {
+  if (to.matched.some(route => route.meta.requiresAuth)) {
     if (user) {
       next();
     } else {
       next({
-        path: "/auth",
+        path: "/auth"
       });
     }
   } else {
@@ -89,5 +89,5 @@ new Vue({
   store,
   i18n,
   vuetify,
-  render: (h) => h(App),
+  render: h => h(App)
 }).$mount("#app");
