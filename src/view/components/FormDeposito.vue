@@ -39,6 +39,20 @@
         />
         <span class="form-text text-muted">Pegawai yang melayani.</span>
       </div>
+
+      <div class="form-group">
+        <label>Produk</label>
+        <input
+          type="text"
+          class="form-control form-control-solid form-control-lg"
+          placeholder="Contoh: Produk A"
+          v-model="produk_name"
+          @click="dialogproduk = !dialogproduk"
+        />
+        <span class="form-text text-muted"
+          >Masukkan produk akan dibuat rekening.</span
+        >
+      </div>
       <div class="form-group">
         <label>Tanggal Pembuatan</label>
         <input
@@ -98,7 +112,12 @@
     <dialog-nasabah
       :show="dialognasabah"
       @close="dialognasabah = !dialognasabah"
-      @choose="ondialogChoose"
+      @choose="onDialogNasabah"
+    />
+    <dialog-produk
+      :show="dialogproduk"
+      @close="dialogproduk = !dialogproduk"
+      @choose="onDialogProduk"
     />
   </form>
 </template>
@@ -118,9 +137,12 @@ export default {
       pegawai_name: "",
       tanggal_buka: "",
       tanggal_tempo: "",
+      produk_name: "",
+      produk: {},
       nilai: "",
       dialoguser: false,
       dialognasabah: false,
+      dialogproduk: false,
     };
   },
 
@@ -147,10 +169,15 @@ export default {
     // console.log(getUser());
   },
   methods: {
-    ondialogChoose(nasabah) {
+    onDialogNasabah(nasabah) {
       this.dialognasabah = !this.dialognasabah;
       this.nasabah_id = nasabah.id;
       this.nasabah_name = nasabah.nama_lengkap;
+    },
+    onDialogProduk(produk) {
+      this.dialogproduk = !this.dialogproduk;
+      this.produk_name = produk.nama_produk;
+      this.produk = produk;
     },
     submit() {
       if (this.isEdit) {
@@ -159,6 +186,7 @@ export default {
           id: this.id,
           tgl_buka: this.tanggal_buka,
           tgl_jatuh_tempo: this.tanggal_tempo,
+          produk_id: this.produk.id,
           nasabah_id: this.nasabah_id,
           pegawai_id: this.pegawai_id,
           nila_deposito: this.nilai,
@@ -177,6 +205,7 @@ export default {
           id: this.id,
           tgl_buka: this.tanggal_buka,
           tgl_jatuh_tempo: this.tanggal_tempo,
+          produk_id: this.produk.id,
           nasabah_id: this.nasabah_id,
           pegawai_id: this.pegawai_id,
           nila_deposito: this.nilai,
