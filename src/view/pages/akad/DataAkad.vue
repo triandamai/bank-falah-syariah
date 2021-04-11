@@ -31,8 +31,6 @@
           >Tambahkan Akad Baru</b-button
         >
 
-        <b>Data Akad</b>
-
         <!-- <a
           class="font-weight-bold"
           href="https://vuetifyjs.com/en/components/data-tables"

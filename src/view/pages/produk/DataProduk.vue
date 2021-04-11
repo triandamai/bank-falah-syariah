@@ -30,8 +30,6 @@
           >Tambahkan Produk Baru</b-button
         >
 
-        <b>Data Produk</b>
-
         <!-- <a
           class="font-weight-bold"
           href="https://vuetifyjs.com/en/components/data-tables"
@@ -64,16 +62,6 @@
             :search="search"
             data-app
           >
-            <template v-slot:[`item.active`]="{ item }">
-              <v-chip>
-                {{ item.active == 1 ? "aktif" : "nonaktif" }}
-              </v-chip>
-            </template>
-            <template v-slot:[`item.last_login`]="{ item }">
-              {{
-                item.last_login != "" ? item.last_login : "belum ada aktivitas"
-              }}
-            </template>
             <template v-slot:[`item.action`]="{ item }">
               <b-button-toolbar
                 aria-label="Toolbar with button groups and dropdown menu"
@@ -87,13 +75,14 @@
                         kode_produk = item.kode_produk;
                         nama_produk = item.nama_produk;
                         akad_id = item.akad_id;
+                        akad_nama = item.akad_id;
                         tipe_produk = item.tipe_produk;
                         id = item.id;
                       }
                     "
                     >Ubah</b-button
                   >
-                  <b-button>Detail</b-button>
+
                   <b-button @click="deleteProduk(item)">Hapus</b-button>
                 </b-button-group>
               </b-button-toolbar>
@@ -164,6 +153,7 @@
                     kode_produk = null;
                     nama_produk = null;
                     akad_id = null;
+                    akad_nama = '';
                     id = null;
                   }
                 "
@@ -179,7 +169,7 @@
     <dialog-akad
       :show="dialogakad"
       @close="dialogakad = !dialogakad"
-      @choose="ondialogChoose"
+      @choose="onAkadChoose"
     />
   </div>
 </template>
@@ -244,7 +234,7 @@ export default {
           }
         });
     },
-    ondialogChoose(data) {
+    onAkadChoose(data) {
       this.dialogakad = !this.dialogakad;
       this.akad_nama = data.nama_akad;
       this.akad = data;
@@ -263,6 +253,7 @@ export default {
             mastertype: MPRODUK,
             path: "produk",
             body: {
+              id: this.id,
               tipe_produk: this.tipe_produk,
               kode_produk: this.kode_produk,
               nama_produk: this.nama_produk,
@@ -358,10 +349,10 @@ export default {
       }).then((result) => {
         if (result.isConfirmed) {
           this.$store
-            .dispatch("system/" + ACTION_DELETE_DATA_MASTER, {
+            .dispatch("master/" + ACTION_DELETE_DATA_MASTER, {
               mastertype: MPRODUK,
               path: "produk",
-              body: {},
+              body: produk,
             })
             .then(({ success, message }) => {
               if (success) {
