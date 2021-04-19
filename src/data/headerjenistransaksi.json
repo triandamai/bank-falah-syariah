@@ -1,0 +1,22 @@
+[
+    {
+        "text": "No",
+        "value": "id"
+    },
+    {
+        "text": "Kode Transaksi",
+        "value": "kode_transaksi"
+    },
+    {
+        "text": "Nama Transaksi",
+        "value": "nama_transaksi"
+    },
+    {
+        "text": "Dibuat pada",
+        "value": "created_at"
+    },
+    {
+        "text": "Aksi",
+        "value": "action"
+    }
+]

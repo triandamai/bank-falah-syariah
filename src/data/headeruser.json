@@ -1,0 +1,30 @@
+[
+    {
+        "text": "No",
+        "align": "left",
+        "sortable": false,
+        "value": "id"
+    },
+    {
+        "text": "Username",
+        "align": "left",
+        "sortable": true,
+        "value": "username"
+    },
+    {
+        "text": "Status",
+        "align": "left",
+        "sortable": true,
+        "value": "active"
+    },
+    {
+        "text": "Aktivitas Terakhir",
+        "align": "left",
+        "sortable": false,
+        "value": "last_login"
+    },
+    {
+        "text": "Aksi",
+        "value": "action"
+    }
+]
