@@ -1,94 +1,96 @@
-/* eslint-disable */
-/*
- * Author Bakaran Project
- * Made by Trian Damai
- * 28 Jan 2021 - 10:14
- *
- */
 import Vue from "vue";
 import App from "./App.vue";
+import BootstrapVue from "bootstrap-vue";
 import router from "./router";
-import store, { RESET_LAYOUT_CONFIG } from "@/store";
-import ApiService from "@/core/services/api.service";
-import { getUser } from "@/core/services/jwt.service.js";
+import Breadcrumbs from "./components/bread_crumbs";
+import { store } from "./store";
+import Vue2Filters from "vue2-filters";
+import VueSweetalert2 from "vue-sweetalert2";
+import VueFormWizard from "vue-form-wizard";
+import VueTour from "vue-tour";
+import Notifications from "vue-notification";
+import { Vue2Dragula } from "vue2-dragula";
+import Toasted from "vue-toasted";
+import SmartTable from "vuejs-smart-table";
+import * as VueGoogleMaps from "vue2-google-maps";
+import { VueMasonryPlugin } from "vue-masonry";
+import VueFeather from "vue-feather";
+import VueApexCharts from "vue-apexcharts";
+import FunctionalCalendar from "vue-functional-calendar";
+import vueKanban from "vue-kanban";
 
-Vue.config.productionTip = false;
+import PxCard from "./components/Pxcard.vue";
+Vue.component(PxCard.name, PxCard);
 
-// Global 3rd party plugins
-import "popper.js";
-import "tooltip.js";
-import PerfectScrollbar from "perfect-scrollbar";
-window.PerfectScrollbar = PerfectScrollbar;
-import ClipboardJS from "clipboard";
-window.ClipboardJS = ClipboardJS;
+import { Icon } from "leaflet";
+delete Icon.Default.prototype._getIconUrl;
 
-// Vue 3rd party plugins
-import i18n from "@/core/plugins/vue-i18n";
-import vuetify from "@/core/plugins/vuetify";
-import "@/core/plugins/portal-vue";
-import "@/core/plugins/bootstrap-vue";
-import "@/core/plugins/perfect-scrollbar";
-// import "@/core/plugins/highlight-js";
-import "@/core/plugins/inline-svg";
-import "@/core/plugins/apexcharts";
-import "@/core/plugins/metronic";
-import "@mdi/font/css/materialdesignicons.css";
+// Multi Language Add
+import en from "./locales/en.json";
+import es from "./locales/es.json";
+import { defaultLocale, localeOptions } from "./constants/config";
+import VueI18n from "vue-i18n";
 
-//registring components
-import { upperFirst, camelCase } from "lodash";
+// Import Theme scss
+import "./assets/scss/app.scss";
 
-import "./assets/tailwind.css";
-const requireComponent = require.context(
-  "./view/components",
-  false,
-  /[\w-]+\.vue$/
-);
+import vuetify from "./plugins/vuetify";
+import "@babel/polyfill";
+// api services
+import ApiService from "./services/api.service";
 
-requireComponent.keys().forEach(fileName => {
-  //get comp config
-  const componentConfig = requireComponent(fileName);
-  //get PascalCase name
-  const componentName = upperFirst(
-    camelCase(fileName.replace(/^\.\//, "").replace(/\.\w+$/, ""))
-  );
-
-  Vue.component(componentName, componentConfig.default || componentConfig);
-});
-
-// API service init
 ApiService.init();
 
-// Remove this to disable mock API
-// MockService.init();
+Vue.use(VueFeather);
 
-router.beforeEach((to, from, next) => {
-  const user = getUser();
-  ApiService.setHeader();
-  if (to.matched.some(route => route.meta.requiresAuth)) {
-    if (user) {
-      next();
-    } else {
-      next({
-        path: "/auth"
-      });
-    }
-  } else {
-    next();
+Vue.use(Toasted, {
+  iconPack: "fontawesome"
+});
+Vue.use(Vue2Dragula);
+
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: "API_KEY",
+    libraries: "places"
   }
-
-  // reset config to initial state
-  store.dispatch("config/" + RESET_LAYOUT_CONFIG, "");
-
-  // Scroll page to top on every route change
-  setTimeout(() => {
-    window.scrollTo(0, 0);
-  }, 100);
 });
 
+Vue.use(Notifications);
+Vue.use(Vue2Filters);
+Vue.use(VueSweetalert2);
+Vue.use(VueFormWizard);
+Vue.use(VueTour);
+Vue.use(BootstrapVue);
+Vue.use(SmartTable);
+Vue.use(require("vue-chartist"));
+Vue.use(require("vue-moment"));
+Vue.component("Breadcrumbs", Breadcrumbs);
+Vue.use(VueMasonryPlugin);
+Vue.component("apexchart", VueApexCharts);
+Vue.use(FunctionalCalendar, {
+  dayNames: ["M", "T", "W", "T", "F", "S", "S"]
+});
+Vue.use(vueKanban);
+Vue.use(VueI18n);
+
+const messages = { en: en, es: es };
+const locale =
+  localStorage.getItem("currentLanguage") &&
+  localeOptions.filter(x => x.id === localStorage.getItem("currentLanguage"))
+    .length > 0
+    ? localStorage.getItem("currentLanguage")
+    : defaultLocale;
+const i18n = new VueI18n({
+  locale: locale,
+  fallbackLocale: "en",
+  messages
+});
+
+Vue.config.productionTip = false;
 new Vue({
+  i18n,
   router,
   store,
-  // i18n,
   vuetify,
   render: h => h(App)
 }).$mount("#app");

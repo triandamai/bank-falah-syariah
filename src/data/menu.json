@@ -1,0 +1,178 @@
+{
+  "data": [
+    {
+      "headTitle1": "General",
+      "headTitle2": "Dashboards,features & data.",
+      "type": "headtitle"
+    },
+    {
+      "path": "/main/nasabah",
+      "title": "Nasabah",
+      "icon": "git-pull-request",
+      "type": "link",
+      "active": false
+    },
+    {
+      "title": "Master Data",
+      "icon": "monitor",
+      "type": "sub",
+      "badgeType": "primary",
+      "badgeValue": "5",
+      "active": false,
+      "children": [
+        {
+          "path": "/main/akad",
+          "title": "Akad",
+          "type": "link"
+        },
+        {
+          "path": "/main/jenistransaksi",
+          "title": "Jenis Transaksi",
+          "type": "link"
+        },
+        {
+          "path": "/main/produk",
+          "title": "Produk",
+          "type": "link"
+        },
+        {
+          "path": "/main/jabatan",
+          "title": "Jabatan",
+          "type": "link"
+        },
+        {
+          "path": "/main/pegawai",
+          "title": "Pegawai",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "title": "Rekening",
+      "icon": "book",
+      "type": "sub",
+      "badgeType": "primary",
+      "badgeValue": "3",
+      "active": false,
+      "children": [
+        {
+          "path": "/main/deposito",
+          "title": "Deposito",
+          "type": "link"
+        },
+        {
+          "path": "/main/pembiayaan",
+          "title": "Pembiayaan",
+          "type": "link"
+        },
+        {
+          "path": "/main/simpanan",
+          "title": "Simpanan",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "headTitle1": "Shortcut",
+      "headTitle2": "Form etc",
+      "type": "headtitle"
+    },
+    {
+      "title": "Form",
+      "icon": "server",
+      "type": "sub",
+      "active": false,
+      "children": [
+        {
+          "title": "Master Data",
+          "type": "sub",
+          "active": false,
+          "children": [
+            {
+              "path": "/table/basic",
+              "title": "New Akad",
+              "type": "link"
+            },
+            {
+              "path": "/table/sizing",
+              "title": "New jenis Transaksi",
+              "type": "link"
+            },
+            {
+              "path": "/table/border",
+              "title": "New produk",
+              "type": "link"
+            },
+            {
+              "path": "/table/styling",
+              "title": "New jabatan",
+              "type": "link"
+            },
+            {
+              "path": "/table/styling",
+              "title": "New Pegawai",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "title": "Rekening",
+          "type": "sub",
+          "active": false,
+          "children": [
+            {
+              "path": "/datatable-basic",
+              "title": "New Deposito",
+              "type": "link"
+            },
+            {
+              "path": "/datatable-select-delete",
+              "title": "New Simpanan",
+              "type": "link"
+            },
+            {
+              "path": "/filter-table",
+              "title": "New embiayaan",
+              "type": "link"
+            }
+          ]
+        },
+        {
+          "path": "/table/smarttable",
+          "title": "New Nasabah",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "headTitle1": "Advance",
+      "headTitle2": "Settings,Role & Group",
+      "type": "headtitle"
+    },
+    {
+      "title": "System",
+      "icon": "settings",
+      "type": "sub",
+      "badgeType": "primary",
+      "badgeValue": "3",
+      "active": false,
+      "children": [
+        {
+          "path": "/main/menu",
+          "title": "Menu",
+          "type": "link"
+        },
+        {
+          "path": "/main/user",
+          "title": "User",
+          "type": "link"
+        },
+        {
+          "path": "/main/group",
+          "title": "Group",
+          "type": "link"
+        }
+      ]
+    }
+  ]
+}
