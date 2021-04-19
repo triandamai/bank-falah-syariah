@@ -58,7 +58,7 @@ const routes = [
       {
         path: "jenistransaksi",
         name: "jenistransaksi",
-        component: () => import("../pages/nasabah/nasabah.vue"),
+        component: () => import("../pages/jenistransaksi/jenistransaksi.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -68,7 +68,7 @@ const routes = [
       {
         path: "produk",
         name: "produk",
-        component: () => import("../pages/nasabah/nasabah.vue"),
+        component: () => import("../pages/produk/produk.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
