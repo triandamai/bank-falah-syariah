@@ -17,6 +17,8 @@
                 :items="nasabah"
                 :headers="headers"
                 @onAdd="$router.push({ name: 'addnasabah' })"
+                @edit="onChange"
+                @delete="onDelete"
               />
             </div>
           </div>
@@ -55,6 +57,20 @@ export default {
         if (res) {
           this.getData();
         }
+      });
+    },
+    onChange(nasabah) {
+      this.$router.push({ path: `nasabah/edit/${nasabah.id}` });
+    },
+    onDelete(nasabah) {
+      this.$swal({
+        text: "Are you sure you want to do this?",
+        showCancelButton: true,
+        confirmButtonText: "Oke",
+        confirmButtonColor: "#4466f2",
+        cancelButtonText: "Batal",
+        cancelButtonColor: "#efefef",
+        reverseButtons: true,
       });
     },
   },

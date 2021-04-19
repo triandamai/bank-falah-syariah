@@ -12,7 +12,7 @@
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
             </div>
-            <form-nasabah :isEdit="false" />
+            <form-nasabah :isEdit="true" />
           </div>
         </div>
       </div>

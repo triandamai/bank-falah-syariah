@@ -16,7 +16,7 @@
               <data-table
                 :items="items"
                 :headers="headers"
-                @onAdd="$router.push({ name: 'addnasabah' })"
+                @onAdd="formakad = true"
               />
             </div>
           </div>
@@ -24,21 +24,25 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
+    <form-akad :show="formakad" @close="formakad = false" @submit="onSubmit" />
   </div>
 </template>
 
 <script>
 import DataTable from "../../components/datatable.vue";
+import FormAkad from "../../components/form_akad.vue";
 import header from "../../data/headerakad.json";
 import { ACTION_GET_DATA_MASTER, MAKAD } from "../../store/modules/master";
 import { mapState } from "vuex";
 export default {
   components: {
     DataTable,
+    FormAkad,
   },
   data: () => {
     return {
       headers: header,
+      formakad: false,
     };
   },
   computed: {
@@ -61,6 +65,9 @@ export default {
             this.getAkad();
           }
         });
+    },
+    onSubmit(data) {
+      console.log(data);
     },
   },
 };

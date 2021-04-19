@@ -17,8 +17,8 @@
           aria-label="Toolbar with button groups and dropdown menu"
         >
           <b-button-group class="mx-1">
-            <v-btn @click="$emit('onChange', item)" outlined small>Ubah</v-btn>
-            <v-btn @click="$emit('onDelete', item)" outlined small>Hapus</v-btn>
+            <v-btn @click="$emit('edit', item)" outlined small>Ubah</v-btn>
+            <v-btn @click="$emit('delete', item)" outlined small>Hapus</v-btn>
           </b-button-group>
         </b-button-toolbar>
       </template>

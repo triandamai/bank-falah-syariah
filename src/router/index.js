@@ -44,6 +44,15 @@ const routes = [
           reqiresAuth: true
         }
       },
+      {
+        path: "nasabah/edit/:id",
+        name: "editnasabah",
+        component: () => import("../pages/nasabah/addnasabah.vue"),
+        meta: {
+          title: "Nasabah | Add",
+          reqiresAuth: true
+        }
+      },
       //
       {
         path: "akad",
