@@ -99,6 +99,7 @@
         </li>
       </ul>
     </div>
+    <!-- search -->
     <div class="nav-right col-8 pull-right right-header p-0">
       <ul class="nav-menus">
         <li>
@@ -106,49 +107,7 @@
             ><feather type="search" @click="search_open()"></feather
           ></span>
         </li>
-        <li class="onhover-dropdown">
-          <div class="notification-box">
-            <feather type="bell"></feather
-            ><span class="badge badge-pill badge-secondary">4 </span>
-          </div>
-          <ul class="notification-dropdown onhover-show-div">
-            <li>
-              <feather type="bell"></feather>
-              <h6 class="f-18 mb-0">Notitications</h6>
-            </li>
-            <li>
-              <p>
-                <i class="fa fa-circle-o mr-3 font-primary"> </i>Delivery
-                processing <span class="pull-right">10 min.</span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="fa fa-circle-o mr-3 font-success"></i>Order
-                Complete<span class="pull-right">1 hr</span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="fa fa-circle-o mr-3 font-info"></i>Tickets
-                Generated<span class="pull-right">3 hr</span>
-              </p>
-            </li>
-            <li>
-              <p>
-                <i class="fa fa-circle-o mr-3 font-danger"></i>Delivery
-                Complete<span class="pull-right">6 hr</span>
-              </p>
-            </li>
-            <li>
-              <a class="btn btn-primary" href="#">Check all notification</a>
-            </li>
-          </ul>
-        </li>
-        <li class="onhover-dropdown">
-          <div class="notification-box"><feather type="star"></feather></div>
-          <Bookmark />
-        </li>
+
         <li>
           <div class="mode">
             <i
@@ -163,185 +122,7 @@
             ></i>
           </div>
         </li>
-        <li class="cart-nav onhover-dropdown">
-          <div class="cart-box">
-            <feather type="shopping-cart"></feather>
-            <span class="badge badge-pill badge-primary">2</span>
-          </div>
-          <ul class="cart-dropdown onhover-show-div">
-            <li>
-              <h6 class="mb-0 f-20">Shoping Bag</h6>
-              <feather type="shopping-cart"></feather>
-            </li>
-            <li class="mt-0">
-              <div class="media">
-                <img
-                  class="img-fluid rounded-circle mr-3 img-60"
-                  src="../assets/images/ecommerce/01.jpg"
-                  alt=""
-                />
-                <div class="media-body">
-                  <span>V-Neck Shawl Collar Woman's Solid T-Shirt</span>
-                  <p>Yellow(#fcb102)</p>
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <span class="input-group-prepend">
-                        <button
-                          class="btn quantity-left-minus"
-                          type="button"
-                          data-type="minus"
-                          data-field=""
-                        >
-                          <feather type="minus"></feather>
-                        </button>
-                      </span>
-                      <input
-                        class="form-control input-number"
-                        type="text"
-                        name="quantity"
-                        value="1"
-                      /><span class="input-group-prepend">
-                        <button
-                          class="btn quantity-right-plus"
-                          type="button"
-                          data-type="plus"
-                          data-field=""
-                        >
-                          <feather type="plus"></feather></button
-                      ></span>
-                    </div>
-                  </div>
-                  <h6 class="text-right text-muted">$299.00</h6>
-                </div>
-                <div class="close-circle">
-                  <a href="#"><feather type="x"></feather></a>
-                </div>
-              </div>
-            </li>
-            <li class="mt-0">
-              <div class="media">
-                <img
-                  class="img-fluid rounded-circle mr-3 img-60"
-                  src="../assets/images/ecommerce/03.jpg"
-                  alt=""
-                />
-                <div class="media-body">
-                  <span>V-Neck Shawl Collar Woman's Solid T-Shirt</span>
-                  <p>Yellow(#fcb102)</p>
-                  <div class="qty-box">
-                    <div class="input-group">
-                      <span class="input-group-prepend">
-                        <button
-                          class="btn quantity-left-minus"
-                          type="button"
-                          data-type="minus"
-                          data-field=""
-                        >
-                          <feather type="minus"></feather></button
-                      ></span>
-                      <input
-                        class="form-control input-number"
-                        type="text"
-                        name="quantity"
-                        value="1"
-                      /><span class="input-group-prepend">
-                        <button
-                          class="btn quantity-right-plus"
-                          type="button"
-                          data-type="plus"
-                          data-field=""
-                        >
-                          <feather type="plus"></feather></button
-                      ></span>
-                    </div>
-                  </div>
-                  <h6 class="text-right text-muted">$299.00</h6>
-                </div>
-                <div class="close-circle">
-                  <a href="#"><feather type="x"></feather></a>
-                </div>
-              </div>
-            </li>
-            <li>
-              <div class="total">
-                <h6 class="mb-2 mt-0 text-muted">
-                  Order Total : <span class="f-right f-20">$598.00</span>
-                </h6>
-              </div>
-            </li>
-            <li>
-              <router-link
-                class="btn btn-block btn-primary view-cart"
-                :to="'/ecommerce/cart'"
-              >
-                Go to shoping bag
-              </router-link>
-              <router-link
-                :to="'/ecommerce/checkout'"
-                class="btn btn-block btn-secondary view-cart"
-              >
-                Checkout
-              </router-link>
-            </li>
-          </ul>
-        </li>
-        <li class="onhover-dropdown">
-          <feather type="message-square"></feather>
-          <ul class="chat-dropdown onhover-show-div">
-            <li>
-              <feather type="message-square"></feather>
-              <h6 class="f-18 mb-0">Message Box</h6>
-            </li>
-            <li>
-              <div class="media">
-                <img
-                  class="img-fluid rounded-circle mr-3"
-                  src="../assets/images/user/1.jpg"
-                  alt=""
-                />
-                <div class="status-circle online"></div>
-                <div class="media-body">
-                  <span>Erica Hughes</span>
-                  <p>Lorem Ipsum is simply dummy...</p>
-                </div>
-                <p class="f-12 font-success">58 mins ago</p>
-              </div>
-            </li>
-            <li>
-              <div class="media">
-                <img
-                  class="img-fluid rounded-circle mr-3"
-                  src="../assets/images/user/2.jpg"
-                  alt=""
-                />
-                <div class="status-circle online"></div>
-                <div class="media-body">
-                  <span>Kori Thomas</span>
-                  <p>Lorem Ipsum is simply dummy...</p>
-                </div>
-                <p class="f-12 font-success">1 hr ago</p>
-              </div>
-            </li>
-            <li>
-              <div class="media">
-                <img
-                  class="img-fluid rounded-circle mr-3"
-                  src="../assets/images/user/4.jpg"
-                  alt=""
-                />
-                <div class="status-circle offline"></div>
-                <div class="media-body">
-                  <span>Ain Chavez</span>
-                  <p>Lorem Ipsum is simply dummy...</p>
-                </div>
-                <p class="f-12 font-danger">32 mins ago</p>
-              </div>
-            </li>
-            <li class="text-center">
-              <a class="btn btn-primary" href="#">View All </a>
-            </li>
-          </ul>
-        </li>
+
         <li class="maximize">
           <a
             class="text-dark"
@@ -366,7 +147,7 @@
             </div>
           </div>
           <ul class="profile-dropdown onhover-show-div">
-            <li>
+            <!-- <li>
               <a href="#"
                 ><feather type="user"></feather><span>Account </span></a
               >
@@ -377,15 +158,17 @@
             <li>
               <a href="#"
                 ><feather type="file-text"></feather><span>Taskboard</span></a
-              >
-            </li>
-            <li>
+              > 
+            </li> 
+           <li>
               <a href="#"
                 ><feather type="settings"></feather><span>Settings</span></a
               >
-            </li>
+            </li> -->
             <li>
-              <a><feather type="log-in"></feather><span>Log out</span></a>
+              <a @click="logOut"
+                ><feather type="log-in"></feather><span>Log out</span></a
+              >
             </li>
           </ul>
         </li>
@@ -429,7 +212,7 @@
 <script>
 var body = document.getElementsByTagName("body")[0];
 import { mapState, mapActions } from "vuex";
-import app from "../main";
+import { LOGOUT } from "../store/modules/auth";
 import Bookmark from "./bookmark";
 export default {
   name: "Search",
@@ -493,15 +276,7 @@ export default {
     mobileaccordian() {
       this.mobile_accordian = !this.mobile_accordian;
     },
-    logout: function () {
-      firebase
-        .auth()
-        .signOut()
-        .then(() => {
-          UserAuth.Logout();
-          this.$router.replace("/auth/login");
-        });
-    },
+
     addFix() {
       body.classList.add("offcanvas");
       this.searchResult = true;
@@ -538,6 +313,11 @@ export default {
     customizeMixLayout(val) {
       this.mixLayout = val;
       this.$store.dispatch("layout/setLayout", val);
+    },
+    logOut() {
+      this.$store.dispatch(`auth/${LOGOUT}`).then(() => {
+        this.$router.replace({ name: "login" });
+      });
     },
   },
   watch: {
