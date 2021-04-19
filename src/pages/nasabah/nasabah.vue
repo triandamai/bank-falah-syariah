@@ -47,13 +47,13 @@ export default {
     }),
   },
   created() {
-    this.getNasabah();
+    this.getData();
   },
   methods: {
-    getNasabah() {
+    getData() {
       this.$store.dispatch(`nasabah/${ACTION_GET_NASABAH}`).then((res) => {
         if (res) {
-          this.getNasabah();
+          this.getData();
         }
       });
     },
