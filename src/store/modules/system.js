@@ -114,14 +114,14 @@ const actions = {
           } else {
             resolve({
               success: false,
-              message: res.data.message ?? "Gagal coba lagi nanti !"
+              message: res.data.message || "Gagal coba lagi nanti !"
             });
           }
         })
         .catch(e => {
           resolve({
             success: false,
-            message: e.response.data.message ?? "Gagal coba lagi nanti !"
+            message: e.response.data.message || "Gagal coba lagi nanti !"
           });
         });
     });
@@ -149,14 +149,14 @@ const actions = {
           } else {
             resolve({
               success: false,
-              message: res.data.message ?? "Gagal coba lagi nanti"
+              message: res.data.message || "Gagal coba lagi nanti"
             });
           }
         })
         .catch(e => {
           resolve({
             success: false,
-            message: e.response.data.message ?? "Gaga coba lagi nanti"
+            message: e.response.data.message || "Gaga coba lagi nanti"
           });
         });
     });
@@ -179,14 +179,14 @@ const actions = {
           } else {
             resolve({
               success: false,
-              message: res.data.message ?? "Gagal coba lagi nanti"
+              message: res.data.message || "Gagal coba lagi nanti"
             });
           }
         })
         .catch(e => {
           resolve({
             success: true,
-            message: e.response.data.message ?? "Berhasil mengubah!"
+            message: e.response.data.message || "Berhasil mengubah!"
           });
         });
     });

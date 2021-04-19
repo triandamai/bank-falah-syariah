@@ -98,7 +98,7 @@ const routes = [
       {
         path: "deposito",
         name: "deposito",
-        component: () => import("../pages/nasabah/nasabah.vue"),
+        component: () => import("../pages/deposito/deposito.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -108,7 +108,7 @@ const routes = [
       {
         path: "pembiayaan",
         name: "pembiayaan",
-        component: () => import("../pages/nasabah/nasabah.vue"),
+        component: () => import("../pages/pembiayaan/pembiayaan.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -118,7 +118,7 @@ const routes = [
       {
         path: "simpanan",
         name: "simpanan",
-        component: () => import("../pages/nasabah/nasabah.vue"),
+        component: () => import("../pages/simpanan/simpanan.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
