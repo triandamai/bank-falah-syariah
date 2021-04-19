@@ -6,6 +6,8 @@ import menu from "./modules/menu";
 import auth from "./modules/auth";
 import nasabah from "./modules/nasabah";
 import master from "./modules/master";
+import rekening from "./modules/rekening";
+import system from "./modules/system";
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
@@ -17,6 +19,8 @@ export const store = new Vuex.Store({
     menu,
     auth,
     nasabah,
-    master
+    master,
+    rekening,
+    system
   }
 });
