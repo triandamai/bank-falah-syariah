@@ -14,7 +14,7 @@
     "animate.css": "^3.7.2",
     "apexcharts": "^3.11.2",
     "auth0-js": "^9.11.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap-vue": "^2.0.3",
     "chart.js": "^2.8.0",
     "chartjs-plugin-streaming": "^1.8.0",
@@ -90,7 +90,7 @@
     "node-sass": "^4.13.0",
     "vue-cli-plugin-vuetify": "~2.3.1",
     "vue-template-compiler": "^2.6.10",
-    "webpack-dev-server": "^2.9.7"
+    "webpack-dev-server": "^3.1.11"
   },
   "eslintConfig": {
     "root": true,

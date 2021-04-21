@@ -42,7 +42,6 @@ import header from "../../data/headeruser.json";
 import {
   ACTION_GET_DATA_SYSTEM,
   ACTION_POST_DATA_SYSTEM,
-  ACTION_PUT_DATA_MASTER,
   ACTION_PUT_DATA_SYSTEM,
   SUSER,
 } from "../../store/modules/system";
