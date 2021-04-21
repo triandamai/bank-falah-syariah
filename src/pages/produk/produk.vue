@@ -16,7 +16,9 @@
               <data-table
                 :items="items"
                 :headers="headers"
-                @onAdd="$router.push({ name: 'addnasabah' })"
+                @add="formproduk = true"
+                @edit="onEdit"
+                @delete="onDelete"
               />
             </div>
           </div>
@@ -24,21 +26,32 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
+    <form-produk
+      :show="formproduk"
+      :body="body"
+      @submit="onSubmit"
+      @close="formproduk = false"
+    />
   </div>
 </template>
 
 <script>
 import DataTable from "../../components/datatable.vue";
+import FormProduk from "../../components/form_produk.vue";
 import header from "../../data/headerproduk.json";
 import { ACTION_GET_DATA_MASTER, MPRODUK } from "../../store/modules/master";
 import { mapState } from "vuex";
 export default {
   components: {
     DataTable,
+    FormProduk,
   },
   data: () => {
     return {
       headers: header,
+      formproduk: false,
+      body: {},
+      isEdit: false,
     };
   },
   computed: {
@@ -61,6 +74,33 @@ export default {
             this.getData();
           }
         });
+    },
+    onSubmit(data) {
+      if (this.isEdit) {
+      }
+      if (!this.isEdit) {
+      }
+    },
+    onAdd() {
+      this.formproduk = true;
+      this.body = {};
+      this.isEdit = false;
+    },
+    onEdit(data) {
+      this.formproduk = true;
+      this.body = data;
+      this.isEdit = data;
+    },
+    onDelete(data) {
+      this.$swal({
+        text: "Are you sure you want to do this?",
+        showCancelButton: true,
+        confirmButtonText: "Oke",
+        confirmButtonColor: "#4466f2",
+        cancelButtonText: "Batal",
+        cancelButtonColor: "#efefef",
+        reverseButtons: true,
+      });
     },
   },
 };
