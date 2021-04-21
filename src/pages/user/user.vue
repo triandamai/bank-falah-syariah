@@ -38,13 +38,14 @@
 <script>
 import DataTable from "../../components/datatable.vue";
 import FormAkad from "../../components/form_akad.vue";
-import header from "../../data/headerakad.json";
+import header from "../../data/headeruser.json";
 import {
-  ACTION_GET_DATA_MASTER,
-  ACTION_POST_DATA_MASTER,
+  ACTION_GET_DATA_SYSTEM,
+  ACTION_POST_DATA_SYSTEM,
   ACTION_PUT_DATA_MASTER,
-  MAKAD,
-} from "../../store/modules/master";
+  ACTION_PUT_DATA_SYSTEM,
+  SUSER,
+} from "../../store/modules/system";
 import { mapState } from "vuex";
 export default {
   components: {
@@ -61,7 +62,7 @@ export default {
   },
   computed: {
     ...mapState({
-      items: (state) => state.master.dataakad,
+      items: (state) => state.system.datausers,
     }),
   },
   created() {
@@ -70,9 +71,9 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(`master/${ACTION_GET_DATA_MASTER}`, {
-          mastertype: MAKAD,
-          path: "akad",
+        .dispatch(`system/${ACTION_GET_DATA_SYSTEM}`, {
+          systemtype: SUSER,
+          path: "users",
         })
         .then((res) => {
           if (res) {
@@ -83,9 +84,9 @@ export default {
     onSubmit(data) {
       if (this.isEdit) {
         this.$store
-          .dispatch(`master/${ACTION_PUT_DATA_MASTER}`, {
-            mastertype: MAKAD,
-            path: "akad",
+          .dispatch(`system/${ACTION_POST_DATA_SYSTEM}`, {
+            systemtype: SUSER,
+            path: "user",
             body: data,
           })
           .then(({ success, message }) => {});
@@ -93,15 +94,15 @@ export default {
 
       if (!this.isEdit) {
         this.$store
-          .dispatch(`master/${ACTION_POST_DATA_MASTER}`, {
-            mastertype: MAKAD,
-            path: "akad",
+          .dispatch(`master/${ACTION_PUT_DATA_SYSTEM}`, {
+            systemtype: SUSER,
+            path: "user",
             body: data,
           })
           .then(({ success, message }) => {});
       }
     },
-    onDelete() {
+    onDelete(data) {
       this.$swal({
         text: "Are you sure you want to do this?",
         showCancelButton: true,

@@ -138,7 +138,7 @@
           ]
         },
         {
-          "path": "/table/smarttable",
+          "path": "/main/nasabah/add",
           "title": "New Nasabah",
           "type": "link"
         }

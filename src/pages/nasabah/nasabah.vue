@@ -16,7 +16,7 @@
               <data-table
                 :items="nasabah"
                 :headers="headers"
-                @onAdd="$router.push({ name: 'addnasabah' })"
+                @add="$router.push({ name: 'addnasabah' })"
                 @edit="onChange"
                 @delete="onDelete"
               />

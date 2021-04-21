@@ -137,7 +137,7 @@ const routes = [
       {
         path: "user",
         name: "user",
-        component: () => import("../pages/nasabah/nasabah.vue"),
+        component: () => import("../pages/user/user.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
