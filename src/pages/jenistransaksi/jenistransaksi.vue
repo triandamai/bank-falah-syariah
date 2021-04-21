@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs title="Sample Page" />
+    <Breadcrumbs title="Jenis Transaksi" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
@@ -16,7 +16,9 @@
               <data-table
                 :items="items"
                 :headers="headers"
-                @onAdd="$router.push({ name: 'addnasabah' })"
+                @add="onAdd"
+                @edit="onEdit"
+                @delete="onDelete"
               />
             </div>
           </div>
@@ -24,6 +26,12 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
+    <form-jenistransaksi
+      :show="formjenistransaksi"
+      :body="body"
+      @close="formjenistransaksi = false"
+      @submit="onSubmit"
+    />
   </div>
 </template>
 
@@ -35,18 +43,23 @@ import {
   MJENISTRANSAKSI,
 } from "../../store/modules/master";
 import { mapState } from "vuex";
+import FormJenistransaksi from "../../components/form_jenistransaksi.vue";
 export default {
   components: {
     DataTable,
+    FormJenistransaksi,
   },
   data: () => {
     return {
       headers: header,
+      formjenistransaksi: false,
+      body: {},
+      isEdit: false,
     };
   },
   computed: {
     ...mapState({
-      items: (state) => state.master.dataproduk,
+      items: (state) => state.master.datajenistransaksi,
     }),
   },
   created() {
@@ -64,6 +77,28 @@ export default {
             this.getData();
           }
         });
+    },
+    onSubmit(data) {},
+    onAdd() {
+      this.formjenistransaksi = true;
+      this.body = {};
+      this.isEdit = false;
+    },
+    onEdit(data) {
+      this.formjenistransaksi = true;
+      this.body = data;
+      this.isEdit = true;
+    },
+    onDelete(data) {
+      this.$swal({
+        text: "Are you sure you want to do this?",
+        showCancelButton: true,
+        confirmButtonText: "Oke",
+        confirmButtonColor: "#4466f2",
+        cancelButtonText: "Batal",
+        cancelButtonColor: "#efefef",
+        reverseButtons: true,
+      });
     },
   },
 };

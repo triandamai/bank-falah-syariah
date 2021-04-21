@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs title="Sample Page" />
+    <Breadcrumbs title="Nasabah" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">

@@ -1,7 +1,7 @@
 <template>
   <v-card flat>
     <v-card-title>
-      <v-btn @click="$emit('onAdd', true)" outlined small>Tambah</v-btn>
+      <v-btn @click="$emit('add', true)" outlined small>Tambah</v-btn>
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"

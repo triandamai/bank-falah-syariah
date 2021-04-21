@@ -28,38 +28,26 @@ export const MJENISTRANSAKSI = "MJEBISTRANSAKSI";
 const state = {
   dataakad: [],
   akad: {
-    dialog: false,
     current_page: 0,
     last_page: 0
-  },
-  formakad: {
-    tipe_akad: "",
-    nama_akad: "",
-    kode_akad: "",
-    active: ""
   },
   datajenistransaksi: [],
   jenistransaksi: {
     current_page: 0,
     last_page: 0
   },
-  formjenistransaksi: {},
   dataproduk: [],
   produk: {
     current_page: 0,
     last_page: 0
   },
-  formproduk: {},
   datajabatan: [],
   jabatan: {
-    dialog: false,
     current_page: 0,
     last_page: 0
   },
-  formjabatan: {},
   datapegawai: [],
   pegawai: {
-    dialog: false,
     current_page: 0,
     last_page: 0
   },
