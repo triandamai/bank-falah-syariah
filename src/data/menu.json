@@ -89,29 +89,29 @@
           "active": false,
           "children": [
             {
-              "path": "/table/basic",
+              "path": "akad",
               "title": "New Akad",
-              "type": "link"
+              "type": "button"
             },
             {
-              "path": "/table/sizing",
+              "path": "jenistransaksi",
               "title": "New jenis Transaksi",
-              "type": "link"
+              "type": "button"
             },
             {
-              "path": "/table/border",
+              "path": "produk",
               "title": "New produk",
-              "type": "link"
+              "type": "button"
             },
             {
-              "path": "/table/styling",
+              "path": "jabatan",
               "title": "New jabatan",
-              "type": "link"
+              "type": "button"
             },
             {
-              "path": "/table/styling",
+              "path": "pegawai",
               "title": "New Pegawai",
-              "type": "link"
+              "type": "button"
             }
           ]
         },
@@ -121,24 +121,24 @@
           "active": false,
           "children": [
             {
-              "path": "/datatable-basic",
+              "path": "deposito",
               "title": "New Deposito",
-              "type": "link"
+              "type": "button"
             },
             {
-              "path": "/datatable-select-delete",
+              "path": "simpanan",
               "title": "New Simpanan",
-              "type": "link"
+              "type": "button"
             },
             {
-              "path": "/filter-table",
-              "title": "New embiayaan",
-              "type": "link"
+              "path": "pembiayaan",
+              "title": "New Pembiayaan",
+              "type": "button"
             }
           ]
         },
         {
-          "path": "/main/nasabah/add",
+          "path": "/main /nasabah/add",
           "title": "New Nasabah",
           "type": "link"
         }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs title="Produk" />
+    <Breadcrumbs title="Akad" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
@@ -16,7 +16,7 @@
               <data-table
                 :items="items"
                 :headers="headers"
-                @add="formproduk = true"
+                @add="onAdd"
                 @edit="onEdit"
                 @delete="onDelete"
               />
@@ -26,31 +26,42 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-produk
-      :show="formproduk"
+    <form-akad
+      :show="formakad"
       :body="body"
+      @close="formakad = false"
       @submit="onSubmit"
-      @close="formproduk = false"
     />
   </div>
 </template>
 
 <script>
-import header from "../../data/headerproduk.json";
-import { ACTION_GET_DATA_MASTER, MPRODUK } from "../../store/modules/master";
+import DataTable from "../../components/datatable.vue";
+import FormAkad from "../../components/form_akad.vue";
+import header from "../../data/headeruser.json";
+import {
+  ACTION_GET_DATA_SYSTEM,
+  ACTION_POST_DATA_SYSTEM,
+  ACTION_PUT_DATA_SYSTEM,
+  SUSER,
+} from "../../store/modules/system";
 import { mapState } from "vuex";
 export default {
+  components: {
+    DataTable,
+    FormAkad,
+  },
   data: () => {
     return {
       headers: header,
-      formproduk: false,
+      formakad: false,
       body: {},
       isEdit: false,
     };
   },
   computed: {
     ...mapState({
-      items: (state) => state.master.dataproduk,
+      items: (state) => state.system.datausers,
     }),
   },
   created() {
@@ -59,9 +70,9 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(`master/${ACTION_GET_DATA_MASTER}`, {
-          mastertype: MPRODUK,
-          path: "produk",
+        .dispatch(`system/${ACTION_GET_DATA_SYSTEM}`, {
+          systemtype: SUSER,
+          path: "users",
         })
         .then((res) => {
           if (res) {
@@ -71,19 +82,24 @@ export default {
     },
     onSubmit(data) {
       if (this.isEdit) {
+        this.$store
+          .dispatch(`system/${ACTION_POST_DATA_SYSTEM}`, {
+            systemtype: SUSER,
+            path: "user",
+            body: data,
+          })
+          .then(({ success, message }) => {});
       }
+
       if (!this.isEdit) {
+        this.$store
+          .dispatch(`system/${ACTION_PUT_DATA_SYSTEM}`, {
+            systemtype: SUSER,
+            path: "user",
+            body: data,
+          })
+          .then(({ success, message }) => {});
       }
-    },
-    onAdd() {
-      this.formproduk = true;
-      this.body = {};
-      this.isEdit = false;
-    },
-    onEdit(data) {
-      this.formproduk = true;
-      this.body = data;
-      this.isEdit = data;
     },
     onDelete(data) {
       this.$swal({
@@ -95,6 +111,16 @@ export default {
         cancelButtonColor: "#efefef",
         reverseButtons: true,
       });
+    },
+    onAdd() {
+      this.body = {};
+      this.formakad = true;
+      this.isEdit = false;
+    },
+    onEdit(data) {
+      this.body = data;
+      this.formakad = true;
+      this.isEdit = true;
     },
   },
 };

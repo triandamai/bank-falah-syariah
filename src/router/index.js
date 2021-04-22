@@ -148,7 +148,7 @@ const routes = [
       {
         path: "group",
         name: "group",
-        component: () => import("../pages/nasabah/nasabah.vue"),
+        component: () => import("../pages/group/group.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -158,7 +158,7 @@ const routes = [
       {
         path: "menu",
         name: "menu",
-        component: () => import("../pages/nasabah/nasabah.vue"),
+        component: () => import("../pages/menu/menu.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true

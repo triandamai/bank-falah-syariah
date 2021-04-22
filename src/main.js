@@ -18,7 +18,25 @@ import VueFeather from "vue-feather";
 import VueApexCharts from "vue-apexcharts";
 import FunctionalCalendar from "vue-functional-calendar";
 import vueKanban from "vue-kanban";
+//
+import DataTable from "./components/datatable.vue";
+import FormAkad from "./components/form_akad.vue";
+import FormDeposito from "./components/form_deposito.vue";
+import FormJenistransaksi from "./components/form_jenistransaksi.vue";
+import FormNasabah from "./components/form_nasabah.vue";
+import FormPembiayaan from "./components/form_pembiayaan.vue";
+import FormProduk from "./components/form_produk.vue";
+import FormSimpanan from "./components/form_simpanan.vue";
+Vue.component("data-table", DataTable);
+Vue.component("form-akad", FormAkad);
+Vue.component("form-deposito", FormDeposito);
+Vue.component("form-jenistransaksi", FormJenistransaksi);
+Vue.component("form-nasabah", FormNasabah);
+Vue.component("form-pembiayaan", FormPembiayaan);
+Vue.component("form-produk", FormProduk);
+Vue.component("form-simpanan", FormSimpanan);
 
+//
 import PxCard from "./components/Pxcard.vue";
 Vue.component(PxCard.name, PxCard);
 

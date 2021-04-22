@@ -36,8 +36,6 @@
 </template>
 
 <script>
-import DataTable from "../../components/datatable.vue";
-import FormAkad from "../../components/form_akad.vue";
 import header from "../../data/headerakad.json";
 import {
   ACTION_GET_DATA_MASTER,
@@ -47,10 +45,6 @@ import {
 } from "../../store/modules/master";
 import { mapState } from "vuex";
 export default {
-  components: {
-    DataTable,
-    FormAkad,
-  },
   data: () => {
     return {
       headers: header,

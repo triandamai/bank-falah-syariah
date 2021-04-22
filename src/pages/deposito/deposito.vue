@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import DataTable from "../../components/datatable.vue";
-import FormDeposito from "../../components/form_deposito.vue";
 import header from "../../data/headerdeposito.json";
 import {
   ACTION_GET_DATA_REKENING,
@@ -34,10 +32,6 @@ import {
 } from "../../store/modules/rekening";
 import { mapState } from "vuex";
 export default {
-  components: {
-    DataTable,
-    FormDeposito,
-  },
   data: () => {
     return {
       headers: header,

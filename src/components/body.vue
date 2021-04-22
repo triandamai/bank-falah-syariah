@@ -38,6 +38,12 @@
       </div>
       <Customizer />
     </div>
+    <form-akad :show="formakad" @close="hide" />
+    <form-deposito :show="formdeposito" @close="hide" />
+    <form-jenistransaksi :show="formjenistransaksi" @close="hide" />
+    <form-pembiayaan :show="formpembiayaan" @close="hide" />
+    <form-produk :show="formproduk" @close="hide" />
+    <form-simpanan :show="formsimpanan" @close="hide" />
   </div>
 </template>
 
@@ -70,6 +76,13 @@ export default {
       menuItems: (state) => state.menu.data,
       layout: (state) => state.layout.layout,
       togglesidebar: (state) => state.menu.togglesidebar,
+      body: (state) => state.body,
+      formakad: (state) => state.formakad,
+      formdeposito: (state) => state.formdeposito,
+      formjenistransaksi: (state) => state.formjenistransaksi,
+      formpembiayaan: (state) => state.formpembiayaan,
+      formproduk: (state) => state.formproduk,
+      formsimpanan: (state) => state.formsimpanan,
     }),
   },
   created() {
@@ -77,6 +90,7 @@ export default {
     this.handleResize();
     this.resized = this.sidebar_toggle_var;
     this.$store.dispatch("layout/set");
+    console.log(this.$store);
   },
   watch: {
     $route() {
@@ -101,6 +115,9 @@ export default {
     },
   },
   methods: {
+    hide() {
+      this.$store.commit("hideForm", {});
+    },
     sidebar_toggle(value) {
       this.sidebar_toggle_var = !value;
     },

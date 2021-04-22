@@ -28,7 +28,6 @@
 </template>
 
 <script>
-import DataTable from "../../components/datatable.vue";
 import header from "../../data/headersimpanan.json";
 import {
   ACTION_GET_DATA_REKENING,
@@ -36,9 +35,6 @@ import {
 } from "../../store/modules/rekening";
 import { mapState } from "vuex";
 export default {
-  components: {
-    DataTable,
-  },
   data: () => {
     return {
       headers: header,

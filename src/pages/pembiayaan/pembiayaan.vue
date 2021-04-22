@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import DataTable from "../../components/datatable.vue";
-import FormPembiayaan from "../../components/form_pembiayaan.vue";
 import header from "../../data/headerpembiayaan.json";
 import {
   ACTION_GET_DATA_REKENING,
@@ -34,10 +32,6 @@ import {
 } from "../../store/modules/rekening";
 import { mapState } from "vuex";
 export default {
-  components: {
-    DataTable,
-    FormPembiayaan,
-  },
   data: () => {
     return {
       formpembiayaan: false,

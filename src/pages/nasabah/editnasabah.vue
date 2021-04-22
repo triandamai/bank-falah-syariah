@@ -22,10 +22,5 @@
 </template>
 
 <script>
-import FormNasabah from "../../components/form_nasabah.vue";
-export default {
-  components: {
-    FormNasabah,
-  },
-};
+export default {};
 </script>

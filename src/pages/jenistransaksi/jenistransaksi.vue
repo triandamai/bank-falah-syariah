@@ -36,19 +36,13 @@
 </template>
 
 <script>
-import DataTable from "../../components/datatable.vue";
 import header from "../../data/headerjenistransaksi.json";
 import {
   ACTION_GET_DATA_MASTER,
   MJENISTRANSAKSI,
 } from "../../store/modules/master";
 import { mapState } from "vuex";
-import FormJenistransaksi from "../../components/form_jenistransaksi.vue";
 export default {
-  components: {
-    DataTable,
-    FormJenistransaksi,
-  },
   data: () => {
     return {
       headers: header,

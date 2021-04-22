@@ -30,14 +30,10 @@
 </template>
 
 <script>
-import DataTable from "../../components/datatable.vue";
 import header from "../../data/headernasabah.json";
 import { ACTION_GET_NASABAH } from "../../store/modules/nasabah";
 import { mapState } from "vuex";
 export default {
-  components: {
-    DataTable,
-  },
   data: () => {
     return {
       headers: header,
