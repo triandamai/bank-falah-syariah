@@ -1,5 +1,5 @@
 <template>
-  <v-card flat>
+  <v-card flat :dark="theme">
     <v-card-title>
       <v-btn @click="$emit('add', true)" outlined small>Tambah</v-btn>
       <v-spacer></v-spacer>
@@ -26,12 +26,18 @@
   </v-card>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   props: ["items", "headers"],
   data() {
     return {
       search: "",
     };
+  },
+  computed: {
+    ...mapState({
+      theme: (state) => state.layout.isDark,
+    }),
   },
 };
 </script>

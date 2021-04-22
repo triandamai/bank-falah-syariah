@@ -38,12 +38,28 @@
       </div>
       <Customizer />
     </div>
-    <form-akad :show="formakad" @close="hide" />
-    <form-deposito :show="formdeposito" @close="hide" />
-    <form-jenistransaksi :show="formjenistransaksi" @close="hide" />
-    <form-pembiayaan :show="formpembiayaan" @close="hide" />
-    <form-produk :show="formproduk" @close="hide" />
-    <form-simpanan :show="formsimpanan" @close="hide" />
+    <form-akad :show="formakad" @close="hide" @submit="onSubmitAkad" />
+    <form-deposito
+      :show="formdeposito"
+      @close="hide"
+      @submit="onSubmitDeposito"
+    />
+    <form-jenistransaksi
+      :show="formjenistransaksi"
+      @close="hide"
+      @submit="onSubmitJenistransaksi"
+    />
+    <form-pembiayaan
+      :show="formpembiayaan"
+      @close="hide"
+      @submit="onSubmitPembiayaan"
+    />
+    <form-produk :show="formproduk" @close="hide" @submit="onSubmitProduk" />
+    <form-simpanan
+      :show="formsimpanan"
+      @close="hide"
+      @submit="onSubmitSimpanan"
+    />
   </div>
 </template>
 
@@ -90,7 +106,6 @@ export default {
     this.handleResize();
     this.resized = this.sidebar_toggle_var;
     this.$store.dispatch("layout/set");
-    console.log(this.$store);
   },
   watch: {
     $route() {
@@ -127,6 +142,12 @@ export default {
     handleResize() {
       this.$store.dispatch("menu/resizetoggle");
     },
+    onSubmitAkad() {},
+    onSubmitDeposito() {},
+    onSubmitJenistransaksi() {},
+    onSubmitPembiayaan() {},
+    onSubmitProduk() {},
+    onSubmitSimpanan() {},
   },
 };
 </script>

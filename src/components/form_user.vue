@@ -7,38 +7,51 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>Form Produk</v-toolbar>
+        <v-toolbar color="primary" dark>Form User</v-toolbar>
         <v-card-text>
           <v-container>
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.nama_produk"
-                  label="Nama *"
+                  v-model="form.username"
+                  label="Username*"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.tipe_produk"
-                  label="Tipe *"
+                  v-model="form.email"
+                  type="email"
+                  label="Email*"
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
+              <v-col cols="12" v-show="!isEdit">
                 <v-text-field
-                  v-model="form.kode_produk"
-                  label="Kode *"
+                  v-model="form.password"
+                  type="password"
+                  label="Password*"
                   required
                 ></v-text-field>
+              </v-col>
+
+              <v-col cols="12">
+                <v-autocomplete
+                  v-model="form.role_id"
+                  :items="itemsrole"
+                  item-value="id"
+                  item-text="name"
+                  label="Role*"
+                  required
+                ></v-autocomplete>
               </v-col>
               <v-col cols="12">
                 <v-autocomplete
-                  v-model="form.akad_id"
-                  :items="itemsakad"
-                  item-text="nama_akad"
+                  v-model="form.group_id"
+                  :items="itemsgroup"
                   item-value="id"
-                  label="Akad *"
+                  item-text="name"
+                  label="Group*"
                   required
                 ></v-autocomplete>
               </v-col>
@@ -64,22 +77,22 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  props: ["show", "body"],
+  props: ["show", "body", "isEdit"],
   data: () => {
     return {
-      dialogakad: false,
-
       form: {
-        nama_produk: "",
-        kode_produk: "",
-        tipe_produk: "",
-        akad_id: "",
+        username: "",
+        email: "",
+        role_id: "",
+        group_id: "",
+        active: 1,
       },
     };
   },
   computed: {
     ...mapState({
-      itemsakad: (state) => state.master.dataakad,
+      itemsrole: (state) => state.system.dataroles,
+      itemsgroup: (state) => state.system.datagroups,
     }),
   },
   watch: {

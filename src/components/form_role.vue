@@ -7,21 +7,22 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>Form Jenis Transaksi</v-toolbar>
+        <v-toolbar color="primary" dark>Form Role</v-toolbar>
         <v-card-text>
           <v-container>
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.nama_transaksi"
-                  label="Nama *"
+                  v-model="form.name"
+                  label="Name Role*"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.kode_transaksi"
-                  label="Kode *"
+                  v-model="form.description"
+                  type="email"
+                  label="Deskription*"
                   required
                 ></v-text-field>
               </v-col>
@@ -50,8 +51,8 @@ export default {
   data: () => {
     return {
       form: {
-        nama_transaksi: "",
-        kode_transaksi: "",
+        name: "",
+        description: "",
       },
     };
   },

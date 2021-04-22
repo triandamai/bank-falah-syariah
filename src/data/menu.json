@@ -171,6 +171,11 @@
           "path": "/main/group",
           "title": "Group",
           "type": "link"
+        },
+        {
+          "path": "/main/role",
+          "title": "Role",
+          "type": "link"
         }
       ]
     }

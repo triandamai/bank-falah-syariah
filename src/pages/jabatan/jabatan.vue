@@ -29,10 +29,7 @@
 
 <script>
 import header from "../../data/headersimpanan.json";
-import {
-  ACTION_GET_DATA_REKENING,
-  RSIMPANAN,
-} from "../../store/modules/rekening";
+import { ACTION_GET_DATA_MASTER, MJABATAN } from "../../store/modules/master";
 import { mapState } from "vuex";
 export default {
   data: () => {
@@ -51,9 +48,9 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(`rekening/${ACTION_GET_DATA_REKENING}`, {
-          mastertype: RSIMPANAN,
-          path: "rekening_simpanan",
+        .dispatch(`master/${ACTION_GET_DATA_MASTER}`, {
+          mastertype: MJABATAN,
+          path: "jabatan",
         })
         .then((res) => {
           if (res) {

@@ -7,7 +7,7 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>Opening from the bottom</v-toolbar>
+        <v-toolbar color="primary" dark>Form Simpanan</v-toolbar>
         <v-card-text>
           <v-container>
             <v-row>
@@ -113,7 +113,7 @@ export default {
     }),
   },
   watch: {
-    body: function (newVal, oldVal) {
+    body: function (newVal) {
       this.form = newVal;
     },
   },

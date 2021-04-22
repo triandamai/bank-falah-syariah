@@ -39,6 +39,9 @@
 import header from "../../data/headerjenistransaksi.json";
 import {
   ACTION_GET_DATA_MASTER,
+  ACTION_POST_DATA_MASTER,
+  ACTION_PUT_DATA_MASTER,
+  ACTION_DELETE_DATA_MASTER,
   MJENISTRANSAKSI,
 } from "../../store/modules/master";
 import { mapState } from "vuex";
@@ -72,7 +75,47 @@ export default {
           }
         });
     },
-    onSubmit(data) {},
+    onSubmit(data) {
+      if (this.isEdit) {
+        this.$store
+          .dispatch(`master/${ACTION_PUT_DATA_MASTER}`, {
+            mastertype: MJENISTRANSAKSI,
+            path: "jenis-transaksi",
+            body: data,
+          })
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            });
+            if (success) {
+              this.formjenistransaksi = false;
+              this.body = {};
+            }
+          });
+      }
+      if (!this.isEdit) {
+        this.$store
+          .dispatch(`master/${ACTION_POST_DATA_MASTER}`, {
+            mastertype: MJENISTRANSAKSI,
+            path: "jenis-transaksi",
+            body: data,
+          })
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            });
+            if (success) {
+              this.onAdd();
+            }
+          });
+      }
+    },
     onAdd() {
       this.formjenistransaksi = true;
       this.body = {};
@@ -85,13 +128,30 @@ export default {
     },
     onDelete(data) {
       this.$swal({
-        text: "Are you sure you want to do this?",
+        text: `Hapus ${data.nama_transaksi}?`,
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",
         cancelButtonText: "Batal",
         cancelButtonColor: "#efefef",
         reverseButtons: true,
+      }).then(({ value }) => {
+        if (value) {
+          this.$store
+            .dispatch(`master/${ACTION_DELETE_DATA_MASTER}`, {
+              mastertype: MJENISTRANSAKSI,
+              path: "jenis-transaksi",
+              body: data,
+            })
+            .then(({ success, message }) => {
+              this.$toasted.show(`${message}`, {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              });
+            });
+        }
       });
     },
   },

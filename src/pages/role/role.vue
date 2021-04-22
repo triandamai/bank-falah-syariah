@@ -26,36 +26,37 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-akad
-      :show="formakad"
+    <form-role
+      :show="form"
       :body="body"
-      @close="formakad = false"
+      @close="form = false"
       @submit="onSubmit"
     />
   </div>
 </template>
 
 <script>
-import header from "../../data/headeruser.json";
+import header from "../../data/headerrole.json";
 import {
+  ACTION_DELETE_DATA_SYSTEM,
   ACTION_GET_DATA_SYSTEM,
   ACTION_POST_DATA_SYSTEM,
   ACTION_PUT_DATA_SYSTEM,
-  SUSER,
+  SROLE,
 } from "../../store/modules/system";
 import { mapState } from "vuex";
 export default {
   data: () => {
     return {
       headers: header,
-      formakad: false,
+      form: false,
       body: {},
       isEdit: false,
     };
   },
   computed: {
     ...mapState({
-      items: (state) => state.system.datausers,
+      items: (state) => state.system.dataroles,
     }),
   },
   created() {
@@ -65,8 +66,8 @@ export default {
     getData() {
       this.$store
         .dispatch(`system/${ACTION_GET_DATA_SYSTEM}`, {
-          systemtype: SUSER,
-          path: "users",
+          systemtype: SROLE,
+          path: "roles",
         })
         .then((res) => {
           if (res) {
@@ -77,43 +78,81 @@ export default {
     onSubmit(data) {
       if (this.isEdit) {
         this.$store
-          .dispatch(`system/${ACTION_POST_DATA_SYSTEM}`, {
-            systemtype: SUSER,
-            path: "user",
+          .dispatch(`system/${ACTION_PUT_DATA_SYSTEM}`, {
+            systemtype: SROLE,
+            path: "role",
             body: data,
           })
-          .then(({ success, message }) => {});
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            });
+            if (success) {
+              this.form = false;
+              this.body = {};
+            }
+          });
       }
 
       if (!this.isEdit) {
         this.$store
-          .dispatch(`system/${ACTION_PUT_DATA_SYSTEM}`, {
-            systemtype: SUSER,
-            path: "user",
+          .dispatch(`system/${ACTION_POST_DATA_SYSTEM}`, {
+            systemtype: SROLE,
+            path: "role",
             body: data,
           })
-          .then(({ success, message }) => {});
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            });
+            if (success) {
+              this.onAdd();
+            }
+          });
       }
     },
     onDelete(data) {
       this.$swal({
-        text: "Are you sure you want to do this?",
+        text: `Hapus ${data.name}?`,
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",
         cancelButtonText: "Batal",
         cancelButtonColor: "#efefef",
         reverseButtons: true,
+      }).then(({ value }) => {
+        if (value) {
+          this.$store
+            .dispatch(`system/${ACTION_DELETE_DATA_SYSTEM}`, {
+              systemtype: SROLE,
+              path: "role",
+              body: data,
+            })
+            .then(({ success, message }) => {
+              this.$toasted.show(`${message}`, {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              });
+            });
+        }
       });
     },
     onAdd() {
       this.body = {};
-      this.formakad = true;
+      this.form = true;
       this.isEdit = false;
     },
     onEdit(data) {
       this.body = data;
-      this.formakad = true;
+      this.form = true;
       this.isEdit = true;
     },
   },

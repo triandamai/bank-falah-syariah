@@ -41,6 +41,7 @@ import {
   ACTION_GET_DATA_MASTER,
   ACTION_POST_DATA_MASTER,
   ACTION_PUT_DATA_MASTER,
+  ACTION_DELETE_DATA_MASTER,
   MAKAD,
 } from "../../store/modules/master";
 import { mapState } from "vuex";
@@ -82,7 +83,17 @@ export default {
             path: "akad",
             body: data,
           })
-          .then(({ success, message }) => {});
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            });
+            if (success) {
+              this.formakad = false;
+            }
+          });
       }
 
       if (!this.isEdit) {
@@ -92,22 +103,49 @@ export default {
             path: "akad",
             body: data,
           })
-          .then(({ success, message }) => {});
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            });
+            if (success) {
+              this.onAdd();
+            }
+          });
       }
     },
-    onDelete() {
+    onDelete(data) {
       this.$swal({
-        text: "Are you sure you want to do this?",
+        text: `Hapus ${data.nama_akad}?`,
         showCancelButton: true,
-        confirmButtonText: "Oke",
+        confirmButtonText: "Hapus",
         confirmButtonColor: "#4466f2",
         cancelButtonText: "Batal",
         cancelButtonColor: "#efefef",
         reverseButtons: true,
+      }).then(({ value }) => {
+        if (value) {
+          this.$store
+            .dispatch(`master/${ACTION_DELETE_DATA_MASTER}`, {
+              mastertype: MAKAD,
+              path: "akad",
+              body: data,
+            })
+            .then(({ success, message }) => {
+              this.$toasted.show(`${message}`, {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              });
+            });
+        }
       });
     },
     onAdd() {
-      this.body = {};
+      this.body = { active: 1 };
       this.formakad = true;
       this.isEdit = false;
     },

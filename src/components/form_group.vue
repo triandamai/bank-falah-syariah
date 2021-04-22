@@ -7,21 +7,22 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>Form Jenis Transaksi</v-toolbar>
+        <v-toolbar color="primary" dark>Form Group</v-toolbar>
         <v-card-text>
           <v-container>
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.nama_transaksi"
-                  label="Nama *"
+                  v-model="form.name"
+                  label="Name Group*"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.kode_transaksi"
-                  label="Kode *"
+                  v-model="form.description"
+                  type="email"
+                  label="Description*"
                   required
                 ></v-text-field>
               </v-col>
@@ -45,15 +46,22 @@
   </v-dialog>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   props: ["show", "body"],
   data: () => {
     return {
       form: {
-        nama_transaksi: "",
-        kode_transaksi: "",
+        name: "",
+        description: "",
       },
     };
+  },
+  computed: {
+    ...mapState({
+      itemsrole: (state) => state.system.datarole,
+      itemsgroup: (state) => state.system.datagroup,
+    }),
   },
   watch: {
     body: function (newVal) {

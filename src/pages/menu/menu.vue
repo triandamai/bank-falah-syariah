@@ -18,7 +18,6 @@
                 :headers="headers"
                 @add="onAdd"
                 @edit="onEdit"
-                @delete="onDelete"
               />
             </div>
           </div>
@@ -26,18 +25,16 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-akad
-      :show="formakad"
+    <form-menu
+      :show="form"
       :body="body"
-      @close="formakad = false"
+      @close="form = false"
       @submit="onSubmit"
     />
   </div>
 </template>
 
 <script>
-import DataTable from "../../components/datatable.vue";
-import FormAkad from "../../components/form_akad.vue";
 import header from "../../data/headeruser.json";
 import {
   ACTION_GET_DATA_SYSTEM,
@@ -47,14 +44,10 @@ import {
 } from "../../store/modules/system";
 import { mapState } from "vuex";
 export default {
-  components: {
-    DataTable,
-    FormAkad,
-  },
   data: () => {
     return {
       headers: header,
-      formakad: false,
+      form: false,
       body: {},
       isEdit: false,
     };
@@ -82,36 +75,24 @@ export default {
     },
     onSubmit(data) {
       if (this.isEdit) {
-        this.$store
-          .dispatch(`system/${ACTION_POST_DATA_SYSTEM}`, {
-            systemtype: SUSER,
-            path: "user",
-            body: data,
-          })
-          .then(({ success, message }) => {});
+        this.$store.dispatch(`system/${ACTION_POST_DATA_SYSTEM}`, {
+          systemtype: SUSER,
+          path: "user",
+          body: data,
+        });
+        // .then(({ success, message }) => {});
       }
 
       if (!this.isEdit) {
-        this.$store
-          .dispatch(`system/${ACTION_PUT_DATA_SYSTEM}`, {
-            systemtype: SUSER,
-            path: "user",
-            body: data,
-          })
-          .then(({ success, message }) => {});
+        this.$store.dispatch(`system/${ACTION_PUT_DATA_SYSTEM}`, {
+          systemtype: SUSER,
+          path: "user",
+          body: data,
+        });
+        // .then(({ success, message }) => {});
       }
     },
-    onDelete(data) {
-      this.$swal({
-        text: "Are you sure you want to do this?",
-        showCancelButton: true,
-        confirmButtonText: "Oke",
-        confirmButtonColor: "#4466f2",
-        cancelButtonText: "Batal",
-        cancelButtonColor: "#efefef",
-        reverseButtons: true,
-      });
-    },
+
     onAdd() {
       this.body = {};
       this.formakad = true;
