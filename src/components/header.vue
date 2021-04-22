@@ -140,19 +140,19 @@
               alt=""
             />
             <div class="media-body">
-              <span>Emay Walter</span>
+              <span>{{ username }}</span>
               <p class="mb-0 font-roboto">
-                Admin <i class="middle fa fa-angle-down"></i>
+                {{ role }} <i class="middle fa fa-angle-down"></i>
               </p>
             </div>
           </div>
           <ul class="profile-dropdown onhover-show-div">
-            <!-- <li>
+            <li>
               <a href="#"
                 ><feather type="user"></feather><span>Account </span></a
               >
             </li>
-            <li>
+            <!-- <li>
               <a href="#"><feather type="mail"></feather><span>Inbox</span></a>
             </li>
             <li>
@@ -212,6 +212,7 @@
 <script>
 var body = document.getElementsByTagName("body")[0];
 import { mapState, mapActions } from "vuex";
+import { getUser } from "../services/jwt.service";
 import { LOGOUT } from "../store/modules/auth";
 import Bookmark from "./bookmark";
 export default {
@@ -231,10 +232,19 @@ export default {
       openlanguage: false,
       mobile_accordian: false,
       mixLayout: "light-only",
+      username: "",
+      role: "",
+      group: "",
     };
   },
   components: {
     Bookmark,
+  },
+  created() {
+    const user = getUser();
+    this.username = user.username;
+    this.role = user.role[0].name;
+    this.group = user.group[0].name;
   },
   computed: {
     ...mapState({

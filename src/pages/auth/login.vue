@@ -15,10 +15,12 @@
               <a class="logo text-left">
                 <img
                   class="img-fluid for-light"
+                  width="40px"
                   src="../../assets/images/logo/login.png"
                   alt="looginpage" />
                 <img
                   class="img-fluid for-dark"
+                  width="40px"
                   src="../../assets/images/logo/logo_dark.png"
                   alt="looginpage"
               /></a>

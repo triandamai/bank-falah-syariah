@@ -4,9 +4,11 @@
       <router-link to="/">
         <img
           class="img-fluid for-light"
+          width="30px"
           src="../assets/images/logo/logo.png"
           alt=""
         /><img
+          width="30px"
           class="img-fluid for-dark"
           src="../assets/images/logo/logo_dark.png"
           alt=""
@@ -25,7 +27,11 @@
     </div>
     <div class="logo-icon-wrapper">
       <router-link to="/">
-        <img class="img-fluid" src="../assets/images/logo/logo-icon.png" alt=""
+        <img
+          class="img-fluid"
+          width="30px"
+          src="../assets/images/logo/logo-icon.png"
+          alt=""
       /></router-link>
     </div>
     <nav class="sidebar-main">
