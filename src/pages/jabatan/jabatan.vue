@@ -29,12 +29,7 @@
 
 <script>
 import header from "../../data/headersimpanan.json";
-import {
-  ACTION_GET_DATA_MASTER,
-  ACTION_POST_DATA_MASTER,
-  ACTION_PUT_DATA_MASTER,
-  MJABATAN,
-} from "../../store/modules/master";
+import { ACTION_GET_DATA_MASTER, MJABATAN } from "../../store/modules/master";
 import { mapState } from "vuex";
 export default {
   data: () => {

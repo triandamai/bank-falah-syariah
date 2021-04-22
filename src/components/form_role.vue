@@ -46,7 +46,6 @@
   </v-dialog>
 </template>
 <script>
-import { mapState } from "vuex";
 export default {
   props: ["show", "body"],
   data: () => {
@@ -58,7 +57,7 @@ export default {
     };
   },
   watch: {
-    body: function (newVal, oldVal) {
+    body: function (newVal) {
       this.form = newVal;
     },
   },

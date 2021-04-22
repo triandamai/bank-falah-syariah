@@ -113,7 +113,7 @@ export default {
     }),
   },
   watch: {
-    body: function (newVal, oldVal) {
+    body: function (newVal) {
       this.form = newVal;
     },
   },

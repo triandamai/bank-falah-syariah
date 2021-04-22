@@ -18,7 +18,6 @@
                 :headers="headers"
                 @add="onAdd"
                 @edit="onEdit"
-                @delete="onDelete"
               />
             </div>
           </div>
@@ -76,36 +75,24 @@ export default {
     },
     onSubmit(data) {
       if (this.isEdit) {
-        this.$store
-          .dispatch(`system/${ACTION_POST_DATA_SYSTEM}`, {
-            systemtype: SUSER,
-            path: "user",
-            body: data,
-          })
-          .then(({ success, message }) => {});
+        this.$store.dispatch(`system/${ACTION_POST_DATA_SYSTEM}`, {
+          systemtype: SUSER,
+          path: "user",
+          body: data,
+        });
+        // .then(({ success, message }) => {});
       }
 
       if (!this.isEdit) {
-        this.$store
-          .dispatch(`system/${ACTION_PUT_DATA_SYSTEM}`, {
-            systemtype: SUSER,
-            path: "user",
-            body: data,
-          })
-          .then(({ success, message }) => {});
+        this.$store.dispatch(`system/${ACTION_PUT_DATA_SYSTEM}`, {
+          systemtype: SUSER,
+          path: "user",
+          body: data,
+        });
+        // .then(({ success, message }) => {});
       }
     },
-    onDelete(data) {
-      this.$swal({
-        text: "Are you sure you want to do this?",
-        showCancelButton: true,
-        confirmButtonText: "Oke",
-        confirmButtonColor: "#4466f2",
-        cancelButtonText: "Batal",
-        cancelButtonColor: "#efefef",
-        reverseButtons: true,
-      });
-    },
+
     onAdd() {
       this.body = {};
       this.formakad = true;

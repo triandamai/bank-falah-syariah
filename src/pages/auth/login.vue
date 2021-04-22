@@ -122,7 +122,7 @@
 </template>
 
 <script>
-import { LOGIN, LOGOUT } from "../../store/modules/auth";
+import { LOGIN } from "../../store/modules/auth";
 export default {
   name: "login",
   data() {

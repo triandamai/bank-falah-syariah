@@ -211,10 +211,10 @@
 </template>
 <script>
 var body = document.getElementsByTagName("body")[0];
-import { mapState, mapActions } from "vuex";
+import { mapState } from "vuex";
 import { getUser } from "../services/jwt.service";
 import { LOGOUT } from "../store/modules/auth";
-import Bookmark from "./bookmark";
+// import Bookmark from "./bookmark";
 export default {
   name: "Search",
   data() {
@@ -237,9 +237,9 @@ export default {
       group: "",
     };
   },
-  components: {
-    Bookmark,
-  },
+  // components: {
+  //   Bookmark,
+  // },
   created() {
     const user = getUser();
     this.username = user.username;
