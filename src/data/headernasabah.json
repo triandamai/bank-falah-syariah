@@ -1,0 +1,40 @@
+[
+    {
+        "text": "No",
+        "align": "left",
+        "sortable": false,
+        "value": "id"
+    },
+    {
+        "text": "Kode Nasabah",
+        "value": "kode_nasabah"
+    },
+    {
+        "text": "Nama Nasabah",
+        "value": "nama_lengkap"
+    },
+    {
+        "text": "Jenis Kelamin",
+        "value": "jenis_kelamin"
+    },
+    {
+        "text": "TTl",
+        "value": "ttl"
+    },
+    {
+        "text": "Alamat",
+        "value": "alamat"
+    },
+    {
+        "text": "Telp.",
+        "value": "no_hp"
+    },
+    {
+        "text": "Status",
+        "value": "status"
+    },
+    {
+        "text": "Aksi",
+        "value": "action"
+    }
+]

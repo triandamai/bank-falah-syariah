@@ -1,0 +1,30 @@
+[
+    {
+        "text": "No",
+        "value": "id"
+    },
+    {
+        "text": "Dibuka",
+        "value": "tgl_buka"
+    },
+    {
+        "text": "Jatuh Tempo",
+        "value": "tgl_jatuh_tempo"
+    },
+    {
+        "text": "Nasabah",
+        "value": "nasabah_id"
+    },
+    {
+        "text": "Teller",
+        "value": "pegawai_id"
+    },
+    {
+        "text": "Nilai",
+        "value": "nilao_deposito"
+    },
+    {
+        "text": "Aksi",
+        "value": "action"
+    }
+]

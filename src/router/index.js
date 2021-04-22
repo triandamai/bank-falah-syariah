@@ -1,79 +1,197 @@
 import Vue from "vue";
-import VueRouter from "vue-router";
-//view
-import Dashboard from "../views/Dashboard.vue";
-import About from "../views/About.vue";
-import Main from "../views/Main.vue";
-import Login from "../views/Login.vue";
-//page
-import Home from "../views/pages/Home.vue";
-import NotFound from "../views/pages/NotFound.vue";
-import View404 from "../views/View404.vue";
+import Router from "vue-router";
+import ApiService from "../services/api.service";
+import { getUser } from "../services/jwt.service";
 
-Vue.use(VueRouter);
+// component
+
+Vue.use(Router);
 
 const routes = [
+  { path: "", redirect: { name: "dashboard" } },
   {
-    path: "/",
-    name: "Main",
-    component: Main,
-  },
-  {
-    path: "/login",
-    name: "Login",
-    component: Login,
-  },
-  {
-    path: "/dashboard",
-    component: Dashboard,
+    path: "/main",
+    component: () => import("../components/body"),
     meta: {
-      requiresAuth: true,
+      reqiresAuth: true
     },
     children: [
       {
         path: "",
-        redirect: "home",
+        name: "dashboard",
+        component: () => import("../pages/dashboard/dashboard.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "nasabah",
+        name: "nasabah",
+        component: () => import("../pages/nasabah/nasabah.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
       },
       {
-        path: "home",
-        name: "Home",
-        component: Home,
+        path: "nasabah/add",
+        name: "addnasabah",
+        component: () => import("../pages/nasabah/addnasabah.vue"),
+        meta: {
+          title: "Nasabah | Add",
+          reqiresAuth: true
+        }
       },
       {
-        path: "*",
-        name: "NotFound",
-        component: NotFound,
+        path: "nasabah/edit/:id",
+        name: "editnasabah",
+        component: () => import("../pages/nasabah/addnasabah.vue"),
+        meta: {
+          title: "Nasabah | Add",
+          reqiresAuth: true
+        }
       },
-    ],
+      //
+      {
+        path: "akad",
+        name: "akad",
+        component: () => import("../pages/akad/akad.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "jenistransaksi",
+        name: "jenistransaksi",
+        component: () => import("../pages/jenistransaksi/jenistransaksi.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "produk",
+        name: "produk",
+        component: () => import("../pages/produk/produk.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "jabatan",
+        name: "jabatan",
+        component: () => import("../pages/nasabah/nasabah.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "pegawai",
+        name: "pegawai",
+        component: () => import("../pages/nasabah/nasabah.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "deposito",
+        name: "deposito",
+        component: () => import("../pages/deposito/deposito.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "pembiayaan",
+        name: "pembiayaan",
+        component: () => import("../pages/pembiayaan/pembiayaan.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "simpanan",
+        name: "simpanan",
+        component: () => import("../pages/simpanan/simpanan.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "user",
+        name: "user",
+        component: () => import("../pages/user/user.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+
+      //
+      {
+        path: "group",
+        name: "group",
+        component: () => import("../pages/group/group.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "menu",
+        name: "menu",
+        component: () => import("../pages/menu/menu.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      }
+    ]
   },
   {
-    path: "/about",
-    name: "About",
-    component: About,
-  },
-  {
-    path: "*",
-    name: "404",
-    component: View404,
-  },
+    path: "/login",
+    name: "login",
+    component: () => import("../pages/auth/login.vue")
+  }
 ];
 
-const router = new VueRouter({
-  mode: "history",
-  base: process.env.BASE_URL,
+const router = new Router({
   routes,
+  base: "/",
+  mode: "history",
+  linkActiveClass: "active",
+  scrollBehavior() {
+    return { x: 0, y: 0 };
+  }
 });
-router.onError;
-router.beforeEach((from, to, next) => {
-  let user = sessionStorage.getItem("zzaAAb");
 
-  if (to.matched.some((record) => record.meta.requiresAuth)) {
-    if (user != null) {
+router.beforeEach((to, from, next) => {
+  ApiService.setHeader();
+  const user = getUser();
+  if (to.meta.title) document.title = to.meta.title;
+  if (to.meta.reqiresAuth) {
+    if (user) {
       next();
     } else {
-      next({
-        redirect: "/login",
-      });
+      next({ path: "/login" });
     }
   } else {
     next();

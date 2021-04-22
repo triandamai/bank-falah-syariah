@@ -1,0 +1,30 @@
+[
+    {
+        "text": "No",
+        "value": "id"
+    },
+    {
+        "text": "Pencairan",
+        "value": "tgl_pencairan"
+    },
+    {
+        "text": "Jatuh Tempo",
+        "value": "tgl_jatuh_tempo"
+    },
+    {
+        "text": "Nasabah",
+        "value": "nasabah_id"
+    },
+    {
+        "text": "Teller",
+        "value": "pegawai_id"
+    },
+    {
+        "text": "Nila",
+        "value": "nilao_deposito"
+    },
+    {
+        "text": "Lama Angsuran",
+        "value": "id"
+    }
+]

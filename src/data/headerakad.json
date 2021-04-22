@@ -1,0 +1,22 @@
+[
+    {
+        "text": "No",
+        "value": "id"
+    },
+    {
+        "text": "Nama",
+        "value": "nama_akad"
+    },
+    {
+        "text": "Kode",
+        "value": "kode_akad"
+    },
+    {
+        "text": "Status",
+        "value": "active"
+    },
+    {
+        "text": "Aksi",
+        "value": "action"
+    }
+]
