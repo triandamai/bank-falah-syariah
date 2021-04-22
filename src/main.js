@@ -27,6 +27,13 @@ import FormNasabah from "./components/form_nasabah.vue";
 import FormPembiayaan from "./components/form_pembiayaan.vue";
 import FormProduk from "./components/form_produk.vue";
 import FormSimpanan from "./components/form_simpanan.vue";
+import FormUser from "./components/form_user.vue";
+import FormGroup from "./components/form_group.vue";
+import FormMenu from "./components/form_menu.vue";
+import FormRole from "./components/form_role.vue";
+import FormJabatan from "./components/form_jabatan.vue";
+import FormPegawai from "./components/form_pegawai.vue";
+
 Vue.component("data-table", DataTable);
 Vue.component("form-akad", FormAkad);
 Vue.component("form-deposito", FormDeposito);
@@ -35,6 +42,12 @@ Vue.component("form-nasabah", FormNasabah);
 Vue.component("form-pembiayaan", FormPembiayaan);
 Vue.component("form-produk", FormProduk);
 Vue.component("form-simpanan", FormSimpanan);
+Vue.component("form-user", FormUser);
+Vue.component("form-group", FormGroup);
+Vue.component("form-menu", FormMenu);
+Vue.component("form-role", FormRole);
+Vue.component("form-jabatan", FormJabatan);
+Vue.component("form-pegawai", FormPegawai);
 
 //
 import PxCard from "./components/Pxcard.vue";

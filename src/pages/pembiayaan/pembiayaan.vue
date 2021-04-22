@@ -28,6 +28,8 @@
 import header from "../../data/headerpembiayaan.json";
 import {
   ACTION_GET_DATA_REKENING,
+  ACTION_POST_DATA_REKENING,
+  ACTION_PUT_DATA_REKENING,
   RPEMBIAYAAN,
 } from "../../store/modules/rekening";
 import { mapState } from "vuex";
@@ -61,6 +63,7 @@ export default {
     },
     onSubmit(data) {
       if (this.isEdit) {
+        this.$store.dispatch(``);
       }
       if (!this.isEdit) {
       }

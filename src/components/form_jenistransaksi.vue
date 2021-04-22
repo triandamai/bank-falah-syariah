@@ -7,7 +7,7 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>Opening from the bottom</v-toolbar>
+        <v-toolbar color="primary" dark>Form Jenis Transaksi</v-toolbar>
         <v-card-text>
           <v-container>
             <v-row>

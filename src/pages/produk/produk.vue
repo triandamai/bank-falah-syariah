@@ -37,7 +37,13 @@
 
 <script>
 import header from "../../data/headerproduk.json";
-import { ACTION_GET_DATA_MASTER, MPRODUK } from "../../store/modules/master";
+import {
+  ACTION_GET_DATA_MASTER,
+  ACTION_POST_DATA_MASTER,
+  ACTION_PUT_DATA_MASTER,
+  ACTION_DELETE_DATA_MASTER,
+  MPRODUK,
+} from "../../store/modules/master";
 import { mapState } from "vuex";
 export default {
   data: () => {
@@ -71,8 +77,43 @@ export default {
     },
     onSubmit(data) {
       if (this.isEdit) {
+        this.$store
+          .dispatch(`master/${ACTION_PUT_DATA_MASTER}`, {
+            mastertype: MPRODUK,
+            path: "produk",
+            body: data,
+          })
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            });
+            if (success) {
+              this.formproduk = false;
+              this.body = {};
+            }
+          });
       }
       if (!this.isEdit) {
+        this.$store
+          .dispatch(`master/${ACTION_POST_DATA_MASTER}`, {
+            mastertype: MPRODUK,
+            path: "produk",
+            body: data,
+          })
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            });
+            if (success) {
+              this.onAdd();
+            }
+          });
       }
     },
     onAdd() {
@@ -87,13 +128,30 @@ export default {
     },
     onDelete(data) {
       this.$swal({
-        text: "Are you sure you want to do this?",
+        text: `Hapus ${data.nama_produk}?`,
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",
         cancelButtonText: "Batal",
         cancelButtonColor: "#efefef",
         reverseButtons: true,
+      }).then(({ value }) => {
+        if (value) {
+          this.$store
+            .dispatch(`master/${ACTION_DELETE_DATA_MASTER}`, {
+              mastertype: MPRODUK,
+              path: "produk",
+              body: data,
+            })
+            .then(({ success, message }) => {
+              this.$toasted.show(`${message}`, {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              });
+            });
+        }
       });
     },
   },
