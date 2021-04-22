@@ -93,7 +93,7 @@ const actions = {
               resolve(true);
               stillPaging = true;
             }
-            console.log("ex");
+
             res.data.data.map(item => {
               commit(MUTATION_ADD_DATA_MASTER, {
                 mastertype: mastertype,
