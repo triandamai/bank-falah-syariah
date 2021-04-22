@@ -87,7 +87,7 @@ const routes = [
       {
         path: "jabatan",
         name: "jabatan",
-        component: () => import("../pages/nasabah/nasabah.vue"),
+        component: () => import("../pages/jabatan/jabatan.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -97,7 +97,7 @@ const routes = [
       {
         path: "pegawai",
         name: "pegawai",
-        component: () => import("../pages/nasabah/nasabah.vue"),
+        component: () => import("../pages/pegawai/pegawai.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -159,6 +159,16 @@ const routes = [
         path: "menu",
         name: "menu",
         component: () => import("../pages/menu/menu.vue"),
+        meta: {
+          title: "Default Dashboard | Endless - Premium Admin Template",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "role",
+        name: "role",
+        component: () => import("../pages/role/role.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
