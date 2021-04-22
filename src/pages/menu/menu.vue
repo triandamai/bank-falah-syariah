@@ -26,18 +26,16 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-akad
-      :show="formakad"
+    <form-menu
+      :show="form"
       :body="body"
-      @close="formakad = false"
+      @close="form = false"
       @submit="onSubmit"
     />
   </div>
 </template>
 
 <script>
-import DataTable from "../../components/datatable.vue";
-import FormAkad from "../../components/form_akad.vue";
 import header from "../../data/headeruser.json";
 import {
   ACTION_GET_DATA_SYSTEM,
@@ -47,14 +45,10 @@ import {
 } from "../../store/modules/system";
 import { mapState } from "vuex";
 export default {
-  components: {
-    DataTable,
-    FormAkad,
-  },
   data: () => {
     return {
       headers: header,
-      formakad: false,
+      form: false,
       body: {},
       isEdit: false,
     };
