@@ -3,14 +3,23 @@
     {
       "headTitle1": "General",
       "headTitle2": "Dashboards,features & data.",
-      "type": "headtitle"
+      "type": "headtitle",
+      "path": "General",
+      "idx": 1,
+      "privilage": [
+        ""
+      ]
     },
     {
       "path": "/main/nasabah",
       "title": "Nasabah",
       "icon": "git-pull-request",
       "type": "link",
-      "active": false
+      "active": false,
+      "idx": 2,
+      "privilage": [
+        ""
+      ]
     },
     {
       "title": "Master Data",
@@ -19,6 +28,11 @@
       "badgeType": "primary",
       "badgeValue": "5",
       "active": false,
+      "path": "Mater Data",
+      "idx": 3,
+      "privilage": [
+        ""
+      ],
       "children": [
         {
           "path": "/main/akad",
@@ -54,6 +68,11 @@
       "badgeType": "primary",
       "badgeValue": "3",
       "active": false,
+      "path": "Rekening",
+      "idx": 4,
+      "privilage": [
+        "test"
+      ],
       "children": [
         {
           "path": "/main/deposito",
@@ -75,13 +94,23 @@
     {
       "headTitle1": "Shortcut",
       "headTitle2": "Form etc",
-      "type": "headtitle"
+      "type": "headtitle",
+      "path": "ShortCut",
+      "idx": 5,
+      "privilage": [
+        ""
+      ]
     },
     {
       "title": "Form",
       "icon": "server",
       "type": "sub",
       "active": false,
+      "path": "Form",
+      "idx": 6,
+      "privilage": [
+        ""
+      ],
       "children": [
         {
           "title": "Master Data",
@@ -147,7 +176,12 @@
     {
       "headTitle1": "Advance",
       "headTitle2": "Settings,Role & Group",
-      "type": "headtitle"
+      "type": "headtitle",
+      "path": "Advance",
+      "idx": 7,
+      "privilage": [
+        ""
+      ]
     },
     {
       "title": "System",
@@ -156,6 +190,11 @@
       "badgeType": "primary",
       "badgeValue": "3",
       "active": false,
+      "path": "System",
+      "idx": 8,
+      "privilage": [
+        ""
+      ],
       "children": [
         {
           "path": "/main/menu",
