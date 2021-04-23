@@ -200,7 +200,7 @@ const actions = {
         })
         .catch(e => {
           resolve({
-            success: true,
+            success: false,
             message: e.response.data.message || "Berhasil mengubah!"
           });
         });

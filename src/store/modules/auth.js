@@ -48,7 +48,7 @@ const actions = {
       })
         .then(res => {
           // console.log(res);
-          if (res.status == 200 || 201) {
+          if (res.status == 200 || res.status == 201) {
             commit(SET_AUTH, res.data);
 
             resolve({ success: true, message: res.data.message || "Berhasil" });
@@ -62,7 +62,7 @@ const actions = {
         .catch(e => {
           resolve({
             success: false,
-            message: e.response.message || "Gagal coba lagi nanti!"
+            message: e || "Gagal coba lagi nanti!"
           });
         });
     });

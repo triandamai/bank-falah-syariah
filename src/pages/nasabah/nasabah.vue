@@ -31,7 +31,10 @@
 
 <script>
 import header from "../../data/headernasabah.json";
-import { ACTION_GET_NASABAH } from "../../store/modules/nasabah";
+import {
+  ACTION_GET_NASABAH,
+  ACTION_DELETE_NASABAH,
+} from "../../store/modules/nasabah";
 import { mapState } from "vuex";
 export default {
   data: () => {
@@ -60,13 +63,16 @@ export default {
     },
     onDelete(nasabah) {
       this.$swal({
-        text: "Are you sure you want to do this?",
+        text: `Hapus ${nasabah.nama_lengkap}?`,
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",
         cancelButtonText: "Batal",
         cancelButtonColor: "#efefef",
         reverseButtons: true,
+      }).then(({ value }) => {
+        if (value) {
+        }
       });
     },
   },
