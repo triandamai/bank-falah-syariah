@@ -17,7 +17,7 @@
               type="text"
               v-on:keyup="searchterm"
               v-model="terms"
-              placeholder="Search Cuba .."
+              placeholder="Cari Halaman .."
               name="q"
               title=""
               autofocus

@@ -47,7 +47,7 @@ const routes = [
       {
         path: "nasabah/edit/:id",
         name: "editnasabah",
-        component: () => import("../pages/nasabah/addnasabah.vue"),
+        component: () => import("../pages/nasabah/editnasabah.vue"),
         meta: {
           title: "Nasabah | Add",
           reqiresAuth: true
