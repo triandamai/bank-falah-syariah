@@ -72,6 +72,16 @@ export default {
         reverseButtons: true,
       }).then(({ value }) => {
         if (value) {
+          this.$store
+            .dispatch(`nasabah/${ACTION_DELETE_NASABAH}`, nasabah)
+            .then(({ success, message }) => {
+              this.$toasted.show(`${message}`, {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              });
+            });
         }
       });
     },

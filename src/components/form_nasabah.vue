@@ -23,6 +23,7 @@
             <v-row>
               <v-col cols="12" sm="12" md="6" class="my-2">
                 <v-text-field
+                  v-model="form.nama_lengkap"
                   label="Nama Lengkap"
                   placeholder="Nama Lengkap"
                   outlined
@@ -31,6 +32,7 @@
               </v-col>
               <v-col cols="12" sm="12" md="6" class="my-2">
                 <v-text-field
+                  v-model="form.nama_panggilan"
                   label="Nama panggilan"
                   placeholder="Nama Panggilan"
                   outlined
@@ -41,7 +43,10 @@
               <v-col class="d-flex" cols="12" sm="12">
                 <v-select
                   :items="jenis_kelamin"
-                  label="Outlined style"
+                  v-model="form.jenis_kelamin"
+                  item-text="label"
+                  item-value="value"
+                  label="Jenis Kelamin"
                   dense
                   outlined
                 ></v-select>
@@ -57,8 +62,8 @@
                 >
                   <template v-slot:activator="{ on, attrs }">
                     <v-text-field
-                      v-model="tanggal_lahir"
-                      label="Birthday date"
+                      v-model="form.tanggal_lahir"
+                      label="Tanggal Lahir"
                       readonly
                       v-bind="attrs"
                       v-on="on"
@@ -68,7 +73,7 @@
                   </template>
                   <v-date-picker
                     ref="picker"
-                    v-model="tanggal_lahir"
+                    v-model="form.tanggal_lahir"
                     :max="new Date().toISOString().substr(0, 10)"
                     min="1950-01-01"
                     @change="save"
@@ -82,8 +87,9 @@
 
           <v-stepper-content step="2">
             <v-row>
-              <v-col cols="12" sm="12" md="6" class="my-2">
+              <v-col cols="12" sm="12" class="my-2">
                 <v-text-field
+                  v-model="form.alamat"
                   label="Alamat"
                   placeholder="Alamat Lengkap"
                   outlined
@@ -97,15 +103,16 @@
 
           <v-stepper-content step="3">
             <v-row>
-              <v-col cols="12" sm="12" md="6" class="my-2">
+              <v-col cols="12" sm="12" class="my-2">
                 <v-text-field
+                  v-model="form.notelp"
                   label="Telp"
                   placeholder="Nomor Telpon"
                   outlined
                   dense
                 ></v-text-field> </v-col
             ></v-row>
-            <v-btn @click="step = 1" outlined small> Simpan </v-btn>
+            <v-btn @click="onSubmit" outlined small> Simpan </v-btn>
 
             <v-btn text> Sebelumnya </v-btn>
           </v-stepper-content>
@@ -116,26 +123,74 @@
 </template>
 
 <script>
+import {
+  ACTION_POST_NASABAH,
+  ACTION_PUT_NASABAH,
+} from "../store/modules/nasabah";
 export default {
   props: ["isEdit"],
   data() {
     return {
       step: 1,
-      jenis_kelamin: ["Laki-Laki", "Perempuan"],
+      jenis_kelamin: [
+        { label: "Laki-Laki", value: "L" },
+        { label: "Perempuan", value: "P" },
+      ],
       datepicker: false,
       tanggal_lahir: "",
       form: {
-        kode_nasabah: "",
+        kode_nasabah: "4",
         nama_lengkap: "",
         nama_panggilan: "",
         jenis_kelamin: "",
+        alamat: "",
+        notelp: "",
         active: 1,
       },
     };
   },
+  created() {
+    if (this.isEdit) {
+      if (!this.$route.params.id) return this.$router.go(-1);
+      this.form.id = this.$route.params.id;
+    }
+  },
   methods: {
     save(date) {
       this.$refs.datepicker.save(date);
+    },
+    onSubmit() {
+      if (!this.isEdit) {
+        console.log("post");
+        this.$store
+          .dispatch(`nasabah/${ACTION_POST_NASABAH}`, this.form)
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            });
+            if (success) {
+              this.form = {};
+            }
+          });
+      }
+      if (this.isEdit) {
+        this.$store
+          .dispatch(`nasabah/${ACTION_PUT_NASABAH}`, this.form)
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            });
+            if (success) {
+              this.$router.push({ name: "nasabah" });
+            }
+          });
+      }
     },
   },
 };
