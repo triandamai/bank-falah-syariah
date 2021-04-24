@@ -18,6 +18,7 @@
                 :headers="headers"
                 :hidedelete="true"
                 :hideadd="true"
+                @edit="form = true"
               />
             </div>
           </div>
@@ -27,7 +28,8 @@
     <!-- Container-fluid Ends-->
     <form-menu
       :show="form"
-      :body="body"
+      :roles="roles"
+      :groups="groups"
       @close="form = false"
       @submit="onSubmit"
     />
@@ -44,6 +46,9 @@ export default {
       headers: header,
       form: false,
       body: {},
+      roles: [],
+      groups: [],
+      index: null,
       isEdit: false,
     };
   },
@@ -59,9 +64,15 @@ export default {
     getData() {
       this.$store.dispatch(`menu/getMenu`).then(({ success }) => {});
     },
+    onEdit(menu) {
+      this.form = true;
+      this.index = menu.idx;
+      this.roles = menu.privilage.roles;
+      this.groups = menu.privilage.groups;
+    },
     onSubmit(data) {
       this.$store
-        .dispatch(`menu/updateMenu`, this.items)
+        .dispatch(`menu/updateMenu`, data)
         .then(({ success, message }) => {
           if (success) {
             this.getData();

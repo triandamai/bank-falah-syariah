@@ -47,6 +47,7 @@
                   item-text="label"
                   item-value="value"
                   label="Jenis Kelamin"
+                  auto-select-first
                   dense
                   outlined
                 ></v-select>
@@ -105,7 +106,7 @@
             <v-row>
               <v-col cols="12" sm="12" class="my-2">
                 <v-text-field
-                  v-model="form.notelp"
+                  v-model="form.no_hp"
                   label="Telp"
                   placeholder="Nomor Telpon"
                   outlined
@@ -123,6 +124,7 @@
 </template>
 
 <script>
+import ApiService from "../services/api.service";
 import {
   ACTION_POST_NASABAH,
   ACTION_PUT_NASABAH,
@@ -144,15 +146,25 @@ export default {
         nama_panggilan: "",
         jenis_kelamin: "",
         alamat: "",
-        notelp: "",
+        no_hp: "",
         active: 1,
       },
     };
   },
   created() {
+    console.log(this.isEdit);
     if (this.isEdit) {
       if (!this.$route.params.id) return this.$router.go(-1);
       this.form.id = this.$route.params.id;
+      ApiService.get(`nasabah/${this.$route.params.id}`)
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
+            if (data.data.length > 0) {
+              this.form = data.data[0];
+            }
+          }
+        })
+        .catch((e) => {});
     }
   },
   methods: {

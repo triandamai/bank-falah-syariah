@@ -7,43 +7,33 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>Form User</v-toolbar>
+        <v-toolbar color="primary" dark>Ubah Akses Menu</v-toolbar>
         <v-card-text>
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field
-                  v-model="form.username"
-                  label="Username*"
-                  required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  v-model="form.email"
-                  type="email"
-                  label="Email*"
-                  required
-                ></v-text-field>
-              </v-col>
-
-              <v-col cols="12">
                 <v-autocomplete
-                  v-model="form.role_id"
-                  :items="itemsrole"
-                  item-value="id"
-                  item-text="name"
+                  v-model="form.roles"
                   label="Role*"
+                  :items="itemsrole"
+                  item-text="name"
+                  item-value="id"
+                  auto-select-first
+                  chips
+                  multiple
                   required
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12">
                 <v-autocomplete
-                  v-model="form.group_id"
-                  :items="itemsgroup"
-                  item-value="id"
-                  item-text="name"
                   label="Group*"
+                  v-model="form.groups"
+                  :items="itemsgroup"
+                  item-text="name"
+                  item-value="id"
+                  auto-select-first
+                  chips
+                  multiple
                   required
                 ></v-autocomplete>
               </v-col>
@@ -69,27 +59,27 @@
 <script>
 import { mapState } from "vuex";
 export default {
-  props: ["show", "body"],
+  props: ["show", "roles", "groups"],
   data: () => {
     return {
       form: {
-        username: "",
-        email: "",
-        role_id: "",
-        group_id: "",
-        active: 1,
+        roles: [],
+        groups: [],
       },
     };
   },
   computed: {
     ...mapState({
-      itemsrole: (state) => state.system.datarole,
-      itemsgroup: (state) => state.system.datagroup,
+      itemsrole: (state) => state.system.dataroles,
+      itemsgroup: (state) => state.system.datagroups,
     }),
   },
   watch: {
-    body: function (newVal) {
-      this.form = newVal;
+    roles: function (newVal) {
+      this.form.roles = newVal;
+    },
+    groups: function (newVal) {
+      this.form.groups = newVal;
     },
   },
   methods: {

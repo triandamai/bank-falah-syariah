@@ -6,9 +6,13 @@
       "type": "headtitle",
       "path": "General",
       "idx": 1,
-      "privilage": [
-        ""
-      ]
+      "privilage": {
+        "roles": [
+          1,
+          2
+        ],
+        "groups": []
+      }
     },
     {
       "path": "/main/nasabah",
@@ -17,9 +21,10 @@
       "type": "link",
       "active": false,
       "idx": 2,
-      "privilage": [
-        ""
-      ]
+      "privilage": {
+        "roles": [],
+        "groups": []
+      }
     },
     {
       "title": "Master Data",
@@ -30,9 +35,10 @@
       "active": false,
       "path": "Mater Data",
       "idx": 3,
-      "privilage": [
-        ""
-      ],
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
       "children": [
         {
           "path": "/main/akad",
@@ -70,9 +76,10 @@
       "active": false,
       "path": "Rekening",
       "idx": 4,
-      "privilage": [
-        "test"
-      ],
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
       "children": [
         {
           "path": "/main/deposito",
@@ -97,9 +104,10 @@
       "type": "headtitle",
       "path": "ShortCut",
       "idx": 5,
-      "privilage": [
-        ""
-      ]
+      "privilage": {
+        "roles": [],
+        "groups": []
+      }
     },
     {
       "title": "Form",
@@ -108,9 +116,10 @@
       "active": false,
       "path": "Form",
       "idx": 6,
-      "privilage": [
-        ""
-      ],
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
       "children": [
         {
           "title": "Master Data",
@@ -179,9 +188,10 @@
       "type": "headtitle",
       "path": "Advance",
       "idx": 7,
-      "privilage": [
-        ""
-      ]
+      "privilage": {
+        "roles": [],
+        "groups": []
+      }
     },
     {
       "title": "System",
@@ -192,9 +202,10 @@
       "active": false,
       "path": "System",
       "idx": 8,
-      "privilage": [
-        ""
-      ],
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
       "children": [
         {
           "path": "/main/menu",
