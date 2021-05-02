@@ -83,7 +83,7 @@
               </v-col>
             </v-row>
             <v-btn @click="step = 2" outlined small> Selanjutnya </v-btn>
-            <v-btn text> Kembali </v-btn>
+            <v-btn @click="goBack" text> Kembali </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="2">
@@ -99,7 +99,7 @@
             ></v-row>
             <v-btn @click="step = 3" outlined small> Selanjutnya </v-btn>
 
-            <v-btn text> Kembali </v-btn>
+            <v-btn @click="goBack" text> Kembali </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="3">
@@ -168,6 +168,11 @@ export default {
     }
   },
   methods: {
+    goBack() {
+      if (this.step > 1) {
+        this.step - 1;
+      }
+    },
     save(date) {
       this.$refs.datepicker.save(date);
     },
