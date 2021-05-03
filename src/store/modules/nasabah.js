@@ -12,7 +12,7 @@ export const ACTION_POST_NASABAH = "createUser";
 export const ACTION_PUT_NASABAH = "updateNasabah";
 export const ACTION_GET_NASABAH = "getNasabah";
 
-export const ACTION_DLEETE_NASABAH = "deleteNasabah";
+export const ACTION_DELETE_NASABAH = "deleteNasabah";
 
 // mutation types
 export const MUTATION_SET_ERROR = "setError";
@@ -113,7 +113,7 @@ const actions = {
         });
     });
   },
-  [ACTION_DLEETE_NASABAH]({ commit }, body) {
+  [ACTION_DELETE_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
       ApiService.post(`nasbaah/${body.id}`)
         .then(({ status, data }) => {
