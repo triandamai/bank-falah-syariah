@@ -34,16 +34,16 @@ const actions = {
     return new Promise((resolve, reject) => {
       let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
       ApiService.get(`nasabah${page}`)
-        .then(res => {
-          //    console.log(res.data.data);
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
+        .then(({ status, data }) => {
+          //    console.log(data.data);
+          if (status == 200 || status == 201) {
+            if (data.current_page >= data.last_page) {
               //jangan ambil data lagi
               resolve(false);
             } else {
               resolve(true);
             }
-            res.data.data.map(item => {
+            data.data.map(item => {
               let data = {
                 id: item.id,
                 kode_nasabah: item.kode_nasabah,

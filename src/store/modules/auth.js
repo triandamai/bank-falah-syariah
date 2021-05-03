@@ -46,16 +46,16 @@ const actions = {
         username: credentials.username,
         password: credentials.password
       })
-        .then(res => {
+        .then(({ status, data }) => {
           // console.log(res);
-          if (res.status == 200 || res.status == 201) {
-            commit(SET_AUTH, res.data);
+          if (status == 200 || status == 201) {
+            commit(SET_AUTH, data);
 
-            resolve({ success: true, message: res.data.message || "Berhasil" });
+            resolve({ success: true, message: data.message || "Berhasil" });
           } else {
             resolve({
               success: false,
-              message: res.data.message || "Gagal coba lagi nanti!"
+              message: data.message || "Gagal coba lagi nanti!"
             });
           }
         })
