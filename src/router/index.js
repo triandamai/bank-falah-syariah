@@ -1,3 +1,7 @@
+/**
+ * Author Trian Damai
+ * Bakaran Project
+ */
 import Vue from "vue";
 import Router from "vue-router";
 import ApiService from "../services/api.service";
@@ -7,6 +11,16 @@ import { getUser } from "../services/jwt.service";
 
 Vue.use(Router);
 
+/**
+ * routes definition
+ * there only 1 nested routes
+ * @see Router
+ * ex:
+ *  route1
+ *    subroute1
+ *    subroute2
+ *  route2
+ */
 const routes = [
   { path: "", redirect: { name: "dashboard" } },
   {
@@ -18,6 +32,10 @@ const routes = [
     children: [
       {
         path: "",
+        redirect: "dashboard"
+      },
+      {
+        path: "dashboard",
         name: "dashboard",
         component: () => import("../pages/dashboard/dashboard.vue"),
         meta: {
@@ -50,6 +68,27 @@ const routes = [
         component: () => import("../pages/nasabah/editnasabah.vue"),
         meta: {
           title: "Nasabah | Add",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "laporan-teller",
+        name: "laporan-teller",
+        component: () => import("../pages/teller/teller.vue"),
+        meta: {
+          title: "Laporan | Teller",
+          reqiresAuth: true
+        }
+      },
+      //
+      {
+        path: "transaksi-simpanan",
+        name: "transaksi-simpanan",
+        component: () =>
+          import("../pages/transaksi-simpanan/transaksi-simpanan.vue"),
+        meta: {
+          title: "Laporan | Teller",
           reqiresAuth: true
         }
       },

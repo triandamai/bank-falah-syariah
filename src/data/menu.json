@@ -15,9 +15,9 @@
       }
     },
     {
-      "path": "/main/nasabah",
-      "title": "Nasabah",
-      "icon": "git-pull-request",
+      "path": "/main/dashboard",
+      "title": "Dashboard",
+      "icon": "codesandbox",
       "type": "link",
       "active": false,
       "idx": 2,
@@ -27,13 +27,87 @@
       }
     },
     {
+      "path": "/main/nasabah",
+      "title": "Nasabah",
+      "icon": "users",
+      "type": "link",
+      "active": false,
+      "idx": 2,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      }
+    },
+    {
+      "title": "Transaksi",
+      "icon": "book-open",
+      "type": "sub",
+      "badgeType": "primary",
+      "badgeValue": "5",
+      "active": false,
+      "path": "Master Data",
+      "idx": 3,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
+      "children": [
+        {
+          "path": "/main/akad",
+          "title": "Akad",
+          "type": "link"
+        },
+        {
+          "path": "/main/jenistransaksi",
+          "title": "Jenis Transaksi",
+          "type": "link"
+        },
+        {
+          "path": "/main/produk",
+          "title": "Produk",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "title": "Laporan",
+      "icon": "printer",
+      "type": "sub",
+      "badgeType": "primary",
+      "badgeValue": "5",
+      "active": false,
+      "path": "Master Data",
+      "idx": 3,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
+      "children": [
+        {
+          "path": "/main/akad",
+          "title": "Akad",
+          "type": "link"
+        },
+        {
+          "path": "/main/jenistransaksi",
+          "title": "Jenis Transaksi",
+          "type": "link"
+        },
+        {
+          "path": "/main/produk",
+          "title": "Produk",
+          "type": "link"
+        }
+      ]
+    },
+    {
       "title": "Master Data",
       "icon": "monitor",
       "type": "sub",
       "badgeType": "primary",
       "badgeValue": "5",
       "active": false,
-      "path": "Mater Data",
+      "path": "Master Data",
       "idx": 3,
       "privilage": {
         "roles": [],
