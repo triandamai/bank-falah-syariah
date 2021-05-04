@@ -1,13 +1,13 @@
 <template>
   <v-card flat :dark="theme">
     <v-card-title>
-      <v-btn v-show="!hideadd" @click="$emit('add', true)" outlined small
-        >Tambah</v-btn
-      >
+      <v-btn v-show="!hideadd" @click="$emit('add', true)" outlined small>{{
+        $t("Add")
+      }}</v-btn>
       <v-spacer></v-spacer>
       <v-text-field
         v-model="search"
-        label="Search"
+        :label="$t('Search')"
         single-line
         hide-details
       ></v-text-field>
@@ -24,14 +24,14 @@
               @click="$emit('edit', item)"
               outlined
               small
-              >Ubah</v-btn
+              >{{ $t("Edit") }}</v-btn
             >
             <v-btn
               v-show="!hidedelete"
               @click="$emit('delete', item)"
               outlined
               small
-              >Hapus</v-btn
+              >{{ $t("Delete") }}</v-btn
             >
           </b-button-group>
         </b-button-toolbar>

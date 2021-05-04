@@ -171,7 +171,8 @@
           <ul class="profile-dropdown onhover-show-div">
             <li>
               <a href="#"
-                ><feather type="user"></feather><span>Account </span></a
+                ><feather type="user"></feather
+                ><span>{{ $t("Profil") }}</span></a
               >
             </li>
             <!-- <li>
@@ -189,7 +190,8 @@
             </li> -->
             <li>
               <a @click="logOut"
-                ><feather type="log-in"></feather><span>Log out</span></a
+                ><feather type="log-in"></feather
+                ><span>{{ $t("Logout") }}</span></a
               >
             </li>
           </ul>
@@ -358,6 +360,8 @@ export default {
   },
   watch: {
     "$i18n.locale"(to, from) {
+      console.log(to);
+      this.$i18n.locale = to;
       if (from !== to) {
         this.$router.go(this.$route.path);
       }
