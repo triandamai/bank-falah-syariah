@@ -30,6 +30,12 @@ const state = {
 const getters = {};
 
 const actions = {
+  /**
+   *
+   * @param {*} param0
+   * @param {*} data
+   * @returns Should goto next page ?
+   */
   [ACTION_GET_NASABAH]({ commit, state }, data) {
     return new Promise((resolve, reject) => {
       let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
@@ -68,6 +74,12 @@ const actions = {
         });
     });
   },
+  /**
+   *
+   * @param {*} param0
+   * @param {*} body
+   * @returns
+   */
   [ACTION_POST_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
       ApiService.post("nasabah", body)
@@ -97,6 +109,12 @@ const actions = {
         });
     });
   },
+  /**
+   *
+   * @param {*} param0
+   * @param {*} body
+   * @returns
+   */
   [ACTION_PUT_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
       ApiService.put(`nasabah/${body.id}`, body)
@@ -113,6 +131,12 @@ const actions = {
         });
     });
   },
+  /**
+   *
+   * @param {*} param0
+   * @param {*} body
+   * @returns
+   */
   [ACTION_DELETE_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
       ApiService.post(`nasbaah/${body.id}`)

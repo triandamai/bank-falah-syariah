@@ -222,6 +222,9 @@ const routes = [
   }
 ];
 
+/**
+ * instance router
+ */
 const router = new Router({
   routes,
   base: "/",
@@ -232,6 +235,9 @@ const router = new Router({
   }
 });
 
+/**
+ * check session of user
+ */
 router.beforeEach((to, from, next) => {
   ApiService.setHeader();
   const user = getUser();
