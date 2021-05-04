@@ -57,11 +57,13 @@ import { Icon } from "leaflet";
 delete Icon.Default.prototype._getIconUrl;
 
 // Multi Language Add
+import VueI18n from "vue-i18n";
 import en from "./locales/en.json";
 import es from "./locales/es.json";
 import id from "./locales/id.json";
-import { defaultLocale, localeOptions } from "./constants/config";
-import VueI18n from "vue-i18n";
+import { defaultLocale, localeOptions } from "./constants/config.js";
+
+const messages = { en: en, es: es, id: id };
 
 // Import Theme scss
 import "./assets/scss/app.scss";
@@ -104,18 +106,19 @@ Vue.use(FunctionalCalendar, {
 });
 Vue.use(vueKanban);
 Vue.use(VueI18n);
-
-const messages = { en: en, es: es, id: id };
 const locale =
-  localStorage.getItem("currentLanguage") &&
-  localeOptions.filter(x => x.id === localStorage.getItem("currentLanguage"))
-    .length > 0
-    ? localStorage.getItem("currentLanguage")
+  window.localStorage.getItem("currentLanguage") &&
+  localeOptions.filter(
+    x => x.id === window.localStorage.getItem("currentLanguage")
+  ).length > 0
+    ? window.localStorage.getItem("currentLanguage")
     : defaultLocale;
+console.log(locale);
+
 const i18n = new VueI18n({
   locale: locale,
   fallbackLocale: "en",
-  messages
+  messages: messages
 });
 
 Vue.config.productionTip = false;

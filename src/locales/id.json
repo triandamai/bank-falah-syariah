@@ -37,5 +37,12 @@
     "Delete": "Hapus",
     "Dashboards,features & data.": "Beranda,Fitur & data.",
     "Form etc.": "Formulir dll.",
-    "Settings,Role & Group": "Pengaturan Sistem dll."
+    "Settings,Role & Group": "Pengaturan Sistem dll.",
+    "Search": "Cari",
+    "Profil": "Akun",
+    "Logout": "Keluar",
+    "Delete Message": "Hapus {who} ?",
+    "Success Message": "Berhasil {context}!",
+    "Failed Message": "Gagal {context}!",
+    "Error Message": "Terjadi Kesalahan {context}!"
 }
