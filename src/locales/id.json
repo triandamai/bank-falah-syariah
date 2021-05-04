@@ -44,5 +44,6 @@
     "Delete Message": "Hapus {who} ?",
     "Success Message": "Berhasil {context}!",
     "Failed Message": "Gagal {context}!",
-    "Error Message": "Terjadi Kesalahan {context}!"
+    "Error Message": "Terjadi Kesalahan {context}!",
+    "Report Teller": "Laporan Teller"
 }

@@ -84,8 +84,8 @@
       },
       "children": [
         {
-          "path": "/main/jenistransaksi",
-          "title": "Type of Transaction",
+          "path": "/main/laporan-teller",
+          "title": "Report Teller",
           "type": "link"
         }
       ]

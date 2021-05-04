@@ -44,5 +44,6 @@
     "Delete Message": "Delete {who} ?",
     "Success Message": "Success {context}!",
     "Failed Message": "Failed {context}!",
-    "Error Message": "Somethin happen {context}!"
+    "Error Message": "Somethin happen {context}!",
+    "Report Teller": "Report Teller"
 }
