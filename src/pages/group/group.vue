@@ -70,63 +70,45 @@ export default {
           systemtype: SGROUP,
           path: "groups",
         })
-        .then((res) => {
-          if (res) {
+        .then((isNext) => {
+          if (isNext) {
             this.getData();
           }
         });
     },
     onSubmit(data) {
-      if (this.isEdit) {
-        this.$store
-          .dispatch(`system/${ACTION_PUT_DATA_SYSTEM}`, {
+      this.$store
+        .dispatch(
+          `system/${
+            this.isEdit ? ACTION_PUT_DATA_SYSTEM : ACTION_POST_DATA_SYSTEM
+          }`,
+          {
             systemtype: SGROUP,
             path: "group",
             body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(
-              success
-                ? this.$t("Success Message", { context: `${message}` })
-                : this.$t("Failed Message", { context: `${message}` }),
-              {
-                theme: "bubble",
-                position: "top-right",
-                type: success ? "success" : "error",
-                duration: 4000,
-              }
-            );
-            if (success) {
-              this.form = false;
-              this.body = {};
+          }
+        )
+        .then(({ success, message }) => {
+          this.$toasted.show(
+            success
+              ? this.$t("Success Message", { context: `${message}` })
+              : this.$t("Failed Message", { context: `${message}` }),
+            {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
             }
-          });
-      }
-
-      if (!this.isEdit) {
-        this.$store
-          .dispatch(`system/${ACTION_POST_DATA_SYSTEM}`, {
-            systemtype: SGROUP,
-            path: "group",
-            body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(
-              success
-                ? this.$t("Success Message", { context: `${message}` })
-                : this.$t("Failed Message", { context: `${message}` }),
-              {
-                theme: "bubble",
-                position: "top-right",
-                type: success ? "success" : "error",
-                duration: 4000,
-              }
-            );
-            if (success) {
+          );
+          if (success) {
+            if (!this.isEdit) {
               this.onAdd();
+              return;
             }
-          });
-      }
+            this.form = false;
+            this.body = {};
+          }
+        });
     },
     onDelete(data) {
       this.$swal({
@@ -146,12 +128,17 @@ export default {
               body: data,
             })
             .then(({ success, message }) => {
-              this.$toasted.show(`${message}`, {
-                theme: "bubble",
-                position: "top-right",
-                type: success ? "success" : "error",
-                duration: 4000,
-              });
+              this.$toasted.show(
+                success
+                  ? this.$t("Success Message", { context: `${message}` })
+                  : this.$t("Failed Message", { context: `${message}` }),
+                {
+                  theme: "bubble",
+                  position: "top-right",
+                  type: success ? "success" : "error",
+                  duration: 4000,
+                }
+              );
             });
         }
       });

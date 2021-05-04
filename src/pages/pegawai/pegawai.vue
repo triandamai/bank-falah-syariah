@@ -52,8 +52,8 @@ export default {
           mastertype: MPEGAWAI,
           path: "pegawai",
         })
-        .then((res) => {
-          if (res) {
+        .then((isNext) => {
+          if (isNext) {
             this.getData();
           }
         });

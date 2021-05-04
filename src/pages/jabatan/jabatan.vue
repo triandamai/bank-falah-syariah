@@ -52,8 +52,8 @@ export default {
           mastertype: MJABATAN,
           path: "jabatan",
         })
-        .then((res) => {
-          if (res) {
+        .then((isNext) => {
+          if (isNext) {
             this.getData();
           }
         });

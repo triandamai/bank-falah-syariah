@@ -69,62 +69,44 @@ export default {
           mastertype: MAKAD,
           path: "akad",
         })
-        .then((res) => {
-          if (res) {
+        .then((isNext) => {
+          if (isNext) {
             this.getData();
           }
         });
     },
     onSubmit(data) {
-      if (this.isEdit) {
-        this.$store
-          .dispatch(`master/${ACTION_PUT_DATA_MASTER}`, {
+      this.$store
+        .dispatch(
+          `master/${
+            this.isEdit ? ACTION_PUT_DATA_MASTER : ACTION_POST_DATA_MASTER
+          }`,
+          {
             mastertype: MAKAD,
             path: "akad",
             body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(
-              success
-                ? this.$t("Success Message", { context: `${message}` })
-                : this.$t("Failed Message", { context: `${message}` }),
-              {
-                theme: "bubble",
-                position: "top-right",
-                type: success ? "success" : "error",
-                duration: 4000,
-              }
-            );
-            if (success) {
-              this.formakad = false;
+          }
+        )
+        .then(({ success, message }) => {
+          this.$toasted.show(
+            success
+              ? this.$t("Success Message", { context: `${message}` })
+              : this.$t("Failed Message", { context: `${message}` }),
+            {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
             }
-          });
-      }
-
-      if (!this.isEdit) {
-        this.$store
-          .dispatch(`master/${ACTION_POST_DATA_MASTER}`, {
-            mastertype: MAKAD,
-            path: "akad",
-            body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(
-              success
-                ? this.$t("Success Message", { context: `${message}` })
-                : this.$t("Failed Message", { context: `${message}` }),
-              {
-                theme: "bubble",
-                position: "top-right",
-                type: success ? "success" : "error",
-                duration: 4000,
-              }
-            );
-            if (success) {
+          );
+          if (success) {
+            if (!this.isEdit) {
               this.onAdd();
+              return;
             }
-          });
-      }
+            this.formakad = false;
+          }
+        });
     },
     onDelete(data) {
       this.$swal({
@@ -144,12 +126,17 @@ export default {
               body: data,
             })
             .then(({ success, message }) => {
-              this.$toasted.show(`${message}`, {
-                theme: "bubble",
-                position: "top-right",
-                type: success ? "success" : "error",
-                duration: 4000,
-              });
+              this.$toasted.show(
+                success
+                  ? this.$t("Success Message", { context: `${message}` })
+                  : this.$t("Failed Message", { context: `${message}` }),
+                {
+                  theme: "bubble",
+                  position: "top-right",
+                  type: success ? "success" : "error",
+                  duration: 4000,
+                }
+              );
             });
         }
       });

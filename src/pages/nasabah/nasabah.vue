@@ -52,8 +52,8 @@ export default {
   },
   methods: {
     getData() {
-      this.$store.dispatch(`nasabah/${ACTION_GET_NASABAH}`).then((res) => {
-        if (res) {
+      this.$store.dispatch(`nasabah/${ACTION_GET_NASABAH}`).then((isNext) => {
+        if (isNext) {
           this.getData();
         }
       });
@@ -75,12 +75,17 @@ export default {
           this.$store
             .dispatch(`nasabah/${ACTION_DELETE_NASABAH}`, nasabah)
             .then(({ success, message }) => {
-              this.$toasted.show(`${message}`, {
-                theme: "bubble",
-                position: "top-right",
-                type: success ? "success" : "error",
-                duration: 4000,
-              });
+              this.$toasted.show(
+                success
+                  ? this.$t("Success Message", { context: `${message}` })
+                  : this.$t("Failed Message", { context: `${message}` }),
+                {
+                  theme: "bubble",
+                  position: "top-right",
+                  type: success ? "success" : "error",
+                  duration: 4000,
+                }
+              );
             });
         }
       });
