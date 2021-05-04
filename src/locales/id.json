@@ -2,8 +2,8 @@
     "Dashboard": "Beranda",
     "Transaction": "Transaksi",
     "Transaction Teller": "Transaksi Teller",
-    "Customer": "Customer",
-    "General": "General",
+    "Customer": "Nasabah",
+    "General": "Umum",
     "Report": "Laporan",
     "Master Data": "Master Data",
     "Akad": "Akad",
@@ -35,7 +35,7 @@
     "Add": "Tambah",
     "Edit": "Ubah",
     "Delete": "Hapus",
-    "Dashboards,features & data.": "Dashboards,features & data.",
-    "Form etc.": "Form etc.",
-    "Settings,Role & Group": "Setting System etc."
+    "Dashboards,features & data.": "Beranda,Fitur & data.",
+    "Form etc.": "Formulir dll.",
+    "Settings,Role & Group": "Pengaturan Sistem dll."
 }

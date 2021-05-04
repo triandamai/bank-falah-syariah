@@ -102,6 +102,28 @@
     <!-- search -->
     <div class="nav-right col-8 pull-right right-header p-0">
       <ul class="nav-menus">
+        <li class="language-nav">
+          <b-dropdown
+            id="langddm"
+            class="translate_wrapper ml-2"
+            variant="light"
+            size="sm"
+            toggle-class="language-button"
+          >
+            <template slot="button-content">
+              <i class="flag-icon" :class="langIcon"></i>
+              <span class="name">{{ $i18n.locale }}</span>
+            </template>
+            <b-dropdown-item
+              v-for="(l, index) in localeOptions"
+              :key="index"
+              @click="changeLocale(l)"
+            >
+              <i class="flag-icon" :class="l.icon"></i>
+              {{ l.name }}</b-dropdown-item
+            >
+          </b-dropdown>
+        </li>
         <li>
           <span class="header-search"
             ><feather type="search" @click="search_open()"></feather
@@ -211,9 +233,10 @@
 </template>
 <script>
 var body = document.getElementsByTagName("body")[0];
-import { mapState } from "vuex";
+import { mapActions, mapState } from "vuex";
 import { getUser } from "../services/jwt.service";
 import { LOGOUT } from "../store/modules/auth";
+import { localeOptions } from "../constants/config";
 // import Bookmark from "./bookmark";
 export default {
   name: "Search",
@@ -232,6 +255,8 @@ export default {
       openlanguage: false,
       mobile_accordian: false,
       mixLayout: "light-only",
+      localeOptions,
+      langIcon: localStorage.getItem("currentLanguageIcon") || "flag-icon-us",
       username: "",
       role: "",
       group: "",
@@ -253,6 +278,7 @@ export default {
     }),
   },
   methods: {
+    ...mapActions(["setLang"]),
     toggle_sidebar() {
       this.$store.dispatch("menu/opensidebar");
     },

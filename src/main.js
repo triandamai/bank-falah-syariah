@@ -59,6 +59,7 @@ delete Icon.Default.prototype._getIconUrl;
 // Multi Language Add
 import en from "./locales/en.json";
 import es from "./locales/es.json";
+import id from "./locales/id.json";
 import { defaultLocale, localeOptions } from "./constants/config";
 import VueI18n from "vue-i18n";
 
@@ -104,7 +105,7 @@ Vue.use(FunctionalCalendar, {
 Vue.use(vueKanban);
 Vue.use(VueI18n);
 
-const messages = { en: en, es: es };
+const messages = { en: en, es: es, id: id };
 const locale =
   localStorage.getItem("currentLanguage") &&
   localeOptions.filter(x => x.id === localStorage.getItem("currentLanguage"))

@@ -8,6 +8,7 @@ import nasabah from "./modules/nasabah";
 import master from "./modules/master";
 import rekening from "./modules/rekening";
 import system from "./modules/system";
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
@@ -21,6 +22,11 @@ export const store = new Vuex.Store({
     body: {}
   },
   mutations: {
+    changeLang(state, payload) {
+      localStorage.setItem("currentLanguage", payload.id);
+      localStorage.setItem("currentLanguageIcon", payload.icon);
+      window.location.reload();
+    },
     hideForm(state, {}) {
       state.formakad = false;
       state.formdeposito = false;
@@ -83,7 +89,11 @@ export const store = new Vuex.Store({
       }
     }
   },
-  actions: {},
+  actions: {
+    setLang({ commit }, payload) {
+      commit("changeLang", payload);
+    }
+  },
   modules: {
     layout,
     menu,
