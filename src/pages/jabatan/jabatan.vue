@@ -7,7 +7,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Sample Card</h5>
+              <h5>Master Data Jabatan</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
@@ -52,8 +52,8 @@ export default {
           mastertype: MJABATAN,
           path: "jabatan",
         })
-        .then((res) => {
-          if (res) {
+        .then((isNext) => {
+          if (isNext) {
             this.getData();
           }
         });

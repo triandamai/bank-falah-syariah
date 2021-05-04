@@ -7,7 +7,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Sample Card</h5>
+              <h5>Data Nasabah</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
@@ -31,7 +31,10 @@
 
 <script>
 import header from "../../data/headernasabah.json";
-import { ACTION_GET_NASABAH } from "../../store/modules/nasabah";
+import {
+  ACTION_GET_NASABAH,
+  ACTION_DELETE_NASABAH,
+} from "../../store/modules/nasabah";
 import { mapState } from "vuex";
 export default {
   data: () => {
@@ -49,8 +52,8 @@ export default {
   },
   methods: {
     getData() {
-      this.$store.dispatch(`nasabah/${ACTION_GET_NASABAH}`).then((res) => {
-        if (res) {
+      this.$store.dispatch(`nasabah/${ACTION_GET_NASABAH}`).then((isNext) => {
+        if (isNext) {
           this.getData();
         }
       });
@@ -60,13 +63,31 @@ export default {
     },
     onDelete(nasabah) {
       this.$swal({
-        text: "Are you sure you want to do this?",
+        text: this.$t("Delete Message", { who: `${nasabah.nama_lengkap}` }),
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",
         cancelButtonText: "Batal",
         cancelButtonColor: "#efefef",
         reverseButtons: true,
+      }).then(({ value }) => {
+        if (value) {
+          this.$store
+            .dispatch(`nasabah/${ACTION_DELETE_NASABAH}`, nasabah)
+            .then(({ success, message }) => {
+              this.$toasted.show(
+                success
+                  ? this.$t("Success Message", { context: `${message}` })
+                  : this.$t("Failed Message", { context: `${message}` }),
+                {
+                  theme: "bubble",
+                  position: "top-right",
+                  type: success ? "success" : "error",
+                  duration: 4000,
+                }
+              );
+            });
+        }
       });
     },
   },

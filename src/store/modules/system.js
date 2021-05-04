@@ -68,9 +68,9 @@ const actions = {
       }
 
       ApiService.get(`${path}${page}`)
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
+            if (data.current_page >= data.last_page) {
               //jangan ambil data lagi
               resolve(false);
               stillPaging = false;
@@ -78,7 +78,7 @@ const actions = {
               resolve(true);
               stillPaging = true;
             }
-            res.data.data.map(item => {
+            data.data.map(item => {
               commit(MUTATION_ADD_DATA_SYSTEM, {
                 systemtype: systemtype,
                 data: item,
@@ -104,17 +104,17 @@ const actions = {
   [ACTION_POST_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
     return new Promise(resolve => {
       ApiService.post(`${path}`, body)
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
             commit(MUTATION_ADD_DATA_SYSTEM, {
               systemtype: systemtype,
-              data: res.data.data[0]
+              data: data.data[0]
             });
             resolve({ success: true, message: "Berhasil menambah!" });
           } else {
             resolve({
               success: false,
-              message: res.data.message || "Gagal coba lagi nanti !"
+              message: data.message || "Gagal coba lagi nanti !"
             });
           }
         })
@@ -138,18 +138,18 @@ const actions = {
   [ACTION_PUT_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
     return new Promise(resolve => {
       ApiService.put(`${path}/${body.id}`, body)
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
             commit(MUTATION_PUT_DATA_SYSTEM, {
               systemtype: systemtype,
-              data: res.data.data[0],
+              data: data.data[0],
               olddata: body
             });
             resolve({ success: true, message: "Berhasil mengubah!" });
           } else {
             resolve({
               success: false,
-              message: res.data.message || "Gagal coba lagi nanti"
+              message: data.message || "Gagal coba lagi nanti"
             });
           }
         })
@@ -169,8 +169,8 @@ const actions = {
   [ACTION_DELETE_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
     return new Promise(resolve => {
       ApiService.delete(`${path}/${body.id}`)
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
             commit(MUTATION_DELETE_DATA_SYSTEM, {
               systemtype: systemtype,
               data: body
@@ -179,7 +179,7 @@ const actions = {
           } else {
             resolve({
               success: false,
-              message: res.data.message || "Gagal coba lagi nanti"
+              message: data.message || "Gagal coba lagi nanti"
             });
           }
         })

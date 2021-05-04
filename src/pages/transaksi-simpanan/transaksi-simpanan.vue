@@ -7,7 +7,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Master Data Akad</h5>
+              <h5>Sample Card</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
@@ -69,48 +69,56 @@ export default {
           mastertype: MAKAD,
           path: "akad",
         })
-        .then((isNext) => {
-          if (isNext) {
+        .then((res) => {
+          if (res) {
             this.getData();
           }
         });
     },
     onSubmit(data) {
-      this.$store
-        .dispatch(
-          `master/${
-            this.isEdit ? ACTION_PUT_DATA_MASTER : ACTION_POST_DATA_MASTER
-          }`,
-          {
+      if (this.isEdit) {
+        this.$store
+          .dispatch(`master/${ACTION_PUT_DATA_MASTER}`, {
             mastertype: MAKAD,
             path: "akad",
             body: data,
-          }
-        )
-        .then(({ success, message }) => {
-          this.$toasted.show(
-            success
-              ? this.$t("Success Message", { context: `${message}` })
-              : this.$t("Failed Message", { context: `${message}` }),
-            {
+          })
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
               theme: "bubble",
               position: "top-right",
               type: success ? "success" : "error",
               duration: 4000,
+            });
+            if (success) {
+              this.formakad = false;
             }
-          );
-          if (success) {
-            if (!this.isEdit) {
+          });
+      }
+
+      if (!this.isEdit) {
+        this.$store
+          .dispatch(`master/${ACTION_POST_DATA_MASTER}`, {
+            mastertype: MAKAD,
+            path: "akad",
+            body: data,
+          })
+          .then(({ success, message }) => {
+            this.$toasted.show(`${message}`, {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            });
+            if (success) {
               this.onAdd();
-              return;
             }
-            this.formakad = false;
-          }
-        });
+          });
+      }
     },
     onDelete(data) {
       this.$swal({
-        text: this.$t("Delete Message", { who: `${data.nama_akad}` }),
+        text: `Hapus ${data.nama_akad}?`,
         showCancelButton: true,
         confirmButtonText: "Hapus",
         confirmButtonColor: "#4466f2",
@@ -126,17 +134,12 @@ export default {
               body: data,
             })
             .then(({ success, message }) => {
-              this.$toasted.show(
-                success
-                  ? this.$t("Success Message", { context: `${message}` })
-                  : this.$t("Failed Message", { context: `${message}` }),
-                {
-                  theme: "bubble",
-                  position: "top-right",
-                  type: success ? "success" : "error",
-                  duration: 4000,
-                }
-              );
+              this.$toasted.show(`${message}`, {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              });
             });
         }
       });

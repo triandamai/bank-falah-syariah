@@ -7,7 +7,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Sample Card</h5>
+              <h5>Rekening Pembiayaan</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
@@ -56,52 +56,45 @@ export default {
           mastertype: RPEMBIAYAAN,
           path: "rekening_pembiayaan",
         })
-        .then((res) => {
-          if (res) {
+        .then((isNext) => {
+          if (isNext) {
             this.getData();
           }
         });
     },
     onSubmit(data) {
-      if (this.isEdit) {
-        this.$store
-          .dispatch(`rekening/${ACTION_PUT_DATA_REKENING}`, {
+      this.$store
+        .dispatch(
+          `rekening/${
+            this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING
+          }`,
+          {
             rekeningtype: RPEMBIAYAAN,
             path: "rekening_pembiayaan",
             body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
+          }
+        )
+        .then(({ success, message }) => {
+          this.$toasted.show(
+            success
+              ? this.$t("Success Message", { context: `${message}` })
+              : this.$t("Failed Message", { context: `${message}` }),
+            {
               theme: "bubble",
               position: "top-right",
               type: success ? "success" : "error",
               duration: 4000,
-            });
-            if (success) {
-              this.formpembiayaan = false;
-              this.body = {};
             }
-          });
-      }
-      if (!this.isEdit) {
-        this.$store
-          .dispatch(`rekening/${ACTION_POST_DATA_REKENING}`, {
-            rekeningtype: RPEMBIAYAAN,
-            path: "rekening_pembiayaan",
-            body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
-            if (success) {
+          );
+          if (success) {
+            if (!this.isEdit) {
               this.onAdd();
+              return;
             }
-          });
-      }
+            this.formpembiayaan = false;
+            this.body = {};
+          }
+        });
     },
     onAdd() {
       this.formpembiayaan = true;
@@ -115,7 +108,7 @@ export default {
     },
     onDelete(data) {
       this.$swal({
-        text: `Hapus Rekening Ini?`,
+        text: this.$t("Delete Message", { who: `${data}` }),
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",
@@ -131,12 +124,17 @@ export default {
               body: data,
             })
             .then(({ success, message }) => {
-              this.$toasted.show(`${message}`, {
-                theme: "bubble",
-                position: "top-right",
-                type: success ? "success" : "error",
-                duration: 4000,
-              });
+              this.$toasted.show(
+                success
+                  ? this.$t("Success Message", { context: `${message}` })
+                  : this.$t("Failed Message", { context: `${message}` }),
+                {
+                  theme: "bubble",
+                  position: "top-right",
+                  type: success ? "success" : "error",
+                  duration: 4000,
+                }
+              );
             });
         }
       });

@@ -87,8 +87,8 @@
           >
             <!-- link title -->
             <div v-if="menuItem.type == 'headtitle'">
-              <h6 class="lan-1">{{ menuItem.headTitle1 }}</h6>
-              <p class="lan-2">{{ menuItem.headTitle2 }}</p>
+              <h6 class="lan-1">{{ $t(menuItem.headTitle1) }}</h6>
+              <p class="lan-2">{{ $t(menuItem.headTitle2) }}</p>
             </div>
             <!-- Sub -->
             <label
@@ -104,7 +104,7 @@
             >
               <feather :type="menuItem.icon" class="top"></feather>
               <span>
-                {{ menuItem.title }}
+                {{ $t(menuItem.title) }}
               </span>
               <div class="according-menu" v-if="menuItem.children">
                 <i class="fa fa-angle-right pull-right"></i>
@@ -119,7 +119,7 @@
             >
               <feather :type="menuItem.icon" class="top"></feather>
               <span>
-                {{ menuItem.title }}
+                {{ $t(menuItem.title) }}
               </span>
               <i
                 class="fa fa-angle-right pull-right"
@@ -135,7 +135,7 @@
             >
               <feather :type="menuItem.icon" class="top"></feather>
               <span>
-                {{ menuItem.title }}
+                {{ $t(menuItem.title) }}
               </span>
               <i
                 class="fa fa-angle-right pull-right"
@@ -152,7 +152,7 @@
             >
               <feather :type="menuItem.icon" class="top"></feather>
               <span>
-                {{ menuItem.title }}
+                {{ $t(menuItem.title) }}
               </span>
               <i
                 class="fa fa-angle-right pull-right"
@@ -177,7 +177,7 @@
                   v-if="childrenItem.type == 'sub'"
                   @click="setNavActive(childrenItem, index)"
                 >
-                  {{ childrenItem.title }}
+                  {{ $t(childrenItem.title) }}
                   <label
                     :class="
                       'badge badge-' + childrenItem.badgeType + ' pull-right'
@@ -198,7 +198,7 @@
                   v-if="childrenItem.type == 'link'"
                   router-link-exact-active
                 >
-                  {{ childrenItem.title }}
+                  {{ $t(childrenItem.title) }}
                   <label
                     :class="
                       'badge badge-' + childrenItem.badgeType + ' pull-right'
@@ -217,7 +217,7 @@
                   v-if="childrenItem.type == 'extLink'"
                   class="submenu-title"
                 >
-                  {{ childrenItem.title }}
+                  {{ $t(childrenItem.title) }}
                   <label
                     :class="
                       'badge badge-' + childrenItem.badgeType + ' pull-right'
@@ -238,7 +238,7 @@
                   target="_blank"
                   v-if="childrenItem.type == 'extTabLink'"
                 >
-                  {{ childrenItem.title }}
+                  {{ $t(childrenItem.title) }}
                   <label
                     :class="
                       'badge badge-' + childrenItem.badgeType + ' pull-right'
@@ -267,7 +267,7 @@
                       v-if="childrenSubItem.type == 'link'"
                       router-link-exact-active
                     >
-                      {{ childrenSubItem.title }}
+                      {{ $t(childrenSubItem.title) }}
                       <label
                         :class="
                           'badge badge-' +
@@ -288,7 +288,7 @@
                       v-if="childrenSubItem.type == 'button'"
                       router-link-exact-active
                     >
-                      {{ childrenSubItem.title }}
+                      {{ $t(childrenSubItem.title) }}
                       <label
                         :class="
                           'badge badge-' +
@@ -310,7 +310,7 @@
                       v-if="childrenSubItem.type == 'extLink'"
                       router-link-exact-active
                     >
-                      {{ childrenSubItem.title }}
+                      {{ $t(childrenSubItem.title) }}
                       <label
                         :class="
                           'badge badge-' +
@@ -331,7 +331,7 @@
                       v-if="childrenSubItem.type == 'extLink'"
                       router-link-exact-active
                     >
-                      {{ childrenSubItem.title }}
+                      {{ $t(childrenSubItem.title) }}
                       <label
                         :class="
                           'badge badge-' +

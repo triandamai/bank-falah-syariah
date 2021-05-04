@@ -7,7 +7,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Sample Card</h5>
+              <h5>User Role</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
@@ -69,57 +69,49 @@ export default {
           systemtype: SROLE,
           path: "roles",
         })
-        .then((res) => {
-          if (res) {
+        .then((isNext) => {
+          if (isNext) {
             this.getData();
           }
         });
     },
     onSubmit(data) {
-      if (this.isEdit) {
-        this.$store
-          .dispatch(`system/${ACTION_PUT_DATA_SYSTEM}`, {
+      this.$store
+        .dispatch(
+          `system/${
+            this.isEdit ? ACTION_PUT_DATA_SYSTEM : ACTION_POST_DATA_SYSTEM
+          }`,
+          {
             systemtype: SROLE,
             path: "role",
             body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
+          }
+        )
+        .then(({ success, message }) => {
+          this.$toasted.show(
+            success
+              ? this.$t("Success Message", { context: `${message}` })
+              : this.$t("Failed Message", { context: `${message}` }),
+            {
               theme: "bubble",
               position: "top-right",
               type: success ? "success" : "error",
               duration: 4000,
-            });
-            if (success) {
-              this.form = false;
-              this.body = {};
             }
-          });
-      }
-
-      if (!this.isEdit) {
-        this.$store
-          .dispatch(`system/${ACTION_POST_DATA_SYSTEM}`, {
-            systemtype: SROLE,
-            path: "role",
-            body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
-            if (success) {
+          );
+          if (success) {
+            if (!this.isEdit) {
               this.onAdd();
+              return;
             }
-          });
-      }
+            this.form = false;
+            this.body = {};
+          }
+        });
     },
     onDelete(data) {
       this.$swal({
-        text: `Hapus ${data.name}?`,
+        text: this.$t("Delete Message", { who: `${data.name}` }),
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",
@@ -135,12 +127,17 @@ export default {
               body: data,
             })
             .then(({ success, message }) => {
-              this.$toasted.show(`${message}`, {
-                theme: "bubble",
-                position: "top-right",
-                type: success ? "success" : "error",
-                duration: 4000,
-              });
+              this.$toasted.show(
+                success
+                  ? this.$t("Success Message", { context: `${message}` })
+                  : this.$t("Failed Message", { context: `${message}` }),
+                {
+                  theme: "bubble",
+                  position: "top-right",
+                  type: success ? "success" : "error",
+                  duration: 4000,
+                }
+              );
             });
         }
       });

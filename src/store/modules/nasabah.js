@@ -8,14 +8,17 @@
 import ApiService from "../../services/api.service";
 // action types
 
-export const ACTION_TAMBAH_NASABAH = "updateUser";
-export const ACTION_UPDATE_NASABAH = "createNasabah";
+export const ACTION_POST_NASABAH = "createUser";
+export const ACTION_PUT_NASABAH = "updateNasabah";
 export const ACTION_GET_NASABAH = "getNasabah";
+
+export const ACTION_DELETE_NASABAH = "deleteNasabah";
 
 // mutation types
 export const MUTATION_SET_ERROR = "setError";
-export const MUTATION_TAMBAH_DATA_NASABAH = "tambahnasabah";
-export const MUTATION_UBAH_DATA_NASABAH = "tambah nasabah";
+export const MUTATION_ADD_NASABAH = "tambahnasabah";
+export const MUTATION_PUT_NASABAH = "editnasabah";
+export const MUTATION_DELETE_NASABAH = "deletenasabah";
 //
 const state = {
   errors: null,
@@ -27,20 +30,26 @@ const state = {
 const getters = {};
 
 const actions = {
+  /**
+   *
+   * @param {*} param0
+   * @param {*} data
+   * @returns Should goto next page ?
+   */
   [ACTION_GET_NASABAH]({ commit, state }, data) {
     return new Promise((resolve, reject) => {
       let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
       ApiService.get(`nasabah${page}`)
-        .then(res => {
-          //    console.log(res.data.data);
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
+        .then(({ status, data }) => {
+          //    console.log(data.data);
+          if (status == 200 || status == 201) {
+            if (data.current_page >= data.last_page) {
               //jangan ambil data lagi
               resolve(false);
             } else {
               resolve(true);
             }
-            res.data.data.map(item => {
+            data.data.map(item => {
               let data = {
                 id: item.id,
                 kode_nasabah: item.kode_nasabah,
@@ -54,7 +63,7 @@ const actions = {
                 status: item.active
               };
 
-              commit(MUTATION_TAMBAH_DATA_NASABAH, data);
+              commit(MUTATION_ADD_NASABAH, data);
             });
           } else {
             resolve(false);
@@ -65,28 +74,82 @@ const actions = {
         });
     });
   },
-  [ACTION_TAMBAH_NASABAH](context, data) {
+  /**
+   *
+   * @param {*} param0
+   * @param {*} body
+   * @returns
+   */
+  [ACTION_POST_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
-      ApiService.post("nasabah", data)
-        .then(({ data }) => {
-          context.commit(MUTATION_TAMBAH_DATA_NASABAH, data);
-          resolve(data);
+      ApiService.post("nasabah", body)
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
+            let result = {
+              id: data.data[0].id,
+              kode_nasabah: data.data[0].kode_nasabah,
+              nama_lengkap: data.data[0].nama_lengkap,
+              jenis_kelamin: data.data[0].jenis_kelamin,
+              ttl: data.data[0].tempat_lahir + data.data[0].tanggal_lahir,
+              tempat_lahir: item.tempat_lahir,
+              tanggal_lahir: item.tanggal_lahir,
+              alamat: data.data[0].alamat,
+              no_hp: data.data[0].no_hp,
+              status: data.data[0].active
+            };
+
+            commit(MUTATION_ADD_NASABAH, result);
+            resolve({ success: true, message: "Berhasil" });
+          } else {
+            resolve({ success: false, message: "Gagal coba lgi nanti" });
+          }
         })
         .catch(({ response }) => {
-          context.commit(SET_ERROR, response.data.errors);
-          reject(response);
+          resolve({ success: false, message: response.data.message });
         });
     });
   },
-  [ACTION_UPDATE_NASABAH](context, payload) {
+  /**
+   *
+   * @param {*} param0
+   * @param {*} body
+   * @returns
+   */
+  [ACTION_PUT_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
-      ApiService.post("", { payload })
-        .then(({ data }) => {
-          context.commit(MUTATION_UBAH_DATA_NASABAH, data);
-          resolve(data);
+      ApiService.put(`nasabah/${body.id}`, body)
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
+            commit(MUTATION_PUT_NASABAH, { data: data.data[0], olddata: body });
+            resolve({ success: true, message: "Berhasil" });
+          } else {
+            resolve({ success: false, message: "Gagal Coba lagi nanti" });
+          }
         })
         .catch(({ response }) => {
-          reject(response);
+          resolve({ success: false, message: `${response.data.message}` });
+        });
+    });
+  },
+  /**
+   *
+   * @param {*} param0
+   * @param {*} body
+   * @returns
+   */
+  [ACTION_DELETE_NASABAH]({ commit }, body) {
+    return new Promise((resolve, reject) => {
+      ApiService.post(`nasbaah/${body.id}`)
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
+            commit(MUTATION_DELETE_NASABAH, body);
+            resolve({ success: true, message: "Berhasil" });
+          } else {
+            resolve({ success: false, message: "Gagal Coba lagi nanti" });
+          }
+        })
+        .catch(e => {
+          resolve({ success: false, message: e.response.data.message });
         });
     });
   }
@@ -96,7 +159,7 @@ const mutations = {
   [MUTATION_SET_ERROR](state, data) {
     state.errors = data;
   },
-  [MUTATION_TAMBAH_DATA_NASABAH](state, data) {
+  [MUTATION_ADD_NASABAH](state, data) {
     var exsts = state.datanasabah.some(nasabah => {
       return nasabah.id == data.id;
     });
@@ -104,7 +167,16 @@ const mutations = {
       state.datanasabah.push(data);
     }
   },
-  [MUTATION_UBAH_DATA_NASABAH](state, error) {}
+  [MUTATION_PUT_NASABAH](state, { data, olddata }) {
+    var index = state.datanasabah
+      .map(nasabah => nasabah.id)
+      .indexOf(olddata.id);
+    Object.assign(state.datanasabah[index], data);
+  },
+  [MUTATION_DELETE_NASABAH](state, data) {
+    var index = state.datanasabah.map(nasabah => nasabah.id).indexOf(data.id);
+    state.datanasabah.splice(index);
+  }
 };
 
 export default {

@@ -14,99 +14,47 @@
           </div>
           <span>Quick option</span>
         </a>
-        <a
-          class="nav-link"
-          target="_blank"
-          href="https://pixelstrap.freshdesk.com/"
-        >
+        <a class="nav-link" target="_blank" href="https://bakaranproject.com/">
           <div>
             <i class="icon-support"></i>
           </div>
           <span>Support</span>
         </a>
-        <a
-          class="nav-link"
-          target="_blank"
-          href="http://admin.pixelstrap.com/cuba/document/index.html"
-        >
-          <div>
-            <i class="icon-settings"></i>
-          </div>
-          <span>Document</span>
-        </a>
-        <a
-          class="nav-link"
-          target="_blank"
-          href="http://admin.pixelstrap.com/cuba/theme/landing-page.html#frameworks"
-        >
+
+        <a class="nav-link" target="_blank" href="https://bakaranproject.com">
           <div>
             <i class="icon-panel"></i>
           </div>
           <span>Check features</span>
         </a>
-        <a
-          class="nav-link"
-          target="_blank"
-          href="https://1.envato.market/3GVzd"
-        >
+        <a class="nav-link" target="_blank" href="https://bakaranproject.com">
           <div>
             <i class="icon-shopping-cart-full"></i>
           </div>
-          <span>Buy now</span>
+          <span>Buy License</span>
         </a>
       </div>
     </div>
     <div class="customizer-contain" :class="{ open: customizer }">
       <div class="tab-content">
+        <!-- HEADER -->
         <div class="customizer-header">
           <i class="icofont-close icon-close" @click="customizer = ''"></i>
           <h5>Customizer</h5>
-          <p class="mb-0">Try It Real Time <i class="fa fa-thumbs-o-up txt-primary"></i></p>
-          <button
-            v-b-modal.modal-customizer
-            class="btn btn-primary plus-popup mt-2"
-          >
-            Configuration
-          </button>
-          <b-modal
-            id="modal-customizer"
-            title="Modal Title"
-            class="theme-modal"
-          >
-            <div class="modal-header modal-copy-header">
-              <h5 class="headerTitle mb-0">Customizer configuration</h5>
-            </div>
-            <div class="modal-body">
-              <div class="config-popup">
-                <p>
-                  To replace our design with your desired theme. Please do
-                  configuration as mention
-                </p>
-                <p>
-                  <b>Path : src > data > layout.json</b>
-                </p>
-                <div>
-                  <pre>
-										<code>
-											<b-form-textarea :value="data" ref="layout" rows="1" v-bind:style="styleObject"></b-form-textarea>
-											{{layout}}
-										</code>
-									</pre>
-                </div>
-                <button class="btn btn-primary mt-2" @click="copyText()">
-                  Copy Json
-                </button>
-              </div>
-            </div>
-          </b-modal>
+          <p class="mb-0">
+            Try It Real Time <i class="fa fa-thumbs-o-up txt-primary"></i>
+          </p>
         </div>
+        <!-- END HEADER -->
         <div class="customizer-body custom-scrollbar">
           <div class="tab-pane fade active show" id="c-pills-home">
             <h6>Layout Type</h6>
             <ul class="main-layout layout-grid">
-              <li data-attr="ltr"
+              <li
+                data-attr="ltr"
                 :class="{ active: layoutType == 'ltr' }"
-                @click="customizeLayoutType('ltr')">
+                @click="customizeLayoutType('ltr')"
+              >
                 <div class="header bg-light">
                   <ul>
                     <li></li>
@@ -123,9 +71,11 @@
                   </ul>
                 </div>
               </li>
-              <li data-attr="rtl"
+              <li
+                data-attr="rtl"
                 :class="{ active: layoutType == 'rtl' }"
-                @click="customizeLayoutType('rtl')">
+                @click="customizeLayoutType('rtl')"
+              >
                 <div class="header bg-light">
                   <ul>
                     <li></li>
@@ -142,9 +92,12 @@
                   </ul>
                 </div>
               </li>
-              <li data-attr="box"
+              <li
+                data-attr="box"
                 :class="{ active: layoutType == 'box-layout' }"
-                @click="customizeLayoutType('box-layout')" class="box-layout px-3">
+                @click="customizeLayoutType('box-layout')"
+                class="box-layout px-3"
+              >
                 <div class="header bg-light">
                   <ul>
                     <li></li>
@@ -162,56 +115,15 @@
                 </div>
               </li>
             </ul>
-            <h6 class="">Sidebar Type</h6>
-            <ul class="sidebar-type layout-grid">
-              <li 
-                data-attr="horizontal-sidebar"
-                class="horizontal-sidebar"
-                :class="{
-                  active: layout.settings.sidebar.type == 'horizontal_sidebar',
-                }"
-                @click="customizeSidebarType('horizontal')">
-                <div class="header bg-light">
-                  <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-                <div class="body">
-                  <ul>
-                    <li class="bg-dark sidebar"></li>
-                    <li class="bg-light body"></li>
-                  </ul>
-                </div>
-              </li>
-              <li
-                data-attr="default-sidebar"
-                :class="{ active: layout.settings.sidebar.type == 'default' }"
-                @click="customizeSidebarType('default')">
-                <div class="header bg-light">
-                  <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>
-                </div>
-                <div class="body">
-                  <ul>
-                    <li class="bg-dark sidebar compact"></li>
-                    <li class="bg-light body"></li>
-                  </ul>
-                </div>
-              </li>
-            </ul>
             <h6 class="">Sidebar settings</h6>
             <ul class="sidebar-setting layout-grid">
               <li
-              data-attr="default-sidebar"
+                data-attr="default-sidebar"
                 :class="{
                   active: layout.settings.sidebar_setting == 'default-sidebar',
                 }"
-                @click="customizeSidebarSetting('default-sidebar')">
+                @click="customizeSidebarSetting('default-sidebar')"
+              >
                 <div class="header bg-light">
                   <ul>
                     <li></li>
@@ -224,11 +136,12 @@
                 </div>
               </li>
               <li
-              data-attr="border-sidebar"
+                data-attr="border-sidebar"
                 :class="{
                   active: layout.settings.sidebar_setting == 'border-sidebar',
                 }"
-                @click="customizeSidebarSetting('border-sidebar')">
+                @click="customizeSidebarSetting('border-sidebar')"
+              >
                 <div class="header bg-light">
                   <ul>
                     <li></li>
@@ -241,12 +154,13 @@
                 </div>
               </li>
               <li
-              data-attr="iconcolor-sidebar"
+                data-attr="iconcolor-sidebar"
                 :class="{
                   active:
                     layout.settings.sidebar_setting == 'iconcolor-sidebar',
                 }"
-                @click="customizeSidebarSetting('iconcolor-sidebar')">
+                @click="customizeSidebarSetting('iconcolor-sidebar')"
+              >
                 <div class="header bg-light">
                   <ul>
                     <li></li>
@@ -290,10 +204,12 @@
             </ul>
             <h6 class="">Mix Layout</h6>
             <ul class="layout-grid customizer-mix">
-              <li class="color-layout" 
+              <li
+                class="color-layout"
                 data-attr="light-only"
                 :class="{ active: mixLayout == 'light-only' }"
-                @click="customizeMixLayout('light-only')">
+                @click="customizeMixLayout('light-only')"
+              >
                 <div class="header bg-light">
                   <ul>
                     <li></li>
@@ -308,9 +224,12 @@
                   </ul>
                 </div>
               </li>
-              <li class="color-layout" data-attr="dark-sidebar"
+              <li
+                class="color-layout"
+                data-attr="dark-sidebar"
                 :class="{ active: mixLayout == 'dark-sidebar' }"
-                @click="customizeMixLayout('dark-sidebar')">
+                @click="customizeMixLayout('dark-sidebar')"
+              >
                 <div class="header bg-light">
                   <ul>
                     <li></li>
@@ -325,9 +244,12 @@
                   </ul>
                 </div>
               </li>
-              <li class="color-layout" data-attr="dark-only"
+              <li
+                class="color-layout"
+                data-attr="dark-only"
                 :class="{ active: mixLayout == 'dark-only' }"
-                @click="customizeMixLayout('dark-only')">
+                @click="customizeMixLayout('dark-only')"
+              >
                 <div class="header bg-dark">
                   <ul>
                     <li></li>
@@ -408,7 +330,7 @@ export default {
     customizeColor() {
       const primary = document.getElementById("ColorPicker1").value;
       const secondary = document.getElementById("ColorPicker2").value;
-      this.$store.dispatch("layout/setColorScheme", {primary, secondary});
+      this.$store.dispatch("layout/setColorScheme", { primary, secondary });
     },
     resetColor() {
       localStorage.setItem("primary_color", "#7366ff");

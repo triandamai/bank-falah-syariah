@@ -84,9 +84,9 @@ const actions = {
           break;
       }
       ApiService.get(`${path}${page}`)
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
+            if (data.current_page >= data.last_page) {
               resolve(false);
               stillPaging = false;
             } else {
@@ -94,7 +94,7 @@ const actions = {
               stillPaging = true;
             }
 
-            res.data.data.map(item => {
+            data.data.map(item => {
               commit(MUTATION_ADD_DATA_MASTER, {
                 mastertype: mastertype,
                 data: item,
@@ -120,17 +120,17 @@ const actions = {
   [ACTION_POST_DATA_MASTER]({ commit }, { mastertype, path, body }) {
     return new Promise(resolve => {
       ApiService.post(`${path}`, body)
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
             commit(MUTATION_ADD_DATA_MASTER, {
               mastertype: mastertype,
-              data: res.data.data[0]
+              data: data.data[0]
             });
             resolve({ success: true, message: "Berhasil menambah data" });
           } else {
             resolve({
               success: false,
-              message: res.data.message || "Gagal coba lagi nanti"
+              message: data.message || "Gagal coba lagi nanti"
             });
           }
         })
@@ -152,18 +152,18 @@ const actions = {
   [ACTION_PUT_DATA_MASTER]({ commit }, { mastertype, path, body }) {
     return new Promise(resolve => {
       ApiService.put(`${path}/${body.id}`, body)
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
             commit(MUTATION_PUT_DATA_MASTER, {
               mastertype: mastertype,
-              data: res.data.data[0],
+              data: data.data[0],
               olddata: body
             });
             resolve({ success: true, message: "Berhasil mengubah!" });
           } else {
             resolve({
               success: false,
-              message: res.data.message || "Gagal coba lagi nanti"
+              message: data.message || "Gagal coba lagi nanti"
             });
           }
         })
@@ -184,8 +184,8 @@ const actions = {
   [ACTION_DELETE_DATA_MASTER]({ commit }, { mastertype, path, body }) {
     return new Promise(resolve => {
       ApiService.delete(`${path}/${body.id}`)
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
             commit(MUTATION_DELETE_DATA_MASTER, {
               mastertype: mastertype,
               data: body
@@ -194,13 +194,13 @@ const actions = {
           } else {
             resolve({
               success: false,
-              message: res.data.message || "Gagal coba lagi nanti"
+              message: data.message || "Gagal coba lagi nanti"
             });
           }
         })
         .catch(e => {
           resolve({
-            success: true,
+            success: false,
             message: e.response.data.message || "Berhasil mengubah!"
           });
         });

@@ -7,7 +7,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Sample Card</h5>
+              <h5>Master Data Produk</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
@@ -69,52 +69,45 @@ export default {
           mastertype: MPRODUK,
           path: "produk",
         })
-        .then((res) => {
-          if (res) {
+        .then((isNext) => {
+          if (isNext) {
             this.getData();
           }
         });
     },
     onSubmit(data) {
-      if (this.isEdit) {
-        this.$store
-          .dispatch(`master/${ACTION_PUT_DATA_MASTER}`, {
+      this.$store
+        .dispatch(
+          `master/${
+            this.isEdit ? ACTION_PUT_DATA_MASTER : ACTION_POST_DATA_MASTER
+          }`,
+          {
             mastertype: MPRODUK,
             path: "produk",
             body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
+          }
+        )
+        .then(({ success, message }) => {
+          this.$toasted.show(
+            success
+              ? this.$t("Success Message", { context: `${message}` })
+              : this.$t("Failed Message", { context: `${message}` }),
+            {
               theme: "bubble",
               position: "top-right",
               type: success ? "success" : "error",
               duration: 4000,
-            });
-            if (success) {
-              this.formproduk = false;
-              this.body = {};
             }
-          });
-      }
-      if (!this.isEdit) {
-        this.$store
-          .dispatch(`master/${ACTION_POST_DATA_MASTER}`, {
-            mastertype: MPRODUK,
-            path: "produk",
-            body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
-            if (success) {
+          );
+          if (success) {
+            if (!this.isEdit) {
               this.onAdd();
+              return;
             }
-          });
-      }
+            this.formproduk = false;
+            this.body = {};
+          }
+        });
     },
     onAdd() {
       this.formproduk = true;
@@ -144,12 +137,17 @@ export default {
               body: data,
             })
             .then(({ success, message }) => {
-              this.$toasted.show(`${message}`, {
-                theme: "bubble",
-                position: "top-right",
-                type: success ? "success" : "error",
-                duration: 4000,
-              });
+              this.$toasted.show(
+                success
+                  ? this.$t("Success Message", { context: `${message}` })
+                  : this.$t("Failed Message", { context: `${message}` }),
+                {
+                  theme: "bubble",
+                  position: "top-right",
+                  type: success ? "success" : "error",
+                  duration: 4000,
+                }
+              );
             });
         }
       });

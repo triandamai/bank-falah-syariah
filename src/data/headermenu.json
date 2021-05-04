@@ -1,0 +1,19 @@
+[
+    {
+        "text": "Path",
+        "sortable": true,
+        "value": "path"
+    },
+    {
+        "text": "Type",
+        "value": "type"
+    },
+    {
+        "text": "Access",
+        "value": "privilage"
+    },
+    {
+        "text": "Aksi",
+        "value": "action"
+    }
+]

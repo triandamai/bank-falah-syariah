@@ -1,18 +1,32 @@
 /* eslint-disable */
+/**
+ * Author Trian Damai
+ * Bakaran Project
+ */
 import CryptoJS from "crypto-js";
 const ID_TOKEN_KEY = "f6da7ebas9c00s";
 const USER_KEY = "z0xk7sasd3";
 
+/**
+ * get stored token
+ * @returns token:String or null
+ */
 export const getToken = () => {
   return window.sessionStorage.getItem(ID_TOKEN_KEY)
     ? aesDecrypt(window.sessionStorage.getItem(ID_TOKEN_KEY))
     : null;
 };
-
+/**
+ * save token
+ * @param {*} token
+ *
+ */
 export const saveToken = token => {
   window.sessionStorage.setItem(ID_TOKEN_KEY, aesEncrypt(token));
 };
-
+/**
+ *
+ */
 export const destroyToken = () => {
   window.sessionStorage.removeItem(ID_TOKEN_KEY);
 };

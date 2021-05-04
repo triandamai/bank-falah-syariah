@@ -3,22 +3,54 @@
     {
       "headTitle1": "General",
       "headTitle2": "Dashboards,features & data.",
-      "type": "headtitle"
+      "type": "headtitle",
+      "path": "General",
+      "idx": 1,
+      "privilage": {
+        "roles": [
+          1,
+          2
+        ],
+        "groups": []
+      }
+    },
+    {
+      "path": "/main/dashboard",
+      "title": "Dashboard",
+      "icon": "codesandbox",
+      "type": "link",
+      "active": false,
+      "idx": 2,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      }
     },
     {
       "path": "/main/nasabah",
-      "title": "Nasabah",
-      "icon": "git-pull-request",
+      "title": "Customer",
+      "icon": "users",
       "type": "link",
-      "active": false
+      "active": false,
+      "idx": 2,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      }
     },
     {
-      "title": "Master Data",
-      "icon": "monitor",
+      "title": "Transaction",
+      "icon": "book-open",
       "type": "sub",
       "badgeType": "primary",
       "badgeValue": "5",
       "active": false,
+      "path": "Transaction",
+      "idx": 3,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
       "children": [
         {
           "path": "/main/akad",
@@ -27,61 +59,131 @@
         },
         {
           "path": "/main/jenistransaksi",
-          "title": "Jenis Transaksi",
+          "title": "Type of Transaction",
           "type": "link"
         },
         {
           "path": "/main/produk",
-          "title": "Produk",
-          "type": "link"
-        },
-        {
-          "path": "/main/jabatan",
-          "title": "Jabatan",
-          "type": "link"
-        },
-        {
-          "path": "/main/pegawai",
-          "title": "Pegawai",
+          "title": "Product",
           "type": "link"
         }
       ]
     },
     {
-      "title": "Rekening",
+      "title": "Report",
+      "icon": "printer",
+      "type": "sub",
+      "badgeType": "primary",
+      "badgeValue": "5",
+      "active": false,
+      "path": "Report",
+      "idx": 3,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
+      "children": [
+        {
+          "path": "/main/laporan-teller",
+          "title": "Report Teller",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "title": "Master Data",
+      "icon": "monitor",
+      "type": "sub",
+      "badgeType": "primary",
+      "badgeValue": "5",
+      "active": false,
+      "path": "Master Data",
+      "idx": 3,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
+      "children": [
+        {
+          "path": "/main/akad",
+          "title": "Akad",
+          "type": "link"
+        },
+        {
+          "path": "/main/jenistransaksi",
+          "title": "Type of Transaction",
+          "type": "link"
+        },
+        {
+          "path": "/main/produk",
+          "title": "Product",
+          "type": "link"
+        },
+        {
+          "path": "/main/jabatan",
+          "title": "Departement",
+          "type": "link"
+        },
+        {
+          "path": "/main/pegawai",
+          "title": "Employees",
+          "type": "link"
+        }
+      ]
+    },
+    {
+      "title": "Account",
       "icon": "book",
       "type": "sub",
       "badgeType": "primary",
       "badgeValue": "3",
       "active": false,
+      "path": "Account",
+      "idx": 4,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
       "children": [
         {
           "path": "/main/deposito",
-          "title": "Deposito",
+          "title": "Storage Area",
           "type": "link"
         },
         {
           "path": "/main/pembiayaan",
-          "title": "Pembiayaan",
+          "title": "Financing",
           "type": "link"
         },
         {
           "path": "/main/simpanan",
-          "title": "Simpanan",
+          "title": "Savings",
           "type": "link"
         }
       ]
     },
     {
       "headTitle1": "Shortcut",
-      "headTitle2": "Form etc",
-      "type": "headtitle"
+      "headTitle2": "Form etc.",
+      "type": "headtitle",
+      "path": "ShortCut",
+      "idx": 5,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      }
     },
     {
       "title": "Form",
       "icon": "server",
       "type": "sub",
       "active": false,
+      "path": "Form",
+      "idx": 6,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
       "children": [
         {
           "title": "Master Data",
@@ -90,56 +192,56 @@
           "children": [
             {
               "path": "akad",
-              "title": "New Akad",
+              "title": "Add a Contract",
               "type": "button"
             },
             {
               "path": "jenistransaksi",
-              "title": "New jenis Transaksi",
+              "title": "Add Transaction Type",
               "type": "button"
             },
             {
               "path": "produk",
-              "title": "New produk",
+              "title": "Add Product",
               "type": "button"
             },
             {
               "path": "jabatan",
-              "title": "New jabatan",
+              "title": "Add Departement",
               "type": "button"
             },
             {
               "path": "pegawai",
-              "title": "New Pegawai",
+              "title": "Add Employee",
               "type": "button"
             }
           ]
         },
         {
-          "title": "Rekening",
+          "title": "Account",
           "type": "sub",
           "active": false,
           "children": [
             {
               "path": "deposito",
-              "title": "New Deposito",
+              "title": "Add Account",
               "type": "button"
             },
             {
               "path": "simpanan",
-              "title": "New Simpanan",
+              "title": "Add Saving",
               "type": "button"
             },
             {
               "path": "pembiayaan",
-              "title": "New Pembiayaan",
+              "title": "Add Financing",
               "type": "button"
             }
           ]
         },
         {
           "path": "/main /nasabah/add",
-          "title": "New Nasabah",
+          "title": "Add Account",
           "type": "link"
         }
       ]
@@ -147,7 +249,13 @@
     {
       "headTitle1": "Advance",
       "headTitle2": "Settings,Role & Group",
-      "type": "headtitle"
+      "type": "headtitle",
+      "path": "Advance",
+      "idx": 7,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      }
     },
     {
       "title": "System",
@@ -156,10 +264,16 @@
       "badgeType": "primary",
       "badgeValue": "3",
       "active": false,
+      "path": "System",
+      "idx": 8,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
       "children": [
         {
           "path": "/main/menu",
-          "title": "Menu",
+          "title": "Menus",
           "type": "link"
         },
         {

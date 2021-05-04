@@ -7,7 +7,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Sample Card</h5>
+              <h5>Menu</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
@@ -16,8 +16,9 @@
               <data-table
                 :items="items"
                 :headers="headers"
-                @add="onAdd"
-                @edit="onEdit"
+                :hidedelete="true"
+                :hideadd="true"
+                @edit="form = true"
               />
             </div>
           </div>
@@ -27,7 +28,8 @@
     <!-- Container-fluid Ends-->
     <form-menu
       :show="form"
-      :body="body"
+      :roles="roles"
+      :groups="groups"
       @close="form = false"
       @submit="onSubmit"
     />
@@ -35,13 +37,8 @@
 </template>
 
 <script>
-import header from "../../data/headeruser.json";
-import {
-  ACTION_GET_DATA_SYSTEM,
-  ACTION_POST_DATA_SYSTEM,
-  ACTION_PUT_DATA_SYSTEM,
-  SUSER,
-} from "../../store/modules/system";
+import header from "../../data/headermenu.json";
+
 import { mapState } from "vuex";
 export default {
   data: () => {
@@ -49,12 +46,15 @@ export default {
       headers: header,
       form: false,
       body: {},
+      roles: [],
+      groups: [],
+      index: null,
       isEdit: false,
     };
   },
   computed: {
     ...mapState({
-      items: (state) => state.system.datausers,
+      items: (state) => state.menu.menu,
     }),
   },
   created() {
@@ -62,46 +62,22 @@ export default {
   },
   methods: {
     getData() {
+      this.$store.dispatch(`menu/getMenu`).then(({ success }) => {});
+    },
+    onEdit(menu) {
+      this.form = true;
+      this.index = menu.idx;
+      this.roles = menu.privilage.roles;
+      this.groups = menu.privilage.groups;
+    },
+    onSubmit(data) {
       this.$store
-        .dispatch(`system/${ACTION_GET_DATA_SYSTEM}`, {
-          systemtype: SUSER,
-          path: "users",
-        })
-        .then((res) => {
-          if (res) {
+        .dispatch(`menu/updateMenu`, data)
+        .then(({ success, message }) => {
+          if (success) {
             this.getData();
           }
         });
-    },
-    onSubmit(data) {
-      if (this.isEdit) {
-        this.$store.dispatch(`system/${ACTION_POST_DATA_SYSTEM}`, {
-          systemtype: SUSER,
-          path: "user",
-          body: data,
-        });
-        // .then(({ success, message }) => {});
-      }
-
-      if (!this.isEdit) {
-        this.$store.dispatch(`system/${ACTION_PUT_DATA_SYSTEM}`, {
-          systemtype: SUSER,
-          path: "user",
-          body: data,
-        });
-        // .then(({ success, message }) => {});
-      }
-    },
-
-    onAdd() {
-      this.body = {};
-      this.formakad = true;
-      this.isEdit = false;
-    },
-    onEdit(data) {
-      this.body = data;
-      this.formakad = true;
-      this.isEdit = true;
     },
   },
 };

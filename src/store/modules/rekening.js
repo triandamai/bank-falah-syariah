@@ -81,17 +81,17 @@ const actions = {
 
       //get
       ApiService.get(`${path}${page}`)
-        .then(res => {
+        .then(({ status, data }) => {
           //success
-          if (res.status == 200 || res.status == 201) {
-            if (res.data.current_page >= res.data.last_page) {
+          if (status == 200 || status == 201) {
+            if (data.current_page >= data.last_page) {
               resolve(false);
               stillPaging = false;
             } else {
               resolve(true);
               stillPaging = true;
             }
-            res.data.data.map(item => {
+            data.data.map(item => {
               commit(MUTATION_ADD_DATA_REKENING, {
                 rekeningtype: rekeningtype,
                 item: item,
@@ -118,11 +118,11 @@ const actions = {
   [ACTION_POST_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
     return new Promise(resolve => {
       ApiService.post(`${path}`, body)
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
             commit(MUTATION_ADD_DATA_REKENING, {
               rekeningtype: rekeningtype,
-              item: res.data.data[0],
+              item: data.data[0],
               page: false
             });
             resolve(true);
@@ -142,11 +142,11 @@ const actions = {
   [ACTION_PUT_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
     return new Promise(resolve => {
       ApiService.put(`${path}/${body.id}`, body)
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
             commit(MUTATION_UPDATE_DATA_REKENING, {
               rekeningtype: rekeningtype,
-              data: res.data.data[0],
+              data: data.data[0],
               olddata: body
             });
           } else {
@@ -165,8 +165,8 @@ const actions = {
   [ACTION_DELETE_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
     return new Promise(resolve => {
       ApiService.delete(`${path}/${body.id}`)
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
             commit(MUTATION_DELETE_DATA_REKENING, {
               rekeningtype: rekeningtype,
               data: body
