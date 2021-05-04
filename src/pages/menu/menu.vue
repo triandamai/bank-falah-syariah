@@ -7,7 +7,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Sample Card</h5>
+              <h5>Menu</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
