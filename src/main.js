@@ -113,7 +113,6 @@ const locale =
   ).length > 0
     ? window.localStorage.getItem("currentLanguage")
     : defaultLocale;
-console.log(locale);
 
 const i18n = new VueI18n({
   locale: locale,
