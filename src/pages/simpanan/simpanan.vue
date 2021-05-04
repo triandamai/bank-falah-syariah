@@ -76,45 +76,38 @@ export default {
         });
     },
     onSubmit(data) {
-      if (this.isEdit) {
-        this.$store
-          .dispatch(`rekening/${ACTION_PUT_DATA_REKENING}`, {
+      this.$store
+        .dispatch(
+          `rekening/${
+            this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING
+          }`,
+          {
             rekeningtype: RSIMPANAN,
             path: "rekening_simpanan",
             body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
+          }
+        )
+        .then(({ success, message }) => {
+          this.$toasted.show(
+            success
+              ? this.$t("Success Message", { context: `${message}` })
+              : this.$t("Failed Message", { context: `${message}` }),
+            {
               theme: "bubble",
               position: "top-right",
               type: success ? "success" : "error",
               duration: 4000,
-            });
-            if (success) {
-              this.formsimpanan = false;
-              this.body = {};
             }
-          });
-      }
-      if (!this.isEdit) {
-        this.$store
-          .dispatch(`rekening/${ACTION_POST_DATA_REKENING}`, {
-            rekeningtype: RSIMPANAN,
-            path: "rekening_simpanan",
-            body: data,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
-            if (success) {
+          );
+          if (success) {
+            if (!this.isEdit) {
               this.onAdd();
+              return;
             }
-          });
-      }
+            this.formsimpanan = false;
+            this.body = {};
+          }
+        });
     },
     onAdd() {
       this.formsimpanan = true;
@@ -128,7 +121,7 @@ export default {
     },
     onDelete(data) {
       this.$swal({
-        text: `Hapus ?`,
+        text: this.$t("Delete Message", { who: `${data}` }),
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",

@@ -85,12 +85,17 @@ export default {
             body: data,
           })
           .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
+            this.$toasted.show(
+              success
+                ? this.$t("Success Message", { context: `${message}` })
+                : this.$t("Failed Message", { context: `${message}` }),
+              {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              }
+            );
             if (success) {
               this.form = false;
               this.body = {};
@@ -106,12 +111,17 @@ export default {
             body: data,
           })
           .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
+            this.$toasted.show(
+              success
+                ? this.$t("Success Message", { context: `${message}` })
+                : this.$t("Failed Message", { context: `${message}` }),
+              {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              }
+            );
             if (success) {
               this.onAdd();
             }
@@ -120,7 +130,7 @@ export default {
     },
     onDelete(data) {
       this.$swal({
-        text: `Hapus ${data.name}?`,
+        text: this.$t("Delete Message", { who: `${data.name}` }),
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",

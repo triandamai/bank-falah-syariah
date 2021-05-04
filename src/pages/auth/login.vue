@@ -163,16 +163,19 @@ export default {
             password: this.password,
           })
           .then(({ success, message }) => {
-            
-               this.$toasted.show(`${message}`, {
+            this.$toasted.show(
+              success
+                ? this.$t("Success Message", { context: `${message}` })
+                : this.$t("Failed Message", { context: `${message}` }),
+              {
                 theme: "bubble",
                 position: "top-right",
-                type: success ? 'success':"error",
+                type: success ? "success" : "error",
                 duration: 2000,
-              });
+              }
+            );
 
             if (success) {
-              
               return this.$router.push({ name: "dashboard" });
             }
           });

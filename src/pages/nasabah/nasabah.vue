@@ -63,7 +63,7 @@ export default {
     },
     onDelete(nasabah) {
       this.$swal({
-        text: `Hapus ${nasabah.nama_lengkap}?`,
+        text: this.$t("Delete Message", { who: `${nasabah.nama_lengkap}` }),
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",

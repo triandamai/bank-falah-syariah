@@ -84,12 +84,17 @@ export default {
             body: data,
           })
           .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
+            this.$toasted.show(
+              success
+                ? this.$t("Success Message", { context: `${message}` })
+                : this.$t("Failed Message", { context: `${message}` }),
+              {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              }
+            );
             if (success) {
               this.formakad = false;
             }
@@ -104,12 +109,17 @@ export default {
             body: data,
           })
           .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
+            this.$toasted.show(
+              success
+                ? this.$t("Success Message", { context: `${message}` })
+                : this.$t("Failed Message", { context: `${message}` }),
+              {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              }
+            );
             if (success) {
               this.onAdd();
             }
@@ -118,7 +128,7 @@ export default {
     },
     onDelete(data) {
       this.$swal({
-        text: `Hapus ${data.nama_akad}?`,
+        text: this.$t("Delete Message", { who: `${data.nama_akad}` }),
         showCancelButton: true,
         confirmButtonText: "Hapus",
         confirmButtonColor: "#4466f2",

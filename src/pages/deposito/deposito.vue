@@ -73,12 +73,17 @@ export default {
             body: data,
           })
           .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
+            this.$toasted.show(
+              success
+                ? this.$t("Success Message", { context: `${message}` })
+                : this.$t("Failed Message", { context: `${message}` }),
+              {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              }
+            );
             if (success) {
               this.formdeposito = false;
               this.body = {};
@@ -93,12 +98,17 @@ export default {
             body: data,
           })
           .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
+            this.$toasted.show(
+              success
+                ? this.$t("Success Message", { context: `${message}` })
+                : this.$t("Failed Message", { context: `${message}` }),
+              {
+                theme: "bubble",
+                position: "top-right",
+                type: success ? "success" : "error",
+                duration: 4000,
+              }
+            );
             if (success) {
               this.onAdd();
             }
@@ -117,7 +127,7 @@ export default {
     },
     onDelete(data) {
       this.$swal({
-        text: "Hapus ?",
+        text: this.$t("Delete Message", { who: `none` }),
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",
