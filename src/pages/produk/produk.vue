@@ -66,8 +66,7 @@ export default {
     getData() {
       this.$store
         .dispatch(`master/${ACTION_GET_DATA_MASTER}`, {
-          mastertype: MPRODUK,
-          path: "produk",
+          type: MPRODUK,
         })
         .then((isNext) => {
           if (isNext) {
@@ -82,8 +81,7 @@ export default {
             this.isEdit ? ACTION_PUT_DATA_MASTER : ACTION_POST_DATA_MASTER
           }`,
           {
-            mastertype: MPRODUK,
-            path: "produk",
+            type: MPRODUK,
             body: data,
           }
         )
@@ -132,8 +130,7 @@ export default {
         if (value) {
           this.$store
             .dispatch(`master/${ACTION_DELETE_DATA_MASTER}`, {
-              mastertype: MPRODUK,
-              path: "produk",
+              type: MPRODUK,
               body: data,
             })
             .then(({ success, message }) => {
