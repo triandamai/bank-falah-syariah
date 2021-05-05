@@ -4,34 +4,59 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 project-list">
           <div class="card">
-            <div class="card-header">
-              <h5>Sample Card</h5>
-              <span
-                >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
-              >
-            </div>
-            <div class="card-body">
-              <data-table
-                :items="items"
-                :headers="headers"
-                @add="onAdd"
-                @edit="onEdit"
-                @delete="onDelete"
-              />
+            <div class="row">
+              <div class="col-sm-12 p-0">
+                <b-tabs content-class="mt-3">
+                  <b-tab active>
+                    <template v-slot:title>
+                      <feather type="book"></feather> Cetak Sampul
+                    </template>
+                    <b-card-text>
+                      <div class="col-sm-12 p-0">
+                        <div class="card">
+                          <div class="card-body">
+                            <data-table
+                              :items="items"
+                              :headers="headers"
+                              @add="onAdd"
+                              @edit="onEdit"
+                              @delete="onDelete"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </b-card-text>
+                  </b-tab>
+                  <b-tab>
+                    <template v-slot:title>
+                      <feather type="database"></feather> Cetak Mutasi
+                    </template>
+                    <b-card-text>
+                      <div class="col-sm-12 p-0">
+                        <div class="card">
+                          <div class="card-body">
+                            <data-table
+                              :items="items"
+                              :headers="headers"
+                              @add="onAdd"
+                              @edit="onEdit"
+                              @delete="onDelete"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    </b-card-text>
+                  </b-tab>
+                </b-tabs>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-akad
-      :show="formakad"
-      :body="body"
-      @close="formakad = false"
-      @submit="onSubmit"
-    />
   </div>
 </template>
 
