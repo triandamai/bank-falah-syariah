@@ -45,5 +45,7 @@
     "Success Message": "Success {context}!",
     "Failed Message": "Failed {context}!",
     "Error Message": "Somethin happen {context}!",
-    "Report Teller": "Report Teller"
+    "Report Teller": "Report Teller",
+    "Transaction Saving": "Transaksi Saving",
+    "Transaction Financing": "Transaksi Financing"
 }

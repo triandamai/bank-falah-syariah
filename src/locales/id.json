@@ -45,5 +45,7 @@
     "Success Message": "Berhasil {context}!",
     "Failed Message": "Gagal {context}!",
     "Error Message": "Terjadi Kesalahan {context}!",
-    "Report Teller": "Laporan Teller"
+    "Report Teller": "Laporan Teller",
+    "Transaction Saving": "Transaksi Simpanan",
+    "Transaction Financing": "Transaksi Pembiayaan"
 }
