@@ -53,18 +53,13 @@
       },
       "children": [
         {
-          "path": "/main/akad",
-          "title": "Akad",
+          "path": "/main/transaksi-simpanan",
+          "title": "Transaction Saving",
           "type": "link"
         },
         {
-          "path": "/main/jenistransaksi",
-          "title": "Type of Transaction",
-          "type": "link"
-        },
-        {
-          "path": "/main/produk",
-          "title": "Product",
+          "path": "/main/transaksi-pembiayaan",
+          "title": "Transaction Financing",
           "type": "link"
         }
       ]
