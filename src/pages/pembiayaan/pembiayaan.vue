@@ -53,8 +53,7 @@ export default {
     getData() {
       this.$store
         .dispatch(`rekening/${ACTION_GET_DATA_REKENING}`, {
-          mastertype: RPEMBIAYAAN,
-          path: "rekening_pembiayaan",
+          type: RPEMBIAYAAN,
         })
         .then((isNext) => {
           if (isNext) {
@@ -69,8 +68,7 @@ export default {
             this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING
           }`,
           {
-            rekeningtype: RPEMBIAYAAN,
-            path: "rekening_pembiayaan",
+            type: RPEMBIAYAAN,
             body: data,
           }
         )
@@ -119,8 +117,7 @@ export default {
         if (value) {
           this.$store
             .dispatch(`rekening/${ACTION_DELETE_DATA_REKENING}`, {
-              rekeningtype: RPEMBIAYAAN,
-              path: "rekening_pembiayaan",
+              type: RPEMBIAYAAN,
               body: data,
             })
             .then(({ success, message }) => {

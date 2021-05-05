@@ -55,8 +55,7 @@ export default {
     getData() {
       this.$store
         .dispatch(`rekening/${ACTION_GET_DATA_REKENING}`, {
-          mastertype: RDEPOSITO,
-          path: "rekening_deposito",
+          type: RDEPOSITO,
         })
         .then((isNext) => {
           if (isNext) {
@@ -71,8 +70,7 @@ export default {
             this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING
           }`,
           {
-            rekeningtype: RDEPOSITO,
-            path: "rekening_deposito",
+            type: RDEPOSITO,
             body: data,
           }
         )
@@ -121,8 +119,7 @@ export default {
         if (value) {
           this.$store
             .dispatch(`rekening/${ACTION_DELETE_DATA_REKENING}`, {
-              rekeningtype: RDEPOSITO,
-              path: "rekening_deposito",
+              type: RDEPOSITO,
               body: data,
             })
             .then(({ success, message }) => {

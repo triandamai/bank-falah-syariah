@@ -67,7 +67,6 @@ export default {
       this.$store
         .dispatch(`rekening/${ACTION_GET_DATA_REKENING}`, {
           mastertype: RSIMPANAN,
-          path: "rekening_simpanan",
         })
         .then((isNext) => {
           if (isNext) {
@@ -82,8 +81,7 @@ export default {
             this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING
           }`,
           {
-            rekeningtype: RSIMPANAN,
-            path: "rekening_simpanan",
+            type: RSIMPANAN,
             body: data,
           }
         )
@@ -132,8 +130,7 @@ export default {
         if (value) {
           this.$store
             .dispatch(`rekening/${ACTION_DELETE_DATA_REKENING}`, {
-              rekeningtype: RSIMPANAN,
-              path: "rekening_simpanan",
+              type: RSIMPANAN,
               body: data,
             })
             .then(({ success, message }) => {
