@@ -250,8 +250,8 @@ const routes = [
  */
 const router = new Router({
   routes,
-  base: "/",
-  mode: "history",
+  base: process.env.BASE_URL || "/",
+  mode: process.env.IS_ELECTRON ? "hash" : "history",
   linkActiveClass: "active",
   scrollBehavior() {
     return { x: 0, y: 0 };
