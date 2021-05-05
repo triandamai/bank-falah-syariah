@@ -5,7 +5,7 @@
  * 28 Jan 2021 - 10:14
  *
  */
-import ApiService from "../../services/api.service";
+import ApiService from "@/services/api.service";
 
 /***
  * dspatch type

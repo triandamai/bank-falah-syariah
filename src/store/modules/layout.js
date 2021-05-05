@@ -1,4 +1,4 @@
-import Layout from "../../data/layout";
+import Layout from "@/data/layout";
 
 const state = {
   layout: Layout,

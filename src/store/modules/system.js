@@ -6,7 +6,7 @@
  *
  */
 
-import ApiService from "../../services/api.service";
+import ApiService from "@/services/api.service";
 
 export const ACTION_GET_DATA_SYSTEM = "GETDATASYSTEM";
 export const ACTION_POST_DATA_SYSTEM = "POGETDATASYSTEM";

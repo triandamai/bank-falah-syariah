@@ -1,7 +1,7 @@
 import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import JwtService from "./jwt.service";
+import JwtService from "@/services/jwt.service";
 
 /**
  * Service to call HTTP request via Axios
@@ -25,22 +25,20 @@ const ApiService = {
     ] = `Bearer ${JwtService.getToken()}`;
   },
   query(resource, params) {
-    return Vue.axios.get(resource, params).catch(error => {
-      // console.log(error);
-      throw new Error(`[KT] ApiService ${error}`);
-    });
+    return Vue.axios.get(resource, params);
   },
   /**
    * Send the GET HTTP request
+   * return Vue.axios.get(`${resource}/${slug}`).catch(error => {
+      // console.log(error);
+      throw new Error(`[KT] ApiService ${error}`);
+    });
    * @param resource
    * @param slug
    * @returns {*}
    */
   get(resource, slug = "") {
-    return Vue.axios.get(`${resource}/${slug}`).catch(error => {
-      // console.log(error);
-      throw new Error(`[KT] ApiService ${error}`);
-    });
+    return Vue.axios.get(`${resource}/${slug}`);
   },
 
   // get(path, slug = "") {
@@ -51,19 +49,19 @@ const ApiService = {
 
   /**
    * Set the POST HTTP request
+   *  return fetch(`http://localhost:8000/${resource}`, {
+   *    method: "POST",
+   *   body: JSON.stringify(params),
+   *   headers: { "Content-Type": "application/json" },
+   *   mode: "no-cors",
+   * }).then((res) => {
+   *  res.json();
+   *});
    * @param resource
    * @param params
    * @returns {*}
    */
   post(resource, params) {
-    // return fetch(`http://localhost:8000/${resource}`, {
-    //   method: "POST",
-    //   body: JSON.stringify(params),
-    //   headers: { "Content-Type": "application/json" },
-    //   mode: "no-cors",
-    // }).then((res) => {
-    //   res.json();
-    // });
     return Vue.axios.post(`${resource}`, params, {
       headers: {
         "Content-Type": "application/json"
@@ -98,10 +96,7 @@ const ApiService = {
    * @returns {*}
    */
   delete(resource) {
-    return Vue.axios.delete(resource).catch(error => {
-      // console.log(error);
-      throw new Error(`[RWV] ApiService ${error}`);
-    });
+    return Vue.axios.delete(resource);
   }
 };
 
