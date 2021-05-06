@@ -49,8 +49,7 @@ export default {
     getData() {
       this.$store
         .dispatch(`master/${ACTION_GET_DATA_MASTER}`, {
-          mastertype: MJABATAN,
-          path: "jabatan",
+          type: MJABATAN,
         })
         .then((isNext) => {
           if (isNext) {

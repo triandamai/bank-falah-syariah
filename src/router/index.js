@@ -22,7 +22,13 @@ Vue.use(Router);
  *  route2
  */
 const routes = [
+  /**
+   * base route in this route will redirect to main
+   */
   { path: "", redirect: { name: "dashboard" } },
+  /**
+   * in this route all children reqiresAuth for access
+   */
   {
     path: "/main",
     component: () => import("../components/body"),
@@ -71,22 +77,38 @@ const routes = [
           reqiresAuth: true
         }
       },
-      //
+      /**
+       * laporan/Report
+       *
+       */
       {
         path: "laporan-teller",
         name: "laporan-teller",
-        component: () => import("../pages/teller/teller.vue"),
+        component: () => import("../pages/laporan-teller/laporan-teller.vue"),
         meta: {
           title: "Laporan | Teller",
           reqiresAuth: true
         }
       },
-      //
+      /**
+       * Transaction
+       *
+       */
       {
         path: "transaksi-simpanan",
         name: "transaksi-simpanan",
         component: () =>
           import("../pages/transaksi-simpanan/transaksi-simpanan.vue"),
+        meta: {
+          title: "Laporan | Teller",
+          reqiresAuth: true
+        }
+      },
+      {
+        path: "transaksi-pembiayaan",
+        name: "transaksi-pembiayaan",
+        component: () =>
+          import("../pages/transaksi-pembiayaan/transaksi-pembiayaan.vue"),
         meta: {
           title: "Laporan | Teller",
           reqiresAuth: true
@@ -224,11 +246,12 @@ const routes = [
 
 /**
  * instance router
+ * mode use instead useing history must use hash for desktop
  */
 const router = new Router({
   routes,
-  base: "/",
-  mode: "history",
+  base: process.env.BASE_URL || "/",
+  mode: process.env.IS_ELECTRON ? "hash" : "history",
   linkActiveClass: "active",
   scrollBehavior() {
     return { x: 0, y: 0 };
@@ -237,6 +260,7 @@ const router = new Router({
 
 /**
  * check session of user
+ * if the user not  logged in route with meta requiresAuth the route will denied and redirect to login
  */
 router.beforeEach((to, from, next) => {
   ApiService.setHeader();

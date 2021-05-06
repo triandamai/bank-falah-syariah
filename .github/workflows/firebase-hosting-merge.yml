@@ -19,3 +19,11 @@ jobs:
       - uses: actions/checkout@v2
       - run: npm ci
       - run: npm run build
+      # - uses: FirebaseExtended/action-hosting-deploy@v0
+      #   with:
+      #     repoToken: "${{ secrets.GITHUB_TOKEN }}"
+      #     firebaseServiceAccount: "${{ secrets.FIREBASE_SERVICE_ACCOUNT_MYPROJECT_64AAC }}"
+      #     channelId: live
+      #     projectId: myproject-64aac
+      #   env:
+      #     FIREBASE_CLI_PREVIEWS: hostingchannels

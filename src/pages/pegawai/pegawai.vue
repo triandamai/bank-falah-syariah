@@ -49,8 +49,7 @@ export default {
     getData() {
       this.$store
         .dispatch(`master/${ACTION_GET_DATA_MASTER}`, {
-          mastertype: MPEGAWAI,
-          path: "pegawai",
+          type: MPEGAWAI,
         })
         .then((isNext) => {
           if (isNext) {

@@ -19,11 +19,11 @@ export const MUTATION_ADD_DATA_MASTER = "MADDDATAMASTER";
 export const MUTATION_PUT_DATA_MASTER = "MPUTDATAMASTER";
 export const MUTATION_DELETE_DATA_MASTER = "DELETEMASTERDATA";
 
-export const MAKAD = "MAKAD";
-export const MPRODUK = "MPRODUK";
-export const MJABATAN = "MJABATAN";
-export const MPEGAWAI = "MPEGAWAI";
-export const MJENISTRANSAKSI = "MJEBISTRANSAKSI";
+export const MAKAD = "akad";
+export const MPRODUK = "produk";
+export const MJABATAN = "jabatan";
+export const MPEGAWAI = "pegawai";
+export const MJENISTRANSAKSI = "jenis-transaksi";
 
 const state = {
   dataakad: [],
@@ -57,16 +57,16 @@ const getters = {};
 const actions = {
   /***
    * get data
-   * @param {mastertype,path,id}
+   * @param {type,path,id}
    * @returns prmise true/false
    * and add data to array smoothly
    */
-  [ACTION_GET_DATA_MASTER]({ commit, state }, { mastertype, path, id }) {
+  [ACTION_GET_DATA_MASTER]({ commit, state }, { type }) {
     return new Promise(resolve => {
       //get current page
       let page = `?page=`;
       let stillPaging = false;
-      switch (mastertype) {
+      switch (type) {
         case MAKAD:
           page += state.akad.current_page;
           break;
@@ -83,7 +83,7 @@ const actions = {
           page += state.jenistransaksi.current_page;
           break;
       }
-      ApiService.get(`${path}${page}`)
+      ApiService.get(`${type}${page}`)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             if (data.current_page >= data.last_page) {
@@ -96,7 +96,7 @@ const actions = {
 
             data.data.map(item => {
               commit(MUTATION_ADD_DATA_MASTER, {
-                mastertype: mastertype,
+                type: type,
                 data: item,
                 page: stillPaging
               });
@@ -112,18 +112,18 @@ const actions = {
   },
   /***
    * send data to server
-   * @param {mastertype,path,body}
+   * @param {type,path,body}
    * @returns save data to server the add to array store
    * @returns {success,message}
    *
    */
-  [ACTION_POST_DATA_MASTER]({ commit }, { mastertype, path, body }) {
+  [ACTION_POST_DATA_MASTER]({ commit }, { type, body }) {
     return new Promise(resolve => {
-      ApiService.post(`${path}`, body)
+      ApiService.post(`${type}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(MUTATION_ADD_DATA_MASTER, {
-              mastertype: mastertype,
+              type: type,
               data: data.data[0]
             });
             resolve({ success: true, message: "Berhasil menambah data" });
@@ -144,18 +144,18 @@ const actions = {
   },
   /****
    * Put data master
-   * @param {mastertype,path,body}
+   * @param {type,path,body}
    * update data to server the notify the data was changed
    * @returns
    *
    */
-  [ACTION_PUT_DATA_MASTER]({ commit }, { mastertype, path, body }) {
+  [ACTION_PUT_DATA_MASTER]({ commit }, { type, body }) {
     return new Promise(resolve => {
-      ApiService.put(`${path}/${body.id}`, body)
+      ApiService.put(`${type}/${body.id}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(MUTATION_PUT_DATA_MASTER, {
-              mastertype: mastertype,
+              type: type,
               data: data.data[0],
               olddata: body
             });
@@ -177,17 +177,17 @@ const actions = {
   },
   /***
    * delete data
-   * @param {mastertype,path,body}
+   * @param {type,path,body}
    * @returns delete data by id
    * @returns if success it will update data no need reload data from service
    */
-  [ACTION_DELETE_DATA_MASTER]({ commit }, { mastertype, path, body }) {
+  [ACTION_DELETE_DATA_MASTER]({ commit }, { type, body }) {
     return new Promise(resolve => {
-      ApiService.delete(`${path}/${body.id}`)
+      ApiService.delete(`${type}/${body.id}`)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(MUTATION_DELETE_DATA_MASTER, {
-              mastertype: mastertype,
+              type: type,
               data: body
             });
             resolve({ success: true, message: "Berhasil menghapus!" });
@@ -210,11 +210,11 @@ const actions = {
 const mutations = {
   /***
    * adding data to each state
-   * @param {mastertype,data,page}
+   * @param {type,data,page}
    * @returns data will be add one -by one
    */
-  [MUTATION_ADD_DATA_MASTER](state, { mastertype, data, page }) {
-    switch (mastertype) {
+  [MUTATION_ADD_DATA_MASTER](state, { type, data, page }) {
+    switch (type) {
       case MAKAD:
         var exist = state.dataakad.some(akad => {
           return akad.id == data.id;
@@ -265,13 +265,13 @@ const mutations = {
   },
   /***
    * Update data
-   * @param {mastertype,data,olddata}
+   * @param {type,data,olddata}
    * update item inside array state data
    * @returns change reactivly
    *
    */
-  [MUTATION_PUT_DATA_MASTER](state, { mastertype, data, olddata }) {
-    switch (mastertype) {
+  [MUTATION_PUT_DATA_MASTER](state, { type, data, olddata }) {
+    switch (type) {
       case MAKAD:
         var index = state.dataakad.map(akad => akad.id).indexOf(olddata.id);
         Object.assign(state.dataakad[index], data);
@@ -283,7 +283,7 @@ const mutations = {
         Object.assign(state.datajabatan[index], data);
         break;
       case MJENISTRANSAKSI:
-        console.log(mastertype);
+        console.log(type);
         var index = state.datajenistransaksi
           .map(jenis => jenis.id)
           .indexOf(olddata.id);
@@ -308,8 +308,8 @@ const mutations = {
    * @param {systemtype,data}
    * @return remove data by index
    */
-  [MUTATION_DELETE_DATA_MASTER](state, { mastertype, data }) {
-    switch (mastertype) {
+  [MUTATION_DELETE_DATA_MASTER](state, { type, data }) {
+    switch (type) {
       case MAKAD:
         var index = state.dataakad.map(akad => akad.id).indexOf(data.id);
         state.dataakad.splice(index);
