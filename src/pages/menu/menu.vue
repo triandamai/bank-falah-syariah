@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import header from "../../data/headermenu.json";
+import header from "@/data/headermenu.json";
 
 import { mapState } from "vuex";
 export default {
@@ -54,7 +54,7 @@ export default {
   },
   computed: {
     ...mapState({
-      items: (state) => state.menu.menu,
+      items: (state) => state.menu.data,
     }),
   },
   created() {

@@ -41,12 +41,6 @@ const ApiService = {
     return Vue.axios.get(`${resource}/${slug}`);
   },
 
-  // get(path, slug = "") {
-  //   return fetch(`${BASE_URL}/${path}/${slug}`, {
-  //     method: "GET",
-  //   }).then((res) => res.json());
-  // },
-
   /**
    * Set the POST HTTP request
    *  return fetch(`http://localhost:8000/${resource}`, {

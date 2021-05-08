@@ -1,9 +1,9 @@
 import Vue from "vue";
-import App from "./App.vue";
+import App from "@/App.vue";
 import BootstrapVue from "bootstrap-vue";
-import router from "./router";
-import Breadcrumbs from "./components/bread_crumbs";
-import { store } from "./store";
+import router from "@/router";
+import Breadcrumbs from "@/components/bread_crumbs";
+import { store } from "@/store";
 import Vue2Filters from "vue2-filters";
 import VueSweetalert2 from "vue-sweetalert2";
 import VueFormWizard from "vue-form-wizard";
@@ -19,20 +19,20 @@ import VueApexCharts from "vue-apexcharts";
 import FunctionalCalendar from "vue-functional-calendar";
 import vueKanban from "vue-kanban";
 //
-import DataTable from "./components/datatable.vue";
-import FormAkad from "./components/form_akad.vue";
-import FormDeposito from "./components/form_deposito.vue";
-import FormJenistransaksi from "./components/form_jenistransaksi.vue";
-import FormNasabah from "./components/form_nasabah.vue";
-import FormPembiayaan from "./components/form_pembiayaan.vue";
-import FormProduk from "./components/form_produk.vue";
-import FormSimpanan from "./components/form_simpanan.vue";
-import FormUser from "./components/form_user.vue";
-import FormGroup from "./components/form_group.vue";
-import FormMenu from "./components/form_menu.vue";
-import FormRole from "./components/form_role.vue";
-import FormJabatan from "./components/form_jabatan.vue";
-import FormPegawai from "./components/form_pegawai.vue";
+import DataTable from "@/components/datatable.vue";
+import FormAkad from "@/components/form_akad.vue";
+import FormDeposito from "@/components/form_deposito.vue";
+import FormJenistransaksi from "@/components/form_jenistransaksi.vue";
+import FormNasabah from "@/components/form_nasabah.vue";
+import FormPembiayaan from "@/components/form_pembiayaan.vue";
+import FormProduk from "@/components/form_produk.vue";
+import FormSimpanan from "@/components/form_simpanan.vue";
+import FormUser from "@/components/form_user.vue";
+import FormGroup from "@/components/form_group.vue";
+import FormMenu from "@/components/form_menu.vue";
+import FormRole from "@/components/form_role.vue";
+import FormJabatan from "@/components/form_jabatan.vue";
+import FormPegawai from "@/components/form_pegawai.vue";
 
 Vue.component("data-table", DataTable);
 Vue.component("form-akad", FormAkad);
@@ -50,7 +50,7 @@ Vue.component("form-jabatan", FormJabatan);
 Vue.component("form-pegawai", FormPegawai);
 
 //
-import PxCard from "./components/Pxcard.vue";
+import PxCard from "@/components/Pxcard.vue";
 Vue.component(PxCard.name, PxCard);
 
 import { Icon } from "leaflet";
@@ -58,20 +58,20 @@ delete Icon.Default.prototype._getIconUrl;
 
 // Multi Language Add
 import VueI18n from "vue-i18n";
-import en from "./locales/en.json";
-import es from "./locales/es.json";
-import id from "./locales/id.json";
-import { defaultLocale, localeOptions } from "./constants/config.js";
+import en from "@/locales/en.json";
+import es from "@/locales/es.json";
+import id from "@/locales/id.json";
+import { defaultLocale, localeOptions } from "@/constants/config.js";
 
 const messages = { en: en, es: es, id: id };
 
 // Import Theme scss
-import "./assets/scss/app.scss";
+import "@/assets/scss/app.scss";
 
-import vuetify from "./plugins/vuetify";
+import vuetify from "@/plugins/vuetify";
 import "@babel/polyfill";
 // api services
-import ApiService from "./services/api.service";
+import ApiService from "@/services/api.service";
 
 ApiService.init();
 
