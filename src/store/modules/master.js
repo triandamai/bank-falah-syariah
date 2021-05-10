@@ -65,6 +65,7 @@ const actions = {
     return new Promise(resolve => {
       //get current page
       let page = `?page=`;
+
       let stillPaging = false;
       switch (type) {
         case MAKAD:

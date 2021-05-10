@@ -115,7 +115,7 @@
             ></v-row>
             <v-btn @click="onSubmit" outlined small> Simpan </v-btn>
 
-            <v-btn text> Sebelumnya </v-btn>
+            <v-btn @click="goBack" text> Sebelumnya </v-btn>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -170,7 +170,8 @@ export default {
   methods: {
     goBack() {
       if (this.step > 1) {
-        this.step - 1;
+        this.step = this.step - 1;
+        console.log(this.step);
       }
     },
     save(date) {

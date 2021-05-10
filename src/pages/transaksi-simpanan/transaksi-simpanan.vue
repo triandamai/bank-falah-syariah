@@ -66,7 +66,7 @@ export default {
     getData() {
       this.$store
         .dispatch(`master/${ACTION_GET_DATA_MASTER}`, {
-          mastertype: MAKAD,
+          type: MAKAD,
           path: "akad",
         })
         .then((res) => {
