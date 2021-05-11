@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     getData() {
-      this.$store.dispatch(`nasabah/${ACTION_GET_NASABAH}`).then((isNext) => {
+      this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
         if (isNext) {
           this.getData();
         }
@@ -73,7 +73,7 @@ export default {
       }).then(({ value }) => {
         if (value) {
           this.$store
-            .dispatch(`nasabah/${ACTION_DELETE_NASABAH}`, nasabah)
+            .dispatch(ACTION_DELETE_NASABAH, nasabah)
             .then(({ success, message }) => {
               this.$toasted.show(
                 success

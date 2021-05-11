@@ -124,13 +124,18 @@
 </template>
 
 <script>
-import ApiService from "../services/api.service";
+import ApiService from "@/services/api.service";
 import {
-  ACTION_POST_NASABAH,
-  ACTION_PUT_NASABAH,
-} from "../store/modules/nasabah";
+  ACTION_GET_WILAYAH,
+  WPROVINSI,
+  WKABUPATEN,
+  WKECAMATAN,
+  WDESA,
+} from "@/store/modules/wilayah";
+
 export default {
   props: ["isEdit"],
+
   data() {
     return {
       step: 1,
@@ -152,8 +157,19 @@ export default {
     };
   },
   created() {
-    console.log(this.isEdit);
     if (this.isEdit) {
+      this.getDataById();
+    }
+    this.getProvinsi();
+  },
+  methods: {
+    goBack() {
+      if (this.step > 1) {
+        this.step = this.step - 1;
+        console.log(this.step);
+      }
+    },
+    getDataById() {
       if (!this.$route.params.id) return this.$router.go(-1);
       this.form.id = this.$route.params.id;
       ApiService.get(`nasabah/${this.$route.params.id}`)
@@ -165,50 +181,35 @@ export default {
           }
         })
         .catch((e) => {});
-    }
-  },
-  methods: {
-    goBack() {
-      if (this.step > 1) {
-        this.step = this.step - 1;
-        console.log(this.step);
-      }
     },
+    getProvinsi() {
+      this.$store
+        .dispatch(ACTION_GET_WILAYAH, { type: WPROVINSI })
+        .then((res) => {
+          if (res) {
+            this.getProvinsi();
+          }
+        });
+    },
+    getKabupaten(query) {
+      this.$store
+        .dispatch(ACTION_GET_WILAYAH, {
+          type: WKABUPATEN,
+          query: `provinsi_id=${query}`,
+        })
+        .then((res) => {
+          if (res) {
+            this.getKabupaten();
+          }
+        });
+    },
+    getkecamatan() {},
+    getDesa() {},
     save(date) {
       this.$refs.datepicker.save(date);
     },
     onSubmit() {
-      if (!this.isEdit) {
-        console.log("post");
-        this.$store
-          .dispatch(`nasabah/${ACTION_POST_NASABAH}`, this.form)
-          .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
-            if (success) {
-              this.form = {};
-            }
-          });
-      }
-      if (this.isEdit) {
-        this.$store
-          .dispatch(`nasabah/${ACTION_PUT_NASABAH}`, this.form)
-          .then(({ success, message }) => {
-            this.$toasted.show(`${message}`, {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            });
-            if (success) {
-              this.$router.push({ name: "nasabah" });
-            }
-          });
-      }
+      this.$emit("submit", this.form);
     },
   },
 };

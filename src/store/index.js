@@ -8,6 +8,7 @@ import nasabah from "./modules/nasabah";
 import master from "./modules/master";
 import rekening from "./modules/rekening";
 import system from "./modules/system";
+import wilayah from "./modules/wilayah";
 
 Vue.use(Vuex);
 
@@ -101,6 +102,16 @@ export const store = new Vuex.Store({
     nasabah,
     master,
     rekening,
-    system
+    system,
+    wilayah
   }
 });
+
+export * from "./modules/layout";
+export * from "./modules/menu";
+export * from "./modules/auth";
+export * from "./modules/nasabah";
+export * from "./modules/master";
+export * from "./modules/rekening";
+export * from "./modules/system";
+export * from "./modules/wilayah";

@@ -8,17 +8,26 @@
 import ApiService from "@/services/api.service";
 // action types
 
-export const ACTION_POST_NASABAH = "createUser";
-export const ACTION_PUT_NASABAH = "updateNasabah";
-export const ACTION_GET_NASABAH = "getNasabah";
+const POST_NASABAH = "createUser";
+const PUT_NASABAH = "updateNasabah";
+const GET_NASABAH = "getNasabah";
+const DELETE_NASABAH = "deleteNasabah";
 
-export const ACTION_DELETE_NASABAH = "deleteNasabah";
+export const ACTION_POST_NASABAH = `nasabah/${POST_NASABAH}`;
+export const ACTION_PUT_NASABAH = `nasabah/${PUT_NASABAH}`;
+export const ACTION_GET_NASABAH = `nasabah/${GET_NASABAH}`;
+export const ACTION_DELETE_NASABAH = `nasabah/${DELETE_NASABAH}`;
 
 // mutation types
-export const MUTATION_SET_ERROR = "setError";
-export const MUTATION_ADD_NASABAH = "tambahnasabah";
-export const MUTATION_PUT_NASABAH = "editnasabah";
-export const MUTATION_DELETE_NASABAH = "deletenasabah";
+const SET_ERROR = "setError";
+const ADD_NASABAH = "tambahnasabah";
+const EDIT_NASABAH = "editnasabah";
+const REMOVE_NASABAH = "deletenasabah";
+
+export const MUTATION_SET_ERROR = `nasabah/${SET_ERROR}`;
+export const MUTATION_ADD_NASABAH = `nasabah/${ADD_NASABAH}`;
+export const MUTATION_PUT_NASABAH = `nasabah/${EDIT_NASABAH}`;
+export const MUTATION_DELETE_NASABAH = `nasabah/${REMOVE_NASABAH}`;
 //
 const state = {
   errors: null,
@@ -36,7 +45,7 @@ const actions = {
    * @param {*} data
    * @returns Should goto next page ?
    */
-  [ACTION_GET_NASABAH]({ commit, state }, data) {
+  [GET_NASABAH]({ commit, state }, data) {
     return new Promise((resolve, reject) => {
       let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
       ApiService.get(`nasabah${page}`)
@@ -63,7 +72,7 @@ const actions = {
                 status: item.active
               };
 
-              commit(MUTATION_ADD_NASABAH, data);
+              commit(ADD_NASABAH, data);
             });
           } else {
             resolve(false);
@@ -80,7 +89,7 @@ const actions = {
    * @param {*} body
    * @returns
    */
-  [ACTION_POST_NASABAH]({ commit }, body) {
+  [POST_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
       ApiService.post("nasabah", body)
         .then(({ status, data }) => {
@@ -98,7 +107,7 @@ const actions = {
               status: data.data[0].active
             };
 
-            commit(MUTATION_ADD_NASABAH, result);
+            commit(ADD_NASABAH, result);
             resolve({ success: true, message: "Berhasil" });
           } else {
             resolve({ success: false, message: "Gagal coba lgi nanti" });
@@ -115,12 +124,12 @@ const actions = {
    * @param {*} body
    * @returns
    */
-  [ACTION_PUT_NASABAH]({ commit }, body) {
+  [PUT_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
       ApiService.put(`nasabah/${body.id}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_PUT_NASABAH, { data: data.data[0], olddata: body });
+            commit(EDIT_NASABAH, { data: data.data[0], olddata: body });
             resolve({ success: true, message: "Berhasil" });
           } else {
             resolve({ success: false, message: "Gagal Coba lagi nanti" });
@@ -137,12 +146,12 @@ const actions = {
    * @param {*} body
    * @returns
    */
-  [ACTION_DELETE_NASABAH]({ commit }, body) {
+  [DELETE_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
       ApiService.post(`nasbaah/${body.id}`)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_DELETE_NASABAH, body);
+            commit(REMOVE_NASABAH, body);
             resolve({ success: true, message: "Berhasil" });
           } else {
             resolve({ success: false, message: "Gagal Coba lagi nanti" });
@@ -156,10 +165,10 @@ const actions = {
 };
 
 const mutations = {
-  [MUTATION_SET_ERROR](state, data) {
+  [SET_ERROR](state, data) {
     state.errors = data;
   },
-  [MUTATION_ADD_NASABAH](state, data) {
+  [ADD_NASABAH](state, data) {
     var exsts = state.datanasabah.some(nasabah => {
       return nasabah.id == data.id;
     });
@@ -167,13 +176,13 @@ const mutations = {
       state.datanasabah.push(data);
     }
   },
-  [MUTATION_PUT_NASABAH](state, { data, olddata }) {
+  [EDIT_NASABAH](state, { data, olddata }) {
     var index = state.datanasabah
       .map(nasabah => nasabah.id)
       .indexOf(olddata.id);
     Object.assign(state.datanasabah[index], data);
   },
-  [MUTATION_DELETE_NASABAH](state, data) {
+  [REMOVE_NASABAH](state, data) {
     var index = state.datanasabah.map(nasabah => nasabah.id).indexOf(data.id);
     state.datanasabah.splice(index);
   }

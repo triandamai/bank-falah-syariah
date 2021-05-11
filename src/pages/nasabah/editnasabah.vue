@@ -12,7 +12,7 @@
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
             </div>
-            <form-nasabah :isEdit="true" />
+            <form-nasabah :isEdit="true" @submit="onAdd" />
           </div>
         </div>
       </div>
@@ -22,5 +22,9 @@
 </template>
 
 <script>
-export default {};
+export default {
+  methods: {
+    onSubmit(data) {},
+  },
+};
 </script>
