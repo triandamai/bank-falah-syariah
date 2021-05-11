@@ -10,19 +10,21 @@ import ApiService from "@/services/api.service";
 /***
  * dspatch type
  */
-export const ACTION_GET_DATA_REKENING = "GETDATAREKENING";
+const GET_DATA_REKENING = "GETDATAREKENING";
+const POST_DATA_REKENING = "POSTREKENINGDATA";
+const PUT_DATA_REKENING = "PUTDATAREKENING";
+const DELETE_DATA_REKENING = "DELETEDATAREKENING";
+export const ACTION_GET_DATA_REKENING = `rekening/${GET_DATA_REKENING}`;
+export const ACTION_POST_DATA_REKENING = `rekening/${POST_DATA_REKENING}`;
+export const ACTION_PUT_DATA_REKENING = `rekening/${PUT_DATA_REKENING}`;
+export const ACTION_DELETE_DATA_REKENING = `rekening/${DELETE_DATA_REKENING}`;
 
-export const ACTION_POST_DATA_REKENING = "POSTREKENINGDATA";
-
-export const ACTION_PUT_DATA_REKENING = "PUTDATAREKENING";
-
-export const ACTION_DELETE_DATA_REKENING = "DELETEDATAREKENING";
-
-export const MUTATION_ADD_DATA_REKENING = "MADDDATAREKENING";
-
-export const MUTATION_DELETE_DATA_REKENING = "MDELETEDATAREKENING";
-
-export const MUTATION_UPDATE_DATA_REKENING = "MUPDATEREKENING";
+const ADD_DATA_REKENING = "MADDDATAREKENING";
+const EDIT_DATA_REKENING = "MUPDATEREKENING";
+const REMOVE_DATA_REKENING = "MDELETEDATAREKENING";
+export const MUTATION_ADD_DATA_REKENING = `rekening/${ADD_DATA_REKENING}`;
+export const MUTATION_UPDATE_DATA_REKENING = `rekening/${EDIT_DATA_REKENING}`;
+export const MUTATION_DELETE_DATA_REKENING = `rekekning/${REMOVE_DATA_REKENING}`;
 /***
  *
  * type Action
@@ -60,7 +62,7 @@ const actions = {
    *  @returns data array and after success adding to @global data array
    *
    */
-  [ACTION_GET_DATA_REKENING]({ commit, state }, { type }) {
+  [GET_DATA_REKENING]({ commit, state }, { type }) {
     return new Promise(resolve => {
       //cek pagination (get current page)
       let page = `?page=`;
@@ -92,7 +94,7 @@ const actions = {
               stillPaging = true;
             }
             data.data.map(item => {
-              commit(MUTATION_ADD_DATA_REKENING, {
+              commit(ADD_DATA_REKENING, {
                 type: type,
                 item: item,
                 page: stillPaging
@@ -115,12 +117,12 @@ const actions = {
    *  @param {type,body}
    *
    */
-  [ACTION_POST_DATA_REKENING]({ commit }, { type, body }) {
+  [POST_DATA_REKENING]({ commit }, { type, body }) {
     return new Promise(resolve => {
       ApiService.post(`${type}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_ADD_DATA_REKENING, {
+            commit(ADD_DATA_REKENING, {
               type: type,
               item: data.data[0],
               page: false
@@ -139,12 +141,12 @@ const actions = {
    * update/edit data
    * @param {type,body}
    */
-  [ACTION_PUT_DATA_REKENING]({ commit }, { type, body }) {
+  [PUT_DATA_REKENING]({ commit }, { type, body }) {
     return new Promise(resolve => {
       ApiService.put(`${type}/${body.id}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_UPDATE_DATA_REKENING, {
+            commit(EDIT_DATA_REKENING, {
               type: type,
               data: data.data[0],
               olddata: body
@@ -162,12 +164,12 @@ const actions = {
    * delete pembiayaan
    * @param {type,body}
    */
-  [ACTION_DELETE_DATA_REKENING]({ commit }, { type, body }) {
+  [DELETE_DATA_REKENING]({ commit }, { type, body }) {
     return new Promise(resolve => {
       ApiService.delete(`${type}/${body.id}`)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_DELETE_DATA_REKENING, {
+            commit(REMOVE_DATA_REKENING, {
               type: type,
               data: body
             });
@@ -192,7 +194,7 @@ const mutations = {
    * @param item}
    * @returns each data array will increment smoothly
    */
-  [MUTATION_ADD_DATA_REKENING](state, { type, item, page }) {
+  [ADD_DATA_REKENING](state, { type, item, page }) {
     //push data with type rekening assosiated
     switch (type) {
       case RPEMBIAYAAN:
@@ -242,7 +244,7 @@ const mutations = {
    * @param olddata}
    * @returns update data
    */
-  [MUTATION_UPDATE_DATA_REKENING](state, { type, data, olddata }) {
+  [EDIT_DATA_REKENING](state, { type, data, olddata }) {
     //get type rekening
     switch (type) {
       case RSIMPANAN:
@@ -271,7 +273,7 @@ const mutations = {
    * delete data
    * @param {rekenigntype,data}
    */
-  [MUTATION_DELETE_DATA_REKENING](state, { type, data }) {
+  [REMOVE_DATA_REKENING](state, { type, data }) {
     switch (type) {
       case RDEPOSITO:
         var index = state.datadeposito

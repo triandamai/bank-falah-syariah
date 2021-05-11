@@ -25,14 +25,14 @@
 </template>
 
 <script>
-import header from "../../data/headerpembiayaan.json";
+import header from "@/data/headerpembiayaan.json";
 import {
   ACTION_DELETE_DATA_REKENING,
   ACTION_GET_DATA_REKENING,
   ACTION_POST_DATA_REKENING,
   ACTION_PUT_DATA_REKENING,
   RPEMBIAYAAN,
-} from "../../store/modules/rekening";
+} from "@/store/modules/rekening";
 import { mapState } from "vuex";
 export default {
   data: () => {
@@ -52,7 +52,7 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(`rekening/${ACTION_GET_DATA_REKENING}`, {
+        .dispatch(ACTION_GET_DATA_REKENING, {
           type: RPEMBIAYAAN,
         })
         .then((isNext) => {
@@ -64,9 +64,7 @@ export default {
     onSubmit(data) {
       this.$store
         .dispatch(
-          `rekening/${
-            this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING
-          }`,
+          this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING,
           {
             type: RPEMBIAYAAN,
             body: data,
@@ -116,7 +114,7 @@ export default {
       }).then(({ value }) => {
         if (value) {
           this.$store
-            .dispatch(`rekening/${ACTION_DELETE_DATA_REKENING}`, {
+            .dispatch(ACTION_DELETE_DATA_REKENING, {
               type: RPEMBIAYAAN,
               body: data,
             })

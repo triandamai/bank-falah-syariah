@@ -36,14 +36,14 @@
 </template>
 
 <script>
-import header from "../../data/headersimpanan.json";
+import header from "@/data/headersimpanan.json";
 import {
   ACTION_DELETE_DATA_REKENING,
   ACTION_GET_DATA_REKENING,
   ACTION_POST_DATA_REKENING,
   ACTION_PUT_DATA_REKENING,
   RSIMPANAN,
-} from "../../store/modules/rekening";
+} from "@/store/modules/rekening";
 import { mapState } from "vuex";
 export default {
   data: () => {
@@ -65,7 +65,7 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(`rekening/${ACTION_GET_DATA_REKENING}`, {
+        .dispatch(ACTION_GET_DATA_REKENING, {
           mastertype: RSIMPANAN,
         })
         .then((isNext) => {
@@ -77,9 +77,7 @@ export default {
     onSubmit(data) {
       this.$store
         .dispatch(
-          `rekening/${
-            this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING
-          }`,
+          this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING,
           {
             type: RSIMPANAN,
             body: data,
@@ -129,7 +127,7 @@ export default {
       }).then(({ value }) => {
         if (value) {
           this.$store
-            .dispatch(`rekening/${ACTION_DELETE_DATA_REKENING}`, {
+            .dispatch(ACTION_DELETE_DATA_REKENING, {
               type: RSIMPANAN,
               body: data,
             })
