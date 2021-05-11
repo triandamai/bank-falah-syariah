@@ -48,7 +48,7 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(`master/${ACTION_GET_DATA_MASTER}`, {
+        .dispatch(ACTION_GET_DATA_MASTER, {
           type: MPEGAWAI,
         })
         .then((isNext) => {

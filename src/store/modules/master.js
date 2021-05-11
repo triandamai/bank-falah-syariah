@@ -7,17 +7,23 @@
  */
 import ApiService from "@/services/api.service";
 
-export const ACTION_GET_DATA_MASTER = "GETMASTERDATA";
+const GETDATAMASTER = `GETDATAMASTER`;
+const POSTDATAMASTER = `POSTMASTERDATA`;
+const PUTDATAMASTER = `PUTMASTERDATA`;
+const DELETEDATAMASTER = `DELETEMASTERDATA`;
 
-export const ACTION_POST_DATA_MASTER = "POSTMASTERDATA";
+export const ACTION_GET_DATA_MASTER = `master/${GETDATAMASTER}`;
+export const ACTION_POST_DATA_MASTER = `master/${POSTDATAMASTER}`;
+export const ACTION_PUT_DATA_MASTER = `master/${PUTDATAMASTER}`;
+export const ACTION_DELETE_DATA_MASTER = `master/${DELETEDATAMASTER}`;
 
-export const ACTION_PUT_DATA_MASTER = "PUTMASTERDATA";
+const ADDDATAMASTER = `ADDDATAMASTER`;
+const EDITDATAMASTER = `EDITDATAMASTER`;
+const REMOVEDATAMASTER = `REMOVEDATAMASTER`;
 
-export const ACTION_DELETE_DATA_MASTER = "DELETEMASTERDATA";
-
-export const MUTATION_ADD_DATA_MASTER = "MADDDATAMASTER";
-export const MUTATION_PUT_DATA_MASTER = "MPUTDATAMASTER";
-export const MUTATION_DELETE_DATA_MASTER = "DELETEMASTERDATA";
+export const MUTATION_ADD_DATA_MASTER = `master/${ADDDATAMASTER}`;
+export const MUTATION_PUT_DATA_MASTER = `master/${EDITDATAMASTER}`;
+export const MUTATION_DELETE_DATA_MASTER = `master/${REMOVEDATAMASTER}`;
 
 export const MAKAD = "akad";
 export const MPRODUK = "produk";
@@ -61,7 +67,7 @@ const actions = {
    * @returns prmise true/false
    * and add data to array smoothly
    */
-  [ACTION_GET_DATA_MASTER]({ commit, state }, { type }) {
+  [GETDATAMASTER]({ commit, state }, { type }) {
     return new Promise(resolve => {
       //get current page
       let page = `?page=`;
@@ -96,7 +102,7 @@ const actions = {
             }
 
             data.data.map(item => {
-              commit(MUTATION_ADD_DATA_MASTER, {
+              commit(ADDDATAMASTER, {
                 type: type,
                 data: item,
                 page: stillPaging
@@ -118,12 +124,12 @@ const actions = {
    * @returns {success,message}
    *
    */
-  [ACTION_POST_DATA_MASTER]({ commit }, { type, body }) {
+  [POSTDATAMASTER]({ commit }, { type, body }) {
     return new Promise(resolve => {
       ApiService.post(`${type}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_ADD_DATA_MASTER, {
+            commit(ADDDATAMASTER, {
               type: type,
               data: data.data[0]
             });
@@ -150,12 +156,12 @@ const actions = {
    * @returns
    *
    */
-  [ACTION_PUT_DATA_MASTER]({ commit }, { type, body }) {
+  [PUTDATAMASTER]({ commit }, { type, body }) {
     return new Promise(resolve => {
       ApiService.put(`${type}/${body.id}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_PUT_DATA_MASTER, {
+            commit(EDITDATAMASTER, {
               type: type,
               data: data.data[0],
               olddata: body
@@ -182,12 +188,12 @@ const actions = {
    * @returns delete data by id
    * @returns if success it will update data no need reload data from service
    */
-  [ACTION_DELETE_DATA_MASTER]({ commit }, { type, body }) {
+  [DELETEDATAMASTER]({ commit }, { type, body }) {
     return new Promise(resolve => {
       ApiService.delete(`${type}/${body.id}`)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_DELETE_DATA_MASTER, {
+            commit(REMOVEDATAMASTER, {
               type: type,
               data: body
             });
@@ -214,7 +220,7 @@ const mutations = {
    * @param {type,data,page}
    * @returns data will be add one -by one
    */
-  [MUTATION_ADD_DATA_MASTER](state, { type, data, page }) {
+  [ADDDATAMASTER](state, { type, data, page }) {
     switch (type) {
       case MAKAD:
         var exist = state.dataakad.some(akad => {
@@ -271,7 +277,7 @@ const mutations = {
    * @returns change reactivly
    *
    */
-  [MUTATION_PUT_DATA_MASTER](state, { type, data, olddata }) {
+  [EDITDATAMASTER](state, { type, data, olddata }) {
     switch (type) {
       case MAKAD:
         var index = state.dataakad.map(akad => akad.id).indexOf(olddata.id);
@@ -309,7 +315,7 @@ const mutations = {
    * @param {systemtype,data}
    * @return remove data by index
    */
-  [MUTATION_DELETE_DATA_MASTER](state, { type, data }) {
+  [REMOVEDATAMASTER](state, { type, data }) {
     switch (type) {
       case MAKAD:
         var index = state.dataakad.map(akad => akad.id).indexOf(data.id);
