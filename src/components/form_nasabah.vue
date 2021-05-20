@@ -88,6 +88,42 @@
 
           <v-stepper-content step="2">
             <v-row>
+              <v-col cols="12" md="6" lg="6" sm="12">
+                <v-autocomplete
+                  label="Provinsi *"
+                  :items="provinsi"
+                  item-text="nama_lengkap"
+                  outlined
+                  required
+                ></v-autocomplete>
+              </v-col>
+              <v-col cols="12" md="6" lg="6" sm="12">
+                <v-autocomplete
+                  label="Kabupaten *"
+                  :items="kabupaten"
+                  item-text="nama_lengkap"
+                  outlined
+                  required
+                ></v-autocomplete>
+              </v-col>
+              <v-col cols="12" md="6" lg="6" sm="12">
+                <v-autocomplete
+                  label="Kecamatan *"
+                  :items="kecamatan"
+                  item-text="nama_lengkap"
+                  outlined
+                  required
+                ></v-autocomplete>
+              </v-col>
+              <v-col cols="12" md="6" lg="6" sm="12">
+                <v-autocomplete
+                  label="Desa *"
+                  :items="desa"
+                  item-text="nama_lengkap"
+                  outlined
+                  required
+                ></v-autocomplete>
+              </v-col>
               <v-col cols="12" sm="12" class="my-2">
                 <v-text-field
                   v-model="form.alamat"
@@ -132,6 +168,7 @@ import {
   WKECAMATAN,
   WDESA,
 } from "@/store/modules/wilayah";
+import { mapState } from "vuex";
 
 export default {
   props: ["isEdit"],
@@ -155,6 +192,14 @@ export default {
         active: 1,
       },
     };
+  },
+  computed: {
+    ...mapState({
+      provinsi: (state) => state.wilayah.provinsi.data,
+      kabupaten: (state) => state.wilayah.kabupaten.data,
+      kecamatan: (state) => state.wilayah.kecamatan.data,
+      desa: (state) => state.wilayah.desa.data,
+    }),
   },
   created() {
     if (this.isEdit) {
@@ -203,8 +248,22 @@ export default {
           }
         });
     },
-    getkecamatan() {},
-    getDesa() {},
+    getkecamatan() {
+      this.$store
+        .dispatch(ACTION_GET_WILAYAH, { type: WKECAMATAN })
+        .then((res) => {
+          if (res) {
+            this.getkecamatan();
+          }
+        });
+    },
+    getDesa() {
+      this.$store.dispatch(ACTION_GET_WILAYAH, { type: WDESA }).then((res) => {
+        if (res) {
+          this.getDesa();
+        }
+      });
+    },
     save(date) {
       this.$refs.datepicker.save(date);
     },
