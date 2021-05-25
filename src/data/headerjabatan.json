@@ -4,13 +4,13 @@
         "value": "id"
     },
     {
-        "text": "Nama Role",
+        "text": "Nama Jabatan",
         "sortable": true,
-        "value": "name"
+        "value": "nama_jabatan"
     },
     {
         "text": "Deskripsi",
-        "value": "description"
+        "value": "deskripsi"
     },
     {
         "text": "Aktivitas",

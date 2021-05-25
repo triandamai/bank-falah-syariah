@@ -99,7 +99,7 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.pegawai_id"
+                  v-model="nama_lengkap"
                   label="Pegawai *"
                   required
                   disabled
@@ -133,6 +133,12 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import {
+  ACTION_GET_DATA_MASTER,
+  MPRODUK,
+  ACTION_GET_NASABAH,
+} from "@/store/index";
+import { getUser } from "@/services/jwt.service";
 export default {
   props: ["show", "body"],
   data: () => {
@@ -140,6 +146,7 @@ export default {
       dialogakad: false,
       modal_tgl_buka: false,
       modal_tgl_jatuh_tempo: false,
+      nama_lengkap: "",
       form: {
         tgl_buka: "",
         tgl_jatuh_tempo: "",
@@ -149,6 +156,11 @@ export default {
         nilai_deposito: "",
       },
     };
+  },
+  beforeMount() {
+    this.getNasabah();
+    this.getProduk();
+    this.initPegawai();
   },
   computed: {
     ...mapState({
@@ -162,6 +174,23 @@ export default {
     },
   },
   methods: {
+    initPegawai() {
+      const { id, username } = getUser();
+      this.form.pegawai_id = id;
+      this.nama_lengkap = username;
+    },
+    getNasabah() {
+      this.$store.dispatch(ACTION_GET_NASABAH, {}).then((isNext) => {
+        if (isNext) return this.getNasabah();
+      });
+    },
+    getProduk() {
+      this.$store
+        .dispatch(ACTION_GET_DATA_MASTER, { type: MPRODUK })
+        .then((isNext) => {
+          if (isNext) return this.getProduk();
+        });
+    },
     submit() {
       this.$emit("submit", this.form);
     },

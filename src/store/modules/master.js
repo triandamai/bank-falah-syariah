@@ -101,6 +101,7 @@ const actions = {
               stillPaging = true;
             }
 
+            console.log(data);
             data.data.map(item => {
               commit(ADDDATAMASTER, {
                 type: type,

@@ -20,7 +20,11 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-deposito :show="formdeposito" @close="formdeposito = false" />
+    <form-deposito
+      :show="formdeposito"
+      @close="formdeposito = false"
+      @submit="onSubmit"
+    />
   </div>
 </template>
 
@@ -64,6 +68,7 @@ export default {
         });
     },
     onSubmit(data) {
+      console.log("onSubmit");
       this.$store
         .dispatch(
           this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING,

@@ -53,7 +53,7 @@ export default {
         })
         .then((isNext) => {
           if (isNext) {
-            this.getData();
+            //this.getData();
           }
         });
     },
