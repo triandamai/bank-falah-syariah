@@ -74,7 +74,15 @@
                   auto-select-first
                   dense
                   outlined
-                />
+                /> </v-col
+              ><v-col cols="12" sm="12" md="12" class="my-2">
+                <v-text-field
+                  v-model="form.no_identitas"
+                  label="Nomor Identitas"
+                  placeholder="Nomor Identitas"
+                  outlined
+                  dense
+                ></v-text-field>
               </v-col>
               <v-col class="d-flex" cols="12" sm="12">
                 <v-select
@@ -121,15 +129,7 @@
                   dense
                 ></v-text-field>
               </v-col>
-              <v-col cols="12" sm="12" md="12" class="my-2">
-                <v-text-field
-                  v-model="form.no_identitas"
-                  label="Nomor Identitas"
-                  placeholder="Nomor Identitas"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
+
               <v-col cols="12" sm="12" md="12">
                 <v-menu
                   ref="datepicker"
