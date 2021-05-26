@@ -22,6 +22,7 @@ export const ACTION_DELETE_DATA_REKENING = `rekening/${DELETE_DATA_REKENING}`;
 const ADD_DATA_REKENING = "MADDDATAREKENING";
 const EDIT_DATA_REKENING = "MUPDATEREKENING";
 const REMOVE_DATA_REKENING = "MDELETEDATAREKENING";
+const INCREMENt_PAGE = `INCREMENT`;
 export const MUTATION_ADD_DATA_REKENING = `rekening/${ADD_DATA_REKENING}`;
 export const MUTATION_UPDATE_DATA_REKENING = `rekening/${EDIT_DATA_REKENING}`;
 export const MUTATION_DELETE_DATA_REKENING = `rekekning/${REMOVE_DATA_REKENING}`;
@@ -90,6 +91,7 @@ const actions = {
               resolve(false);
               stillPaging = false;
             } else {
+              commit(INCREMENt_PAGE);
               resolve(true);
               stillPaging = true;
             }
@@ -188,6 +190,19 @@ const actions = {
    */
 };
 const mutations = {
+  [INCREMENt_PAGE](state, { type }) {
+    switch (type) {
+      case RPEMBIAYAAN:
+        state.pembiayaan.current_page++;
+        break;
+      case RSIMPANAN:
+        state.simpanan.current_page++;
+        break;
+      case RDEPOSITO:
+        state.deposito.current_page++;
+        break;
+    }
+  },
   /***
    * Rekening add data dynamicly
    * {@param type
@@ -201,39 +216,25 @@ const mutations = {
         var exist = state.datapembiayaan.some(pembiayaan => {
           return pembiayaan.id == item.id;
         });
-        //assume the data/item is doesnt exist
         if (!exist) {
           state.datapembiayaan.push(item);
         }
-        //pagination if still other page
-        page
-          ? (state.pembiayaan.current_page = state.pembiayaan.current_page++)
-          : null;
         break;
       case RSIMPANAN:
         var exist = state.datasimpanan.some(simpanan => {
           return simpanan.id == item.id;
         });
-        //assume the data/item is doesnt exist
         if (!exist) {
           state.datasimpanan.push(item);
         }
-        //pagination
-        page
-          ? (state.simpanan.current_page = state.simpanan.current_page++)
-          : null;
         break;
       case RDEPOSITO:
         var exist = state.datadeposito.some(deposito => {
           return deposito.id == item.id;
         });
-        //assume the data/item is doesnt exist
         if (!exist) {
           state.datadeposito.push(item);
         }
-        page
-          ? (state.deposito.current_page = state.deposito.current_page)
-          : null;
         break;
     }
   },

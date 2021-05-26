@@ -20,6 +20,7 @@ export const ACTION_DELETE_DATA_SYSTEM = `system/${DELETE_DATA_SYSTEM}`;
 const ADD_DATA_SYSTEM = "MADDDATASYSTEM";
 const EDIT_DATA_SYSTEM = "MPUTDATASYSTEM";
 const REMOVE_DATA_SYSTEM = "MDDATASYSTEM";
+const INCREMENT_PAGE = `INCREMENT`;
 export const MUTATION_ADD_DATA_SYSTEM = `system/${ADD_DATA_SYSTEM}`;
 export const MUTATION_PUT_DATA_SYSTEM = `system/${EDIT_DATA_SYSTEM}`;
 export const MUTATION_DELETE_DATA_SYSTEM = `system/${REMOVE_DATA_SYSTEM}`;
@@ -200,14 +201,27 @@ const actions = {
   }
 };
 const mutations = {
+  [INCREMENT_PAGE](state, { type }) {
+    switch (type) {
+      case SUSER:
+        state.user.current_page++;
+        break;
+      case SROLE:
+        state.role.current_page++;
+        break;
+      case SGROUP:
+        state.group.current_page++;
+        break;
+    }
+  },
   /***
    * Add data
    * @param {systemtype,data}
    * @return data user add one by one
    * @todo if exist and data change sholud update
    */
-  [ADD_DATA_SYSTEM](state, { systemtype, data, page }) {
-    switch (systemtype) {
+  [ADD_DATA_SYSTEM](state, { type, data, page }) {
+    switch (type) {
       case SUSER:
         var exist = state.datausers.some(user => {
           return user.id == data.id;
@@ -215,7 +229,6 @@ const mutations = {
         if (!exist) {
           state.datausers.push(data);
         }
-        page ? state.user.current_page++ : null;
         break;
       case SROLE:
         var exist = state.dataroles.some(role => {
@@ -224,7 +237,6 @@ const mutations = {
         if (!exist) {
           state.dataroles.push(data);
         }
-        page ? state.role.current_page++ : null;
         break;
       case SGROUP:
         var exist = state.datagroups.some(group => {
@@ -233,7 +245,6 @@ const mutations = {
         if (!exist) {
           state.datagroups.push(data);
         }
-        page ? state.group.current_page++ : null;
         break;
     }
   },

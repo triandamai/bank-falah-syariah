@@ -20,6 +20,7 @@ export const ACTION_DELETE_DATA_MASTER = `master/${DELETEDATAMASTER}`;
 const ADDDATAMASTER = `ADDDATAMASTER`;
 const EDITDATAMASTER = `EDITDATAMASTER`;
 const REMOVEDATAMASTER = `REMOVEDATAMASTER`;
+const INCREMENT_PAGE = `INCREMENT`;
 
 export const MUTATION_ADD_DATA_MASTER = `master/${ADDDATAMASTER}`;
 export const MUTATION_PUT_DATA_MASTER = `master/${EDITDATAMASTER}`;
@@ -97,6 +98,7 @@ const actions = {
               resolve(false);
               stillPaging = false;
             } else {
+              commit(INCREMENT_PAGE, { type: type });
               resolve(true);
               stillPaging = true;
             }
@@ -221,6 +223,25 @@ const mutations = {
    * @param {type,data,page}
    * @returns data will be add one -by one
    */
+  [INCREMENT_PAGE](state, { type }) {
+    switch (type) {
+      case MAKAD:
+        state.akad.current_page++;
+        break;
+      case MJABATAN:
+        state.jabatan.current_page++;
+        break;
+      case MJENISTRANSAKSI:
+        state.jenistransaksi.current_page++;
+        break;
+      case MPEGAWAI:
+        state.pegawai.current_page++;
+        break;
+      case MPRODUK:
+        state.produk.current_page++;
+        break;
+    }
+  },
   [ADDDATAMASTER](state, { type, data, page }) {
     switch (type) {
       case MAKAD:
@@ -230,7 +251,7 @@ const mutations = {
         if (!exist) {
           state.dataakad.push(data);
         }
-        page ? state.akad.current_page++ : null;
+
         break;
       case MJABATAN:
         var exist = state.datajabatan.some(jabatan => {
@@ -239,7 +260,7 @@ const mutations = {
         if (!exist) {
           state.datajabatan.push(data);
         }
-        page ? state.jabatan.current_page++ : null;
+
         break;
       case MJENISTRANSAKSI:
         // console.log(data);
@@ -249,7 +270,6 @@ const mutations = {
         if (!exist) {
           state.datajenistransaksi.push(data);
         }
-        page ? state.jenistransaksi.current_page++ : null;
         break;
       case MPEGAWAI:
         var exist = state.datapegawai.some(pegawai => {
@@ -258,7 +278,6 @@ const mutations = {
         if (!exist) {
           state.datapegawai.push(data);
         }
-        page ? state.pegawai.current_page++ : null;
         break;
       case MPRODUK:
         var exist = state.dataproduk.some(produk => {
@@ -267,7 +286,6 @@ const mutations = {
         if (!exist) {
           state.dataproduk.push(data);
         }
-        page ? state.produk.current_page++ : null;
         break;
     }
   },

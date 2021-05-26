@@ -23,6 +23,7 @@ const SET_ERROR = "setError";
 const ADD_NASABAH = "tambahnasabah";
 const EDIT_NASABAH = "editnasabah";
 const REMOVE_NASABAH = "deletenasabah";
+const INCREMENT_PAGE = `INCREMENT`;
 
 export const MUTATION_SET_ERROR = `nasabah/${SET_ERROR}`;
 export const MUTATION_ADD_NASABAH = `nasabah/${ADD_NASABAH}`;
@@ -56,6 +57,7 @@ const actions = {
               //jangan ambil data lagi
               resolve(false);
             } else {
+              commit(INCREMENT_PAGE);
               resolve(true);
             }
             data.data.map(item => {
@@ -167,6 +169,9 @@ const actions = {
 const mutations = {
   [SET_ERROR](state, data) {
     state.errors = data;
+  },
+  [INCREMENT_PAGE]({ currentpage }) {
+    currentpage++;
   },
   [ADD_NASABAH](state, data) {
     var exsts = state.datanasabah.some(nasabah => {
