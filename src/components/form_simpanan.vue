@@ -64,12 +64,14 @@
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12">
-                <v-text-field
+                <v-autocomplete
                   v-model="form.pegawai_id"
                   label="Pegawai *"
+                  :items="itemspegawai"
+                  item-text="fullname"
+                  item-value="id"
                   required
-                  disabled
-                ></v-text-field>
+                />
               </v-col>
             </v-row>
           </v-container>
@@ -92,6 +94,12 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import {
+  ACTION_GET_DATA_MASTER,
+  ACTION_GET_NASABAH,
+  MPEGAWAI,
+  MPRODUK,
+} from "@/store/index";
 export default {
   props: ["show", "body"],
   data: () => {
@@ -110,6 +118,7 @@ export default {
     ...mapState({
       itemsproduk: (state) => state.master.dataproduk,
       itemsnasabah: (state) => state.nasabah.datanasabah,
+      itemspegawai: (state) => state.master.datapegawai,
     }),
   },
   watch: {
@@ -117,9 +126,33 @@ export default {
       this.form = newVal;
     },
   },
+  created() {
+    this.getNasabah();
+    this.getProduk();
+    this.getProduk();
+  },
   methods: {
     submit() {
       this.$emit("submit", this.form);
+    },
+    getNasabah() {
+      this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
+        if (isNext) return this.getNasabah();
+      });
+    },
+    getProduk() {
+      this.$store
+        .dispatch(ACTION_GET_DATA_MASTER, { type: MPRODUK })
+        .then((isNext) => {
+          if (isNext) return this.getProduk();
+        });
+    },
+    getPegawai() {
+      this.$store
+        .dispatch(ACTION_GET_DATA_MASTER, { type: MPEGAWAI })
+        .then((isNext) => {
+          if (isNext) return this.getPegawai();
+        });
     },
   },
 };

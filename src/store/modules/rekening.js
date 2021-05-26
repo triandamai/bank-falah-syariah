@@ -129,13 +129,13 @@ const actions = {
               item: data.data[0],
               page: false
             });
-            resolve(true);
+            resolve({ success: true, message: "Berhasil" });
           } else {
-            resolve(false);
+            resolve({ success: false, message: "Gagal" });
           }
         })
         .catch(e => {
-          resolve(false);
+          resolve({ success: true, message: e });
         });
     });
   },
@@ -153,12 +153,13 @@ const actions = {
               data: data.data[0],
               olddata: body
             });
+            resolve({ success: true, message: "Berhasil" });
           } else {
-            resolve(false);
+            resolve({ success: false, message: "Berhasil" });
           }
         })
         .catch(e => {
-          resolve(false);
+          resolve({ success: true, message: "Berhasil" });
         });
     });
   },
@@ -175,12 +176,13 @@ const actions = {
               type: type,
               data: body
             });
+            resolve({ success: true, message: "Berhasil" });
           } else {
-            resolve(false);
+            resolve({ success: false, message: "Berhasil" });
           }
         })
         .catch(e => {
-          resolve(false);
+          resolve({ success: true, message: "Berhasil" });
         });
     });
   }

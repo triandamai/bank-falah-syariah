@@ -66,7 +66,7 @@ export default {
     getData() {
       this.$store
         .dispatch(ACTION_GET_DATA_REKENING, {
-          mastertype: RSIMPANAN,
+          type: RSIMPANAN,
         })
         .then((isNext) => {
           if (isNext) {
