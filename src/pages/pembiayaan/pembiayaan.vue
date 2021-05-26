@@ -13,14 +13,25 @@
               >
             </div>
             <div class="card-body">
-              <data-table :items="items" :headers="headers" @add="onAdd" />
+              <data-table
+                :items="items"
+                :headers="headers"
+                @add="onAdd"
+                @edit="onEdit"
+                @delete="onDelete"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-pembiayaan :show="formpembiayaan" @close="formpembiayaan = false" />
+    <form-pembiayaan
+      :show="formpembiayaan"
+      :body="body"
+      @close="formpembiayaan = false"
+      @submit="onSubmit"
+    />
   </div>
 </template>
 
@@ -39,6 +50,7 @@ export default {
     return {
       formpembiayaan: false,
       headers: header,
+      body: {},
     };
   },
   computed: {

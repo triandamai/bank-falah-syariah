@@ -20,11 +20,15 @@
         "value": "pegawai_id"
     },
     {
-        "text": "Nila",
-        "value": "nilao_deposito"
+        "text": "Nilai",
+        "value": "modal"
     },
     {
         "text": "Lama Angsuran",
-        "value": "id"
+        "value": "lama_angsuran"
+    },
+    {
+        "text": "Aksi",
+        "value": "action"
     }
 ]
