@@ -26,6 +26,15 @@
             <v-row>
               <v-col cols="12" sm="12" md="6" class="my-2">
                 <v-text-field
+                  v-model="form.kode_nasabah"
+                  label="Kode Nasabah"
+                  placeholder="kode Nasabah"
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="12" md="6" class="my-2">
+                <v-text-field
                   v-model="form.nama_lengkap"
                   label="Nama Lengkap"
                   placeholder="Nama Lengkap"
