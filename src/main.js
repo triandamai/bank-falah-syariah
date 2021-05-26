@@ -41,6 +41,10 @@ import FormMenu from "@/components/form_menu.vue";
 import FormRole from "@/components/form_role.vue";
 import FormJabatan from "@/components/form_jabatan.vue";
 import FormPegawai from "@/components/form_pegawai.vue";
+import FormTransaksiSimpananTunai from "@/components/form_transaksi_simpanan_tunai.vue";
+import FormTransaksiSimpananNonTunai from "@/components/form_transaksi_simpanan_nontunai.vue";
+import FormTransaksiPembiayaanTunai from "@/components/form_transaksi_pembiayaan_tunai.vue";
+import FormTransaksiPembiayaanNonTunai from "@/components/form_transaksi_pembiayaan_nontunai.vue";
 
 import PxCard from "@/components/Pxcard.vue";
 import { Icon } from "leaflet";
@@ -68,6 +72,16 @@ Vue.component("form-menu", FormMenu);
 Vue.component("form-role", FormRole);
 Vue.component("form-jabatan", FormJabatan);
 Vue.component("form-pegawai", FormPegawai);
+Vue.component("form-transaksi-simpanan-tunai", FormTransaksiSimpananTunai);
+Vue.component(
+  "form-transaksi-simpanan-nontunai",
+  FormTransaksiSimpananNonTunai
+);
+Vue.component("form-transaksi-pembiayaan-tunai", FormTransaksiPembiayaanTunai);
+Vue.component(
+  "form-transaksi-pembiayaan-nontunai",
+  FormTransaksiPembiayaanNonTunai
+);
 
 Vue.component("Breadcrumbs", Breadcrumbs);
 
