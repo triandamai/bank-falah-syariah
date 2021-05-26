@@ -30,11 +30,11 @@
 </template>
 
 <script>
-import header from "../../data/headernasabah.json";
+import header from "@/data/headernasabah.json";
 import {
   ACTION_GET_NASABAH,
   ACTION_DELETE_NASABAH,
-} from "../../store/modules/nasabah";
+} from "@/store/modules/nasabah";
 import { mapState } from "vuex";
 export default {
   data: () => {

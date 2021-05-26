@@ -22,9 +22,26 @@
 </template>
 
 <script>
+import { ACTION_PUT_NASABAH } from "@/store/modules/nasabah";
 export default {
   methods: {
-    onSubmit(data) {},
+    onSubmit(data) {
+      this.$store
+        .dispatch(ACTION_PUT_NASABAH, data)
+        .then(({ success, message }) => {
+          this.$toasted.show(
+            success
+              ? this.$t("Success Message", { context: `${message}` })
+              : this.$t("Failed Message", { context: `${message}` }),
+            {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            }
+          );
+        });
+    },
   },
 };
 </script>

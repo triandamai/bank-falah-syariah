@@ -4,18 +4,21 @@
       <v-stepper v-model="step" non-linear class="elevation-0">
         <v-stepper-header class="elevation-0">
           <v-stepper-step :complete="step > 1" step="1">
-            Identitas
+            Data Umum
           </v-stepper-step>
 
           <v-divider></v-divider>
 
           <v-stepper-step :complete="step > 2" step="2">
-            Domisili
+            Data Alamat
           </v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step step="3"> Data pendukung </v-stepper-step>
+          <v-stepper-step :complete="step > 3" step="3">
+            Data Pekerjaan
+          </v-stepper-step>
+          <v-divider></v-divider>
         </v-stepper-header>
 
         <v-stepper-items>
@@ -52,6 +55,72 @@
                   outlined
                 ></v-select>
               </v-col>
+              <v-col class="d-flex" cols="12" sm="12">
+                <v-select
+                  :items="jenis_identitas"
+                  v-model="form.jenis_identitas_id"
+                  item-text="label"
+                  item-value="value"
+                  label="Jenis Identitas"
+                  auto-select-first
+                  dense
+                  outlined
+                />
+              </v-col>
+              <v-col class="d-flex" cols="12" sm="12">
+                <v-select
+                  :items="agama"
+                  v-model="form.agama_id"
+                  item-text="label"
+                  item-value="value"
+                  label="Agama"
+                  auto-select-first
+                  dense
+                  outlined
+                />
+              </v-col>
+              <v-col class="d-flex" cols="12" sm="12">
+                <v-select
+                  :items="pendidikan"
+                  v-model="form.pendidikan_id"
+                  item-text="label"
+                  item-value="value"
+                  label="Pendidikan"
+                  auto-select-first
+                  dense
+                  outlined
+                />
+              </v-col>
+              <v-col class="d-flex" cols="12" sm="12">
+                <v-select
+                  :items="status_martial"
+                  v-model="form.status_martial_id"
+                  item-text="label"
+                  item-value="value"
+                  label="Status Martial"
+                  auto-select-first
+                  dense
+                  outlined
+                />
+              </v-col>
+              <v-col cols="12" sm="12" md="12" class="my-2">
+                <v-text-field
+                  v-model="form.nama_ibu_kandung"
+                  label="Nama Ibu Kandung"
+                  placeholder="Nama Ibu Kandung"
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="12" md="12" class="my-2">
+                <v-text-field
+                  v-model="form.no_identitas"
+                  label="Nomor Identitas"
+                  placeholder="Nomor Identitas"
+                  outlined
+                  dense
+                ></v-text-field>
+              </v-col>
               <v-col cols="12" sm="12" md="12">
                 <v-menu
                   ref="datepicker"
@@ -83,7 +152,7 @@
               </v-col>
             </v-row>
             <v-btn @click="step = 2" outlined small> Selanjutnya </v-btn>
-            <v-btn @click="goBack" text> Kembali </v-btn>
+            <v-btn @click="goBack" text> Sebelumnya </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="2">
@@ -92,36 +161,51 @@
                 <v-autocomplete
                   label="Provinsi *"
                   :items="provinsi"
-                  item-text="nama_lengkap"
+                  item-text="provNama"
+                  @change="provinsiChange"
+                  auto-select-first
+                  return-object
                   outlined
                   required
+                  small
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12" md="6" lg="6" sm="12">
                 <v-autocomplete
                   label="Kabupaten *"
                   :items="kabupaten"
-                  item-text="nama_lengkap"
+                  item-text="kabNama"
+                  @change="kabupatenChange"
+                  auto-select-first
+                  return-object
                   outlined
                   required
+                  small
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12" md="6" lg="6" sm="12">
                 <v-autocomplete
                   label="Kecamatan *"
                   :items="kecamatan"
-                  item-text="nama_lengkap"
+                  item-text="kecNama"
+                  @change="kecamatanChange"
+                  auto-select-first
+                  return-object
                   outlined
                   required
+                  small
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12" md="6" lg="6" sm="12">
                 <v-autocomplete
                   label="Desa *"
                   :items="desa"
-                  item-text="nama_lengkap"
+                  item-text="desNama"
+                  auto-select-first
+                  return-object
                   outlined
                   required
+                  small
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12" sm="12" class="my-2">
@@ -131,24 +215,91 @@
                   placeholder="Alamat Lengkap"
                   outlined
                   dense
-                ></v-text-field> </v-col
+                />
+              </v-col>
+              <v-col cols="12" sm="12" class="my-2">
+                <v-text-field
+                  v-model="form.tlpkantor"
+                  label="Telp Kantor"
+                  placeholder="No Telpon Kantor"
+                  outlined
+                  dense
+                />
+              </v-col>
+              <v-col cols="12" sm="12" class="my-2">
+                <v-text-field
+                  v-model="form.no_hp"
+                  label="Hp"
+                  placeholder="No Handphone"
+                  outlined
+                  dense
+                />
+              </v-col>
+              <v-col cols="12" sm="12" class="my-2">
+                <v-text-field
+                  v-model="form.email"
+                  label="Email"
+                  placeholder="Email"
+                  outlined
+                  dense
+                /> </v-col
             ></v-row>
             <v-btn @click="step = 3" outlined small> Selanjutnya </v-btn>
 
-            <v-btn @click="goBack" text> Kembali </v-btn>
+            <v-btn @click="goBack" text> Sebelumnya </v-btn>
           </v-stepper-content>
 
           <v-stepper-content step="3">
             <v-row>
+              <v-col class="d-flex" cols="12" sm="12">
+                <v-select
+                  :items="jenis_pekerjaan"
+                  v-model="form.jenis_pekerjaan_id"
+                  item-text="label"
+                  item-value="value"
+                  label="Pekerjaan"
+                  auto-select-first
+                  dense
+                  outlined
+                />
+              </v-col>
               <v-col cols="12" sm="12" class="my-2">
                 <v-text-field
-                  v-model="form.no_hp"
-                  label="Telp"
-                  placeholder="Nomor Telpon"
+                  v-model="form.nama_perusahaan"
+                  label="Nama Perusahaan"
+                  placeholder="Nama Perusahaan"
                   outlined
                   dense
-                ></v-text-field> </v-col
-            ></v-row>
+                />
+              </v-col>
+              <v-col cols="12" sm="12" class="my-2">
+                <v-text-field
+                  v-model="form.nama_atasan"
+                  label="Nama Atasan"
+                  placeholder="Nama Atasan"
+                  outlined
+                  dense
+                />
+              </v-col>
+              <v-col cols="12" sm="12" class="my-2">
+                <v-text-field
+                  v-model="form.penghasilan_perbulan"
+                  label="Penghasilan Perbulan"
+                  placeholder="Penghasilan Perbulan"
+                  outlined
+                  dense
+                />
+              </v-col>
+              <v-col cols="12" sm="12" class="my-2">
+                <v-text-field
+                  v-model="form.penghasilan_pertahun"
+                  label="Penghasilan Pertahun"
+                  placeholder="Penghasilan Pertahun"
+                  outlined
+                  dense
+                />
+              </v-col>
+            </v-row>
             <v-btn @click="onSubmit" outlined small> Simpan </v-btn>
 
             <v-btn @click="goBack" text> Sebelumnya </v-btn>
@@ -180,10 +331,49 @@ export default {
         { label: "Laki-Laki", value: "L" },
         { label: "Perempuan", value: "P" },
       ],
+      jenis_identitas: [
+        { label: "KTP", value: 1 },
+        { label: "SIM", value: 2 },
+        { label: "PASSPORT", value: 3 },
+      ],
+      agama: [
+        { label: "Islam", value: 1 },
+        { label: "Kristen Katolik", value: 2 },
+        { label: "Kristen Protestan", value: 3 },
+        { label: "Hindu", value: 4 },
+        { label: "Budha", value: 5 },
+        { label: "Konghucu", value: 6 },
+      ],
+      pendidikan: [
+        { label: "SD", value: 1 },
+        { label: "SLTP/SMP/Sederajat", value: 2 },
+        { label: "SLTA/SMA/SMK/Sederajat", value: 3 },
+        { label: "Diploma", value: 4 },
+        { label: "S1", value: 5 },
+        { label: "S2", value: 6 },
+        { label: "S3", value: 7 },
+        { label: "Lainnya", value: 8 },
+      ],
+      status_martial: [
+        { label: "Lajang", value: 1 },
+        { label: "Menikah", value: 2 },
+        { label: "Janda/Duda", value: 3 },
+      ],
+      jenis_pekerjaan: [
+        { label: "Pegawai Negeri(Guru)", value: 1 },
+        { label: "Pegawai Negeri(Non Guru)", value: 2 },
+        { label: "TNI/POLRI", value: 3 },
+        { label: "Karyawan Swasta", value: 4 },
+        { label: "Petani", value: 5 },
+        { label: "Nelayan", value: 6 },
+        { label: "Peternak", value: 7 },
+        { label: "Pengrajin", value: 8 },
+        { label: "Pedagang", value: 9 },
+        { label: "Pekerjaan Lainnya", value: 10 },
+      ],
       datepicker: false,
       tanggal_lahir: "",
       form: {
-        kode_nasabah: "4",
         nama_lengkap: "",
         nama_panggilan: "",
         jenis_kelamin: "",
@@ -236,11 +426,15 @@ export default {
           }
         });
     },
+    provinsiChange(data) {
+      this.getKabupaten(data.provIdProvinsi);
+    },
     getKabupaten(query) {
+      console.log(query);
       this.$store
         .dispatch(ACTION_GET_WILAYAH, {
           type: WKABUPATEN,
-          query: `provinsi_id=${query}`,
+          query: query,
         })
         .then((res) => {
           if (res) {
@@ -248,21 +442,29 @@ export default {
           }
         });
     },
-    getkecamatan() {
+    kabupatenChange(data) {
+      this.getKecamatan(data.kabIdKabupaten);
+    },
+    getKecamatan(query) {
       this.$store
-        .dispatch(ACTION_GET_WILAYAH, { type: WKECAMATAN })
+        .dispatch(ACTION_GET_WILAYAH, { type: WKECAMATAN, query: query })
         .then((res) => {
           if (res) {
-            this.getkecamatan();
+            this.getKecamatan();
           }
         });
     },
-    getDesa() {
-      this.$store.dispatch(ACTION_GET_WILAYAH, { type: WDESA }).then((res) => {
-        if (res) {
-          this.getDesa();
-        }
-      });
+    kecamatanChange(data) {
+      this.getDesa(data.kecIdKecamatan);
+    },
+    getDesa(query) {
+      this.$store
+        .dispatch(ACTION_GET_WILAYAH, { type: WDESA, query: query })
+        .then((res) => {
+          if (res) {
+            this.getDesa();
+          }
+        });
     },
     save(date) {
       this.$refs.datepicker.save(date);
