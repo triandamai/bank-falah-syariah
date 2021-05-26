@@ -338,7 +338,7 @@ const mutations = {
         var index = state.datapegawai
           .map(pegawai => pegawai.id)
           .indexOf(data.id);
-        state.dataproduk.splice(index);
+        state.datapegawai.splice(index);
         break;
       case MPRODUK:
         var index = state.dataproduk.map(produk => produk.id).indexOf(data.id);

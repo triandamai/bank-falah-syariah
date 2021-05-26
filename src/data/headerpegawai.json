@@ -4,13 +4,17 @@
         "value": "id"
     },
     {
-        "text": "Nama Role",
+        "text": "Nama Lengkap",
         "sortable": true,
-        "value": "name"
+        "value": "fullname"
     },
     {
-        "text": "Deskripsi",
-        "value": "description"
+        "text": "Jabatan",
+        "value": "jabatan_id"
+    },
+    {
+        "text": "Tempat Lahir",
+        "value": "tempat_lahir"
     },
     {
         "text": "Aktivitas",
