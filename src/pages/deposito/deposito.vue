@@ -13,7 +13,13 @@
               >
             </div>
             <div class="card-body">
-              <data-table :items="items" :headers="headers" @add="onAdd" />
+              <data-table
+                :items="items"
+                :headers="headers"
+                @add="onAdd"
+                @edit="onEdit"
+                @delete="onDelete"
+              />
             </div>
           </div>
         </div>
@@ -22,6 +28,7 @@
     <!-- Container-fluid Ends-->
     <form-deposito
       :show="formdeposito"
+      :body="body"
       @close="formdeposito = false"
       @submit="onSubmit"
     />

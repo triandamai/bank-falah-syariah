@@ -98,12 +98,14 @@
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12">
-                <v-text-field
-                  v-model="nama_lengkap"
+                <v-autocomplete
+                  v-model="form.pegawai_id"
                   label="Pegawai *"
+                  :items="itemspegawai"
+                  item-text="fullname"
+                  item-value="id"
                   required
-                  disabled
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12">
                 <v-text-field
@@ -160,12 +162,13 @@ export default {
   beforeMount() {
     this.getNasabah();
     this.getProduk();
-    this.initPegawai();
+    this.getPegawai();
   },
   computed: {
     ...mapState({
       itemsproduk: (state) => state.master.dataproduk,
       itemsnasabah: (state) => state.nasabah.datanasabah,
+      itemspegawai: (state) => state.master.datapegawai,
     }),
   },
   watch: {
@@ -174,13 +177,11 @@ export default {
     },
   },
   methods: {
-    initPegawai() {
-      const { id, username } = getUser();
-      this.form.pegawai_id = id;
-      this.nama_lengkap = username;
+    submit() {
+      this.$emit("submit", this.form);
     },
     getNasabah() {
-      this.$store.dispatch(ACTION_GET_NASABAH, {}).then((isNext) => {
+      this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
         if (isNext) return this.getNasabah();
       });
     },
@@ -191,8 +192,12 @@ export default {
           if (isNext) return this.getProduk();
         });
     },
-    submit() {
-      this.$emit("submit", this.form);
+    getPegawai() {
+      this.$store
+        .dispatch(ACTION_GET_DATA_MASTER, { type: MPEGAWAI })
+        .then((isNext) => {
+          if (isNext) return this.getPegawai();
+        });
     },
   },
 };
