@@ -138,9 +138,9 @@ import { mapState } from "vuex";
 import {
   ACTION_GET_DATA_MASTER,
   MPRODUK,
+  MPEGAWAI,
   ACTION_GET_NASABAH,
 } from "@/store/index";
-import { getUser } from "@/services/jwt.service";
 export default {
   props: ["show", "body"],
   data: () => {
