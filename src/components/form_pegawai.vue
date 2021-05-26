@@ -38,7 +38,7 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.temat_lahir"
+                  v-model="form.tempat_lahir"
                   label="Tempat Lahir*"
                   required
                 ></v-text-field>
