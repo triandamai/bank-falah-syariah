@@ -150,7 +150,7 @@ const actions = {
    */
   [DELETE_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
-      ApiService.post(`nasbaah/${body.id}`)
+      ApiService.post(`nasbaah/${body.id}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(REMOVE_NASABAH, body);

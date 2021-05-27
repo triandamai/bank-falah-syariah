@@ -19,7 +19,7 @@ const ApiService = {
    *
    */
   setHeader() {
-    Vue.axios.defaults.baseURL = "http://192.168.100.4:8000"; //"http://localhost:8000";
+    Vue.axios.defaults.baseURL = "https://bfsservice.bakaranproject.com"; //"http://192.168.100.4:8000"; //"http://localhost:8000";
     Vue.axios.defaults.headers.common[
       "Authorization"
     ] = `Bearer ${JwtService.getToken()}`;

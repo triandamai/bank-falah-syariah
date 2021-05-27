@@ -12,7 +12,7 @@
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
             </div>
-            <form-nasabah :isEdit="false" @submit="onSubmit" />
+            <form-nasabah :isEdit="false" @submit="onSubmit" :body="{}" />
           </div>
         </div>
       </div>
