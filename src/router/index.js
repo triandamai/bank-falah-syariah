@@ -4,8 +4,8 @@
  */
 import Vue from "vue";
 import Router from "vue-router";
-import ApiService from "../services/api.service";
-import { getUser } from "../services/jwt.service";
+import ApiService from "@/services/api.service";
+import { getUser } from "@/services/jwt.service";
 
 // component
 
@@ -43,7 +43,7 @@ const routes = [
       {
         path: "dashboard",
         name: "dashboard",
-        component: () => import("../pages/dashboard/dashboard.vue"),
+        component: () => import("@/pages/dashboard/dashboard.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -53,7 +53,7 @@ const routes = [
       {
         path: "nasabah",
         name: "nasabah",
-        component: () => import("../pages/nasabah/nasabah.vue"),
+        component: () => import("@/pages/nasabah/nasabah.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -62,7 +62,7 @@ const routes = [
       {
         path: "nasabah/add",
         name: "addnasabah",
-        component: () => import("../pages/nasabah/addnasabah.vue"),
+        component: () => import("@/pages/nasabah/addnasabah.vue"),
         meta: {
           title: "Nasabah | Add",
           reqiresAuth: true
@@ -71,7 +71,7 @@ const routes = [
       {
         path: "nasabah/edit/:id",
         name: "editnasabah",
-        component: () => import("../pages/nasabah/editnasabah.vue"),
+        component: () => import("@/pages/nasabah/editnasabah.vue"),
         meta: {
           title: "Nasabah | Add",
           reqiresAuth: true
@@ -84,7 +84,7 @@ const routes = [
       {
         path: "laporan-teller",
         name: "laporan-teller",
-        component: () => import("../pages/laporan-teller/laporan-teller.vue"),
+        component: () => import("@/pages/laporan-teller/laporan-teller.vue"),
         meta: {
           title: "Laporan | Teller",
           reqiresAuth: true
@@ -98,7 +98,7 @@ const routes = [
         path: "transaksi-simpanan",
         name: "transaksi-simpanan",
         component: () =>
-          import("../pages/transaksi-simpanan/transaksi-simpanan.vue"),
+          import("@/pages/transaksi-simpanan/transaksi-simpanan.vue"),
         meta: {
           title: "Laporan | Teller",
           reqiresAuth: true
@@ -108,7 +108,7 @@ const routes = [
         path: "transaksi-pembiayaan",
         name: "transaksi-pembiayaan",
         component: () =>
-          import("../pages/transaksi-pembiayaan/transaksi-pembiayaan.vue"),
+          import("@/pages/transaksi-pembiayaan/transaksi-pembiayaan.vue"),
         meta: {
           title: "Laporan | Teller",
           reqiresAuth: true
@@ -118,7 +118,7 @@ const routes = [
       {
         path: "akad",
         name: "akad",
-        component: () => import("../pages/akad/akad.vue"),
+        component: () => import("@/pages/akad/akad.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -128,7 +128,7 @@ const routes = [
       {
         path: "jenistransaksi",
         name: "jenistransaksi",
-        component: () => import("../pages/jenistransaksi/jenistransaksi.vue"),
+        component: () => import("@/pages/jenistransaksi/jenistransaksi.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -138,7 +138,7 @@ const routes = [
       {
         path: "produk",
         name: "produk",
-        component: () => import("../pages/produk/produk.vue"),
+        component: () => import("@/pages/produk/produk.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -148,7 +148,7 @@ const routes = [
       {
         path: "jabatan",
         name: "jabatan",
-        component: () => import("../pages/jabatan/jabatan.vue"),
+        component: () => import("@/pages/jabatan/jabatan.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -158,7 +158,7 @@ const routes = [
       {
         path: "pegawai",
         name: "pegawai",
-        component: () => import("../pages/pegawai/pegawai.vue"),
+        component: () => import("@/pages/pegawai/pegawai.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -168,7 +168,7 @@ const routes = [
       {
         path: "deposito",
         name: "deposito",
-        component: () => import("../pages/deposito/deposito.vue"),
+        component: () => import("@/pages/deposito/deposito.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -178,7 +178,7 @@ const routes = [
       {
         path: "pembiayaan",
         name: "pembiayaan",
-        component: () => import("../pages/pembiayaan/pembiayaan.vue"),
+        component: () => import("@/pages/pembiayaan/pembiayaan.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -188,7 +188,7 @@ const routes = [
       {
         path: "simpanan",
         name: "simpanan",
-        component: () => import("../pages/simpanan/simpanan.vue"),
+        component: () => import("@/pages/simpanan/simpanan.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -198,7 +198,7 @@ const routes = [
       {
         path: "user",
         name: "user",
-        component: () => import("../pages/user/user.vue"),
+        component: () => import("@/pages/user/user.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -209,7 +209,7 @@ const routes = [
       {
         path: "group",
         name: "group",
-        component: () => import("../pages/group/group.vue"),
+        component: () => import("@/pages/group/group.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -219,7 +219,7 @@ const routes = [
       {
         path: "menu",
         name: "menu",
-        component: () => import("../pages/menu/menu.vue"),
+        component: () => import("@/pages/menu/menu.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -229,7 +229,7 @@ const routes = [
       {
         path: "role",
         name: "role",
-        component: () => import("../pages/role/role.vue"),
+        component: () => import("@/pages/role/role.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
           reqiresAuth: true
@@ -240,7 +240,7 @@ const routes = [
   {
     path: "/login",
     name: "login",
-    component: () => import("../pages/auth/login.vue")
+    component: () => import("@/pages/auth/login.vue")
   }
 ];
 

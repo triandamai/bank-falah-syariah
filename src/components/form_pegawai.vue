@@ -13,39 +13,35 @@
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.username"
-                  label="Username*"
+                  v-model="form.nip"
+                  label="Nip*"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.email"
-                  type="email"
-                  label="Email*"
+                  v-model="form.fullname"
+                  label="Nama Lengkap*"
                   required
                 ></v-text-field>
               </v-col>
 
               <v-col cols="12">
                 <v-autocomplete
-                  v-model="form.role_id"
-                  :items="itemsrole"
+                  v-model="form.jabatan_id"
+                  :items="itemsjabatan"
                   item-value="id"
-                  item-text="name"
-                  label="Role*"
+                  item-text="nama_jabatan"
+                  label="Jabatan*"
                   required
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12">
-                <v-autocomplete
-                  v-model="form.group_id"
-                  :items="itemsgroup"
-                  item-value="id"
-                  item-text="name"
-                  label="Group*"
+                <v-text-field
+                  v-model="form.tempat_lahir"
+                  label="Tempat Lahir*"
                   required
-                ></v-autocomplete>
+                ></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -67,24 +63,18 @@
   </v-dialog>
 </template>
 <script>
+import { ACTION_GET_DATA_MASTER, MJABATAN } from "@/store";
 import { mapState } from "vuex";
 export default {
   props: ["show", "body"],
   data: () => {
     return {
-      form: {
-        username: "",
-        email: "",
-        role_id: "",
-        group_id: "",
-        active: 1,
-      },
+      form: {},
     };
   },
   computed: {
     ...mapState({
-      itemsrole: (state) => state.system.datarole,
-      itemsgroup: (state) => state.system.datagroup,
+      itemsjabatan: (state) => state.master.datajabatan,
     }),
   },
   watch: {
@@ -92,7 +82,17 @@ export default {
       this.form = newVal;
     },
   },
+  beforeMount() {
+    this.getJabatan();
+  },
   methods: {
+    getJabatan() {
+      this.$store
+        .dispatch(ACTION_GET_DATA_MASTER, { type: MJABATAN })
+        .then((isNext) => {
+          if (isNext) return this.getJabatan();
+        });
+    },
     submit() {
       this.$emit("submit", this.form);
     },

@@ -98,12 +98,14 @@
                 ></v-autocomplete>
               </v-col>
               <v-col cols="12">
-                <v-text-field
+                <v-autocomplete
                   v-model="form.pegawai_id"
                   label="Pegawai *"
+                  :items="itemspegawai"
+                  item-text="fullname"
+                  item-value="id"
                   required
-                  disabled
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12">
                 <v-text-field
@@ -133,6 +135,12 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import {
+  ACTION_GET_DATA_MASTER,
+  MPRODUK,
+  MPEGAWAI,
+  ACTION_GET_NASABAH,
+} from "@/store/index";
 export default {
   props: ["show", "body"],
   data: () => {
@@ -140,6 +148,7 @@ export default {
       dialogakad: false,
       modal_tgl_buka: false,
       modal_tgl_jatuh_tempo: false,
+      nama_lengkap: "",
       form: {
         tgl_buka: "",
         tgl_jatuh_tempo: "",
@@ -150,10 +159,16 @@ export default {
       },
     };
   },
+  beforeMount() {
+    this.getNasabah();
+    this.getProduk();
+    this.getPegawai();
+  },
   computed: {
     ...mapState({
       itemsproduk: (state) => state.master.dataproduk,
       itemsnasabah: (state) => state.nasabah.datanasabah,
+      itemspegawai: (state) => state.master.datapegawai,
     }),
   },
   watch: {
@@ -164,6 +179,25 @@ export default {
   methods: {
     submit() {
       this.$emit("submit", this.form);
+    },
+    getNasabah() {
+      this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
+        if (isNext) return this.getNasabah();
+      });
+    },
+    getProduk() {
+      this.$store
+        .dispatch(ACTION_GET_DATA_MASTER, { type: MPRODUK })
+        .then((isNext) => {
+          if (isNext) return this.getProduk();
+        });
+    },
+    getPegawai() {
+      this.$store
+        .dispatch(ACTION_GET_DATA_MASTER, { type: MPEGAWAI })
+        .then((isNext) => {
+          if (isNext) return this.getPegawai();
+        });
     },
   },
 };

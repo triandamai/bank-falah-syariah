@@ -5,32 +5,35 @@
  * 28 Jan 2021 - 10:14
  *
  */
-import ApiService from "../../services/api.service";
+import ApiService from "@/services/api.service";
 
 /***
  * dspatch type
  */
-export const ACTION_GET_DATA_REKENING = "GETDATAREKENING";
+const GET_DATA_REKENING = "GETDATAREKENING";
+const POST_DATA_REKENING = "POSTREKENINGDATA";
+const PUT_DATA_REKENING = "PUTDATAREKENING";
+const DELETE_DATA_REKENING = "DELETEDATAREKENING";
+export const ACTION_GET_DATA_REKENING = `rekening/${GET_DATA_REKENING}`;
+export const ACTION_POST_DATA_REKENING = `rekening/${POST_DATA_REKENING}`;
+export const ACTION_PUT_DATA_REKENING = `rekening/${PUT_DATA_REKENING}`;
+export const ACTION_DELETE_DATA_REKENING = `rekening/${DELETE_DATA_REKENING}`;
 
-export const ACTION_POST_DATA_REKENING = "POSTREKENINGDATA";
-
-export const ACTION_PUT_DATA_REKENING = "PUTDATAREKENING";
-
-export const ACTION_DELETE_DATA_REKENING = "DELETEDATAREKENING";
-
-export const MUTATION_ADD_DATA_REKENING = "MADDDATAREKENING";
-
-export const MUTATION_DELETE_DATA_REKENING = "MDELETEDATAREKENING";
-
-export const MUTATION_UPDATE_DATA_REKENING = "MUPDATEREKENING";
+const ADD_DATA_REKENING = "MADDDATAREKENING";
+const EDIT_DATA_REKENING = "MUPDATEREKENING";
+const REMOVE_DATA_REKENING = "MDELETEDATAREKENING";
+const INCREMENt_PAGE = `INCREMENT`;
+export const MUTATION_ADD_DATA_REKENING = `rekening/${ADD_DATA_REKENING}`;
+export const MUTATION_UPDATE_DATA_REKENING = `rekening/${EDIT_DATA_REKENING}`;
+export const MUTATION_DELETE_DATA_REKENING = `rekekning/${REMOVE_DATA_REKENING}`;
 /***
  *
  * type Action
  *
  */
-export const RSIMPANAN = "SIMPANAN";
-export const RDEPOSITO = "DEPOSITO";
-export const RPEMBIAYAAN = "PEMBIAYAAN";
+export const RSIMPANAN = "rekening_simpanan";
+export const RDEPOSITO = "rekening_deposito";
+export const RPEMBIAYAAN = "rekening_pembiayaan";
 
 const state = {
   datadeposito: [],
@@ -56,18 +59,18 @@ const getters = {};
 const actions = {
   /***
    * get all data rekekning deposito/pembiayaansimpanan
-   * @param {rekeningtype,path}
+   * @param {type,path}
    *  @returns data array and after success adding to @global data array
    *
    */
-  [ACTION_GET_DATA_REKENING]({ commit, state }, { rekeningtype, path }) {
+  [GET_DATA_REKENING]({ commit, state }, { type }) {
     return new Promise(resolve => {
       //cek pagination (get current page)
       let page = `?page=`;
       //for mutation the pagination going forward or stop
       let stillPaging = false;
 
-      switch (rekeningtype) {
+      switch (type) {
         case RSIMPANAN:
           page += state.simpanan.current_page;
           break;
@@ -80,7 +83,7 @@ const actions = {
       }
 
       //get
-      ApiService.get(`${path}${page}`)
+      ApiService.get(`${type}${page}`)
         .then(({ status, data }) => {
           //success
           if (status == 200 || status == 201) {
@@ -88,12 +91,13 @@ const actions = {
               resolve(false);
               stillPaging = false;
             } else {
+              commit(INCREMENt_PAGE);
               resolve(true);
               stillPaging = true;
             }
             data.data.map(item => {
-              commit(MUTATION_ADD_DATA_REKENING, {
-                rekeningtype: rekeningtype,
+              commit(ADD_DATA_REKENING, {
+                type: type,
                 item: item,
                 page: stillPaging
               });
@@ -112,71 +116,73 @@ const actions = {
 
   /***
    * save data
-   *  @param {rekeningtype,path,body}
+   *  @param {type,body}
    *
    */
-  [ACTION_POST_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
+  [POST_DATA_REKENING]({ commit }, { type, body }) {
     return new Promise(resolve => {
-      ApiService.post(`${path}`, body)
+      ApiService.post(`${type}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_ADD_DATA_REKENING, {
-              rekeningtype: rekeningtype,
+            commit(ADD_DATA_REKENING, {
+              type: type,
               item: data.data[0],
               page: false
             });
-            resolve(true);
+            resolve({ success: true, message: "Berhasil" });
           } else {
-            resolve(false);
+            resolve({ success: false, message: "Gagal" });
           }
         })
         .catch(e => {
-          resolve(false);
+          resolve({ success: true, message: e });
         });
     });
   },
   /***
    * update/edit data
-   * @param {rekeningtype,path,body}
+   * @param {type,body}
    */
-  [ACTION_PUT_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
+  [PUT_DATA_REKENING]({ commit }, { type, body }) {
     return new Promise(resolve => {
-      ApiService.put(`${path}/${body.id}`, body)
+      ApiService.put(`${type}/${body.id}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_UPDATE_DATA_REKENING, {
-              rekeningtype: rekeningtype,
+            commit(EDIT_DATA_REKENING, {
+              type: type,
               data: data.data[0],
               olddata: body
             });
+            resolve({ success: true, message: "Berhasil" });
           } else {
-            resolve(false);
+            resolve({ success: false, message: "Berhasil" });
           }
         })
         .catch(e => {
-          resolve(false);
+          resolve({ success: true, message: "Berhasil" });
         });
     });
   },
   /***
    * delete pembiayaan
-   * @param {rekeningtype,body,path}
+   * @param {type,body}
    */
-  [ACTION_DELETE_DATA_REKENING]({ commit }, { rekeningtype, path, body }) {
+  [DELETE_DATA_REKENING]({ commit }, { type, body }) {
     return new Promise(resolve => {
-      ApiService.delete(`${path}/${body.id}`)
+      ApiService.delete(`${type}/${body.id}`)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_DELETE_DATA_REKENING, {
-              rekeningtype: rekeningtype,
+            commit(REMOVE_DATA_REKENING, {
+              type: type,
               data: body
             });
+            resolve({ success: true, message: "Berhasil" });
           } else {
-            resolve(false);
+            resolve({ success: false, message: "Berhasil" });
           }
         })
         .catch(e => {
-          resolve(false);
+          resolve({ success: true, message: "Berhasil" });
         });
     });
   }
@@ -186,65 +192,64 @@ const actions = {
    */
 };
 const mutations = {
+  [INCREMENt_PAGE](state, { type }) {
+    switch (type) {
+      case RPEMBIAYAAN:
+        state.pembiayaan.current_page++;
+        break;
+      case RSIMPANAN:
+        state.simpanan.current_page++;
+        break;
+      case RDEPOSITO:
+        state.deposito.current_page++;
+        break;
+    }
+  },
   /***
    * Rekening add data dynamicly
-   * {@param rekeningtype
+   * {@param type
    * @param item}
    * @returns each data array will increment smoothly
    */
-  [MUTATION_ADD_DATA_REKENING](state, { rekeningtype, item, page }) {
+  [ADD_DATA_REKENING](state, { type, item, page }) {
     //push data with type rekening assosiated
-    switch (rekeningtype) {
+    switch (type) {
       case RPEMBIAYAAN:
         var exist = state.datapembiayaan.some(pembiayaan => {
           return pembiayaan.id == item.id;
         });
-        //assume the data/item is doesnt exist
         if (!exist) {
           state.datapembiayaan.push(item);
         }
-        //pagination if still other page
-        page
-          ? (state.pembiayaan.current_page = state.pembiayaan.current_page++)
-          : null;
         break;
       case RSIMPANAN:
         var exist = state.datasimpanan.some(simpanan => {
           return simpanan.id == item.id;
         });
-        //assume the data/item is doesnt exist
         if (!exist) {
           state.datasimpanan.push(item);
         }
-        //pagination
-        page
-          ? (state.simpanan.current_page = state.simpanan.current_page++)
-          : null;
         break;
       case RDEPOSITO:
         var exist = state.datadeposito.some(deposito => {
           return deposito.id == item.id;
         });
-        //assume the data/item is doesnt exist
         if (!exist) {
           state.datadeposito.push(item);
         }
-        page
-          ? (state.deposito.current_page = state.deposito.current_page)
-          : null;
         break;
     }
   },
   /***
    * update data
-   * {@param rekeningtype,
+   * {@param type,
    * @param data
    * @param olddata}
    * @returns update data
    */
-  [MUTATION_UPDATE_DATA_REKENING](state, { rekeningtype, data, olddata }) {
+  [EDIT_DATA_REKENING](state, { type, data, olddata }) {
     //get type rekening
-    switch (rekeningtype) {
+    switch (type) {
       case RSIMPANAN:
         //update to data
         var index = state.datasimpanan
@@ -271,8 +276,8 @@ const mutations = {
    * delete data
    * @param {rekenigntype,data}
    */
-  [MUTATION_DELETE_DATA_REKENING](state, { rekeningtype, data }) {
-    switch (rekeningtype) {
+  [REMOVE_DATA_REKENING](state, { type, data }) {
+    switch (type) {
       case RDEPOSITO:
         var index = state.datadeposito
           .map(deposito => deposito.id)

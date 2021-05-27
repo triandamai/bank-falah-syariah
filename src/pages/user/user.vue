@@ -37,14 +37,14 @@
 </template>
 
 <script>
-import header from "../../data/headeruser.json";
+import header from "@/data/headeruser.json";
 import {
   ACTION_DELETE_DATA_SYSTEM,
   ACTION_GET_DATA_SYSTEM,
   ACTION_POST_DATA_SYSTEM,
   ACTION_PUT_DATA_SYSTEM,
   SUSER,
-} from "../../store/modules/system";
+} from "@/store/modules/system";
 import { mapState } from "vuex";
 export default {
   data: () => {
@@ -66,7 +66,7 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(`system/${ACTION_GET_DATA_SYSTEM}`, {
+        .dispatch(ACTION_GET_DATA_SYSTEM, {
           systemtype: SUSER,
           path: "users",
         })
@@ -79,9 +79,7 @@ export default {
     onSubmit(data) {
       this.$store
         .dispatch(
-          `system/${
-            this.isEdit ? ACTION_PUT_DATA_SYSTEM : ACTION_POST_DATA_SYSTEM
-          }`,
+          this.isEdit ? ACTION_PUT_DATA_SYSTEM : ACTION_POST_DATA_SYSTEM,
           {
             systemtype: SUSER,
             path: "user",
@@ -123,7 +121,7 @@ export default {
         console.log(value);
         if (value) {
           this.$store
-            .dispatch(`system/${ACTION_DELETE_DATA_SYSTEM}`, {
+            .dispatch(ACTION_DELETE_DATA_SYSTEM, {
               systemtype: SUSER,
               path: "user",
               body: data,

@@ -12,7 +12,7 @@
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
             </div>
-            <form-nasabah :isEdit="false" />
+            <form-nasabah :isEdit="false" @submit="onSubmit" :body="{}" />
           </div>
         </div>
       </div>
@@ -22,5 +22,26 @@
 </template>
 
 <script>
-export default {};
+import { ACTION_POST_NASABAH } from "@/store/modules/nasabah";
+export default {
+  methods: {
+    onSubmit(data) {
+      this.$store
+        .dispatch(ACTION_POST_NASABAH, data)
+        .then(({ success, message }) => {
+          this.$toasted.show(
+            success
+              ? this.$t("Success Message", { context: `${message}` })
+              : this.$t("Failed Message", { context: `${message}` }),
+            {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            }
+          );
+        });
+    },
+  },
+};
 </script>

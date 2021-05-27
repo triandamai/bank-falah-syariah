@@ -13,39 +13,17 @@
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.username"
-                  label="Username*"
+                  v-model="form.nama_jabatan"
+                  label="Nama Jabatan*"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.email"
-                  type="email"
-                  label="Email*"
+                  v-model="form.deskripsi"
+                  label="Deskripsi*"
                   required
                 ></v-text-field>
-              </v-col>
-
-              <v-col cols="12">
-                <v-autocomplete
-                  v-model="form.role_id"
-                  :items="itemsrole"
-                  item-value="id"
-                  item-text="name"
-                  label="Role*"
-                  required
-                ></v-autocomplete>
-              </v-col>
-              <v-col cols="12">
-                <v-autocomplete
-                  v-model="form.group_id"
-                  :items="itemsgroup"
-                  item-value="id"
-                  item-text="name"
-                  label="Group*"
-                  required
-                ></v-autocomplete>
               </v-col>
             </v-row>
           </v-container>
@@ -67,25 +45,15 @@
   </v-dialog>
 </template>
 <script>
-import { mapState } from "vuex";
 export default {
   props: ["show", "body"],
   data: () => {
     return {
       form: {
-        username: "",
-        email: "",
-        role_id: "",
-        group_id: "",
-        active: 1,
+        nama_jabatan: "",
+        deskripsi: "",
       },
     };
-  },
-  computed: {
-    ...mapState({
-      itemsrole: (state) => state.system.datarole,
-      itemsgroup: (state) => state.system.datagroup,
-    }),
   },
   watch: {
     body: function (newVal) {
@@ -94,6 +62,7 @@ export default {
   },
   methods: {
     submit() {
+      console.log("emit");
       this.$emit("submit", this.form);
     },
   },

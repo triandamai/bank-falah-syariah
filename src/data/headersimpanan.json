@@ -2,5 +2,25 @@
     {
         "text": "No",
         "value": "id"
+    },
+    {
+        "text": "No Rekening",
+        "value": "no_rekening"
+    },
+    {
+        "text": "Nasabah",
+        "value": "nasabah_id"
+    },
+    {
+        "text": "Produk",
+        "value": "produk_id"
+    },
+    {
+        "text": "Tanggal Buka",
+        "value": "tgl_buka"
+    },
+    {
+        "text": "Aksi",
+        "value": "action"
     }
 ]

@@ -39,19 +39,19 @@
                     <b-card-text>
                       <form class="theme-form" @submit.prevent="signUp">
                         <h4>Sign in to account</h4>
-                        <p>Enter your email & password to login</p>
+                        <p>Enter your username & password to login</p>
                         <div class="alert alert-info">
-                          Email: test@admin.com<br />
-                          Password: test@123456
+                          Username: admin<br />
+                          Password: admin
                         </div>
                         <div class="form-group">
-                          <label class="col-form-label">Email Address</label>
+                          <label class="col-form-label">Username</label>
                           <input
                             v-model="email"
                             class="form-control"
                             type="text"
                             required=""
-                            placeholder="Test@gmail.com"
+                            placeholder="Username"
                             :class="{
                               'is-invalid': submitted && !email,
                             }"
@@ -88,12 +88,12 @@
                           </div>
                         </div>
                         <div class="form-group mb-0">
-                          <div class="checkbox p-0">
+                          <!-- <div class="checkbox p-0">
                             <input id="checkbox1" type="checkbox" />
                             <label class="text-muted" for="checkbox1"
                               >Remember password</label
                             >
-                          </div>
+                          </div> -->
                           <button
                             class="btn btn-primary btn-block"
                             type="submit"
@@ -102,12 +102,12 @@
                           </button>
                         </div>
 
-                        <p class="mt-4 mb-0">
+                        <!-- <p class="mt-4 mb-0">
                           Don't have account?
                           <router-link class="ml-2" tag="a" to="/auth/register">
                             Create Account
                           </router-link>
-                        </p>
+                        </p> -->
                       </form>
                     </b-card-text>
                   </b-tab>

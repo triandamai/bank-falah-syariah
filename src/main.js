@@ -1,9 +1,9 @@
 import Vue from "vue";
-import App from "./App.vue";
+import App from "@/App.vue";
 import BootstrapVue from "bootstrap-vue";
-import router from "./router";
-import Breadcrumbs from "./components/bread_crumbs";
-import { store } from "./store";
+import router from "@/router";
+import Breadcrumbs from "@/components/bread_crumbs";
+import { store } from "@/store";
 import Vue2Filters from "vue2-filters";
 import VueSweetalert2 from "vue-sweetalert2";
 import VueFormWizard from "vue-form-wizard";
@@ -18,21 +18,45 @@ import VueFeather from "vue-feather";
 import VueApexCharts from "vue-apexcharts";
 import FunctionalCalendar from "vue-functional-calendar";
 import vueKanban from "vue-kanban";
+
+// Import Theme scss
+import "@/assets/scss/app.scss";
+
+import vuetify from "@/plugins/vuetify";
+import "@babel/polyfill";
+// api services
+import ApiService from "@/services/api.service";
 //
-import DataTable from "./components/datatable.vue";
-import FormAkad from "./components/form_akad.vue";
-import FormDeposito from "./components/form_deposito.vue";
-import FormJenistransaksi from "./components/form_jenistransaksi.vue";
-import FormNasabah from "./components/form_nasabah.vue";
-import FormPembiayaan from "./components/form_pembiayaan.vue";
-import FormProduk from "./components/form_produk.vue";
-import FormSimpanan from "./components/form_simpanan.vue";
-import FormUser from "./components/form_user.vue";
-import FormGroup from "./components/form_group.vue";
-import FormMenu from "./components/form_menu.vue";
-import FormRole from "./components/form_role.vue";
-import FormJabatan from "./components/form_jabatan.vue";
-import FormPegawai from "./components/form_pegawai.vue";
+import DataTable from "@/components/datatable.vue";
+import FormAkad from "@/components/form_akad.vue";
+import FormDeposito from "@/components/form_deposito.vue";
+import FormJenistransaksi from "@/components/form_jenistransaksi.vue";
+import FormNasabah from "@/components/form_nasabah.vue";
+import FormPembiayaan from "@/components/form_pembiayaan.vue";
+import FormProduk from "@/components/form_produk.vue";
+import FormSimpanan from "@/components/form_simpanan.vue";
+import FormUser from "@/components/form_user.vue";
+import FormGroup from "@/components/form_group.vue";
+import FormMenu from "@/components/form_menu.vue";
+import FormRole from "@/components/form_role.vue";
+import FormJabatan from "@/components/form_jabatan.vue";
+import FormPegawai from "@/components/form_pegawai.vue";
+import FormTransaksiSimpananTunai from "@/components/form_transaksi_simpanan_tunai.vue";
+import FormTransaksiSimpananNonTunai from "@/components/form_transaksi_simpanan_nontunai.vue";
+import FormTransaksiPembiayaanTunai from "@/components/form_transaksi_pembiayaan_tunai.vue";
+import FormTransaksiPembiayaanNonTunai from "@/components/form_transaksi_pembiayaan_nontunai.vue";
+
+import PxCard from "@/components/Pxcard.vue";
+import { Icon } from "leaflet";
+
+// Multi Language Add
+import VueI18n from "vue-i18n";
+import en from "@/locales/en.json";
+import es from "@/locales/es.json";
+import id from "@/locales/id.json";
+import { defaultLocale, localeOptions } from "@/constants/config.js";
+
+const messages = { en: en, es: es, id: id };
 
 Vue.component("data-table", DataTable);
 Vue.component("form-akad", FormAkad);
@@ -48,30 +72,26 @@ Vue.component("form-menu", FormMenu);
 Vue.component("form-role", FormRole);
 Vue.component("form-jabatan", FormJabatan);
 Vue.component("form-pegawai", FormPegawai);
+Vue.component("form-transaksi-simpanan-tunai", FormTransaksiSimpananTunai);
+Vue.component(
+  "form-transaksi-simpanan-nontunai",
+  FormTransaksiSimpananNonTunai
+);
+Vue.component("form-transaksi-pembiayaan-tunai", FormTransaksiPembiayaanTunai);
+Vue.component(
+  "form-transaksi-pembiayaan-nontunai",
+  FormTransaksiPembiayaanNonTunai
+);
+
+Vue.component("Breadcrumbs", Breadcrumbs);
+
+Vue.component("apexchart", VueApexCharts);
 
 //
-import PxCard from "./components/Pxcard.vue";
+
 Vue.component(PxCard.name, PxCard);
 
-import { Icon } from "leaflet";
 delete Icon.Default.prototype._getIconUrl;
-
-// Multi Language Add
-import VueI18n from "vue-i18n";
-import en from "./locales/en.json";
-import es from "./locales/es.json";
-import id from "./locales/id.json";
-import { defaultLocale, localeOptions } from "./constants/config.js";
-
-const messages = { en: en, es: es, id: id };
-
-// Import Theme scss
-import "./assets/scss/app.scss";
-
-import vuetify from "./plugins/vuetify";
-import "@babel/polyfill";
-// api services
-import ApiService from "./services/api.service";
 
 ApiService.init();
 
@@ -98,9 +118,7 @@ Vue.use(BootstrapVue);
 Vue.use(SmartTable);
 Vue.use(require("vue-chartist"));
 Vue.use(require("vue-moment"));
-Vue.component("Breadcrumbs", Breadcrumbs);
 Vue.use(VueMasonryPlugin);
-Vue.component("apexchart", VueApexCharts);
 Vue.use(FunctionalCalendar, {
   dayNames: ["M", "T", "W", "T", "F", "S", "S"]
 });

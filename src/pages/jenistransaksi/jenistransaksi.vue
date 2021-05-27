@@ -65,7 +65,7 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(`master/${ACTION_GET_DATA_MASTER}`, {
+        .dispatch(ACTION_GET_DATA_MASTER, {
           type: MJENISTRANSAKSI,
         })
         .then((isNext) => {
@@ -77,9 +77,7 @@ export default {
     onSubmit(data) {
       this.$store
         .dispatch(
-          `master/${
-            this.isEdit ? ACTION_PUT_DATA_MASTER : ACTION_POST_DATA_MASTER
-          }`,
+          this.isEdit ? ACTION_PUT_DATA_MASTER : ACTION_POST_DATA_MASTER,
           {
             type: MJENISTRANSAKSI,
             body: data,
@@ -129,7 +127,7 @@ export default {
       }).then(({ value }) => {
         if (value) {
           this.$store
-            .dispatch(`master/${ACTION_DELETE_DATA_MASTER}`, {
+            .dispatch(ACTION_DELETE_DATA_MASTER, {
               type: MJENISTRANSAKSI,
               body: data,
             })

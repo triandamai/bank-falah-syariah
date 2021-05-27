@@ -13,26 +13,37 @@
               >
             </div>
             <div class="card-body">
-              <data-table :items="items" :headers="headers" @add="onAdd" />
+              <data-table
+                :items="items"
+                :headers="headers"
+                @add="onAdd"
+                @edit="onEdit"
+                @delete="onDelete"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-deposito :show="formdeposito" @close="formdeposito = false" />
+    <form-deposito
+      :show="formdeposito"
+      :body="body"
+      @close="formdeposito = false"
+      @submit="onSubmit"
+    />
   </div>
 </template>
 
 <script>
-import header from "../../data/headerdeposito.json";
+import header from "@/data/headerdeposito.json";
 import {
   ACTION_DELETE_DATA_REKENING,
   ACTION_GET_DATA_REKENING,
   ACTION_POST_DATA_REKENING,
   ACTION_PUT_DATA_REKENING,
   RDEPOSITO,
-} from "../../store/modules/rekening";
+} from "@/store/modules/rekening";
 import { mapState } from "vuex";
 export default {
   data: () => {
@@ -54,9 +65,8 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(`rekening/${ACTION_GET_DATA_REKENING}`, {
-          mastertype: RDEPOSITO,
-          path: "rekening_deposito",
+        .dispatch(ACTION_GET_DATA_REKENING, {
+          type: RDEPOSITO,
         })
         .then((isNext) => {
           if (isNext) {
@@ -65,14 +75,12 @@ export default {
         });
     },
     onSubmit(data) {
+      console.log("onSubmit");
       this.$store
         .dispatch(
-          `rekening/${
-            this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING
-          }`,
+          this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING,
           {
-            rekeningtype: RDEPOSITO,
-            path: "rekening_deposito",
+            type: RDEPOSITO,
             body: data,
           }
         )
@@ -120,9 +128,8 @@ export default {
       }).then(({ value }) => {
         if (value) {
           this.$store
-            .dispatch(`rekening/${ACTION_DELETE_DATA_REKENING}`, {
-              rekeningtype: RDEPOSITO,
-              path: "rekening_deposito",
+            .dispatch(ACTION_DELETE_DATA_REKENING, {
+              type: RDEPOSITO,
               body: data,
             })
             .then(({ success, message }) => {

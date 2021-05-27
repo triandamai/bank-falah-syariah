@@ -36,14 +36,14 @@
 </template>
 
 <script>
-import header from "../../data/headergroup.json";
+import header from "@/data/headergroup.json";
 import {
   ACTION_GET_DATA_SYSTEM,
   ACTION_POST_DATA_SYSTEM,
   ACTION_PUT_DATA_SYSTEM,
   ACTION_DELETE_DATA_SYSTEM,
   SGROUP,
-} from "../../store/modules/system";
+} from "@/store/modules/system";
 import { mapState } from "vuex";
 export default {
   data: () => {
@@ -66,7 +66,7 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(`system/${ACTION_GET_DATA_SYSTEM}`, {
+        .dispatch(ACTION_GET_DATA_SYSTEM, {
           systemtype: SGROUP,
           path: "groups",
         })
@@ -79,9 +79,7 @@ export default {
     onSubmit(data) {
       this.$store
         .dispatch(
-          `system/${
-            this.isEdit ? ACTION_PUT_DATA_SYSTEM : ACTION_POST_DATA_SYSTEM
-          }`,
+          this.isEdit ? ACTION_PUT_DATA_SYSTEM : ACTION_POST_DATA_SYSTEM,
           {
             systemtype: SGROUP,
             path: "group",
@@ -122,7 +120,7 @@ export default {
       }).then(({ value }) => {
         if (value) {
           this.$store
-            .dispatch(`system/${ACTION_DELETE_DATA_SYSTEM}`, {
+            .dispatch(ACTION_DELETE_DATA_SYSTEM, {
               systemtype: SGROUP,
               path: "group",
               body: data,

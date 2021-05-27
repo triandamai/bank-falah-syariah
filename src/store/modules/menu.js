@@ -1,5 +1,5 @@
-import Menu from "../../data/menu";
-import ApiServices from "../../services/api.service";
+import Menu from "@/data/menu";
+import ApiServices from "@/services/api.service";
 
 const state = {
   data: Menu.data,

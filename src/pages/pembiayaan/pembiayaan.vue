@@ -13,32 +13,44 @@
               >
             </div>
             <div class="card-body">
-              <data-table :items="items" :headers="headers" @add="onAdd" />
+              <data-table
+                :items="items"
+                :headers="headers"
+                @add="onAdd"
+                @edit="onEdit"
+                @delete="onDelete"
+              />
             </div>
           </div>
         </div>
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-pembiayaan :show="formpembiayaan" @close="formpembiayaan = false" />
+    <form-pembiayaan
+      :show="formpembiayaan"
+      :body="body"
+      @close="formpembiayaan = false"
+      @submit="onSubmit"
+    />
   </div>
 </template>
 
 <script>
-import header from "../../data/headerpembiayaan.json";
+import header from "@/data/headerpembiayaan.json";
 import {
   ACTION_DELETE_DATA_REKENING,
   ACTION_GET_DATA_REKENING,
   ACTION_POST_DATA_REKENING,
   ACTION_PUT_DATA_REKENING,
   RPEMBIAYAAN,
-} from "../../store/modules/rekening";
+} from "@/store/modules/rekening";
 import { mapState } from "vuex";
 export default {
   data: () => {
     return {
       formpembiayaan: false,
       headers: header,
+      body: {},
     };
   },
   computed: {
@@ -52,9 +64,8 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(`rekening/${ACTION_GET_DATA_REKENING}`, {
-          mastertype: RPEMBIAYAAN,
-          path: "rekening_pembiayaan",
+        .dispatch(ACTION_GET_DATA_REKENING, {
+          type: RPEMBIAYAAN,
         })
         .then((isNext) => {
           if (isNext) {
@@ -65,12 +76,9 @@ export default {
     onSubmit(data) {
       this.$store
         .dispatch(
-          `rekening/${
-            this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING
-          }`,
+          this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING,
           {
-            rekeningtype: RPEMBIAYAAN,
-            path: "rekening_pembiayaan",
+            type: RPEMBIAYAAN,
             body: data,
           }
         )
@@ -118,9 +126,8 @@ export default {
       }).then(({ value }) => {
         if (value) {
           this.$store
-            .dispatch(`rekening/${ACTION_DELETE_DATA_REKENING}`, {
-              rekeningtype: RPEMBIAYAAN,
-              path: "rekening_pembiayaan",
+            .dispatch(ACTION_DELETE_DATA_REKENING, {
+              type: RPEMBIAYAAN,
               body: data,
             })
             .then(({ success, message }) => {

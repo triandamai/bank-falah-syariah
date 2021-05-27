@@ -5,8 +5,8 @@
  * 28 Jan 2021 - 10:14
  *
  */
-import ApiService from "../../services/api.service";
-import JwtService from "../../services/jwt.service";
+import ApiService from "@/services/api.service";
+import JwtService from "@/services/jwt.service";
 
 // action types
 export const LOGIN = "login";

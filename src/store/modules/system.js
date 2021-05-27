@@ -6,16 +6,24 @@
  *
  */
 
-import ApiService from "../../services/api.service";
+import ApiService from "@/services/api.service";
 
-export const ACTION_GET_DATA_SYSTEM = "GETDATASYSTEM";
-export const ACTION_POST_DATA_SYSTEM = "POGETDATASYSTEM";
-export const ACTION_PUT_DATA_SYSTEM = "PUGETDATASYSTEM";
-export const ACTION_DELETE_DATA_SYSTEM = "DELETEDATASYSTEM";
+const GET_DATA_SYSTEM = "GETDATASYSTEM";
+const POST_DATA_SYSTEM = "POGETDATASYSTEM";
+const PUT_DATA_SYSTEM = "PUGETDATASYSTEM";
+const DELETE_DATA_SYSTEM = "DELETEDATASYSTEM";
+export const ACTION_GET_DATA_SYSTEM = `system/${GET_DATA_SYSTEM}`;
+export const ACTION_POST_DATA_SYSTEM = `system/${POST_DATA_SYSTEM}`;
+export const ACTION_PUT_DATA_SYSTEM = `system/${PUT_DATA_SYSTEM}`;
+export const ACTION_DELETE_DATA_SYSTEM = `system/${DELETE_DATA_SYSTEM}`;
 
-export const MUTATION_ADD_DATA_SYSTEM = "MADDDATASYSTEM";
-export const MUTATION_PUT_DATA_SYSTEM = "MPUTDATASYSTEM";
-export const MUTATION_DELETE_DATA_SYSTEM = "MDDATASYSTEM";
+const ADD_DATA_SYSTEM = "MADDDATASYSTEM";
+const EDIT_DATA_SYSTEM = "MPUTDATASYSTEM";
+const REMOVE_DATA_SYSTEM = "MDDATASYSTEM";
+const INCREMENT_PAGE = `INCREMENT`;
+export const MUTATION_ADD_DATA_SYSTEM = `system/${ADD_DATA_SYSTEM}`;
+export const MUTATION_PUT_DATA_SYSTEM = `system/${EDIT_DATA_SYSTEM}`;
+export const MUTATION_DELETE_DATA_SYSTEM = `system/${REMOVE_DATA_SYSTEM}`;
 
 export const SUSER = "USER";
 export const SROLE = "ROLE";
@@ -49,7 +57,7 @@ const actions = {
    * @returns promise true/false if true get data always repeat until last_page
    *
    */
-  [ACTION_GET_DATA_SYSTEM]({ commit, state }, { systemtype, path, id }) {
+  [GET_DATA_SYSTEM]({ commit, state }, { systemtype, path, id }) {
     return new Promise(resolve => {
       //get pagination
       let page = `?page=`;
@@ -79,7 +87,7 @@ const actions = {
               stillPaging = true;
             }
             data.data.map(item => {
-              commit(MUTATION_ADD_DATA_SYSTEM, {
+              commit(ADD_DATA_SYSTEM, {
                 systemtype: systemtype,
                 data: item,
                 page: stillPaging
@@ -101,12 +109,12 @@ const actions = {
    * @return boolean is saved? then commit to datauser
    * @returns {success,message}
    */
-  [ACTION_POST_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
+  [POST_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
     return new Promise(resolve => {
       ApiService.post(`${path}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_ADD_DATA_SYSTEM, {
+            commit(ADD_DATA_SYSTEM, {
               systemtype: systemtype,
               data: data.data[0]
             });
@@ -135,12 +143,12 @@ const actions = {
    * @returns {success,message}
    *
    */
-  [ACTION_PUT_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
+  [PUT_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
     return new Promise(resolve => {
       ApiService.put(`${path}/${body.id}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_PUT_DATA_SYSTEM, {
+            commit(EDIT_DATA_SYSTEM, {
               systemtype: systemtype,
               data: data.data[0],
               olddata: body
@@ -166,12 +174,12 @@ const actions = {
    * @param {systemtype,path,body}
    * @return boolean is saved? then commit remove user from data user by index
    */
-  [ACTION_DELETE_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
+  [DELETE_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
     return new Promise(resolve => {
       ApiService.delete(`${path}/${body.id}`)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            commit(MUTATION_DELETE_DATA_SYSTEM, {
+            commit(REMOVE_DATA_SYSTEM, {
               systemtype: systemtype,
               data: body
             });
@@ -193,14 +201,27 @@ const actions = {
   }
 };
 const mutations = {
+  [INCREMENT_PAGE](state, { type }) {
+    switch (type) {
+      case SUSER:
+        state.user.current_page++;
+        break;
+      case SROLE:
+        state.role.current_page++;
+        break;
+      case SGROUP:
+        state.group.current_page++;
+        break;
+    }
+  },
   /***
    * Add data
    * @param {systemtype,data}
    * @return data user add one by one
    * @todo if exist and data change sholud update
    */
-  [MUTATION_ADD_DATA_SYSTEM](state, { systemtype, data, page }) {
-    switch (systemtype) {
+  [ADD_DATA_SYSTEM](state, { type, data, page }) {
+    switch (type) {
       case SUSER:
         var exist = state.datausers.some(user => {
           return user.id == data.id;
@@ -208,7 +229,6 @@ const mutations = {
         if (!exist) {
           state.datausers.push(data);
         }
-        page ? state.user.current_page++ : null;
         break;
       case SROLE:
         var exist = state.dataroles.some(role => {
@@ -217,7 +237,6 @@ const mutations = {
         if (!exist) {
           state.dataroles.push(data);
         }
-        page ? state.role.current_page++ : null;
         break;
       case SGROUP:
         var exist = state.datagroups.some(group => {
@@ -226,7 +245,6 @@ const mutations = {
         if (!exist) {
           state.datagroups.push(data);
         }
-        page ? state.group.current_page++ : null;
         break;
     }
   },
@@ -234,7 +252,7 @@ const mutations = {
    * add updated data to existing data
    *@param {systemtype,data,olddata}
    */
-  [MUTATION_PUT_DATA_SYSTEM](state, { systemtype, data, olddata }) {
+  [EDIT_DATA_SYSTEM](state, { systemtype, data, olddata }) {
     switch (systemtype) {
       case SUSER:
         var index = state.datausers.map(user => user.id).indexOf(olddata.id);
@@ -256,7 +274,7 @@ const mutations = {
    * @param {systemtype,data}
    * @return remove user by index
    */
-  [MUTATION_DELETE_DATA_SYSTEM](state, { systemtype, data }) {
+  [REMOVE_DATA_SYSTEM](state, { systemtype, data }) {
     switch (systemtype) {
       case SUSER:
         var index = state.datausers.map(user => user.id).indexOf(data.id);
