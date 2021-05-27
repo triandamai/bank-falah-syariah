@@ -168,6 +168,7 @@
             <v-row>
               <v-col cols="12" md="6" lg="6" sm="12">
                 <v-autocomplete
+                  v-model="form.provinsi"
                   label="Provinsi *"
                   :items="provinsi"
                   item-text="provNama"
@@ -182,6 +183,7 @@
               <v-col cols="12" md="6" lg="6" sm="12">
                 <v-autocomplete
                   label="Kabupaten *"
+                  v-model="form.kabupaten"
                   :items="kabupaten"
                   item-text="kabNama"
                   @change="kabupatenChange"
@@ -195,6 +197,7 @@
               <v-col cols="12" md="6" lg="6" sm="12">
                 <v-autocomplete
                   label="Kecamatan *"
+                  v-model="form.kecamatan"
                   :items="kecamatan"
                   item-text="kecNama"
                   @change="kecamatanChange"
@@ -208,6 +211,7 @@
               <v-col cols="12" md="6" lg="6" sm="12">
                 <v-autocomplete
                   label="Desa *"
+                  v-model="form.desa"
                   :items="desa"
                   item-text="desNama"
                   auto-select-first
@@ -331,7 +335,7 @@ import {
 import { mapState } from "vuex";
 
 export default {
-  props: ["isEdit"],
+  props: ["isEdit", "body"],
 
   data() {
     return {
@@ -391,6 +395,11 @@ export default {
         active: 1,
       },
     };
+  },
+  watch: {
+    body: function (newVal) {
+      this.form = newVal;
+    },
   },
   computed: {
     ...mapState({
