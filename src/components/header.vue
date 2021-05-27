@@ -111,7 +111,7 @@
             toggle-class="language-button"
           >
             <template slot="button-content">
-              <i class="flag-icon" :class="langIcon"></i>
+              <!-- <i class="flag-icon" :class="langIcon"></i> -->
               <span class="name">{{ $i18n.locale }}</span>
             </template>
             <b-dropdown-item
