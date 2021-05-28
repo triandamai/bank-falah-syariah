@@ -39,53 +39,6 @@
       }
     },
     {
-      "title": "Transaction",
-      "icon": "book-open",
-      "type": "sub",
-      "badgeType": "primary",
-      "badgeValue": "5",
-      "active": false,
-      "path": "Transaction",
-      "idx": 3,
-      "privilage": {
-        "roles": [],
-        "groups": []
-      },
-      "children": [
-        {
-          "path": "/main/transaksi-simpanan",
-          "title": "Transaction Saving",
-          "type": "link"
-        },
-        {
-          "path": "/main/transaksi-pembiayaan",
-          "title": "Transaction Financing",
-          "type": "link"
-        }
-      ]
-    },
-    {
-      "title": "Report",
-      "icon": "printer",
-      "type": "sub",
-      "badgeType": "primary",
-      "badgeValue": "5",
-      "active": false,
-      "path": "Report",
-      "idx": 3,
-      "privilage": {
-        "roles": [],
-        "groups": []
-      },
-      "children": [
-        {
-          "path": "/main/laporan-teller",
-          "title": "Report Teller",
-          "type": "link"
-        }
-      ]
-    },
-    {
       "title": "Master Data",
       "icon": "monitor",
       "type": "sub",
@@ -123,27 +76,6 @@
           "path": "/main/pegawai",
           "title": "Employees",
           "type": "link"
-        }
-      ]
-    },
-    {
-      "title": "Account",
-      "icon": "book",
-      "type": "sub",
-      "badgeType": "primary",
-      "badgeValue": "3",
-      "active": false,
-      "path": "Account",
-      "idx": 4,
-      "privilage": {
-        "roles": [],
-        "groups": []
-      },
-      "children": [
-        {
-          "path": "/main/deposito",
-          "title": "Storage Area",
-          "type": "link"
         },
         {
           "path": "/main/pembiayaan",
@@ -158,85 +90,55 @@
       ]
     },
     {
-      "headTitle1": "Shortcut",
-      "headTitle2": "Form etc.",
-      "type": "headtitle",
-      "path": "ShortCut",
-      "idx": 5,
-      "privilage": {
-        "roles": [],
-        "groups": []
-      }
-    },
-    {
-      "title": "Form",
-      "icon": "server",
+      "title": "Transaction",
+      "icon": "book-open",
       "type": "sub",
+      "badgeType": "primary",
+      "badgeValue": "5",
       "active": false,
-      "path": "Form",
-      "idx": 6,
+      "path": "Transaction",
+      "idx": 3,
       "privilage": {
         "roles": [],
         "groups": []
       },
       "children": [
         {
-          "title": "Master Data",
+          "title": "Tabungan",
           "type": "sub",
           "active": false,
           "children": [
             {
-              "path": "akad",
-              "title": "Add a Contract",
-              "type": "button"
+              "path": "/main/transaksi-simpanan",
+              "title": "Setor",
+              "type": "link"
             },
             {
-              "path": "jenistransaksi",
-              "title": "Add Transaction Type",
-              "type": "button"
-            },
-            {
-              "path": "produk",
-              "title": "Add Product",
-              "type": "button"
-            },
-            {
-              "path": "jabatan",
-              "title": "Add Departement",
-              "type": "button"
-            },
-            {
-              "path": "pegawai",
-              "title": "Add Employee",
-              "type": "button"
+              "path": "/main/transaksi-simpanan",
+              "title": "Tarik",
+              "type": "link"
             }
           ]
-        },
+        }
+      ]
+    },
+    {
+      "title": "Report",
+      "icon": "printer",
+      "type": "sub",
+      "badgeType": "primary",
+      "badgeValue": "5",
+      "active": false,
+      "path": "Report",
+      "idx": 3,
+      "privilage": {
+        "roles": [],
+        "groups": []
+      },
+      "children": [
         {
-          "title": "Account",
-          "type": "sub",
-          "active": false,
-          "children": [
-            {
-              "path": "deposito",
-              "title": "Add Account",
-              "type": "button"
-            },
-            {
-              "path": "simpanan",
-              "title": "Add Saving",
-              "type": "button"
-            },
-            {
-              "path": "pembiayaan",
-              "title": "Add Financing",
-              "type": "button"
-            }
-          ]
-        },
-        {
-          "path": "/main /nasabah/add",
-          "title": "Add Account",
+          "path": "/main/laporan-teller",
+          "title": "Report Teller",
           "type": "link"
         }
       ]
@@ -267,23 +169,13 @@
       },
       "children": [
         {
-          "path": "/main/menu",
-          "title": "Menus",
-          "type": "link"
-        },
-        {
           "path": "/main/user",
           "title": "User",
           "type": "link"
         },
         {
-          "path": "/main/group",
-          "title": "Group",
-          "type": "link"
-        },
-        {
-          "path": "/main/role",
-          "title": "Role",
+          "path": "/main/akad",
+          "title": "Preferences",
           "type": "link"
         }
       ]
