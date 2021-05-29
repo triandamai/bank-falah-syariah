@@ -19,6 +19,10 @@
             Data Pekerjaan
           </v-stepper-step>
           <v-divider></v-divider>
+          <v-stepper-step :complete="step > 4" step="4">
+            Data pendukung
+          </v-stepper-step>
+          <v-divider></v-divider>
         </v-stepper-header>
 
         <v-stepper-items>
@@ -42,7 +46,7 @@
                   dense
                 ></v-text-field>
               </v-col>
-              <v-col cols="12" sm="12" md="6" class="my-2">
+              <v-col cols="12" sm="12" md="12" class="my-2">
                 <v-text-field
                   v-model="form.nama_panggilan"
                   label="Nama panggilan"
@@ -263,6 +267,61 @@
           </v-stepper-content>
 
           <v-stepper-content step="3">
+            <v-row>
+              <v-col class="d-flex" cols="12" sm="12">
+                <v-select
+                  :items="jenis_pekerjaan"
+                  v-model="form.jenis_pekerjaan_id"
+                  item-text="label"
+                  item-value="value"
+                  label="Pekerjaan"
+                  auto-select-first
+                  dense
+                  outlined
+                />
+              </v-col>
+              <v-col cols="12" sm="12" class="my-2">
+                <v-text-field
+                  v-model="form.nama_perusahaan"
+                  label="Nama Perusahaan"
+                  placeholder="Nama Perusahaan"
+                  outlined
+                  dense
+                />
+              </v-col>
+              <v-col cols="12" sm="12" class="my-2">
+                <v-text-field
+                  v-model="form.nama_atasan"
+                  label="Nama Atasan"
+                  placeholder="Nama Atasan"
+                  outlined
+                  dense
+                />
+              </v-col>
+              <v-col cols="12" sm="12" class="my-2">
+                <v-text-field
+                  v-model="form.penghasilan_perbulan"
+                  label="Penghasilan Perbulan"
+                  placeholder="Penghasilan Perbulan"
+                  outlined
+                  dense
+                />
+              </v-col>
+              <v-col cols="12" sm="12" class="my-2">
+                <v-text-field
+                  v-model="form.penghasilan_pertahun"
+                  label="Penghasilan Pertahun"
+                  placeholder="Penghasilan Pertahun"
+                  outlined
+                  dense
+                />
+              </v-col>
+            </v-row>
+            <v-btn @click="step = 4" outlined small> Selanjutnya </v-btn>
+
+            <v-btn @click="goBack" text> Sebelumnya </v-btn>
+          </v-stepper-content>
+          <v-stepper-content step="4">
             <v-row>
               <v-col class="d-flex" cols="12" sm="12">
                 <v-select
