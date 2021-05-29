@@ -409,7 +409,7 @@ export default {
       desa: (state) => state.wilayah.desa.data,
     }),
   },
-  created() {
+  mounted() {
     if (this.isEdit) {
       this.getDataById();
     }

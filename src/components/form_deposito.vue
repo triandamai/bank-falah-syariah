@@ -159,7 +159,7 @@ export default {
       },
     };
   },
-  beforeMount() {
+  mounted() {
     this.getNasabah();
     this.getProduk();
     this.getPegawai();

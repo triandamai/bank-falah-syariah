@@ -82,7 +82,7 @@ export default {
       this.form = newVal;
     },
   },
-  beforeMount() {
+  mounted() {
     this.getJabatan();
   },
   methods: {

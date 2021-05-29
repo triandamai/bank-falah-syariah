@@ -194,7 +194,7 @@ export default {
       this.form = newVal;
     },
   },
-  created() {
+  mounted() {
     this.getNasabah();
     this.getProduk();
     this.getPegawai();

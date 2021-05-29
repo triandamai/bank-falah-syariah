@@ -38,28 +38,6 @@
       </div>
       <Customizer />
     </div>
-    <form-akad :show="formakad" @close="hide" @submit="onSubmitAkad" />
-    <form-deposito
-      :show="formdeposito"
-      @close="hide"
-      @submit="onSubmitDeposito"
-    />
-    <form-jenistransaksi
-      :show="formjenistransaksi"
-      @close="hide"
-      @submit="onSubmitJenistransaksi"
-    />
-    <form-pembiayaan
-      :show="formpembiayaan"
-      @close="hide"
-      @submit="onSubmitPembiayaan"
-    />
-    <form-produk :show="formproduk" @close="hide" @submit="onSubmitProduk" />
-    <form-simpanan
-      :show="formsimpanan"
-      @close="hide"
-      @submit="onSubmitSimpanan"
-    />
   </div>
 </template>
 
@@ -93,12 +71,6 @@ export default {
       layout: (state) => state.layout.layout,
       togglesidebar: (state) => state.menu.togglesidebar,
       body: (state) => state.body,
-      formakad: (state) => state.formakad,
-      formdeposito: (state) => state.formdeposito,
-      formjenistransaksi: (state) => state.formjenistransaksi,
-      formpembiayaan: (state) => state.formpembiayaan,
-      formproduk: (state) => state.formproduk,
-      formsimpanan: (state) => state.formsimpanan,
     }),
   },
   created() {
@@ -130,9 +102,6 @@ export default {
     },
   },
   methods: {
-    hide() {
-      this.$store.commit("hideForm", {});
-    },
     sidebar_toggle(value) {
       this.sidebar_toggle_var = !value;
     },
@@ -142,12 +111,6 @@ export default {
     handleResize() {
       this.$store.dispatch("menu/resizetoggle");
     },
-    onSubmitAkad() {},
-    onSubmitDeposito() {},
-    onSubmitJenistransaksi() {},
-    onSubmitPembiayaan() {},
-    onSubmitProduk() {},
-    onSubmitSimpanan() {},
   },
 };
 </script>
