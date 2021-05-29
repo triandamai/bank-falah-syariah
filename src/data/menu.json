@@ -5,13 +5,13 @@
       "headTitle2": "Dashboards,features & data.",
       "type": "headtitle",
       "path": "General",
-      "idx": 1,
       "privilage": {
         "roles": [
-          1,
-          2
+          "admin"
         ],
-        "groups": []
+        "groups": [
+          "admin"
+        ]
       }
     },
     {
@@ -20,10 +20,13 @@
       "icon": "codesandbox",
       "type": "link",
       "active": false,
-      "idx": 2,
       "privilage": {
-        "roles": [],
-        "groups": []
+        "roles": [
+          "admin"
+        ],
+        "groups": [
+          "admin"
+        ]
       }
     },
     {
@@ -32,10 +35,13 @@
       "icon": "users",
       "type": "link",
       "active": false,
-      "idx": 2,
       "privilage": {
-        "roles": [],
-        "groups": []
+        "roles": [
+          "admin"
+        ],
+        "groups": [
+          "admin"
+        ]
       }
     },
     {
@@ -46,46 +52,105 @@
       "badgeValue": "5",
       "active": false,
       "path": "Master Data",
-      "idx": 3,
       "privilage": {
-        "roles": [],
-        "groups": []
+        "roles": [
+          "admin"
+        ],
+        "groups": [
+          "admin"
+        ]
       },
       "children": [
         {
           "path": "/main/akad",
           "title": "Akad",
-          "type": "link"
+          "type": "link",
+          "privilage": {
+            "roles": [
+              "all"
+            ],
+            "groups": [
+              "all"
+            ]
+          }
         },
         {
           "path": "/main/jenistransaksi",
           "title": "Type of Transaction",
-          "type": "link"
+          "type": "link",
+          "privilage": {
+            "roles": [
+              "all"
+            ],
+            "groups": [
+              "all"
+            ]
+          }
         },
         {
           "path": "/main/produk",
           "title": "Product",
-          "type": "link"
+          "type": "link",
+          "privilage": {
+            "roles": [
+              "all"
+            ],
+            "groups": [
+              "all"
+            ]
+          }
         },
         {
           "path": "/main/jabatan",
           "title": "Departement",
-          "type": "link"
+          "type": "link",
+          "privilage": {
+            "roles": [
+              "all"
+            ],
+            "groups": [
+              "all"
+            ]
+          }
         },
         {
           "path": "/main/pegawai",
           "title": "Employees",
-          "type": "link"
+          "type": "link",
+          "privilage": {
+            "roles": [
+              "all"
+            ],
+            "groups": [
+              "all"
+            ]
+          }
         },
         {
           "path": "/main/pembiayaan",
           "title": "Financing",
-          "type": "link"
+          "type": "link",
+          "privilage": {
+            "roles": [
+              "all"
+            ],
+            "groups": [
+              "all"
+            ]
+          }
         },
         {
           "path": "/main/simpanan",
           "title": "Savings",
-          "type": "link"
+          "type": "link",
+          "privilage": {
+            "roles": [
+              "all"
+            ],
+            "groups": [
+              "all"
+            ]
+          }
         }
       ]
     },
@@ -97,26 +162,53 @@
       "badgeValue": "5",
       "active": false,
       "path": "Transaction",
-      "idx": 3,
       "privilage": {
-        "roles": [],
-        "groups": []
+        "roles": [
+          "admin"
+        ],
+        "groups": [
+          "admin"
+        ]
       },
       "children": [
         {
           "title": "Tabungan",
           "type": "sub",
           "active": false,
+          "privilage": {
+            "roles": [
+              "all"
+            ],
+            "groups": [
+              "all"
+            ]
+          },
           "children": [
             {
               "path": "/main/transaksi-simpanan",
               "title": "Setor",
-              "type": "link"
+              "type": "link",
+              "privilage": {
+                "roles": [
+                  "all"
+                ],
+                "groups": [
+                  "all"
+                ]
+              }
             },
             {
               "path": "/main/transaksi-simpanan",
               "title": "Tarik",
-              "type": "link"
+              "type": "link",
+              "privilage": {
+                "roles": [
+                  "all"
+                ],
+                "groups": [
+                  "all"
+                ]
+              }
             }
           ]
         }
@@ -130,16 +222,27 @@
       "badgeValue": "5",
       "active": false,
       "path": "Report",
-      "idx": 3,
       "privilage": {
-        "roles": [],
-        "groups": []
+        "roles": [
+          "admin"
+        ],
+        "groups": [
+          "admin"
+        ]
       },
       "children": [
         {
           "path": "/main/laporan-teller",
           "title": "Report Teller",
-          "type": "link"
+          "type": "link",
+          "privilage": {
+            "roles": [
+              "all"
+            ],
+            "groups": [
+              "all"
+            ]
+          }
         }
       ]
     },
@@ -148,10 +251,13 @@
       "headTitle2": "Settings,Role & Group",
       "type": "headtitle",
       "path": "Advance",
-      "idx": 7,
       "privilage": {
-        "roles": [],
-        "groups": []
+        "roles": [
+          "admin"
+        ],
+        "groups": [
+          "admin"
+        ]
       }
     },
     {
@@ -162,21 +268,40 @@
       "badgeValue": "3",
       "active": false,
       "path": "System",
-      "idx": 8,
       "privilage": {
-        "roles": [],
-        "groups": []
+        "roles": [
+          "admin"
+        ],
+        "groups": [
+          "admin"
+        ]
       },
       "children": [
         {
           "path": "/main/user",
           "title": "User",
-          "type": "link"
+          "type": "link",
+          "privilage": {
+            "roles": [
+              "all"
+            ],
+            "groups": [
+              "all"
+            ]
+          }
         },
         {
           "path": "/main/akad",
           "title": "Preferences",
-          "type": "link"
+          "type": "link",
+          "privilage": {
+            "roles": [
+              "all"
+            ],
+            "groups": [
+              "all"
+            ]
+          }
         }
       ]
     }
