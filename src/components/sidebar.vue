@@ -14,6 +14,7 @@
           alt=""
         />
       </router-link>
+      <span style="margin-left: 5px">Bank Falah Syariah</span>
       <div class="back-btn" @click="toggle_sidebar">
         <i class="fa fa-angle-left"></i>
       </div>
@@ -94,12 +95,14 @@
             <label
               :class="'badge badge-' + menuItem.badgeType"
               v-if="menuItem.badgeType"
+              v-show="checkprivilage(menuItem.privilage)"
               >{{ menuItem.badgeValue }}</label
             >
             <a
               href="javascript:void(0)"
               class="sidebar-link sidebar-title"
               v-if="menuItem.type == 'sub'"
+              v-show="checkprivilage(menuItem.privilage)"
               @click="setNavActive(menuItem, index)"
             >
               <feather :type="menuItem.icon" class="top"></feather>
@@ -115,6 +118,7 @@
               :to="menuItem.path"
               class="sidebar-link sidebar-title"
               v-if="menuItem.type == 'link'"
+              v-show="checkprivilage(menuItem.privilage)"
               router-link-exact-active
             >
               <feather :type="menuItem.icon" class="top"></feather>
@@ -131,6 +135,7 @@
               :href="menuItem.path"
               class="sidebar-link sidebar-title"
               v-if="menuItem.type == 'extLink'"
+              v-show="checkprivilage(menuItem.privilage)"
               @click="setNavActive(menuItem, index)"
             >
               <feather :type="menuItem.icon" class="top"></feather>
@@ -148,6 +153,7 @@
               target="_blank"
               class="sidebar-link sidebar-title"
               v-if="menuItem.type == 'extTabLink'"
+              v-show="checkprivilage(menuItem.privilage)"
               @click="setNavActive(menuItem, index)"
             >
               <feather :type="menuItem.icon" class="top"></feather>
@@ -175,6 +181,7 @@
                   class="submenu-title"
                   href="javascript:void(0)"
                   v-if="childrenItem.type == 'sub'"
+                  v-show="checkprivilage(childrenItem.privilage)"
                   @click="setNavActive(childrenItem, index)"
                 >
                   {{ $t(childrenItem.title) }}
@@ -196,6 +203,7 @@
                   class="submenu-title"
                   :to="childrenItem.path"
                   v-if="childrenItem.type == 'link'"
+                  v-show="checkprivilage(childrenItem.privilage)"
                   router-link-exact-active
                 >
                   {{ $t(childrenItem.title) }}
@@ -215,6 +223,7 @@
                 <a
                   :href="childrenItem.path"
                   v-if="childrenItem.type == 'extLink'"
+                  v-show="checkprivilage(childrenItem.privilage)"
                   class="submenu-title"
                 >
                   {{ $t(childrenItem.title) }}
@@ -237,6 +246,7 @@
                   :href="childrenItem.path"
                   target="_blank"
                   v-if="childrenItem.type == 'extTabLink'"
+                  v-show="checkprivilage(childrenItem.privilage)"
                 >
                   {{ $t(childrenItem.title) }}
                   <label
@@ -265,6 +275,7 @@
                     <router-link
                       :to="childrenSubItem.path"
                       v-if="childrenSubItem.type == 'link'"
+                      v-show="checkprivilage(childrenSubItem.privilage)"
                       router-link-exact-active
                     >
                       {{ $t(childrenSubItem.title) }}
@@ -286,6 +297,7 @@
                     <a
                       @click="showForm(childrenSubItem.path)"
                       v-if="childrenSubItem.type == 'button'"
+                      v-show="checkprivilage(childrenSubItem.privilage)"
                       router-link-exact-active
                     >
                       {{ $t(childrenSubItem.title) }}
@@ -308,6 +320,7 @@
                     <router-link
                       :to="childrenSubItem.path"
                       v-if="childrenSubItem.type == 'extLink'"
+                      v-show="checkprivilage(childrenSubItem.privilage)"
                       router-link-exact-active
                     >
                       {{ $t(childrenSubItem.title) }}
@@ -329,6 +342,7 @@
                     <router-link
                       :to="childrenSubItem.path"
                       v-if="childrenSubItem.type == 'extLink'"
+                      v-show="checkprivilage(childrenSubItem.privilage)"
                       router-link-exact-active
                     >
                       {{ $t(childrenSubItem.title) }}
@@ -374,6 +388,7 @@
   </div>
 </template>
 <script>
+import { getUser } from "@/services/jwt.service";
 import { mapState } from "vuex";
 export default {
   name: "Sidebar",
@@ -446,6 +461,18 @@ export default {
     });
   },
   methods: {
+    checkprivilage(privilage) {
+      const { role, group } = getUser();
+      const current_role = role[0].name;
+      const current_group = group[0].name;
+      const haveAllGroup = privilage.roles.includes("all");
+      const haveAllRole = privilage.groups.includes("all");
+      if (haveAllGroup && haveAllRole) return true;
+
+      const haveRolePrivilage = privilage.roles.includes(current_role);
+      const haveGroupPrivilage = privilage.groups.includes(current_group);
+      return haveRolePrivilage && haveGroupPrivilage;
+    },
     showForm(form) {
       this.$store.commit("showForm", form);
     },
