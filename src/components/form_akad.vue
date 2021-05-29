@@ -32,6 +32,20 @@
                   required
                 ></v-text-field>
               </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="form.rasio_nasabah"
+                  label="Rasio Nasabah*"
+                  required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  v-model="form.rasio_bank"
+                  label="Rasio Bank*"
+                  required
+                ></v-text-field>
+              </v-col>
             </v-row>
           </v-container>
           <small>*indicates required field</small>
@@ -57,9 +71,6 @@ export default {
   data: () => {
     return {
       form: {
-        kode_akad: "",
-        nama_akad: "",
-        tipe_akad: "",
         active: 1,
       },
     };
