@@ -17,7 +17,7 @@
                   class="img-fluid for-light"
                   width="40px"
                   src="../../assets/images/logo/login.png"
-                  alt="looginpage" />
+                  alt="looginpage"/>
                 <img
                   class="img-fluid for-dark"
                   width="40px"
@@ -97,6 +97,7 @@
                           <button
                             class="btn btn-primary btn-block"
                             type="submit"
+                            :disabled="disable"
                           >
                             Login
                           </button>
@@ -133,6 +134,7 @@ export default {
       username: "",
       passwordjwt: "",
       submitted: false,
+      disable: false,
     };
   },
   computed: {
@@ -146,7 +148,7 @@ export default {
   },
   methods: {
     // show/hide password
-    showPassword: function () {
+    showPassword: function() {
       if (this.type === "password") {
         this.type = "text";
       } else {
@@ -154,9 +156,10 @@ export default {
       }
     },
     // Firebase login
-    signUp: function () {
+    signUp: function() {
       this.submitted = true;
       if (this.email != "" && this.password != "") {
+        this.disable = true;
         this.$store
           .dispatch(`auth/${LOGIN}`, {
             username: this.email,
@@ -176,8 +179,12 @@ export default {
             );
 
             if (success) {
-              return this.$router.push({ name: "dashboard" });
+              setTimeout(() => {
+                this.$router.push({ name: "dashboard" });
+              }, 1000);
+              return;
             }
+            this.disable = false;
           });
       }
     },

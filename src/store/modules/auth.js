@@ -21,7 +21,7 @@ const state = {
   error: false,
   message: "",
   user: JwtService.getUser(),
-  isAuthenticated: !!JwtService.getToken()
+  isAuthenticated: !!JwtService.getToken(),
 };
 
 const getters = {
@@ -30,7 +30,7 @@ const getters = {
   },
   isAuthenticated(state) {
     return state.isAuthenticated;
-  }
+  },
 };
 
 const actions = {
@@ -44,7 +44,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       ApiService.post("login", {
         username: credentials.username,
-        password: credentials.password
+        password: credentials.password,
       })
         .then(({ status, data }) => {
           // console.log(res);
@@ -55,14 +55,14 @@ const actions = {
           } else {
             resolve({
               success: false,
-              message: data.message || "Gagal coba lagi nanti!"
+              message: data.message || "Gagal coba lagi nanti!",
             });
           }
         })
-        .catch(e => {
+        .catch((e) => {
           resolve({
             success: false,
-            message: e || "Gagal coba lagi nanti!"
+            message: e || "Gagal coba lagi nanti!",
           });
         });
     });
@@ -75,7 +75,7 @@ const actions = {
    */
   [LOGOUT]({ commit }) {
     commit(PURGE_AUTH);
-  }
+  },
 };
 
 const mutations = {
@@ -96,7 +96,7 @@ const mutations = {
     state.errors = {};
     JwtService.dropUser();
     JwtService.destroyToken();
-  }
+  },
 };
 
 export default {
@@ -104,5 +104,5 @@ export default {
   state,
   actions,
   mutations,
-  getters
+  getters,
 };
