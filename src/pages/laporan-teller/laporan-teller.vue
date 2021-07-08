@@ -8,42 +8,9 @@
           <div class="card">
             <div class="row">
               <div class="col-sm-12 p-0">
-                <b-tabs content-class="mt-3">
-                  <b-tab active>
-                    <template v-slot:title>
-                      <feather type="book"></feather> Cetak Sampul
-                    </template>
-                    <b-card-text>
-                      <div class="col-sm-12 p-0">
-                        <div class="card">
-                          <div class="card-body">
-                            <pdf
-                              ref="myPdfComponent"
-                              src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-                            ></pdf>
-                          </div>
-                        </div>
-                      </div>
-                    </b-card-text>
-                  </b-tab>
-                  <b-tab>
-                    <template v-slot:title>
-                      <feather type="database"></feather> Cetak Mutasi
-                    </template>
-                    <b-card-text>
-                      <div class="col-sm-12 p-0">
-                        <div class="card">
-                          <div class="card-body">
-                            <pdf
-                              ref="myPdfComponent"
-                              src="https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf"
-                            ></pdf>
-                          </div>
-                        </div>
-                      </div>
-                    </b-card-text>
-                  </b-tab>
-                </b-tabs>
+                <pdf
+                  src="https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf"
+                />
               </div>
             </div>
           </div>
@@ -55,7 +22,7 @@
 </template>
 
 <script>
-import pdf from "vue-pdf";
+import pdf from "vue-pdf-cdn";
 export default {
   components: {
     pdf,
@@ -63,5 +30,6 @@ export default {
   data: () => {
     return {};
   },
+  methods: {},
 };
 </script>

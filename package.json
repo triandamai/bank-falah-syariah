@@ -60,7 +60,7 @@
     "vue-multiselect": "^2.1.6",
     "vue-notification": "^1.3.16",
     "vue-paypal-checkout": "^3.2.0",
-    "vue-pdf": "^4.2.0",
+    "vue-pdf-cdn": "^1.0.10",
     "vue-perfect-scrollbar": "^0.2.0",
     "vue-rate-it": "^2.1.0",
     "vue-router": "^3.1.3",
@@ -84,7 +84,8 @@
     "vuejs-datepicker": "^1.6.2",
     "vuejs-smart-table": "0.0.5",
     "vuetify": "^2.4.0",
-    "vuex": "^3.1.1"
+    "vuex": "^3.1.1",
+    "worker-loader": "^3.0.8"
   },
   "devDependencies": {
     "@mdi/font": "^5.9.55",
