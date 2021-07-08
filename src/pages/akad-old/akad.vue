@@ -1,13 +1,13 @@
 <template>
   <div>
-    <Breadcrumbs title="Produk" />
+    <Breadcrumbs title="Akad" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Master Data Produk</h5>
+              <h5>Master Data Akad</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
@@ -16,7 +16,7 @@
               <data-table
                 :items="items"
                 :headers="headers"
-                @add="formproduk = true"
+                @add="onAdd"
                 @edit="onEdit"
                 @delete="onDelete"
               />
@@ -26,37 +26,37 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-produk
-      :show="formproduk"
+    <form-akad
+      :show="formakad"
       :body="body"
+      @close="formakad = false"
       @submit="onSubmit"
-      @close="formproduk = false"
     />
   </div>
 </template>
 
 <script>
-import header from "../../data/headerproduk.json";
+import header from "../../data/headerakad.json";
 import {
   ACTION_GET_DATA_MASTER,
   ACTION_POST_DATA_MASTER,
   ACTION_PUT_DATA_MASTER,
   ACTION_DELETE_DATA_MASTER,
-  MPRODUK,
+  MAKAD,
 } from "../../store/modules/master";
 import { mapState } from "vuex";
 export default {
   data: () => {
     return {
       headers: header,
-      formproduk: false,
+      formakad: false,
       body: {},
       isEdit: false,
     };
   },
   computed: {
     ...mapState({
-      items: (state) => state.master.dataproduk,
+      items: (state) => state.master.dataakad,
     }),
   },
   created() {
@@ -66,7 +66,7 @@ export default {
     getData() {
       this.$store
         .dispatch(ACTION_GET_DATA_MASTER, {
-          type: MPRODUK,
+          type: MAKAD,
         })
         .then((isNext) => {
           if (isNext) {
@@ -79,7 +79,7 @@ export default {
         .dispatch(
           this.isEdit ? ACTION_PUT_DATA_MASTER : ACTION_POST_DATA_MASTER,
           {
-            type: MPRODUK,
+            type: MAKAD,
             body: data,
           }
         )
@@ -100,26 +100,15 @@ export default {
               this.onAdd();
               return;
             }
-            this.formproduk = false;
-            this.body = {};
+            this.formakad = false;
           }
         });
     },
-    onAdd() {
-      this.formproduk = true;
-      this.body = {};
-      this.isEdit = false;
-    },
-    onEdit(data) {
-      this.formproduk = true;
-      this.body = data;
-      this.isEdit = data;
-    },
     onDelete(data) {
       this.$swal({
-        text: `Hapus ${data.nama_produk}?`,
+        text: this.$t("Delete Message", { who: `${data.nama_akad}` }),
         showCancelButton: true,
-        confirmButtonText: "Oke",
+        confirmButtonText: "Hapus",
         confirmButtonColor: "#4466f2",
         cancelButtonText: "Batal",
         cancelButtonColor: "#efefef",
@@ -128,7 +117,7 @@ export default {
         if (value) {
           this.$store
             .dispatch(ACTION_DELETE_DATA_MASTER, {
-              type: MPRODUK,
+              type: MAKAD,
               body: data,
             })
             .then(({ success, message }) => {
@@ -146,6 +135,16 @@ export default {
             });
         }
       });
+    },
+    onAdd() {
+      this.body = { active: 1 };
+      this.formakad = true;
+      this.isEdit = false;
+    },
+    onEdit(data) {
+      this.body = data;
+      this.formakad = true;
+      this.isEdit = true;
     },
   },
 };

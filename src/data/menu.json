@@ -64,15 +64,6 @@
           }
         },
         {
-          "path": "/main/produk",
-          "title": "Product",
-          "type": "link",
-          "privilage": {
-            "roles": ["all"],
-            "groups": ["all"]
-          }
-        },
-        {
           "path": "/main/pegawai",
           "title": "Employees",
           "type": "link",
@@ -91,33 +82,22 @@
           }
         },
         {
-          "title": "Rekening",
-          "type": "sub",
-          "active": false,
+          "path": "/main/simpanan",
+          "title": "Simpanan",
+          "type": "link",
           "privilage": {
             "roles": ["all"],
             "groups": ["all"]
-          },
-          "children": [
-            {
-              "path": "/main/pembiayaan",
-              "title": "Financing",
-              "type": "link",
-              "privilage": {
-                "roles": ["all"],
-                "groups": ["all"]
-              }
-            },
-            {
-              "path": "/main/tabungan",
-              "title": "Savings",
-              "type": "link",
-              "privilage": {
-                "roles": ["all"],
-                "groups": ["all"]
-              }
-            }
-          ]
+          }
+        },
+        {
+          "path": "/main/pembiayaan",
+          "title": "Pembiayaan",
+          "type": "link",
+          "privilage": {
+            "roles": ["all"],
+            "groups": ["all"]
+          }
         }
       ]
     },
@@ -135,22 +115,62 @@
       },
       "children": [
         {
-          "path": "/main/transaksi-tabungan",
-          "title": "Setor",
-          "type": "link",
+          "title": "Tabungan",
+          "type": "sub",
+          "active": false,
           "privilage": {
-            "roles": ["all"],
-            "groups": ["all"]
-          }
+            "roles": ["admin"],
+            "groups": ["admin"]
+          },
+          "children": [
+            {
+              "path": "/form/datepicker",
+              "title": "Setor",
+              "type": "link",
+              "privilage": {
+                "roles": ["admin"],
+                "groups": ["admin"]
+              }
+            },
+            {
+              "path": "/form/select2",
+              "title": "Tarik",
+              "type": "link",
+              "privilage": {
+                "roles": ["admin"],
+                "groups": ["admin"]
+              }
+            }
+          ]
         },
         {
-          "path": "/main/transaksi-tabungan",
-          "title": "Tarik",
-          "type": "link",
+          "title": "Pembiayaan",
+          "type": "sub",
+          "active": false,
           "privilage": {
-            "roles": ["all"],
-            "groups": ["all"]
-          }
+            "roles": ["admin"],
+            "groups": ["admin"]
+          },
+          "children": [
+            {
+              "path": "/form/datepicker",
+              "title": "Setor",
+              "type": "link",
+              "privilage": {
+                "roles": ["admin"],
+                "groups": ["admin"]
+              }
+            },
+            {
+              "path": "/form/select2",
+              "title": "Tarik",
+              "type": "link",
+              "privilage": {
+                "roles": ["admin"],
+                "groups": ["admin"]
+              }
+            }
+          ]
         }
       ]
     },

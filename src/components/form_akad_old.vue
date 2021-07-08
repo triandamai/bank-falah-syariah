@@ -7,40 +7,30 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>Form Produk</v-toolbar>
+        <v-toolbar color="primary" dark>Form Akad</v-toolbar>
         <v-card-text>
           <v-container>
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.nama_produk"
-                  label="Nama *"
+                  v-model="form.nama_akad"
+                  label="Nama Akad*"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.tipe_produk"
-                  label="Tipe *"
+                  v-model="form.tipe_akad"
+                  label="Tipe Akad*"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.kode_produk"
-                  label="Kode *"
+                  v-model="form.kode_akad"
+                  label="Kode Akad*"
                   required
                 ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-autocomplete
-                  v-model="form.akad_id"
-                  :items="itemsakad"
-                  item-text="nama_akad"
-                  item-value="id"
-                  label="Akad *"
-                  required
-                ></v-autocomplete>
               </v-col>
             </v-row>
           </v-container>
@@ -62,28 +52,17 @@
   </v-dialog>
 </template>
 <script>
-import { mapState } from "vuex";
 export default {
   props: ["show", "body"],
   data: () => {
     return {
-      dialogakad: false,
-
       form: {
-        nama_produk: "",
-        kode_produk: "",
-        tipe_produk: "",
-        akad_id: "",
+        active: 1,
       },
     };
   },
-  computed: {
-    ...mapState({
-      itemsakad: (state) => state.master.dataakad,
-    }),
-  },
   watch: {
-    body: function (newVal) {
+    body: function(newVal) {
       this.form = newVal;
     },
   },

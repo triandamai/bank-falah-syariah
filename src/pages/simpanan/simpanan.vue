@@ -1,13 +1,13 @@
 <template>
   <div>
-    <Breadcrumbs title="Produk" />
+    <Breadcrumbs title="Tabungan" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Master Data Produk</h5>
+              <h5>Rekening Tabungan</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
@@ -16,7 +16,7 @@
               <data-table
                 :items="items"
                 :headers="headers"
-                @add="formproduk = true"
+                @add="onAdd"
                 @edit="onEdit"
                 @delete="onDelete"
               />
@@ -26,37 +26,37 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-produk
-      :show="formproduk"
+    <form-tabungan
+      :show="formtabungan"
       :body="body"
       @submit="onSubmit"
-      @close="formproduk = false"
+      @close="formtabungan = false"
     />
   </div>
 </template>
 
 <script>
-import header from "../../data/headerproduk.json";
+import header from "@/data/headersimpanan.json";
 import {
-  ACTION_GET_DATA_MASTER,
-  ACTION_POST_DATA_MASTER,
-  ACTION_PUT_DATA_MASTER,
-  ACTION_DELETE_DATA_MASTER,
-  MPRODUK,
-} from "../../store/modules/master";
+  ACTION_DELETE_DATA_REKENING,
+  ACTION_GET_DATA_REKENING,
+  ACTION_POST_DATA_REKENING,
+  ACTION_PUT_DATA_REKENING,
+  RTABUNGAN,
+} from "@/store/modules/rekening";
 import { mapState } from "vuex";
 export default {
   data: () => {
     return {
+      formtabungan: false,
       headers: header,
-      formproduk: false,
       body: {},
       isEdit: false,
     };
   },
   computed: {
     ...mapState({
-      items: (state) => state.master.dataproduk,
+      items: (state) => state.rekening.datasimpanan,
     }),
   },
   created() {
@@ -65,8 +65,8 @@ export default {
   methods: {
     getData() {
       this.$store
-        .dispatch(ACTION_GET_DATA_MASTER, {
-          type: MPRODUK,
+        .dispatch(ACTION_GET_DATA_REKENING, {
+          type: RTABUNGAN,
         })
         .then((isNext) => {
           if (isNext) {
@@ -77,9 +77,9 @@ export default {
     onSubmit(data) {
       this.$store
         .dispatch(
-          this.isEdit ? ACTION_PUT_DATA_MASTER : ACTION_POST_DATA_MASTER,
+          this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING,
           {
-            type: MPRODUK,
+            type: RTABUNGAN,
             body: data,
           }
         )
@@ -100,24 +100,24 @@ export default {
               this.onAdd();
               return;
             }
-            this.formproduk = false;
+            this.formsimpanan = false;
             this.body = {};
           }
         });
     },
     onAdd() {
-      this.formproduk = true;
-      this.body = {};
+      this.formsimpanan = true;
       this.isEdit = false;
+      this.body = {};
     },
     onEdit(data) {
-      this.formproduk = true;
+      this.formsimpanan = true;
+      this.isEdit = true;
       this.body = data;
-      this.isEdit = data;
     },
     onDelete(data) {
       this.$swal({
-        text: `Hapus ${data.nama_produk}?`,
+        text: this.$t("Delete Message", { who: `${data}` }),
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",
@@ -127,8 +127,8 @@ export default {
       }).then(({ value }) => {
         if (value) {
           this.$store
-            .dispatch(ACTION_DELETE_DATA_MASTER, {
-              type: MPRODUK,
+            .dispatch(ACTION_DELETE_DATA_REKENING, {
+              type: RTABUNGAN,
               body: data,
             })
             .then(({ success, message }) => {

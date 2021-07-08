@@ -23,358 +23,457 @@
             Data pendukung
           </v-stepper-step>
           <v-divider></v-divider>
+          <v-stepper-step :complete="step > 5" step="5">
+            Data Keanggotaan
+          </v-stepper-step>
+          <v-divider></v-divider>
         </v-stepper-header>
 
         <v-stepper-items>
           <v-stepper-content step="1">
-            <v-row>
-              <v-col cols="12" sm="12" md="6" class="my-2">
-                <v-text-field
-                  v-model="form.kode_nasabah"
-                  label="Kode Nasabah"
-                  placeholder="kode Nasabah"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="12" md="6" class="my-2">
-                <v-text-field
-                  v-model="form.nama_lengkap"
-                  label="Nama Lengkap"
-                  placeholder="Nama Lengkap"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12" sm="12" md="12" class="my-2">
-                <v-text-field
-                  v-model="form.nama_panggilan"
-                  label="Nama panggilan"
-                  placeholder="Nama Panggilan"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
+            <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
+              <v-row>
+                <v-col cols="12" sm="12" md="6">
+                  <v-text-field
+                    v-model="form.kode_nasabah"
+                    label="Kode Nasabah"
+                    placeholder="kode Nasabah"
+                    outlined
+                    dense
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="12" md="6">
+                  <v-text-field
+                    v-model="form.nama_lengkap"
+                    label="Nama Lengkap"
+                    placeholder="Nama Lengkap"
+                    outlined
+                    dense
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12" sm="12" md="12">
+                  <v-text-field
+                    v-model="form.nama_panggilan"
+                    label="Nama panggilan"
+                    placeholder="Nama Panggilan"
+                    outlined
+                    dense
+                  ></v-text-field>
+                </v-col>
 
-              <v-col class="d-flex" cols="12" sm="12">
-                <v-select
-                  :items="jenis_kelamin"
-                  v-model="form.jenis_kelamin"
-                  item-text="label"
-                  item-value="value"
-                  label="Jenis Kelamin"
-                  auto-select-first
-                  dense
-                  outlined
-                ></v-select>
-              </v-col>
-              <v-col class="d-flex" cols="12" sm="12">
-                <v-select
-                  :items="jenis_identitas"
-                  v-model="form.jenis_identitas_id"
-                  item-text="label"
-                  item-value="value"
-                  label="Jenis Identitas"
-                  auto-select-first
-                  dense
-                  outlined
-                /> </v-col
-              ><v-col cols="12" sm="12" md="12" class="my-2">
-                <v-text-field
-                  v-model="form.no_identitas"
-                  label="Nomor Identitas"
-                  placeholder="Nomor Identitas"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
-              <v-col class="d-flex" cols="12" sm="12">
-                <v-select
-                  :items="agama"
-                  v-model="form.agama_id"
-                  item-text="label"
-                  item-value="value"
-                  label="Agama"
-                  auto-select-first
-                  dense
-                  outlined
-                />
-              </v-col>
-              <v-col class="d-flex" cols="12" sm="12">
-                <v-select
-                  :items="pendidikan"
-                  v-model="form.pendidikan_id"
-                  item-text="label"
-                  item-value="value"
-                  label="Pendidikan"
-                  auto-select-first
-                  dense
-                  outlined
-                />
-              </v-col>
-              <v-col class="d-flex" cols="12" sm="12">
-                <v-select
-                  :items="status_martial"
-                  v-model="form.status_martial_id"
-                  item-text="label"
-                  item-value="value"
-                  label="Status Martial"
-                  auto-select-first
-                  dense
-                  outlined
-                />
-              </v-col>
-              <v-col cols="12" sm="12" md="12" class="my-2">
-                <v-text-field
-                  v-model="form.nama_ibu_kandung"
-                  label="Nama Ibu Kandung"
-                  placeholder="Nama Ibu Kandung"
-                  outlined
-                  dense
-                ></v-text-field>
-              </v-col>
+                <v-col class="d-flex" cols="12" sm="12">
+                  <v-select
+                    :items="jenis_kelamin"
+                    v-model="form.jenis_kelamin"
+                    item-text="label"
+                    item-value="value"
+                    label="Jenis Kelamin"
+                    auto-select-first
+                    dense
+                    outlined
+                    small-chips
+                  ></v-select>
+                </v-col>
+                <v-col class="d-flex" cols="12" sm="12">
+                  <v-select
+                    :items="jenis_identitas"
+                    v-model="form.jenis_identitas_id"
+                    item-text="label"
+                    item-value="value"
+                    label="Jenis Identitas"
+                    auto-select-first
+                    dense
+                    outlined
+                    small-chips
+                  /> </v-col
+                ><v-col cols="12" sm="12" md="12">
+                  <v-text-field
+                    v-model="form.no_identitas"
+                    label="Nomor Identitas"
+                    placeholder="Nomor Identitas"
+                    outlined
+                    dense
+                  ></v-text-field>
+                </v-col>
+                <v-col class="d-flex" cols="12" sm="12">
+                  <v-select
+                    :items="agama"
+                    v-model="form.agama_id"
+                    item-text="label"
+                    item-value="value"
+                    label="Agama"
+                    auto-select-first
+                    dense
+                    outlined
+                    small-chips
+                  />
+                </v-col>
+                <v-col class="d-flex" cols="12" sm="12">
+                  <v-select
+                    :items="pendidikan"
+                    v-model="form.pendidikan_id"
+                    item-text="label"
+                    item-value="value"
+                    label="Pendidikan"
+                    auto-select-first
+                    small-chips
+                    dense
+                    outlined
+                  />
+                </v-col>
+                <v-col class="d-flex" cols="12" sm="12">
+                  <v-select
+                    :items="status_martial"
+                    v-model="form.status_martial_id"
+                    item-text="label"
+                    item-value="value"
+                    label="Status Martial"
+                    auto-select-first
+                    small-chips
+                    dense
+                    outlined
+                  />
+                </v-col>
+                <v-col cols="12" sm="12" md="12">
+                  <v-text-field
+                    v-model="form.nama_ibu_kandung"
+                    label="Nama Ibu Kandung"
+                    placeholder="Nama Ibu Kandung"
+                    outlined
+                    dense
+                  ></v-text-field>
+                </v-col>
 
-              <v-col cols="12" sm="12" md="12">
-                <v-menu
-                  ref="datepicker"
-                  v-model="datepicker"
-                  :close-on-content-click="false"
-                  transition="scale-transition"
-                  offset-y
-                  min-width="auto"
-                >
-                  <template v-slot:activator="{ on, attrs }">
-                    <v-text-field
+                <v-col cols="12" sm="12" md="12">
+                  <v-menu
+                    ref="datepicker"
+                    v-model="datepicker"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="form.tanggal_lahir"
+                        label="Tanggal Lahir"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                        dense
+                        outlined
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      ref="picker"
                       v-model="form.tanggal_lahir"
-                      label="Tanggal Lahir"
-                      readonly
-                      v-bind="attrs"
-                      v-on="on"
-                      dense
-                      outlined
-                    ></v-text-field>
-                  </template>
-                  <v-date-picker
-                    ref="picker"
-                    v-model="form.tanggal_lahir"
-                    :max="new Date().toISOString().substr(0, 10)"
-                    min="1950-01-01"
-                    @change="save"
-                  ></v-date-picker>
-                </v-menu>
-              </v-col>
-            </v-row>
-            <v-btn @click="step = 2" outlined small> Selanjutnya </v-btn>
-            <v-btn @click="goBack" text> Sebelumnya </v-btn>
+                      :max="new Date().toISOString().substr(0, 10)"
+                      min="1950-01-01"
+                      @change="save"
+                    ></v-date-picker>
+                  </v-menu>
+                </v-col>
+              </v-row>
+              <v-btn @click="step = 2" outlined small> Selanjutnya </v-btn>
+              <v-btn @click="goBack" text> Sebelumnya </v-btn>
+            </v-container>
           </v-stepper-content>
 
           <v-stepper-content step="2">
-            <v-row>
-              <v-col cols="12" md="6" lg="6" sm="12">
-                <v-autocomplete
-                  v-model="form.provinsi"
-                  label="Provinsi *"
-                  :items="provinsi"
-                  item-text="provNama"
-                  @change="provinsiChange"
-                  auto-select-first
-                  return-object
-                  outlined
-                  required
-                  small
-                ></v-autocomplete>
-              </v-col>
-              <v-col cols="12" md="6" lg="6" sm="12">
-                <v-autocomplete
-                  label="Kabupaten *"
-                  v-model="form.kabupaten"
-                  :items="kabupaten"
-                  item-text="kabNama"
-                  @change="kabupatenChange"
-                  auto-select-first
-                  return-object
-                  outlined
-                  required
-                  small
-                ></v-autocomplete>
-              </v-col>
-              <v-col cols="12" md="6" lg="6" sm="12">
-                <v-autocomplete
-                  label="Kecamatan *"
-                  v-model="form.kecamatan"
-                  :items="kecamatan"
-                  item-text="kecNama"
-                  @change="kecamatanChange"
-                  auto-select-first
-                  return-object
-                  outlined
-                  required
-                  small
-                ></v-autocomplete>
-              </v-col>
-              <v-col cols="12" md="6" lg="6" sm="12">
-                <v-autocomplete
-                  label="Desa *"
-                  v-model="form.desa"
-                  :items="desa"
-                  item-text="desNama"
-                  auto-select-first
-                  return-object
-                  outlined
-                  required
-                  small
-                ></v-autocomplete>
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.alamat"
-                  label="Alamat"
-                  placeholder="Alamat Lengkap"
-                  outlined
-                  dense
-                />
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.tlpkantor"
-                  label="Telp Kantor"
-                  placeholder="No Telpon Kantor"
-                  outlined
-                  dense
-                />
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.no_hp"
-                  label="Hp"
-                  placeholder="No Handphone"
-                  outlined
-                  dense
-                />
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.email"
-                  label="Email"
-                  placeholder="Email"
-                  outlined
-                  dense
-                /> </v-col
-            ></v-row>
-            <v-btn @click="step = 3" outlined small> Selanjutnya </v-btn>
+            <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
+              <v-row class="mx-2">
+                <v-col cols="12" md="6" lg="6" sm="12">
+                  <v-autocomplete
+                    v-model="form.provinsi"
+                    label="Provinsi *"
+                    :items="provinsi"
+                    item-text="provNama"
+                    @change="provinsiChange"
+                    auto-select-first
+                    return-object
+                    outlined
+                    required
+                    dense
+                    small-chips
+                  ></v-autocomplete>
+                </v-col>
+                <v-col cols="12" md="6" lg="6" sm="12">
+                  <v-autocomplete
+                    label="Kabupaten *"
+                    v-model="form.kabupaten"
+                    :items="kabupaten"
+                    item-text="kabNama"
+                    @change="kabupatenChange"
+                    auto-select-first
+                    return-object
+                    outlined
+                    required
+                    dense
+                    small-chips
+                  ></v-autocomplete>
+                </v-col>
+                <v-col cols="12" md="6" lg="6" sm="12">
+                  <v-autocomplete
+                    label="Kecamatan *"
+                    v-model="form.kecamatan"
+                    :items="kecamatan"
+                    item-text="kecNama"
+                    @change="kecamatanChange"
+                    auto-select-first
+                    return-object
+                    outlined
+                    dense
+                    required
+                    small-chips
+                  ></v-autocomplete>
+                </v-col>
+                <v-col cols="12" md="6" lg="6" sm="12">
+                  <v-autocomplete
+                    label="Desa *"
+                    v-model="form.desa"
+                    :items="desa"
+                    item-text="desNama"
+                    auto-select-first
+                    return-object
+                    outlined
+                    required
+                    dense
+                    small-chips
+                  ></v-autocomplete>
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.alamat"
+                    label="Alamat"
+                    placeholder="Alamat Lengkap"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.tlpkantor"
+                    label="Telp Kantor"
+                    placeholder="No Telpon Kantor"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.no_hp"
+                    label="Hp"
+                    placeholder="No Handphone"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.email"
+                    label="Email"
+                    placeholder="Email"
+                    outlined
+                    dense
+                  /> </v-col
+              ></v-row>
+              <v-btn @click="step = 3" outlined small> Selanjutnya </v-btn>
 
-            <v-btn @click="goBack" text> Sebelumnya </v-btn>
+              <v-btn @click="goBack" text> Sebelumnya </v-btn>
+            </v-container>
           </v-stepper-content>
 
           <v-stepper-content step="3">
-            <v-row>
-              <v-col class="d-flex" cols="12" sm="12">
-                <v-select
-                  :items="jenis_pekerjaan"
-                  v-model="form.jenis_pekerjaan_id"
-                  item-text="label"
-                  item-value="value"
-                  label="Pekerjaan"
-                  auto-select-first
-                  dense
-                  outlined
-                />
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.nama_perusahaan"
-                  label="Nama Perusahaan"
-                  placeholder="Nama Perusahaan"
-                  outlined
-                  dense
-                />
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.nama_atasan"
-                  label="Nama Atasan"
-                  placeholder="Nama Atasan"
-                  outlined
-                  dense
-                />
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.penghasilan_perbulan"
-                  label="Penghasilan Perbulan"
-                  placeholder="Penghasilan Perbulan"
-                  outlined
-                  dense
-                />
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.penghasilan_pertahun"
-                  label="Penghasilan Pertahun"
-                  placeholder="Penghasilan Pertahun"
-                  outlined
-                  dense
-                />
-              </v-col>
-            </v-row>
-            <v-btn @click="step = 4" outlined small> Selanjutnya </v-btn>
+            <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
+              <v-row>
+                <v-col class="d-flex" cols="12" sm="12">
+                  <v-select
+                    :items="jenis_pekerjaan"
+                    v-model="form.jenis_pekerjaan_id"
+                    item-text="label"
+                    item-value="value"
+                    label="Pekerjaan"
+                    auto-select-first
+                    dense
+                    outlined
+                    small-chips
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.nama_perusahaan"
+                    label="Nama Perusahaan"
+                    placeholder="Nama Perusahaan"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.nama_atasan"
+                    label="Nama Atasan"
+                    placeholder="Nama Atasan"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.penghasilan_perbulan"
+                    label="Penghasilan Perbulan"
+                    placeholder="Penghasilan Perbulan"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.penghasilan_pertahun"
+                    label="Penghasilan Pertahun"
+                    placeholder="Penghasilan Pertahun"
+                    outlined
+                    dense
+                  />
+                </v-col>
+              </v-row>
+              <v-btn @click="step = 4" outlined small> Selanjutnya </v-btn>
 
-            <v-btn @click="goBack" text> Sebelumnya </v-btn>
+              <v-btn @click="goBack" text> Sebelumnya </v-btn>
+            </v-container>
           </v-stepper-content>
           <v-stepper-content step="4">
-            <v-row>
-              <v-col class="d-flex" cols="12" sm="12">
-                <v-select
-                  :items="jenis_pekerjaan"
-                  v-model="form.jenis_pekerjaan_id"
-                  item-text="label"
-                  item-value="value"
-                  label="Pekerjaan"
-                  auto-select-first
-                  dense
-                  outlined
-                />
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.nama_perusahaan"
-                  label="Nama Perusahaan"
-                  placeholder="Nama Perusahaan"
-                  outlined
-                  dense
-                />
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.nama_atasan"
-                  label="Nama Atasan"
-                  placeholder="Nama Atasan"
-                  outlined
-                  dense
-                />
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.penghasilan_perbulan"
-                  label="Penghasilan Perbulan"
-                  placeholder="Penghasilan Perbulan"
-                  outlined
-                  dense
-                />
-              </v-col>
-              <v-col cols="12" sm="12" class="my-2">
-                <v-text-field
-                  v-model="form.penghasilan_pertahun"
-                  label="Penghasilan Pertahun"
-                  placeholder="Penghasilan Pertahun"
-                  outlined
-                  dense
-                />
-              </v-col>
-            </v-row>
-            <v-btn @click="onSubmit" outlined small> Simpan </v-btn>
+            <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
+              <v-row>
+                <v-col class="d-flex" cols="12" sm="12">
+                  <v-select
+                    :items="jenis_pekerjaan"
+                    v-model="form.jenis_pekerjaan_id"
+                    item-text="label"
+                    item-value="value"
+                    label="Pekerjaan"
+                    auto-select-first
+                    dense
+                    outlined
+                    small-chips
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.nama_perusahaan"
+                    label="Nama Perusahaan"
+                    placeholder="Nama Perusahaan"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.nama_atasan"
+                    label="Nama Atasan"
+                    placeholder="Nama Atasan"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.penghasilan_perbulan"
+                    label="Penghasilan Perbulan"
+                    placeholder="Penghasilan Perbulan"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.penghasilan_pertahun"
+                    label="Penghasilan Pertahun"
+                    placeholder="Penghasilan Pertahun"
+                    outlined
+                    dense
+                  />
+                </v-col>
+              </v-row>
+              <v-btn @click="step = 5" outlined small> Selanjutnya </v-btn>
 
-            <v-btn @click="goBack" text> Sebelumnya </v-btn>
+              <v-btn @click="goBack" text> Sebelumnya </v-btn>
+            </v-container>
+          </v-stepper-content>
+          <v-stepper-content step="5">
+            <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="form.rasio_nasabah"
+                    label="Rasio Nasabah*"
+                    required
+                    dense
+                    outlined
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    v-model="form.rasio_bank"
+                    label="Rasio Bank*"
+                    required
+                    dense
+                    outlined
+                  ></v-text-field>
+                </v-col>
+                <v-col class="d-flex" cols="12" sm="12">
+                  <v-select
+                    :items="jenis_pekerjaan"
+                    v-model="form.jenis_pekerjaan_id"
+                    item-text="label"
+                    item-value="value"
+                    label="Pekerjaan"
+                    auto-select-first
+                    dense
+                    outlined
+                    small-chips
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.nama_perusahaan"
+                    label="Nama Perusahaan"
+                    placeholder="Nama Perusahaan"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.nama_atasan"
+                    label="Nama Atasan"
+                    placeholder="Nama Atasan"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.penghasilan_perbulan"
+                    label="Penghasilan Perbulan"
+                    placeholder="Penghasilan Perbulan"
+                    outlined
+                    dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12">
+                  <v-text-field
+                    v-model="form.penghasilan_pertahun"
+                    label="Penghasilan Pertahun"
+                    placeholder="Penghasilan Pertahun"
+                    outlined
+                    dense
+                  />
+                </v-col>
+              </v-row>
+              <v-btn @click="onSubmit" outlined small> Simpan </v-btn>
+
+              <v-btn @click="goBack" text> Sebelumnya </v-btn>
+            </v-container>
           </v-stepper-content>
         </v-stepper-items>
       </v-stepper>
@@ -456,7 +555,7 @@ export default {
     };
   },
   watch: {
-    body: function (newVal) {
+    body: function(newVal) {
       this.form = newVal;
     },
   },
@@ -552,4 +651,3 @@ export default {
   },
 };
 </script>
-

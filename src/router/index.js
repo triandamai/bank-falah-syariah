@@ -145,15 +145,15 @@ const routes = [
         },
       },
       //
-      {
-        path: "produk",
-        name: "produk",
-        component: () => import("@/pages/produk/produk.vue"),
-        meta: {
-          title: "Produk | Bank Falah Syariah",
-          reqiresAuth: true,
-        },
-      },
+      // {
+      //   path: "produk",
+      //   name: "produk",
+      //   component: () => import("@/pages/produk/produk.vue"),
+      //   meta: {
+      //     title: "Produk | Bank Falah Syariah",
+      //     reqiresAuth: true,
+      //   },
+      // },
       //
       {
         path: "jabatan",
@@ -196,11 +196,11 @@ const routes = [
       },
       //
       {
-        path: "tabungan",
-        name: "tabungan",
-        component: () => import("@/pages/tabungan/tabungan.vue"),
+        path: "simpanan",
+        name: "simpanan",
+        component: () => import("@/pages/simpanan/simpanan.vue"),
         meta: {
-          title: "Tabungan | Bank Falah Syariah",
+          title: "Simpanan | Bank Falah Syariah",
           reqiresAuth: true,
         },
       },

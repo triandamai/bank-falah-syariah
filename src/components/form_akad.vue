@@ -7,44 +7,40 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>Form Akad</v-toolbar>
+        <v-toolbar color="primary" dark>Form Produk</v-toolbar>
         <v-card-text>
           <v-container>
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.nama_akad"
-                  label="Nama Akad*"
+                  v-model="form.nama_produk"
+                  label="Nama *"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.tipe_akad"
-                  label="Tipe Akad*"
+                  v-model="form.tipe_produk"
+                  label="Tipe *"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.kode_akad"
-                  label="Kode Akad*"
+                  v-model="form.kode_produk"
+                  label="Kode *"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field
-                  v-model="form.rasio_nasabah"
-                  label="Rasio Nasabah*"
+                <v-autocomplete
+                  v-model="form.akad_id"
+                  :items="itemsakad"
+                  item-text="nama_akad"
+                  item-value="id"
+                  label="Akad *"
                   required
-                ></v-text-field>
-              </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  v-model="form.rasio_bank"
-                  label="Rasio Bank*"
-                  required
-                ></v-text-field>
+                ></v-autocomplete>
               </v-col>
             </v-row>
           </v-container>
@@ -66,14 +62,25 @@
   </v-dialog>
 </template>
 <script>
+import { mapState } from "vuex";
 export default {
   props: ["show", "body"],
   data: () => {
     return {
+      dialogakad: false,
+
       form: {
-        active: 1,
+        nama_produk: "",
+        kode_produk: "",
+        tipe_produk: "",
+        akad_id: "",
       },
     };
+  },
+  computed: {
+    ...mapState({
+      itemsakad: (state) => state.master.dataakad,
+    }),
   },
   watch: {
     body: function (newVal) {
