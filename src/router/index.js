@@ -33,12 +33,12 @@ const routes = [
     path: "/main",
     component: () => import("../components/body"),
     meta: {
-      reqiresAuth: true
+      reqiresAuth: true,
     },
     children: [
       {
         path: "",
-        redirect: "dashboard"
+        redirect: "dashboard",
       },
       {
         path: "dashboard",
@@ -46,8 +46,8 @@ const routes = [
         component: () => import("@/pages/dashboard/dashboard.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
@@ -56,8 +56,8 @@ const routes = [
         component: () => import("@/pages/nasabah/nasabah.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       {
         path: "nasabah/add",
@@ -65,8 +65,8 @@ const routes = [
         component: () => import("@/pages/nasabah/addnasabah.vue"),
         meta: {
           title: "Nasabah | Add",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       {
         path: "nasabah/edit/:id",
@@ -74,8 +74,8 @@ const routes = [
         component: () => import("@/pages/nasabah/editnasabah.vue"),
         meta: {
           title: "Nasabah | Add",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       /**
        * laporan/Report
@@ -87,22 +87,22 @@ const routes = [
         component: () => import("@/pages/laporan-teller/laporan-teller.vue"),
         meta: {
           title: "Laporan | Teller",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       /**
        * Transaction
        *
        */
       {
-        path: "transaksi-simpanan",
-        name: "transaksi-simpanan",
+        path: "transaksi-tabungan",
+        name: "transaksi-tabungan",
         component: () =>
-          import("@/pages/transaksi-simpanan/transaksi-simpanan.vue"),
+          import("@/pages/transaksi-tabungan/transaksi-tabungan.vue"),
         meta: {
           title: "Laporan | Teller",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       {
         path: "transaksi-pembiayaan",
@@ -111,8 +111,8 @@ const routes = [
           import("@/pages/transaksi-pembiayaan/transaksi-pembiayaan.vue"),
         meta: {
           title: "Laporan | Teller",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
@@ -121,8 +121,8 @@ const routes = [
         component: () => import("@/pages/akad/akad.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
@@ -131,8 +131,8 @@ const routes = [
         component: () => import("@/pages/jenistransaksi/jenistransaksi.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
@@ -141,8 +141,8 @@ const routes = [
         component: () => import("@/pages/produk/produk.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
@@ -151,8 +151,8 @@ const routes = [
         component: () => import("@/pages/jabatan/jabatan.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
@@ -161,8 +161,8 @@ const routes = [
         component: () => import("@/pages/pegawai/pegawai.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
@@ -171,8 +171,8 @@ const routes = [
         component: () => import("@/pages/deposito/deposito.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
@@ -181,18 +181,18 @@ const routes = [
         component: () => import("@/pages/pembiayaan/pembiayaan.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
-        path: "simpanan",
-        name: "simpanan",
-        component: () => import("@/pages/simpanan/simpanan.vue"),
+        path: "tabungan",
+        name: "tabungan",
+        component: () => import("@/pages/tabungan/tabungan.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
@@ -201,8 +201,8 @@ const routes = [
         component: () => import("@/pages/user/user.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
 
       //
@@ -212,8 +212,8 @@ const routes = [
         component: () => import("@/pages/group/group.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
@@ -222,8 +222,8 @@ const routes = [
         component: () => import("@/pages/menu/menu.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
+          reqiresAuth: true,
+        },
       },
       //
       {
@@ -232,16 +232,16 @@ const routes = [
         component: () => import("@/pages/role/role.vue"),
         meta: {
           title: "Default Dashboard | Endless - Premium Admin Template",
-          reqiresAuth: true
-        }
-      }
-    ]
+          reqiresAuth: true,
+        },
+      },
+    ],
   },
   {
     path: "/login",
     name: "login",
-    component: () => import("@/pages/auth/login.vue")
-  }
+    component: () => import("@/pages/auth/login.vue"),
+  },
 ];
 
 /**
@@ -255,7 +255,7 @@ const router = new Router({
   linkActiveClass: "active",
   scrollBehavior() {
     return { x: 0, y: 0 };
-  }
+  },
 });
 
 /**

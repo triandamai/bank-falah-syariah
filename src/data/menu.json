@@ -6,12 +6,8 @@
       "type": "headtitle",
       "path": "General",
       "privilage": {
-        "roles": [
-          "admin"
-        ],
-        "groups": [
-          "admin"
-        ]
+        "roles": ["admin"],
+        "groups": ["admin"]
       }
     },
     {
@@ -21,12 +17,8 @@
       "type": "link",
       "active": false,
       "privilage": {
-        "roles": [
-          "admin"
-        ],
-        "groups": [
-          "admin"
-        ]
+        "roles": ["admin"],
+        "groups": ["admin"]
       }
     },
     {
@@ -36,12 +28,8 @@
       "type": "link",
       "active": false,
       "privilage": {
-        "roles": [
-          "admin"
-        ],
-        "groups": [
-          "admin"
-        ]
+        "roles": ["admin"],
+        "groups": ["admin"]
       }
     },
     {
@@ -53,12 +41,8 @@
       "active": false,
       "path": "Master Data",
       "privilage": {
-        "roles": [
-          "admin"
-        ],
-        "groups": [
-          "admin"
-        ]
+        "roles": ["admin"],
+        "groups": ["admin"]
       },
       "children": [
         {
@@ -66,12 +50,8 @@
           "title": "Akad",
           "type": "link",
           "privilage": {
-            "roles": [
-              "all"
-            ],
-            "groups": [
-              "all"
-            ]
+            "roles": ["all"],
+            "groups": ["all"]
           }
         },
         {
@@ -79,12 +59,8 @@
           "title": "Type of Transaction",
           "type": "link",
           "privilage": {
-            "roles": [
-              "all"
-            ],
-            "groups": [
-              "all"
-            ]
+            "roles": ["all"],
+            "groups": ["all"]
           }
         },
         {
@@ -92,25 +68,8 @@
           "title": "Product",
           "type": "link",
           "privilage": {
-            "roles": [
-              "all"
-            ],
-            "groups": [
-              "all"
-            ]
-          }
-        },
-        {
-          "path": "/main/jabatan",
-          "title": "Departement",
-          "type": "link",
-          "privilage": {
-            "roles": [
-              "all"
-            ],
-            "groups": [
-              "all"
-            ]
+            "roles": ["all"],
+            "groups": ["all"]
           }
         },
         {
@@ -118,39 +77,47 @@
           "title": "Employees",
           "type": "link",
           "privilage": {
-            "roles": [
-              "all"
-            ],
-            "groups": [
-              "all"
-            ]
+            "roles": ["all"],
+            "groups": ["all"]
           }
         },
         {
-          "path": "/main/pembiayaan",
-          "title": "Financing",
+          "path": "/main/jabatan",
+          "title": "Departement",
           "type": "link",
           "privilage": {
-            "roles": [
-              "all"
-            ],
-            "groups": [
-              "all"
-            ]
+            "roles": ["all"],
+            "groups": ["all"]
           }
         },
         {
-          "path": "/main/simpanan",
-          "title": "Savings",
-          "type": "link",
+          "title": "Rekening",
+          "type": "sub",
+          "active": false,
           "privilage": {
-            "roles": [
-              "all"
-            ],
-            "groups": [
-              "all"
-            ]
-          }
+            "roles": ["all"],
+            "groups": ["all"]
+          },
+          "children": [
+            {
+              "path": "/main/pembiayaan",
+              "title": "Financing",
+              "type": "link",
+              "privilage": {
+                "roles": ["all"],
+                "groups": ["all"]
+              }
+            },
+            {
+              "path": "/main/tabungan",
+              "title": "Savings",
+              "type": "link",
+              "privilage": {
+                "roles": ["all"],
+                "groups": ["all"]
+              }
+            }
+          ]
         }
       ]
     },
@@ -163,54 +130,27 @@
       "active": false,
       "path": "Transaction",
       "privilage": {
-        "roles": [
-          "admin"
-        ],
-        "groups": [
-          "admin"
-        ]
+        "roles": ["admin"],
+        "groups": ["admin"]
       },
       "children": [
         {
-          "title": "Tabungan",
-          "type": "sub",
-          "active": false,
+          "path": "/main/transaksi-tabungan",
+          "title": "Setor",
+          "type": "link",
           "privilage": {
-            "roles": [
-              "all"
-            ],
-            "groups": [
-              "all"
-            ]
-          },
-          "children": [
-            {
-              "path": "/main/transaksi-simpanan",
-              "title": "Setor",
-              "type": "link",
-              "privilage": {
-                "roles": [
-                  "all"
-                ],
-                "groups": [
-                  "all"
-                ]
-              }
-            },
-            {
-              "path": "/main/transaksi-simpanan",
-              "title": "Tarik",
-              "type": "link",
-              "privilage": {
-                "roles": [
-                  "all"
-                ],
-                "groups": [
-                  "all"
-                ]
-              }
-            }
-          ]
+            "roles": ["all"],
+            "groups": ["all"]
+          }
+        },
+        {
+          "path": "/main/transaksi-tabungan",
+          "title": "Tarik",
+          "type": "link",
+          "privilage": {
+            "roles": ["all"],
+            "groups": ["all"]
+          }
         }
       ]
     },
@@ -223,12 +163,8 @@
       "active": false,
       "path": "Report",
       "privilage": {
-        "roles": [
-          "admin"
-        ],
-        "groups": [
-          "admin"
-        ]
+        "roles": ["admin"],
+        "groups": ["admin"]
       },
       "children": [
         {
@@ -236,12 +172,8 @@
           "title": "Report Teller",
           "type": "link",
           "privilage": {
-            "roles": [
-              "all"
-            ],
-            "groups": [
-              "all"
-            ]
+            "roles": ["all"],
+            "groups": ["all"]
           }
         }
       ]
@@ -252,12 +184,8 @@
       "type": "headtitle",
       "path": "Advance",
       "privilage": {
-        "roles": [
-          "admin"
-        ],
-        "groups": [
-          "admin"
-        ]
+        "roles": ["admin"],
+        "groups": ["admin"]
       }
     },
     {
@@ -269,12 +197,8 @@
       "active": false,
       "path": "System",
       "privilage": {
-        "roles": [
-          "admin"
-        ],
-        "groups": [
-          "admin"
-        ]
+        "roles": ["admin"],
+        "groups": ["admin"]
       },
       "children": [
         {
@@ -282,12 +206,8 @@
           "title": "User",
           "type": "link",
           "privilage": {
-            "roles": [
-              "all"
-            ],
-            "groups": [
-              "all"
-            ]
+            "roles": ["all"],
+            "groups": ["all"]
           }
         },
         {
@@ -295,12 +215,8 @@
           "title": "Preferences",
           "type": "link",
           "privilage": {
-            "roles": [
-              "all"
-            ],
-            "groups": [
-              "all"
-            ]
+            "roles": ["all"],
+            "groups": ["all"]
           }
         }
       ]

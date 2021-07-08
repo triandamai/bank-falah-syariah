@@ -34,7 +34,7 @@ import FormJenistransaksi from "@/components/form_jenistransaksi.vue";
 import FormNasabah from "@/components/form_nasabah.vue";
 import FormPembiayaan from "@/components/form_pembiayaan.vue";
 import FormProduk from "@/components/form_produk.vue";
-import FormSimpanan from "@/components/form_simpanan.vue";
+import FormTabungan from "@/components/form_tabungan.vue";
 import FormUser from "@/components/form_user.vue";
 import FormGroup from "@/components/form_group.vue";
 import FormMenu from "@/components/form_menu.vue";
@@ -65,7 +65,7 @@ Vue.component("form-jenistransaksi", FormJenistransaksi);
 Vue.component("form-nasabah", FormNasabah);
 Vue.component("form-pembiayaan", FormPembiayaan);
 Vue.component("form-produk", FormProduk);
-Vue.component("form-simpanan", FormSimpanan);
+Vue.component("form-tabungan", FormTabungan);
 Vue.component("form-user", FormUser);
 Vue.component("form-group", FormGroup);
 Vue.component("form-menu", FormMenu);
@@ -98,15 +98,15 @@ ApiService.init();
 Vue.use(VueFeather);
 
 Vue.use(Toasted, {
-  iconPack: "fontawesome"
+  iconPack: "fontawesome",
 });
 Vue.use(Vue2Dragula);
 
 Vue.use(VueGoogleMaps, {
   load: {
     key: "API_KEY",
-    libraries: "places"
-  }
+    libraries: "places",
+  },
 });
 
 Vue.use(Notifications);
@@ -120,14 +120,14 @@ Vue.use(require("vue-chartist"));
 Vue.use(require("vue-moment"));
 Vue.use(VueMasonryPlugin);
 Vue.use(FunctionalCalendar, {
-  dayNames: ["M", "T", "W", "T", "F", "S", "S"]
+  dayNames: ["M", "T", "W", "T", "F", "S", "S"],
 });
 Vue.use(vueKanban);
 Vue.use(VueI18n);
 const locale =
   window.localStorage.getItem("currentLanguage") &&
   localeOptions.filter(
-    x => x.id === window.localStorage.getItem("currentLanguage")
+    (x) => x.id === window.localStorage.getItem("currentLanguage")
   ).length > 0
     ? window.localStorage.getItem("currentLanguage")
     : defaultLocale;
@@ -135,7 +135,7 @@ const locale =
 const i18n = new VueI18n({
   locale: locale,
   fallbackLocale: "en",
-  messages: messages
+  messages: messages,
 });
 
 Vue.config.productionTip = false;
@@ -144,5 +144,5 @@ new Vue({
   router,
   store,
   vuetify,
-  render: h => h(App)
+  render: (h) => h(App),
 }).$mount("#app");
