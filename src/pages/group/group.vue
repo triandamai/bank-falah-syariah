@@ -67,8 +67,7 @@ export default {
     getData() {
       this.$store
         .dispatch(ACTION_GET_DATA_SYSTEM, {
-          systemtype: SGROUP,
-          path: "groups",
+          type: SGROUP,
         })
         .then((isNext) => {
           if (isNext) {
@@ -81,8 +80,8 @@ export default {
         .dispatch(
           this.isEdit ? ACTION_PUT_DATA_SYSTEM : ACTION_POST_DATA_SYSTEM,
           {
-            systemtype: SGROUP,
-            path: "group",
+            type: SGROUP,
+
             body: data,
           }
         )
@@ -121,8 +120,8 @@ export default {
         if (value) {
           this.$store
             .dispatch(ACTION_DELETE_DATA_SYSTEM, {
-              systemtype: SGROUP,
-              path: "group",
+              type: SGROUP,
+
               body: data,
             })
             .then(({ success, message }) => {

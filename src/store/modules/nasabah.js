@@ -34,7 +34,7 @@ const state = {
   errors: null,
   currentpage: 0,
   lastpage: "",
-  datanasabah: []
+  datanasabah: [],
 };
 
 const getters = {};
@@ -60,7 +60,7 @@ const actions = {
               commit(INCREMENT_PAGE);
               resolve(true);
             }
-            data.data.map(item => {
+            data.data.map((item) => {
               let data = {
                 id: item.id,
                 kode_nasabah: item.kode_nasabah,
@@ -71,7 +71,7 @@ const actions = {
                 tanggal_lahir: item.tanggal_lahir,
                 alamat: item.alamat,
                 no_hp: item.no_hp,
-                status: item.active
+                status: item.active,
               };
 
               commit(ADD_NASABAH, data);
@@ -80,7 +80,7 @@ const actions = {
             resolve(false);
           }
         })
-        .catch(e => {
+        .catch((e) => {
           resolve(false);
         });
     });
@@ -106,17 +106,23 @@ const actions = {
               tanggal_lahir: item.tanggal_lahir,
               alamat: data.data[0].alamat,
               no_hp: data.data[0].no_hp,
-              status: data.data[0].active
+              status: data.data[0].active,
             };
 
             commit(ADD_NASABAH, result);
-            resolve({ success: true, message: "Berhasil" });
+            resolve({ success: true, message: "Berhasil menyimpan" });
           } else {
-            resolve({ success: false, message: "Gagal coba lgi nanti" });
+            resolve({
+              success: false,
+              message: "Gagal menyimpan,pastikan data sudah benar!",
+            });
           }
         })
         .catch(({ response }) => {
-          resolve({ success: false, message: response.data.message });
+          resolve({
+            success: false,
+            message: "Terjadi kesalahan silahkan coba lagi nanti!",
+          });
         });
     });
   },
@@ -132,13 +138,19 @@ const actions = {
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(EDIT_NASABAH, { data: data.data[0], olddata: body });
-            resolve({ success: true, message: "Berhasil" });
+            resolve({ success: true, message: "Berhasil mengubah" });
           } else {
-            resolve({ success: false, message: "Gagal Coba lagi nanti" });
+            resolve({
+              success: false,
+              message: "Gagal mengubah,pastikan data sudah benar!",
+            });
           }
         })
         .catch(({ response }) => {
-          resolve({ success: false, message: `${response.data.message}` });
+          resolve({
+            success: false,
+            message: "Terjadi kesalahan silahkan coba lagi nanti!",
+          });
         });
     });
   },
@@ -156,14 +168,20 @@ const actions = {
             commit(REMOVE_NASABAH, body);
             resolve({ success: true, message: "Berhasil" });
           } else {
-            resolve({ success: false, message: "Gagal Coba lagi nanti" });
+            resolve({
+              success: false,
+              message: "Gagal menhapus,pastikan data sudah benar!",
+            });
           }
         })
-        .catch(e => {
-          resolve({ success: false, message: e.response.data.message });
+        .catch((e) => {
+          resolve({
+            success: false,
+            message: "Terjadi kesalahan silahkan coba lagi nanti!",
+          });
         });
     });
-  }
+  },
 };
 
 const mutations = {
@@ -174,7 +192,7 @@ const mutations = {
     currentpage++;
   },
   [ADD_NASABAH](state, data) {
-    var exsts = state.datanasabah.some(nasabah => {
+    var exsts = state.datanasabah.some((nasabah) => {
       return nasabah.id == data.id;
     });
     if (!exsts) {
@@ -183,14 +201,14 @@ const mutations = {
   },
   [EDIT_NASABAH](state, { data, olddata }) {
     var index = state.datanasabah
-      .map(nasabah => nasabah.id)
+      .map((nasabah) => nasabah.id)
       .indexOf(olddata.id);
     Object.assign(state.datanasabah[index], data);
   },
   [REMOVE_NASABAH](state, data) {
-    var index = state.datanasabah.map(nasabah => nasabah.id).indexOf(data.id);
+    var index = state.datanasabah.map((nasabah) => nasabah.id).indexOf(data.id);
     state.datanasabah.splice(index);
-  }
+  },
 };
 
 export default {
@@ -198,5 +216,5 @@ export default {
   state,
   actions,
   mutations,
-  getters
+  getters,
 };

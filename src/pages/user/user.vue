@@ -67,8 +67,7 @@ export default {
     getData() {
       this.$store
         .dispatch(ACTION_GET_DATA_SYSTEM, {
-          systemtype: SUSER,
-          path: "users",
+          type: SUSER,
         })
         .then((isNext) => {
           if (isNext) {
@@ -81,8 +80,7 @@ export default {
         .dispatch(
           this.isEdit ? ACTION_PUT_DATA_SYSTEM : ACTION_POST_DATA_SYSTEM,
           {
-            systemtype: SUSER,
-            path: "user",
+            type: SUSER,
             body: data,
           }
         )
@@ -122,8 +120,8 @@ export default {
         if (value) {
           this.$store
             .dispatch(ACTION_DELETE_DATA_SYSTEM, {
-              systemtype: SUSER,
-              path: "user",
+              type: SUSER,
+
               body: data,
             })
             .then(({ success, message }) => {

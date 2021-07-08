@@ -51,18 +51,18 @@ const actions = {
           if (status == 200 || status == 201) {
             commit(SET_AUTH, data);
 
-            resolve({ success: true, message: data.message || "Berhasil" });
+            resolve({ success: true, message: "Berhasil Masuk" });
           } else {
             resolve({
               success: false,
-              message: data.message || "Gagal coba lagi nanti!",
+              message: "Username dan Password tidak dikenali!",
             });
           }
         })
         .catch((e) => {
           resolve({
             success: false,
-            message: e || "Gagal coba lagi nanti!",
+            message: "Terjadi kesalahan silahkan coba lagi nanti!",
           });
         });
     });

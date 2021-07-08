@@ -25,45 +25,45 @@ export const MUTATION_ADD_DATA_SYSTEM = `system/${ADD_DATA_SYSTEM}`;
 export const MUTATION_PUT_DATA_SYSTEM = `system/${EDIT_DATA_SYSTEM}`;
 export const MUTATION_DELETE_DATA_SYSTEM = `system/${REMOVE_DATA_SYSTEM}`;
 
-export const SUSER = "USER";
-export const SROLE = "ROLE";
-export const SGROUP = "SGROUP";
+export const SUSER = "users";
+export const SROLE = "roles";
+export const SGROUP = "groups";
 
 const state = {
   datausers: [],
   user: {
     current_page: 0,
-    last_page: 0
+    last_page: 0,
   },
   datagroups: [],
   group: {
     current_page: 0,
     last_page: 0,
-    dialog: false
+    dialog: false,
   },
   dataroles: [],
   role: {
     current_page: 0,
     last_page: 0,
-    dialog: false
-  }
+    dialog: false,
+  },
 };
 
 const actions = {
   /***
    * get data
-   * @param {systemtype,path,id}
+   * @param {type,path,id}
    * @todo
    * @returns promise true/false if true get data always repeat until last_page
    *
    */
-  [GET_DATA_SYSTEM]({ commit, state }, { systemtype, path, id }) {
-    return new Promise(resolve => {
+  [GET_DATA_SYSTEM]({ commit, state }, { type, id }) {
+    return new Promise((resolve) => {
       //get pagination
       let page = `?page=`;
       let stillPaging = false;
       //proper way to get pagination t service maybe :-)
-      switch (systemtype) {
+      switch (type) {
         case SGROUP:
           page += state.group.current_page;
           break;
@@ -75,7 +75,7 @@ const actions = {
           break;
       }
 
-      ApiService.get(`${path}${page}`)
+      ApiService.get(`${type}${page}`)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             if (data.current_page >= data.last_page) {
@@ -86,18 +86,18 @@ const actions = {
               resolve(true);
               stillPaging = true;
             }
-            data.data.map(item => {
+            data.data.map((item) => {
               commit(ADD_DATA_SYSTEM, {
-                systemtype: systemtype,
+                type: type,
                 data: item,
-                page: stillPaging
+                page: stillPaging,
               });
             });
           } else {
             resolve(false);
           }
         })
-        .catch(e => {
+        .catch((e) => {
           resolve(false);
         });
     });
@@ -105,31 +105,31 @@ const actions = {
 
   /***
    * Send User and save
-   * @param {systemtype,path,body}
+   * @param {type,path,body}
    * @return boolean is saved? then commit to datauser
    * @returns {success,message}
    */
-  [POST_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
-    return new Promise(resolve => {
-      ApiService.post(`${path}`, body)
+  [POST_DATA_SYSTEM]({ commit }, { type, body }) {
+    return new Promise((resolve) => {
+      ApiService.post(`${type}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(ADD_DATA_SYSTEM, {
-              systemtype: systemtype,
-              data: data.data[0]
+              type: type,
+              data: data.data[0],
             });
-            resolve({ success: true, message: "Berhasil menambah!" });
+            resolve({ success: true, message: "Berhasil menyimpan" });
           } else {
             resolve({
               success: false,
-              message: data.message || "Gagal coba lagi nanti !"
+              message: "Gagal menyimpan,pastikan data sudah benar!",
             });
           }
         })
-        .catch(e => {
+        .catch((e) => {
           resolve({
             success: false,
-            message: e.response.data.message || "Gagal coba lagi nanti !"
+            message: e.response.data.message || "Gagal coba lagi nanti !",
           });
         });
     });
@@ -143,62 +143,62 @@ const actions = {
    * @returns {success,message}
    *
    */
-  [PUT_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
-    return new Promise(resolve => {
-      ApiService.put(`${path}/${body.id}`, body)
+  [PUT_DATA_SYSTEM]({ commit }, { type, body }) {
+    return new Promise((resolve) => {
+      ApiService.put(`${type}/${body.id}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(EDIT_DATA_SYSTEM, {
-              systemtype: systemtype,
+              type: type,
               data: data.data[0],
-              olddata: body
+              olddata: body,
             });
             resolve({ success: true, message: "Berhasil mengubah!" });
           } else {
             resolve({
               success: false,
-              message: data.message || "Gagal coba lagi nanti"
+              message: "Gagal mengubah,pastikan data sudah benar!",
             });
           }
         })
-        .catch(e => {
+        .catch((e) => {
           resolve({
             success: false,
-            message: e.response.data.message || "Gaga coba lagi nanti"
+            message: "Gagal mengubah,pastikan data sudah benar!",
           });
         });
     });
   },
   /***
    * delete data
-   * @param {systemtype,path,body}
+   * @param {type,path,body}
    * @return boolean is saved? then commit remove user from data user by index
    */
-  [DELETE_DATA_SYSTEM]({ commit }, { systemtype, path, body }) {
-    return new Promise(resolve => {
-      ApiService.delete(`${path}/${body.id}`)
+  [DELETE_DATA_SYSTEM]({ commit }, { type, body }) {
+    return new Promise((resolve) => {
+      ApiService.delete(`${type}/${body.id}`)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(REMOVE_DATA_SYSTEM, {
-              systemtype: systemtype,
-              data: body
+              type: type,
+              data: body,
             });
             resolve({ success: true, message: "Berhasil menghapus!" });
           } else {
             resolve({
               success: false,
-              message: data.message || "Gagal coba lagi nanti"
+              message: "Gagal menghapus,pastikan data sudah benar!",
             });
           }
         })
-        .catch(e => {
+        .catch((e) => {
           resolve({
             success: true,
-            message: e.response.data.message || "Berhasil mengubah!"
+            message: "Gagal mengubah,pastikan data sudah benar!",
           });
         });
     });
-  }
+  },
 };
 const mutations = {
   [INCREMENT_PAGE](state, { type }) {
@@ -216,14 +216,14 @@ const mutations = {
   },
   /***
    * Add data
-   * @param {systemtype,data}
+   * @param {type,data}
    * @return data user add one by one
    * @todo if exist and data change sholud update
    */
   [ADD_DATA_SYSTEM](state, { type, data, page }) {
     switch (type) {
       case SUSER:
-        var exist = state.datausers.some(user => {
+        var exist = state.datausers.some((user) => {
           return user.id == data.id;
         });
         if (!exist) {
@@ -231,7 +231,7 @@ const mutations = {
         }
         break;
       case SROLE:
-        var exist = state.dataroles.some(role => {
+        var exist = state.dataroles.some((role) => {
           return role.id == data.id;
         });
         if (!exist) {
@@ -239,7 +239,7 @@ const mutations = {
         }
         break;
       case SGROUP:
-        var exist = state.datagroups.some(group => {
+        var exist = state.datagroups.some((group) => {
           return group.id == data.id;
         });
         if (!exist) {
@@ -250,20 +250,22 @@ const mutations = {
   },
   /***
    * add updated data to existing data
-   *@param {systemtype,data,olddata}
+   *@param {type,data,olddata}
    */
-  [EDIT_DATA_SYSTEM](state, { systemtype, data, olddata }) {
-    switch (systemtype) {
+  [EDIT_DATA_SYSTEM](state, { type, data, olddata }) {
+    switch (type) {
       case SUSER:
-        var index = state.datausers.map(user => user.id).indexOf(olddata.id);
+        var index = state.datausers.map((user) => user.id).indexOf(olddata.id);
         Object.assign(state.datausers[index], data);
         break;
       case SGROUP:
-        var index = state.datagroups.map(group => group.id).indexOf(olddata.id);
+        var index = state.datagroups
+          .map((group) => group.id)
+          .indexOf(olddata.id);
         Object.assign(state.datagroups[index], data);
         break;
       case SROLE:
-        var index = state.dataroles.map(role => role.id).indexOf(olddata.id);
+        var index = state.dataroles.map((role) => role.id).indexOf(olddata.id);
         Object.assign(state.dataroles[index], data);
         break;
     }
@@ -271,25 +273,25 @@ const mutations = {
 
   /***
    * delete data y index
-   * @param {systemtype,data}
+   * @param {type,data}
    * @return remove user by index
    */
-  [REMOVE_DATA_SYSTEM](state, { systemtype, data }) {
-    switch (systemtype) {
+  [REMOVE_DATA_SYSTEM](state, { type, data }) {
+    switch (type) {
       case SUSER:
-        var index = state.datausers.map(user => user.id).indexOf(data.id);
+        var index = state.datausers.map((user) => user.id).indexOf(data.id);
         state.datausers.splice(index);
         break;
       case SGROUP:
-        var index = state.datagroups.map(group => group.id).indexOf(data.id);
+        var index = state.datagroups.map((group) => group.id).indexOf(data.id);
         state.datagroups.splice(index);
         break;
       case SROLE:
-        var index = state.dataroles.map(role => role.id).indexOf(data.id);
+        var index = state.dataroles.map((role) => role.id).indexOf(data.id);
         state.dataroles.splice(index);
         break;
     }
-  }
+  },
 };
 
 export default { namespaced: true, state, actions, mutations };

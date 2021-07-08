@@ -36,29 +36,29 @@ const state = {
   dataakad: [],
   akad: {
     current_page: 0,
-    last_page: 0
+    last_page: 0,
   },
   datajenistransaksi: [],
   jenistransaksi: {
     current_page: 0,
-    last_page: 0
+    last_page: 0,
   },
   dataproduk: [],
   produk: {
     current_page: 0,
-    last_page: 0
+    last_page: 0,
   },
   datajabatan: [],
   jabatan: {
     current_page: 0,
-    last_page: 0
+    last_page: 0,
   },
   datapegawai: [],
   pegawai: {
     current_page: 0,
-    last_page: 0
+    last_page: 0,
   },
-  formpegawai: {}
+  formpegawai: {},
 };
 const getters = {};
 const actions = {
@@ -69,7 +69,7 @@ const actions = {
    * and add data to array smoothly
    */
   [GETDATAMASTER]({ commit, state }, { type }) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       //get current page
       let page = `?page=`;
 
@@ -104,18 +104,18 @@ const actions = {
             }
 
             console.log(data);
-            data.data.map(item => {
+            data.data.map((item) => {
               commit(ADDDATAMASTER, {
                 type: type,
                 data: item,
-                page: stillPaging
+                page: stillPaging,
               });
             });
           } else {
             resolve(false);
           }
         })
-        .catch(e => {
+        .catch((e) => {
           resolve(false);
         });
     });
@@ -128,26 +128,26 @@ const actions = {
    *
    */
   [POSTDATAMASTER]({ commit }, { type, body }) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       ApiService.post(`${type}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(ADDDATAMASTER, {
               type: type,
-              data: data.data[0]
+              data: data.data[0],
             });
-            resolve({ success: true, message: "Berhasil menambah data" });
+            resolve({ success: true, message: "Berhasil menyimpan" });
           } else {
             resolve({
               success: false,
-              message: data.message || "Gagal coba lagi nanti"
+              message: "Gagal menyimpan,pastikan data sudah benar!",
             });
           }
         })
-        .catch(e => {
+        .catch((e) => {
           resolve({
             success: false,
-            message: e.response.data.message || "Gagal coba lagi nanti"
+            message: "Terjadi kesalahan silahkan coba lagi nanti!",
           });
         });
     });
@@ -160,27 +160,27 @@ const actions = {
    *
    */
   [PUTDATAMASTER]({ commit }, { type, body }) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       ApiService.put(`${type}/${body.id}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(EDITDATAMASTER, {
               type: type,
               data: data.data[0],
-              olddata: body
+              olddata: body,
             });
             resolve({ success: true, message: "Berhasil mengubah!" });
           } else {
             resolve({
               success: false,
-              message: data.message || "Gagal coba lagi nanti"
+              message: "Gagal mengubah,pastikan data sudah benar!",
             });
           }
         })
-        .catch(e => {
+        .catch((e) => {
           resolve({
             success: false,
-            message: e.response.data.message || "Gaga coba lagi nanti"
+            message: "Terjadi kesalahan silahkan coba lagi nanti!",
           });
         });
     });
@@ -192,30 +192,30 @@ const actions = {
    * @returns if success it will update data no need reload data from service
    */
   [DELETEDATAMASTER]({ commit }, { type, body }) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       ApiService.delete(`${type}/${body.id}`)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(REMOVEDATAMASTER, {
               type: type,
-              data: body
+              data: body,
             });
             resolve({ success: true, message: "Berhasil menghapus!" });
           } else {
             resolve({
               success: false,
-              message: data.message || "Gagal coba lagi nanti"
+              message: "Gagal menhapus,pastikan data sudah benar!",
             });
           }
         })
-        .catch(e => {
+        .catch((e) => {
           resolve({
             success: false,
-            message: e.response.data.message || "Berhasil mengubah!"
+            message: "Terjadi kesalahan silahkan coba lagi nanti!",
           });
         });
     });
-  }
+  },
 };
 const mutations = {
   /***
@@ -245,7 +245,7 @@ const mutations = {
   [ADDDATAMASTER](state, { type, data, page }) {
     switch (type) {
       case MAKAD:
-        var exist = state.dataakad.some(akad => {
+        var exist = state.dataakad.some((akad) => {
           return akad.id == data.id;
         });
         if (!exist) {
@@ -254,7 +254,7 @@ const mutations = {
 
         break;
       case MJABATAN:
-        var exist = state.datajabatan.some(jabatan => {
+        var exist = state.datajabatan.some((jabatan) => {
           return jabatan.id == data.id;
         });
         if (!exist) {
@@ -264,7 +264,7 @@ const mutations = {
         break;
       case MJENISTRANSAKSI:
         // console.log(data);
-        var exist = state.datajenistransaksi.some(jenis => {
+        var exist = state.datajenistransaksi.some((jenis) => {
           return jenis.id == data.id;
         });
         if (!exist) {
@@ -272,7 +272,7 @@ const mutations = {
         }
         break;
       case MPEGAWAI:
-        var exist = state.datapegawai.some(pegawai => {
+        var exist = state.datapegawai.some((pegawai) => {
           return pegawai.id == data.id;
         });
         if (!exist) {
@@ -280,7 +280,7 @@ const mutations = {
         }
         break;
       case MPRODUK:
-        var exist = state.dataproduk.some(produk => {
+        var exist = state.dataproduk.some((produk) => {
           return produk.id == data.id;
         });
         if (!exist) {
@@ -299,31 +299,31 @@ const mutations = {
   [EDITDATAMASTER](state, { type, data, olddata }) {
     switch (type) {
       case MAKAD:
-        var index = state.dataakad.map(akad => akad.id).indexOf(olddata.id);
+        var index = state.dataakad.map((akad) => akad.id).indexOf(olddata.id);
         Object.assign(state.dataakad[index], data);
         break;
       case MJABATAN:
         var index = state.datajabatan
-          .map(jabatan => jabatan.id)
+          .map((jabatan) => jabatan.id)
           .indexOf(olddata.id);
         Object.assign(state.datajabatan[index], data);
         break;
       case MJENISTRANSAKSI:
         console.log(type);
         var index = state.datajenistransaksi
-          .map(jenis => jenis.id)
+          .map((jenis) => jenis.id)
           .indexOf(olddata.id);
         Object.assign(state.datajenistransaksi[index], data);
         break;
       case MPEGAWAI:
         var index = state.datapegawai
-          .map(pegawai => pegawai.id)
+          .map((pegawai) => pegawai.id)
           .indexOf(olddata.id);
         Object.assign(state.datapegawai[index], data);
         break;
       case MPRODUK:
         var index = state.dataproduk
-          .map(produk => produk.id)
+          .map((produk) => produk.id)
           .indexOf(olddata.id);
         Object.assign(state.dataproduk[index], data);
         break;
@@ -337,33 +337,35 @@ const mutations = {
   [REMOVEDATAMASTER](state, { type, data }) {
     switch (type) {
       case MAKAD:
-        var index = state.dataakad.map(akad => akad.id).indexOf(data.id);
+        var index = state.dataakad.map((akad) => akad.id).indexOf(data.id);
         state.dataakad.splice(index);
         break;
       case MJABATAN:
         var index = state.datajabatan
-          .map(jabatan => jabatan.id)
+          .map((jabatan) => jabatan.id)
           .indexOf(data.id);
         state.datajabatan.splice(index);
         break;
       case MJENISTRANSAKSI:
         var index = state.datajenistransaksi
-          .map(jenis => jenis.id)
+          .map((jenis) => jenis.id)
           .indexOf(data.id);
         state.datajenistransaksi.splice(index);
         break;
       case MPEGAWAI:
         var index = state.datapegawai
-          .map(pegawai => pegawai.id)
+          .map((pegawai) => pegawai.id)
           .indexOf(data.id);
         state.datapegawai.splice(index);
         break;
       case MPRODUK:
-        var index = state.dataproduk.map(produk => produk.id).indexOf(data.id);
+        var index = state.dataproduk
+          .map((produk) => produk.id)
+          .indexOf(data.id);
         state.dataproduk.splice(index);
         break;
     }
-  }
+  },
 };
 
 export default {
@@ -371,5 +373,5 @@ export default {
   state,
   getters,
   actions,
-  mutations
+  mutations,
 };

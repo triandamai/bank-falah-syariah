@@ -211,7 +211,7 @@
           }
         },
         {
-          "path": "/main/akad",
+          "path": "/main/preferences",
           "title": "Preferences",
           "type": "link",
           "privilage": {
