@@ -10,8 +10,8 @@
                   v-model="form.jenistransaksi"
                   label="Jenis Transaksi *"
                   :items="jenistransaksi"
-                  item-text="nama_lengkap"
-                  item-value="id"
+                  item-text="nama_transaksi"
+                  item-value="kode_transaksi"
                   auto-select-first
                   required
                 />
@@ -136,10 +136,10 @@ export default {
       itemnasabah: [],
     };
   },
+
   computed: {
     ...mapState({
       jenistransaksi: (state) => state.master.datajenistransaksi,
-      rekening: (state) => [],
     }),
   },
   methods: {

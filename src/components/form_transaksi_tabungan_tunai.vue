@@ -140,7 +140,6 @@ export default {
   computed: {
     ...mapState({
       jenistransaksi: (state) => state.master.datajenistransaksi,
-      rekening: (state) => [],
     }),
   },
   methods: {
