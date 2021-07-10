@@ -32,16 +32,6 @@
                   required
                 ></v-text-field>
               </v-col>
-              <v-col cols="12">
-                <v-autocomplete
-                  v-model="form.akad_id"
-                  :items="itemsakad"
-                  item-text="nama_akad"
-                  item-value="id"
-                  label="Akad *"
-                  required
-                ></v-autocomplete>
-              </v-col>
             </v-row>
           </v-container>
           <small>*indicates required field</small>
@@ -83,7 +73,7 @@ export default {
     }),
   },
   watch: {
-    body: function (newVal) {
+    body: function(newVal) {
       this.form = newVal;
     },
   },
