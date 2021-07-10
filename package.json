@@ -85,7 +85,8 @@
     "vuejs-smart-table": "0.0.5",
     "vuetify": "^2.4.0",
     "vuex": "^3.1.1",
-    "worker-loader": "^3.0.8"
+    "worker-loader": "^3.0.8",
+    "xlsx": "^0.17.0"
   },
   "devDependencies": {
     "@mdi/font": "^5.9.55",

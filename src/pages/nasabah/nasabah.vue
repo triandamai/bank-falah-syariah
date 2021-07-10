@@ -4,25 +4,35 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <h5>Data Nasabah</h5>
-              <span
-                >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
-              >
+        <!-- BEGIN CHART -->
+        <div class="col-xl-8 xl-100 dashboard-sec box-col-12">
+          <px-card class="earning-card">
+            <div class="row">
+              <div class=" earning-content">
+                <div class="row  chart-left">
+                  <div class="col-xl-12 left_side_earning">
+                    <h5>Dashboard</h5>
+                    <p class="font-roboto">Overview of last month</p>
+                  </div>
+                  <div class="col-xl-12 left-btn">
+                    <a class="btn btn-gradient">Import</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chart-right">
+                <data-table
+                  :items="nasabah"
+                  :headers="headers"
+                  @add="$router.push({ name: 'addnasabah' })"
+                  @edit="onChange"
+                  @delete="onDelete"
+                />
+              </div>
             </div>
-            <div class="card-body">
-              <data-table
-                :items="nasabah"
-                :headers="headers"
-                @add="$router.push({ name: 'addnasabah' })"
-                @edit="onChange"
-                @delete="onDelete"
-              />
-            </div>
-          </div>
+          </px-card>
         </div>
+        <!-- END CHART -->
       </div>
     </div>
     <!-- Container-fluid Ends-->
