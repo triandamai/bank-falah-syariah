@@ -26,11 +26,11 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-tabungan
-      :show="formtabungan"
+    <form-simpanan
+      :show="formsimpanan"
       :body="body"
       @submit="onSubmit"
-      @close="formtabungan = false"
+      @close="formsimpanan = false"
     />
   </div>
 </template>
@@ -48,7 +48,7 @@ import { mapState } from "vuex";
 export default {
   data: () => {
     return {
-      formtabungan: false,
+      formsimpanan: false,
       headers: header,
       body: {},
       isEdit: false,
