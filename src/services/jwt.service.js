@@ -6,6 +6,7 @@
 import CryptoJS from "crypto-js";
 const ID_TOKEN_KEY = "f6da7ebas9c00s";
 const USER_KEY = "z0xk7sasd3";
+const KEY_APP_NAME = "ewyftrqgwoi";
 
 /**
  * get stored token
@@ -21,7 +22,7 @@ export const getToken = () => {
  * @param {*} token
  *
  */
-export const saveToken = token => {
+export const saveToken = (token) => {
   window.sessionStorage.setItem(ID_TOKEN_KEY, aesEncrypt(token));
 };
 /**
@@ -37,11 +38,21 @@ export const getUser = () => {
     : null;
 };
 
-export const setUser = user => {
+export const setUser = (user) => {
   window.sessionStorage.setItem(USER_KEY, aesEncrypt(JSON.stringify(user)));
 };
 export const dropUser = () => {
   window.sessionStorage.removeItem(USER_KEY);
+};
+
+export const setAppname = (name) => {
+  window.localStorage.setItem(KEY_APP_NAME, aesEncrypt(name));
+};
+
+export const getAppname = () => {
+  return window.sessionStorage.getItem(USER_KEY)
+    ? JSON.parse(aesDecrypt(window.sessionStorage.getItem(USER_KEY)))
+    : "Bank Falah Syariah";
 };
 
 /***
@@ -56,9 +67,9 @@ const iv = "bakaranprojectbismillah";
  * @return string chiper
  *
  */
-const aesEncrypt = text =>
+const aesEncrypt = (text) =>
   CryptoJS.AES.encrypt(text, CryptoJS.enc.Utf8.parse(key).toString(), {
-    iv: CryptoJS.enc.Utf8.parse(iv).toString()
+    iv: CryptoJS.enc.Utf8.parse(iv).toString(),
   }).toString();
 /***
  * Ecnrypt
@@ -66,9 +77,9 @@ const aesEncrypt = text =>
  * @return string real text
  *
  */
-const aesDecrypt = text =>
+const aesDecrypt = (text) =>
   CryptoJS.AES.decrypt(text, CryptoJS.enc.Utf8.parse(key).toString(), {
-    iv: CryptoJS.enc.Utf8.parse(iv).toString()
+    iv: CryptoJS.enc.Utf8.parse(iv).toString(),
   }).toString(CryptoJS.enc.Utf8);
 
 export default {
@@ -77,5 +88,5 @@ export default {
   destroyToken,
   getUser,
   setUser,
-  dropUser
+  dropUser,
 };

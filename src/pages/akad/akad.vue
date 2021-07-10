@@ -26,7 +26,7 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-produk
+    <form-akad
       :show="formproduk"
       :body="body"
       @submit="onSubmit"
@@ -44,6 +44,7 @@ import {
   ACTION_DELETE_DATA_MASTER,
   MPRODUK,
 } from "../../store/modules/master";
+
 import { mapState } from "vuex";
 export default {
   data: () => {

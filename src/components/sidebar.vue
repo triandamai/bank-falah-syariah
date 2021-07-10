@@ -282,8 +282,8 @@
                       <label
                         :class="
                           'badge badge-' +
-                          childrenSubItem.badgeType +
-                          ' pull-right'
+                            childrenSubItem.badgeType +
+                            ' pull-right'
                         "
                         v-if="childrenSubItem.badgeType"
                         >{{ childrenSubItem.badgeValue }}</label
@@ -304,8 +304,8 @@
                       <label
                         :class="
                           'badge badge-' +
-                          childrenSubItem.badgeType +
-                          ' pull-right'
+                            childrenSubItem.badgeType +
+                            ' pull-right'
                         "
                         v-if="childrenSubItem.badgeType"
                         >{{ childrenSubItem.badgeValue }}</label
@@ -327,8 +327,8 @@
                       <label
                         :class="
                           'badge badge-' +
-                          childrenSubItem.badgeType +
-                          ' pull-right'
+                            childrenSubItem.badgeType +
+                            ' pull-right'
                         "
                         v-if="childrenSubItem.badgeType"
                         >{{ childrenSubItem.badgeValue }}</label
@@ -349,8 +349,8 @@
                       <label
                         :class="
                           'badge badge-' +
-                          childrenSubItem.badgeType +
-                          ' pull-right'
+                            childrenSubItem.badgeType +
+                            ' pull-right'
                         "
                         v-if="childrenSubItem.badgeType"
                         >{{ childrenSubItem.badgeValue }}</label
@@ -461,17 +461,17 @@ export default {
     });
   },
   methods: {
+    //check if user already logged in is have privilage for acces those menu
     checkprivilage(privilage) {
-      const { role, group } = getUser();
-      const current_role = role[0].name;
-      const current_group = group[0].name;
-      const haveAllGroup = privilage.roles.includes("all");
-      const haveAllRole = privilage.groups.includes("all");
-      if (haveAllGroup && haveAllRole) return true;
-
-      const haveRolePrivilage = privilage.roles.includes(current_role);
-      const haveGroupPrivilage = privilage.groups.includes(current_group);
-      return haveRolePrivilage && haveGroupPrivilage;
+      const { role } = getUser();
+      const haveAllRole = privilage.roles.includes("all");
+      if (haveAllRole) return true;
+      if (role[0]) {
+        const current_role = role[0].name;
+        const haveRolePrivilage = privilage.roles.includes(current_role);
+        return haveRolePrivilage;
+      }
+      return false;
     },
     showForm(form) {
       this.$store.commit("showForm", form);

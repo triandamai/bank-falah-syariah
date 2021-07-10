@@ -47,5 +47,10 @@
   "Error Message": "Terjadi Kesalahan {context}!",
   "Report Teller": "Laporan Teller",
   "Transaction Saving": "Transaksi Simpanan",
-  "Transaction Financing": "Transaksi Pembiayaan"
+  "Transaction Financing": "Transaksi Pembiayaan",
+  "Simpanan": "Simpanan",
+  "Pembiayaan": "Pembiayaan",
+  "Tabungan": "Tabungan",
+  "Setor": "Setor",
+  "Tarik": "Tarik"
 }

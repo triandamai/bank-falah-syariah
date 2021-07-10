@@ -270,8 +270,11 @@ export default {
   created() {
     const user = getUser();
     this.username = user.username;
-    this.role = user.role[0].name;
-    this.group = user.group[0].name;
+    if (user.role[0]) {
+      this.role = user.role[0].name;
+    }
+    this.role = "undefined";
+    //this.group = user.group[0].name;
   },
   computed: {
     ...mapState({
@@ -305,7 +308,7 @@ export default {
     search_close() {
       this.searchOpen = false;
     },
-    searchterm: function () {
+    searchterm: function() {
       this.$store.dispatch("menu/searchTerm", this.terms);
     },
     changeLocale(locale) {
@@ -366,7 +369,7 @@ export default {
         this.$router.go(this.$route.path);
       }
     },
-    menuItems: function () {
+    menuItems: function() {
       this.terms ? this.addFix() : this.removeFix();
       if (!this.menuItems.length) this.searchResultEmpty = true;
       else this.searchResultEmpty = false;
@@ -374,4 +377,3 @@ export default {
   },
 };
 </script>
-

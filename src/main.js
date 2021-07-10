@@ -52,11 +52,10 @@ import { Icon } from "leaflet";
 // Multi Language Add
 import VueI18n from "vue-i18n";
 import en from "@/locales/en.json";
-import es from "@/locales/es.json";
 import id from "@/locales/id.json";
 import { defaultLocale, localeOptions } from "@/constants/config.js";
 
-const messages = { en: en, es: es, id: id };
+const messages = { en: en, id: id };
 
 Vue.component("data-table", DataTable);
 Vue.component("form-akad", FormAkad);

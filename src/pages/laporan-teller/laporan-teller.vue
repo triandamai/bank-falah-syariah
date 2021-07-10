@@ -1,17 +1,29 @@
 <template>
   <div>
-    <Breadcrumbs title="Akad" />
+    <Breadcrumbs title="Nasabah" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12 project-list">
+        <div class="col-md-12">
           <div class="card">
-            <div class="row">
-              <div class="col-sm-12 p-0">
-                <pdf
-                  src="https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf"
-                />
-              </div>
+            <div class="card-header">
+              <h5>Data Nasabah</h5>
+              <span
+                >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
+              >
+            </div>
+
+            <div class="card-body"></div>
+          </div>
+          <div class="card">
+            <div class="card-header">
+              <h5>Data Nasabah</h5>
+            </div>
+
+            <div class="card-body">
+              <pdf
+                src="https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf"
+              />
             </div>
           </div>
         </div>
