@@ -2,7 +2,6 @@ import Vue from "vue";
 import App from "@/App.vue";
 import BootstrapVue from "bootstrap-vue";
 import router from "@/router";
-import Breadcrumbs from "@/components/bread_crumbs";
 import { store } from "@/store";
 import Vue2Filters from "vue2-filters";
 import VueSweetalert2 from "vue-sweetalert2";
@@ -15,7 +14,7 @@ import SmartTable from "vuejs-smart-table";
 import * as VueGoogleMaps from "vue2-google-maps";
 import { VueMasonryPlugin } from "vue-masonry";
 import VueFeather from "vue-feather";
-import VueApexCharts from "vue-apexcharts";
+
 import FunctionalCalendar from "vue-functional-calendar";
 import vueKanban from "vue-kanban";
 
@@ -24,29 +23,13 @@ import "@/assets/scss/app.scss";
 
 import vuetify from "@/plugins/vuetify";
 import "@babel/polyfill";
+
+//components
+import "@/plugins/components.js";
 // api services
 import ApiService from "@/services/api.service";
 //
-import DataTable from "@/components/datatable.vue";
-// import FormAkad from "@/components/form_akad_old.vue";
-import FormDeposito from "@/components/form_deposito.vue";
-import FormJenistransaksi from "@/components/form_jenistransaksi.vue";
-import FormNasabah from "@/components/form_nasabah.vue";
-import FormPembiayaan from "@/components/form_pembiayaan.vue";
-import FormAkad from "@/components/form_akad.vue";
-import FormSimpanan from "@/components/form_simpanan.vue";
-import FormUser from "@/components/form_user.vue";
-import FormGroup from "@/components/form_group.vue";
-import FormMenu from "@/components/form_menu.vue";
-import FormRole from "@/components/form_role.vue";
-import FormJabatan from "@/components/form_jabatan.vue";
-import FormPegawai from "@/components/form_pegawai.vue";
-import FormTransaksiTabunganTunai from "@/components/form_transaksi_tabungan_tunai.vue";
-import FormTransaksiTabunganNonTunai from "@/components/form_transaksi_tabungan_nontunai.vue";
-import FormTransaksiPembiayaanTunai from "@/components/form_transaksi_pembiayaan_tunai.vue";
-import FormTransaksiPembiayaanNonTunai from "@/components/form_transaksi_pembiayaan_nontunai.vue";
 
-import PxCard from "@/components/Pxcard.vue";
 import { Icon } from "leaflet";
 
 // Multi Language Add
@@ -56,39 +39,6 @@ import id from "@/locales/id.json";
 import { defaultLocale, localeOptions } from "@/constants/config.js";
 
 const messages = { en: en, id: id };
-
-Vue.component("data-table", DataTable);
-Vue.component("form-akad", FormAkad);
-Vue.component("form-deposito", FormDeposito);
-Vue.component("form-jenistransaksi", FormJenistransaksi);
-Vue.component("form-nasabah", FormNasabah);
-Vue.component("form-pembiayaan", FormPembiayaan);
-// Vue.component("form-produk", FormProduk);
-Vue.component("form-simpanan", FormSimpanan);
-Vue.component("form-user", FormUser);
-Vue.component("form-group", FormGroup);
-Vue.component("form-menu", FormMenu);
-Vue.component("form-role", FormRole);
-Vue.component("form-jabatan", FormJabatan);
-Vue.component("form-pegawai", FormPegawai);
-Vue.component("form-transaksi-tabungan-tunai", FormTransaksiTabunganTunai);
-Vue.component(
-  "form-transaksi-tabungan-nontunai",
-  FormTransaksiTabunganNonTunai
-);
-Vue.component("form-transaksi-pembiayaan-tunai", FormTransaksiPembiayaanTunai);
-Vue.component(
-  "form-transaksi-pembiayaan-nontunai",
-  FormTransaksiPembiayaanNonTunai
-);
-
-Vue.component("Breadcrumbs", Breadcrumbs);
-
-Vue.component("apexchart", VueApexCharts);
-
-//
-
-Vue.component(PxCard.name, PxCard);
 
 delete Icon.Default.prototype._getIconUrl;
 
