@@ -12,19 +12,20 @@ const POST_NASABAH = "createUser";
 const PUT_NASABAH = "updateNasabah";
 const GET_NASABAH = "getNasabah";
 const DELETE_NASABAH = "deleteNasabah";
+const IMPORT_NASABAH = "importnasabah";
 
 export const ACTION_POST_NASABAH = `nasabah/${POST_NASABAH}`;
 export const ACTION_PUT_NASABAH = `nasabah/${PUT_NASABAH}`;
 export const ACTION_GET_NASABAH = `nasabah/${GET_NASABAH}`;
 export const ACTION_DELETE_NASABAH = `nasabah/${DELETE_NASABAH}`;
-export const ACTION_IMPORT_NASABAH = `nasabah/${IMPORT_NASBAH}`;
+export const ACTION_IMPORT_NASABAH = `nasabah/${IMPORT_NASABAH}`;
 
 // mutation types
 const SET_ERROR = "setError";
 const ADD_NASABAH = "tambahnasabah";
 const EDIT_NASABAH = "editnasabah";
 const REMOVE_NASABAH = "deletenasabah";
-const IMPORT_NASBAH = "importnasabah";
+
 const INCREMENT_PAGE = `INCREMENT`;
 
 export const MUTATION_SET_ERROR = `nasabah/${SET_ERROR}`;
@@ -134,9 +135,9 @@ const actions = {
    * @param {*} body
    * @returns
    */
-  [IMPORT_NASBAH]({ commit }, body) {
+  [IMPORT_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
-      ApiService.post("nasabah", body)
+      ApiService.post("nasabah/import", body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             let result = {

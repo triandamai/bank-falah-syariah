@@ -52,5 +52,6 @@
   "Pembiayaan": "Cost",
   "Tabungan": "Deposit",
   "Setor": "Payout",
-  "Tarik": "Withdraw"
+  "Tarik": "Withdraw",
+  "Preferences": "Preferences"
 }
