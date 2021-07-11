@@ -32,7 +32,14 @@
           >
             Close
           </v-btn>
-          <v-btn @click="onSubmit" color="blue darken-1" text> Save </v-btn>
+          <v-btn
+            :disabled="loading"
+            @click="onSubmit"
+            color="blue darken-1"
+            text
+          >
+            Save
+          </v-btn>
         </v-card-actions>
       </v-card>
     </template>
@@ -45,6 +52,7 @@ export default {
   props: ["show", "body"],
   data: () => {
     return {
+      loading: false,
       dialogakad: false,
       files: null,
       datanasabah: [],
@@ -63,6 +71,9 @@ export default {
         return alert("format salah");
 
       const fileReader = new FileReader();
+      fileReader.onloadstart = () => {
+        this.loading = true;
+      };
       fileReader.onload = (ev) => {
         try {
           const data = ev.target.result;
@@ -70,7 +81,7 @@ export default {
           const workbook = XLSX.read(data, { type: "binary" });
           const sheetName = workbook.SheetNames[0];
           const sheet = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-          console.log(sheet);
+
           sheet.map((nasabah) => {
             //asosiate ke objek nasabah
 
@@ -95,15 +106,15 @@ export default {
                 ),
                 provinsi: {
                   desNama: nasabah["Nama Provinsi"],
-                  desKodeMendagri: nasabah["Kode Provinsi"],
+                  provKode: nasabah["Kode Provinsi"],
                 },
                 kabupaten: {
-                  desNama: nasabah["Nama Kabupaten"],
-                  desKodeMendagri: nasabah["Kode Kabupaten"],
+                  kabNama: nasabah["Nama Kabupaten"],
+                  kabKodeMendagri: nasabah["Kode Kabupaten"],
                 },
                 kecamatan: {
-                  desNama: nasabah["Nama Kecmatan"],
-                  desKodeMendagri: nasabah["Kode Kecamatan"],
+                  kecNama: nasabah["Nama Kecmatan"],
+                  kecKodeMendagri: nasabah["Kode Kecamatan"],
                 },
                 desa: {
                   desNama: nasabah["Nama Desa/Kelurahan"],
@@ -127,6 +138,9 @@ export default {
         } catch (error) {
           console.log(error);
         }
+      };
+      fileReader.onprogress = () => {
+        this.loading = false;
       };
       fileReader.readAsBinaryString(file);
     },

@@ -105,8 +105,8 @@ const actions = {
               nama_lengkap: data.data[0].nama_lengkap,
               jenis_kelamin: data.data[0].jenis_kelamin,
               ttl: data.data[0].tempat_lahir + data.data[0].tanggal_lahir,
-              tempat_lahir: item.tempat_lahir,
-              tanggal_lahir: item.tanggal_lahir,
+              tempat_lahir: data.data[0].tempat_lahir,
+              tanggal_lahir: data.data[0].tanggal_lahir,
               alamat: data.data[0].alamat,
               no_hp: data.data[0].no_hp,
               status: data.data[0].active,
@@ -146,8 +146,8 @@ const actions = {
               nama_lengkap: data.data[0].nama_lengkap,
               jenis_kelamin: data.data[0].jenis_kelamin,
               ttl: data.data[0].tempat_lahir + data.data[0].tanggal_lahir,
-              tempat_lahir: item.tempat_lahir,
-              tanggal_lahir: item.tanggal_lahir,
+              tempat_lahir: data.data[0].tempat_lahir,
+              tanggal_lahir: data.data[0].tanggal_lahir,
               alamat: data.data[0].alamat,
               no_hp: data.data[0].no_hp,
               status: data.data[0].active,
@@ -162,7 +162,8 @@ const actions = {
             });
           }
         })
-        .catch(({ response }) => {
+        .catch((e) => {
+          console.log(e);
           resolve({
             success: false,
             message: "Terjadi kesalahan silahkan coba lagi nanti!",
@@ -206,7 +207,7 @@ const actions = {
    */
   [DELETE_NASABAH]({ commit }, body) {
     return new Promise((resolve, reject) => {
-      ApiService.post(`nasbaah/${body.id}`, body)
+      ApiService.delete(`nasabah/${body.id}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(REMOVE_NASABAH, body);
