@@ -31,9 +31,9 @@
 
         <v-stepper-items>
           <v-stepper-content step="1">
-            <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
+            <v-container class="pt-md-2 pt-lg-2 pt-sm-2">
               <v-row>
-                <!-- <v-col cols="12" sm="12" md="6">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.kode_nasabah"
                     label="Kode Nasabah"
@@ -41,7 +41,7 @@
                     outlined
                     dense
                   ></v-text-field>
-                </v-col> -->
+                </v-col>
                 <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.nama_lengkap"
@@ -175,14 +175,14 @@
                   </v-menu>
                 </v-col>
               </v-row>
-              <v-btn @click="step = 2" outlined small> Selanjutnya </v-btn>
+              <v-btn @click="goForward" outlined small> Selanjutnya </v-btn>
               <v-btn @click="goBack" text> Sebelumnya </v-btn>
             </v-container>
           </v-stepper-content>
 
           <v-stepper-content step="2">
-            <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
-              <v-row class="mx-2">
+            <v-container class="pt-md-2 pt-lg-2 pt-sm-2">
+              <v-row>
                 <v-col cols="12" sm="12" md="6" lg="4">
                   <v-autocomplete
                     v-model="form.provinsi"
@@ -278,7 +278,7 @@
                     dense
                   /> </v-col
               ></v-row>
-              <v-btn @click="step = 3" outlined small> Selanjutnya </v-btn>
+              <v-btn @click="goForward" outlined small> Selanjutnya </v-btn>
 
               <v-btn @click="goBack" text> Sebelumnya </v-btn>
             </v-container>
@@ -337,7 +337,7 @@
                   />
                 </v-col>
               </v-row>
-              <v-btn @click="step = 4" outlined small> Selanjutnya </v-btn>
+              <v-btn @click="goForward" outlined small> Selanjutnya </v-btn>
 
               <v-btn @click="goBack" text> Sebelumnya </v-btn>
             </v-container>
@@ -395,7 +395,7 @@
                   />
                 </v-col>
               </v-row>
-              <v-btn @click="step = 5" outlined small> Selanjutnya </v-btn>
+              <v-btn @click="goForward" outlined small> Selanjutnya </v-btn>
 
               <v-btn @click="goBack" text> Sebelumnya </v-btn>
             </v-container>
@@ -574,12 +574,24 @@ export default {
     }
     this.getProvinsi();
   },
+  created() {
+    window.addEventListener("keydown", (e) => {
+      //if Enter go to next
+      if (e.key == "Enter") {
+        if (this.step == 5) return this.onSubmit();
+        this.goForward();
+      }
+    });
+  },
   methods: {
     goBack() {
       if (this.step > 1) {
         this.step = this.step - 1;
-        console.log(this.step);
       }
+    },
+    goForward() {
+      if (this.step == 5) return;
+      this.step = this.step + 1;
     },
     getDataById() {
       if (!this.$route.params.id) return this.$router.go(-1);
