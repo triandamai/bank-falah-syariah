@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row">
         <!-- BEGIN CHART -->
-        <div class="col-xl-8 xl-100 dashboard-sec box-col-12">
+        <div class="col-xl-12 xl-100 dashboard-sec box-col-12">
           <px-card class="earning-card">
             <div class="row m-0">
               <div class="col-xl-3 earning-content p-0">

@@ -17,12 +17,14 @@ export const ACTION_POST_NASABAH = `nasabah/${POST_NASABAH}`;
 export const ACTION_PUT_NASABAH = `nasabah/${PUT_NASABAH}`;
 export const ACTION_GET_NASABAH = `nasabah/${GET_NASABAH}`;
 export const ACTION_DELETE_NASABAH = `nasabah/${DELETE_NASABAH}`;
+export const ACTION_IMPORT_NASABAH = `nasabah/${IMPORT_NASBAH}`;
 
 // mutation types
 const SET_ERROR = "setError";
 const ADD_NASABAH = "tambahnasabah";
 const EDIT_NASABAH = "editnasabah";
 const REMOVE_NASABAH = "deletenasabah";
+const IMPORT_NASBAH = "importnasabah";
 const INCREMENT_PAGE = `INCREMENT`;
 
 export const MUTATION_SET_ERROR = `nasabah/${SET_ERROR}`;
@@ -115,6 +117,47 @@ const actions = {
             resolve({
               success: false,
               message: "Gagal menyimpan,pastikan data sudah benar!",
+            });
+          }
+        })
+        .catch(({ response }) => {
+          resolve({
+            success: false,
+            message: "Terjadi kesalahan silahkan coba lagi nanti!",
+          });
+        });
+    });
+  },
+  /**
+   *
+   * @param {*} param0
+   * @param {*} body
+   * @returns
+   */
+  [IMPORT_NASBAH]({ commit }, body) {
+    return new Promise((resolve, reject) => {
+      ApiService.post("nasabah", body)
+        .then(({ status, data }) => {
+          if (status == 200 || status == 201) {
+            let result = {
+              id: data.data[0].id,
+              kode_nasabah: data.data[0].kode_nasabah,
+              nama_lengkap: data.data[0].nama_lengkap,
+              jenis_kelamin: data.data[0].jenis_kelamin,
+              ttl: data.data[0].tempat_lahir + data.data[0].tanggal_lahir,
+              tempat_lahir: item.tempat_lahir,
+              tanggal_lahir: item.tanggal_lahir,
+              alamat: data.data[0].alamat,
+              no_hp: data.data[0].no_hp,
+              status: data.data[0].active,
+            };
+
+            commit(ADD_NASABAH, result);
+            resolve({ success: true, message: "Berhasil import data nasabah" });
+          } else {
+            resolve({
+              success: false,
+              message: "Gagal import,pastikan data sudah benar!",
             });
           }
         })

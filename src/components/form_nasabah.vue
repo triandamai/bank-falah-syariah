@@ -33,7 +33,7 @@
           <v-stepper-content step="1">
             <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
               <v-row>
-                <v-col cols="12" sm="12" md="6">
+                <!-- <v-col cols="12" sm="12" md="6">
                   <v-text-field
                     v-model="form.kode_nasabah"
                     label="Kode Nasabah"
@@ -41,8 +41,8 @@
                     outlined
                     dense
                   ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="12" md="6">
+                </v-col> -->
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.nama_lengkap"
                     label="Nama Lengkap"
@@ -51,7 +51,7 @@
                     dense
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="12" md="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.nama_panggilan"
                     label="Nama panggilan"
@@ -61,7 +61,7 @@
                   ></v-text-field>
                 </v-col>
 
-                <v-col class="d-flex" cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-select
                     :items="jenis_kelamin"
                     v-model="form.jenis_kelamin"
@@ -74,7 +74,7 @@
                     small-chips
                   ></v-select>
                 </v-col>
-                <v-col class="d-flex" cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-select
                     :items="jenis_identitas"
                     v-model="form.jenis_identitas_id"
@@ -85,8 +85,9 @@
                     dense
                     outlined
                     small-chips
-                  /> </v-col
-                ><v-col cols="12" sm="12" md="12">
+                  />
+                </v-col>
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.no_identitas"
                     label="Nomor Identitas"
@@ -95,7 +96,7 @@
                     dense
                   ></v-text-field>
                 </v-col>
-                <v-col class="d-flex" cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-select
                     :items="agama"
                     v-model="form.agama_id"
@@ -108,7 +109,7 @@
                     small-chips
                   />
                 </v-col>
-                <v-col class="d-flex" cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-select
                     :items="pendidikan"
                     v-model="form.pendidikan_id"
@@ -121,7 +122,7 @@
                     outlined
                   />
                 </v-col>
-                <v-col class="d-flex" cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-select
                     :items="status_martial"
                     v-model="form.status_martial_id"
@@ -134,7 +135,7 @@
                     outlined
                   />
                 </v-col>
-                <v-col cols="12" sm="12" md="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.nama_ibu_kandung"
                     label="Nama Ibu Kandung"
@@ -144,7 +145,7 @@
                   ></v-text-field>
                 </v-col>
 
-                <v-col cols="12" sm="12" md="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-menu
                     ref="datepicker"
                     v-model="datepicker"
@@ -182,7 +183,7 @@
           <v-stepper-content step="2">
             <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
               <v-row class="mx-2">
-                <v-col cols="12" md="6" lg="6" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-autocomplete
                     v-model="form.provinsi"
                     label="Provinsi *"
@@ -197,7 +198,7 @@
                     small-chips
                   ></v-autocomplete>
                 </v-col>
-                <v-col cols="12" md="6" lg="6" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-autocomplete
                     label="Kabupaten *"
                     v-model="form.kabupaten"
@@ -212,7 +213,7 @@
                     small-chips
                   ></v-autocomplete>
                 </v-col>
-                <v-col cols="12" md="6" lg="6" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-autocomplete
                     label="Kecamatan *"
                     v-model="form.kecamatan"
@@ -227,7 +228,7 @@
                     small-chips
                   ></v-autocomplete>
                 </v-col>
-                <v-col cols="12" md="6" lg="6" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-autocomplete
                     label="Desa *"
                     v-model="form.desa"
@@ -241,7 +242,7 @@
                     small-chips
                   ></v-autocomplete>
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.alamat"
                     label="Alamat"
@@ -250,7 +251,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.tlpkantor"
                     label="Telp Kantor"
@@ -259,7 +260,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.no_hp"
                     label="Hp"
@@ -268,7 +269,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.email"
                     label="Email"
@@ -286,7 +287,7 @@
           <v-stepper-content step="3">
             <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
               <v-row>
-                <v-col class="d-flex" cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-select
                     :items="jenis_pekerjaan"
                     v-model="form.jenis_pekerjaan_id"
@@ -299,7 +300,7 @@
                     small-chips
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.nama_perusahaan"
                     label="Nama Perusahaan"
@@ -308,7 +309,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.nama_atasan"
                     label="Nama Atasan"
@@ -317,7 +318,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.penghasilan_perbulan"
                     label="Penghasilan Perbulan"
@@ -326,7 +327,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.penghasilan_pertahun"
                     label="Penghasilan Pertahun"
@@ -344,7 +345,7 @@
           <v-stepper-content step="4">
             <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
               <v-row>
-                <v-col class="d-flex" cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-select
                     :items="jenis_pekerjaan"
                     v-model="form.jenis_pekerjaan_id"
@@ -357,7 +358,7 @@
                     small-chips
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.nama_perusahaan"
                     label="Nama Perusahaan"
@@ -366,7 +367,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.nama_atasan"
                     label="Nama Atasan"
@@ -375,7 +376,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.penghasilan_perbulan"
                     label="Penghasilan Perbulan"
@@ -384,7 +385,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.penghasilan_pertahun"
                     label="Penghasilan Pertahun"
@@ -402,7 +403,7 @@
           <v-stepper-content step="5">
             <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
               <v-row>
-                <v-col cols="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.rasio_nasabah"
                     label="Rasio Nasabah*"
@@ -411,7 +412,7 @@
                     outlined
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.rasio_bank"
                     label="Rasio Bank*"
@@ -420,7 +421,7 @@
                     outlined
                   ></v-text-field>
                 </v-col>
-                <v-col class="d-flex" cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-select
                     :items="jenis_pekerjaan"
                     v-model="form.jenis_pekerjaan_id"
@@ -433,7 +434,7 @@
                     small-chips
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.nama_perusahaan"
                     label="Nama Perusahaan"
@@ -442,7 +443,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.nama_atasan"
                     label="Nama Atasan"
@@ -451,7 +452,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.penghasilan_perbulan"
                     label="Penghasilan Perbulan"
@@ -460,7 +461,7 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12">
+                <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.penghasilan_pertahun"
                     label="Penghasilan Pertahun"

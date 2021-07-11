@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="row">
         <!-- BEGIN CHART -->
-        <div class="col-xl-8 xl-100 dashboard-sec box-col-12">
+        <div class="col-xl-12 xl-100 dashboard-sec box-col-12">
           <px-card class="earning-card">
             <div class="row">
               <div class=" earning-content">
@@ -15,7 +15,9 @@
                     <p class="font-roboto">Overview of last month</p>
                   </div>
                   <div class="col-xl-12 left-btn">
-                    <a class="btn btn-gradient">Import</a>
+                    <a class="btn btn-gradient" @click="formimport = true"
+                      >Import</a
+                    >
                   </div>
                 </div>
               </div>
@@ -36,6 +38,7 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
+    <form-import-nasabah :show="formimport" />
   </div>
 </template>
 
@@ -50,6 +53,7 @@ export default {
   data: () => {
     return {
       headers: header,
+      formimport: false,
     };
   },
   computed: {

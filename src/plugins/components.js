@@ -10,7 +10,7 @@ Vue.component("form-nasabah", () => import("@/components/form_nasabah.vue"));
 Vue.component("form-pembiayaan", () =>
   import("@/components/form_pembiayaan.vue")
 );
-Vue.compile("form-import-nasabah", () =>
+Vue.component("form-import-nasabah", () =>
   import("@/components/form_upload_xlsx.vue")
 );
 Vue.component("form-simpanan", () => import("@/components/form_simpanan.vue"));
@@ -38,3 +38,5 @@ Vue.component("Breadcrumbs", () => import("@/components/bread_crumbs.vue"));
 Vue.component("apexchart", () => import("vue-apexcharts"));
 
 Vue.component("PxCard", () => import("@/components/Pxcard.vue"));
+
+export default {};
