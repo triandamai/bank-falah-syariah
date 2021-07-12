@@ -38,7 +38,7 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-import-nasabah :show="formimport" />
+    <form-import-nasabah :show="formimport" @close="formimport = false" />
   </div>
 </template>
 

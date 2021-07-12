@@ -23,10 +23,6 @@
             Data pendukung
           </v-stepper-step>
           <v-divider></v-divider>
-          <v-stepper-step :complete="step > 5" step="5">
-            Data Keanggotaan
-          </v-stepper-step>
-          <v-divider></v-divider>
         </v-stepper-header>
 
         <v-stepper-items>
@@ -265,6 +261,7 @@
                     v-model="form.no_hp"
                     label="Hp"
                     placeholder="No Handphone"
+                    type="phonenumber"
                     outlined
                     dense
                   />
@@ -274,6 +271,7 @@
                     v-model="form.email"
                     label="Email"
                     placeholder="Email"
+                    type="email"
                     outlined
                     dense
                   /> </v-col
@@ -318,20 +316,24 @@
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
+                <v-col cols="12" sm="12" md="6" lg="6">
                   <v-text-field
                     v-model="form.penghasilan_perbulan"
                     label="Penghasilan Perbulan"
                     placeholder="Penghasilan Perbulan"
+                    prefix="Rp"
+                    type="number"
                     outlined
                     dense
                   />
                 </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
+                <v-col cols="12" sm="12" md="6" lg="6">
                   <v-text-field
                     v-model="form.penghasilan_pertahun"
                     label="Penghasilan Pertahun"
                     placeholder="Penghasilan Pertahun"
+                    type="number"
+                    prefix="Rp"
                     outlined
                     dense
                   />
@@ -345,130 +347,27 @@
           <v-stepper-content step="4">
             <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
               <v-row>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-select
-                    :items="jenis_pekerjaan"
-                    v-model="form.jenis_pekerjaan_id"
-                    item-text="label"
-                    item-value="value"
-                    label="Pekerjaan"
-                    auto-select-first
-                    dense
-                    outlined
-                    small-chips
-                  />
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
+                <v-col cols="12" sm="12" md="6" lg="6">
                   <v-text-field
-                    v-model="form.nama_perusahaan"
-                    label="Nama Perusahaan"
-                    placeholder="Nama Perusahaan"
-                    outlined
-                    dense
-                  />
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-text-field
-                    v-model="form.nama_atasan"
-                    label="Nama Atasan"
-                    placeholder="Nama Atasan"
-                    outlined
-                    dense
-                  />
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-text-field
-                    v-model="form.penghasilan_perbulan"
-                    label="Penghasilan Perbulan"
-                    placeholder="Penghasilan Perbulan"
-                    outlined
-                    dense
-                  />
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-text-field
-                    v-model="form.penghasilan_pertahun"
-                    label="Penghasilan Pertahun"
-                    placeholder="Penghasilan Pertahun"
-                    outlined
-                    dense
-                  />
-                </v-col>
-              </v-row>
-              <v-btn @click="goForward" outlined small> Selanjutnya </v-btn>
-
-              <v-btn @click="goBack" text> Sebelumnya </v-btn>
-            </v-container>
-          </v-stepper-content>
-          <v-stepper-content step="5">
-            <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
-              <v-row>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-text-field
-                    v-model="form.rasio_nasabah"
+                    v-model="rasio_nasabah"
                     label="Rasio Nasabah*"
+                    suffix="%"
                     required
                     dense
                     outlined
+                    type="number"
                   ></v-text-field>
                 </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
+                <v-col cols="12" sm="12" md="6" lg="6">
                   <v-text-field
-                    v-model="form.rasio_bank"
+                    v-model="rasio_bank"
                     label="Rasio Bank*"
+                    suffix="%"
                     required
                     dense
                     outlined
+                    type="number"
                   ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-select
-                    :items="jenis_pekerjaan"
-                    v-model="form.jenis_pekerjaan_id"
-                    item-text="label"
-                    item-value="value"
-                    label="Pekerjaan"
-                    auto-select-first
-                    dense
-                    outlined
-                    small-chips
-                  />
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-text-field
-                    v-model="form.nama_perusahaan"
-                    label="Nama Perusahaan"
-                    placeholder="Nama Perusahaan"
-                    outlined
-                    dense
-                  />
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-text-field
-                    v-model="form.nama_atasan"
-                    label="Nama Atasan"
-                    placeholder="Nama Atasan"
-                    outlined
-                    dense
-                  />
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-text-field
-                    v-model="form.penghasilan_perbulan"
-                    label="Penghasilan Perbulan"
-                    placeholder="Penghasilan Perbulan"
-                    outlined
-                    dense
-                  />
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-text-field
-                    v-model="form.penghasilan_pertahun"
-                    label="Penghasilan Pertahun"
-                    placeholder="Penghasilan Pertahun"
-                    outlined
-                    dense
-                  />
                 </v-col>
               </v-row>
               <v-btn @click="onSubmit" outlined small> Simpan </v-btn>
@@ -544,7 +443,9 @@ export default {
         { label: "Pekerjaan Lainnya", value: 10 },
       ],
       datepicker: false,
-      tanggal_lahir: "",
+
+      rasio_nasabah: null,
+      rasio_bank: null,
       form: {
         nama_lengkap: "",
         nama_panggilan: "",
@@ -552,12 +453,24 @@ export default {
         alamat: "",
         no_hp: "",
         active: 1,
+        rasio_nasabah: null,
+        rasio_bank: null,
       },
     };
   },
   watch: {
     body: function(newVal) {
       this.form = newVal;
+    },
+    rasio_nasabah: function(newVal) {
+      this.form.rasio_bank = 100 - newVal;
+      this.rasio_bank = 100 - newVal;
+      this.form.rasio_nasabah = newVal;
+    },
+    rasio_bank: function(newVal) {
+      this.form.rasion_nasabah = 100 - newVal;
+      this.rasion_nasabah = 100 - newVal;
+      this.form.rasio_bank = newVal;
     },
   },
   computed: {
@@ -590,7 +503,7 @@ export default {
       }
     },
     goForward() {
-      if (this.step == 5) return;
+      if (this.step == 4) return;
       this.step = this.step + 1;
     },
     getDataById() {
@@ -619,7 +532,6 @@ export default {
       this.getKabupaten(data.provIdProvinsi);
     },
     getKabupaten(query) {
-      console.log(query);
       this.$store
         .dispatch(ACTION_GET_WILAYAH, {
           type: WKABUPATEN,
@@ -627,7 +539,7 @@ export default {
         })
         .then((res) => {
           if (res) {
-            this.getKabupaten();
+            this.getKabupaten(query);
           }
         });
     },
@@ -639,7 +551,7 @@ export default {
         .dispatch(ACTION_GET_WILAYAH, { type: WKECAMATAN, query: query })
         .then((res) => {
           if (res) {
-            this.getKecamatan();
+            this.getKecamatan(query);
           }
         });
     },
@@ -651,7 +563,7 @@ export default {
         .dispatch(ACTION_GET_WILAYAH, { type: WDESA, query: query })
         .then((res) => {
           if (res) {
-            this.getDesa();
+            this.getDesa(query);
           }
         });
     },

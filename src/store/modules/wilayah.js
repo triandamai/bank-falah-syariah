@@ -16,7 +16,7 @@ const state = {
   provinsi: { current_page: 0, data: [] },
   kabupaten: { current_page: 0, data: [] },
   desa: { current_page: 0, data: [] },
-  dusun: { current_page: 0, data: [] }
+  dusun: { current_page: 0, data: [] },
 };
 const actions = {
   /**
@@ -26,7 +26,7 @@ const actions = {
    * @returns
    */
   [GET_WILAYAH]({ commit, state }, { type, query }) {
-    return new Promise(resolve => {
+    return new Promise((resolve) => {
       let stillPaging = false;
       let resource = ``;
       switch (type) {
@@ -37,10 +37,10 @@ const actions = {
           resource = `/kabupaten?page=${state.kabupaten.current_page}&provinsi_id=${query}`;
           break;
         case WKECAMATAN:
-          resource = `/kecamatan?page${state.kecamatan.current_page}&kabupaten_id=${query}`;
+          resource = `/kecamatan?page=${state.kecamatan.current_page}&kabupaten_id=${query}`;
           break;
         case WDESA:
-          resource = `/desa?page${state.desa.current_page}&kecamatan_id=${query}`;
+          resource = `/desa?page=${state.desa.current_page}&kecamatan_id=${query}`;
           break;
         case WDUSUN:
           break;
@@ -48,7 +48,6 @@ const actions = {
       ApiService.getWilayah(resource)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            console.log(type);
             if (data.data.current_page >= data.data.last_page) {
               stillPaging = false;
               resolve(false);
@@ -57,11 +56,11 @@ const actions = {
               resolve(true);
               stillPaging = true;
             }
-            data.data.data.map(wilayah => {
+            data.data.data.map((wilayah) => {
               commit(ADD_DATA_WILAYAH, {
                 type: type,
                 page: stillPaging,
-                data: wilayah
+                data: wilayah,
               });
             });
           } else {
@@ -72,7 +71,7 @@ const actions = {
           resolve(false);
         });
     });
-  }
+  },
 };
 const mutations = {
   /**
@@ -99,7 +98,7 @@ const mutations = {
   [ADD_DATA_WILAYAH](state, { type, page, data }) {
     switch (type) {
       case WPROVINSI:
-        var exist = state.provinsi.data.some(provinsi => {
+        var exist = state.provinsi.data.some((provinsi) => {
           return provinsi.provIdProvinsi == data.provIdProvinsi;
         });
         if (!exist) {
@@ -107,7 +106,7 @@ const mutations = {
         }
         break;
       case WKABUPATEN:
-        var exist = state.kabupaten.data.some(kabupaten => {
+        var exist = state.kabupaten.data.some((kabupaten) => {
           return kabupaten.kabIdKabupaten == data.kabIdKabupaten;
         });
         if (!exist) {
@@ -115,7 +114,7 @@ const mutations = {
         }
         break;
       case WKECAMATAN:
-        var exist = state.kecamatan.data.some(kecamatan => {
+        var exist = state.kecamatan.data.some((kecamatan) => {
           return kecamatan.kecIdKecamatan == data.kecIdKecamatan;
         });
         if (!exist) {
@@ -123,7 +122,7 @@ const mutations = {
         }
         break;
       case WDESA:
-        var exist = state.desa.data.some(desa => {
+        var exist = state.desa.data.some((desa) => {
           return desa.desIdDesa == data.desIdDesa;
         });
         if (!exist) {
@@ -131,12 +130,12 @@ const mutations = {
         }
         break;
     }
-  }
+  },
 };
 
 export default {
   namespaced: true,
   state,
   actions,
-  mutations
+  mutations,
 };

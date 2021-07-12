@@ -25,11 +25,7 @@
         </v-card-text>
         <v-card-actions class="justify-end">
           <v-spacer></v-spacer>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="$emit('close', dialog.value)"
-          >
+          <v-btn color="blue darken-1" text @click="onClose(dialog.value)">
             Close
           </v-btn>
           <v-btn
@@ -53,14 +49,15 @@ export default {
   data: () => {
     return {
       loading: false,
-      dialogakad: false,
+      dialog: false,
       files: null,
+
       datanasabah: [],
     };
   },
   watch: {
-    body: function(newVal) {
-      this.form = newVal;
+    show: function(newVal) {
+      this.dialogakad = newVal;
     },
   },
   methods: {
@@ -143,6 +140,10 @@ export default {
         this.loading = false;
       };
       fileReader.readAsBinaryString(file);
+    },
+    onClose(dialog) {
+      console.log(dialog);
+      this.$emit("close", dialog);
     },
     onSubmit() {
       console.log(this.datanasabah);
