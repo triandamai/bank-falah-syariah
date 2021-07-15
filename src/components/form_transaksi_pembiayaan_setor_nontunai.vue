@@ -15,7 +15,7 @@
           <v-toolbar-title>Settings</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn dark text @click="dialog = false">
+            <v-btn dark text @click="onSubmit">
               Save
             </v-btn>
           </v-toolbar-items>
@@ -64,7 +64,7 @@
   </v-row>
 </template>
 <script>
-
+import {ACTION_TRANSACTION,PEMBIAYAAN_SETOR_NONTUNAI} from "@/store"
 export default {
   props: ["show"],
   data: () => {
@@ -84,6 +84,22 @@ export default {
     hidden() {
       this.$store.commit("hideForm", {});
     },
+    onSubmit(){
+      this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:PEMBIAYAAN_SETOR_NONTUNAI})
+      .then(({success,message})=>{
+        this.$toasted.show(
+            success
+                ? this.$t("Success Message", { context: `${message}` })
+                : this.$t("Failed Message", { context: `${message}` }),
+            {
+              theme: "bubble",
+              position: "top-right",
+              type: success ? "success" : "error",
+              duration: 4000,
+            }
+        );
+      })
+    }
 
   }
 };
