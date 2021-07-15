@@ -8,8 +8,8 @@
     >
 
       <v-card>
-        <v-toolbar dark color="primary">
-          <v-btn icon dark @click="hidden">
+        <v-toolbar color="primary" dark>
+          <v-btn dark icon @click="hidden">
             <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-toolbar-title>Settings</v-toolbar-title>
@@ -20,20 +20,45 @@
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>
-        <v-list three-line subheader>
-          <v-subheader>User Controls</v-subheader>
+        <v-container class="pt-md-6 pt-lg-6 pt-sm-6">
+          <v-row>
+            <v-col cols="12" sm="12" md="6" lg="4">
+              <v-autocomplete
+                  v-model="form.nasabah_id"
+                  label="Nasabah *"
+                  :items="nasabah"
+                  item-text="nama_lengkap"
+                  item-value="id_nasabah"
+                  auto-select-first
+                  outlined
+                  required
+                  dense
+                  small-chips
+              ></v-autocomplete>
+            </v-col>
 
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>Password</v-list-item-title>
-              <v-list-item-subtitle
-              >Require password for purchase or use password to restrict
-                purchase</v-list-item-subtitle
-              >
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
+            <v-col cols="12" sm="12" md="6" lg="4">
+              <v-text-field
+                  v-model="form.nomor_rekening"
+                  label="Nomor Rekening"
+                  placeholder="01100XXXX"
+                  outlined
+                  dense
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="12" md="6" lg="4">
+              <v-text-field
+                  v-model="form.value"
+                  label="Jumlah"
+                  placeholder="0"
+                  prefix="Rp"
+                  outlined
+                  dense
+              ></v-text-field>
+            </v-col>
 
+          </v-row>
+        </v-container>
       </v-card>
     </v-dialog>
   </v-row>
@@ -45,19 +70,21 @@ export default {
   data: () => {
     return {
       dialog: false,
+      nasabah:[],
+      form:{}
     };
   },
   watch: {
-    show: function(newVal) {
-      console.log(newVal)
+    show: function (newVal) {
+
       this.dialog = newVal;
     },
   },
-  methods:{
-    hidden(){
+  methods: {
+    hidden() {
+      this.$store.commit("hideForm", {});
+    },
 
-      this.$store.commit("hideForm",{});
-    }
   }
 };
 </script>
