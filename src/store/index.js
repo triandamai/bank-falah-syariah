@@ -9,6 +9,7 @@ import master from "./modules/master";
 import rekening from "./modules/rekening";
 import system from "./modules/system";
 import wilayah from "./modules/wilayah";
+import transaksi from "./modules/transaksi";
 
 Vue.use(Vuex);
 
@@ -140,7 +141,8 @@ export const store = new Vuex.Store({
     master,
     rekening,
     system,
-    wilayah
+    wilayah,
+    transaksi
   }
 });
 
@@ -152,3 +154,5 @@ export * from "./modules/master";
 export * from "./modules/rekening";
 export * from "./modules/system";
 export * from "./modules/wilayah";
+export * from "./modules/transaksi";
+export * from "./modules/statistic"
