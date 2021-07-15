@@ -38,6 +38,14 @@
       </div>
       <Customizer />
     </div>
+    <form-transaksi-pembiayaan-setor-tunai :show="pembiayaanformsetortunai"/>
+    <form-transaksi-pembiayaan-setor-nontunai :show="pembiayaanformsetornontunai"/>
+    <form-transaksi-pembiayaan-tarik-tunai :show="pembiayaanformtariktunai"/>
+    <form-transaksi-pembiayaan-tarik-nontunai :show="pembiayaanformtariknontunai"/>
+    <form-transaksi-tabungan-setor-tunai :show="tabunganformsetortunai"/>
+    <form-transaksi-tabungan-setor-nontunai :show="tabunganformsetornontunai"/>
+    <form-transaksi-tabungan-tarik-tunai :show="tabunganformtariktunai"/>
+    <form-transaksi-tabungan-tarik-nontunai :show="tabunganformtariknontunai"/>
   </div>
 </template>
 
@@ -71,6 +79,14 @@ export default {
       layout: (state) => state.layout.layout,
       togglesidebar: (state) => state.menu.togglesidebar,
       body: (state) => state.body,
+      tabunganformsetortunai:(state)=> state.tabunganformsetortunai,
+      tabunganformsetornontunai:(state)=> state.tabunganformsetornontunai,
+      tabunganformtariktunai:(state)=> state.tabunganformtariktunai,
+      tabunganformtariknontunai:(state)=> state.tabunganformtariknontunai,
+      pembiayaanformsetortunai:(state)=> state.pembiayaanformsetortunai,
+      pembiayaanformsetornontunai:(state)=> state.pembiayaanformsetornontunai,
+      pembiayaanformtariktunai:(state)=> state.pembiayaanformtariktunai,
+      pembiayaanformtariknontunai:(state)=> state.pembiayaanformtariknontunai,
     }),
   },
   created() {

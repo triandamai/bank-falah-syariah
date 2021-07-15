@@ -14,12 +14,14 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    formakad: false,
-    formdeposito: false,
-    formjenistransaksi: false,
-    formpembiayaan: false,
-    formproduk: false,
-    formsimpanan: false,
+    tabunganformsetortunai: false,
+    tabunganformsetornontunai: false,
+    tabunganformtariktunai: false,
+    tabunganformtariknontunai: false,
+    pembiayaanformsetortunai: false,
+    pembiayaanformsetornontunai: false,
+    pembiayaanformtariktunai: false,
+    pembiayaanformtariknontunai: false,
     body: {}
   },
   mutations: {
@@ -28,64 +30,99 @@ export const store = new Vuex.Store({
       localStorage.setItem("currentLanguageIcon", payload.icon);
       window.location.reload();
     },
+    // eslint-disable-next-line no-empty-pattern
     hideForm(state, {}) {
-      state.formakad = false;
-      state.formdeposito = false;
-      state.formjenistransaksi = false;
-      state.formpembiayaan = false;
-      state.formproduk = false;
-      state.formsimpanan = false;
+      state.tabunganformsetortunai= false;
+      state.tabunganformsetornontunai= false;
+      state.tabunganformtariktunai= false;
+      state.tabunganformtariknontunai= false;
+      state.pembiayaanformsetortunai= false;
+      state.pembiayaanformsetornontunai= false;
+      state.pembiayaanformtariktunai= false;
+      state.pembiayaanformtariknontunai= false;
     },
     showForm(state, form) {
       state.body = {};
       switch (form) {
-        case "akad":
-          state.formakad = true;
-          state.formdeposito = false;
-          state.formjenistransaksi = false;
-          state.formpembiayaan = false;
-          state.formproduk = false;
-          state.formsimpanan = false;
+        case "tabunganformsetortunai":
+          state.tabunganformsetortunai= true;
+          state.tabunganformsetornontunai= false;
+          state.tabunganformtariktunai= false;
+          state.tabunganformtariknontunai= false;
+          state.pembiayaanformsetortunai= false;
+          state.pembiayaanformsetornontunai= false;
+          state.pembiayaanformtariktunai= false;
+          state.pembiayaanformtariknontunai= false;
           break;
-        case "jenistransaksi":
-          state.formakad = false;
-          state.formdeposito = false;
-          state.formjenistransaksi = true;
-          state.formpembiayaan = false;
-          state.formproduk = false;
-          state.formsimpanan = false;
+        case "tabunganformsetornontunai":
+          state.tabunganformsetortunai= false;
+          state.tabunganformsetornontunai= true;
+          state.tabunganformtariktunai= false;
+          state.tabunganformtariknontunai= false;
+          state.pembiayaanformsetortunai= false;
+          state.pembiayaanformsetornontunai= false;
+          state.pembiayaanformtariktunai= false;
+          state.pembiayaanformtariknontunai= false;
           break;
-        case "produk":
-          state.formakad = false;
-          state.formdeposito = false;
-          state.formjenistransaksi = false;
-          state.formpembiayaan = false;
-          state.formproduk = true;
-          state.formsimpanan = false;
+        case "tabunganformtariktunai":
+          state.tabunganformsetortunai= false;
+          state.tabunganformsetornontunai= false;
+          state.tabunganformtariktunai= true;
+          state.tabunganformtariknontunai= false;
+          state.pembiayaanformsetortunai= false;
+          state.pembiayaanformsetornontunai= false;
+          state.pembiayaanformtariktunai= false;
+          state.pembiayaanformtariknontunai= false;
           break;
-        case "deposito":
-          state.formakad = false;
-          state.formdeposito = true;
-          state.formjenistransaksi = false;
-          state.formpembiayaan = false;
-          state.formproduk = false;
-          state.formsimpanan = false;
+        case "tabunganformtariknontunai":
+          state.tabunganformsetortunai= false;
+          state.tabunganformsetornontunai= false;
+          state.tabunganformtariktunai= false;
+          state.tabunganformtariknontunai= true;
+          state.pembiayaanformsetortunai= false;
+          state.pembiayaanformsetornontunai= false;
+          state.pembiayaanformtariktunai= false;
+          state.pembiayaanformtariknontunai= false;
           break;
-        case "pembiayaan":
-          state.formakad = false;
-          state.formdeposito = false;
-          state.formjenistransaksi = false;
-          state.formpembiayaan = true;
-          state.formproduk = false;
-          state.formsimpanan = false;
+        case "pembiayaanformsetortunai":
+          state.tabunganformsetortunai= false;
+          state.tabunganformsetornontunai= false;
+          state.tabunganformtariktunai= false;
+          state.tabunganformtariknontunai= false;
+          state.pembiayaanformsetortunai= true;
+          state.pembiayaanformsetornontunai= false;
+          state.pembiayaanformtariktunai= false;
+          state.pembiayaanformtariknontunai= false;
           break;
-        case "simpanan":
-          state.formakad = false;
-          state.formdeposito = false;
-          state.formjenistransaksi = false;
-          state.formpembiayaan = false;
-          state.formproduk = false;
-          state.formsimpanan = true;
+        case "pembiayaanformsetornontunai":
+          state.tabunganformsetortunai= false;
+          state.tabunganformsetornontunai= false;
+          state.tabunganformtariktunai= false;
+          state.tabunganformtariknontunai= false;
+          state.pembiayaanformsetortunai= false;
+          state.pembiayaanformsetornontunai= true;
+          state.pembiayaanformtariktunai= false;
+          state.pembiayaanformtariknontunai= false;
+          break;
+        case "pembiayaanformtariktunai":
+          state.tabunganformsetortunai= false;
+          state.tabunganformsetornontunai= false;
+          state.tabunganformtariktunai= false;
+          state.tabunganformtariknontunai= false;
+          state.pembiayaanformsetortunai= false;
+          state.pembiayaanformsetornontunai= false;
+          state.pembiayaanformtariktunai= true;
+          state.pembiayaanformtariknontunai= false;
+          break;
+        case "pembiayaanformtariknontunai":
+          state.tabunganformsetortunai= false;
+          state.tabunganformsetornontunai= false;
+          state.tabunganformtariktunai= false;
+          state.tabunganformtariknontunai= false;
+          state.pembiayaanformsetortunai= false;
+          state.pembiayaanformsetornontunai= false;
+          state.pembiayaanformtariktunai= false;
+          state.pembiayaanformtariknontunai= true;
           break;
       }
     }

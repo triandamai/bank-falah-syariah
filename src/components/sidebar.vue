@@ -513,7 +513,6 @@ export default {
       }
     },
     scrollToLeft() {
-      console.log("left");
 
       // If Margin is reach between screen resolution
       if (this.margin >= -this.width) {

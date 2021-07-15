@@ -124,23 +124,42 @@
           },
           "children": [
             {
-              "path": "/main/transaksi-tabungan-tunai",
-              "title": "Setor",
-              "type": "link",
+              "path": "tabunganformsetortunai",
+              "title": "Setor Tunai",
+              "type": "button",
               "privilage": {
                 "roles": ["admin", "all"],
                 "groups": ["admin"]
               }
             },
             {
-              "path": "/main/transaksi-tabungan-nontunai",
-              "title": "Tarik",
-              "type": "link",
+              "path": "tabunganformsetornontunai",
+              "title": "Setor Non-Tunai",
+              "type": "button",
+              "privilage": {
+                "roles": ["admin", "all"],
+                "groups": ["admin"]
+              }
+            },
+            {
+              "path": "tabunganformtariktunai",
+              "title": "Tarik Tunai",
+              "type": "button",
+              "privilage": {
+                "roles": ["admin", "all"],
+                "groups": ["admin"]
+              }
+            },
+            {
+              "path": "tabunganformtariknontunai",
+              "title": "Tarik Non-Tunai",
+              "type": "button",
               "privilage": {
                 "roles": ["admin", "all"],
                 "groups": ["admin"]
               }
             }
+
           ]
         },
         {
@@ -153,23 +172,44 @@
           },
           "children": [
             {
-              "path": "/main/transaksi-pembiayaan-tunai",
-              "title": "Setor",
-              "type": "link",
+              "path": "pembiayaanformsetortunai",
+              "title": "Setor Tunai",
+              "type": "button",
               "privilage": {
                 "roles": ["admin", "all"],
                 "groups": ["admin"]
               }
             },
             {
-              "path": "/main/transaksi-pembiayaan-nontunai",
-              "title": "Tarik",
-              "type": "link",
+              "path": "pembiayaanformsetornontunai",
+              "title": "Setor Non-Tunai",
+              "type": "button",
+              "privilage": {
+                "roles": ["admin", "all"],
+                "groups": ["admin"]
+              }
+            },
+            {
+              "path": "pembiayaanformtariktunai",
+              "title": "Tarik Tunai",
+              "type": "button",
+              "privilage": {
+                "roles": ["admin", "all"],
+                "groups": ["admin"]
+              }
+            },
+            {
+              "path": "pembiayaanformtariknontunai",
+              "title": "Tarik Non-Tunai",
+              "type": "button",
               "privilage": {
                 "roles": ["admin", "all"],
                 "groups": ["admin"]
               }
             }
+
+
+
           ]
         }
       ]
