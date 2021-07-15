@@ -100,52 +100,6 @@ const routes = [
           reqiresAuth: true,
         },
       },
-      /**
-       * Transaction
-       *
-       */
-      {
-        path: "transaksi-tabungan-tunai",
-        name: "transaksi-tabungan-tunai",
-        component: () =>
-          import("@/pages/transaksi-tabungan/transaksi-tabungan-tunai.vue"),
-        meta: {
-          title: "Transaksi | Bank Falah Syariah",
-          reqiresAuth: true,
-        },
-      },
-      {
-        path: "transaksi-tabungan-nontunai",
-        name: "transaksi-tabungan-nontunai",
-        component: () =>
-          import("@/pages/transaksi-tabungan/transaksi-tabungan-nontunai.vue"),
-        meta: {
-          title: "Transaksi | Bank Falah Syariah",
-          reqiresAuth: true,
-        },
-      },
-      {
-        path: "transaksi-pembiayaan-tunai",
-        name: "transaksi-pembiayaan-tunai",
-        component: () =>
-          import("@/pages/transaksi-pembiayaan/transaksi-pembiayaan-tunai.vue"),
-        meta: {
-          title: "Transaksi | Bank Falah Syariah",
-          reqiresAuth: true,
-        },
-      },
-      {
-        path: "transaksi-pembiayaan-nontunai",
-        name: "transaksi-pembiayaan-nontunai",
-        component: () =>
-          import(
-            "@/pages/transaksi-pembiayaan/transaksi-pembiayaan-nontunai.vue"
-          ),
-        meta: {
-          title: "Transaksi | Bank Falah Syariah",
-          reqiresAuth: true,
-        },
-      },
       //
       {
         path: "akad",

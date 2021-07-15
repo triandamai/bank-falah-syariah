@@ -201,7 +201,7 @@ export default {
     };
   },
   created() {
-    console.log(this.$store)
+
     this.$store.dispatch(ACTION_GET_TRANSACTION_STATISTIC,{})
     this.$store.dispatch(ACTION_GET_NASABAH_STATISTIC,{})
   }

@@ -39,11 +39,14 @@ export default {
     getNasabahById(id) {
       ApiService.get(`nasabah/${id}`)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             this.body = data.data[0];
           }
         })
-        .catch((e) => {});
+          // eslint-disable-next-line no-unused-vars
+        .catch((e) => {
+
+        });
     },
     onSubmit(data) {
       this.$store

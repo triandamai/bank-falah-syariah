@@ -132,8 +132,9 @@ export default {
               });
             }
           });
+          // eslint-disable-next-line no-empty
         } catch (error) {
-          console.log(error);
+
         }
       };
       fileReader.onprogress = () => {
@@ -194,63 +195,63 @@ export default {
       return `${date_info.getUTCFullYear()}-${date_info.getMonth()}-${date_info.getDate()}`;
     },
     checkIDType(value) {
-      if (value == "KTP") return 1;
-      if (value == "SIM") return 2;
-      if (value == "PASSPOSRT") return 3;
+      if (value === "KTP") return 1;
+      if (value === "SIM") return 2;
+      if (value === "PASSPOSRT") return 3;
       return 1;
     },
     checkAgama(value) {
-      if (value == "Islam") return 1;
-      if (value == "Kristen") return 2;
-      if (value == "Kristen Katolik") return 2;
-      if (value == "Katolik") return 2;
-      if (value == "Kristen Protestan") return 3;
-      if (value == "Protestan") return 3;
-      if (value == "Hindu") return 4;
-      if (value == "Budha") return 5;
-      if (value == "Konghucu") return 6;
+      if (value === "Islam") return 1;
+      if (value === "Kristen") return 2;
+      if (value === "Kristen Katolik") return 2;
+      if (value === "Katolik") return 2;
+      if (value === "Kristen Protestan") return 3;
+      if (value === "Protestan") return 3;
+      if (value === "Hindu") return 4;
+      if (value === "Budha") return 5;
+      if (value === "Konghucu") return 6;
 
       return 1;
     },
     checkEducation(value) {
-      if (value == "SD") return 1;
-      if (value == "SLTP/SMP/Sederajat") return 2;
-      if (value == "SLTP") return 2;
-      if (value == "SMP") return 2;
-      if (value == "SLTA/SMA/SMK/Sederajat") return 3;
-      if (value == "SLTA") return 3;
-      if (value == "SMA") return 3;
-      if (value == "SMK") return 3;
-      if (value == "Diploma") return 4;
-      if (value == "S1") return 5;
-      if (value == "S2") return 6;
-      if (value == "S3") return 7;
-      if (value == "Lainnya") return 8;
+      if (value === "SD") return 1;
+      if (value === "SLTP/SMP/Sederajat") return 2;
+      if (value === "SLTP") return 2;
+      if (value === "SMP") return 2;
+      if (value === "SLTA/SMA/SMK/Sederajat") return 3;
+      if (value === "SLTA") return 3;
+      if (value === "SMA") return 3;
+      if (value === "SMK") return 3;
+      if (value === "Diploma") return 4;
+      if (value === "S1") return 5;
+      if (value === "S2") return 6;
+      if (value === "S3") return 7;
+      if (value === "Lainnya") return 8;
       return 8;
     },
     checkStatusMartial(value) {
-      if (value == "Lajang") return 1;
-      if (value == "Menikah") return 2;
-      if (value == "Janda/Duda") return 3;
-      if (value == "Duda/Janda") return 3;
-      if (value == "Janda") return 3;
-      if (value == "Duda") return 3;
+      if (value === "Lajang") return 1;
+      if (value === "Menikah") return 2;
+      if (value === "Janda/Duda") return 3;
+      if (value === "Duda/Janda") return 3;
+      if (value === "Janda") return 3;
+      if (value === "Duda") return 3;
       return 1;
     },
     checkWork(value) {
-      if (value == "Pegawai Negeri(Guru)") return 1;
-      if (value == "Pegawai Negeri(Non Guru)") return 2;
-      if (value == "PNS") return 2;
-      if (value == "TNI/POLRI") return 3;
-      if (value == "TNI") return 3;
-      if (value == "POLRI") return 3;
-      if (value == "Karyawan Swasta") return 4;
-      if (value == "Petani") return 5;
-      if (value == "Nelayan") return 6;
-      if (value == "Peternak") return 7;
-      if (value == "Pengrajin") return 8;
-      if (value == "Pedagang") return 9;
-      if (value == "Pekerjaan Lainnya") return 10;
+      if (value === "Pegawai Negeri(Guru)") return 1;
+      if (value === "Pegawai Negeri(Non Guru)") return 2;
+      if (value === "PNS") return 2;
+      if (value === "TNI/POLRI") return 3;
+      if (value === "TNI") return 3;
+      if (value === "POLRI") return 3;
+      if (value === "Karyawan Swasta") return 4;
+      if (value === "Petani") return 5;
+      if (value === "Nelayan") return 6;
+      if (value === "Peternak") return 7;
+      if (value === "Pengrajin") return 8;
+      if (value === "Pedagang") return 9;
+      if (value === "Pekerjaan Lainnya") return 10;
       return 10;
     },
   },

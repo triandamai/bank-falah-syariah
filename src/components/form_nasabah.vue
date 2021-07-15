@@ -469,7 +469,7 @@ export default {
     },
     rasio_bank: function(newVal) {
       this.form.rasion_nasabah = 100 - newVal;
-      this.rasion_nasabah = 100 - newVal;
+      this.rasio_nasabah = 100 - newVal;
       this.form.rasio_bank = newVal;
     },
   },
@@ -517,6 +517,7 @@ export default {
             }
           }
         })
+          // eslint-disable-next-line no-unused-vars
         .catch((e) => {});
     },
     getProvinsi() {

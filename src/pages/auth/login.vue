@@ -123,7 +123,7 @@
 </template>
 
 <script>
-import { LOGIN } from "../../store/modules/auth";
+import { LOGIN } from "@/store/modules/auth";
 export default {
   name: "login",
   data() {
@@ -158,7 +158,7 @@ export default {
     // Firebase login
     signUp: function() {
       this.submitted = true;
-      if (this.email != "" && this.password != "") {
+      if (this.email !== "" && this.password !== "") {
         this.disable = true;
         this.$store
           .dispatch(`auth/${LOGIN}`, {
