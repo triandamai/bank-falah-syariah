@@ -64,7 +64,8 @@
   </v-row>
 </template>
 <script>
-import {ACTION_TRANSACTION,PEMBIAYAAN_SETOR_NONTUNAI} from "@/store"
+import {ACTION_TRANSACTION,PEMBIAYAAN_SETOR_TUNAI} from "@/store"
+import {getTodayDate, getUser} from "@/services/jwt.service"
 export default {
   props: ["show"],
   data: () => {
@@ -76,16 +77,20 @@ export default {
   },
   watch: {
     show: function (newVal) {
-
       this.dialog = newVal;
     },
+  },
+  created() {
+    const user = getUser();
+    this.form.petugas_id = user.id_user
   },
   methods: {
     hidden() {
       this.$store.commit("hideForm", {});
     },
     onSubmit(){
-      this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:PEMBIAYAAN_SETOR_NONTUNAI})
+      this.form.tanggal_transaksi = getTodayDate()
+      this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:PEMBIAYAAN_SETOR_TUNAI})
           .then(({success,message})=>{
             this.$toasted.show(
                 success

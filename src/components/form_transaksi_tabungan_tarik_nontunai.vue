@@ -28,7 +28,7 @@
                   label="Nasabah *"
                   :items="nasabah"
                   item-text="nama_lengkap"
-                  item-value="id_nasabah"
+                  item-value="id"
                   auto-select-first
                   outlined
                   required
@@ -64,28 +64,40 @@
   </v-row>
 </template>
 <script>
-import {ACTION_TRANSACTION,PEMBIAYAAN_SETOR_NONTUNAI} from "@/store"
+import {ACTION_GET_NASABAH, ACTION_TRANSACTION, TABUNGAN_TARIK_NONTUNAI} from "@/store"
+import {getCurrendUserId, getTodayDate} from "@/services/jwt.service"
+import {mapState} from "vuex"
 export default {
   props: ["show"],
   data: () => {
     return {
       dialog: false,
-      nasabah:[],
       form:{}
     };
   },
   watch: {
     show: function (newVal) {
-
       this.dialog = newVal;
     },
+  },
+  computed:{
+    ...mapState({
+      nasabah: (state)=> state.nasabah.datanasabah
+    })
+  },
+  created() {
+
+
+    this.getNasabah()
   },
   methods: {
     hidden() {
       this.$store.commit("hideForm", {});
     },
     onSubmit(){
-      this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:PEMBIAYAAN_SETOR_NONTUNAI})
+      this.form.tgl_transaksi = getTodayDate()
+      this.form.petugas_id = getCurrendUserId()
+      this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:TABUNGAN_TARIK_NONTUNAI})
           .then(({success,message})=>{
             this.$toasted.show(
                 success
@@ -99,6 +111,13 @@ export default {
                 }
             );
           })
+    },
+    getNasabah(){
+      this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
+        if (isNext) {
+          this.getData();
+        }
+      });
     }
 
   }
