@@ -55,6 +55,13 @@ export const getAppname = () => {
     : "Bank Falah Syariah";
 };
 
+export const getTodayDate=()=>{
+  const date = new Date()
+  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
+}
+export const getCurrendUserId=()=>{
+  return getUser().id;
+}
 /***
  * Ecryption for local data(token and user data)
  *
@@ -81,6 +88,7 @@ const aesDecrypt = (text) =>
   CryptoJS.AES.decrypt(text, CryptoJS.enc.Utf8.parse(key).toString(), {
     iv: CryptoJS.enc.Utf8.parse(iv).toString(),
   }).toString(CryptoJS.enc.Utf8);
+
 
 export default {
   getToken,
