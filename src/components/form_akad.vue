@@ -58,7 +58,6 @@ export default {
   data: () => {
     return {
       dialogakad: false,
-
       form: {
         nama_produk: "",
         kode_produk: "",
