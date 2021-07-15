@@ -5,8 +5,10 @@
     <div class="container-fluid">
       <div class="row">
         <!-- BEGIN CHART -->
-        <div class="col-xl-12 xl-100 dashboard-sec box-col-12">
-          <px-card class="earning-card">
+
+          <div class="col-xl-12 xl-100 dashboard-sec box-col-12">
+          <px-card class="earning-card with-padding">
+
             <div class="row m-0">
               <div class="col-xl-3 earning-content p-0">
                 <div class="row m-0 chart-left">
@@ -42,7 +44,7 @@
                       </div>
                     </div>
                     <div
-                      class="col-xl-4 col-md-4 col-sm-4 col-12 p-0 justify-content-end"
+                        class="col-xl-4 col-md-4 col-sm-4 col-12 p-0 justify-content-end"
                     >
                       <div class="inner-top-right">
                         <ul class="d-flex list-unstyled justify-content-end">
@@ -58,10 +60,10 @@
                         <div class="current-sale-container">
                           <div id="chart-currently">
                             <apexchart
-                              height="250"
-                              type="area"
-                              :options="apexDashboard.options"
-                              :series="apexDashboard.series"
+                                height="250"
+                                type="area"
+                                :options="apexDashboard.options"
+                                :series="apexDashboard.series"
                             ></apexchart>
                           </div>
                         </div>
@@ -71,8 +73,11 @@
                 </div>
               </div>
             </div>
+
           </px-card>
         </div>
+
+
         <!-- END CHART -->
       </div>
     </div>

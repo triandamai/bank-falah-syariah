@@ -14,7 +14,8 @@
           alt=""
         />
       </router-link>
-      <span style="margin-left: 5px">Bank Falah Syariah</span>
+      <span class="font-roboto" style="margin-left: 5px; font-style: normal;">Bank Falah Syariah</span>
+
       <div class="back-btn" @click="toggle_sidebar">
         <i class="fa fa-angle-left"></i>
       </div>
