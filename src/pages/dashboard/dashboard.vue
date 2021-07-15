@@ -83,6 +83,7 @@
 <script>
 var primary = localStorage.getItem("primary_color") || "#7366ff";
 var secondary = localStorage.getItem("secondary_color") || "#f73164";
+import {ACTION_GET_NASABAH_STATISTIC,ACTION_GET_TRANSACTION_STATISTIC} from "@/store"
 export default {
   data: () => {
     return {
@@ -199,5 +200,10 @@ export default {
       },
     };
   },
+  created() {
+    console.log(this.$store)
+    this.$store.dispatch(ACTION_GET_TRANSACTION_STATISTIC,{})
+    this.$store.dispatch(ACTION_GET_NASABAH_STATISTIC,{})
+  }
 };
 </script>
