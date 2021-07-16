@@ -58,6 +58,7 @@ const state = {
             offsetX: 0,
             offsetY: 0,
             show: false,
+            max:16,
             labels: {
                 low: 0,
                 offsetX: 0,
@@ -120,7 +121,15 @@ const actions = {
                    const data_label =[]
                    let transaksi =0;
                    let nasabah =0;
+                   let max =0;
                    data.data.map(item=>{
+                       if(item.nasabah > max){
+                           max = item.nasabah + 5;
+                       }
+
+                       if(item.transaksi > max){
+                           max = item.transaksi + 5;
+                       }
                        nasabah = nasabah + item.nasabah
                        transaksi = transaksi + item.transaksi
                        data_nasabah.push(item.nasabah)
@@ -128,7 +137,7 @@ const actions = {
                        data_label.push(item.date)
                    })
                    commit(STATISTIC,{nasabah:nasabah,transaksi:transaksi})
-                    resolve({success:true,data:{label:data_label,transaksi:data_transaksi,nasabah:data_nasabah}});
+                    resolve({success:true,data:{label:data_label,transaksi:data_transaksi,nasabah:data_nasabah,max:max}});
                } else {
                    resolve({success:false,data:[]});
                }

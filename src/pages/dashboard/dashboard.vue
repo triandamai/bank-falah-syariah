@@ -105,7 +105,25 @@ export default {
                 offsetX: 0,
                 show: false,
           },
-        }})
+        },
+          yaxis: {
+            low: 0,
+            offsetX: 0,
+            offsetY: 0,
+            show: false,
+            max:data.max,
+            labels: {
+              low: 0,
+              offsetX: 0,
+              show: false,
+            },
+            axisBorder: {
+              low: 0,
+              offsetX: 0,
+              show: false,
+            },
+          },
+        })
         this.$refs.chart_statistic.updateSeries([{name:"Nasabah",data:data.nasabah},{name:"Transaksi",data:data.transaksi}])
       }
 
