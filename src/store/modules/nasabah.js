@@ -64,20 +64,7 @@ const actions = {
               resolve(true);
             }
             data.data.map((item) => {
-              let data = {
-                id: item.id,
-                kode_nasabah: item.kode_nasabah,
-                nama_lengkap: item.nama_lengkap,
-                jenis_kelamin: item.jenis_kelamin,
-                ttl: item.tempat_lahir + item.tanggal_lahir,
-                tempat_lahir: item.tempat_lahir,
-                tanggal_lahir: item.tanggal_lahir,
-                alamat: item.alamat,
-                no_hp: item.no_hp,
-                status: item.active,
-              };
-
-              commit(ADD_NASABAH, data);
+              commit(ADD_NASABAH, item);
             });
           } else {
             resolve(false);
@@ -99,20 +86,9 @@ const actions = {
       ApiService.post("nasabah", body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            let result = {
-              id: data.data[0].id,
-              kode_nasabah: data.data[0].kode_nasabah,
-              nama_lengkap: data.data[0].nama_lengkap,
-              jenis_kelamin: data.data[0].jenis_kelamin,
-              ttl: data.data[0].tempat_lahir + data.data[0].tanggal_lahir,
-              tempat_lahir: data.data[0].tempat_lahir,
-              tanggal_lahir: data.data[0].tanggal_lahir,
-              alamat: data.data[0].alamat,
-              no_hp: data.data[0].no_hp,
-              status: data.data[0].active,
-            };
 
-            commit(ADD_NASABAH, result);
+
+            commit(ADD_NASABAH, data.data[0]);
             resolve({ success: true, message: "Berhasil menyimpan" });
           } else {
             resolve({
@@ -140,20 +116,11 @@ const actions = {
       ApiService.post("nasabah/import", body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-            let result = {
-              id: data.data[0].id,
-              kode_nasabah: data.data[0].kode_nasabah,
-              nama_lengkap: data.data[0].nama_lengkap,
-              jenis_kelamin: data.data[0].jenis_kelamin,
-              ttl: data.data[0].tempat_lahir + data.data[0].tanggal_lahir,
-              tempat_lahir: data.data[0].tempat_lahir,
-              tanggal_lahir: data.data[0].tanggal_lahir,
-              alamat: data.data[0].alamat,
-              no_hp: data.data[0].no_hp,
-              status: data.data[0].active,
-            };
 
-            commit(ADD_NASABAH, result);
+
+            data.data.map((item) => {
+              commit(ADD_NASABAH, item);
+            });
             resolve({ success: true, message: "Berhasil import data nasabah" });
           } else {
             resolve({
