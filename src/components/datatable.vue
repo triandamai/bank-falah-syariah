@@ -19,28 +19,42 @@
     </v-card-title>
 
     <v-data-table flat :headers="headers" :items="items" :search="search">
-      <template v-slot:[`item.action`]="{ item }">
-        <b-button-toolbar
-          aria-label="Toolbar with button groups and dropdown menu"
-        >
-          <b-button-group class="mx-1">
-            <v-btn
-              v-show="!hideupdate"
-              @click="$emit('edit', item)"
-              outlined
-              small
-              >{{ $t("Edit") }}</v-btn
-            >
-            <v-btn
-              v-show="!hidedelete"
-              @click="$emit('delete', item)"
-              outlined
-              small
-              >{{ $t("Delete") }}</v-btn
-            >
-          </b-button-group>
-        </b-button-toolbar>
+      <template v-slot:item.jenis_kelamin="{ item }">
+        {{item.jenis_kelamin == "L" ?'Laki-Laki':'Perempuan'}}
       </template>
+      <template v-slot:item.active="{ item }">
+        <v-chip
+            :color="getColor(item.active)"
+            dark
+        >
+          {{ item.active > 0 ? 'Aktif':'Non-Aktif' }}
+        </v-chip>
+      </template>
+      <template v-slot:item.action="{ item }">
+        <v-icon
+            small
+            class="mr-2"
+            @click="$emit('edit', item)"
+        >
+          mdi-pencil
+        </v-icon>
+        <v-icon
+            small
+            @click="$emit('delete', item)"
+        >
+          mdi-delete
+        </v-icon>
+      </template>
+
+      <template v-slot:no-data>
+        <v-btn
+            color="primary"
+            @click="initialize"
+        >
+          Reset
+        </v-btn>
+      </template>
+
     </v-data-table>
   </v-card>
 </template>
@@ -58,5 +72,12 @@ export default {
       theme: (state) => state.layout.isDark,
     }),
   },
+  methods:{
+    getColor (active) {
+      if (active > 0) return 'green'
+      return 'orange'
+
+    },
+  }
 };
 </script>

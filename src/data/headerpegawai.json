@@ -1,7 +1,8 @@
 [
     {
-        "text": "No",
-        "value": "id"
+        "text": "NIP",
+        "sortable": true,
+        "value": "nip"
     },
     {
         "text": "Nama Lengkap",
@@ -11,6 +12,10 @@
     {
         "text": "Jabatan",
         "value": "jabatan_id"
+    },
+    {
+        "text": "Gender",
+        "value": "jenis_kelamin"
     },
     {
         "text": "Tempat Lahir",

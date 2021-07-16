@@ -1,8 +1,5 @@
 [
-    {
-        "text": "No",
-        "value": "id"
-    },
+
     {
         "text": "No Rekening",
         "value": "no_rekening"
@@ -18,6 +15,10 @@
     {
         "text": "Tanggal Buka",
         "value": "tgl_buka"
+    },
+    {
+        "text": "Status",
+        "value": "active"
     },
     {
         "text": "Aksi",

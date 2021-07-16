@@ -1,24 +1,19 @@
 [
+
+
     {
-        "text": "No",
-        "value": "id"
-    },
-    {
-        "text": "Tipe",
-        "value": "tipe_produk"
-    },
-    {
-        "text": "Kode",
+        "text": "Kode Produk",
         "value": "kode_produk"
     },
     {
-        "text": "Nama",
-        "value": "nama_produk"
+        "text": "Tipe Produk",
+        "value": "tipe_produk"
     },
     {
-        "text": "Akad",
-        "value": "akad_id"
+        "text": "Nama Produk",
+        "value": "nama_produk"
     },
+
     {
         "text": "Aksi",
         "value": "action"

@@ -1,10 +1,5 @@
 [
-    {
-        "text": "No",
-        "align": "left",
-        "sortable": false,
-        "value": "id"
-    },
+
     {
         "text": "Kode Nasabah",
         "value": "kode_nasabah"
@@ -19,19 +14,16 @@
     },
     {
         "text": "TTl",
-        "value": "ttl"
+        "value": "tanggal_lahir"
     },
     {
         "text": "Alamat",
         "value": "alamat"
     },
-    {
-        "text": "Telp.",
-        "value": "no_hp"
-    },
+
     {
         "text": "Status",
-        "value": "status"
+        "value": "active"
     },
     {
         "text": "Aksi",
