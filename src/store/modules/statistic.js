@@ -22,7 +22,7 @@ const state = {
     options: {
         chart: {
             width: 685,
-            height: 250,
+            height: 240,
             type: "area",
             toolbar: {
                 show: false,
