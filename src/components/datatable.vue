@@ -28,6 +28,9 @@
       <template v-slot:item.pegawai="{ item }">
         {{item.pegawai.fullname}}
       </template>
+      <template v-slot:item.jabatan="{ item }">
+        {{item.jabatan.nama_jabatan}}
+      </template>
       <template v-slot:item.tipe_produk="{ item }">
         {{getTipeProduk(item.tipe_produk)}}
       </template>
