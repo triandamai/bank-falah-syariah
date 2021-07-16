@@ -4,76 +4,148 @@
  *
  */
 import ApiService from "@/services/api.service.js";
+import transaksi from "@/store/modules/transaksi";
 
 
 
-const REKENING = "REKENING"
-const TRANSACTION = "TRANSACTION"
-export const ACTION_GET_TRANSACTION_STATISTIC = `statistic/${TRANSACTION}`
-export const ACTION_GET_NASABAH_STATISTIC = `statistic/${REKENING}`
+const STATISTIC = "STATISTIC"
 
-export const MUTATION_GET_TRANSACTION_STATISTIC = `statistic/${TRANSACTION}`
-export const MUTATION_GET_NASABAH_STATISTIC = `statistic/${REKENING}`
+export const ACTION_GET_STATISTIC = `statistic/${STATISTIC}`
 
 
+
+var primary = localStorage.getItem("primary_color") || "#7366ff";
+var secondary = localStorage.getItem("secondary_color") || "#f73164";
 const state = {
-    series:[
-        {
-            name:"Transaction",
-            data:[]
+    totalnasabah:0,
+    totaltransaksi:0,
+    options: {
+        chart: {
+            width: 685,
+            height: 250,
+            type: "area",
+            toolbar: {
+                show: false,
+            },
         },
-        {
-            name:"Rekening",
-            data:[]
-        }
+        colors: [primary, secondary],
+        dataLabels: {
+            enabled: false,
+        },
+        stroke: {
+            curve: "smooth",
+        },
+        xaxis: {
+            type: "datetime",
+            low: 0,
+            offsetX: 0,
+            offsetY: 0,
+            show: false,
+            categories: [],
+            labels: {
+                low: 0,
+                offsetX: 0,
+                show: false,
+            },
+            axisBorder: {
+                low: 0,
+                offsetX: 0,
+                show: false,
+            },
+        },
+        yaxis: {
+            low: 0,
+            offsetX: 0,
+            offsetY: 0,
+            show: false,
+            labels: {
+                low: 0,
+                offsetX: 0,
+                show: false,
+            },
+            axisBorder: {
+                low: 0,
+                offsetX: 0,
+                show: false,
+            },
+        },
+        markers: {
+            strokeWidth: 3,
+            colors: "#ffffff",
+            strokeColors: [primary, secondary],
+            hover: {
+                size: 6,
+            },
+        },
+        fill: {
+            type: "gradient",
+            gradient: {
+                shadeIntensity: 1,
+                opacityFrom: 0.7,
+                opacityTo: 0.5,
+                stops: [0, 80, 100],
+            },
+        },
+        legend: {
+            show: true,
+        },
+        tooltip: {
+            x: {
+                format: "dd/MM/yy",
+            },
+        },
+        grid: {
+            show: false,
+            padding: {
+                left: 0,
+                right: 0,
+                bottom: -15,
+                top: -40,
+            },
+        },
+    },
+    series:[
     ]
 };
 const getters = {};
 const actions = {
     // eslint-disable-next-line no-unused-vars,no-empty-pattern
-    [TRANSACTION]({commit}, {}) {
+    [STATISTIC]({commit,state}, {}) {
         return new Promise(resolve => {
-           ApiService.get("/statistics/transaksi").then(({status,data})=>{
-               if (status == 200 || status == 201) {
-                   if (data.current_page >= data.last_page) {
-                       resolve(false);
-                   } else {
-                       resolve(true);
+           ApiService.get("/statistics?days=10").then(({status,data})=>{
 
-                   }
+               if (status == 200 || status == 201) {
+                   const data_nasabah =[]
+                   const data_transaksi =[]
+                   const data_label =[]
+                   let transaksi =0;
+                   let nasabah =0;
+                   data.data.map(item=>{
+                       nasabah = nasabah + item.nasabah
+                       transaksi = transaksi + item.transaksi
+                       data_nasabah.push(item.nasabah)
+                       data_transaksi.push(item.transaksi)
+                       data_label.push(item.date)
+                   })
+                   commit(STATISTIC,{nasabah:nasabah,transaksi:transaksi})
+                    resolve({success:true,data:{label:data_label,transaksi:data_transaksi,nasabah:data_nasabah}});
                } else {
-                   resolve(false);
+                   resolve({success:false,data:[]});
                }
+           }).catch(()=>{
+               resolve({success:false,data:[]});
            })
 
         })
     },
     // eslint-disable-next-line no-unused-vars,no-empty-pattern
-    [REKENING]({commit}, {}) {
-        return new Promise(resolve => {
-            ApiService.get("/statistics/nasabah?days=100").then(({status,data})=>{
-                if (status == 200 || status == 201) {
-                    if (data.current_page >= data.last_page) {
-                        resolve(false);
-                    } else {
-                        resolve(true);
 
-                    }
-                } else {
-                    resolve(false);
-                }
-            })
-        })
-    }
 };
 const mutations = {
-    [TRANSACTION](state,data){
-        state[0].data = data
-    },
-    [REKENING](state,data){
-        state[1].data = data
-    },
-
+[STATISTIC](state,{nasabah,transaksi}){
+    state.totalnasabah=nasabah
+    state.totaltransaksi=transaksi
+}
 };
 export default {
     namespaced: true,
