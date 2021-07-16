@@ -18,9 +18,27 @@
       ></v-text-field>
     </v-card-title>
 
-    <v-data-table flat :headers="headers" :items="items" :search="search">
+    <v-data-table
+        :loading="loading"
+        loading-text="Loading... Please wait"
+        flat :headers="headers" :items="items" :search="search">
       <template v-slot:item.jenis_kelamin="{ item }">
         {{item.jenis_kelamin == "L" ?'Laki-Laki':'Perempuan'}}
+      </template>
+      <template v-slot:item.pegawai="{ item }">
+        {{item.pegawai.fullname}}
+      </template>
+      <template v-slot:item.tipe_produk="{ item }">
+        {{getTipeProduk(item.tipe_produk)}}
+      </template>
+      <template v-slot:item.lama_angsuran="{ item }">
+        {{item.tipe_angsuran == 1 ? `${item.lama_angsuran} Minggu`:`${item.lama_angsuran} Hari`}}
+      </template>
+      <template v-slot:item.nasabah="{ item }">
+        {{item.nasabah.nama_lengkap}}
+      </template>
+      <template v-slot:item.produk="{ item }">
+        {{item.produk.nama_produk}}
       </template>
       <template v-slot:item.active="{ item }">
         <v-chip
@@ -49,7 +67,7 @@
       <template v-slot:no-data>
         <v-btn
             color="primary"
-            @click="initialize"
+
         >
           Reset
         </v-btn>
@@ -65,7 +83,13 @@ export default {
   data() {
     return {
       search: "",
+      loading:true
     };
+  },
+  watch:{
+    items:function(){
+      this.loading= false
+    }
   },
   computed: {
     ...mapState({
@@ -78,6 +102,13 @@ export default {
       return 'orange'
 
     },
+    getTipeProduk(tipe){
+      if(tipe === 1) return "Simpanan"
+      if (tipe === 2) return "Pembiayaan"
+      if(tipe === 3) return "Deposito"
+
+      return "Tidak diketahui"
+    }
   }
 };
 </script>
