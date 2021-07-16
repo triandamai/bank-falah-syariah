@@ -172,7 +172,7 @@
                 </v-col>
               </v-row>
               <v-btn @click="goForward" outlined small> Selanjutnya </v-btn>
-              <v-btn @click="goBack" text> Sebelumnya </v-btn>
+              <v-btn @click="removeBackStack" text> Kembali </v-btn>
             </v-container>
           </v-stepper-content>
 
@@ -505,6 +505,9 @@ export default {
     goForward() {
       if (this.step == 4) return;
       this.step = this.step + 1;
+    },
+    removeBackStack(){
+      this.$router.go(-1)
     },
     getDataById() {
       if (!this.$route.params.id) return this.$router.go(-1);
