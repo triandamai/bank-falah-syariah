@@ -6,11 +6,11 @@
     },
     {
         "text": "Nasabah",
-        "value": "nasabah_id"
+        "value": "nasabah"
     },
     {
         "text": "Produk",
-        "value": "produk_id"
+        "value": "produk"
     },
     {
         "text": "Tanggal Buka",

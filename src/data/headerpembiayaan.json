@@ -1,23 +1,13 @@
 [
-    {
-        "text": "No",
-        "value": "id"
-    },
-    {
-        "text": "Pencairan",
-        "value": "tgl_pencairan"
-    },
-    {
-        "text": "Jatuh Tempo",
-        "value": "tgl_jatuh_tempo"
-    },
+
+
     {
         "text": "Nasabah",
-        "value": "nasabah_id"
+        "value": "nasabah"
     },
     {
         "text": "Teller",
-        "value": "pegawai_id"
+        "value": "pegawai"
     },
     {
         "text": "Nilai",
@@ -26,6 +16,14 @@
     {
         "text": "Lama Angsuran",
         "value": "lama_angsuran"
+    },
+    {
+        "text": "Pencairan",
+        "value": "tgl_pencairan"
+    },
+    {
+        "text": "Jatuh Tempo",
+        "value": "tgl_jatuh_tempo"
     },
     {
         "text": "Aksi",
