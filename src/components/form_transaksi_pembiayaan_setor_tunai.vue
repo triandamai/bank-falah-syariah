@@ -28,7 +28,7 @@
                   label="Nasabah *"
                   :items="nasabah"
                   item-text="nama_lengkap"
-                  item-value="id_nasabah"
+                  item-value="id"
                   auto-select-first
                   outlined
                   required
@@ -64,14 +64,14 @@
   </v-row>
 </template>
 <script>
-import {ACTION_TRANSACTION,PEMBIAYAAN_SETOR_TUNAI} from "@/store"
-import {getTodayDate, getUser} from "@/services/jwt.service"
+import {ACTION_GET_NASABAH, ACTION_TRANSACTION, PEMBIAYAAN_SETOR_TUNAI} from "@/store"
+import {getCurrendUserId, getTodayDate} from "@/services/jwt.service"
+import {mapState} from "vuex"
 export default {
   props: ["show"],
   data: () => {
     return {
       dialog: false,
-      nasabah:[],
       form:{}
     };
   },
@@ -80,16 +80,23 @@ export default {
       this.dialog = newVal;
     },
   },
+  computed:{
+    ...mapState({
+      nasabah: (state)=> state.nasabah.datanasabah
+    })
+  },
   created() {
-    const user = getUser();
-    this.form.petugas_id = user.id_user
+
+
+    this.getNasabah()
   },
   methods: {
     hidden() {
       this.$store.commit("hideForm", {});
     },
     onSubmit(){
-      this.form.tanggal_transaksi = getTodayDate()
+      this.form.tgl_transaksi = getTodayDate()
+      this.form.petugas_id = getCurrendUserId()
       this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:PEMBIAYAAN_SETOR_TUNAI})
           .then(({success,message})=>{
             this.$toasted.show(
@@ -104,6 +111,13 @@ export default {
                 }
             );
           })
+    },
+    getNasabah(){
+      this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
+        if (isNext) {
+          this.getNasabah();
+        }
+      });
     }
 
   }

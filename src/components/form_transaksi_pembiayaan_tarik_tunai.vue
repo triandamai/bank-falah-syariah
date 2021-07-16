@@ -64,7 +64,7 @@
   </v-row>
 </template>
 <script>
-import {ACTION_GET_NASABAH, ACTION_TRANSACTION, PEMBIAYAAN_TARIK_TUNAI} from "@/store"
+import {ACTION_GET_NASABAH, ACTION_TRANSACTION, PEMBIAYAAN_TARIK_NONTUNAI} from "@/store"
 import {getCurrendUserId, getTodayDate} from "@/services/jwt.service"
 import {mapState} from "vuex"
 export default {
@@ -97,7 +97,7 @@ export default {
     onSubmit(){
       this.form.tgl_transaksi = getTodayDate()
       this.form.petugas_id = getCurrendUserId()
-      this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:PEMBIAYAAN_TARIK_TUNAI})
+      this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:PEMBIAYAAN_TARIK_NONTUNAI})
           .then(({success,message})=>{
             this.$toasted.show(
                 success
@@ -115,7 +115,7 @@ export default {
     getNasabah(){
       this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
         if (isNext) {
-          this.getData();
+          this.getNasabah();
         }
       });
     }

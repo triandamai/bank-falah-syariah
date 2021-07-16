@@ -54,7 +54,6 @@ const actions = {
       let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
       ApiService.get(`nasabah${page}`)
         .then(({ status, data }) => {
-          //    console.log(data.data);
           if (status == 200 || status == 201) {
             if (data.current_page >= data.last_page) {
               //jangan ambil data lagi
@@ -116,8 +115,6 @@ const actions = {
       ApiService.post("nasabah/import", body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
-
-
             data.data.map((item) => {
               commit(ADD_NASABAH, item);
             });
@@ -201,7 +198,7 @@ const mutations = {
     state.errors = data;
   },
   [INCREMENT_PAGE]({ currentpage }) {
-    currentpage++;
+    currentpage = currentpage+1;
   },
   [ADD_NASABAH](state, data) {
     var exsts = state.datanasabah.some((nasabah) => {

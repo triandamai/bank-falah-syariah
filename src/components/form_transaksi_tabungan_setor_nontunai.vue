@@ -115,7 +115,7 @@ export default {
     getNasabah(){
       this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
         if (isNext) {
-          this.getData();
+          this.getNasabah();
         }
       });
     }
