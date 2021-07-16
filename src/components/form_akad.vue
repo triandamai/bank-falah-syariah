@@ -19,12 +19,16 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field
-                  v-model="form.tipe_produk"
-                  label="Tipe *"
-                  required
-                ></v-text-field>
+                <v-select
+                    v-model="form.tipe_produk"
+                    label="Tipe *"
+                    required
+                    :items="tipe_produk"
+                    item-text="text"
+                    item-value="val"
+                ></v-select>
               </v-col>
+
               <v-col cols="12">
                 <v-text-field
                   v-model="form.kode_produk"
@@ -64,6 +68,11 @@ export default {
         tipe_produk: "",
         akad_id: "",
       },
+      tipe_produk: [
+        { val: "1", text: "Simpanan" },
+        { val: "2", text: "Pembiayaan" },
+        { val: "3", text: "Deposito" },
+      ],
     };
   },
   computed: {
