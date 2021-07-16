@@ -32,9 +32,6 @@
               </div>
               <div class="col-xl-9 p-0">
                 <div class="chart-right">
-
-                  <div class="row">
-                    <div class="col-xl-12">
                       <div class="card-body">
                         <div class="current-sale-container">
                           <div id="chart-currently">
@@ -47,8 +44,6 @@
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -111,7 +106,7 @@ export default {
             offsetX: 0,
             offsetY: 0,
             show: false,
-            max:data.max,
+            max:data.max+2,
             labels: {
               low: 0,
               offsetX: 0,

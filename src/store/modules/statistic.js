@@ -22,7 +22,7 @@ const state = {
     options: {
         chart: {
             width: 685,
-            height: 240,
+            height: 230,
             type: "area",
             toolbar: {
                 show: false,
@@ -124,11 +124,11 @@ const actions = {
                    let max =0;
                    data.data.map(item=>{
                        if(item.nasabah > max){
-                           max = item.nasabah + 5;
+                           max = item.nasabah ;
                        }
 
                        if(item.transaksi > max){
-                           max = item.transaksi + 5;
+                           max = item.transaksi;
                        }
                        nasabah = nasabah + item.nasabah
                        transaksi = transaksi + item.transaksi
