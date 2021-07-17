@@ -81,11 +81,15 @@ export default {
     },
     openMenu(e){
 
-      this.viewMenu = true;
-      Vue.nextTick(function() {
-        this.$refs.right.focus()
-        this.setMenu(e.y, e.x)
-      }.bind(this));
+      if(this.$route.path === "/login"){
+
+      }else {
+        this.viewMenu = true;
+        Vue.nextTick(function () {
+          this.$refs.right.focus()
+          this.setMenu(e.y, e.x)
+        }.bind(this));
+      }
     },
     closeMenu({relatedTarget}){
 
