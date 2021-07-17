@@ -20,22 +20,10 @@
         </div>
       </div>
     </div>
-    <!-- <div class="container-fluid">
-      <div class="page-title">
-        <div class="row">
-          <div class="col-6 d-flex">
-            <h3>{{ title }}</h3>
-          </div>
-          <div class="col-6">
-            <Bookmark />
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 <script>
-import Bookmark from "./bookmark";
+
 export default {
   props: {
     title: {
@@ -44,9 +32,6 @@ export default {
     main: {
       default: "",
     },
-  },
-  components: {
-    Bookmark,
   },
 };
 </script>

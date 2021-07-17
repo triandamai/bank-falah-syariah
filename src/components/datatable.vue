@@ -19,7 +19,7 @@
     </v-card-title>
 
     <v-data-table
-        :loading="loading"
+        :loading="loadingtable"
         loading-text="Loading... Please wait"
         flat :headers="headers" :items="items" :search="search">
       <template v-slot:item.jenis_kelamin="{ item }">
@@ -86,17 +86,14 @@ export default {
   data() {
     return {
       search: "",
-      loading:true
     };
-  },
-  watch:{
-    items:function(){
-      this.loading= false
-    }
   },
   computed: {
     ...mapState({
       theme: (state) => state.layout.isDark,
+      loadingtable:(state)=> {
+        console.log(state.loadingtable)
+        return state.loadingtable}
     }),
   },
   methods:{

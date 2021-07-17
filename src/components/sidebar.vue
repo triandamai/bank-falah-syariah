@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="sidebar">
     <div class="logo-wrapper">
       <router-link to="/">
         <img

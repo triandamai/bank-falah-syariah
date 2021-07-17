@@ -61,6 +61,7 @@ export default {
     }),
   },
   created() {
+    this.$store.commit('setLoading',true)
     this.getData();
   },
   methods: {
@@ -73,6 +74,7 @@ export default {
           if (isNext) {
             this.getData();
           }
+          this.$store.commit('setLoading',false)
         });
     },
     onSubmit(data) {

@@ -1,17 +1,17 @@
 <template>
-  <div>
-    <footer class="footer">
-      <div class="container-fluid">
+
+    <footer class="footer ">
+      <div class="container-fluid ">
         <div class="row">
-          <div class="col-md-12 footer-copyright text-center">
-            <p class="mb-0">
+          <div class="col-md-12 col-lg-12 col-sm-12 col-12 col-xs-12 footer-copyright text-center">
+            <p class="mb-5">
               Copyright 2020 © Bank Falah Syariah by BakaranProject
             </p>
           </div>
         </div>
       </div>
     </footer>
-  </div>
+
 </template>
 
 <script>

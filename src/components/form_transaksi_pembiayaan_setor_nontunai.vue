@@ -94,10 +94,14 @@ export default {
     })
   },
   created() {
+
     window.addEventListener("keydown", (e) => {
       //if Enter go to next
       if (e.key == "Enter") {
-       this.onSubmit()
+        if(this.dialog){
+          this.onSubmit()
+        }
+
       }
     });
   },

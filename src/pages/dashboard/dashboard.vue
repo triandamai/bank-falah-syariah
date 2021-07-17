@@ -80,7 +80,6 @@ export default {
 
   },
   created() {
-
     this.$store.dispatch(ACTION_GET_STATISTIC,{}).then(({success,data})=>{
       if(success){
         this.$refs.chart_statistic.updateOptions( { xaxis: {

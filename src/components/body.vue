@@ -36,16 +36,16 @@
         </div>
         <Footer />
       </div>
+      <form-transaksi-pembiayaan-setor-tunai :show="pembiayaanformsetortunai"/>
+      <form-transaksi-pembiayaan-setor-nontunai :show="pembiayaanformsetornontunai"/>
+      <form-transaksi-pembiayaan-tarik-tunai :show="pembiayaanformtariktunai"/>
+      <form-transaksi-pembiayaan-tarik-nontunai :show="pembiayaanformtariknontunai"/>
+      <form-transaksi-tabungan-setor-tunai :show="tabunganformsetortunai"/>
+      <form-transaksi-tabungan-setor-nontunai :show="tabunganformsetornontunai"/>
+      <form-transaksi-tabungan-tarik-tunai :show="tabunganformtariktunai"/>
+      <form-transaksi-tabungan-tarik-nontunai :show="tabunganformtariknontunai"/>
       <Customizer />
     </div>
-    <form-transaksi-pembiayaan-setor-tunai :show="pembiayaanformsetortunai"/>
-    <form-transaksi-pembiayaan-setor-nontunai :show="pembiayaanformsetornontunai"/>
-    <form-transaksi-pembiayaan-tarik-tunai :show="pembiayaanformtariktunai"/>
-    <form-transaksi-pembiayaan-tarik-nontunai :show="pembiayaanformtariknontunai"/>
-    <form-transaksi-tabungan-setor-tunai :show="tabunganformsetortunai"/>
-    <form-transaksi-tabungan-setor-nontunai :show="tabunganformsetornontunai"/>
-    <form-transaksi-tabungan-tarik-tunai :show="tabunganformtariktunai"/>
-    <form-transaksi-tabungan-tarik-nontunai :show="tabunganformtariknontunai"/>
   </div>
 </template>
 
@@ -91,6 +91,7 @@ export default {
     }),
   },
   created() {
+
     window.addEventListener("resize", this.handleResize);
     this.handleResize();
     this.resized = this.sidebar_toggle_var;

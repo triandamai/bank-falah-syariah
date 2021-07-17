@@ -58,11 +58,16 @@ export default {
     }),
   },
   created() {
+    this.$store.commit('setLoading',true)
     this.getData();
   },
   methods: {
     getData() {
-      this.$store.dispatch(`menu/getMenu`).then(({ success }) => {});
+      this.$store.dispatch(`menu/getMenu`).then(({ success }) => {
+        if(success){
+          this.$store.commit('setLoading',false)
+        }
+      });
     },
     onEdit(menu) {
       this.form = true;

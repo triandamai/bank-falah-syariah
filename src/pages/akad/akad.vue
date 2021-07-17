@@ -61,10 +61,12 @@ export default {
     }),
   },
   created() {
+    this.$store.commit('setLoading',true)
     this.getData();
   },
   methods: {
     getData() {
+
       this.$store
         .dispatch(ACTION_GET_DATA_MASTER, {
           type: MPRODUK,
@@ -73,6 +75,7 @@ export default {
           if (isNext) {
             this.getData();
           }
+          this.$store.commit('setLoading',false)
         });
     },
     onSubmit(data) {

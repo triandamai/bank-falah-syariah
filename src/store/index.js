@@ -24,9 +24,14 @@ export const store = new Vuex.Store({
     pembiayaanformsetornontunai: false,
     pembiayaanformtariktunai: false,
     pembiayaanformtariknontunai: false,
+    loadingtable:true,
     body: {}
   },
   mutations: {
+    // eslint-disable-next-line no-unused-vars
+    setLoading(state,isloading){
+      state.loadingtable = isloading
+    },
     changeLang(state, payload) {
       localStorage.setItem("currentLanguage", payload.id);
       localStorage.setItem("currentLanguageIcon", payload.icon);
