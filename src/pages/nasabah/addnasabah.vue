@@ -18,17 +18,28 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
+    <v-overlay :value="overlay">
+      <v-progress-circular
+          indeterminate
+          size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 
 <script>
 import { ACTION_POST_NASABAH } from "@/store/modules/nasabah";
 export default {
+  data:()=>{return{
+    overlay:false,
+  }},
   methods: {
     onSubmit(data) {
+      this.overlay = true
       this.$store
         .dispatch(ACTION_POST_NASABAH, data)
         .then(({ success, message }) => {
+          this.overlay = success
           this.$toasted.show(
             success
               ? this.$t("Success Message", { context: `${message}` })

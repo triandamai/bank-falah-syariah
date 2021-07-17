@@ -28,14 +28,7 @@
             <div class="login-main">
               <b-card no-body>
                 <b-tabs pills vertical>
-                  <b-tab active>
-                    <template #title>
-                      <img
-                        src="../../assets/images/login/firebase.svg"
-                        id="firebase-tooltip"
-                      />
-                      <span>Firebase Login</span>
-                    </template>
+
                     <b-card-text>
                       <form class="theme-form" @submit.prevent="signUp">
                         <h4>Sign in to account</h4>
@@ -60,7 +53,7 @@
                             v-show="submitted && !email"
                             class="invalid-feedback"
                           >
-                            Email is required
+                            Username is required
                           </div>
                         </div>
                         <div class="form-group">
@@ -81,7 +74,7 @@
                             v-show="submitted && !password"
                             class="invalid-feedback"
                           >
-                            Email is required
+                            Password is required
                           </div>
                           <div class="show-hide" @click="showPassword">
                             <span class="show"></span>
@@ -111,7 +104,7 @@
                         </p> -->
                       </form>
                     </b-card-text>
-                  </b-tab>
+
                 </b-tabs>
               </b-card>
             </div>
@@ -119,6 +112,12 @@
         </div>
       </div>
     </div>
+    <v-overlay :value="overlay">
+      <v-progress-circular
+          indeterminate
+          size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 
@@ -128,6 +127,7 @@ export default {
   name: "login",
   data() {
     return {
+      overlay:false,
       type: "password",
       email: "",
       password: "",
@@ -160,6 +160,7 @@ export default {
       this.submitted = true;
       if (this.email !== "" && this.password !== "") {
         this.disable = true;
+        this.overlay = true;
         this.$store
           .dispatch(`auth/${LOGIN}`, {
             username: this.email,
@@ -179,12 +180,14 @@ export default {
             );
 
             if (success) {
+              this.overlay = false;
               setTimeout(() => {
                 this.$router.push({ name: "dashboard" });
               }, 1000);
               return;
             }
             this.disable = false;
+            this.overlay = false;
           });
       }
     },

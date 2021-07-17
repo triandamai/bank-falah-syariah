@@ -85,11 +85,6 @@ export default {
       nasabah: (state)=> state.nasabah.datanasabah
     })
   },
-  created() {
-
-
-    this.getNasabah()
-  },
   methods: {
     hidden() {
       this.$store.commit("hideForm", {});
@@ -112,14 +107,6 @@ export default {
             );
           })
     },
-    getNasabah(){
-      this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
-        if (isNext) {
-          this.getNasabah();
-        }
-      });
-    }
-
   }
 };
 </script>

@@ -55,6 +55,7 @@ import Header from "./header";
 import Sidebar from "./sidebar";
 import Footer from "./footer";
 import Customizer from "./customizer";
+import {ACTION_GET_NASABAH} from "@/store";
 
 export default {
   name: "mainpage",
@@ -94,6 +95,8 @@ export default {
     this.handleResize();
     this.resized = this.sidebar_toggle_var;
     this.$store.dispatch("layout/set");
+    //get data nasabah
+    this.getNasabah()
   },
   watch: {
     $route() {
@@ -127,6 +130,13 @@ export default {
     handleResize() {
       this.$store.dispatch("menu/resizetoggle");
     },
+    getNasabah(){
+      this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
+        if (isNext) {
+          this.getNasabah();
+        }
+      });
+    }
   },
 };
 </script>

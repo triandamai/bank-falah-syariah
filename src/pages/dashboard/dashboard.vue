@@ -61,7 +61,8 @@
 
 <script>
 
-import {ACTION_GET_STATISTIC,} from "@/store"
+import {ACTION_GET_STATISTIC} from "@/store"
+
 import {mapState} from "vuex"
 export default {
   data: () => {
@@ -82,7 +83,6 @@ export default {
 
     this.$store.dispatch(ACTION_GET_STATISTIC,{}).then(({success,data})=>{
       if(success){
-
         this.$refs.chart_statistic.updateOptions( { xaxis: {
           type: "datetime",
               low: 0,

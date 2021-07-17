@@ -18,6 +18,12 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
+    <v-overlay :value="overlay">
+      <v-progress-circular
+          indeterminate
+          size="64"
+      ></v-progress-circular>
+    </v-overlay>
   </div>
 </template>
 
@@ -27,7 +33,10 @@ import ApiService from "@/services/api.service";
 export default {
   data: () => {
     return {
-      body: {},
+      overlay:false,
+      body: {
+
+      },
     };
   },
   created() {
@@ -49,9 +58,11 @@ export default {
         });
     },
     onSubmit(data) {
+      this.overlay = true
       this.$store
         .dispatch(ACTION_PUT_NASABAH, data)
         .then(({ success, message }) => {
+          this.overlay = success
           this.$toasted.show(
             success
               ? this.$t("Success Message", { context: `${message}` })

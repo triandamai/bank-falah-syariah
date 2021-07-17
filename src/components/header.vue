@@ -1,7 +1,7 @@
 <template>
   <div
     class="header-wrapper row m-0"
-    style="padding-top: 5px; padding-bottom-5px;"
+    style="padding-top: 5px; padding-bottom:5px;"
   >
     <form
       class="form-inline search-full"
@@ -272,8 +272,9 @@ export default {
     this.username = user.username;
     if (user.role[0]) {
       this.role = user.role[0].name;
+    }else {
+      this.role = "undefined";
     }
-    this.role = "undefined";
     //this.group = user.group[0].name;
   },
   computed: {
