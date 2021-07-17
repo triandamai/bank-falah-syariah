@@ -80,7 +80,6 @@ export default {
       this.left = left + 'px';
     },
     openMenu(e){
-
       if(this.$route.path === "/login"){
         this.$toasted.show("Masuk dahulu sebelum menggunakan option menu!",
             {
