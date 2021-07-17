@@ -4,9 +4,6 @@
  *
  */
 import ApiService from "@/services/api.service.js";
-import transaksi from "@/store/modules/transaksi";
-
-
 
 const STATISTIC = "STATISTIC"
 
