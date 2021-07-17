@@ -60,17 +60,25 @@
           </v-row>
         </v-container>
       </v-card>
+      <v-overlay :value="overlay" :z-index="99">
+        <v-progress-circular
+            indeterminate
+            size="64"
+        ></v-progress-circular>
+      </v-overlay>
     </v-dialog>
+
   </v-row>
 </template>
 <script>
-import {ACTION_GET_NASABAH, ACTION_TRANSACTION, PEMBIAYAAN_TARIK_NONTUNAI} from "@/store"
+import { ACTION_TRANSACTION, PEMBIAYAAN_TARIK_NONTUNAI} from "@/store"
 import {getCurrendUserId, getTodayDate} from "@/services/jwt.service"
 import {mapState} from "vuex"
 export default {
   props: ["show"],
   data: () => {
     return {
+      overlay:false,
       dialog: false,
       form:{}
     };
@@ -85,11 +93,20 @@ export default {
       nasabah: (state)=> state.nasabah.datanasabah
     })
   },
+  created() {
+    window.addEventListener("keydown", (e) => {
+      //if Enter go to next
+      if (e.key == "Enter") {
+        this.onSubmit()
+      }
+    });
+  },
   methods: {
     hidden() {
       this.$store.commit("hideForm", {});
     },
     onSubmit(){
+      this.overlay = true
       this.form.tgl_transaksi = getTodayDate()
       this.form.petugas_id = getCurrendUserId()
       this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:PEMBIAYAAN_TARIK_NONTUNAI})

@@ -178,16 +178,16 @@ export default {
                 duration: 2000,
               }
             );
-
+            this.overlay = false;
             if (success) {
-              this.overlay = false;
+
               setTimeout(() => {
                 this.$router.push({ name: "dashboard" });
               }, 1000);
               return;
             }
             this.disable = false;
-            this.overlay = false;
+
           });
       }
     },

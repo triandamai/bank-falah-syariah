@@ -62,7 +62,7 @@ export default {
       this.$store
         .dispatch(ACTION_PUT_NASABAH, data)
         .then(({ success, message }) => {
-          this.overlay = success
+          this.overlay = false
           this.$toasted.show(
             success
               ? this.$t("Success Message", { context: `${message}` })
