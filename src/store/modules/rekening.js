@@ -6,6 +6,7 @@
  *
  */
 import ApiService from "@/services/api.service";
+import {Promise} from "es6-promise";
 
 /***
  * dspatch type
@@ -14,15 +15,20 @@ const GET_DATA_REKENING = "GETDATAREKENING";
 const POST_DATA_REKENING = "POSTREKENINGDATA";
 const PUT_DATA_REKENING = "PUTDATAREKENING";
 const DELETE_DATA_REKENING = "DELETEDATAREKENING";
+const MUTASI = "MUTASI"
+
 export const ACTION_GET_DATA_REKENING = `rekening/${GET_DATA_REKENING}`;
 export const ACTION_POST_DATA_REKENING = `rekening/${POST_DATA_REKENING}`;
 export const ACTION_PUT_DATA_REKENING = `rekening/${PUT_DATA_REKENING}`;
 export const ACTION_DELETE_DATA_REKENING = `rekening/${DELETE_DATA_REKENING}`;
+export const ACTION_MUTASI = `rekening/${MUTASI}`;
 
 const ADD_DATA_REKENING = "MADDDATAREKENING";
 const EDIT_DATA_REKENING = "MUPDATEREKENING";
 const REMOVE_DATA_REKENING = "MDELETEDATAREKENING";
-const INCREMENt_PAGE = `INCREMENT`;
+const INCREMENT_PAGE = `INCREMENT`;
+const MUTASI_REKENING = "MUTASI_REKENING"
+
 export const MUTATION_ADD_DATA_REKENING = `rekening/${ADD_DATA_REKENING}`;
 export const MUTATION_UPDATE_DATA_REKENING = `rekening/${EDIT_DATA_REKENING}`;
 export const MUTATION_DELETE_DATA_REKENING = `rekekning/${REMOVE_DATA_REKENING}`;
@@ -54,6 +60,7 @@ const state = {
     current_page: 0,
     last_page: 0,
   },
+  datamutasi:{}
 };
 const getters = {};
 const actions = {
@@ -86,7 +93,7 @@ const actions = {
       ApiService.get(`${type}${page}`)
         .then(({ status, data }) => {
           //success
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             if (data.current_page >= data.last_page) {
               resolve(false);
               stillPaging = false;
@@ -114,16 +121,32 @@ const actions = {
     });
   },
 
+  [MUTASI]({commit},{type,body}){
+    return new Promise((resolve)=>{
+      ApiService.get(``)
+          .then(({status,data})=>{
+            if(status === 200 || status === 201){
+              commit()
+            }else {
+
+            }
+          })
+          .catch(()=>{
+
+          })
+    })
+  },
   /***
    * save data
-   *  @param {type,body}
-   *
+   * @param commit
+   * @param type
+   * @param body
    */
   [POST_DATA_REKENING]({ commit }, { type, body }) {
     return new Promise((resolve) => {
       ApiService.post(`${type}`, body)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             commit(ADD_DATA_REKENING, {
               type: type,
               item: data.data[0],
@@ -141,13 +164,12 @@ const actions = {
   },
   /***
    * update/edit data
-   * @param {type,body}
    */
   [PUT_DATA_REKENING]({ commit }, { type, body }) {
     return new Promise((resolve) => {
       ApiService.put(`${type}/${body.id}`, body)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             commit(EDIT_DATA_REKENING, {
               type: type,
               data: data.data[0],
@@ -165,13 +187,15 @@ const actions = {
   },
   /***
    * delete pembiayaan
-   * @param {type,body}
+   * @param commit
+   * @param type
+   * @param body
    */
   [DELETE_DATA_REKENING]({ commit }, { type, body }) {
     return new Promise((resolve) => {
       ApiService.delete(`${type}/${body.id}`)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             commit(REMOVE_DATA_REKENING, {
               type: type,
               data: body,
@@ -192,7 +216,10 @@ const actions = {
    */
 };
 const mutations = {
-  [INCREMENt_PAGE](state, { type }) {
+  [MUTASI_REKENING](state,{type}){
+
+  },
+  [INCREMENT_PAGE](state, { type }) {
     switch (type) {
       case RPEMBIAYAAN:
         state.pembiayaan.current_page++;
@@ -207,8 +234,10 @@ const mutations = {
   },
   /***
    * Rekening add data dynamicly
-   * {@param type
+   * {@param state
+   * @param type
    * @param item}
+   * @param page
    * @returns each data array will increment smoothly
    */
   [ADD_DATA_REKENING](state, { type, item, page }) {
@@ -216,7 +245,7 @@ const mutations = {
     switch (type) {
       case RPEMBIAYAAN:
         var exist = state.datapembiayaan.some((pembiayaan) => {
-          return pembiayaan.id == item.id;
+          return pembiayaan.id === item.id;
         });
         if (!exist) {
           state.datapembiayaan.push(item);
