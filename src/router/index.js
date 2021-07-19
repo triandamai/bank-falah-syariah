@@ -180,6 +180,15 @@ const routes = [
           reqiresAuth: true,
         },
       },
+      {
+        path:"detail-rekening/:no_rekening",
+        name:"detail-rekening",
+        component:()=>import("@/pages/detail-rekening/detail-rekening.vue"),
+        meta: {
+          title: "Mutasi | Bank Falah Syariah",
+          reqiresAuth: true
+        }
+      },
       //
       {
         path: "user",

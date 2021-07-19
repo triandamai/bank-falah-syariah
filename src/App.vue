@@ -15,6 +15,7 @@
     <ul id="right-click-menu" tabindex="-1" ref="right" v-if="viewMenu" @blur.prevent="closeMenu"  :style="{top:top, left:left}">
       <v-list
           nav
+          dense
       >
         <v-list-item-group
             color="primary"
