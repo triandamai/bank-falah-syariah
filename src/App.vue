@@ -24,7 +24,7 @@
            <v-list-item
                v-for="(item, i) in items"
                :key="i"
-               :id="'context_menu_'+i"
+               :id="'context_menu_'+item.val"
            >
              <v-list-item-icon class="pr-3">
                <v-icon v-text="item.icon"></v-icon>
@@ -37,11 +37,20 @@
        </v-list>
      </v-card>
     </ul>
+    <!--    overlay-->
+    <v-overlay :value="overlay">
+      <v-progress-circular
+          indeterminate
+          size="64"
+      ></v-progress-circular>
+    </v-overlay>
+    <!--    -->
   </div>
 </template>
 
 <script>
 import Vue from "vue"
+import {LOGOUT} from "@/store"
 export default {
   name: "app",
   data() {
@@ -52,10 +61,11 @@ export default {
       left:'0px',
       selectedItem: 0,
       items: [
-        { text: 'Personalisasi', icon: 'mdi-android-studio' },
-        { text: 'Cetak Mutasi', icon: 'mdi-printer' },
-        { text: 'Keluar', icon: 'mdi-logout-variant' },
+        { text: 'Personalisasi',val:1, icon: 'mdi-android-studio' },
+        { text: 'Cetak Mutasi', val:2,icon: 'mdi-printer' },
+        { text: 'Keluar',val:3, icon: 'mdi-logout-variant' },
       ],
+      overlay:false,
     };
   },
   mounted() {
@@ -102,13 +112,20 @@ export default {
     closeMenu({relatedTarget}){
 
       if(relatedTarget){
-        if(relatedTarget.id === "context_menu_0"){
+        if(relatedTarget.id === "context_menu_1"){
           console.log(relatedTarget.id)
-        }else if(relatedTarget.id === "context_menu_1"){
+        }else if(relatedTarget.id === "context_menu_2"){
           console.log(relatedTarget.id)
         }
-        else if(relatedTarget.id === "context_menu_2"){
-          console.log(relatedTarget.id)
+        else if(relatedTarget.id === "context_menu_3"){
+          this.overlay = true
+          setTimeout(()=>{
+            this.overlay = false
+            this.$store.dispatch(`auth/${LOGOUT}`).then(() => {
+              this.$router.replace({ name: "login" });
+            });
+          },1000)
+
         }
       }
       this.viewMenu = false;

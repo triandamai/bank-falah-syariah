@@ -57,12 +57,12 @@
           <div class="mode">
             <i
               class="fa fa-moon-o"
-              v-show="mixLayout == 'light-only'"
+              v-show="mixLayout === 'light-only'"
               @click="customizeMixLayout('dark-only')"
             ></i>
             <i
               class="fa fa-lightbulb-o"
-              v-show="mixLayout == 'dark-only'"
+              v-show="mixLayout === 'dark-only'"
               @click="customizeMixLayout('light-only')"
             ></i>
           </div>
@@ -146,9 +146,9 @@
 <script>
 var body = document.getElementsByTagName("body")[0];
 import { mapActions, mapState } from "vuex";
-import { getUser } from "../services/jwt.service";
-import { LOGOUT } from "../store/modules/auth";
-import { localeOptions } from "../utils/utils";
+import { getUser } from "@/services/jwt.service";
+import { LOGOUT } from "@/store/modules/auth";
+import { localeOptions } from "@/utils/utils";
 // import Bookmark from "./bookmark";
 export default {
   name: "Search",
