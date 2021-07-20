@@ -36,7 +36,7 @@ import { Icon } from "leaflet";
 import VueI18n from "vue-i18n";
 import en from "@/locales/en.json";
 import id from "@/locales/id.json";
-import { defaultLocale, localeOptions } from "@/constants/config.js";
+import { defaultLocale, localeOptions } from "@/utils/utils.js";
 
 const messages = { en: en, id: id };
 

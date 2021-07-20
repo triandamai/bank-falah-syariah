@@ -44,8 +44,11 @@ import {
   ACTION_PUT_DATA_REKENING,
   RPEMBIAYAAN,
 } from "@/store/modules/rekening";
+import pageMixin from "@/mixin/page.mixin"
+
 import { mapState } from "vuex";
 export default {
+  mixins:[pageMixin],
   data: () => {
     return {
       formpembiayaan: false,

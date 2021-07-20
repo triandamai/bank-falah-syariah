@@ -55,19 +55,12 @@ export const getAppname = () => {
     : "Bank Falah Syariah";
 };
 
-export const getTodayDate=()=>{
-  const date = new Date()
-  return `${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`
-}
+
 export const getCurrendUserId=()=>{
   return getUser().id;
 }
 
-//currency
 
-export const formatCurrency=(total)=>  total.toFixed(2).replace(/./g, function(c, i, a) {
-  return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
-});
 /***
  * Ecryption for local data(token and user data)
  *

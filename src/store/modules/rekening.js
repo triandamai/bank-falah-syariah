@@ -6,7 +6,7 @@
  *
  */
 import ApiService from "@/services/api.service";
-import {formatCurrency} from "@/services/jwt.service";
+import {formatCurrency} from "@/utils/utils";
 
 /***
  * dspatch type
@@ -34,8 +34,8 @@ const DESTROY_MUTASI ="DESTROY MUTASI"
 
 export const MUTATION_ADD_DATA_REKENING = `rekening/${ADD_DATA_REKENING}`;
 export const MUTATION_UPDATE_DATA_REKENING = `rekening/${EDIT_DATA_REKENING}`;
-export const MUTATION_DELETE_DATA_REKENING = `rekekning/${REMOVE_DATA_REKENING}`;
-export const MUTATION_DESTROY_MUTASI = `rekekning/${DESTROY_MUTASI}`;
+export const MUTATION_DELETE_DATA_REKENING = `rekening/${REMOVE_DATA_REKENING}`;
+export const MUTATION_DESTROY_MUTASI = `rekening/${DESTROY_MUTASI}`;
 /***
  *
  * type Action
@@ -70,21 +70,16 @@ const state = {
   }
 };
 const getters = {
-  saldoPembiayaan:state=>{
-    const total = state.mutasi.pembiayaan.map(mutasi=>mutasi.value).reduce((prev,next)=>prev+next,0)
-    return formatCurrency(total)
-  },
-  saldoSimpanan:state=>{
-    const total = state.mutasi.simpanan.map(mutasi=>mutasi.value).reduce((prev,next)=>prev+next,0)
-    return formatCurrency(total)
-  }
+  saldoPembiayaan:state=> formatCurrency(state.mutasi.pembiayaan.map(mutasi=>mutasi.value).reduce((prev,next)=>prev+next,0)),
+  saldoSimpanan:state=> formatCurrency(state.mutasi.simpanan.map(mutasi=>mutasi.value).reduce((prev,next)=>prev+next,0))
 };
 const actions = {
   /***
-   * get all data rekekning deposito/pembiayaansimpanan
+   * get all data rekening deposito/pembiayaan/simpanan
    * @param {type,path}
    *  @returns data array and after success adding to @global data array
    *
+   * @param type
    */
   [GET_DATA_REKENING]({ commit, state }, { type }) {
     return new Promise((resolve) => {

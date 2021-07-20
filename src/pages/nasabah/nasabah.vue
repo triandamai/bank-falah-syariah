@@ -8,7 +8,7 @@
         <div class="col-xl-12 xl-100 dashboard-sec box-col-12">
           <px-card class="earning-card">
             <div class="row">
-              <div class="earning-content">
+              <div class="earning-content col-xl-3 col-lg-12 col-md-12">
                 <div class="row  chart-left">
                   <div class="col-xl-12 left_side_earning">
                     <h5>Dashboard</h5>
@@ -22,7 +22,7 @@
                 </div>
               </div>
 
-              <div class="chart-right col-xl-9 pt-5 pb-5">
+              <div class="chart-right col-xl-9 col-lg-12 col-md-12 pt-5 pb-5">
                 <data-table
                   :items="nasabah"
                   :headers="headers"

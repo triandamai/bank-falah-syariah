@@ -31,6 +31,9 @@
       <template v-slot:item.pegawai="{ item }">
         {{item.pegawai.fullname}}
       </template>
+      <template v-slot:item.modal="{ item }">
+       Rp {{formatCurrency(item.modal)}}
+      </template>
       <template v-slot:item.jabatan="{ item }">
         {{item.jabatan.nama_jabatan}}
       </template>
@@ -53,6 +56,9 @@
         >
           {{ item.active > 0 ? 'Aktif':'Non-Aktif' }}
         </v-chip>
+      </template>
+      <template v-slot:item.updated_at="{ item }">
+        {{convertReadableDate(item.updated_at)}}
       </template>
       <template v-slot:item.action="{ item }">
         <v-icon
@@ -84,7 +90,10 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import pageMixin from "@/mixin/page.mixin"
+import componentMixin from "@/mixin/component.mixin"
 export default {
+  mixins:[pageMixin,componentMixin],
   props: ["items", "headers", "hideadd", "hidedelete", "hideupdate"],
   data() {
     return {
@@ -94,9 +103,7 @@ export default {
   computed: {
     ...mapState({
       theme: (state) => state.layout.isDark,
-      loadingtable:(state)=> {
-        console.log(state.loadingtable)
-        return state.loadingtable}
+      loadingtable:(state)=>  state.loadingtable
     }),
   },
   methods:{

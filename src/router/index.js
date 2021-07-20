@@ -246,7 +246,7 @@ const routes = [
     name: "login",
     component: () => import("@/pages/auth/login.vue"),
     meta: {
-      title: "Role | Bank Falah Syariah",
+      title: "Login | Bank Falah Syariah",
       reqiresAuth: false,
     },
   },

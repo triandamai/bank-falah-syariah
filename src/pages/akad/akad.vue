@@ -14,7 +14,7 @@
             </div>
             <div class="card-body">
               <data-table
-                :items="items"
+                :items="items_akad"
                 :headers="headers"
                 @add="formproduk = true"
                 @edit="onEdit"
@@ -57,7 +57,7 @@ export default {
   },
   computed: {
     ...mapState({
-      items: (state) => state.master.dataproduk,
+      items_akad: (state) => state.master.dataproduk,
     }),
   },
   created() {

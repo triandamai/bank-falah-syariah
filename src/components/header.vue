@@ -3,73 +3,7 @@
     class="header-wrapper row m-0"
     style="padding-top: 5px; padding-bottom:5px;"
   >
-    <form
-      class="form-inline search-full"
-      action="#"
-      method="get"
-      :class="{ open: searchOpen }"
-    >
-      <div class="form-group w-100">
-        <div class="Typeahead Typeahead--twitterUsers">
-          <div class="u-posRelative">
-            <input
-              class="demo-input Typeahead-input form-control-plaintext w-100"
-              type="text"
-              v-on:keyup="searchterm"
-              v-model="terms"
-              placeholder="Cari Halaman .."
-              name="q"
-              title=""
-              autofocus
-            />
-            <div class="spinner-border Typeahead-spinner" role="status">
-              <span class="sr-only">Loading...</span>
-            </div>
-            <feather
-              class="close-search"
-              type="x"
-              @click="search_close()"
-            ></feather>
-          </div>
-          <div
-            :class="searchResult ? 'Typeahead-menu is-open' : 'Typeahead-menu'"
-            v-if="menuItems.length"
-          >
-            <div
-              class="ProfileCard u-cf"
-              v-for="(menuItem, index) in menuItems.slice(0, 8)"
-              :key="index"
-            >
-              <div class="ProfileCard-avatar header-search">
-                <!-- <feather :type="menuItem.icon"></feather> -->
-              </div>
-              <div class="ProfileCard-details">
-                <div class="ProfileCard-realName">
-                  <span @click="removeFix()"
-                    ><router-link
-                      :to="{ path: menuItem.path }"
-                      class="realname"
-                      >{{ menuItem.title }}</router-link
-                    ></span
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            :class="
-              searchResultEmpty ? 'Typeahead-menu is-open' : 'Typeahead-menu'
-            "
-          >
-            <div class="tt-dataset tt-dataset-0">
-              <div class="EmptyMessage">
-                Your search turned up 0 results. Opps There are no result found.
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
+
     <div class="header-logo-wrapper">
       <div class="logo-wrapper">
         <router-link to="/">
@@ -87,20 +21,13 @@
     <div class="left-header col horizontal-wrapper pl-0">
       <ul class="horizontal-menu">
         <li class="mega-menu outside">
-          <a class="nav-link" href="javascript:void(0);">
-            <feather type="layers"></feather><span>Bonus Ui</span>
-          </a>
+
         </li>
-        <li class="level-menu outside">
-          <a class="nav-link" href="#">
-            <feather type="inbox"></feather>
-            <span>Level Menu</span></a
-          >
-        </li>
+
       </ul>
     </div>
     <!-- search -->
-    <div class="nav-right col-8 pull-right right-header p-0">
+    <div class="nav-right col-8 pull-right right-header p-0 pb-3 pt-3">
       <ul class="nav-menus">
         <li class="language-nav">
           <b-dropdown
@@ -124,11 +51,7 @@
             >
           </b-dropdown>
         </li>
-        <li>
-          <span class="header-search"
-            ><feather type="search" @click="search_open()"></feather
-          ></span>
-        </li>
+
 
         <li>
           <div class="mode">
@@ -154,7 +77,7 @@
             <feather type="maximize"></feather
           ></a>
         </li>
-        <li class="profile-nav onhover-dropdown p-0 mr-0">
+        <li class="onhover-dropdown p-0 mr-0">
           <div class="media profile-media">
             <img
               class="b-r-10"
@@ -175,19 +98,6 @@
                 ><span>{{ $t("Profil") }}</span></a
               >
             </li>
-            <!-- <li>
-              <a href="#"><feather type="mail"></feather><span>Inbox</span></a>
-            </li>
-            <li>
-              <a href="#"
-                ><feather type="file-text"></feather><span>Taskboard</span></a
-              > 
-            </li> 
-           <li>
-              <a href="#"
-                ><feather type="settings"></feather><span>Settings</span></a
-              >
-            </li> -->
             <li>
               <a @click="logOut"
                 ><feather type="log-in"></feather
@@ -238,7 +148,7 @@ var body = document.getElementsByTagName("body")[0];
 import { mapActions, mapState } from "vuex";
 import { getUser } from "../services/jwt.service";
 import { LOGOUT } from "../store/modules/auth";
-import { localeOptions } from "../constants/config";
+import { localeOptions } from "../utils/utils";
 // import Bookmark from "./bookmark";
 export default {
   name: "Search",

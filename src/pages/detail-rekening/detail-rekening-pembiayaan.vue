@@ -12,7 +12,10 @@
                 <div class="pricing-plan">
                   <h6>Total Saldo</h6>
                   <h5>Rp {{ saldo }}</h5>
-
+                  <p>Jumlah Pinjaman</p>
+                  <div class="btn btn-outline-primary btn-xs">
+                    Rp 10.000.000
+                  </div>
                   <img
                       class="bg-img"
                       :src="require('../../assets/images/dashboard/folder1.png')"
@@ -60,8 +63,8 @@
                               <span class="digits counter">#{{$route.params.no_rekening}}</span>
                             </h3>
                             <p>
-                              May
-                              <span class="digits">27, 2019</span>
+                            {{getMonthString()}}
+                              <span class="digits">{{ getDateMutasi() }}</span>
                               <br />
                             </p>
                           </div>
@@ -85,7 +88,10 @@
                               <h6 class="p-2 mb-0">Jenis Transaksi</h6>
                             </td>
                             <td class="subtotal">
-                              <h6 class="p-2 mb-0">Saldo</h6>
+                              <h6 class="p-2 mb-0">Angsuran</h6>
+                            </td>
+                            <td class="subtotal">
+                              <h6 class="p-2 mb-0">Angsuran Harus Dibayar</h6>
                             </td>
                           </tr>
                           <tr v-for="(mutasi,index) in mutasi" :key="index">
@@ -97,6 +103,11 @@
                             </td>
                             <td>
                               <p class="itemtext digits">{{mutasi.jenis_transaksi.nama_transaksi}}</p>
+                            </td>
+                            <td>
+                              <p class="itemtext digits">Rp {{
+                                  formatCurrency(mutasi.value)
+                                }}</p>
                             </td>
                             <td>
                               <p class="itemtext digits">Rp {{
@@ -137,13 +148,16 @@
 <script>
 import {ACTION_MUTASI, MUTASI_PEMBIAYAAN,MUTATION_DESTROY_MUTASI} from "@/store"
 import {mapState,mapGetters} from "vuex"
-import {formatCurrency} from "@/services/jwt.service";
+import pageMixin from "@/mixin/page.mixin"
+
 export default {
+  mixins:[pageMixin],
   data: () => {
     return {
 
     };
   },
+
   computed:{
     ...mapState({
       mutasi:(state)=> state.rekening.mutasi.pembiayaan
@@ -165,7 +179,6 @@ export default {
 
           })
     },
-    formatCurrency:(total)=>formatCurrency(total)
   },
 };
 </script>
