@@ -30,10 +30,12 @@ const EDIT_DATA_REKENING = "MUPDATEREKENING";
 const REMOVE_DATA_REKENING = "MDELETEDATAREKENING";
 const INCREMENT_PAGE = `INCREMENT`;
 const MUTASI_REKENING = "MUTASI_REKENING"
+const DESTROY_MUTASI ="DESTROY MUTASI"
 
 export const MUTATION_ADD_DATA_REKENING = `rekening/${ADD_DATA_REKENING}`;
 export const MUTATION_UPDATE_DATA_REKENING = `rekening/${EDIT_DATA_REKENING}`;
 export const MUTATION_DELETE_DATA_REKENING = `rekekning/${REMOVE_DATA_REKENING}`;
+export const MUTATION_DESTROY_MUTASI = `rekekning/${DESTROY_MUTASI}`;
 /***
  *
  * type Action
@@ -263,6 +265,13 @@ const mutations = {
         }
 
       }
+  },
+  [DESTROY_MUTASI](state,{type}){
+    if(type === MUTASI_PEMBIAYAAN){
+      state.mutasi.pembiayaan = []
+    }else {
+      state.mutasi.simpanan = []
+    }
   },
   [INCREMENT_PAGE](state, { type }) {
     switch (type) {

@@ -115,7 +115,7 @@
                         </div>
                         <div class="col-sm-12 text-center mt-3">
 
-                          <button class="btn btn-secondary" type="button">Cancel</button>
+                          <button class="btn btn-secondary" @click="$router.go(-1)" type="button">kembali</button>
                         </div>
                         <!-- End Invoice-->
                         <!-- End Invoice Holder-->
@@ -135,7 +135,7 @@
 
 
 <script>
-import {ACTION_MUTASI, MUTASI_SIMPANAN} from "@/store"
+import {ACTION_MUTASI,  MUTASI_SIMPANAN, MUTATION_DESTROY_MUTASI} from "@/store"
 import {mapState,mapGetters} from "vuex"
 import {formatCurrency} from "@/services/jwt.service";
 export default {
@@ -153,6 +153,7 @@ export default {
     })
   },
   created() {
+    this.$store.commit(MUTATION_DESTROY_MUTASI,{type:MUTASI_SIMPANAN})
     if(this.$route.params.no_rekening){
       this.getData(this.$route.params.no_rekening)
     }
