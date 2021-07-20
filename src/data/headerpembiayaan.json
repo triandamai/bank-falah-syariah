@@ -1,6 +1,8 @@
 [
-
-
+    {
+        "text": "No Rekening",
+        "value": "no_rekening"
+    },
     {
         "text": "Nasabah",
         "value": "nasabah"

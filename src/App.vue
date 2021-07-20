@@ -7,7 +7,6 @@
       </div>
     </div>
     <!-- Loader ends-->
-
     <!--<Main/>-->
     <v-app>
       <router-view></router-view>

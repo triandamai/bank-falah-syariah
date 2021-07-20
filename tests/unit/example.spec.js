@@ -1,7 +1,7 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
 import Vuex from "vuex";
-import Footer from "../../src/components/footer.vue";
-import Bookmark from "../../src/components/bookmark.vue";
+import Footer from "@/components/footer.vue";
+import Bookmark from "@/components/bookmark.vue";
 import VueFeather from "vue-feather";
 
 const localVue = createLocalVue();

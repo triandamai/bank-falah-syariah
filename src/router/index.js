@@ -181,9 +181,18 @@ const routes = [
         },
       },
       {
-        path:"detail-rekening/:no_rekening",
-        name:"detail-rekening",
-        component:()=>import("@/pages/detail-rekening/detail-rekening.vue"),
+        path:"mutasi/pembiayaan/:no_rekening",
+        name:"detail-rekening-simpanan",
+        component:()=>import("@/pages/detail-rekening/detail-rekening-pembiayaan.vue"),
+        meta: {
+          title: "Mutasi | Bank Falah Syariah",
+          reqiresAuth: true
+        }
+      },
+      {
+        path:"mutasi/simpanan/:no_rekening",
+        name:"detail-rekening-pembiayaan",
+        component:()=>import("@/pages/detail-rekening/detail-rekening-simpanan.vue"),
         meta: {
           title: "Mutasi | Bank Falah Syariah",
           reqiresAuth: true

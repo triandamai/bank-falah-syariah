@@ -16,6 +16,8 @@ const POST_DATA_REKENING = "POSTREKENINGDATA";
 const PUT_DATA_REKENING = "PUTDATAREKENING";
 const DELETE_DATA_REKENING = "DELETEDATAREKENING";
 const MUTASI = "MUTASI"
+const PEMBIAYAAN = 'rekening_pembiayaan/'
+const SIMPANAN = 'rekening_simpanan/'
 
 export const ACTION_GET_DATA_REKENING = `rekening/${GET_DATA_REKENING}`;
 export const ACTION_POST_DATA_REKENING = `rekening/${POST_DATA_REKENING}`;
@@ -60,9 +62,16 @@ const state = {
     current_page: 0,
     last_page: 0,
   },
-  datamutasi:{}
+  mutasi:{
+    pembiayaan:[],
+    simpanan:[]
+  }
 };
-const getters = {};
+const getters = {
+  saldopembiayaan:function (state) {
+
+  }
+};
 const actions = {
   /***
    * get all data rekekning deposito/pembiayaansimpanan
@@ -98,7 +107,7 @@ const actions = {
               resolve(false);
               stillPaging = false;
             } else {
-              commit(INCREMENt_PAGE);
+              commit(INCREMENT_PAGE);
               resolve(true);
               stillPaging = true;
             }
@@ -121,18 +130,21 @@ const actions = {
     });
   },
 
-  [MUTASI]({commit},{type,body}){
+  [MUTASI]({commit},{type,no_rekening}){
     return new Promise((resolve)=>{
-      ApiService.get(``)
+      ApiService.get(`${type}${no_rekening}/mutasi`)
           .then(({status,data})=>{
             if(status === 200 || status === 201){
-              commit()
+              resolve(true)
+              data.data.map(mutasi=>{
+                commit(MUTASI,{type:type,mutasi:mutasi})
+              })
             }else {
-
+              resolve(false)
             }
           })
           .catch(()=>{
-
+            resolve(false)
           })
     })
   },
@@ -216,8 +228,12 @@ const actions = {
    */
 };
 const mutations = {
-  [MUTASI_REKENING](state,{type}){
-
+  [MUTASI_REKENING](state,{type,mutasi}){
+      if(type === PEMBIAYAAN){
+        state.mutasi.pembiayaan.push(mutasi)
+      }else if(type === SIMPANAN){
+        state.mutasi.simpanan.push(mutasi)
+      }
   },
   [INCREMENT_PAGE](state, { type }) {
     switch (type) {

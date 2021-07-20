@@ -22,6 +22,9 @@
         :loading="loadingtable"
         loading-text="Loading... Please wait"
         flat :headers="headers" :items="items" :search="search">
+      <template v-slot:item.no_rekening="{ item }">
+        <router-link :to="getRouteMutasi(item)"> {{item.no_rekening }}</router-link>
+      </template>
       <template v-slot:item.jenis_kelamin="{ item }">
         {{item.jenis_kelamin == "L" ?'Laki-Laki':'Perempuan'}}
       </template>
@@ -35,7 +38,7 @@
         {{getTipeProduk(item.tipe_produk)}}
       </template>
       <template v-slot:item.lama_angsuran="{ item }">
-        {{item.tipe_angsuran == 1 ? `${item.lama_angsuran} Minggu`:`${item.lama_angsuran} Hari`}}
+        {{item.tipe_angsuran === 1 ? `${item.lama_angsuran} Minggu`:`${item.lama_angsuran} Hari`}}
       </template>
       <template v-slot:item.nasabah="{ item }">
         {{item.nasabah.nama_lengkap}}
@@ -108,6 +111,12 @@ export default {
       if(tipe === 3) return "Deposito"
 
       return "Tidak diketahui"
+    },
+    getRouteMutasi(mutasi){
+      if(mutasi.tipe_angsuran){
+        return `/main/mutasi/pembiayaan/${mutasi.no_rekening}`
+      }
+      return `/main/mutasi/simpanan/${mutasi.no_rekening}`
     }
   }
 };
