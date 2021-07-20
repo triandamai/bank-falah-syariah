@@ -160,10 +160,8 @@ export default {
   methods: {
     getData(no_rekening){
       this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_SIMPANAN,no_rekening:no_rekening})
-          .then(isSuccess=>{
-            if(isSuccess){
-              console.log(isSuccess)
-            }
+          .then(()=>{
+
           })
     },
     formatCurrency:(total)=>formatCurrency(total)

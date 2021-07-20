@@ -11,7 +11,7 @@
 
                 <div class="pricing-plan">
                   <h6>Total Saldo</h6>
-                  <h5>Rp 20.000.000</h5>
+                  <h5>Rp {{ saldo }}</h5>
 
                   <img
                       class="bg-img"
@@ -76,110 +76,35 @@
                           <tbody>
                           <tr>
                             <td class="item">
-                              <h6 class="p-2 mb-0">Item Description</h6>
+                              <h6 class="p-2 mb-0">Tanggal Transaksi</h6>
                             </td>
                             <td class="Hours">
-                              <h6 class="p-2 mb-0">Hours</h6>
+                              <h6 class="p-2 mb-0">Tipe</h6>
                             </td>
                             <td class="Rate">
-                              <h6 class="p-2 mb-0">Rate</h6>
+                              <h6 class="p-2 mb-0">Jenis Transaksi</h6>
                             </td>
                             <td class="subtotal">
-                              <h6 class="p-2 mb-0">Sub-total</h6>
+                              <h6 class="p-2 mb-0">Saldo</h6>
                             </td>
                           </tr>
-                          <tr>
+                          <tr v-for="(mutasi,index) in mutasi" :key="index">
                             <td>
-                              <label>Lorem Ipsum</label>
-                              <p
-                                  class="m-0"
-                              >Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+                              <label>{{mutasi.tgl_transaksi}}</label>
                             </td>
                             <td>
-                              <p class="itemtext digits">5</p>
+                              <p class="itemtext digits">{{mutasi.type}}</p>
                             </td>
                             <td>
-                              <p class="itemtext digits">$75</p>
+                              <p class="itemtext digits">{{mutasi.jenis_transaksi.nama_transaksi}}</p>
                             </td>
                             <td>
-                              <p class="itemtext digits">$375.00</p>
+                              <p class="itemtext digits">Rp {{
+                                  formatCurrency(mutasi.value)
+                                }}</p>
                             </td>
                           </tr>
-                          <tr>
-                            <td>
-                              <label>Lorem Ipsum</label>
-                              <p
-                                  class="m-0"
-                              >Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            </td>
-                            <td>
-                              <p class="itemtext digits">3</p>
-                            </td>
-                            <td>
-                              <p class="itemtext digits">$75</p>
-                            </td>
-                            <td>
-                              <p class="itemtext digits">$225.00</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <label>Lorem Ipsum</label>
-                              <p
-                                  class="m-0"
-                              >Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            </td>
-                            <td>
-                              <p class="itemtext digits">10</p>
-                            </td>
-                            <td>
-                              <p class="itemtext digits">$75</p>
-                            </td>
-                            <td>
-                              <p class="itemtext digits">$750.00</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <label>Lorem Ipsum</label>
-                              <p
-                                  class="m-0"
-                              >Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
-                            </td>
-                            <td>
-                              <p class="itemtext digits">10</p>
-                            </td>
-                            <td>
-                              <p class="itemtext digits">$75</p>
-                            </td>
-                            <td>
-                              <p class="itemtext digits">$750.00</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td>
-                              <p class="itemtext"></p>
-                            </td>
-                            <td>
-                              <p class="m-0">HST</p>
-                            </td>
-                            <td>
-                              <p class="m-0 digits">13%</p>
-                            </td>
-                            <td>
-                              <p class="m-0 digits">$419.25</p>
-                            </td>
-                          </tr>
-                          <tr>
-                            <td></td>
-                            <td></td>
-                            <td class="Rate">
-                              <h6 class="mb-0 p-2">Total</h6>
-                            </td>
-                            <td class="payment digits">
-                              <h6 class="mb-0 p-2">$3,644.25</h6>
-                            </td>
-                          </tr>
+
                           </tbody>
                         </table>
                       </div>
@@ -208,13 +133,24 @@
   </div>
 </template>
 
+
 <script>
 import {ACTION_MUTASI, MUTASI_PEMBIAYAAN} from "@/store"
+import {mapState,mapGetters} from "vuex"
+import {formatCurrency} from "@/services/jwt.service";
 export default {
   data: () => {
     return {
 
     };
+  },
+  computed:{
+    ...mapState({
+      mutasi:(state)=> state.rekening.mutasi.pembiayaan
+    }),
+    ...mapGetters({
+      saldo:'rekening/saldoPembiayaan'
+    })
   },
   created() {
     if(this.$route.params.no_rekening){
@@ -224,12 +160,11 @@ export default {
   methods: {
     getData(no_rekening){
       this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_PEMBIAYAAN,no_rekening:no_rekening})
-      .then(isSuccess=>{
-        if(isSuccess){
-          console.log(isSuccess)
-        }
-      })
-    }
+          .then(()=>{
+
+          })
+    },
+    formatCurrency:(total)=>formatCurrency(total)
   },
 };
 </script>
