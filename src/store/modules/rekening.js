@@ -238,10 +238,30 @@ const mutations = {
   [MUTASI_REKENING](state,{type,mutasi}){
 
       if(type === MUTASI_PEMBIAYAAN){
-        state.mutasi.pembiayaan.push(mutasi)
+        var exist = state.mutasi.pembiayaan.some((pembiayaan) => {
+          return pembiayaan.id === mutasi.id;
+        });
+        if(exist){
+          var index = state.mutasi.pembiayaan
+              .map((pembiayaan) => pembiayaan.id)
+              .indexOf(mutasi.id);
+          Object.assign(state.mutasi.pembiayaan[index], mutasi);
+        }else {
+          state.mutasi.pembiayaan.push(mutasi)
+        }
       }else{
+        var exist = state.mutasi.simpanan.some((simpanan) => {
+          return simpanan.id === mutasi.id;
+        });
+        if(exist){
+          var index = state.mutasi.simpanan
+              .map((simpanan) => simpanan.id)
+              .indexOf(mutasi.id);
+          Object.assign(state.mutasi.simpanan[index], mutasi);
+        }else {
+          state.mutasi.simpanan.push(mutasi)
+        }
 
-        state.mutasi.simpanan.push(mutasi)
       }
   },
   [INCREMENT_PAGE](state, { type }) {
