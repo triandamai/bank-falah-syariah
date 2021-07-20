@@ -6,7 +6,7 @@
  *
  */
 import ApiService from "@/services/api.service";
-import {Promise} from "es6-promise";
+import {formatCurrency} from "@/services/jwt.service";
 
 /***
  * dspatch type
@@ -70,11 +70,11 @@ const state = {
 const getters = {
   saldoPembiayaan:state=>{
     const total = state.mutasi.pembiayaan.map(mutasi=>mutasi.value).reduce((prev,next)=>prev+next,0)
-    return total.toFixed(3);
+    return formatCurrency(total)
   },
   saldoSimpanan:state=>{
     const total = state.mutasi.simpanan.map(mutasi=>mutasi.value).reduce((prev,next)=>prev+next,0)
-    return total.toFixed(3);
+    return formatCurrency(total)
   }
 };
 const actions = {

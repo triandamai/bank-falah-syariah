@@ -99,7 +99,9 @@
                                     <p class="itemtext digits">{{mutasi.jenis_transaksi.nama_transaksi}}</p>
                                   </td>
                                   <td>
-                                    <p class="itemtext digits">Rp. {{mutasi.value}}</p>
+                                    <p class="itemtext digits">Rp {{
+                                        formatCurrency(mutasi.value)
+                                      }}</p>
                                   </td>
                                 </tr>
 
@@ -135,6 +137,7 @@
 <script>
 import {ACTION_MUTASI, MUTASI_SIMPANAN} from "@/store"
 import {mapState,mapGetters} from "vuex"
+import {formatCurrency} from "@/services/jwt.service";
 export default {
   data: () => {
     return {
@@ -162,7 +165,8 @@ export default {
               console.log(isSuccess)
             }
           })
-    }
+    },
+    formatCurrency:(total)=>formatCurrency(total)
   },
 };
 </script>

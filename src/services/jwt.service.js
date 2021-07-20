@@ -62,6 +62,12 @@ export const getTodayDate=()=>{
 export const getCurrendUserId=()=>{
   return getUser().id;
 }
+
+//currency
+
+export const formatCurrency=(total)=>  total.toFixed(2).replace(/./g, function(c, i, a) {
+  return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+});
 /***
  * Ecryption for local data(token and user data)
  *
