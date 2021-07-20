@@ -141,7 +141,7 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="$emit('close', dialog.value)"
+            @click="close( dialog.value)"
           >
             Close
           </v-btn>
@@ -159,17 +159,13 @@ import {
   MPRODUK,
   MPEGAWAI,
 } from "@/store/index";
+import componentMixin from "@/mixin/component.mixin"
 export default {
-  props: ["show", "body"],
+  mixins:[componentMixin],
   data: () => {
     return {
-      dialogakad: false,
       modal_tgl_pencairan: false,
       modal_tgl_jatuh_tempo: false,
-      tipe_angsuran: [
-        { val: "1", text: "Mingguan" },
-        { val: "2", text: "harian" },
-      ],
       form: {
         tgl_pencairan: "",
         tgl_jatuh_tempo: "",
@@ -182,27 +178,12 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapState({
-      itemsproduk: (state) => state.master.dataproduk,
-      itemsnasabah: (state) => state.nasabah.datanasabah,
-      itemspegawai: (state) => state.master.datapegawai,
-    }),
-  },
-  watch: {
-    body: function (newVal) {
-      this.form = newVal;
-    },
-  },
   mounted() {
     this.getNasabah();
     this.getProduk();
     this.getPegawai();
   },
   methods: {
-    submit() {
-      this.$emit("submit", this.form);
-    },
     getNasabah() {
       this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
         if (isNext) return this.getNasabah();

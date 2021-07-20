@@ -34,7 +34,7 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="$emit('close', dialog.value)"
+            @click="close"
           >
             Close
           </v-btn>
@@ -45,8 +45,9 @@
   </v-dialog>
 </template>
 <script>
+import componentMixin from "@/mixin/component.mixin"
 export default {
-  props: ["show", "body"],
+  mixins:[componentMixin],
   data: () => {
     return {
       form: {
@@ -54,16 +55,6 @@ export default {
         kode_transaksi: "",
       },
     };
-  },
-  watch: {
-    body: function (newVal) {
-      this.form = newVal;
-    },
-  },
-  methods: {
-    submit() {
-      this.$emit("submit", this.form);
-    },
   },
 };
 </script>

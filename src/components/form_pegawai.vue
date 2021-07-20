@@ -52,7 +52,7 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="$emit('close', dialog.value)"
+            @click="close(dialog.value)"
           >
             Close
           </v-btn>
@@ -64,23 +64,13 @@
 </template>
 <script>
 import { ACTION_GET_DATA_MASTER, MJABATAN } from "@/store";
-import { mapState } from "vuex";
+import componentMixin from "@/mixin/component.mixin"
 export default {
-  props: ["show", "body"],
+  mixins:[componentMixin],
   data: () => {
     return {
       form: {},
     };
-  },
-  computed: {
-    ...mapState({
-      itemsjabatan: (state) => state.master.datajabatan,
-    }),
-  },
-  watch: {
-    body: function (newVal) {
-      this.form = newVal;
-    },
   },
   mounted() {
     this.getJabatan();
@@ -92,10 +82,7 @@ export default {
         .then((isNext) => {
           if (isNext) return this.getJabatan();
         });
-    },
-    submit() {
-      this.$emit("submit", this.form);
-    },
+    }
   },
 };
 </script>

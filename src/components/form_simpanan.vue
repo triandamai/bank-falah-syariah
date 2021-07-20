@@ -82,7 +82,7 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="$emit('close', dialog.value)"
+            @click="close( dialog.value)"
           >
             Close
           </v-btn>
@@ -93,18 +93,18 @@
   </v-dialog>
 </template>
 <script>
-import { mapState } from "vuex";
+
 import {
   ACTION_GET_DATA_MASTER,
   ACTION_GET_NASABAH,
   MPEGAWAI,
   MPRODUK,
 } from "@/store/index";
+import componentMixin from "@/mixin/component.mixin"
 export default {
-  props: ["show", "body"],
+  mixins:[componentMixin],
   data: () => {
     return {
-      dialogakad: false,
       modal_tgl_buka: false,
       form: {
         tgl_buka: "",
@@ -114,27 +114,12 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapState({
-      itemsproduk: (state) => state.master.dataproduk,
-      itemsnasabah: (state) => state.nasabah.datanasabah,
-      itemspegawai: (state) => state.master.datapegawai,
-    }),
-  },
-  watch: {
-    body: function (newVal) {
-      this.form = newVal;
-    },
-  },
   mounted() {
     this.getNasabah();
     this.getProduk();
     this.getProduk();
   },
   methods: {
-    submit() {
-      this.$emit("submit", this.form);
-    },
     getNasabah() {
       this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
         if (isNext) return this.getNasabah();

@@ -36,6 +36,15 @@
                   required
                 ></v-text-field>
               </v-col>
+              <v-col cols="12">
+                <v-text-field
+                    v-model="form.minimum_saldo"
+                    label="Minimum Saldo *"
+                    type="number"
+                    prefix="Rp "
+                    required
+                ></v-text-field>
+              </v-col>
             </v-row>
           </v-container>
           <small>*indicates required field</small>
@@ -45,7 +54,7 @@
           <v-btn
             color="blue darken-1"
             text
-            @click="$emit('close', dialog.value)"
+            @click="close(dialog.value)"
           >
             Close
           </v-btn>
@@ -57,38 +66,21 @@
 </template>
 <script>
 import { mapState } from "vuex";
+import componentMixin from "@/mixin/component.mixin"
 export default {
-  props: ["show", "body"],
+  mixins:[componentMixin],
   data: () => {
     return {
-      dialogakad: false,
       form: {
-        nama_produk: "",
-        kode_produk: "",
-        tipe_produk: "",
+        nama_akad: "",
         akad_id: "",
       },
-      tipe_produk: [
-        { val: "1", text: "Simpanan" },
-        { val: "2", text: "Pembiayaan" },
-        { val: "3", text: "Deposito" },
-      ],
     };
   },
   computed: {
     ...mapState({
       itemsakad: (state) => state.master.dataakad,
     }),
-  },
-  watch: {
-    body: function(newVal) {
-      this.form = newVal;
-    },
-  },
-  methods: {
-    submit() {
-      this.$emit("submit", this.form);
-    },
   },
 };
 </script>
