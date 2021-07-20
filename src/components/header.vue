@@ -7,7 +7,7 @@
     <div class="header-logo-wrapper">
       <div class="logo-wrapper">
         <router-link to="/">
-          <img class="img-fluid" src="../assets/images/logo/logo.png" alt />
+          <img class="img-fluid" src="../assets/images/logo/logo.webp" alt />
         </router-link>
       </div>
       <div class="toggle-sidebar" @click="toggle_sidebar">

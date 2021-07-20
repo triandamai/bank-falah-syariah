@@ -12,28 +12,30 @@
       <router-view></router-view>
     </v-app>
     <ul id="right-click-menu" tabindex="-1" ref="right" v-if="viewMenu" @blur.prevent="closeMenu"  :style="{top:top, left:left}">
-      <v-list
-          nav
-          dense
-      >
-        <v-list-item-group
-            color="primary"
-        >
-          <v-list-item
-              v-for="(item, i) in items"
-              :key="i"
-              :id="'context_menu_'+i"
-          >
-            <v-list-item-icon class="pr-3">
-              <v-icon v-text="item.icon"></v-icon>
-            </v-list-item-icon>
-            <v-list-item-content>
-              <v-list-item-title v-text="item.text"></v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
+     <v-card elevation="1">
+       <v-list
+           nav
+           dense
 
+       >
+         <v-list-item-group
+             color="primary"
+         >
+           <v-list-item
+               v-for="(item, i) in items"
+               :key="i"
+               :id="'context_menu_'+i"
+           >
+             <v-list-item-icon class="pr-3">
+               <v-icon v-text="item.icon"></v-icon>
+             </v-list-item-icon>
+             <v-list-item-content>
+               <v-list-item-title v-text="item.text"></v-list-item-title>
+             </v-list-item-content>
+           </v-list-item>
+         </v-list-item-group>
+       </v-list>
+     </v-card>
     </ul>
   </div>
 </template>
@@ -137,7 +139,6 @@ export default {
 }
 
 #right-click-menu{
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 3px 1px -2px rgba(0,0,0,.20),0 1px 5px 0 rgba(0,0,0,.50);
   display: block;
   position: absolute;
   width: 250px;

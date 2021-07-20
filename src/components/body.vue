@@ -3,7 +3,7 @@
     <div
       class="page-wrapper"
       :class="
-        layout.settings.sidebar.type == 'horizontal_sidebar'
+        layout.settings.sidebar.type === 'horizontal_sidebar'
           ? 'horizontal-wrapper'
           : 'compact-wrapper'
       "
@@ -14,7 +14,7 @@
       <div
         class="page-body-wrapper"
         :class="
-          layout.settings.sidebar.type == 'horizontal_sidebar'
+          layout.settings.sidebar.type === 'horizontal_sidebar'
             ? 'horizontal-menu'
             : 'sidebar-icon'
         "
@@ -51,10 +51,7 @@
 
 <script>
 import { mapState } from "vuex";
-import Header from "./header";
-import Sidebar from "./sidebar";
-import Footer from "./footer";
-import Customizer from "./customizer";
+
 import {ACTION_GET_NASABAH} from "@/store";
 
 export default {
@@ -68,12 +65,7 @@ export default {
     };
   },
   // props:['sidebar_toggle_var'],
-  components: {
-    Header,
-    Sidebar,
-    Footer,
-    Customizer,
-  },
+
   computed: {
     ...mapState({
       menuItems: (state) => state.menu.data,

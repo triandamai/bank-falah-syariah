@@ -18,15 +18,29 @@ export  default {
             this.form = newVal;
         },
     },
+    created() {
+        window.addEventListener("keydown", (e) => {
+            //if Enter go to next
+            if (e.key === "Enter") {
+                if(this.show){
+                    this.onSubmit()
+                }
+            }
+        });
+    },
     computed: {
         ...mapState({
             itemsjabatan: (state) => state.master.datajabatan,
             itemsproduk: (state) => state.master.dataproduk,
             itemsnasabah: (state) => state.nasabah.datanasabah,
             itemspegawai: (state) => state.master.datapegawai,
+            nasabah: (state)=> state.nasabah.datanasabah
         }),
     },
     methods:{
+        hidden() {
+            this.$store.commit("hideForm", {});
+        },
         close(val=true){
           this.$emit( 'close', val)
         },

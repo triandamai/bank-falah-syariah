@@ -1,4 +1,10 @@
 import Vue from "vue";
+
+
+Vue.component("Header",()=>import("@/components/header"))
+Vue.component("Sidebar",()=>import("@/components/sidebar"))
+Vue.component("Footer",()=>import("@/components/footer"))
+Vue.component("Customizer",()=>import("@/components/customizer"))
 Vue.component("data-table", () => import("@/components/datatable.vue"));
 Vue.component("form-akad", () => import("@/components/form_akad.vue"));
 Vue.component("form-deposito", () => import("@/components/form_deposito.vue"));
@@ -14,9 +20,6 @@ Vue.component("form-import-nasabah", () =>
 );
 Vue.component("form-simpanan", () => import("@/components/form_simpanan.vue"));
 Vue.component("form-user", () => import("@/components/form_user.vue"));
-Vue.component("form-group", () => import("@/components/form_group.vue"));
-Vue.component("form-menu", () => import("@/components/form_menu.vue"));
-Vue.component("form-role", () => import("@/components/form_role.vue"));
 Vue.component("form-jabatan", () => import("@/components/form_jabatan.vue"));
 Vue.component("form-pegawai", () => import("@/components/form_pegawai.vue"));
 Vue.component("Breadcrumbs", () => import("@/components/bread_crumbs.vue"));

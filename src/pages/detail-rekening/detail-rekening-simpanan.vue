@@ -38,7 +38,7 @@
                                   <div class="media-left">
                                     <img
                                         class="media-object img-60"
-                                        src="../../assets/images/logo/logo.png"
+                                        src="../../assets/images/logo/logo.webp"
                                         alt
                                     />
                                   </div>
@@ -137,8 +137,9 @@
 <script>
 import {ACTION_MUTASI,  MUTASI_SIMPANAN, MUTATION_DESTROY_MUTASI} from "@/store"
 import {mapState,mapGetters} from "vuex"
-import {formatCurrency} from "@/services/jwt.service";
+import componentMixin from "@/mixin/component.mixin"
 export default {
+  mixins:[componentMixin],
   data: () => {
     return {
 

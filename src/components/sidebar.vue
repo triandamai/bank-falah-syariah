@@ -5,12 +5,12 @@
         <img
           class="img-fluid for-light"
           width="30px"
-          src="../assets/images/logo/logo.png"
+          src="../assets/images/logo/logo.webp"
           alt=""
         /><img
           width="30px"
           class="img-fluid for-dark"
-          src="../assets/images/logo/logo_dark.png"
+          src="../assets/images/logo/logo_dark.webp"
           alt=""
         />
       </router-link>
@@ -32,7 +32,7 @@
         <img
           class="img-fluid"
           width="30px"
-          src="../assets/images/logo/logo-icon.png"
+          src="../assets/images/logo/logo-icon.webp"
           alt=""
       /></router-link>
     </div>
@@ -70,7 +70,7 @@
             <router-link to="/">
               <img
                 class="img-fluid"
-                src="../assets/images/logo/logo-icon.png"
+                src="../assets/images/logo/logo-icon.webp"
                 alt=""
             /></router-link>
             <div class="mobile-back text-right">

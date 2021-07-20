@@ -41,7 +41,7 @@
                             <div class="media-left">
                               <img
                                   class="media-object img-60"
-                                  src="../../assets/images/logo/logo.png"
+                                  src="../../assets/images/logo/logo.webp"
                                   alt
                               />
                             </div>

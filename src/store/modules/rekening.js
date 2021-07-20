@@ -160,9 +160,12 @@ const actions = {
    */
   [POST_DATA_REKENING]({ commit }, { type, body }) {
     return new Promise((resolve) => {
+
+
       ApiService.post(`${type}`, body)
         .then(({ status, data }) => {
           if (status === 200 || status === 201) {
+            console.log(data)
             commit(ADD_DATA_REKENING, {
               type: type,
               item: data.data[0],

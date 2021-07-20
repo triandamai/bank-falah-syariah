@@ -16,12 +16,12 @@
                 <img
                   class="img-fluid for-light"
                   width="40px"
-                  src="../../assets/images/logo/login.png"
+                  src="../../assets/images/logo/login.webp"
                   alt="looginpage"/>
                 <img
                   class="img-fluid for-dark"
                   width="40px"
-                  src="../../assets/images/logo/logo_dark.png"
+                  src="../../assets/images/logo/logo_dark.webp"
                   alt="looginpage"
               /></a>
             </div>

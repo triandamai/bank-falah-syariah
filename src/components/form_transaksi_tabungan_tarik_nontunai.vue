@@ -71,7 +71,8 @@
 </template>
 <script>
 import { ACTION_TRANSACTION, TABUNGAN_TARIK_NONTUNAI} from "@/store"
-import {getCurrendUserId, getTodayDate} from "@/services/jwt.service"
+import {getCurrendUserId} from "@/services/jwt.service"
+import {getTodayDate} from "@/utils/utils"
 import {mapState} from "vuex"
 export default {
   props: ["show"],

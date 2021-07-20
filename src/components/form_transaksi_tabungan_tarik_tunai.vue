@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-dialog
-        v-model="dialog"
+        v-model="show"
         fullscreen
         hide-overlay
         transition="dialog-bottom-transition"
@@ -71,40 +71,18 @@
 </template>
 <script>
 import { ACTION_TRANSACTION, TABUNGAN_TARIK_TUNAI} from "@/store"
-import {getCurrendUserId, getTodayDate} from "@/services/jwt.service"
-import {mapState} from "vuex"
+import {getCurrendUserId} from "@/services/jwt.service"
+import {getTodayDate} from "@/utils/utils"
+import componentMixin from "@/mixin/component.mixin"
 export default {
-  props: ["show"],
+  mixins:[componentMixin],
   data: () => {
     return {
       overlay:false,
-      dialog: false,
       form:{}
     };
   },
-  watch: {
-    show: function (newVal) {
-      this.dialog = newVal;
-    },
-  },
-  computed:{
-    ...mapState({
-      nasabah: (state)=> state.nasabah.datanasabah
-    })
-  },
-  created() {
-    window.addEventListener("keydown", (e) => {
-      //if Enter go to next
-      if (e.key == "Enter") {
-        if(this.dialog){
-          this.onSubmit()
-        }}
-    });
-  },
   methods: {
-    hidden() {
-      this.$store.commit("hideForm", {});
-    },
     onSubmit(){
       this.overlay = true
       this.form.tgl_transaksi = getTodayDate()

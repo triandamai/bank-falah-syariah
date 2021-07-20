@@ -207,38 +207,8 @@ const routes = [
           title: "User | Bank Falah Syariah",
           reqiresAuth: true,
         },
-      },
+      }
 
-      //
-      {
-        path: "group",
-        name: "group",
-        component: () => import("@/pages/group/group.vue"),
-        meta: {
-          title: "Group | Bank Falah Syariah",
-          reqiresAuth: true,
-        },
-      },
-      //
-      {
-        path: "menu",
-        name: "menu",
-        component: () => import("@/pages/menu/menu.vue"),
-        meta: {
-          title: "Menu | Bank Falah Syariah",
-          reqiresAuth: true,
-        },
-      },
-      //
-      {
-        path: "role",
-        name: "role",
-        component: () => import("@/pages/role/role.vue"),
-        meta: {
-          title: "Role | Bank Falah Syariah",
-          reqiresAuth: true,
-        },
-      },
     ],
   },
   {

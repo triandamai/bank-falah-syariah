@@ -5,18 +5,15 @@ import router from "@/router";
 import { store } from "@/store";
 import Vue2Filters from "vue2-filters";
 import VueSweetalert2 from "vue-sweetalert2";
-import VueFormWizard from "vue-form-wizard";
 import VueTour from "vue-tour";
 import Notifications from "vue-notification";
 import { Vue2Dragula } from "vue2-dragula";
 import Toasted from "vue-toasted";
-import SmartTable from "vuejs-smart-table";
-import * as VueGoogleMaps from "vue2-google-maps";
+
 import { VueMasonryPlugin } from "vue-masonry";
 import VueFeather from "vue-feather";
 
 import FunctionalCalendar from "vue-functional-calendar";
-import vueKanban from "vue-kanban";
 
 // Import Theme scss
 import "@/assets/scss/app.scss";
@@ -51,27 +48,18 @@ Vue.use(Toasted, {
 });
 Vue.use(Vue2Dragula);
 
-Vue.use(VueGoogleMaps, {
-  load: {
-    key: "API_KEY",
-    libraries: "places",
-  },
-});
 
 Vue.use(Notifications);
 Vue.use(Vue2Filters);
 Vue.use(VueSweetalert2);
-Vue.use(VueFormWizard);
 Vue.use(VueTour);
 Vue.use(BootstrapVue);
-Vue.use(SmartTable);
 Vue.use(require("vue-chartist"));
 Vue.use(require("vue-moment"));
 Vue.use(VueMasonryPlugin);
 Vue.use(FunctionalCalendar, {
   dayNames: ["M", "T", "W", "T", "F", "S", "S"],
 });
-Vue.use(vueKanban);
 Vue.use(VueI18n);
 const locale =
   window.localStorage.getItem("currentLanguage") &&

@@ -152,7 +152,7 @@
   </v-dialog>
 </template>
 <script>
-import { mapState } from "vuex";
+
 import {
   ACTION_GET_DATA_MASTER,
   ACTION_GET_NASABAH,
