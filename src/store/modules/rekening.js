@@ -16,8 +16,8 @@ const POST_DATA_REKENING = "POSTREKENINGDATA";
 const PUT_DATA_REKENING = "PUTDATAREKENING";
 const DELETE_DATA_REKENING = "DELETEDATAREKENING";
 const MUTASI = "MUTASI"
-const PEMBIAYAAN = 'rekening_pembiayaan/'
-const SIMPANAN = 'rekening_simpanan/'
+export const MUTASI_PEMBIAYAAN = 'rekening_pembiayaan/'
+export const MUTASI_SIMPANAN = 'rekening_simpanan/'
 
 export const ACTION_GET_DATA_REKENING = `rekening/${GET_DATA_REKENING}`;
 export const ACTION_POST_DATA_REKENING = `rekening/${POST_DATA_REKENING}`;
@@ -68,8 +68,13 @@ const state = {
   }
 };
 const getters = {
-  saldopembiayaan:function (state) {
-
+  saldoPembiayaan:state=>{
+    const total = state.mutasi.pembiayaan.map(mutasi=>mutasi.value).reduce((prev,next)=>prev+next,0)
+    return total.toFixed(3);
+  },
+  saldoSimpanan:state=>{
+    const total = state.mutasi.simpanan.map(mutasi=>mutasi.value).reduce((prev,next)=>prev+next,0)
+    return total.toFixed(3);
   }
 };
 const actions = {
@@ -132,12 +137,14 @@ const actions = {
 
   [MUTASI]({commit},{type,no_rekening}){
     return new Promise((resolve)=>{
-      ApiService.get(`${type}${no_rekening}/mutasi`)
+      ApiService.get(`${type}${no_rekening}/mutasi?t=${new Date().getMilliseconds()}`)
           .then(({status,data})=>{
             if(status === 200 || status === 201){
               resolve(true)
+
               data.data.map(mutasi=>{
-                commit(MUTASI,{type:type,mutasi:mutasi})
+
+                commit(MUTASI_REKENING,{type:type,mutasi:mutasi})
               })
             }else {
               resolve(false)
@@ -229,9 +236,11 @@ const actions = {
 };
 const mutations = {
   [MUTASI_REKENING](state,{type,mutasi}){
-      if(type === PEMBIAYAAN){
+
+      if(type === MUTASI_PEMBIAYAAN){
         state.mutasi.pembiayaan.push(mutasi)
-      }else if(type === SIMPANAN){
+      }else{
+
         state.mutasi.simpanan.push(mutasi)
       }
   },
