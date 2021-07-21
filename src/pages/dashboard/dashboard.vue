@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs title="Sample Page" />
+    <Breadcrumbs :title="$t('Dashboard')" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
@@ -13,20 +13,20 @@
               <div class="col-xl-3 earning-content p-0">
                 <div class="row m-0 chart-left">
                   <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>Dashboard</h5>
-                    <p class="font-roboto">Overview of last month</p>
+                    <h5>{{ $t('Dashboard') }}</h5>
+                    <p class="font-roboto">{{$t('overview10day')}}</p>
                   </div>
                   <div class="col-xl-12 p-0 left_side_earning">
                     <h5>{{ totalnasabah }}</h5>
-                    <p class="font-roboto">Nasabah</p>
+                    <p class="font-roboto">{{$t('Customer')}}</p>
                   </div>
                   <div class="col-xl-12 p-0 left_side_earning">
                     <h5>{{ totaltransaksi }}</h5>
-                    <p class="font-roboto">Transaksi</p>
+                    <p class="font-roboto">{{$t('Transaction')}}</p>
                   </div>
 
                   <div class="col-xl-12 p-0 left-btn">
-                    <a class="btn btn-gradient">Summary</a>
+                    <a class="btn btn-gradient">{{$t('Summary')}}</a>
                   </div>
                 </div>
               </div>
@@ -118,7 +118,7 @@ export default {
             },
           },
         })
-        this.$refs.chart_statistic.updateSeries([{name:"Nasabah",data:data.nasabah},{name:"Transaksi",data:data.transaksi}])
+        this.$refs.chart_statistic.updateSeries([{name:this.$t("Customer"),data:data.nasabah},{name:this.$t("Transaction"),data:data.transaksi}])
       }
 
 

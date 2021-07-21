@@ -57,5 +57,21 @@
   "Setor Tunai": "Setor Tunai",
   "Setor Non-Tunai": "Setor Non-Tunai",
   "Tarik Tunai": "Tarik Tunai",
-  "Tarik Non-Tunai": "Tarik Non-Tunai"
+  "Tarik Non-Tunai": "Tarik Non-Tunai",
+  "Summary": "Summary",
+  "overview10day": "Overview of last month",
+  "Data Customer": "Data Customer",
+  "Import": "Import",
+  "subtitlenasabah": "Data Customer Bank Falah Syariah",
+  "Master Data Akad": "Master Data Akad",
+  "Form Akad": "Form Akad",
+  "Name of Product": "Name of Product *",
+  "Tipe Product": "Type Product *",
+  "Kode Product": "Code Product *",
+  "Minimum Saldo": "Minimum Saldo *",
+  "Close": "Close",
+  "Save": "Save",
+  "indicates required field": "* indicates required field",
+  "subtitle Akad": "Click button add to add new akad"
+
 }

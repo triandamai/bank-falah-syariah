@@ -7,21 +7,21 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>Form Produk</v-toolbar>
+        <v-toolbar color="primary" dark>{{$t('Form Akad')}}</v-toolbar>
         <v-card-text>
           <v-container>
             <v-row>
               <v-col cols="12">
                 <v-text-field
                   v-model="form.nama_produk"
-                  label="Nama *"
+                  :label="$t('Name of Product')"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-select
                     v-model="form.tipe_produk"
-                    label="Tipe *"
+                    :label="$t('Tipe Product')"
                     required
                     :items="tipe_produk"
                     item-text="text"
@@ -32,14 +32,14 @@
               <v-col cols="12">
                 <v-text-field
                   v-model="form.kode_produk"
-                  label="Kode *"
+                  :label="$t('Kode Product')"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
                     v-model="form.minimum_saldo"
-                    label="Minimum Saldo *"
+                    :label="$t('Minimum Saldo')"
                     type="number"
                     prefix="Rp "
                     required
@@ -47,7 +47,7 @@
               </v-col>
             </v-row>
           </v-container>
-          <small>*indicates required field</small>
+          <small>{{$t('indicates required field')}}</small>
         </v-card-text>
         <v-card-actions class="justify-end">
           <v-spacer></v-spacer>
@@ -56,9 +56,9 @@
             text
             @click="close(dialog.value)"
           >
-            Close
+            {{ $t('Close') }}
           </v-btn>
-          <v-btn color="blue darken-1" text @click="submit"> Save </v-btn>
+          <v-btn color="blue darken-1" text @click="submit"> {{ $t('Save') }} </v-btn>
         </v-card-actions>
       </v-card>
     </template>

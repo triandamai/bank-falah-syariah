@@ -93,7 +93,7 @@ export default {
     },
     openMenu(e){
       if(this.$route.path === "/login"){
-        this.$toasted.show("Masuk dahulu sebelum menggunakan option menu!",
+        this.$toasted.show("Masuk dahulu sebelum menggunakan option menu !",
             {
               theme: "bubble",
               position: "top-right",

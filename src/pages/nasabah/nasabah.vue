@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs title="Nasabah" />
+    <Breadcrumbs :title="$t('Customer')" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
@@ -11,12 +11,12 @@
               <div class="earning-content col-xl-3 col-lg-12 col-md-12">
                 <div class="row  chart-left">
                   <div class="col-xl-12 left_side_earning">
-                    <h5>Dashboard</h5>
-                    <p class="font-roboto">Overview of last month</p>
+                    <h5>{{$t('Data Customer')}}</h5>
+                    <p class="font-roboto">{{$t('subtitlenasabah')}}</p>
                   </div>
                   <div class="col-xl-12 left-btn">
                     <a class="btn btn-gradient" @click="formimport = true"
-                      >Import</a
+                      >{{ $t('Import') }}</a
                     >
                   </div>
                 </div>

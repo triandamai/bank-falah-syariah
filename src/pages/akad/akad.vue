@@ -1,15 +1,15 @@
 <template>
   <div>
-    <Breadcrumbs title="Produk" />
+    <Breadcrumbs :title="$t('Akad')" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Master Data Produk</h5>
+              <h5>{{$t('Master Data Akad')}}</h5>
               <span
-                >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
+                >{{$t('subtitle Akad')}}</span
               >
             </div>
             <div class="card-body">

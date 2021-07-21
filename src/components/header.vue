@@ -240,7 +240,7 @@ export default {
     },
     toggle_fullscreen() {
       if (
-        (document.fullScreenElement && document.fullScreenElement !== null) ||
+        document.fullScreenElement ||
         (!document.mozFullScreen && !document.webkitIsFullScreen)
       ) {
         if (document.documentElement.requestFullScreen) {
