@@ -46,7 +46,7 @@
               :key="index"
               @click="changeLocale(l)"
             >
-              <i class="flag-icon" :class="l.icon"></i>
+<!--              <i class="flag-icon" :class="l.icon"></i>-->
               {{ l.name }}</b-dropdown-item
             >
           </b-dropdown>

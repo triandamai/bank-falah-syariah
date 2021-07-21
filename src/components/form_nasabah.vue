@@ -4,23 +4,23 @@
       <v-stepper v-model="step" non-linear class="elevation-0">
         <v-stepper-header class="elevation-0">
           <v-stepper-step :complete="step > 1" step="1">
-            Data Umum
+            {{$t('Data Umum')}}
           </v-stepper-step>
 
           <v-divider></v-divider>
 
           <v-stepper-step :complete="step > 2" step="2">
-            Data Alamat
+            {{$t('Data Alamat')}}
           </v-stepper-step>
 
           <v-divider></v-divider>
 
           <v-stepper-step :complete="step > 3" step="3">
-            Data Pekerjaan
+            {{ $t('Data Pekerjaan') }}
           </v-stepper-step>
           <v-divider></v-divider>
           <v-stepper-step :complete="step > 4" step="4">
-            Data pendukung
+            {{$t('Data Pendukung') }}
           </v-stepper-step>
           <v-divider></v-divider>
         </v-stepper-header>
@@ -171,8 +171,8 @@
                   </v-menu>
                 </v-col>
               </v-row>
-              <v-btn @click="goForward" outlined small> Selanjutnya </v-btn>
-              <v-btn @click="removeBackStack" text> Kembali </v-btn>
+              <v-btn @click="goForward" outlined small>{{$t('Selanjutnya')}}</v-btn>
+              <v-btn @click="removeBackStack" text>{{$t('Kembali')}} </v-btn>
             </v-container>
           </v-stepper-content>
 
@@ -276,9 +276,9 @@
                     dense
                   /> </v-col
               ></v-row>
-              <v-btn @click="goForward" outlined small> Selanjutnya </v-btn>
+              <v-btn @click="goForward" outlined small> {{$t('Selanjutnya')}} </v-btn>
 
-              <v-btn @click="goBack" text> Sebelumnya </v-btn>
+              <v-btn @click="goBack" text> {{$t('Sebelumnya')}} </v-btn>
             </v-container>
           </v-stepper-content>
 
@@ -339,9 +339,9 @@
                   />
                 </v-col>
               </v-row>
-              <v-btn @click="goForward" outlined small> Selanjutnya </v-btn>
+              <v-btn @click="goForward" outlined small> {{$t('Selanjutnya')}} </v-btn>
 
-              <v-btn @click="goBack" text> Sebelumnya </v-btn>
+              <v-btn @click="goBack" text> {{$t('Sebelumnya')}} </v-btn>
             </v-container>
           </v-stepper-content>
           <v-stepper-content step="4">
@@ -370,9 +370,9 @@
                   ></v-text-field>
                 </v-col>
               </v-row>
-              <v-btn @click="onSubmit" outlined small> Simpan </v-btn>
+              <v-btn @click="onSubmit" outlined small> {{$t('Save')}} </v-btn>
 
-              <v-btn @click="goBack" text> Sebelumnya </v-btn>
+              <v-btn @click="goBack" text> {{$t('Sebelumnya')}} </v-btn>
             </v-container>
           </v-stepper-content>
         </v-stepper-items>

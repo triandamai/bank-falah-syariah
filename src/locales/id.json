@@ -72,5 +72,20 @@
   "Close": "Tutup",
   "Save": "Simpan",
   "indicates required field": "* wajib diisi",
-  "subtitle Akad": "Data Akad klik tambah untuk menambah data akad baru"
+  "subtitle Akad": "Data Akad klik tambah untuk menambah data akad baru",
+  "Form Nasabah":"Formulir Nasabah",
+  "subtitle form nasabah": "Lengkapi data berikut",
+  "Data Umum": "Data umum",
+  "Data Alamat": "Data Alamat",
+  "Data Pekerjaan": "Data Pekerjaan",
+  "Data Pendukung": "Data Pendukung",
+  "Selanjutnya": "Selanjutnya",
+  "Kembali": "Kembali",
+  "Sebelumnya": "Sebelumnya",
+  "Bookmark": "Penanda",
+  "Wait Loading": "Loading... Mohon tunggu",
+  "Male": "Laki-Laki",
+  "Female": "Perempuan",
+  "Weeks": "Minggu",
+  "Days": "Hari"
 }

@@ -1,15 +1,15 @@
 <template>
   <div>
-    <Breadcrumbs title="Sample Page" />
+    <Breadcrumbs :title="$t('Customer')" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Sample Card</h5>
+              <h5>{{ $t('Form Nasabah') }}</h5>
               <span
-                >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
+                >{{$t('subtitle form nasabah')}}</span
               >
             </div>
             <form-nasabah :isEdit="false" @submit="onSubmit" :body="{}" />

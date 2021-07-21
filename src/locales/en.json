@@ -72,6 +72,21 @@
   "Close": "Close",
   "Save": "Save",
   "indicates required field": "* indicates required field",
-  "subtitle Akad": "Click button add to add new akad"
+  "subtitle Akad": "Click button add to add new akad",
+  "Form Nasabah":"Form Nasabah",
+  "subtitle form nasabah": "Complete the following data",
+  "Data Umum": "General",
+  "Data Alamat": "Address",
+  "Data Pekerjaan": "Profession",
+  "Data Pendukung": "Additional Data",
+  "Selanjutnya": "Next",
+  "Kembali": "Back",
+  "Sebelumnya": "Previous",
+  "Bookmark": "Bookmark",
+  "Wait Loading": "Loading... Please wait",
+  "Male": "Male",
+  "Female": "Female",
+  "Weeks": "Weeks",
+  "Days": "Days"
 
 }

@@ -13,7 +13,7 @@
             <ul class="droplet-dropdown bookmark-dropdown">
               <li class="gradient-primary">
                 <feather type="star"></feather>
-                <h6 class="f-18 mb-0">Bookmark</h6>
+                <h6 class="f-18 mb-0">{{$t('Bookmark')}}</h6>
               </li>
               <li>
                 <div class="row">

@@ -20,13 +20,13 @@
 
     <v-data-table
         :loading="loadingtable"
-        loading-text="Loading... Please wait"
+        :loading-text="$t('Wait Loading')"
         flat :headers="headers" :items="items" :search="search">
       <template v-slot:item.no_rekening="{ item }">
         <router-link :to="getRouteMutasi(item)"> {{item.no_rekening }}</router-link>
       </template>
       <template v-slot:item.jenis_kelamin="{ item }">
-        {{item.jenis_kelamin == "L" ?'Laki-Laki':'Perempuan'}}
+        {{item.jenis_kelamin == "L" ? $t('Male'):$t('Female')}}
       </template>
       <template v-slot:item.pegawai="{ item }">
         {{item.pegawai.fullname}}
@@ -41,7 +41,7 @@
         {{getTipeProduk(item.tipe_produk)}}
       </template>
       <template v-slot:item.lama_angsuran="{ item }">
-        {{item.tipe_angsuran === 1 ? `${item.lama_angsuran} Minggu`:`${item.lama_angsuran} Hari`}}
+        {{item.tipe_angsuran === 1 ? `${item.lama_angsuran} ${$t('Weeks')}`:`${item.lama_angsuran} ${$t('Days')}`}}
       </template>
       <template v-slot:item.nasabah="{ item }">
         {{item.nasabah.nama_lengkap}}
