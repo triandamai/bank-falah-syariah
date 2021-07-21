@@ -57,7 +57,7 @@
               </v-col>
             </v-row>
           </v-container>
-          <small>*indicates required field</small>
+          <small>{{$t('indicates required field')}}</small>
         </v-card-text>
         <v-card-actions class="justify-end">
           <v-spacer></v-spacer>
@@ -66,9 +66,9 @@
             text
             @click="$emit('close', dialog.value)"
           >
-            Close
+            {{$t('Close')}}
           </v-btn>
-          <v-btn color="blue darken-1" text @click="submit"> Save </v-btn>
+          <v-btn color="blue darken-1" text @click="submit"> {{$t('Save')}} </v-btn>
         </v-card-actions>
       </v-card>
     </template>

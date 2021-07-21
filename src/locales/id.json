@@ -87,5 +87,14 @@
   "Male": "Laki-Laki",
   "Female": "Perempuan",
   "Weeks": "Minggu",
-  "Days": "Hari"
+  "Days": "Hari",
+  "Transaksi Pembiayaan Setor NonTunai": "",
+  "Transaksi Pembiayaan Setor Tunai": "",
+  "Transaksi Pembiayaan Tarik NonTunai": "",
+  "Transaksi Pembiayaan Tarin Tunai": "",
+  "Transaksi Simpanan Setor NonTunai": "",
+  "Transaksi Simpanan Setor Tunai": "",
+  "Transaksi Simpanan Tarik NonTunai": "",
+  "Transaksi Simpanan Tarin Tunai": "",
+  "Pick File Excel": "*pilih file excel"
 }

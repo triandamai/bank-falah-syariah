@@ -12,11 +12,11 @@
           <v-btn dark icon @click="hidden">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>Settings</v-toolbar-title>
+          <v-toolbar-title>{{$t('Transaksi Pembiayaan Setor Tunai')}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn dark text @click="onSubmit">
-              Save
+              {{ $t('Save') }}
             </v-btn>
           </v-toolbar-items>
         </v-toolbar>

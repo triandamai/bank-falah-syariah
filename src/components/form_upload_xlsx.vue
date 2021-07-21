@@ -7,7 +7,7 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>Import Nasabah</v-toolbar>
+        <v-toolbar color="primary" dark>{{$t('Import')}}</v-toolbar>
         <v-card-text>
           <v-container>
             <v-row>
@@ -21,12 +21,12 @@
               </v-col>
             </v-row>
           </v-container>
-          <small>*pilih file excel</small>
+          <small>{{ $t('Pick File Excel') }}</small>
         </v-card-text>
         <v-card-actions class="justify-end">
           <v-spacer></v-spacer>
           <v-btn color="blue darken-1" text @click="onClose(dialog.value)">
-            Close
+            {{$t('Close')}}
           </v-btn>
           <v-btn
             :disabled="loading"
@@ -34,7 +34,7 @@
             color="blue darken-1"
             text
           >
-            Save
+            {{$t('Save')}}
           </v-btn>
         </v-card-actions>
       </v-card>
