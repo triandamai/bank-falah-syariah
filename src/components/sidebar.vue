@@ -468,12 +468,14 @@ export default {
     //check if user already logged in is have privilage for acces those menu
     checkPrivilage(privilage) {
       const { role } = getUser();
-      const haveAllRole = privilage.roles.includes("all");
-      if (haveAllRole) return true;
-      if (role[0]) {
-        const current_role = role[0].name;
-        return  privilage.roles.includes(current_role);
-      }
+     if(role[0]){
+       const haveAllRole = privilage.roles.includes("all");
+       if (haveAllRole) return true;
+       if (role[0]) {
+         const current_role = role[0].name;
+         return  privilage.roles.includes(current_role);
+       }
+     }
       return false;
     },
     showForm(form) {

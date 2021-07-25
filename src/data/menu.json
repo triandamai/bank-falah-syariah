@@ -6,8 +6,8 @@
       "type": "headtitle",
       "path": "General",
       "privilage": {
-        "roles": ["admin", "all"],
-        "groups": ["admin"]
+        "roles": ["admin", "bp_root","siswa","publlic"]
+
       }
     },
     {
@@ -17,8 +17,8 @@
       "type": "link",
       "active": false,
       "privilage": {
-        "roles": ["admin", "all"],
-        "groups": ["admin"]
+        "roles": ["admin", "bp_root","siswa","public"]
+
       }
     },
     {
@@ -28,8 +28,8 @@
       "type": "link",
       "active": false,
       "privilage": {
-        "roles": ["admin", "all"],
-        "groups": ["admin"]
+        "roles": ["admin", "bp_root","siswa","cs"]
+
       }
     },
     {
@@ -41,8 +41,7 @@
       "active": false,
       "path": "Master Data",
       "privilage": {
-        "roles": ["admin", "all"],
-        "groups": ["admin"]
+        "roles": ["admin", "bp_root","siswa","public"]
       },
       "children": [
         {
@@ -50,8 +49,7 @@
           "title": "Akad",
           "type": "link",
           "privilage": {
-            "roles": ["admin", "all"],
-            "groups": ["all"]
+            "roles": ["admin", "bp_root","siswa"]
           }
         },
         {
@@ -59,8 +57,7 @@
           "title": "Type of Transaction",
           "type": "link",
           "privilage": {
-            "roles": ["admin", "all"],
-            "groups": ["all"]
+            "roles": ["admin", "bp_root","siswa"]
           }
         },
         {
@@ -68,8 +65,7 @@
           "title": "Employees",
           "type": "link",
           "privilage": {
-            "roles": ["admin", "all"],
-            "groups": ["all"]
+            "roles": ["admin", "bp_root","siswa"]
           }
         },
         {
@@ -77,8 +73,7 @@
           "title": "Departement",
           "type": "link",
           "privilage": {
-            "roles": ["admin", "all"],
-            "groups": ["all"]
+            "roles": ["admin", "bp_root","siswa"]
           }
         },
         {
@@ -86,8 +81,7 @@
           "title": "Simpanan",
           "type": "link",
           "privilage": {
-            "roles": ["admin", "all"],
-            "groups": ["all"]
+            "roles": ["admin", "bp_root","siswa","cs","teller"]
           }
         },
         {
@@ -95,8 +89,7 @@
           "title": "Pembiayaan",
           "type": "link",
           "privilage": {
-            "roles": ["admin", "all"],
-            "groups": ["all"]
+            "roles": ["admin", "bp_root","siswa","cs","teller"]
           }
         }
       ]
@@ -110,8 +103,7 @@
       "active": false,
       "path": "Transaction",
       "privilage": {
-        "roles": ["admin", "all"],
-        "groups": ["admin"]
+        "roles": ["admin", "bp_root","siswa","teller"]
       },
       "children": [
         {
@@ -119,8 +111,7 @@
           "type": "sub",
           "active": false,
           "privilage": {
-            "roles": ["admin", "all"],
-            "groups": ["admin"]
+            "roles": ["admin", "bp_root","siswa","teller"]
           },
           "children": [
             {
@@ -128,8 +119,7 @@
               "title": "Setor Tunai",
               "type": "button",
               "privilage": {
-                "roles": ["admin", "all"],
-                "groups": ["admin"]
+                "roles": ["admin", "bp_root","siswa","teller"]
               }
             },
             {
@@ -137,8 +127,7 @@
               "title": "Setor Non-Tunai",
               "type": "button",
               "privilage": {
-                "roles": ["admin", "all"],
-                "groups": ["admin"]
+                "roles": ["admin", "bp_root","siswa","teller"]
               }
             },
             {
@@ -146,8 +135,7 @@
               "title": "Tarik Tunai",
               "type": "button",
               "privilage": {
-                "roles": ["admin", "all"],
-                "groups": ["admin"]
+                "roles": ["admin", "bp_root","siswa","teller"]
               }
             },
             {
@@ -155,8 +143,7 @@
               "title": "Tarik Non-Tunai",
               "type": "button",
               "privilage": {
-                "roles": ["admin", "all"],
-                "groups": ["admin"]
+                "roles": ["admin", "bp_root","siswa","teller"]
               }
             }
 
@@ -167,8 +154,7 @@
           "type": "sub",
           "active": false,
           "privilage": {
-            "roles": ["admin", "all"],
-            "groups": ["admin"]
+            "roles": ["admin", "bp_root","siswa","cs","teller"]
           },
           "children": [
             {
@@ -176,8 +162,7 @@
               "title": "Setor Tunai",
               "type": "button",
               "privilage": {
-                "roles": ["admin", "all"],
-                "groups": ["admin"]
+                "roles": ["admin", "bp_root","siswa","teller"]
               }
             },
             {
@@ -185,8 +170,7 @@
               "title": "Setor Non-Tunai",
               "type": "button",
               "privilage": {
-                "roles": ["admin", "all"],
-                "groups": ["admin"]
+                "roles": ["admin", "bp_root","siswa","teller"]
               }
             },
             {
@@ -194,8 +178,7 @@
               "title": "Tarik Tunai",
               "type": "button",
               "privilage": {
-                "roles": ["admin", "all"],
-                "groups": ["admin"]
+                "roles": ["admin", "bp_root","siswa","teller"]
               }
             },
             {
@@ -203,13 +186,9 @@
               "title": "Tarik Non-Tunai",
               "type": "button",
               "privilage": {
-                "roles": ["admin", "all"],
-                "groups": ["admin"]
+                "roles": ["admin", "bp_root","siswa","teller"]
               }
             }
-
-
-
           ]
         }
       ]
@@ -223,8 +202,7 @@
       "active": false,
       "path": "Report",
       "privilage": {
-        "roles": ["admin", "all"],
-        "groups": ["admin"]
+        "roles": ["admin", "bp_root","siswa"]
       },
       "children": [
         {
@@ -232,8 +210,7 @@
           "title": "Report Teller",
           "type": "link",
           "privilage": {
-            "roles": ["admin", "all"],
-            "groups": ["all"]
+            "roles": ["admin", "bp_root","siswa","teller"]
           }
         }
       ]
@@ -244,8 +221,7 @@
       "type": "headtitle",
       "path": "Advance",
       "privilage": {
-        "roles": ["admin", "all"],
-        "groups": ["admin"]
+        "roles": ["admin", "bp_root"]
       }
     },
     {
@@ -257,8 +233,7 @@
       "active": false,
       "path": "System",
       "privilage": {
-        "roles": ["admin", "all"],
-        "groups": ["admin"]
+        "roles": ["admin", "bp_root","siswa"]
       },
       "children": [
         {
@@ -266,8 +241,7 @@
           "title": "User",
           "type": "link",
           "privilage": {
-            "roles": ["admin", "all"],
-            "groups": ["all"]
+            "roles": ["admin", "bp_root"]
           }
         },
         {
@@ -275,8 +249,7 @@
           "title": "Preferences",
           "type": "link",
           "privilage": {
-            "roles": ["admin", "all"],
-            "groups": ["all"]
+            "roles": ["admin", "bp_root"]
           }
         }
       ]

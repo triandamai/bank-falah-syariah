@@ -179,11 +179,12 @@ export default {
   // },
   created() {
     const user = getUser();
+
     this.username = user.username;
     if (user.role[0]) {
       this.role = user.role[0].name;
     }else {
-      this.role = "undefined";
+      this.role = "tidak memiliki akses";
     }
     //this.group = user.group[0].name;
   },

@@ -86,6 +86,7 @@ export default {
         window.addEventListener("keydown", (e) => {
             //if Enter go to next
             if (e.key === "Enter") {
+
                 if (this.show) {
                     this.onSubmit()
                 }
