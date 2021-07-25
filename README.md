@@ -38,10 +38,7 @@ karena applikasi dituntut dinamis dalam penggunaan role
   "path": "General",
   "privilage": {
     "roles": [
-      "admin",
-      "bp_root",
-      "siswa",
-      "publlic"
+      "public"
     ]
   },
   "children": [
@@ -51,7 +48,7 @@ karena applikasi dituntut dinamis dalam penggunaan role
       "type": "headtitle",
       "path": "General",
       "privilage": {
-        "roles": ["admin", "bp_root","siswa","publlic"]
+        "roles": ["public"]
 
       }
     }
