@@ -155,7 +155,7 @@ const actions = {
       ApiService.put(`${type === SUSER ? 'user':type === SROLE ? 'role' :'group'}/${body.id}`, body)
         .then(({ status, data }) => {
           if (status === 200 || status === 201) {
-            console.log(data.data)
+
             commit(EDIT_DATA_SYSTEM, {
               type: type,
               data: data.data[0],

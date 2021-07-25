@@ -143,7 +143,7 @@ export default {
       this.isEdit = false;
     },
     onEdit(data) {
-console.log(data)
+
       this.body = data;
       this.body.role_id = data.role[0].id
       this.form = true;
