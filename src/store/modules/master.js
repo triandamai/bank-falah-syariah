@@ -96,17 +96,14 @@ const actions = {
           if (status == 200 || status == 201) {
             if (data.current_page >= data.last_page) {
               resolve(false);
-              stillPaging = false;
             } else {
               commit(INCREMENT_PAGE, { type: type });
               resolve(true);
-              stillPaging = true;
             }
             data.data.map((item) => {
               commit(ADDDATAMASTER, {
                 type: type,
                 data: item,
-                page: stillPaging,
               });
             });
           } else {
@@ -240,7 +237,7 @@ const mutations = {
         break;
     }
   },
-  [ADDDATAMASTER](state, { type, data, page }) {
+  [ADDDATAMASTER](state, { type, data }) {
     switch (type) {
       case MAKAD:
         var exist = state.dataakad.some((akad) => {
@@ -263,7 +260,7 @@ const mutations = {
       case MJENISTRANSAKSI:
         // console.log(data);
         var exist = state.datajenistransaksi.some((jenis) => {
-          return jenis.id == data.id;
+          return jenis.id === data.id;
         });
         if (!exist) {
           state.datajenistransaksi.push(data);
@@ -271,7 +268,7 @@ const mutations = {
         break;
       case MPEGAWAI:
         var exist = state.datapegawai.some((pegawai) => {
-          return pegawai.id == data.id;
+          return pegawai.id === data.id;
         });
         if (!exist) {
           state.datapegawai.push(data);
@@ -279,7 +276,7 @@ const mutations = {
         break;
       case MPRODUK:
         var exist = state.dataproduk.some((produk) => {
-          return produk.id == data.id;
+          return produk.id === data.id;
         });
         if (!exist) {
           state.dataproduk.push(data);
@@ -293,6 +290,7 @@ const mutations = {
    * update item inside array state data
    * @returns change reactivly
    *
+   * @param state
    */
   [EDITDATAMASTER](state, { type, data, olddata }) {
     switch (type) {
@@ -329,8 +327,9 @@ const mutations = {
   },
   /***
    * delete data y index
-   * @param {systemtype,data}
+   * @param {type,data}
    * @return remove data by index
+   * @param state
    */
   [REMOVEDATAMASTER](state, { type, data }) {
     switch (type) {

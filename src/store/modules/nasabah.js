@@ -54,7 +54,7 @@ const actions = {
       let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
       ApiService.get(`nasabah${page}`)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             if (data.current_page >= data.last_page) {
               //jangan ambil data lagi
               resolve(false);
@@ -114,7 +114,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       ApiService.post("nasabah/import", body)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             data.data.map((item) => {
               commit(ADD_NASABAH, item);
             });
@@ -144,7 +144,7 @@ const actions = {
     return new Promise((resolve, reject) => {
       ApiService.put(`nasabah/${body.id}`, body)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             commit(EDIT_NASABAH, { data: data.data[0], olddata: body });
             resolve({ success: true, message: "Berhasil mengubah" });
           } else {
@@ -169,10 +169,10 @@ const actions = {
    * @returns
    */
   [DELETE_NASABAH]({ commit }, body) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       ApiService.delete(`nasabah/${body.id}`, body)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             commit(REMOVE_NASABAH, body);
             resolve({ success: true, message: "Berhasil" });
           } else {
@@ -201,7 +201,7 @@ const mutations = {
   },
   [ADD_NASABAH](state, data) {
     var exsts = state.datanasabah.some((nasabah) => {
-      return nasabah.id == data.id;
+      return nasabah.id === data.id;
     });
     if (!exsts) {
       state.datanasabah.push(data);

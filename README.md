@@ -1,53 +1,60 @@
 # bank-falah-syariah
+Menggunakan Vue JS  [Configuration Reference](https://cli.vuejs.org/config/).
 
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-### DOC
+### Infrastructure
+-[] Vue js versi 2++
+-[] Boostrap 
+-[] vuetify 2++
+-[] Vuex Store
+-[] Vue Router
+-[] Lumen(sebagai Back End) [Back End](https://github.com/rochman25/aksioma_service)
+-[] Axios
+Semua Resourse Full Client-Side dan Back-End side
 
 ### project structure
 
-```java
-public
-src
-  assets
-    ...
-  constants
-    ..
-  services
-    ...
-  data
-    ...
-  locales
-    ...
-  store
-    module
-      ...
-    utils
-      ...
-  components
-    ...
-  pages
-      pages
-        ...
-  plugins
-    vuetify.js
-  router
-    router.js
-
-  .eslintrc.js
-  App.vue
-  main.js
-
+```text
+assets
+data
+locale
+plugin
+mixin
+services
+utils
+page
+compontent
+store
 ```
 
-Menu
+### Menu
+Apps menu menggunakan dinamis menu berdasarkan role tersedia di object privilages
+karena applikasi dituntut dinamis dalam penggunaan role
 
 ```json
 {
-  "path:"",
-  "id":1,
-  "type":"",
+  "headTitle1": "General",
+  "headTitle2": "Dashboards,features & data.",
+  "type": "headtitle",
+  "path": "General",
+  "privilage": {
+    "roles": [
+      "admin",
+      "bp_root",
+      "siswa",
+      "publlic"
+    ]
+  },
+  "children": [
+    {
+      "headTitle1": "General",
+      "headTitle2": "Dashboards,features & data.",
+      "type": "headtitle",
+      "path": "General",
+      "privilage": {
+        "roles": ["admin", "bp_root","siswa","publlic"]
+
+      }
+    }
+  ]
 }
 ```
