@@ -10,12 +10,11 @@ const STATISTIC = "STATISTIC"
 export const ACTION_GET_STATISTIC = `statistic/${STATISTIC}`
 
 
-
 var primary = localStorage.getItem("primary_color") || "#7366ff";
 var secondary = localStorage.getItem("secondary_color") || "#f73164";
 const state = {
-    totalnasabah:0,
-    totaltransaksi:0,
+    totalnasabah: 0,
+    totaltransaksi: 0,
     options: {
         chart: {
             width: 685,
@@ -55,7 +54,7 @@ const state = {
             offsetX: 0,
             offsetY: 0,
             show: false,
-            max:16,
+            max: 16,
             labels: {
                 low: 0,
                 offsetX: 0,
@@ -102,48 +101,50 @@ const state = {
             },
         },
     },
-    series:[
-    ]
+    series: []
 };
 const getters = {};
 const actions = {
     // eslint-disable-next-line no-unused-vars,no-empty-pattern
-    [STATISTIC]({commit,state}, {}) {
+    [STATISTIC]({commit, state}, {}) {
         return new Promise((resolve) => {
-           ApiService.get("/statistics?days=10").then(({status,data})=>{
+            ApiService.get("/statistics?days=10").then(({status, data}) => {
 
-               if (status === 200 || status === 201) {
-                   const data_nasabah =[]
-                   const data_transaksi =[]
-                   const data_label =[]
-                   let transaksi =0;
-                   let nasabah =0;
-                   let max =0;
-                   data.data.map(item=>{
-                       if(item.nasabah > max){
-                           max = item.nasabah ;
-                       }
+                if (status === 200 || status === 201) {
+                    const data_nasabah = []
+                    const data_transaksi = []
+                    const data_label = []
+                    let transaksi = 0;
+                    let nasabah = 0;
+                    let max = 0;
+                    data.data.map(item => {
+                        if (item.nasabah > max) {
+                            max = item.nasabah;
+                        }
 
-                       if(item.transaksi > max){
-                           max = item.transaksi;
-                       }
-                       nasabah = nasabah + item.nasabah
-                       transaksi = transaksi + item.transaksi
-                       data_nasabah.push(item.nasabah)
-                       data_transaksi.push(item.transaksi)
-                       data_label.push(item.date)
-                   })
-                   commit(STATISTIC,{nasabah:nasabah,transaksi:transaksi})
-                    resolve({success:true,data:{label:data_label,transaksi:data_transaksi,nasabah:data_nasabah,max:max}});
-               } else {
-                   resolve({success:false,data:[]});
-               }
-           }).catch((e)=>{
+                        if (item.transaksi > max) {
+                            max = item.transaksi;
+                        }
+                        nasabah = nasabah + item.nasabah
+                        transaksi = transaksi + item.transaksi
+                        data_nasabah.push(item.nasabah)
+                        data_transaksi.push(item.transaksi)
+                        data_label.push(item.date)
+                    })
+                    commit(STATISTIC, {nasabah: nasabah, transaksi: transaksi})
+                    resolve({
+                        success: true,
+                        data: {label: data_label, transaksi: data_transaksi, nasabah: data_nasabah, max: max}
+                    });
+                } else {
+                    resolve({success: false, data: []});
+                }
+            }).catch(() => {
                 resolve({
-                   success: false,
-                   message: "Terjadi kesalahan coba lagi nanti!",
-               });
-           })
+                    success: false,
+                    message: "Terjadi kesalahan coba lagi nanti!",
+                });
+            })
 
         })
     },
@@ -151,10 +152,10 @@ const actions = {
 
 };
 const mutations = {
-[STATISTIC](state,{nasabah,transaksi}){
-    state.totalnasabah=nasabah
-    state.totaltransaksi=transaksi
-}
+    [STATISTIC](state, {nasabah, transaksi}) {
+        state.totalnasabah = nasabah
+        state.totaltransaksi = transaksi
+    }
 };
 export default {
     namespaced: true,
