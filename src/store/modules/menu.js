@@ -1,8 +1,8 @@
-import Menu from "@/data/menu";
+
 import ApiServices from "@/services/api.service";
 
 const state = {
-  data: Menu.data,
+
   searchData: [],
   togglesidebar: true,
   menu: []
@@ -26,7 +26,7 @@ const mutations = {
   searchTerm: (state, term) => {
     let items = [];
     var searchval = term.toLowerCase();
-    state.data.filter(menuItems => {
+    state.menu.filter(menuItems => {
       if (menuItems.title) {
         if (
           menuItems.title.toLowerCase().includes(searchval) &&
@@ -57,8 +57,8 @@ const mutations = {
   },
   setNavActive: (state, item) => {
     if (!item.active) {
-      state.data.forEach(a => {
-        if (state.data.includes(item)) a.active = false;
+      state.menu.forEach(a => {
+        if (state.menu.includes(item)) a.active = false;
         if (!a.children) return false;
         a.children.forEach(b => {
           if (a.children.includes(item)) {
@@ -70,7 +70,7 @@ const mutations = {
     item.active = !item.active;
   },
   setActiveRoute: (state, item) => {
-    state.data.filter(menuItem => {
+    state.menu.filter(menuItem => {
       if (menuItem != item) menuItem.active = false;
       if (menuItem.children && menuItem.children.includes(item))
         menuItem.active = true;
@@ -108,24 +108,24 @@ const actions = {
   },
   getMenu: ({ commit }) => {
     return new Promise((resolve) => {
-      ApiServices.get(`/route`)
-        .then(res => {
-          if (res.status == 201 || res.status == 200) {
+      ApiServices.get(`/route?param=dsvgdv`)
+        .then(({status,data}) => {
+          if (status == 201 || status == 200) {
             resolve({ success: true, message: "sukses" });
-            commit("setMenu", res.data.data);
+         //   console.log(data.data.data)
+            commit("setMenu", data.data.data);
           } else {
-            resolve({ success: false, message: res });
-            commit("setMenu", Menu.data);
+            resolve({ success: false, message: status });
+           // commit("setMenu", Menu.data);
           }
-        })
-        .catch(() => {
+        }).catch(() => {
 
             resolve({
               success: false,
               message: "Terjadi kesalahan coba lagi nanti!",
             });
 
-          commit("setMenu", Menu.data);
+         // commit("setMenu", Menu.data);
         });
     });
   },

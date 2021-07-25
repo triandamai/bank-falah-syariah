@@ -29,7 +29,7 @@
     <form-user
       :show="form"
       :body="body"
-      :isEdit="isEdit"
+      :edit="isEdit"
       @close="form = false"
       @submit="onSubmit"
     />

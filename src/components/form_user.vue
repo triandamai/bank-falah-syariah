@@ -1,9 +1,9 @@
 <template>
   <v-dialog
-    transition="dialog-bottom-transition"
-    max-width="600"
-    v-model="show"
-    persistent
+      v-model="show"
+      max-width="600"
+      persistent
+      transition="dialog-bottom-transition"
   >
     <template v-slot:default="dialog">
       <v-card>
@@ -13,71 +13,64 @@
             <v-row>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.username"
-                  label="Username*"
-                  required
+                    v-model="form.username"
+                    label="Username*"
+                    required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.email"
-                  type="email"
-                  label="Email*"
-                  required
+                    v-model="form.email"
+                    label="Email*"
+                    required
+                    type="email"
                 ></v-text-field>
               </v-col>
-              <v-col cols="12" v-show="!isEdit">
+              <v-col v-show="!edit" cols="12">
                 <v-text-field
-                  v-model="form.password"
-                  type="password"
-                  label="Password*"
-                  required
+                    v-model="form.password"
+                    label="Password*"
+                    required
+                    type="password"
                 ></v-text-field>
               </v-col>
 
               <v-col cols="12">
                 <v-autocomplete
-                  v-model="form.role_id"
-                  :items="itemsrole"
-                  item-value="id"
-                  item-text="name"
-                  label="Role*"
-                  required
-                ></v-autocomplete>
-              </v-col>
-              <v-col cols="12">
-                <v-autocomplete
-                  v-model="form.group_id"
-                  :items="itemsgroup"
-                  item-value="id"
-                  item-text="name"
-                  label="Group*"
-                  required
+                    v-model="form.role_id"
+                    :items="itemsrole"
+                    item-text="name"
+                    item-value="id"
+                    label="Role*"
+                    required
                 ></v-autocomplete>
               </v-col>
             </v-row>
           </v-container>
-          <small>{{$t('indicates required field')}}</small>
+          <small>{{ $t('indicates required field') }}</small>
         </v-card-text>
         <v-card-actions class="justify-end">
           <v-spacer></v-spacer>
           <v-btn
-            color="blue darken-1"
-            text
-            @click="$emit('close', dialog.value)"
+              color="blue darken-1"
+              text
+              @click="$emit('close', dialog.value)"
           >
-            {{$t('Close')}}
+            {{ $t('Close') }}
           </v-btn>
-          <v-btn color="blue darken-1" text @click="submit"> {{$t('Save')}} </v-btn>
+          <v-btn color="blue darken-1" text @click="submit"> {{ $t('Save') }}</v-btn>
         </v-card-actions>
       </v-card>
     </template>
   </v-dialog>
 </template>
 <script>
-import { mapState } from "vuex";
+
+import {ACTION_GET_DATA_SYSTEM, SROLE} from "@/store"
+import componentMixin from "@/mixin/component.mixin"
+
 export default {
-  props: ["show", "body", "isEdit"],
+  mixins: [componentMixin],
   data: () => {
     return {
       form: {
@@ -89,21 +82,17 @@ export default {
       },
     };
   },
-  computed: {
-    ...mapState({
-      itemsrole: (state) => state.system.dataroles,
-      itemsgroup: (state) => state.system.datagroups,
-    }),
-  },
-  watch: {
-    body: function (newVal) {
-      this.form = newVal;
-    },
+  created() {
+    this.getDataRoles()
   },
   methods: {
-    submit() {
-      this.$emit("submit", this.form);
-    },
+    getDataRoles() {
+      this.$store.dispatch(ACTION_GET_DATA_SYSTEM, {type: SROLE}).then((isNext) => {
+        if (isNext) {
+          this.getDataRoles()
+        }
+      })
+    }
   },
 };
 </script>

@@ -2,7 +2,7 @@ import {mapState} from "vuex";
 import {formatCurrency} from "@/utils/utils";
 
 export default {
-    props: ["show", "body"],
+    props: ["show", "body","edit"],
     data: () => {
         return {
             options: {
@@ -99,7 +99,7 @@ export default {
             itemsnasabah: (state) => state.nasabah.datanasabah,
             itemspegawai: (state) => state.master.datapegawai,
             nasabah: (state) => state.nasabah.datanasabah,
-            menuItems: (state) => state.menu.data,
+            menuItems: (state) => state.menu.menu,
             layout: (state) => state.layout.layout,
             togglesidebar: (state) => state.menu.togglesidebar,
             tabunganformsetortunai: (state) => state.tabunganformsetortunai,
@@ -114,6 +114,7 @@ export default {
             kabupaten: (state) => state.wilayah.kabupaten.data,
             kecamatan: (state) => state.wilayah.kecamatan.data,
             desa: (state) => state.wilayah.desa.data,
+            itemsrole: (state) => state.system.dataroles,
         }),
     },
     methods: {

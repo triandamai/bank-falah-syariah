@@ -77,7 +77,7 @@ const actions = {
 
       ApiService.get(`${type}${page}`)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             if (data.current_page >= data.last_page) {
               //jangan ambil data lagi
               resolve(false);
@@ -114,7 +114,7 @@ const actions = {
    */
   [POST_DATA_SYSTEM]({ commit }, { type, body }) {
     return new Promise((resolve,reject) => {
-      ApiService.post(`${type}`, body)
+      ApiService.post(`${type === SUSER ? 'user':type === SROLE ? 'role' :'group'}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
             commit(ADD_DATA_SYSTEM, {

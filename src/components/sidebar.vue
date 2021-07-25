@@ -407,9 +407,12 @@ export default {
       clicked: false,
     };
   },
+  beforeMount() {
+   this.$store.dispatch('menu/getMenu')
+  },
   computed: {
     ...mapState({
-      menuItems: (state) => state.menu.data,
+      menuItems: (state) =>  state.menu.menu,
       layout: (state) => state.layout.layout,
       sidebar: (state) => state.layout.sidebarType,
     }),
