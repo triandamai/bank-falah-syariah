@@ -76,7 +76,9 @@ export default {
             this.getData();
           }
           this.$store.commit('setLoading',false)
-        });
+        }).catch(()=>{
+        this.unAuthorize()
+      });
     },
     onSubmit(data) {
       this.$store
@@ -107,7 +109,7 @@ export default {
             this.formproduk = false;
             this.body = {};
           }
-        });
+        })
     },
     onAdd() {
       this.formproduk = true;
@@ -149,7 +151,7 @@ export default {
               );
             });
         }
-      });
+      })
     },
   },
 };

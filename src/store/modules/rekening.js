@@ -82,7 +82,7 @@ const actions = {
    * @param type
    */
   [GET_DATA_REKENING]({ commit, state }, { type }) {
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
       //cek pagination (get current page)
       let page = `?page=`;
       //for mutation the pagination going forward or stop
@@ -126,14 +126,16 @@ const actions = {
           }
         })
         .catch((e) => {
-          //failes
-          resolve(false);
+          resolve({
+            success: false,
+            message: "Terjadi kesalahan coba lagi nanti!",
+          });
         });
     });
   },
 
   [MUTASI]({commit},{type,no_rekening}){
-    return new Promise((resolve)=>{
+    return new Promise((resolve,reject)=>{
       ApiService.get(`${type}${no_rekening}/mutasi?t=${new Date().getMilliseconds()}`)
           .then(({status,data})=>{
             if(status === 200 || status === 201){
@@ -148,7 +150,10 @@ const actions = {
             }
           })
           .catch(()=>{
-            resolve(false)
+            resolve({
+              success: false,
+              message: "Terjadi kesalahan coba lagi nanti!",
+            });
           })
     })
   },
@@ -159,7 +164,7 @@ const actions = {
    * @param body
    */
   [POST_DATA_REKENING]({ commit }, { type, body }) {
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
 
 
       ApiService.post(`${type}`, body)
@@ -177,7 +182,10 @@ const actions = {
           }
         })
         .catch((e) => {
-          resolve({ success: true, message: e });
+          resolve({
+            success: false,
+            message: "Terjadi kesalahan coba lagi nanti!",
+          });
         });
     });
   },
@@ -185,7 +193,7 @@ const actions = {
    * update/edit data
    */
   [PUT_DATA_REKENING]({ commit }, { type, body }) {
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
       ApiService.put(`${type}/${body.id}`, body)
         .then(({ status, data }) => {
           if (status === 200 || status === 201) {
@@ -200,7 +208,10 @@ const actions = {
           }
         })
         .catch((e) => {
-          resolve({ success: true, message: "Berhasil" });
+          resolve({
+            success: false,
+            message: "Terjadi kesalahan coba lagi nanti!",
+          });
         });
     });
   },
@@ -211,7 +222,7 @@ const actions = {
    * @param body
    */
   [DELETE_DATA_REKENING]({ commit }, { type, body }) {
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
       ApiService.delete(`${type}/${body.id}`)
         .then(({ status, data }) => {
           if (status === 200 || status === 201) {
@@ -225,7 +236,10 @@ const actions = {
           }
         })
         .catch((e) => {
-          resolve({ success: true, message: "Berhasil" });
+          resolve({
+            success: false,
+            message: "Terjadi kesalahan coba lagi nanti!",
+          });
         });
     });
   },

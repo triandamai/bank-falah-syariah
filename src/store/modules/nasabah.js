@@ -70,7 +70,10 @@ const actions = {
           }
         })
         .catch((e) => {
-          resolve(false);
+          resolve({
+            success: false,
+            message: "Terjadi kesalahan coba lagi nanti!",
+          });
         });
     });
   },
@@ -96,10 +99,10 @@ const actions = {
             });
           }
         })
-        .catch(({ response }) => {
+        .catch((e) => {
           resolve({
             success: false,
-            message: "Terjadi kesalahan silahkan coba lagi nanti!",
+            message: "Terjadi kesalahan coba lagi nanti!",
           });
         });
     });
@@ -127,10 +130,9 @@ const actions = {
           }
         })
         .catch((e) => {
-          console.log(e);
           resolve({
             success: false,
-            message: "Terjadi kesalahan silahkan coba lagi nanti!",
+            message: "Terjadi kesalahan coba lagi nanti!",
           });
         });
     });
@@ -155,10 +157,10 @@ const actions = {
             });
           }
         })
-        .catch(({ response }) => {
+        .catch((e) => {
           resolve({
             success: false,
-            message: "Terjadi kesalahan silahkan coba lagi nanti!",
+            message: "Terjadi kesalahan coba lagi nanti!",
           });
         });
     });
@@ -186,7 +188,7 @@ const actions = {
         .catch((e) => {
           resolve({
             success: false,
-            message: "Terjadi kesalahan silahkan coba lagi nanti!",
+            message: "Terjadi kesalahan coba lagi nanti!",
           });
         });
     });

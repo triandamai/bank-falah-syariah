@@ -25,7 +25,7 @@ export const store = new Vuex.Store({
     pembiayaanformtariktunai: false,
     pembiayaanformtariknontunai: false,
     loadingtable:true,
-    body: {}
+
   },
   mutations: {
     // eslint-disable-next-line no-unused-vars

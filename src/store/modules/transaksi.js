@@ -23,7 +23,7 @@ const getters = {};
 const actions = {
     // eslint-disable-next-line no-unused-vars
     [TRANSACTION]({commit}, {payload, type}) {
-        return new Promise(resolve => {
+        return new Promise((resolve,reject) => {
             var endpoint = "";
             switch (type) {
                 case  TABUNGAN_TARIK_TUNAI:
@@ -62,8 +62,11 @@ const actions = {
                 } else {
                     resolve({success: false, message: "Terjadi Kesalahan"})
                 }
-            }).catch(() => {
-                resolve({success: false, message: "Terjadi Kesalahan"})
+            }).catch((e) => {
+                resolve({
+                    success: false,
+                    message: "Terjadi kesalahan coba lagi nanti!",
+                });
             })
         });
     }

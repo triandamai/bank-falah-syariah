@@ -261,6 +261,30 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
+
 });
+router.afterEach((to)=>{
+
+  if(to.path == "/login" || to.path == "/unlock"){
+    //
+  }else {
+    ApiService.get("/statistics?days=10").then(()=>{}).catch((e)=>{
+      if(e.response){
+        if(e.response.status === 401) {
+          setTimeout(()=>{
+              this.$router.push({path:'/unlock'})
+          },2100)
+          Vue.swal({
+            title: 'Akun terhubung di perangkat lain!',
+            html: 'Anda akan diarahkan ke halaman masuk.',
+            timer:2000
+          })
+        }
+      }
+
+    })
+  }
+
+})
 
 export default router;

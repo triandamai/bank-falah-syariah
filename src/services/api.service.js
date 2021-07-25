@@ -1,7 +1,7 @@
 import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
-import JwtService from "@/services/jwt.service";
+import  {getToken} from "@/services/jwt.service";
 
 /**
  * Service to call HTTP request via Axios
@@ -23,7 +23,7 @@ const ApiService = {
     // "http://192.168.100.4:8000"; // "http://localhost:8000";
     Vue.axios.defaults.headers.common[
       "Authorization"
-    ] = `Bearer ${JwtService.getToken()}`;
+    ] = `Bearer ${getToken()}`;
   },
   query(resource, params) {
     return Vue.axios.get(resource, params);

@@ -34,7 +34,18 @@ export  default {
             itemsproduk: (state) => state.master.dataproduk,
             itemsnasabah: (state) => state.nasabah.datanasabah,
             itemspegawai: (state) => state.master.datapegawai,
-            nasabah: (state)=> state.nasabah.datanasabah
+            nasabah: (state)=> state.nasabah.datanasabah,
+            menuItems: (state) => state.menu.data,
+            layout: (state) => state.layout.layout,
+            togglesidebar: (state) => state.menu.togglesidebar,
+            tabunganformsetortunai:(state)=> state.tabunganformsetortunai,
+            tabunganformsetornontunai:(state)=> state.tabunganformsetornontunai,
+            tabunganformtariktunai:(state)=> state.tabunganformtariktunai,
+            tabunganformtariknontunai:(state)=> state.tabunganformtariknontunai,
+            pembiayaanformsetortunai:(state)=> state.pembiayaanformsetortunai,
+            pembiayaanformsetornontunai:(state)=> state.pembiayaanformsetornontunai,
+            pembiayaanformtariktunai:(state)=> state.pembiayaanformtariktunai,
+            pembiayaanformtariknontunai:(state)=> state.pembiayaanformtariknontunai,
         }),
     },
     methods:{
@@ -46,6 +57,9 @@ export  default {
         },
         submit(){
             this.$emit("submit",this.form);
+        },
+        unAuthorize(){
+
         }
     }
 }

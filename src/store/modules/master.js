@@ -69,7 +69,7 @@ const actions = {
    * and add data to array smoothly
    */
   [GETDATAMASTER]({ commit, state }, { type }) {
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
       //get current page
       let page = `?page=`;
 

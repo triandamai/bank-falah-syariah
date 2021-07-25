@@ -107,7 +107,7 @@ const actions = {
     context.commit("setActiveRoute", item);
   },
   getMenu: ({ commit }) => {
-    return new Promise(resolve => {
+    return new Promise((resolve,reject) => {
       ApiServices.get(`/route`)
         .then(res => {
           if (res.status == 201 || res.status == 200) {
@@ -118,14 +118,19 @@ const actions = {
             commit("setMenu", Menu.data);
           }
         })
-        .catch(e => {
-          resolve({ success: false, message: e });
+        .catch(() => {
+
+            resolve({
+              success: false,
+              message: "Terjadi kesalahan coba lagi nanti!",
+            });
+
           commit("setMenu", Menu.data);
         });
     });
   },
   updateMenu: (ctx, menu) => {
-    return new Promise(resolve => {
+    return new Promise((resolve,reject) => {
       ApiServices.post(`/route`, { menu: menu })
         .then(res => {
           if (res.status == 200 || res.status == 201) {
@@ -134,8 +139,12 @@ const actions = {
             resolve({ success: false, message: "sukses" });
           }
         })
-        .catch(e => {
-          resolve({ success: false, message: "sukses" });
+        .catch(() => {
+            resolve({
+              success: false,
+              message: "Terjadi kesalahan coba lagi nanti!",
+            });
+
         });
     });
   }

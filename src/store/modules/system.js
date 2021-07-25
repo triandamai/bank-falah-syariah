@@ -58,7 +58,7 @@ const actions = {
    *
    */
   [GET_DATA_SYSTEM]({ commit, state }, { type, id }) {
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
       //get pagination
       let page = `?page=`;
       let stillPaging = false;
@@ -98,7 +98,10 @@ const actions = {
           }
         })
         .catch((e) => {
-          resolve(false);
+          resolve({
+            success: false,
+            message: "Terjadi kesalahan coba lagi nanti!",
+          });
         });
     });
   },
@@ -110,7 +113,7 @@ const actions = {
    * @returns {success,message}
    */
   [POST_DATA_SYSTEM]({ commit }, { type, body }) {
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
       ApiService.post(`${type}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
@@ -129,8 +132,9 @@ const actions = {
         .catch((e) => {
           resolve({
             success: false,
-            message: e.response.data.message || "Gagal coba lagi nanti !",
+            message: "Terjadi kesalahan coba lagi nanti!",
           });
+
         });
     });
   },
@@ -144,7 +148,7 @@ const actions = {
    *
    */
   [PUT_DATA_SYSTEM]({ commit }, { type, body }) {
-    return new Promise((resolve) => {
+    return new Promise((resolve,reject) => {
       ApiService.put(`${type}/${body.id}`, body)
         .then(({ status, data }) => {
           if (status == 200 || status == 201) {
@@ -164,7 +168,7 @@ const actions = {
         .catch((e) => {
           resolve({
             success: false,
-            message: "Gagal mengubah,pastikan data sudah benar!",
+            message: "Terjadi kesalahan coba lagi nanti!",
           });
         });
     });
@@ -193,8 +197,8 @@ const actions = {
         })
         .catch((e) => {
           resolve({
-            success: true,
-            message: "Gagal mengubah,pastikan data sudah benar!",
+            success: false,
+            message: "Terjadi kesalahan coba lagi nanti!",
           });
         });
     });

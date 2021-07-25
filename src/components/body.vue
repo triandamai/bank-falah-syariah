@@ -50,12 +50,12 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 
 import {ACTION_GET_NASABAH} from "@/store";
-
+import componentMixin from "@/mixin/component.mixin"
 export default {
   name: "mainpage",
+  mixins:[componentMixin],
   data() {
     return {
       mobileheader_toggle_var: false,
@@ -65,23 +65,6 @@ export default {
     };
   },
   // props:['sidebar_toggle_var'],
-
-  computed: {
-    ...mapState({
-      menuItems: (state) => state.menu.data,
-      layout: (state) => state.layout.layout,
-      togglesidebar: (state) => state.menu.togglesidebar,
-      body: (state) => state.body,
-      tabunganformsetortunai:(state)=> state.tabunganformsetortunai,
-      tabunganformsetornontunai:(state)=> state.tabunganformsetornontunai,
-      tabunganformtariktunai:(state)=> state.tabunganformtariktunai,
-      tabunganformtariknontunai:(state)=> state.tabunganformtariknontunai,
-      pembiayaanformsetortunai:(state)=> state.pembiayaanformsetortunai,
-      pembiayaanformsetornontunai:(state)=> state.pembiayaanformsetornontunai,
-      pembiayaanformtariktunai:(state)=> state.pembiayaanformtariktunai,
-      pembiayaanformtariknontunai:(state)=> state.pembiayaanformtariknontunai,
-    }),
-  },
   created() {
 
     window.addEventListener("resize", this.handleResize);
@@ -128,7 +111,7 @@ export default {
         if (isNext) {
           this.getNasabah();
         }
-      });
+      })
     }
   },
 };
