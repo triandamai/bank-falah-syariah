@@ -112,7 +112,15 @@ export default {
     onEdit(data) {
       this.form = true;
       this.isEdit = true;
-      this.body = data;
+      this.body = {
+        id:data.id,
+        nasabah_id:data.nasabah.id,
+        tgl_buka:data.tgl_buka,
+        produk_id:data.produk.id,
+        pegawai_id:data.pegawai.id,
+        rasio_bank:data.rasio_bank,
+        rasio_nasabah:data.rasio_nasabah,
+      };
     },
     onDelete(data) {
       this.$swal({

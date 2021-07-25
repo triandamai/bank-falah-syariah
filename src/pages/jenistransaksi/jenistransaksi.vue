@@ -110,7 +110,11 @@ export default {
     },
     onEdit(data) {
       this.form = true;
-      this.body = data;
+      this.body = {
+        id:data.id,
+        nama_transaksi:data.nama_transaksi,
+        kode_transaksi:data.kode_transaksi
+      };
       this.isEdit = true;
     },
     onDelete(data) {

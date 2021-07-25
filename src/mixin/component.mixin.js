@@ -5,6 +5,11 @@ export default {
     props: ["show", "body","edit"],
     data: () => {
         return {
+            rasio_nasabah: null,
+            rasio_bank: null,
+            modal_tgl_buka: false,
+            modal_tgl_pencairan: false,
+            modal_tgl_jatuh_tempo: false,
             options: {
                 locale: "id-ID",
                 prefix: "Rp",
@@ -13,13 +18,13 @@ export default {
                 precision: 2
             },
             tipe_produk: [
-                {val: "1", text: "Simpanan"},
-                {val: "2", text: "Pembiayaan"},
-                {val: "3", text: "Deposito"},
+                {val: 1, text: "Simpanan"},
+                {val: 2, text: "Pembiayaan"},
+                {val: 3, text: "Deposito"},
             ],
             tipe_angsuran: [
-                {val: "1", text: "Mingguan"},
-                {val: "2", text: "harian"},
+                {val: 1, text: "Mingguan"},
+                {val: 2, text: "Harian"},
             ],
             jenis_kelamin: [
                 { label: "Laki-Laki", value: "L" },
@@ -70,6 +75,8 @@ export default {
     watch: {
         body: function (newVal) {
             this.form = newVal;
+            this.rasio_bank = newVal.rasio_bank
+            this.rasio_nasabah = newVal.rasio_nasabah
         },
         rasio_nasabah: function(newVal) {
             this.form.rasio_bank = 100 - newVal;
@@ -77,7 +84,7 @@ export default {
             this.form.rasio_nasabah = newVal;
         },
         rasio_bank: function(newVal) {
-            this.form.rasion_nasabah = 100 - newVal;
+            this.form.rasio_nasabah = 100 - newVal;
             this.rasio_nasabah = 100 - newVal;
             this.form.rasio_bank = newVal;
         },

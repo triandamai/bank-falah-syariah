@@ -14,19 +14,19 @@
               <v-col cols="12">
                 <v-text-field
                   v-model="form.nama_produk"
-                  :label="$t('Name of Product')"
+                  :label="$t('Name of Akad')"
                   required
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-select
+                <v-autocomplete
                     v-model="form.tipe_produk"
-                    :label="$t('Tipe Product')"
+                    :label="$t('Tipe Akad')"
                     required
                     :items="tipe_produk"
                     item-text="text"
                     item-value="val"
-                ></v-select>
+                ></v-autocomplete>
               </v-col>
 
               <v-col cols="12">
@@ -40,7 +40,7 @@
               </v-col>
               <v-col cols="12">
                 <vuetify-money
-                    v-model="form.minimum_saldo"
+                    v-model="form.saldo_minimum"
                     :label="$t('Minimum Saldo')"
                     v-bind:options="options"
                     required
@@ -85,12 +85,10 @@ export default {
     };
   },
   computed: {
+
     ...mapState({
       itemsakad: (state) => state.master.dataakad,
     }),
   },
-  methods:{
-
-  }
 };
 </script>

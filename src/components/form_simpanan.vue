@@ -73,6 +73,24 @@
                   required
                 />
               </v-col>
+              <v-col cols="12" sm="12" md="6" lg="6">
+                <v-text-field
+                    v-model="rasio_nasabah"
+                    label="Rasio Nasabah*"
+                    suffix="%"
+                    required
+                    type="number"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="12" md="6" lg="6">
+                <v-text-field
+                    v-model="rasio_bank"
+                    label="Rasio Bank*"
+                    suffix="%"
+                    required
+                    type="number"
+                ></v-text-field>
+              </v-col>
             </v-row>
           </v-container>
           <small>{{$t('indicates required field')}}</small>
@@ -105,13 +123,7 @@ export default {
   mixins:[componentMixin],
   data: () => {
     return {
-      modal_tgl_buka: false,
-      form: {
-        tgl_buka: "",
-        nasabah_id: "",
-        produk_id: "",
-        pegawai_id: "",
-      },
+      form: {      },
     };
   },
   mounted() {

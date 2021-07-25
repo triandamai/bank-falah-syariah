@@ -50,10 +50,7 @@ export default {
   mixins:[componentMixin],
   data: () => {
     return {
-      form: {
-        nama_transaksi: "",
-        kode_transaksi: "",
-      },
+      form: {      },
     };
   },
 };

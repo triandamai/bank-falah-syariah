@@ -345,28 +345,7 @@
           <v-stepper-content step="4">
             <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
               <v-row>
-                <v-col cols="12" sm="12" md="6" lg="6">
-                  <v-text-field
-                    v-model="rasio_nasabah"
-                    label="Rasio Nasabah*"
-                    suffix="%"
-                    required
-                    dense
-                    outlined
-                    type="number"
-                  ></v-text-field>
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="6">
-                  <v-text-field
-                    v-model="rasio_bank"
-                    label="Rasio Bank*"
-                    suffix="%"
-                    required
-                    dense
-                    outlined
-                    type="number"
-                  ></v-text-field>
-                </v-col>
+
               </v-row>
               <v-btn @click="onSubmit" outlined small> {{$t('Save')}} </v-btn>
 
@@ -390,15 +369,13 @@ import {
 } from "@/store/modules/wilayah";
 import componentmixin from "@/mixin/component.mixin"
 
-
 export default {
 mixins:[componentmixin],
   data() {
     return {
       step: 1,
       datepicker: false,
-      rasio_nasabah: null,
-      rasio_bank: null,
+
       form: {
         nama_lengkap: "",
         nama_panggilan: "",
@@ -433,7 +410,7 @@ mixins:[componentmixin],
       }
     },
     goForward() {
-      if (this.step == 4) return;
+      if (this.step === 4) return;
       this.step = this.step + 1;
     },
     removeBackStack(){
@@ -444,7 +421,7 @@ mixins:[componentmixin],
       this.form.id = this.$route.params.id;
       ApiService.get(`nasabah/${this.$route.params.id}`)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             if (data.data.length > 0) {
               this.form = data.data[0];
             }

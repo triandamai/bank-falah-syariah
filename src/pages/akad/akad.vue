@@ -113,9 +113,17 @@ export default {
       this.isEdit = false;
     },
     onEdit(data) {
+      console.log(data)
       this.form = true;
-      this.body = data;
-      this.isEdit = data;
+      this.body = {
+        id:data.id,
+        nama_produk:data.nama_produk,
+        tipe_produk:data.tipe_produk,
+        kode_produk:data.kode_produk,
+        saldo_minimum:data.saldo_minimum,
+
+      };
+      this.isEdit = true;
     },
     onDelete(data) {
       this.$swal({

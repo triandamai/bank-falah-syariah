@@ -109,14 +109,14 @@
                 />
               </v-col>
               <v-col cols="12">
-                <v-select
+                <v-autocomplete
                   v-model="form.tipe_angsuran"
                   label="Tipe Angsuran *"
                   :items="tipe_angsuran"
                   item-text="text"
                   item-value="val"
                   required
-                ></v-select>
+                ></v-autocomplete>
               </v-col>
               <v-col cols="12">
                 <v-text-field
@@ -127,11 +127,29 @@
               </v-col>
               <v-col cols="12">
                 <vuetify-money
-                    v-model="form.minimum_saldo"
+                    v-model="form.modal"
                     :label="$t('Modal *')"
                     v-bind:options="options"
                     required
                 ></vuetify-money>
+              </v-col>
+              <v-col cols="12" sm="12" md="6" lg="6">
+                <v-text-field
+                    v-model="rasio_nasabah"
+                    label="Rasio Nasabah*"
+                    suffix="%"
+                    required
+                    type="number"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12" sm="12" md="6" lg="6">
+                <v-text-field
+                    v-model="rasio_bank"
+                    label="Rasio Bank*"
+                    suffix="%"
+                    required
+                    type="number"
+                ></v-text-field>
               </v-col>
             </v-row>
           </v-container>
@@ -165,18 +183,7 @@ export default {
   mixins:[componentMixin],
   data: () => {
     return {
-      modal_tgl_pencairan: false,
-      modal_tgl_jatuh_tempo: false,
-      form: {
-        tgl_pencairan: "",
-        tgl_jatuh_tempo: "",
-        nasabah_id: "",
-        produk_id: "",
-        pegawai_id: "",
-        lama_angsuran: "",
-        tipe_angsuran: "",
-        modal: "",
-      },
+      form: {},
     };
   },
   mounted() {

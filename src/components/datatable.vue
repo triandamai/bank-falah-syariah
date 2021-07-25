@@ -22,11 +22,17 @@
         :loading="loadingtable"
         :loading-text="$t('Wait Loading')"
         flat :headers="headers" :items="items" :search="search">
+      <template v-slot:item.tempat_lahir="{item}">
+        {{`${item.tempat_lahir},${item.tanggal_lahir}`}}
+      </template>
+      <template v-slot:item.saldo_minimum="{item}">
+        Rp {{formatCurrency(item.saldo_minimum)}}
+      </template>
       <template v-slot:item.no_rekening="{ item }">
         <router-link :to="getRouteMutasi(item)"> {{item.no_rekening }}</router-link>
       </template>
       <template v-slot:item.jenis_kelamin="{ item }">
-        {{item.jenis_kelamin == "L" ? $t('Male'):$t('Female')}}
+        {{item.jenis_kelamin === "L" ? $t('Male'):$t('Female')}}
       </template>
       <template v-slot:item.pegawai="{ item }">
         {{item.pegawai.fullname}}
@@ -79,7 +85,6 @@
       <template v-slot:no-data>
         <v-btn
             color="primary"
-
         >
           Reset
         </v-btn>

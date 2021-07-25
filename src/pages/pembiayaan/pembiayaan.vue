@@ -110,9 +110,23 @@ export default {
       this.body = {};
     },
     onEdit(data) {
+
       this.form = true;
-      this.isEdit = data;
-      this.body = data;
+      this.isEdit = true;
+      this.body = {
+        id:data.id,
+        nasabah_id:data.nasabah.id,
+        tgl_pencairan:data.tgl_pencairan,
+        tgl_jatuh_tempo:data.tgl_jatuh_tempo,
+        produk_id:data.produk.id,
+        pegawai_id:data.pegawai.id,
+        tipe_angsuran:data.tipe_angsuran,
+        lama_angsuran:data.lama_angsuran,
+        rasio_nasabah:data.rasio_nasabah,
+        rasio_bank:data.rasio_bank,
+        modal:data.modal
+      }
+
     },
     onDelete(data) {
       this.$swal({

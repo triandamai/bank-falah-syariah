@@ -2,18 +2,21 @@
 
 
     {
-        "text": "Kode Produk",
+        "text": "Kode Akad",
         "value": "kode_produk"
     },
     {
-        "text": "Tipe Produk",
+        "text": "Tipe Akad",
         "value": "tipe_produk"
     },
     {
-        "text": "Nama Produk",
+        "text": "Nama Akad",
         "value": "nama_produk"
     },
-
+    {
+        "text": "Minimum Saldo",
+        "value": "saldo_minimum"
+    },
     {
         "text": "Aksi",
         "value": "action"
