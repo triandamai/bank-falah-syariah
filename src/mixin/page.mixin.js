@@ -15,15 +15,6 @@ export default {
             const date = new Date(param);
             return `${date.toLocaleString("id-ID")}`
         },
-        unAuthorize(){
-            setTimeout(()=>{
-              //  this.$router.push({path:'/unlock'})
-            },2100)
-            this.$swal({
-                title: 'Akun terhubung di perangkat lain!',
-                html: 'Anda akan diarahkan ke halaman masuk.',
-                timer:2000
-            })
-        }
+
     }
 }

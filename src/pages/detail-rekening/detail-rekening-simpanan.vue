@@ -140,11 +140,6 @@ import {mapState,mapGetters} from "vuex"
 import componentMixin from "@/mixin/component.mixin"
 export default {
   mixins:[componentMixin],
-  data: () => {
-    return {
-
-    };
-  },
   computed:{
     ...mapState({
       mutasi:(state)=> state.rekening.mutasi.simpanan
@@ -165,8 +160,7 @@ export default {
           .then(()=>{
 
           })
-    },
-    formatCurrency:(total)=>formatCurrency(total)
+    }
   },
 };
 </script>
