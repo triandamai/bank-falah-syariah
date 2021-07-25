@@ -51,7 +51,6 @@ export default {
   data: () => {
     return {
       headers: header,
-
     };
   },
   computed: {
@@ -110,6 +109,7 @@ export default {
     },
     onEdit(data) {
       this.form = true;
+
       this.body = {
         id:data.id,
         nama_transaksi:data.nama_transaksi,

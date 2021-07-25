@@ -75,8 +75,11 @@ export default {
     watch: {
         body: function (newVal) {
             this.form = newVal;
-            this.rasio_bank = newVal.rasio_bank
-            this.rasio_nasabah = newVal.rasio_nasabah
+            if(newVal.rasio_nasabah || newVal.rasio_bank){
+                this.rasio_bank = newVal.rasio_bank
+                this.rasio_nasabah = newVal.rasio_nasabah
+            }
+
         },
         rasio_nasabah: function(newVal) {
             this.form.rasio_bank = 100 - newVal;
