@@ -41,7 +41,7 @@
                   </template>
                   <v-date-picker v-model="form.tgl_pencairan" scrollable>
                     <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="modal = false">
+                    <v-btn text color="primary" @click="modal_tgl_pencairan = false">
                       Cancel
                     </v-btn>
                     <v-btn
@@ -73,7 +73,7 @@
                   </template>
                   <v-date-picker v-model="form.tgl_jatuh_tempo" scrollable>
                     <v-spacer></v-spacer>
-                    <v-btn text color="primary" @click="modal = false">
+                    <v-btn text color="primary" @click="modal_tgl_jatuh_tempo = false">
                       Cancel
                     </v-btn>
                     <v-btn

@@ -389,16 +389,14 @@ import {
   WDESA,
 } from "@/store/modules/wilayah";
 import componentmixin from "@/mixin/component.mixin"
-import { mapState } from "vuex";
+
 
 export default {
 mixins:[componentmixin],
   data() {
     return {
       step: 1,
-
       datepicker: false,
-
       rasio_nasabah: null,
       rasio_bank: null,
       form: {
@@ -412,29 +410,6 @@ mixins:[componentmixin],
         rasio_bank: null,
       },
     };
-  },
-  watch: {
-    body: function(newVal) {
-      this.form = newVal;
-    },
-    rasio_nasabah: function(newVal) {
-      this.form.rasio_bank = 100 - newVal;
-      this.rasio_bank = 100 - newVal;
-      this.form.rasio_nasabah = newVal;
-    },
-    rasio_bank: function(newVal) {
-      this.form.rasion_nasabah = 100 - newVal;
-      this.rasio_nasabah = 100 - newVal;
-      this.form.rasio_bank = newVal;
-    },
-  },
-  computed: {
-    ...mapState({
-      provinsi: (state) => state.wilayah.provinsi.data,
-      kabupaten: (state) => state.wilayah.kabupaten.data,
-      kecamatan: (state) => state.wilayah.kecamatan.data,
-      desa: (state) => state.wilayah.desa.data,
-    }),
   },
   mounted() {
     if (this.isEdit) {

@@ -90,10 +90,9 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import pageMixin from "@/mixin/page.mixin"
 import componentMixin from "@/mixin/component.mixin"
 export default {
-  mixins:[pageMixin,componentMixin],
+  mixins:[componentMixin],
   props: ["items", "headers", "hideadd", "hidedelete", "hideupdate"],
   data() {
     return {

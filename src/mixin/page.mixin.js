@@ -1,6 +1,11 @@
 import {formatCurrency} from "@/utils/utils"
 
 export default {
+    data:()=>{return{
+        body: {},
+        isEdit: false,
+        form:false
+    }},
     methods:{
         formatCurrency:(total)=>formatCurrency(total),
         getMonthString(){

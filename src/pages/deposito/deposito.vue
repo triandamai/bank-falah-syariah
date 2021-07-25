@@ -27,9 +27,9 @@
     </div>
     <!-- Container-fluid Ends-->
     <form-deposito
-      :show="formdeposito"
+      :show="form"
       :body="body"
-      @close="formdeposito = false"
+      @close="form = false"
       @submit="onSubmit"
     />
   </div>
@@ -45,13 +45,12 @@ import {
   RDEPOSITO,
 } from "@/store/modules/rekening";
 import { mapState } from "vuex";
+import pageMixin from "@/mixin/page.mixin"
 export default {
+  mixins:[pageMixin],
   data: () => {
     return {
       headers: header,
-      formdeposito: false,
-      body: {},
-      isEdit: false,
     };
   },
   computed: {
@@ -77,7 +76,7 @@ export default {
         });
     },
     onSubmit(data) {
-      console.log("onSubmit");
+
       this.$store
         .dispatch(
           this.isEdit ? ACTION_PUT_DATA_REKENING : ACTION_POST_DATA_REKENING,
@@ -99,22 +98,19 @@ export default {
             }
           );
           if (success) {
-            if (!this.isEdit) {
-              this.onAdd();
-              return;
-            }
-            this.formdeposito = false;
+
+            this.form = false;
             this.body = {};
           }
         });
     },
     onAdd() {
-      this.formdeposito = true;
+      this.form = true;
       this.body = {};
       this.isEdit = false;
     },
     onEdit(data) {
-      this.formdeposito = true;
+      this.form = true;
       this.body = data;
       this.isEdit = true;
     },

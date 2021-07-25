@@ -27,9 +27,9 @@
     </div>
     <!-- Container-fluid Ends-->
     <form-pembiayaan
-      :show="formpembiayaan"
+      :show="form"
       :body="body"
-      @close="formpembiayaan = false"
+      @close="form = false"
       @submit="onSubmit"
     />
   </div>
@@ -51,9 +51,7 @@ export default {
   mixins:[pageMixin],
   data: () => {
     return {
-      formpembiayaan: false,
       headers: header,
-      body: {},
     };
   },
   computed: {
@@ -100,22 +98,19 @@ export default {
             }
           );
           if (success) {
-            if (!this.isEdit) {
-              this.onAdd();
-              return;
-            }
-            this.formpembiayaan = false;
+
+            this.form = false;
             this.body = {};
           }
         });
     },
     onAdd() {
-      this.formpembiayaan = true;
+      this.form = true;
       this.isEdit = false;
       this.body = {};
     },
     onEdit(data) {
-      this.formpembiayaan = true;
+      this.form = true;
       this.isEdit = data;
       this.body = data;
     },

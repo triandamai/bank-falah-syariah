@@ -27,10 +27,10 @@
     </div>
     <!-- Container-fluid Ends-->
     <form-simpanan
-      :show="formsimpanan"
+      :show="form"
       :body="body"
       @submit="onSubmit"
-      @close="formsimpanan = false"
+      @close="form = false"
     />
   </div>
 </template>
@@ -46,13 +46,12 @@ import {
 
 } from "@/store";
 import { mapState } from "vuex";
+import pageMixin from "@/mixin/page.mixin"
 export default {
+  mixins:[pageMixin],
   data: () => {
     return {
-      formsimpanan: false,
       headers: header,
-      body: {},
-      isEdit: false,
     };
   },
   computed: {
@@ -99,22 +98,19 @@ export default {
             }
           );
           if (success) {
-            if (!this.isEdit) {
-              this.onAdd();
-              return;
-            }
-            this.formsimpanan = false;
+
+            this.form = false;
             this.body = {};
           }
         });
     },
     onAdd() {
-      this.formsimpanan = true;
+      this.form = true;
       this.isEdit = false;
       this.body = {};
     },
     onEdit(data) {
-      this.formsimpanan = true;
+      this.form = true;
       this.isEdit = true;
       this.body = data;
     },

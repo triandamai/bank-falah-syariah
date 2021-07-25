@@ -46,13 +46,12 @@ import {
   SUSER,
 } from "@/store/modules/system";
 import { mapState } from "vuex";
+import pageMixin from "@/mixin/page.mixin"
 export default {
+  mixins:[pageMixin],
   data: () => {
     return {
       headers: header,
-      form: false,
-      body: {},
-      isEdit: false,
     };
   },
   computed: {
@@ -99,10 +98,6 @@ export default {
             }
           );
           if (success) {
-            if (!this.isEdit) {
-              this.onAdd();
-              return;
-            }
             this.form = false;
             this.body = {};
           }
@@ -118,7 +113,7 @@ export default {
         cancelButtonColor: "#efefef",
         reverseButtons: true,
       }).then(({ value }) => {
-        console.log(value);
+
         if (value) {
           this.$store
             .dispatch(ACTION_DELETE_DATA_SYSTEM, {

@@ -2,7 +2,7 @@ import {mapState} from "vuex";
 import {formatCurrency} from "@/utils/utils";
 
 export default {
-    props: ["show", "body","isEdit"],
+    props: ["show", "body"],
     data: () => {
         return {
             options: {
@@ -71,6 +71,16 @@ export default {
         body: function (newVal) {
             this.form = newVal;
         },
+        rasio_nasabah: function(newVal) {
+            this.form.rasio_bank = 100 - newVal;
+            this.rasio_bank = 100 - newVal;
+            this.form.rasio_nasabah = newVal;
+        },
+        rasio_bank: function(newVal) {
+            this.form.rasion_nasabah = 100 - newVal;
+            this.rasio_nasabah = 100 - newVal;
+            this.form.rasio_bank = newVal;
+        },
     },
     created() {
         window.addEventListener("keydown", (e) => {
@@ -100,6 +110,10 @@ export default {
             pembiayaanformsetornontunai: (state) => state.pembiayaanformsetornontunai,
             pembiayaanformtariktunai: (state) => state.pembiayaanformtariktunai,
             pembiayaanformtariknontunai: (state) => state.pembiayaanformtariknontunai,
+            provinsi: (state) => state.wilayah.provinsi.data,
+            kabupaten: (state) => state.wilayah.kabupaten.data,
+            kecamatan: (state) => state.wilayah.kecamatan.data,
+            desa: (state) => state.wilayah.desa.data,
         }),
     },
     methods: {

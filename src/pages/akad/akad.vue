@@ -16,7 +16,7 @@
               <data-table
                 :items="items_akad"
                 :headers="headers"
-                @add="formproduk = true"
+                @add="form = true"
                 @edit="onEdit"
                 @delete="onDelete"
               />
@@ -27,32 +27,31 @@
     </div>
     <!-- Container-fluid Ends-->
     <form-akad
-      :show="formproduk"
+      :show="form"
       :body="body"
       @submit="onSubmit"
-      @close="formproduk = false"
+      @close="form = false"
     />
   </div>
 </template>
 
 <script>
-import header from "../../data/headerproduk.json";
+import header from "@/data/headerproduk.json";
 import {
   ACTION_GET_DATA_MASTER,
   ACTION_POST_DATA_MASTER,
   ACTION_PUT_DATA_MASTER,
   ACTION_DELETE_DATA_MASTER,
   MPRODUK,
-} from "../../store/modules/master";
+} from "@/store";
 
 import { mapState } from "vuex";
+import pageMixin from "@/mixin/page.mixin"
 export default {
+  mixins:[pageMixin],
   data: () => {
     return {
       headers: header,
-      formproduk: false,
-      body: {},
-      isEdit: false,
     };
   },
   computed: {
@@ -102,22 +101,19 @@ export default {
             }
           );
           if (success) {
-            if (!this.isEdit) {
-              this.onAdd();
-              return;
-            }
             this.formproduk = false;
+
             this.body = {};
           }
         })
     },
     onAdd() {
-      this.formproduk = true;
+      this.form = true;
       this.body = {};
       this.isEdit = false;
     },
     onEdit(data) {
-      this.formproduk = true;
+      this.form = true;
       this.body = data;
       this.isEdit = data;
     },

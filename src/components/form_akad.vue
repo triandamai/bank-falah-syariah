@@ -66,6 +66,7 @@
   </v-dialog>
 </template>
 <script>
+
 import { mapState } from "vuex";
 import componentMixin from "@/mixin/component.mixin"
 export default {

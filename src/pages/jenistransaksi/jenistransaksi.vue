@@ -27,9 +27,9 @@
     </div>
     <!-- Container-fluid Ends-->
     <form-jenistransaksi
-      :show="formjenistransaksi"
+      :show="form"
       :body="body"
-      @close="formjenistransaksi = false"
+      @close="form = false"
       @submit="onSubmit"
     />
   </div>
@@ -45,13 +45,13 @@ import {
   MJENISTRANSAKSI,
 } from "../../store/modules/master";
 import { mapState } from "vuex";
+import pageMixin from "@/mixin/page.mixin"
 export default {
+  mixins:[pageMixin],
   data: () => {
     return {
       headers: header,
-      formjenistransaksi: false,
-      body: {},
-      isEdit: false,
+
     };
   },
   computed: {
@@ -98,22 +98,18 @@ export default {
             }
           );
           if (success) {
-            if (!this.isEdit) {
-              this.onAdd();
-              return;
-            }
-            this.formjenistransaksi = false;
+            this.form = false;
             this.body = {};
           }
         });
     },
     onAdd() {
-      this.formjenistransaksi = true;
+      this.form = true;
       this.body = {};
       this.isEdit = false;
     },
     onEdit(data) {
-      this.formjenistransaksi = true;
+      this.form = true;
       this.body = data;
       this.isEdit = true;
     },

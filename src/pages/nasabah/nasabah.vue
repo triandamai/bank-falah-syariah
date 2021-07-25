@@ -15,7 +15,7 @@
                     <p class="font-roboto">{{$t('subtitlenasabah')}}</p>
                   </div>
                   <div class="col-xl-12 left-btn">
-                    <a class="btn btn-gradient" @click="formimport = true"
+                    <a class="btn btn-gradient" @click="form = true"
                       >{{ $t('Import') }}</a
                     >
                   </div>
@@ -38,7 +38,7 @@
       </div>
     </div>
     <!-- Container-fluid Ends-->
-    <form-import-nasabah :show="formimport" @close="formimport = false" />
+    <form-import-nasabah :show="form" @close="form = false" />
   </div>
 </template>
 
@@ -49,11 +49,13 @@ import {
   ACTION_DELETE_NASABAH,
 } from "@/store/modules/nasabah";
 import { mapState } from "vuex";
+import pageMixin from "@/mixin/page.mixin"
 export default {
+  mixins:[pageMixin],
   data: () => {
     return {
       headers: header,
-      formimport: false,
+
     };
   },
   computed: {

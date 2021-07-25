@@ -28,10 +28,10 @@
     </div>
     <!-- Container-fluid Ends-->
     <form-jabatan
-      :show="showform"
+      :show="form"
       :body="body"
       @submit="onSubmit"
-      @close="showform = false"
+      @close="form = false"
     />
   </div>
 </template>
@@ -46,13 +46,13 @@ import {
   MJABATAN,
 } from "@/store/modules/master";
 import { mapState } from "vuex";
+import pageMixin from "@/mixin/page.mixin"
 export default {
+  mixins:[pageMixin],
   data: () => {
     return {
       headers: header,
-      showform: false,
-      idEdit: false,
-      body: {},
+
     };
   },
   computed: {
@@ -97,11 +97,8 @@ export default {
             }
           );
           if (success) {
-            if (!this.isEdit) {
-              this.onAdd();
-              return;
-            }
-            this.showform = false;
+            this.form = false;
+            this.body = {};
           }
         });
     },
@@ -139,12 +136,12 @@ export default {
     },
     onAdd() {
       this.body = {};
-      this.showform = true;
+      this.form = true;
       this.isEdit = false;
     },
     onEdit(data) {
       this.body = data;
-      this.showform = true;
+      this.form = true;
       this.isEdit = true;
     },
   },

@@ -27,10 +27,10 @@
     </div>
     <!-- Container-fluid Ends-->
     <form-pegawai
-      :show="formpegawai"
+      :show="form"
       :body="body"
       @submit="onSubmit"
-      @close="formpegawai = false"
+      @close="form = false"
     />
   </div>
 </template>
@@ -45,13 +45,13 @@ import {
   MPEGAWAI,
 } from "@/store/index";
 import { mapState } from "vuex";
+import pageMixin from "@/mixin/page.mixin"
 export default {
+  mixins:[pageMixin],
   data: () => {
     return {
       headers: header,
-      formpegawai: false,
-      isEdit: false,
-      body: {},
+
     };
   },
   computed: {
@@ -95,11 +95,8 @@ export default {
             }
           );
           if (success) {
-            if (!this.isEdit) {
-              this.onAdd();
-              return;
-            }
-            this.formpegawai = false;
+            this.form = false;
+            this.body = {}
           }
         });
     },
@@ -137,12 +134,12 @@ export default {
     },
     onAdd() {
       this.body = {};
-      this.formpegawai = true;
+      this.form = true;
       this.isEdit = false;
     },
     onEdit(data) {
       this.body = data;
-      this.formpegawai = true;
+      this.form = true;
       this.isEdit = true;
     },
   },

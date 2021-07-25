@@ -25,7 +25,41 @@
                   required
                 ></v-text-field>
               </v-col>
+              <v-col cols="12">
+                <v-text-field
+                    v-model="form.tempat_lahir"
+                    label="Tempat Lahir*"
+                    required
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-menu
+                    ref="datepicker"
+                    v-model="datepicker"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                >
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-text-field
+                        v-model="form.tanggal_lahir"
+                        label="Tanggal Lahir"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
 
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                      ref="picker"
+                      v-model="form.tanggal_lahir"
+                      :max="new Date().toISOString().substr(0, 10)"
+                      min="1950-01-01"
+                      @change="save"
+                  ></v-date-picker>
+                </v-menu>
+              </v-col>
               <v-col cols="12">
                 <v-autocomplete
                   v-model="form.jabatan_id"
@@ -36,13 +70,7 @@
                   required
                 ></v-autocomplete>
               </v-col>
-              <v-col cols="12">
-                <v-text-field
-                  v-model="form.tempat_lahir"
-                  label="Tempat Lahir*"
-                  required
-                ></v-text-field>
-              </v-col>
+
             </v-row>
           </v-container>
           <small>{{$t('indicates required field')}}</small>
@@ -69,6 +97,7 @@ export default {
   mixins:[componentMixin],
   data: () => {
     return {
+      datepicker: false,
       form: {},
     };
   },
@@ -82,7 +111,12 @@ export default {
         .then((isNext) => {
           if (isNext) return this.getJabatan();
         });
+    },
+    save(date) {
+      this.$refs.datepicker.save(date);
     }
   },
+
+
 };
 </script>
