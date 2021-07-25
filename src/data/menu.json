@@ -6,7 +6,7 @@
       "type": "headtitle",
       "path": "General",
       "privilage": {
-        "roles": ["admin", "bp_root","siswa","publlic"]
+        "roles": ["admin", "bp_root","siswa","public"]
 
       }
     },

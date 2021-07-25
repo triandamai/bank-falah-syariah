@@ -6,6 +6,8 @@
  *
  */
 import ApiService from "@/services/api.service";
+import router from "@/router";
+import Vue from "vue";
 
 const GETDATAMASTER = `GETDATAMASTER`;
 const POSTDATAMASTER = `POSTMASTERDATA`;
@@ -72,8 +74,6 @@ const actions = {
     return new Promise((resolve,reject) => {
       //get current page
       let page = `?page=`;
-
-      let stillPaging = false;
       switch (type) {
         case MAKAD:
           page += state.akad.current_page;
@@ -93,7 +93,7 @@ const actions = {
       }
       ApiService.get(`${type}${page}`)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             if (data.current_page >= data.last_page) {
               resolve(false);
             } else {
@@ -110,7 +110,7 @@ const actions = {
             resolve(false);
           }
         })
-        .catch((e) => {
+        .catch(() => {
           resolve(false);
         });
     });
@@ -121,12 +121,14 @@ const actions = {
    * @returns save data to server the add to array store
    * @returns {success,message}
    *
+   * @param type
+   * @param body
    */
   [POSTDATAMASTER]({ commit }, { type, body }) {
     return new Promise((resolve) => {
       ApiService.post(`${type}`, body)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             commit(ADDDATAMASTER, {
               type: type,
               data: data.data[0],
@@ -139,11 +141,21 @@ const actions = {
             });
           }
         })
-        .catch((e) => {
+        .catch(({response}) => {
           resolve({
             success: false,
             message: "Terjadi kesalahan silahkan coba lagi nanti!",
           });
+         if(response.status === 401){
+           setTimeout(()=>{
+             router.push({path:"/unlock"})
+           },2000)
+           Vue.swal({
+             title: 'Akun terhubung di perangkat lain!',
+             html: 'Anda akan diarahkan ke halaman masuk.',
+             timer:2000
+           })
+         }
         });
     });
   },
@@ -153,12 +165,14 @@ const actions = {
    * update data to server the notify the data was changed
    * @returns
    *
+   * @param type
+   * @param body
    */
   [PUTDATAMASTER]({ commit }, { type, body }) {
     return new Promise((resolve) => {
       ApiService.put(`${type}/${body.id}`, body)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             commit(EDITDATAMASTER, {
               type: type,
               data: data.data[0],
@@ -185,12 +199,14 @@ const actions = {
    * @param {type,path,body}
    * @returns delete data by id
    * @returns if success it will update data no need reload data from service
+   * @param type
+   * @param body
    */
   [DELETEDATAMASTER]({ commit }, { type, body }) {
     return new Promise((resolve) => {
       ApiService.delete(`${type}/${body.id}`)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             commit(REMOVEDATAMASTER, {
               type: type,
               data: body,
@@ -203,12 +219,22 @@ const actions = {
             });
           }
         })
-        .catch((e) => {
-          resolve({
-            success: false,
-            message: "Terjadi kesalahan silahkan coba lagi nanti!",
+          .catch(({response}) => {
+            resolve({
+              success: false,
+              message: "Terjadi kesalahan silahkan coba lagi nanti!",
+            });
+            if(response.status === 401){
+              setTimeout(()=>{
+                router.push({path:"/unlock"})
+              },2000)
+              Vue.swal({
+                title: 'Akun terhubung di perangkat lain!',
+                html: 'Anda akan diarahkan ke halaman masuk.',
+                timer:2000
+              })
+            }
           });
-        });
     });
   },
 };
@@ -217,6 +243,7 @@ const mutations = {
    * adding data to each state
    * @param {type,data,page}
    * @returns data will be add one -by one
+   * @param state
    */
   [INCREMENT_PAGE](state, { type }) {
     switch (type) {
@@ -241,7 +268,7 @@ const mutations = {
     switch (type) {
       case MAKAD:
         var exist = state.dataakad.some((akad) => {
-          return akad.id == data.id;
+          return akad.id === data.id;
         });
         if (!exist) {
           state.dataakad.push(data);
@@ -250,7 +277,7 @@ const mutations = {
         break;
       case MJABATAN:
         var exist = state.datajabatan.some((jabatan) => {
-          return jabatan.id == data.id;
+          return jabatan.id === data.id;
         });
         if (!exist) {
           state.datajabatan.push(data);
