@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs title="Sample Page" />
+    <Breadcrumbs :title="$t('Edit Data Nasabah')" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
@@ -12,7 +12,7 @@
               >{{$t('subtitle form nasabah')}}</span
               >
             </div>
-            <form-nasabah :isEdit="true" @submit="onAdd" :body="body" />
+            <form-nasabah :isEdit="true" @submit="onSubmit" :body="body" />
           </div>
         </div>
       </div>
@@ -40,16 +40,19 @@ export default {
     };
   },
   created() {
-    if (this.$router.params.id) {
+    this.overlay = true
+    if (this.$route.params.id) {
       this.getNasabahById(this.$route.params.id);
     }
   },
   methods: {
     getNasabahById(id) {
-      ApiService.get(`nasabah/${id}`)
+      ApiService.get(`nasabah/${id}?t=${new Date().getMilliseconds()}`)
         .then(({ status, data }) => {
+          this.overlay =false
           if (status === 200 || status === 201) {
             this.body = data.data[0];
+            this.body.
           }
         })
           // eslint-disable-next-line no-unused-vars
