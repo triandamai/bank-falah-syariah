@@ -322,6 +322,7 @@
                       :label="$t('Penghasilan Perbulan')"
                       v-bind:options="options"
                       v-bind:outlined="'outlined'"
+                      dense
                       required
                   ></vuetify-money>
 
@@ -332,6 +333,7 @@
                       :label="$t('Penghasilan Pertahun')"
                       v-bind:options="options"
                       v-bind:outlined="'outlined'"
+                      dense
                       required
                   ></vuetify-money>
 

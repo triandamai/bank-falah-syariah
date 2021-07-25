@@ -14,7 +14,7 @@
           alt=""
         />
       </router-link>
-      <span class="font-roboto" style="margin-left: 5px; font-style: normal;">Bank Falah Syariah</span>
+      <span class="font-roboto" style="margin-left: 5px; font-style: normal;">{{app_name}}</span>
 
       <div class="back-btn" @click="toggle_sidebar">
         <i class="fa fa-angle-left"></i>
@@ -41,7 +41,7 @@
         class="left-arrow"
         :class="{
           'd-none':
-            layout.settings.layout_type == 'rtl'
+            layout.settings.layout_type === 'rtl'
               ? hideLeftArrowRTL
               : hideLeftArrow,
         }"
@@ -59,8 +59,8 @@
           class="sidebar-links custom-scrollbar"
           id="myDIV"
           :style="[
-            layout.settings.sidebar.type == 'horizontal_sidebar'
-              ? layout.settings.layout_type == 'rtl'
+            layout.settings.sidebar.type === 'horizontal_sidebar'
+              ? layout.settings.layout_type === 'rtl'
                 ? { 'margin-right': margin + 'px' }
                 : { 'margin-left': margin + 'px' }
               : { margin: '0px' },
@@ -83,12 +83,12 @@
             :key="index"
             :class="{
               active: menuItem.active,
-              'sidebar-main-title': menuItem.type == 'headtitle',
+              'sidebar-main-title': menuItem.type === 'headtitle',
             }"
             class="sidebar-list"
           >
             <!-- link title -->
-            <div v-if="menuItem.type == 'headtitle'">
+            <div v-if="menuItem.type === 'headtitle'">
               <h6 class="lan-1">{{ $t(menuItem.headTitle1) }}</h6>
               <p class="lan-2">{{ $t(menuItem.headTitle2) }}</p>
             </div>
@@ -102,7 +102,7 @@
             <a
               href="javascript:void(0)"
               class="sidebar-link sidebar-title"
-              v-if="menuItem.type == 'sub'"
+              v-if="menuItem.type === 'sub'"
               v-show="checkPrivilage(menuItem.privilage)"
               @click="setNavActive(menuItem, index)"
             >
@@ -118,7 +118,7 @@
             <router-link
               :to="menuItem.path"
               class="sidebar-link sidebar-title"
-              v-if="menuItem.type == 'link'"
+              v-if="menuItem.type === 'link'"
               v-show="checkPrivilage(menuItem.privilage)"
               router-link-exact-active
             >
@@ -135,7 +135,7 @@
             <a
               :href="menuItem.path"
               class="sidebar-link sidebar-title"
-              v-if="menuItem.type == 'extLink'"
+              v-if="menuItem.type === 'extLink'"
               v-show="checkPrivilage(menuItem.privilage)"
               @click="setNavActive(menuItem, index)"
             >
@@ -153,7 +153,7 @@
               :href="menuItem.path"
               target="_blank"
               class="sidebar-link sidebar-title"
-              v-if="menuItem.type == 'extTabLink'"
+              v-if="menuItem.type === 'extTabLink'"
               v-show="checkPrivilage(menuItem.privilage)"
               @click="setNavActive(menuItem, index)"
             >
@@ -181,7 +181,7 @@
                 <a
                   class="submenu-title"
                   href="javascript:void(0)"
-                  v-if="childrenItem.type == 'sub'"
+                  v-if="childrenItem.type === 'sub'"
                   v-show="checkPrivilage(childrenItem.privilage)"
                   @click="setNavActive(childrenItem, index)"
                 >
@@ -203,7 +203,7 @@
                 <router-link
                   class="submenu-title"
                   :to="childrenItem.path"
-                  v-if="childrenItem.type == 'link'"
+                  v-if="childrenItem.type === 'link'"
                   v-show="checkPrivilage(childrenItem.privilage)"
                   router-link-exact-active
                 >
@@ -223,7 +223,7 @@
                 <!-- External Link -->
                 <a
                   :href="childrenItem.path"
-                  v-if="childrenItem.type == 'extLink'"
+                  v-if="childrenItem.type === 'extLink'"
                   v-show="checkPrivilage(childrenItem.privilage)"
                   class="submenu-title"
                 >
@@ -246,7 +246,7 @@
                   class="submenu-title"
                   :href="childrenItem.path"
                   target="_blank"
-                  v-if="childrenItem.type == 'extTabLink'"
+                  v-if="childrenItem.type === 'extTabLink'"
                   v-show="checkPrivilage(childrenItem.privilage)"
                 >
                   {{ $t(childrenItem.title) }}
@@ -275,7 +275,7 @@
                     <!-- Link -->
                     <router-link
                       :to="childrenSubItem.path"
-                      v-if="childrenSubItem.type == 'link'"
+                      v-if="childrenSubItem.type === 'link'"
                       v-show="checkPrivilage(childrenSubItem.privilage)"
                       router-link-exact-active
                     >
@@ -297,9 +297,9 @@
                     <!-- Link -->
                     <a
                       @click="showForm(childrenSubItem.path)"
-                      v-if="childrenSubItem.type == 'button'"
+                      v-if="childrenSubItem.type === 'button'"
                       v-show="checkPrivilage(childrenSubItem.privilage)"
-                      router-link-exact-active
+
                     >
                       {{ $t(childrenSubItem.title) }}
                       <label
@@ -320,7 +320,7 @@
                     <!-- External Link -->
                     <router-link
                       :to="childrenSubItem.path"
-                      v-if="childrenSubItem.type == 'extLink'"
+                      v-if="childrenSubItem.type === 'extLink'"
                       v-show="checkPrivilage(childrenSubItem.privilage)"
                       router-link-exact-active
                     >
@@ -342,7 +342,7 @@
                     <!-- External Tab Link -->
                     <router-link
                       :to="childrenSubItem.path"
-                      v-if="childrenSubItem.type == 'extLink'"
+                      v-if="childrenSubItem.type === 'extLink'"
                       v-show="checkPrivilage(childrenSubItem.privilage)"
                       router-link-exact-active
                     >
@@ -372,13 +372,13 @@
         class="right-arrow"
         :class="{
           'd-none':
-            layout.settings.layout_type == 'rtl'
+            layout.settings.layout_type === 'rtl'
               ? hideRightArrowRTL
               : hideRightArrow,
         }"
         @click="
-          layout.settings.sidebar.type == 'horizontal_sidebar' &&
-          layout.settings.layout_type == 'rtl'
+          layout.settings.sidebar.type === 'horizontal_sidebar' &&
+          layout.settings.layout_type === 'rtl'
             ? scrollToRightRTL()
             : scrollToRight()
         "
@@ -390,6 +390,7 @@
 </template>
 <script>
 import {checkPrivilage} from "@/utils/utils"
+import {getAppname} from "@/services/jwt.service";
 import { mapState } from "vuex";
 export default {
   name: "Sidebar",
@@ -405,6 +406,7 @@ export default {
       menuWidth: 0,
       toggle_sidebar_var: false,
       clicked: false,
+      app_name:getAppname()
     };
   },
   beforeMount() {

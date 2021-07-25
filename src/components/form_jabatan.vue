@@ -16,14 +16,14 @@
                   v-model="form.nama_jabatan"
                   label="Nama Jabatan*"
                   required
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12">
                 <v-text-field
                   v-model="form.deskripsi"
                   label="Deskripsi*"
                   required
-                ></v-text-field>
+                />
               </v-col>
             </v-row>
           </v-container>

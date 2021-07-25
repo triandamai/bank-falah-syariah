@@ -32,9 +32,9 @@
                   auto-select-first
                   outlined
                   required
-                  dense
+
                   small-chips
-              ></v-autocomplete>
+              />
             </v-col>
 
             <v-col cols="12" sm="12" md="6" lg="4">
@@ -43,8 +43,7 @@
                   label="Nomor Rekening"
                   placeholder="01100XXXX"
                   outlined
-                  dense
-              ></v-text-field>
+              />
             </v-col>
             <v-col cols="12" sm="12" md="6" lg="4">
               <vuetify-money
@@ -53,7 +52,7 @@
                   v-bind:options="options"
                   v-bind:outlined="'outlined'"
                   required
-              ></vuetify-money>
+              />
             </v-col>
 
           </v-row>

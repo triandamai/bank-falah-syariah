@@ -19,7 +19,7 @@
                   item-text="nama_lengkap"
                   item-value="id"
                   required
-                ></v-autocomplete>
+                />
               </v-col>
               <v-col cols="12">
                 <v-dialog
@@ -36,7 +36,7 @@
                       readonly
                       v-bind="attrs"
                       v-on="on"
-                    ></v-text-field>
+                    />
                   </template>
                   <v-date-picker v-model="form.tgl_buka" scrollable>
                     <v-spacer></v-spacer>
@@ -61,7 +61,7 @@
                   item-text="nama_produk"
                   item-value="id"
                   required
-                ></v-autocomplete>
+                />
               </v-col>
               <v-col cols="12">
                 <v-autocomplete
@@ -80,7 +80,7 @@
                     suffix="%"
                     required
                     type="number"
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12" sm="12" md="6" lg="6">
                 <v-text-field
@@ -89,7 +89,7 @@
                     suffix="%"
                     required
                     type="number"
-                ></v-text-field>
+                />
               </v-col>
             </v-row>
           </v-container>

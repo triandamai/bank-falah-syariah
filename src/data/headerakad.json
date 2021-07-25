@@ -1,19 +1,21 @@
 [
+
+
     {
-        "text": "No",
-        "value": "id"
+        "text": "Kode Akad",
+        "value": "kode_produk"
     },
     {
-        "text": "Nama",
-        "value": "nama_akad"
+        "text": "Tipe Akad",
+        "value": "tipe_produk"
     },
     {
-        "text": "Kode",
-        "value": "kode_akad"
+        "text": "Nama Akad",
+        "value": "nama_produk"
     },
     {
-        "text": "Status",
-        "value": "active"
+        "text": "Minimum Saldo",
+        "value": "saldo_minimum"
     },
     {
         "text": "Aksi",

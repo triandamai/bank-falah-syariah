@@ -15,7 +15,7 @@ export default {
                 prefix: "Rp",
                 suffix: "",
                 length: 11,
-                precision: 2
+                precision: 1
             },
             tipe_produk: [
                 {val: 1, text: "Simpanan"},

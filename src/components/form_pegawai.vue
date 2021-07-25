@@ -16,21 +16,21 @@
                   v-model="form.nip"
                   label="Nip*"
                   required
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12">
                 <v-text-field
                   v-model="form.fullname"
                   label="Nama Lengkap*"
                   required
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12">
                 <v-text-field
                     v-model="form.tempat_lahir"
                     label="Tempat Lahir*"
                     required
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12">
                 <v-menu
@@ -49,7 +49,7 @@
                         v-bind="attrs"
                         v-on="on"
 
-                    ></v-text-field>
+                    />
                   </template>
                   <v-date-picker
                       ref="picker"
@@ -68,7 +68,7 @@
                   item-text="nama_jabatan"
                   label="Jabatan*"
                   required
-                ></v-autocomplete>
+                />
               </v-col>
 
             </v-row>

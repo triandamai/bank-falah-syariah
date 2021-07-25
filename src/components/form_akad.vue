@@ -16,7 +16,7 @@
                   v-model="form.nama_produk"
                   :label="$t('Name of Akad')"
                   required
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12">
                 <v-autocomplete
@@ -26,7 +26,7 @@
                     :items="tipe_produk"
                     item-text="text"
                     item-value="val"
-                ></v-autocomplete>
+                />
               </v-col>
 
               <v-col cols="12">
@@ -36,7 +36,7 @@
                   :rules="rules"
                   type="number"
                   required
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12">
                 <vuetify-money
@@ -44,7 +44,7 @@
                     :label="$t('Minimum Saldo')"
                     v-bind:options="options"
                     required
-                ></vuetify-money>
+                />
               </v-col>
             </v-row>
           </v-container>

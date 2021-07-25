@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import header from "@/data/headerproduk.json";
+import header from "@/data/headerakad.json";
 import {
   ACTION_GET_DATA_MASTER,
   ACTION_POST_DATA_MASTER,

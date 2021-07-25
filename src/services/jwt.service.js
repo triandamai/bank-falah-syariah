@@ -50,8 +50,8 @@ export const setAppname = (name) => {
 };
 
 export const getAppname = () => {
-  return window.sessionStorage.getItem(USER_KEY)
-    ? JSON.parse(aesDecrypt(window.sessionStorage.getItem(USER_KEY)))
+  return window.sessionStorage.getItem(KEY_APP_NAME)
+    ? JSON.parse(aesDecrypt(window.sessionStorage.getItem(KEY_APP_NAME)))
     : "Bank Falah Syariah";
 };
 

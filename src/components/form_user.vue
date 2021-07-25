@@ -16,7 +16,7 @@
                     v-model="form.username"
                     label="Username*"
                     required
-                ></v-text-field>
+                />
               </v-col>
               <v-col cols="12">
                 <v-text-field
@@ -24,7 +24,7 @@
                     label="Email*"
                     required
                     type="email"
-                ></v-text-field>
+                />
               </v-col>
               <v-col v-show="!edit" cols="12">
                 <v-text-field
@@ -32,7 +32,7 @@
                     label="Password*"
                     required
                     type="password"
-                ></v-text-field>
+                />
               </v-col>
 
               <v-col cols="12">
@@ -43,7 +43,7 @@
                     item-value="id"
                     label="Role*"
                     required
-                ></v-autocomplete>
+                />
               </v-col>
             </v-row>
           </v-container>
