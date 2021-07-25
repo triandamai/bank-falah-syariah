@@ -25,7 +25,7 @@
         </v-card-text>
         <v-card-actions class="justify-end">
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="onClose(dialog.value)">
+          <v-btn color="blue darken-1" text @click="close(dialog.value)">
             {{$t('Close')}}
           </v-btn>
           <v-btn
@@ -43,22 +43,18 @@
 </template>
 <script>
 import xlsx from "xlsx";
-import { ACTION_IMPORT_NASABAH } from "@/store/modules/nasabah";
+import { ACTION_IMPORT_USER } from "@/store";
+import componentMixin from "@/mixin/component.mixin"
 export default {
-  props: ["show", "body"],
+ mixins:[componentMixin],
   data: () => {
     return {
       loading: false,
       dialog: false,
       files: null,
 
-      datanasabah: [],
+      datasiswa: [],
     };
-  },
-  watch: {
-    show: function(newVal) {
-      this.dialogakad = newVal;
-    },
   },
   methods: {
     onFileChanged(file) {
@@ -82,8 +78,8 @@ export default {
           sheet.map((nasabah) => {
             //asosiate ke objek nasabah
 
-            if (nasabah["Kode Nasabah"]) {
-              this.datanasabah.push({
+            if (nasabah["Username"]) {
+              this.datasiswa.push({
                 username: nasabah["Username"],
                 email: nasabah["Email"],
                 password: nasabah["Password"],
@@ -101,14 +97,10 @@ export default {
       };
       fileReader.readAsBinaryString(file);
     },
-    onClose(dialog) {
-
-      this.$emit("close", dialog);
-    },
     onSubmit() {
       console.log(this.datanasabah);
       this.$store
-        .dispatch(ACTION_IMPORT_NASABAH, { nasabah: this.datanasabah })
+        .dispatch(ACTION_IMPORT_USER, { data: this.datasiswa })
         .then(({ success, message }) => {
           this.$toasted.show(
             success
@@ -122,7 +114,7 @@ export default {
             }
           );
           if (success) {
-            this.datanasabah = [];
+            this.datasiswa = [];
             this.files = null;
           }
         });
