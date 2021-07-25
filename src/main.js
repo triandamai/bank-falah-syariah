@@ -10,8 +10,10 @@ import Notifications from "vue-notification";
 import { Vue2Dragula } from "vue2-dragula";
 import Toasted from "vue-toasted";
 
+
 import { VueMasonryPlugin } from "vue-masonry";
 import VueFeather from "vue-feather";
+import { VueMaskDirective } from 'v-mask'
 
 import FunctionalCalendar from "vue-functional-calendar";
 
@@ -23,6 +25,7 @@ import "@babel/polyfill";
 
 //components
 import "@/plugins/components.js";
+import "@/plugins/vuetify-money"
 // api services
 import ApiService from "@/services/api.service";
 //
@@ -47,8 +50,7 @@ Vue.use(Toasted, {
   iconPack: "fontawesome",
 });
 Vue.use(Vue2Dragula);
-
-
+Vue.directive('mask', VueMaskDirective);
 Vue.use(Notifications);
 Vue.use(Vue2Filters);
 Vue.use(VueSweetalert2);

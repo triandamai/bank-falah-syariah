@@ -126,11 +126,12 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field
-                  v-model="form.modal"
-                  label="Modal *"
-                  required
-                ></v-text-field>
+                <vuetify-money
+                    v-model="form.minimum_saldo"
+                    :label="$t('Modal *')"
+                    v-bind:options="options"
+                    required
+                ></vuetify-money>
               </v-col>
             </v-row>
           </v-container>

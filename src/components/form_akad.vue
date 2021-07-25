@@ -37,13 +37,12 @@
                 ></v-text-field>
               </v-col>
               <v-col cols="12">
-                <v-text-field
+                <vuetify-money
                     v-model="form.minimum_saldo"
                     :label="$t('Minimum Saldo')"
-                    type="number"
-                    prefix="Rp "
+                    v-bind:options="options"
                     required
-                ></v-text-field>
+                ></vuetify-money>
               </v-col>
             </v-row>
           </v-container>
@@ -71,6 +70,7 @@ export default {
   mixins:[componentMixin],
   data: () => {
     return {
+      mask:'###.###.###.###.##',
       form: {
         nama_akad: "",
         akad_id: "",

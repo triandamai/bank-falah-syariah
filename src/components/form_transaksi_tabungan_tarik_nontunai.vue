@@ -47,14 +47,13 @@
               ></v-text-field>
             </v-col>
             <v-col cols="12" sm="12" md="6" lg="4">
-              <v-text-field
+              <vuetify-money
                   v-model="form.value"
-                  label="Jumlah"
-                  placeholder="0"
-                  prefix="Rp"
-                  outlined
-                  dense
-              ></v-text-field>
+                  :label="$t('Jumlah')"
+                  v-bind:options="options"
+                  v-bind:outlined="'outlined'"
+                  required
+              ></vuetify-money>
             </v-col>
 
           </v-row>
@@ -74,7 +73,9 @@ import { ACTION_TRANSACTION, TABUNGAN_TARIK_NONTUNAI} from "@/store"
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"
 import {mapState} from "vuex"
+import componentMixin from "@/mixin/component.mixin"
 export default {
+  mixins:[componentMixin],
   props: ["show"],
   data: () => {
     return {

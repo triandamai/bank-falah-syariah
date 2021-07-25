@@ -317,26 +317,24 @@
                   />
                 </v-col>
                 <v-col cols="12" sm="12" md="6" lg="6">
-                  <v-text-field
-                    v-model="form.penghasilan_perbulan"
-                    label="Penghasilan Perbulan"
-                    placeholder="Penghasilan Perbulan"
-                    prefix="Rp"
-                    type="number"
-                    outlined
-                    dense
-                  />
+                  <vuetify-money
+                      v-model="form.penghasilan_perbulan"
+                      :label="$t('Penghasilan Perbulan')"
+                      v-bind:options="options"
+                      v-bind:outlined="'outlined'"
+                      required
+                  ></vuetify-money>
+
                 </v-col>
                 <v-col cols="12" sm="12" md="6" lg="6">
-                  <v-text-field
-                    v-model="form.penghasilan_pertahun"
-                    label="Penghasilan Pertahun"
-                    placeholder="Penghasilan Pertahun"
-                    type="number"
-                    prefix="Rp"
-                    outlined
-                    dense
-                  />
+                  <vuetify-money
+                      v-model="form.penghasilan_pertahun"
+                      :label="$t('Penghasilan Pertahun')"
+                      v-bind:options="options"
+                      v-bind:outlined="'outlined'"
+                      required
+                  ></vuetify-money>
+
                 </v-col>
               </v-row>
               <v-btn @click="goForward" outlined small> {{$t('Selanjutnya')}} </v-btn>
@@ -390,58 +388,15 @@ import {
   WKECAMATAN,
   WDESA,
 } from "@/store/modules/wilayah";
+import componentmixin from "@/mixin/component.mixin"
 import { mapState } from "vuex";
 
 export default {
-  props: ["isEdit", "body"],
-
+mixins:[componentmixin],
   data() {
     return {
       step: 1,
-      jenis_kelamin: [
-        { label: "Laki-Laki", value: "L" },
-        { label: "Perempuan", value: "P" },
-      ],
-      jenis_identitas: [
-        { label: "KTP", value: 1 },
-        { label: "SIM", value: 2 },
-        { label: "PASSPORT", value: 3 },
-      ],
-      agama: [
-        { label: "Islam", value: 1 },
-        { label: "Kristen Katolik", value: 2 },
-        { label: "Kristen Protestan", value: 3 },
-        { label: "Hindu", value: 4 },
-        { label: "Budha", value: 5 },
-        { label: "Konghucu", value: 6 },
-      ],
-      pendidikan: [
-        { label: "SD", value: 1 },
-        { label: "SLTP/SMP/Sederajat", value: 2 },
-        { label: "SLTA/SMA/SMK/Sederajat", value: 3 },
-        { label: "Diploma", value: 4 },
-        { label: "S1", value: 5 },
-        { label: "S2", value: 6 },
-        { label: "S3", value: 7 },
-        { label: "Lainnya", value: 8 },
-      ],
-      status_martial: [
-        { label: "Lajang", value: 1 },
-        { label: "Menikah", value: 2 },
-        { label: "Janda/Duda", value: 3 },
-      ],
-      jenis_pekerjaan: [
-        { label: "Pegawai Negeri(Guru)", value: 1 },
-        { label: "Pegawai Negeri(Non Guru)", value: 2 },
-        { label: "TNI/POLRI", value: 3 },
-        { label: "Karyawan Swasta", value: 4 },
-        { label: "Petani", value: 5 },
-        { label: "Nelayan", value: 6 },
-        { label: "Peternak", value: 7 },
-        { label: "Pengrajin", value: 8 },
-        { label: "Pedagang", value: 9 },
-        { label: "Pekerjaan Lainnya", value: 10 },
-      ],
+
       datepicker: false,
 
       rasio_nasabah: null,

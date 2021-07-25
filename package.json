@@ -36,6 +36,7 @@
     "sass-loader": "^8.0.0",
     "tiptap": "^1.26.3",
     "v-calendar": "^2.0.2",
+    "v-mask": "^2.2.4",
     "vee-validate": "^3.0.11",
     "vue": "^2.6.10",
     "vue-apexcharts": "^1.6.0",
@@ -84,6 +85,7 @@
     "vuejs-datepicker": "^1.6.2",
     "vuejs-smart-table": "0.0.5",
     "vuetify": "^2.4.0",
+    "vuetify-money": "^1.2.0",
     "vuex": "^3.1.1",
     "worker-loader": "^3.0.8",
     "xlsx": "^0.17.0"
