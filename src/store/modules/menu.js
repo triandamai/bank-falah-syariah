@@ -71,7 +71,7 @@ const mutations = {
   },
   setActiveRoute: (state, item) => {
     state.menu.filter(menuItem => {
-      if (menuItem != item) menuItem.active = false;
+      if (menuItem !== item) menuItem.active = false;
       if (menuItem.children && menuItem.children.includes(item))
         menuItem.active = true;
       if (menuItem.children) {
@@ -110,36 +110,14 @@ const actions = {
     return new Promise((resolve) => {
       ApiServices.get(`/route?param=dsvgdv`)
         .then(({status,data}) => {
-          if (status == 201 || status == 200) {
+          if (status === 201 || status === 200) {
             resolve({ success: true, message: "sukses" });
-         //   console.log(data.data.data)
             commit("setMenu", data.data.data);
           } else {
             resolve({ success: false, message: status });
-           // commit("setMenu", Menu.data);
           }
         }).catch(() => {
 
-            resolve({
-              success: false,
-              message: "Terjadi kesalahan coba lagi nanti!",
-            });
-
-         // commit("setMenu", Menu.data);
-        });
-    });
-  },
-  updateMenu: (ctx, menu) => {
-    return new Promise((resolve) => {
-      ApiServices.post(`/route`, { menu: menu })
-        .then(res => {
-          if (res.status == 200 || res.status == 201) {
-            resolve({ success: true, message: "sukses" });
-          } else {
-            resolve({ success: false, message: "sukses" });
-          }
-        })
-        .catch(() => {
             resolve({
               success: false,
               message: "Terjadi kesalahan coba lagi nanti!",
