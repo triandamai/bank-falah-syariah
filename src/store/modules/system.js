@@ -108,15 +108,17 @@ const actions = {
 
   /***
    * Send User and save
-   * @param {type,path,body}
    * @return boolean is saved? then commit to datauser
    * @returns {success,message}
+   * @param commit
+   * @param type
+   * @param body
    */
   [POST_DATA_SYSTEM]({ commit }, { type, body }) {
     return new Promise((resolve,reject) => {
       ApiService.post(`${type === SUSER ? 'user':type === SROLE ? 'role' :'group'}`, body)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             commit(ADD_DATA_SYSTEM, {
               type: type,
               data: data.data[0],
@@ -142,16 +144,17 @@ const actions = {
    * Edit User
    * !password cannot be null(but in this case update only few form)
    * !not finish yet
-   * @param user{}
    * @return  promise update data user then commit to mutation
    * @returns {success,message}
-   *
+   * @param commit
+   * @param type
+   * @param body
    */
   [PUT_DATA_SYSTEM]({ commit }, { type, body }) {
-    return new Promise((resolve,reject) => {
-      ApiService.put(`${type}/${body.id}`, body)
+    return new Promise((resolve) => {
+      ApiService.put(`${type === SUSER ? 'user':type === SROLE ? 'role' :'group'}/${body.id}`, body)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             commit(EDIT_DATA_SYSTEM, {
               type: type,
               data: data.data[0],
@@ -177,12 +180,14 @@ const actions = {
    * delete data
    * @param {type,path,body}
    * @return boolean is saved? then commit remove user from data user by index
+   * @param type
+   * @param body
    */
   [DELETE_DATA_SYSTEM]({ commit }, { type, body }) {
     return new Promise((resolve) => {
-      ApiService.delete(`${type}/${body.id}`)
+      ApiService.delete(`${type === SUSER ? 'user':type === SROLE ? 'role' :'group'}/${body.id}`)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             commit(REMOVE_DATA_SYSTEM, {
               type: type,
               data: body,
@@ -223,12 +228,13 @@ const mutations = {
    * @param {type,data}
    * @return data user add one by one
    * @todo if exist and data change sholud update
+   * @param state
    */
   [ADD_DATA_SYSTEM](state, { type, data, page }) {
     switch (type) {
       case SUSER:
         var exist = state.datausers.some((user) => {
-          return user.id == data.id;
+          return user.id === data.id;
         });
         if (!exist) {
           state.datausers.push(data);
@@ -236,7 +242,7 @@ const mutations = {
         break;
       case SROLE:
         var exist = state.dataroles.some((role) => {
-          return role.id == data.id;
+          return role.id === data.id;
         });
         if (!exist) {
           state.dataroles.push(data);
@@ -244,7 +250,7 @@ const mutations = {
         break;
       case SGROUP:
         var exist = state.datagroups.some((group) => {
-          return group.id == data.id;
+          return group.id === data.id;
         });
         if (!exist) {
           state.datagroups.push(data);
@@ -255,6 +261,7 @@ const mutations = {
   /***
    * add updated data to existing data
    *@param {type,data,olddata}
+   * @param state
    */
   [EDIT_DATA_SYSTEM](state, { type, data, olddata }) {
     switch (type) {
@@ -279,6 +286,7 @@ const mutations = {
    * delete data y index
    * @param {type,data}
    * @return remove user by index
+   * @param state
    */
   [REMOVE_DATA_SYSTEM](state, { type, data }) {
     switch (type) {

@@ -74,10 +74,6 @@ export default {
   data: () => {
     return {
       form: {
-        username: "",
-        email: "",
-        role_id: "",
-        group_id: "",
         active: 1,
       },
     };
