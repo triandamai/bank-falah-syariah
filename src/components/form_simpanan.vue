@@ -117,7 +117,7 @@ export default {
   mounted() {
     this.getNasabah();
     this.getProduk();
-    this.getProduk();
+    this.getPegawai();
   },
   methods: {
     getNasabah() {

@@ -1,13 +1,13 @@
 <template>
   <div>
-    <Breadcrumbs title="Tabungan" />
+    <Breadcrumbs :title="$t('Simpanan')" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>Rekening Tabungan</h5>
+              <h5>{{$t('Master data Simpanan')}}</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
@@ -43,7 +43,8 @@ import {
   ACTION_POST_DATA_REKENING,
   ACTION_PUT_DATA_REKENING,
   RTABUNGAN,
-} from "@/store/modules/rekening";
+
+} from "@/store";
 import { mapState } from "vuex";
 export default {
   data: () => {

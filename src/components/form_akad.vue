@@ -31,8 +31,10 @@
 
               <v-col cols="12">
                 <v-text-field
-                  v-model="form.kode_produk"
+                    v-model="form.kode_produk"
                   :label="$t('Kode Product')"
+                  :rules="rules"
+                  type="number"
                   required
                 ></v-text-field>
               </v-col>
@@ -70,11 +72,15 @@ export default {
   mixins:[componentMixin],
   data: () => {
     return {
-      mask:'###.###.###.###.##',
+      max:2,
       form: {
         nama_akad: "",
         akad_id: "",
       },
+      rules: [
+        value => !!value || 'Required.',
+        value => (value && value.length <= 2) || 'Max 2 characters',
+      ],
     };
   },
   computed: {
@@ -82,5 +88,8 @@ export default {
       itemsakad: (state) => state.master.dataakad,
     }),
   },
+  methods:{
+
+  }
 };
 </script>
