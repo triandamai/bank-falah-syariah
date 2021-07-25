@@ -296,12 +296,12 @@ router.afterEach((to)=>{
       if(e.response){
         if(e.response.status === 401) {
           setTimeout(()=>{
-           //   router.push({path:'/unlock'})
-          },2100)
+              router.push({path:'/unlock'})
+          },3400)
           Vue.swal({
-            title: 'Akun terhubung di perangkat lain!',
+            title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
             html: 'Anda akan diarahkan ke halaman masuk.',
-            timer:2000
+            timer:3000
           })
         }
       }

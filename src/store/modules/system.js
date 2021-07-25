@@ -64,10 +64,9 @@ const actions = {
      * @param id
      */
     [GET_DATA_SYSTEM]({commit, state}, {type, id}) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             //get pagination
             let page = `?page=`;
-            let stillPaging = false;
             //proper way to get pagination t service maybe :-)
             switch (type) {
                 case SGROUP:
@@ -87,16 +86,15 @@ const actions = {
                         if (data.current_page >= data.last_page) {
                             //jangan ambil data lagi
                             resolve(false);
-                            stillPaging = false;
+
                         } else {
                             resolve(true);
-                            stillPaging = true;
+
                         }
                         data.data.map((item) => {
                             commit(ADD_DATA_SYSTEM, {
                                 type: type,
                                 data: item,
-                                page: stillPaging,
                             });
                         });
                     } else {
@@ -115,9 +113,10 @@ const actions = {
         return new Promise((resolve) => {
             ApiService.post(`user/siswa/import`, {siswa: data}).then(({status, data}) => {
                 if (status === 200 || status === 201) {
-                    console.log(data.data)
+
                     data.data.map(siswa => {
-                        commit(ADD_DATA_SYSTEM, {type: SUSER, data: siswa, page: 0})
+
+                        commit(ADD_DATA_SYSTEM, {type: SUSER, data: siswa})
                     })
                     resolve({success: true, message: "Berhasil Meng-import siswa"})
                 } else {
@@ -294,7 +293,7 @@ const mutations = {
      * @todo if exist and data change sholud update
      * @param state
      */
-    [ADD_DATA_SYSTEM](state, {type, data, page}) {
+    [ADD_DATA_SYSTEM](state, {type, data}) {
         switch (type) {
             case SUSER:
                 var exist = state.datausers.some((user) => {
