@@ -52,13 +52,8 @@ export default {
           this.overlay =false
           if (status === 200 || status === 201) {
             this.body = data.data[0];
-            this.body.
           }
         })
-          // eslint-disable-next-line no-unused-vars
-        .catch((e) => {
-
-        });
     },
     onSubmit(data) {
       this.overlay = true
