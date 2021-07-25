@@ -15,6 +15,7 @@ const GET_DATA_REKENING = "GETDATAREKENING";
 const POST_DATA_REKENING = "POSTREKENINGDATA";
 const PUT_DATA_REKENING = "PUTDATAREKENING";
 const DELETE_DATA_REKENING = "DELETEDATAREKENING";
+const GET_SALDO_REKENING = "GET_SALDO_REKENING";
 const MUTASI = "MUTASI"
 export const MUTASI_PEMBIAYAAN = 'rekening_pembiayaan/'
 export const MUTASI_SIMPANAN = 'rekening_simpanan/'
@@ -24,6 +25,7 @@ export const ACTION_POST_DATA_REKENING = `rekening/${POST_DATA_REKENING}`;
 export const ACTION_PUT_DATA_REKENING = `rekening/${PUT_DATA_REKENING}`;
 export const ACTION_DELETE_DATA_REKENING = `rekening/${DELETE_DATA_REKENING}`;
 export const ACTION_MUTASI = `rekening/${MUTASI}`;
+export const ACTION_GET_SALDO = `rekening/${GET_SALDO_REKENING}`
 
 const ADD_DATA_REKENING = "MADDDATAREKENING";
 const EDIT_DATA_REKENING = "MUPDATEREKENING";
@@ -31,6 +33,7 @@ const REMOVE_DATA_REKENING = "MDELETEDATAREKENING";
 const INCREMENT_PAGE = `INCREMENT`;
 const MUTASI_REKENING = "MUTASI_REKENING"
 const DESTROY_MUTASI ="DESTROY MUTASI"
+const SET_SALDO = "SETSALDO"
 
 export const MUTATION_ADD_DATA_REKENING = `rekening/${ADD_DATA_REKENING}`;
 export const MUTATION_UPDATE_DATA_REKENING = `rekening/${EDIT_DATA_REKENING}`;
@@ -67,6 +70,15 @@ const state = {
   mutasi:{
     pembiayaan:[],
     simpanan:[]
+  },
+  saldo:{
+    pembiayaan:{
+      saldo:0,
+      jumlah_pinjaman:0
+    },
+    simpanan:{
+      jumlahpinjaman:0
+    }
   }
 };
 const getters = {
@@ -151,6 +163,18 @@ const actions = {
               success: false,
               message: "Terjadi kesalahan coba lagi nanti!",
             });
+          })
+    })
+  },
+  [GET_SALDO_REKENING]({commit},{type,no_rekening}){
+    return new Promise((resolve)=>{
+      ApiService.get(`${type}${no_rekening}/saldo?t=${new Date().getMilliseconds()}`)
+          .then(({status,data})=>{
+            if(status === 200 || status === 201){
+              resolve(true)
+              commit(SET_SALDO,{type:type,saldo:data.data})
+
+            }
           })
     })
   },
@@ -293,6 +317,15 @@ const mutations = {
       case RDEPOSITO:
         state.deposito.current_page++;
         break;
+    }
+  },
+  [SET_SALDO](state,{saldo,type}){
+
+    if(type === MUTASI_PEMBIAYAAN){
+
+      state.saldo.pembiayaan = saldo
+    }else {
+      state.saldo.simpanan = saldo
     }
   },
   /***

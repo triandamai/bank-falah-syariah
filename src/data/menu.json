@@ -29,7 +29,6 @@
       "active": false,
       "privilage": {
         "roles": ["admin", "bp_root","siswa","cs"]
-
       }
     },
     {

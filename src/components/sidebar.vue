@@ -389,7 +389,7 @@
   </div>
 </template>
 <script>
-import { getUser } from "@/services/jwt.service";
+import {checkPrivilage} from "@/utils/utils"
 import { mapState } from "vuex";
 export default {
   name: "Sidebar",
@@ -466,18 +466,7 @@ export default {
   },
   methods: {
     //check if user already logged in is have privilage for acces those menu
-    checkPrivilage(privilage) {
-      const { role } = getUser();
-     if(role[0]){
-       const haveAllRole = privilage.roles.includes("public");
-       if (haveAllRole) return true;
-       if (role[0]) {
-         const current_role = role[0].name;
-         return  privilage.roles.includes(current_role);
-       }
-     }
-      return false;
-    },
+    checkPrivilage:(privilage)=>checkPrivilage(privilage),
     showForm(form) {
       this.$store.commit("showForm", form);
     },

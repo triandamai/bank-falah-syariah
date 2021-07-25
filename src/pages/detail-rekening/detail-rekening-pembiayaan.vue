@@ -11,10 +11,10 @@
 
                 <div class="pricing-plan">
                   <h6>Total Saldo</h6>
-                  <h5>Rp {{ saldo }}</h5>
+                  <h5>Rp {{ formatCurrency(saldo.saldo) }}</h5>
                   <p>Jumlah Pinjaman</p>
                   <div class="btn btn-outline-primary btn-xs">
-                    Rp 10.000.000
+                    Rp {{formatCurrency(saldo.jumlah_pinjaman)}}
                   </div>
                   <img
                       class="bg-img"
@@ -111,7 +111,7 @@
                             </td>
                             <td>
                               <p class="itemtext digits">Rp {{
-                                  formatCurrency(mutasi.value)
+                                  formatCurrency(mutasi.saldo)
                                 }}</p>
                             </td>
                           </tr>
@@ -146,25 +146,18 @@
 
 
 <script>
-import {ACTION_MUTASI, MUTASI_PEMBIAYAAN,MUTATION_DESTROY_MUTASI} from "@/store"
+import {ACTION_GET_SALDO, ACTION_MUTASI, MUTASI_PEMBIAYAAN, MUTATION_DESTROY_MUTASI} from "@/store"
 import {mapState,mapGetters} from "vuex"
 import pageMixin from "@/mixin/page.mixin"
 
 export default {
   mixins:[pageMixin],
-  data: () => {
-    return {
-
-    };
-  },
-
   computed:{
     ...mapState({
-      mutasi:(state)=> state.rekening.mutasi.pembiayaan
+      mutasi:(state)=> state.rekening.mutasi.pembiayaan,
+      saldo:(state)=> state.rekening.saldo.pembiayaan
     }),
-    ...mapGetters({
-      saldo:'rekening/saldoPembiayaan'
-    })
+
   },
   created() {
     this.$store.commit(MUTATION_DESTROY_MUTASI,{type:MUTASI_PEMBIAYAAN})
@@ -178,6 +171,7 @@ export default {
           .then(()=>{
 
           })
+      this.$store.dispatch(ACTION_GET_SALDO,{type:MUTASI_PEMBIAYAAN,no_rekening:no_rekening}).then(()=>{})
     },
   },
 };

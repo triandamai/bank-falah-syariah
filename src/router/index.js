@@ -6,8 +6,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import ApiService from "@/services/api.service";
 import { getUser } from "@/services/jwt.service";
-import {store} from "@/store/index"
-
+import {checkPrivilage} from "@/utils/utils";
 // component
 
 Vue.use(Router);
@@ -32,7 +31,7 @@ const routes = [
    */
   {
     path: "/main",
-    component: () => import("../components/body"),
+    component: () => import("@/components/body"),
     meta: {
       reqiresAuth: true,
     },
@@ -48,6 +47,7 @@ const routes = [
         meta: {
           title: "Dashboard | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["public"]
         },
       },
       //
@@ -58,6 +58,7 @@ const routes = [
         meta: {
           title: "Personalisasi | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root"]
         },
       },
       //
@@ -68,6 +69,7 @@ const routes = [
         meta: {
           title: "Nasabah | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root","cs","siswa"]
         },
       },
       {
@@ -77,6 +79,7 @@ const routes = [
         meta: {
           title: "Nasabah | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root","siswa","cs"]
         },
       },
       {
@@ -86,6 +89,7 @@ const routes = [
         meta: {
           title: "Nasabah | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root","siswa","cs"]
         },
       },
       /**
@@ -99,6 +103,7 @@ const routes = [
         meta: {
           title: "Laporan | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root","siswa","teller"]
         },
       },
       //
@@ -109,6 +114,7 @@ const routes = [
         meta: {
           title: "Akad | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root","siswa"]
         },
       },
       //
@@ -119,6 +125,7 @@ const routes = [
         meta: {
           title: "Jenis Transaksi | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root","siswa"]
         },
       },
       {
@@ -128,6 +135,7 @@ const routes = [
         meta: {
           title: "Jabatan | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root","siswa"]
         },
       },
       //
@@ -138,6 +146,7 @@ const routes = [
         meta: {
           title: "Pegawai | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root","siswa"]
         },
       },
       //
@@ -148,6 +157,7 @@ const routes = [
         meta: {
           title: "Deposito | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root","siswa","cs","teller"]
         },
       },
       //
@@ -158,6 +168,7 @@ const routes = [
         meta: {
           title: "Pembiayaan | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root","siswa","cs","teller"]
         },
       },
       //
@@ -168,6 +179,7 @@ const routes = [
         meta: {
           title: "Simpanan | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root","siswa","cs","teller"]
         },
       },
       {
@@ -176,7 +188,8 @@ const routes = [
         component:()=>import("@/pages/detail-rekening/detail-rekening-pembiayaan.vue"),
         meta: {
           title: "Mutasi | Bank Falah Syariah",
-          reqiresAuth: true
+          reqiresAuth: true,
+          roles: ["admin","bp_root","siswa","cs","teller"]
         }
       },
       {
@@ -185,7 +198,8 @@ const routes = [
         component:()=>import("@/pages/detail-rekening/detail-rekening-simpanan.vue"),
         meta: {
           title: "Mutasi | Bank Falah Syariah",
-          reqiresAuth: true
+          reqiresAuth: true,
+          roles: ["admin","bp_root","siswa","cs","teller"]
         }
       },
       //
@@ -196,8 +210,20 @@ const routes = [
         meta: {
           title: "User | Bank Falah Syariah",
           reqiresAuth: true,
+          roles: ["admin","bp_root"]
+        },
+      },
+      {
+        path: "not-authorized",
+        name: "not-authorized",
+        component:()=> import("@/pages/error/not-authorized.vue"),
+        meta: {
+          title: "Unlock | Bank Falah Syariah",
+          reqiresAuth: true,
+          roles: ["public"]
         },
       }
+
     ],
   },
   {
@@ -207,6 +233,7 @@ const routes = [
     meta: {
       title: "Login | Bank Falah Syariah",
       reqiresAuth: false,
+      roles: ["admin","bp_root","siswa","public"]
     },
   },
   {
@@ -216,8 +243,10 @@ const routes = [
     meta: {
       title: "Unlock | Bank Falah Syariah",
       reqiresAuth: true,
+      roles: ["admin","bp_root","siswa","public"]
     },
-  }
+  },
+
 ];
 
 /**
@@ -244,7 +273,12 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) document.title = to.meta.title;
   if (to.meta.reqiresAuth) {
     if (user) {
-      next();
+      if(checkPrivilage({roles:to.meta.roles})){
+        next();
+      }else {
+        next({path:"/main/not-authorized"})
+      }
+
     } else {
       next({ path: "/login" });
     }
