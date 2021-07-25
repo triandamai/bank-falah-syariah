@@ -7,6 +7,8 @@
  */
 import ApiService from "@/services/api.service";
 import {formatCurrency} from "@/utils/utils";
+import router from "@/router";
+import Vue from "vue";
 
 /***
  * dspatch type
@@ -202,12 +204,22 @@ const actions = {
             resolve({ success: false, message: "Gagal" });
           }
         })
-        .catch((e) => {
-          resolve({
-            success: false,
-            message: "Terjadi kesalahan coba lagi nanti!",
+          .catch(({response}) => {
+            resolve({
+              success: false,
+              message: "Terjadi kesalahan silahkan coba lagi nanti!",
+            });
+            if(response.status === 401){
+              setTimeout(()=>{
+                router.push({path:"/unlock"})
+              },2000)
+              Vue.swal({
+                title: 'Akun terhubung di perangkat lain!',
+                html: 'Anda akan diarahkan ke halaman masuk.',
+                timer:2000
+              })
+            }
           });
-        });
     });
   },
   /***
@@ -228,12 +240,22 @@ const actions = {
             resolve({ success: false, message: "Berhasil" });
           }
         })
-        .catch((e) => {
-          resolve({
-            success: false,
-            message: "Terjadi kesalahan coba lagi nanti!",
+          .catch(({response}) => {
+            resolve({
+              success: false,
+              message: "Terjadi kesalahan silahkan coba lagi nanti!",
+            });
+            if(response.status === 401){
+              setTimeout(()=>{
+                router.push({path:"/unlock"})
+              },2000)
+              Vue.swal({
+                title: 'Akun terhubung di perangkat lain!',
+                html: 'Anda akan diarahkan ke halaman masuk.',
+                timer:2000
+              })
+            }
           });
-        });
     });
   },
   /***
@@ -256,12 +278,22 @@ const actions = {
             resolve({ success: false, message: "Berhasil" });
           }
         })
-        .catch((e) => {
-          resolve({
-            success: false,
-            message: "Terjadi kesalahan coba lagi nanti!",
+          .catch(({response}) => {
+            resolve({
+              success: false,
+              message: "Terjadi kesalahan silahkan coba lagi nanti!",
+            });
+            if(response.status === 401){
+              setTimeout(()=>{
+                router.push({path:"/unlock"})
+              },2000)
+              Vue.swal({
+                title: 'Akun terhubung di perangkat lain!',
+                html: 'Anda akan diarahkan ke halaman masuk.',
+                timer:2000
+              })
+            }
           });
-        });
     });
   },
   /***
@@ -349,7 +381,7 @@ const mutations = {
         break;
       case RTABUNGAN:
         var exist = state.datasimpanan.some((tabungan) => {
-          return tabungan.id == item.id;
+          return tabungan.id === item.id;
         });
         if (!exist) {
           state.datasimpanan.push(item);
@@ -357,7 +389,7 @@ const mutations = {
         break;
       case RDEPOSITO:
         var exist = state.datadeposito.some((deposito) => {
-          return deposito.id == item.id;
+          return deposito.id === item.id;
         });
         if (!exist) {
           state.datadeposito.push(item);
@@ -367,7 +399,8 @@ const mutations = {
   },
   /***
    * update data
-   * {@param type,
+   * {@param state
+   * @param type,
    * @param data
    * @param olddata}
    * @returns update data

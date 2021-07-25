@@ -7,6 +7,8 @@
  */
 
 import ApiService from "@/services/api.service";
+import router from "@/router";
+import Vue from "vue";
 
 const GET_DATA_SYSTEM = "GETDATASYSTEM";
 const POST_DATA_SYSTEM = "POGETDATASYSTEM";
@@ -58,6 +60,8 @@ const actions = {
      * @todo
      * @returns promise true/false if true get data always repeat until last_page
      *
+     * @param type
+     * @param id
      */
     [GET_DATA_SYSTEM]({commit, state}, {type, id}) {
         return new Promise((resolve, reject) => {
@@ -120,13 +124,21 @@ const actions = {
                     resolve({success: false, message: "Berhasil Meng-import siswa"})
                 }
             }).catch(({response}) => {
-                if (response === 401) {
-                    //TODO if un authorized redirect to unlock page
-                } else {
-                    resolve({success: false, message: "Terjadi Kesalahan coba lagi nanti"})
+                resolve({
+                    success: false,
+                    message: "Terjadi kesalahan silahkan coba lagi nanti!",
+                });
+                if (response.status === 401) {
+                    setTimeout(() => {
+                        router.push({path: "/unlock"})
+                    }, 2000)
+                    Vue.swal({
+                        title: 'Akun terhubung di perangkat lain!',
+                        html: 'Anda akan diarahkan ke halaman masuk.',
+                        timer: 2000
+                    })
                 }
-
-            })
+            });
         })
     },
     /***
@@ -153,14 +165,22 @@ const actions = {
                             message: "Gagal menyimpan,pastikan data sudah benar!",
                         });
                     }
-                })
-                .catch((e) => {
-                    resolve({
-                        success: false,
-                        message: "Terjadi kesalahan coba lagi nanti!",
-                    });
-
+                }).catch(({response}) => {
+                resolve({
+                    success: false,
+                    message: "Terjadi kesalahan silahkan coba lagi nanti!",
                 });
+                if (response.status === 401) {
+                    setTimeout(() => {
+                        router.push({path: "/unlock"})
+                    }, 2000)
+                    Vue.swal({
+                        title: 'Akun terhubung di perangkat lain!',
+                        html: 'Anda akan diarahkan ke halaman masuk.',
+                        timer: 2000
+                    })
+                }
+            });
         });
     },
     /***
@@ -192,11 +212,21 @@ const actions = {
                         });
                     }
                 })
-                .catch((e) => {
+                .catch(({response}) => {
                     resolve({
                         success: false,
-                        message: "Terjadi kesalahan coba lagi nanti!",
+                        message: "Terjadi kesalahan silahkan coba lagi nanti!",
                     });
+                    if (response.status === 401) {
+                        setTimeout(() => {
+                            router.push({path: "/unlock"})
+                        }, 2000)
+                        Vue.swal({
+                            title: 'Akun terhubung di perangkat lain!',
+                            html: 'Anda akan diarahkan ke halaman masuk.',
+                            timer: 2000
+                        })
+                    }
                 });
         });
     },
@@ -224,11 +254,21 @@ const actions = {
                         });
                     }
                 })
-                .catch((e) => {
+                .catch(({response}) => {
                     resolve({
                         success: false,
-                        message: "Terjadi kesalahan coba lagi nanti!",
+                        message: "Terjadi kesalahan silahkan coba lagi nanti!",
                     });
+                    if (response.status === 401) {
+                        setTimeout(() => {
+                            router.push({path: "/unlock"})
+                        }, 2000)
+                        Vue.swal({
+                            title: 'Akun terhubung di perangkat lain!',
+                            html: 'Anda akan diarahkan ke halaman masuk.',
+                            timer: 2000
+                        })
+                    }
                 });
         });
     },

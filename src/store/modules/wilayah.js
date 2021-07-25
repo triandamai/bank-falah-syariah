@@ -47,7 +47,7 @@ const actions = {
       }
       ApiService.getWilayah(resource)
         .then(({ status, data }) => {
-          if (status == 200 || status == 201) {
+          if (status === 200 || status === 201) {
             if (data.data.current_page >= data.data.last_page) {
               stillPaging = false;
               resolve(false);
@@ -95,11 +95,11 @@ const mutations = {
         break;
     }
   },
-  [ADD_DATA_WILAYAH](state, { type, page, data }) {
+  [ADD_DATA_WILAYAH](state, { type, data }) {
     switch (type) {
       case WPROVINSI:
         var exist = state.provinsi.data.some((provinsi) => {
-          return provinsi.provIdProvinsi == data.provIdProvinsi;
+          return provinsi.provIdProvinsi === data.provIdProvinsi;
         });
         if (!exist) {
           state.provinsi.data.push(data);
@@ -107,7 +107,7 @@ const mutations = {
         break;
       case WKABUPATEN:
         var exist = state.kabupaten.data.some((kabupaten) => {
-          return kabupaten.kabIdKabupaten == data.kabIdKabupaten;
+          return kabupaten.kabIdKabupaten === data.kabIdKabupaten;
         });
         if (!exist) {
           state.kabupaten.data.push(data);
@@ -115,7 +115,7 @@ const mutations = {
         break;
       case WKECAMATAN:
         var exist = state.kecamatan.data.some((kecamatan) => {
-          return kecamatan.kecIdKecamatan == data.kecIdKecamatan;
+          return kecamatan.kecIdKecamatan === data.kecIdKecamatan;
         });
         if (!exist) {
           state.kecamatan.data.push(data);
@@ -123,7 +123,7 @@ const mutations = {
         break;
       case WDESA:
         var exist = state.desa.data.some((desa) => {
-          return desa.desIdDesa == data.desIdDesa;
+          return desa.desIdDesa === data.desIdDesa;
         });
         if (!exist) {
           state.desa.data.push(data);

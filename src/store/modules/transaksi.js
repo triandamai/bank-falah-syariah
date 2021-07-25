@@ -4,6 +4,8 @@
  *
  */
 import ApiService from "@/services/api.service.js";
+import router from "@/router";
+import Vue from "vue";
 
 export const TABUNGAN_TARIK_TUNAI = "TABUNGAN_TARIK_TUNAI";
 export const TABUNGAN_TARIK_NONTUNAI = "TABUNGAN_TARIK_NONTUNAI";
@@ -23,7 +25,7 @@ const getters = {};
 const actions = {
     // eslint-disable-next-line no-unused-vars
     [TRANSACTION]({commit}, {payload, type}) {
-        return new Promise((resolve,reject) => {
+        return new Promise((resolve) => {
             var endpoint = "";
             switch (type) {
                 case  TABUNGAN_TARIK_TUNAI:
@@ -55,19 +57,29 @@ const actions = {
             ApiService.post(`${endpoint}`, payload).then(({status, data}) => {
                 if (status === 200 || status === 201) {
                     if (data.status === 200 || data.status === 201) {
-                    resolve({success: true, message: "Berhasil menyimpan"});
+                        resolve({success: true, message: "Berhasil menyimpan"});
                     } else {
                         resolve({success: false, message: "Terjadi Kesalahan"})
                     }
                 } else {
                     resolve({success: false, message: "Terjadi Kesalahan"})
                 }
-            }).catch((e) => {
+            }).catch(({response}) => {
                 resolve({
                     success: false,
-                    message: "Terjadi kesalahan coba lagi nanti!",
+                    message: "Terjadi kesalahan silahkan coba lagi nanti!",
                 });
-            })
+                if (response.status === 401) {
+                    setTimeout(() => {
+                        router.push({path: "/unlock"})
+                    }, 2000)
+                    Vue.swal({
+                        title: 'Akun terhubung di perangkat lain!',
+                        html: 'Anda akan diarahkan ke halaman masuk.',
+                        timer: 2000
+                    })
+                }
+            });
         });
     }
 };

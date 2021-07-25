@@ -69,6 +69,7 @@ const actions = {
    * @param {type,path,id}
    * @returns prmise true/false
    * and add data to array smoothly
+   * @param type
    */
   [GETDATAMASTER]({ commit, state }, { type }) {
     return new Promise((resolve,reject) => {
@@ -186,12 +187,22 @@ const actions = {
             });
           }
         })
-        .catch((e) => {
-          resolve({
-            success: false,
-            message: "Terjadi kesalahan silahkan coba lagi nanti!",
+          .catch(({response}) => {
+            resolve({
+              success: false,
+              message: "Terjadi kesalahan silahkan coba lagi nanti!",
+            });
+            if(response.status === 401){
+              setTimeout(()=>{
+                router.push({path:"/unlock"})
+              },2000)
+              Vue.swal({
+                title: 'Akun terhubung di perangkat lain!',
+                html: 'Anda akan diarahkan ke halaman masuk.',
+                timer:2000
+              })
+            }
           });
-        });
     });
   },
   /***

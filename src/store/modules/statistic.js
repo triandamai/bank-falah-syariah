@@ -109,10 +109,10 @@ const getters = {};
 const actions = {
     // eslint-disable-next-line no-unused-vars,no-empty-pattern
     [STATISTIC]({commit,state}, {}) {
-        return new Promise((resolve,reject) => {
+        return new Promise((resolve) => {
            ApiService.get("/statistics?days=10").then(({status,data})=>{
 
-               if (status == 200 || status == 201) {
+               if (status === 200 || status === 201) {
                    const data_nasabah =[]
                    const data_transaksi =[]
                    const data_label =[]
