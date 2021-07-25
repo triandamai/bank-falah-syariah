@@ -208,7 +208,6 @@ const routes = [
           reqiresAuth: true,
         },
       }
-
     ],
   },
   {
@@ -220,6 +219,15 @@ const routes = [
       reqiresAuth: false,
     },
   },
+  {
+    path:'/unlock',
+    name:'unlock',
+    component:()=> import("@/pages/auth/unlock_user"),
+    meta: {
+      title: "Unlock | Bank Falah Syariah",
+      reqiresAuth: true,
+    },
+  }
 ];
 
 /**

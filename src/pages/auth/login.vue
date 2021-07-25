@@ -107,75 +107,10 @@
 </template>
 
 <script>
-import { LOGIN } from "@/store/modules/auth";
+import authenticatioMixin from "@/mixin/authentication.mixin"
 export default {
   name: "login",
-  data() {
-    return {
-      overlay:false,
-      type: "password",
-      email: "",
-      password: "",
-      username: "",
-      passwordjwt: "",
-      submitted: false,
-      disable: false,
-    };
-  },
-  computed: {
-    // JWT authentication
-    loggingIn() {
-      return false; // this.$store.state.authentication.status.loggingIn;
-    },
-  },
-  created() {
-    // reset login status for JWT
-  },
-  methods: {
-    // show/hide password
-    showPassword: function() {
-      if (this.type === "password") {
-        this.type = "text";
-      } else {
-        this.type = "password";
-      }
-    },
-    // Firebase login
-    signUp: function() {
-      this.submitted = true;
-      if (this.email !== "" && this.password !== "") {
-        this.disable = true;
-        this.overlay = true;
-        this.$store
-          .dispatch(`auth/${LOGIN}`, {
-            username: this.email,
-            password: this.password,
-          })
-          .then(({ success, message }) => {
-            this.$toasted.show(
-              success
-                ? this.$t("Success Message", { context: `${message}` })
-                : this.$t("Failed Message", { context: `${message}` }),
-              {
-                theme: "bubble",
-                position: "top-right",
-                type: success ? "success" : "error",
-                duration: 2000,
-              }
-            );
-            this.overlay = false;
-            if (success) {
+  mixins:[authenticatioMixin]
 
-              setTimeout(() => {
-                this.$router.replace({ name: "dashboard" });
-              }, 1000);
-              return;
-            }
-            this.disable = false;
-
-          });
-      }
-    },
-  },
 };
 </script>

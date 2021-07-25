@@ -59,6 +59,9 @@ export const getAppname = () => {
 export const getCurrendUserId=()=>{
   return getUser().id;
 }
+export const getCurrendUsername=()=>{
+  return getUser().username;
+}
 
 
 /***
