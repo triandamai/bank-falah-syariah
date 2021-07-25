@@ -70,10 +70,7 @@ const actions = {
           }
         })
         .catch((e) => {
-          resolve({
-            success: false,
-            message: "Terjadi kesalahan coba lagi nanti!",
-          });
+          resolve(false);
         });
     });
   },

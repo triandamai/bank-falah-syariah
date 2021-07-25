@@ -107,7 +107,7 @@ const actions = {
     context.commit("setActiveRoute", item);
   },
   getMenu: ({ commit }) => {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve) => {
       ApiServices.get(`/route`)
         .then(res => {
           if (res.status == 201 || res.status == 200) {
@@ -130,7 +130,7 @@ const actions = {
     });
   },
   updateMenu: (ctx, menu) => {
-    return new Promise((resolve,reject) => {
+    return new Promise((resolve) => {
       ApiServices.post(`/route`, { menu: menu })
         .then(res => {
           if (res.status == 200 || res.status == 201) {

@@ -126,16 +126,13 @@ const actions = {
           }
         })
         .catch((e) => {
-          resolve({
-            success: false,
-            message: "Terjadi kesalahan coba lagi nanti!",
-          });
+          resolve(false);
         });
     });
   },
 
   [MUTASI]({commit},{type,no_rekening}){
-    return new Promise((resolve,reject)=>{
+    return new Promise((resolve)=>{
       ApiService.get(`${type}${no_rekening}/mutasi?t=${new Date().getMilliseconds()}`)
           .then(({status,data})=>{
             if(status === 200 || status === 201){

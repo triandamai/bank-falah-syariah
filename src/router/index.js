@@ -272,7 +272,7 @@ router.afterEach((to)=>{
       if(e.response){
         if(e.response.status === 401) {
           setTimeout(()=>{
-              this.$router.push({path:'/unlock'})
+              router.push({path:'/unlock'})
           },2100)
           Vue.swal({
             title: 'Akun terhubung di perangkat lain!',
