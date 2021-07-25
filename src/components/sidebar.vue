@@ -469,7 +469,7 @@ export default {
     checkPrivilage(privilage) {
       const { role } = getUser();
      if(role[0]){
-       const haveAllRole = privilage.roles.includes("all");
+       const haveAllRole = privilage.roles.includes("public");
        if (haveAllRole) return true;
        if (role[0]) {
          const current_role = role[0].name;

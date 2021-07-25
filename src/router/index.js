@@ -6,6 +6,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import ApiService from "@/services/api.service";
 import { getUser } from "@/services/jwt.service";
+import {store} from "@/store/index"
 
 // component
 
@@ -120,17 +121,6 @@ const routes = [
           reqiresAuth: true,
         },
       },
-      //
-      // {
-      //   path: "produk",
-      //   name: "produk",
-      //   component: () => import("@/pages/produk/produk.vue"),
-      //   meta: {
-      //     title: "Produk | Bank Falah Syariah",
-      //     reqiresAuth: true,
-      //   },
-      // },
-      //
       {
         path: "jabatan",
         name: "jabatan",
@@ -265,7 +255,7 @@ router.beforeEach((to, from, next) => {
 });
 router.afterEach((to)=>{
 
-  if(to.path == "/login" || to.path == "/unlock"){
+  if(to.path === "/login" || to.path === "/unlock"){
     //
   }else {
     ApiService.get("/statistics?days=10").then(()=>{}).catch((e)=>{
