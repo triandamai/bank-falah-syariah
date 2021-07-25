@@ -135,6 +135,9 @@
   "Jumlah": "Amount *",
   "Penghasilan Pertahun": "Penghasilan Pertahun *",
   "Penghasilan Perbulan": "Penghasilan Perbulan *",
-  "Modal *": "Modal *"
+  "Modal *": "Modal *",
+  "Import Siswa": "Import Student",
+  "Data User": "Data User",
+  "subtitleuser": "Data user Bank Falah Syariah"
 
 }

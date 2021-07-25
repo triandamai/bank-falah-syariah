@@ -12,10 +12,12 @@ const GET_DATA_SYSTEM = "GETDATASYSTEM";
 const POST_DATA_SYSTEM = "POGETDATASYSTEM";
 const PUT_DATA_SYSTEM = "PUGETDATASYSTEM";
 const DELETE_DATA_SYSTEM = "DELETEDATASYSTEM";
+const POST_IMPORT_USER = "IMPORT_USER"
 export const ACTION_GET_DATA_SYSTEM = `system/${GET_DATA_SYSTEM}`;
 export const ACTION_POST_DATA_SYSTEM = `system/${POST_DATA_SYSTEM}`;
 export const ACTION_PUT_DATA_SYSTEM = `system/${PUT_DATA_SYSTEM}`;
 export const ACTION_DELETE_DATA_SYSTEM = `system/${DELETE_DATA_SYSTEM}`;
+export const ACTION_IMPORT_UUSER = `system/${POST_IMPORT_USER}`
 
 const ADD_DATA_SYSTEM = "MADDDATASYSTEM";
 const EDIT_DATA_SYSTEM = "MPUTDATASYSTEM";
@@ -105,7 +107,24 @@ const actions = {
         });
     });
   },
+[POST_IMPORT_USER]({commit,state},{data}){
+    return new Promise((resolve)=>{
+       ApiService.post(`user/siswa/import`,{siswa:data}).then(({status,data})=>{
+        if(status === 200 || status === 201){
+            resolve({success:true,message:"Berhasil Meng-import siswa"})
+        }else {
+          resolve({success:false,message:"Berhasil Meng-import siswa"})
+        }
+      }).catch(({response})=>{
+          if(response === 401){
+            //TODO if un authorized redirect to unlock page
+          }else {
+            resolve({success:false,message:"Terjadi Kesalahan coba lagi nanti"})
+          }
 
+       })
+    })
+},
   /***
    * Send User and save
    * @return boolean is saved? then commit to datauser

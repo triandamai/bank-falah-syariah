@@ -1,28 +1,39 @@
 <template>
   <div>
-    <Breadcrumbs title="Akad" />
+    <Breadcrumbs :title="$t('User')" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
-        <div class="col-md-12">
-          <div class="card">
-            <div class="card-header">
-              <h5>Data User</h5>
-              <span
-                >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
-              >
+        <div class="col-xl-12 xl-100 dashboard-sec box-col-12">
+          <px-card class="earning-card">
+            <div class="row">
+              <div class="earning-content col-xl-3 col-lg-12 col-md-12">
+                <div class="row  chart-left">
+                  <div class="col-xl-12 left_side_earning">
+                    <h5>{{$t('Data User')}}</h5>
+                    <p class="font-roboto">{{$t('subtitleuser')}}</p>
+                  </div>
+                  <div class="col-xl-12 left-btn">
+                    <a class="btn btn-gradient" @click="form_import = true"
+                    >{{ $t('Import Siswa') }}</a
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="chart-right col-xl-9 col-lg-12 col-md-12 pt-5 pb-5">
+                <data-table
+                    :items="items"
+                    :headers="headers"
+                    @add="onAdd"
+                    @edit="onEdit"
+                    @delete="onDelete"
+                />
+              </div>
             </div>
-            <div class="card-body">
-              <data-table
-                :items="items"
-                :headers="headers"
-                @add="onAdd"
-                @edit="onEdit"
-                @delete="onDelete"
-              />
-            </div>
-          </div>
+          </px-card>
         </div>
+
       </div>
     </div>
     <!-- Container-fluid Ends-->
@@ -33,6 +44,7 @@
       @close="form = false"
       @submit="onSubmit"
     />
+    <form-import-siswa :show="form_import" @close="form_import = false" />
   </div>
 </template>
 
@@ -52,6 +64,7 @@ export default {
   data: () => {
     return {
       headers: header,
+      form_import:false
     };
   },
   computed: {
