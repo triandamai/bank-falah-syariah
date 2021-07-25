@@ -98,6 +98,7 @@ const mutations = {
   [ADD_DATA_WILAYAH](state, { type, data }) {
     switch (type) {
       case WPROVINSI:
+        // eslint-disable-next-line no-redeclare
         var exist = state.provinsi.data.some((provinsi) => {
           return provinsi.provIdProvinsi === data.provIdProvinsi;
         });
@@ -106,6 +107,7 @@ const mutations = {
         }
         break;
       case WKABUPATEN:
+        // eslint-disable-next-line no-redeclare
         var exist = state.kabupaten.data.some((kabupaten) => {
           return kabupaten.kabIdKabupaten === data.kabIdKabupaten;
         });
@@ -114,6 +116,7 @@ const mutations = {
         }
         break;
       case WKECAMATAN:
+        // eslint-disable-next-line no-redeclare
         var exist = state.kecamatan.data.some((kecamatan) => {
           return kecamatan.kecIdKecamatan === data.kecIdKecamatan;
         });
@@ -122,6 +125,7 @@ const mutations = {
         }
         break;
       case WDESA:
+        // eslint-disable-next-line no-redeclare
         var exist = state.desa.data.some((desa) => {
           return desa.desIdDesa === data.desIdDesa;
         });
