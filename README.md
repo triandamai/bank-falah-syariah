@@ -28,7 +28,7 @@ store
 
 ### Menu
 Apps menu menggunakan dinamis menu berdasarkan role tersedia di object privilages
-karena applikasi dituntut dinamis dalam penggunaan role
+karena aplikasi dituntut dinamis dalam penggunaan role
 
 ```json
 {
