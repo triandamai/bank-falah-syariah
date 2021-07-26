@@ -219,7 +219,7 @@ const routes = [
         component:()=> import("@/pages/error/not-authorized.vue"),
         meta: {
           title: "Unlock | Bank Falah Syariah",
-          reqiresAuth: true,
+          reqiresAuth: false,
           roles: ["public"]
         },
       }
