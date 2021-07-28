@@ -81,7 +81,7 @@ export default {
                     if (success) {
 
                         setTimeout(() => {
-                            this.$router.replace({ name: "dashboard" });
+                            this.$router.replace({ path: "/main/dashboard" });
                         }, 1000);
                         return;
                     }

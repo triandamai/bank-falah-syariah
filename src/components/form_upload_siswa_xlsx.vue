@@ -16,6 +16,7 @@
                   v-model="files"
                   @change="onFileChanged"
                   show-size
+                  :disabled="loading"
                   label="File Siswa"
                 ></v-file-input>
               </v-col>
@@ -25,9 +26,17 @@
         </v-card-text>
         <v-card-actions class="justify-end">
           <v-spacer></v-spacer>
-          <v-btn color="blue darken-1" text @click="close(dialog.value)">
+
+          <v-btn color="green darken-1" text>
+            <a href="https://bfsservice.bakaranproject.com/upload/format_import_siswa.xlsx">
+              {{$t('Download Format')}}
+            </a>
+
+          </v-btn>
+          <v-btn color="grey darken-1" text @click="close(dialog.value)">
             {{$t('Close')}}
           </v-btn>
+
           <v-btn
             :disabled="loading"
             @click="onSubmit"
@@ -43,15 +52,13 @@
 </template>
 <script>
 import xlsx from "xlsx";
-import { ACTION_IMPORT_USER } from "@/store";
+import { ACTION_IMPORT_USER } from "@/store/index.js";
 import componentMixin from "@/mixin/component.mixin"
 export default {
  mixins:[componentMixin],
   data: () => {
     return {
-      loading: false,
-      dialog: false,
-      files: null,
+
 
       datasiswa: [],
     };
