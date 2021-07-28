@@ -9,11 +9,9 @@ import VueTour from "vue-tour";
 import Notifications from "vue-notification";
 import Toasted from "vue-toasted";
 
-
 import { VueMasonryPlugin } from "vue-masonry";
 import VueFeather from "vue-feather";
 import { VueMaskDirective } from 'v-mask'
-
 
 // Import Theme scss
 import "@/assets/scss/app.scss";
