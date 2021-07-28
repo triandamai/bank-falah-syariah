@@ -7,7 +7,6 @@ import Vue2Filters from "vue2-filters";
 import VueSweetalert2 from "vue-sweetalert2";
 import VueTour from "vue-tour";
 import Notifications from "vue-notification";
-import { Vue2Dragula } from "vue2-dragula";
 import Toasted from "vue-toasted";
 
 
@@ -15,7 +14,6 @@ import { VueMasonryPlugin } from "vue-masonry";
 import VueFeather from "vue-feather";
 import { VueMaskDirective } from 'v-mask'
 
-import FunctionalCalendar from "vue-functional-calendar";
 
 // Import Theme scss
 import "@/assets/scss/app.scss";
@@ -28,7 +26,6 @@ import "@/plugins/components.js";
 import "@/plugins/vuetify-money"
 // api services
 import ApiService from "@/services/api.service";
-//
 
 import { Icon } from "leaflet";
 
@@ -49,7 +46,7 @@ Vue.use(VueFeather);
 Vue.use(Toasted, {
   iconPack: "fontawesome",
 });
-Vue.use(Vue2Dragula);
+
 Vue.directive('mask', VueMaskDirective);
 Vue.use(Notifications);
 Vue.use(Vue2Filters);
@@ -59,9 +56,6 @@ Vue.use(BootstrapVue);
 Vue.use(require("vue-chartist"));
 Vue.use(require("vue-moment"));
 Vue.use(VueMasonryPlugin);
-Vue.use(FunctionalCalendar, {
-  dayNames: ["M", "T", "W", "T", "F", "S", "S"],
-});
 Vue.use(VueI18n);
 const locale =
   window.localStorage.getItem("currentLanguage") &&
