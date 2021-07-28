@@ -81,9 +81,11 @@ export default {
                     if (success) {
 
                         setTimeout(() => {
-                            this.$router.replace({ path: "/main/dashboard" });
+                            this.$router.replace({ path: "/" }).catch(e=>{
+                                console.log(e)
+                            });
                         }, 1000);
-                        return;
+
                     }
                     this.disable = false;
 

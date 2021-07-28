@@ -72,7 +72,7 @@
                         <div class="form-group mb-0">
                           <div class="checkbox p-0">
                             <input id="checkbox1" type="checkbox" />
-                            <label class="text-muted" for="checkbox1"
+                            <label class="text-muted"
                             >Remember password</label
                             >
                           </div>
@@ -80,7 +80,7 @@
                               class="btn btn-primary btn-block"
                               type="submit"
                               :disabled="disable"
-                              @click="signUp"
+
                           >
                             Login
                           </button>
