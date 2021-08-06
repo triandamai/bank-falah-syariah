@@ -29,11 +29,6 @@ const ApiService = {
     return Vue.axios.get(resource, params);
   },
   /**
-   * Send the GET HTTP request
-   * return Vue.axios.get(`${resource}/${slug}`).catch(error => {
-      // console.log(error);
-      throw new Error(`[KT] ApiService ${error}`);
-    });
    * @param resource
    * @param slug
    * @returns {*}
@@ -44,14 +39,6 @@ const ApiService = {
 
   /**
    * Set the POST HTTP request
-   *  return fetch(`http://localhost:8000/${resource}`, {
-   *    method: "POST",
-   *   body: JSON.stringify(params),
-   *   headers: { "Content-Type": "application/json" },
-   *   mode: "no-cors",
-   * }).then((res) => {
-   *  res.json();
-   *});
    * @param resource
    * @param params
    * @returns {*}
