@@ -18,6 +18,9 @@ Vue.component("form-pembiayaan", () =>
 Vue.component("form-import-nasabah", () =>
   import("@/components/form_upload_nasabah_xlsx.vue")
 );
+Vue.component("form-import-percobaan", () =>
+    import("@/components/form_upload_percobaan_xlsx")
+);
 Vue.component("form-import-siswa",()=> import("@/components/form_upload_siswa_xlsx.vue"))
 Vue.component("form-simpanan", () => import("@/components/form_simpanan.vue"));
 Vue.component("form-user", () => import("@/components/form_user.vue"));

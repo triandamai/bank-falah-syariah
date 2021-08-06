@@ -117,6 +117,13 @@ const ApiService = {
       },
     });
   },
+  postPercobaan(data){
+    return axios.post("http://192.227.75.88:3131/irbaya",data,{
+      headers:{
+        "Content-Type":"application/json"
+      }
+    })
+  }
 };
 
 export default ApiService;

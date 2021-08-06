@@ -213,6 +213,17 @@ const routes = [
           roles: ["admin","bp_root"]
         },
       },
+        //percobaan\
+      {
+        path: "coba",
+        name: "coba",
+        component: () => import("@/pages/percobaan/percobaan.vue"),
+        meta: {
+          title: "User | Bank Falah Syariah",
+          reqiresAuth: true,
+          roles: ["admin","bp_root"]
+        },
+      },
       {
         path: "not-authorized",
         name: "not-authorized",
