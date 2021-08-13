@@ -25,12 +25,20 @@ export const store = new Vuex.Store({
     pembiayaanformtariktunai: false,
     pembiayaanformtariknontunai: false,
     loadingtable:true,
-
+    isOnline:true,
+    notifConnection:false
   },
   mutations: {
     // eslint-disable-next-line no-unused-vars
     setLoading(state,isloading){
       state.loadingtable = isloading
+    },
+    setConnection(state,isOnline){
+      state.isOnline = isOnline
+      state.notifConnection = true
+    },
+    showNotif(state,show){
+      state.notifConnection = show
     },
     changeLang(state, payload) {
       localStorage.setItem("currentLanguage", payload.id);

@@ -45,6 +45,22 @@
       <form-transaksi-tabungan-tarik-tunai :show="tabunganformtariktunai"/>
       <form-transaksi-tabungan-tarik-nontunai :show="tabunganformtariknontunai"/>
       <Customizer />
+      <v-snackbar
+          v-model="notifConnection"
+      >
+        {{ isOnline ? 'Anda Online':'Anda Offline' }}
+
+        <template v-slot:action="{ attrs }">
+          <v-btn
+              color="pink"
+              text
+              v-bind="attrs"
+              @click="snackbar = false"
+          >
+            Close
+          </v-btn>
+        </template>
+      </v-snackbar>
     </div>
   </div>
 </template>
@@ -53,6 +69,7 @@
 
 import {ACTION_GET_NASABAH} from "@/store";
 import componentMixin from "@/mixin/component.mixin"
+import {mapState} from "vuex";
 export default {
   name: "mainpage",
   mixins:[componentMixin],
@@ -73,6 +90,19 @@ export default {
     this.$store.dispatch("layout/set");
     //get data nasabah
     this.getNasabah()
+  },
+  computed:{
+    ...mapState({
+      isOnline:(state)=>state.isOnline,
+    }),
+    notifConnection:{
+      get(){
+        return this.$store.state.notifConnection
+      },
+      set(newVal){
+        return this.$store.commit("showNotif",newVal)
+      }
+    }
   },
   watch: {
     $route() {

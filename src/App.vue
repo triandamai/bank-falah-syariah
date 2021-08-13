@@ -45,6 +45,7 @@
       ></v-progress-circular>
     </v-overlay>
     <!--    -->
+
   </div>
 </template>
 
@@ -73,6 +74,7 @@ export default {
 
   },
   methods: {
+
     timeOut() {
       var self = this;
       setTimeout(function () {
