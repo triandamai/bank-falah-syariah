@@ -1,8 +1,16 @@
 import { shallowMount, createLocalVue } from "@vue/test-utils";
+import Vue from "vue"
 import Vuex from "vuex";
 import App from "@/App.vue"
 import VueFeather from "vue-feather";
-import vuetify from "@/plugins/vuetify";
+
+import Vuetify from "vuetify";
+Vue.use(Vuetify)
+const vuetify = new Vuetify({
+    icons: {
+        iconfont: "mdi"
+    }
+});
 
 const localVue = createLocalVue();
 localVue.use(Vuex);
@@ -24,7 +32,7 @@ describe("App.vue", () => {
                 muncul:true
             }}
         });
-        expect(wrapper.find("h6").text()).toMatch("Bookmark");
+        expect(wrapper.text()).not.toMatch("Bookmark");
     });
 });
 

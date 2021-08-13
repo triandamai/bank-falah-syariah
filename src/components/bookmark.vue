@@ -104,7 +104,6 @@
 </template>
 <script>
 import { mapState } from "vuex";
-import draggable from "vuedraggable";
 
 export default {
   data() {
@@ -115,9 +114,6 @@ export default {
       bookmarkSearchResultEmpty: false,
       bookmarkItems: [],
     };
-  },
-  components: {
-    draggable,
   },
   computed: {
     ...mapState({

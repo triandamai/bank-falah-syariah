@@ -8,6 +8,7 @@ import VueSweetalert2 from "vue-sweetalert2";
 import VueTour from "vue-tour";
 import Notifications from "vue-notification";
 import Toasted from "vue-toasted";
+import i18n from "@/plugins/i18n"
 
 import {VueMasonryPlugin} from "vue-masonry";
 import VueFeather from "vue-feather";
@@ -27,13 +28,7 @@ import ApiService from "@/services/api.service";
 
 import {Icon} from "leaflet";
 
-// Multi Language Add
-import VueI18n from "vue-i18n";
-import en from "@/locales/en.json";
-import id from "@/locales/id.json";
-import {defaultLocale, localeOptions} from "@/utils/utils.js";
 
-const messages = {en: en, id: id};
 
 delete Icon.Default.prototype._getIconUrl;
 
@@ -54,20 +49,6 @@ Vue.use(BootstrapVue);
 Vue.use(require("vue-chartist"));
 Vue.use(require("vue-moment"));
 Vue.use(VueMasonryPlugin);
-Vue.use(VueI18n);
-const locale =
-    window.localStorage.getItem("currentLanguage") &&
-    localeOptions.filter(
-        (x) => x.id === window.localStorage.getItem("currentLanguage")
-    ).length > 0
-        ? window.localStorage.getItem("currentLanguage")
-        : defaultLocale;
-
-const i18n = new VueI18n({
-    locale: locale,
-    fallbackLocale: "en",
-    messages: messages,
-});
 
 Vue.config.productionTip = false;
 
@@ -80,7 +61,6 @@ new Vue({
     created() {
       window.addEventListener("offline",()=>{
           store.commit("setConnection", false);
-
       })
       window.addEventListener("online",()=>{
           store.commit("setConnection", true);

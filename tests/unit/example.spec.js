@@ -3,7 +3,7 @@ import Vuex from "vuex";
 import Footer from "@/components/footer.vue";
 import Bookmark from "@/components/bookmark.vue";
 import VueFeather from "vue-feather";
-
+import i18n from "@/plugins/i18n"
 const localVue = createLocalVue();
 localVue.use(Vuex);
 localVue.use(VueFeather);
@@ -44,8 +44,9 @@ describe("Bookmark.vue", () => {
   it("renders h6 text when passed", () => {
     const wrapper = shallowMount(Bookmark, {
       store,
-      localVue
+      localVue,
+      i18n
     });
-    expect(wrapper.find("h6").text()).toMatch("Bookmark");
+    expect(wrapper.find("h6").text()).toMatch("Penanda");
   });
 });
