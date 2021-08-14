@@ -170,7 +170,7 @@ export default {
       localeOptions,
       langIcon: localStorage.getItem("currentLanguageIcon") || "flag-icon-us",
       username: "",
-      role: "",
+      role: "tidak memiliki akses",
       group: "",
     };
   },
@@ -180,12 +180,16 @@ export default {
   created() {
     const user = getUser();
 
-    this.username = user.username;
-    if (user.role[0]) {
-      this.role = user.role[0].name;
-    }else {
-      this.role = "tidak memiliki akses";
+
+    if(user){
+      this.username = user ? user.username:"";
+      if (user.role[0]) {
+        this.role = user.role[0].name;
+      }else {
+        this.role = "tidak memiliki akses";
+      }
     }
+
     //this.group = user.group[0].name;
   },
   computed: {

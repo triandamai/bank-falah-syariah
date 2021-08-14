@@ -6,18 +6,16 @@ import VueFeather from "vue-feather";
 
 import Vuetify from "vuetify";
 Vue.use(Vuetify)
-const vuetify = new Vuetify({
-    icons: {
-        iconfont: "mdi"
-    }
-});
 
-const localVue = createLocalVue();
-localVue.use(Vuex);
-localVue.use(VueFeather);
-localVue.use(vuetify)
 
 describe("App.vue", () => {
+   let vuetify = new Vuetify();
+
+    const localVue = createLocalVue();
+    localVue.use(Vuex);
+    localVue.use(VueFeather);
+    localVue.use(vuetify)
+
     it("renders props.msg when passed", () => {
         const wrapper = shallowMount(App, {
             data:()=>{return{
