@@ -99,11 +99,11 @@ const actions = {
                     }
                 })
                 .catch(({response}) => {
-                    resolve({
-                        success: false,
-                        message: "Terjadi kesalahan silahkan coba lagi nanti!",
-                    });
                     if (response.status === 401) {
+                        resolve({
+                            success: false,
+                            message: "Anda tidak memeiliki izin melakuka operasi ini!",
+                        });
                         setTimeout(() => {
                             router.push({path: "/unlock"})
                         }, 3200)
@@ -112,6 +112,16 @@ const actions = {
                             html: 'Anda akan diarahkan ke halaman masuk.',
                             timer: 3000
                         })
+                    }else if(response.status === 400){
+                        resolve({
+                            success: false,
+                            message: response.data.error,
+                        });
+                    }else {
+                        resolve({
+                            success: false,
+                            message: response.message,
+                        });
                     }
                 });
         });
@@ -139,11 +149,11 @@ const actions = {
                     }
                 })
                 .catch(({response}) => {
-                    resolve({
-                        success: false,
-                        message: "Terjadi kesalahan silahkan coba lagi nanti!",
-                    });
                     if (response.status === 401) {
+                        resolve({
+                            success: false,
+                            message: "Anda tidak memeiliki izin melakuka operasi ini!",
+                        });
                         setTimeout(() => {
                             router.push({path: "/unlock"})
                         }, 3200)
@@ -152,6 +162,16 @@ const actions = {
                             html: 'Anda akan diarahkan ke halaman masuk.',
                             timer: 3000
                         })
+                    }else if(response.status === 400){
+                        resolve({
+                            success: false,
+                            message: response.data.error,
+                        });
+                    }else {
+                        resolve({
+                            success: false,
+                            message: response.message,
+                        });
                     }
                 });
         });
@@ -177,11 +197,11 @@ const actions = {
                     }
                 })
                 .catch(({response}) => {
-                    resolve({
-                        success: false,
-                        message: "Terjadi kesalahan silahkan coba lagi nanti!",
-                    });
                     if (response.status === 401) {
+                        resolve({
+                            success: false,
+                            message: "Anda tidak memeiliki izin melakuka operasi ini!",
+                        });
                         setTimeout(() => {
                             router.push({path: "/unlock"})
                         }, 3200)
@@ -190,6 +210,16 @@ const actions = {
                             html: 'Anda akan diarahkan ke halaman masuk.',
                             timer: 3000
                         })
+                    }else if(response.status === 400){
+                        resolve({
+                            success: false,
+                            message: response.data.error,
+                        });
+                    }else {
+                        resolve({
+                            success: false,
+                            message: response.message,
+                        });
                     }
                 });
         });
@@ -215,11 +245,11 @@ const actions = {
                     }
                 })
                 .catch(({response}) => {
-                    resolve({
-                        success: false,
-                        message: "Terjadi kesalahan silahkan coba lagi nanti!",
-                    });
                     if (response.status === 401) {
+                        resolve({
+                            success: false,
+                            message: "Anda tidak memeiliki izin melakuka operasi ini!",
+                        });
                         setTimeout(() => {
                             router.push({path: "/unlock"})
                         }, 3200)
@@ -228,6 +258,16 @@ const actions = {
                             html: 'Anda akan diarahkan ke halaman masuk.',
                             timer: 3000
                         })
+                    }else if(response.status === 400){
+                        resolve({
+                            success: false,
+                            message: response.data.error,
+                        });
+                    }else {
+                        resolve({
+                            success: false,
+                            message: response.message,
+                        });
                     }
                 });
         });

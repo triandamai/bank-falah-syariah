@@ -20,6 +20,12 @@ export default {
                 length: 11,
                 precision: 1
             },
+            nama_akad:[
+                {value:"Mudharobah",name:"Mudharobah"},
+                {value:"Musyarokah",name:"Musyarokah"},
+                {value:"Wadi'ah",name:"Wadi'ah"},
+                {value:"Murabahah",name:"Murabahah"}
+            ],
             tipe_produk: [
                 {val: 1, text: "Simpanan"},
                 {val: 2, text: "Pembiayaan"},

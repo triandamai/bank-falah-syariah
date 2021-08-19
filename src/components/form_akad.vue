@@ -12,10 +12,13 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field
-                  v-model="form.nama_produk"
-                  :label="$t('Name of Akad')"
-                  required
+                <v-autocomplete
+                    v-model="form.tipe_produk"
+                    :label="$t('Name of Akad')"
+                    required
+                    :items="nama_akad"
+                    item-text="name"
+                    item-value="value"
                 />
               </v-col>
               <v-col cols="12">
@@ -32,10 +35,10 @@
               <v-col cols="12">
                 <v-text-field
                     v-model="form.kode_produk"
-                  :label="$t('Kode Product')"
-                  :rules="rules"
-                  type="number"
-                  required
+                    :label="$t('Kode Product')"
+                    :rules="rules"
+                    type="number"
+                    required
                 />
               </v-col>
               <v-col cols="12">
