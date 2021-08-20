@@ -183,7 +183,7 @@ const routes = [
         },
       },
       {
-        path:"mutasi/pembiayaan/:no_rekening",
+        path:"mutasi/pembiayaan",
         name:"detail-rekening-simpanan",
         component:()=>import("@/pages/detail-rekening/detail-rekening-pembiayaan.vue"),
         meta: {
@@ -193,7 +193,7 @@ const routes = [
         }
       },
       {
-        path:"mutasi/simpanan/:no_rekening",
+        path:"mutasi/simpanan/",
         name:"detail-rekening-pembiayaan",
         component:()=>import("@/pages/detail-rekening/detail-rekening-simpanan.vue"),
         meta: {

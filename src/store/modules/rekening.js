@@ -6,6 +6,7 @@
  *
  */
 import ApiService from "@/services/api.service";
+import {decrypt} from "@/services/jwt.service"
 import {formatCurrency} from "@/utils/utils";
 import router from "@/router";
 import Vue from "vue";
@@ -147,7 +148,8 @@ const actions = {
 
     [MUTASI]({commit}, {type, no_rekening}) {
         return new Promise((resolve) => {
-            ApiService.get(`${type}${no_rekening}/mutasi?t=${new Date().getMilliseconds()}`)
+            const decrypt_no_rekening = decrypt(no_rekening)
+            ApiService.get(`${type}${decrypt_no_rekening}/mutasi?t=${new Date().getMilliseconds()}`)
                 .then(({status, data}) => {
                     if (status === 200 || status === 201) {
                         resolve(true)
@@ -170,7 +172,8 @@ const actions = {
     },
     [GET_SALDO_REKENING]({commit}, {type, no_rekening}) {
         return new Promise((resolve) => {
-            ApiService.get(`${type}${no_rekening}/saldo?t=${new Date().getMilliseconds()}`)
+            const decrypt_no_rekening = decrypt(no_rekening)
+            ApiService.get(`${type}${decrypt_no_rekening}/saldo?t=${new Date().getMilliseconds()}`)
                 .then(({status, data}) => {
                     if (status === 200 || status === 201) {
                         resolve(true)

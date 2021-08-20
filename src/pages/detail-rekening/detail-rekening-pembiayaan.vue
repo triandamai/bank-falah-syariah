@@ -60,7 +60,7 @@
                           <div class="text-md-right">
                             <h3>
                               Mutasi
-                              <span class="digits counter">#{{$route.params.no_rekening}}</span>
+                              <span class="digits counter">#{{decryptPlain($route.query.r)}}</span>
                             </h3>
                             <p>
                             {{getMonthString()}}
@@ -161,8 +161,8 @@ export default {
   },
   created() {
     this.$store.commit(MUTATION_DESTROY_MUTASI,{type:MUTASI_PEMBIAYAAN})
-    if(this.$route.params.no_rekening){
-      this.getData(this.$route.params.no_rekening)
+    if(this.$route.query.r){
+      this.getData(this.$route.query.r)
     }
   },
   methods: {
@@ -171,7 +171,8 @@ export default {
           .then(()=>{
 
           })
-      this.$store.dispatch(ACTION_GET_SALDO,{type:MUTASI_PEMBIAYAAN,no_rekening:no_rekening}).then(()=>{})
+      this.$store.dispatch(ACTION_GET_SALDO,{type:MUTASI_PEMBIAYAAN,no_rekening:no_rekening})
+          .then(()=>{})
     },
   },
 };

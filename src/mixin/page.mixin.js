@@ -1,4 +1,5 @@
 import {formatCurrency} from "@/utils/utils"
+import {decrypt, encrypt} from "@/services/jwt.service";
 
 export default {
     data:()=>{return{
@@ -7,6 +8,8 @@ export default {
         form:false
     }},
     methods:{
+        encryptPlain:(plain)=>encrypt(plain),
+        decryptPlain:(plain)=>decrypt(plain),
         formatCurrency:(total)=>formatCurrency(total),
         getMonthString(){
            const date = new Date();

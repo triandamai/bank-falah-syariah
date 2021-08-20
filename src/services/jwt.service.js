@@ -54,7 +54,8 @@ export const getAppname = () => {
     ? JSON.parse(aesDecrypt(window.sessionStorage.getItem(KEY_APP_NAME)))
     : "Bank Falah Syariah";
 };
-
+export const encrypt=(plain)=>aesEncrypt(plain)
+export const decrypt=(plain)=>aesDecrypt(plain)
 
 export const getCurrendUserId=()=>{
   return getUser().id;

@@ -125,9 +125,26 @@ export default {
     },
     getRouteMutasi(mutasi){
       if(mutasi.tipe_angsuran){
-        return `/main/mutasi/pembiayaan/${mutasi.no_rekening}`
+
+        const data ={
+         path: `/main/mutasi/pembiayaan`,
+          query:{
+            r:this.encryptPlain(mutasi.no_rekening),
+            q:Date.now(),
+            s:'f6ce8d9efde6'
+          }
+        }
+        return data
       }
-      return `/main/mutasi/simpanan/${mutasi.no_rekening}`
+      const data ={
+        path: `/main/mutasi/simpanan`,
+        query:{
+          r:this.encryptPlain(mutasi.no_rekening),
+          q:Date.now(),
+          s:'f6ce8d9efde6'
+        }
+      }
+      return data
     }
   }
 };

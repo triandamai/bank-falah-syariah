@@ -1,5 +1,6 @@
 import {mapState} from "vuex";
 import {formatCurrency} from "@/utils/utils";
+import {decrypt, encrypt} from "@/services/jwt.service"
 
 export default {
     props: ["show", "body","edit"],
@@ -8,6 +9,7 @@ export default {
             loading: false,
             dialog: false,
             files: null,
+            no_rekening:"",
             rasio_nasabah: null,
             rasio_bank: null,
             modal_tgl_buka: false,
@@ -138,6 +140,8 @@ export default {
         }),
     },
     methods: {
+        encryptPlain:(plain)=>encrypt(plain),
+        decryptPlain:(plain)=>decrypt(plain),
         formatCurrency: (total) => formatCurrency(total),
         getMonthString() {
             const date = new Date();
