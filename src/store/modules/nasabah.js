@@ -54,10 +54,10 @@ const actions = {
     [GET_NASABAH]({commit, state}, data) {
         return new Promise((resolve, reject) => {
             let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
-            ApiService.get(`nasabah${page}`)
+            ApiService.get(`nasabah${page}?zx=4sc43f8sdnds7er`)
                 .then(({status, data}) => {
                     if (status === 200 || status === 201) {
-                        if (data.current_page >= data.last_page) {
+                        if (state.currentpage >= data.last_page) {
                             //jangan ambil data lagi
                             resolve(false);
                         } else {
@@ -278,8 +278,8 @@ const mutations = {
     [SET_ERROR](state, data) {
         state.errors = data;
     },
-    [INCREMENT_PAGE]({currentpage}) {
-        currentpage = currentpage + 1;
+    [INCREMENT_PAGE](state) {
+        state.currentpage = state.currentpage + 1;
     },
     [ADD_NASABAH](state, data) {
         var exsts = state.datanasabah.some((nasabah) => {
