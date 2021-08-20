@@ -3,26 +3,22 @@
     <div class="col-sm-12">
       <v-stepper v-model="step" non-linear class="elevation-0">
         <v-stepper-header class="elevation-0">
-          <v-stepper-step :complete="step > 1" step="1">
+          <v-stepper-step editable :complete="step > 1" step="1">
             {{$t('Data Umum')}}
           </v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="step > 2" step="2">
+          <v-stepper-step editable :complete="step > 2" step="2">
             {{$t('Data Alamat')}}
           </v-stepper-step>
 
           <v-divider></v-divider>
 
-          <v-stepper-step :complete="step > 3" step="3">
+          <v-stepper-step editable :complete="step > 3" step="3">
             {{ $t('Data Pekerjaan') }}
           </v-stepper-step>
-          <v-divider></v-divider>
-          <v-stepper-step :complete="step > 4" step="4">
-            {{$t('Data Pendukung') }}
-          </v-stepper-step>
-          <v-divider></v-divider>
+
         </v-stepper-header>
 
         <v-stepper-items>
@@ -339,21 +335,12 @@
 
                 </v-col>
               </v-row>
-              <v-btn @click="goForward" outlined small> {{$t('Selanjutnya')}} </v-btn>
-
-              <v-btn @click="goBack" text> {{$t('Sebelumnya')}} </v-btn>
-            </v-container>
-          </v-stepper-content>
-          <v-stepper-content step="4">
-            <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
-              <v-row>
-
-              </v-row>
               <v-btn @click="onSubmit" outlined small> {{$t('Save')}} </v-btn>
 
               <v-btn @click="goBack" text> {{$t('Sebelumnya')}} </v-btn>
             </v-container>
           </v-stepper-content>
+
         </v-stepper-items>
       </v-stepper>
     </div>
@@ -412,7 +399,7 @@ mixins:[componentmixin],
       }
     },
     goForward() {
-      if (this.step === 4) return;
+      if (this.step === 3) return;
       this.step = this.step + 1;
     },
     removeBackStack(){
