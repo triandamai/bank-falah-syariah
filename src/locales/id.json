@@ -146,5 +146,7 @@
   "FAILED": "Gagal",
   "ERROR": "Terjadi kesalahan",
   "SUCCESS": "Sukses",
-  "VALIDATION": "Validasi gagal"
+  "VALIDATION": "Validasi gagal",
+  "Name of Akad": "Nama Akad *",
+  "Type of Akad": "Tipe Akad *"
 }

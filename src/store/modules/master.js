@@ -125,9 +125,10 @@ const actions = {
                 .then(({success, data, message}) => {
                     resolve({success: success, message: message});
                     if (success) {
+
                         commit(ADDDATAMASTER, {
                             type: type,
-                            data: data.data[0],
+                            data: data[0],
                         });
                     }
                 })
@@ -147,7 +148,7 @@ const actions = {
                     if (success) {
                         commit(EDITDATAMASTER, {
                             type: type,
-                            data: data.data[0],
+                            data: data[0],
                             olddata: body,
                         });
 
@@ -206,6 +207,7 @@ const mutations = {
     },
     [ADDDATAMASTER](state, {type, data}) {
         if (type === MAKAD) {
+
             const exist = state.dataakad.some((akad) => akad.id === data.id);
             if (!exist) {
                 state.dataakad.push(data);

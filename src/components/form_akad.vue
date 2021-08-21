@@ -13,7 +13,7 @@
             <v-row>
               <v-col cols="12">
                 <v-autocomplete
-                    v-model="form.tipe_produk"
+                    v-model="form.nama_produk"
                     :label="$t('Name of Akad')"
                     required
                     :items="nama_akad"
@@ -24,7 +24,7 @@
               <v-col cols="12">
                 <v-autocomplete
                     v-model="form.tipe_produk"
-                    :label="$t('Tipe Akad')"
+                    :label="$t('Type of Akad')"
                     required
                     :items="tipe_produk"
                     item-text="text"

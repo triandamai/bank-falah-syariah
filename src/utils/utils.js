@@ -20,7 +20,8 @@ export const getTodayDate=()=>{
 
 export const formatCurrency=(total)=>{
     if(total){
-      return total.toFixed(2).replace(/./g, function(c, i, a) {
+      const parse = parseFloat(total)
+      return parse.toFixed(2).replace(/./g, function(c, i, a) {
         return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
       });
     }

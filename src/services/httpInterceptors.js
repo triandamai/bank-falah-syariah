@@ -19,8 +19,7 @@
 import Vue from "vue"
 import i81n from "@/plugins/i18n"
 export const responseInterceptor=(response)=>{
-    console.log("response",response)
-    console.log("response",response)
+
     let shouldNext=false
     let message =""
     let data = []
@@ -44,6 +43,7 @@ export const responseInterceptor=(response)=>{
             shouldNext = false
             message = "Success Get Data"
         }else {
+            message = "Berhasil Proses"
             if(response.config.url === "login"){
 
                 Vue.notify({
@@ -53,7 +53,7 @@ export const responseInterceptor=(response)=>{
                     text:message
                 })
             }else {
-                message = "Berhasil Proses"
+
                 Vue.notify({
                     group:"bp",
                     title:i81n.t("SUCCESS"),

@@ -76,7 +76,7 @@ const actions = {
                 .then(({success, data,message}) => {
                     resolve({success:success,message:message})
                     if (success) {
-                        commit(ADD_NASABAH, data.data[0]);
+                        commit(ADD_NASABAH, data[0]);
                     }
                 })
                 // .catch(({response}) => {

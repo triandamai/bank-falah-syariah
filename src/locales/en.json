@@ -146,5 +146,7 @@
   "FAILED": "Failed",
   "ERROR": "Error",
   "SUCCESS": "Success",
-  "VALIDATION": "Error Validation"
+  "VALIDATION": "Error Validation",
+  "Name of Akad": "Name of Akad *",
+  "Type of Akad": "Type of Akad *"
 }
