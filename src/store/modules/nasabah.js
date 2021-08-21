@@ -71,47 +71,40 @@ const actions = {
      * @returns
      */
     [POST_NASABAH]({commit}, body) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             ApiService.post("nasabah", body)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
-
-
+                .then(({success, data,message}) => {
+                    resolve({success:success,message:message})
+                    if (success) {
                         commit(ADD_NASABAH, data.data[0]);
-                        resolve({success: true, message: "Berhasil menyimpan"});
-                    } else {
-                        resolve({
-                            success: false,
-                            message: "Gagal menyimpan,pastikan data sudah benar!",
-                        });
                     }
                 })
-                .catch(({response}) => {
-                    if (response.status === 401) {
-                        resolve({
-                            success: false,
-                            message: "Anda tidak memeiliki izin melakuka operasi ini!",
-                        });
-                        setTimeout(() => {
-                            router.push({path: "/unlock"})
-                        }, 3200)
-                        Vue.swal({
-                            title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                            html: 'Anda akan diarahkan ke halaman masuk.',
-                            timer: 3000
-                        })
-                    }else if(response.status === 400){
-                        resolve({
-                            success: false,
-                            message: response.data.error,
-                        });
-                    }else {
-                        resolve({
-                            success: false,
-                            message: response.message,
-                        });
-                    }
-                });
+                // .catch(({response}) => {
+                //     if (response.status === 401) {
+                //         resolve({
+                //             success: false,
+                //             message: "Anda tidak memeiliki izin melakuka operasi ini!",
+                //         });
+                //         setTimeout(() => {
+                //             router.push({path: "/unlock"})
+                //         }, 3200)
+                //         Vue.swal({
+                //             title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
+                //             html: 'Anda akan diarahkan ke halaman masuk.',
+                //             timer: 3000
+                //         })
+                //     }else if(response.status === 400){
+                //         resolve({
+                //             success: false,
+                //             message: response.data.error,
+                //         });
+                //     }else {
+                //         resolve({
+                //             success: false,
+                //             message: response.message,
+                //         });
+                //     }
+                // });
         });
     },
     /**
@@ -121,143 +114,53 @@ const actions = {
      * @returns
      */
     [IMPORT_NASABAH]({commit}, body) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             ApiService.post("nasabah/import", body)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
-                        data.data.map((item) => {
+                .then(({success, data,message}) => {
+                    resolve({success:success,message:message})
+                    if (success) {
+                        data.map((item) => {
                             commit(ADD_NASABAH, item);
-                        });
-                        resolve({success: true, message: "Berhasil import data nasabah"});
-                    } else {
-                        resolve({
-                            success: false,
-                            message: "Gagal import,pastikan data sudah benar!",
                         });
                     }
                 })
-                .catch(({response}) => {
-                    if (response.status === 401) {
-                        resolve({
-                            success: false,
-                            message: "Anda tidak memeiliki izin melakuka operasi ini!",
-                        });
-                        setTimeout(() => {
-                            router.push({path: "/unlock"})
-                        }, 3200)
-                        Vue.swal({
-                            title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                            html: 'Anda akan diarahkan ke halaman masuk.',
-                            timer: 3000
-                        })
-                    }else if(response.status === 400){
-                        resolve({
-                            success: false,
-                            message: response.data.error,
-                        });
-                    }else {
-                        resolve({
-                            success: false,
-                            message: response.message,
-                        });
-                    }
-                });
+
         });
     },
     /**
      *
-     * @param {*} param0
+     * @param {*} state
      * @param {*} body
      * @returns
      */
     [PUT_NASABAH]({commit}, body) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             ApiService.put(`nasabah/${body.id}`, body)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
-                        commit(EDIT_NASABAH, {data: data.data[0], olddata: body});
-                        resolve({success: true, message: "Berhasil mengubah"});
-                    } else {
-                        resolve({
-                            success: false,
-                            message: "Gagal mengubah,pastikan data sudah benar!",
-                        });
+                .then(({success, data,message}) => {
+                    resolve({success: success, message: message});
+                    if (success) {
+                        commit(EDIT_NASABAH, {data: data[0], olddata: body});
+
                     }
                 })
-                .catch(({response}) => {
-                    if (response.status === 401) {
-                        resolve({
-                            success: false,
-                            message: "Anda tidak memeiliki izin melakuka operasi ini!",
-                        });
-                        setTimeout(() => {
-                            router.push({path: "/unlock"})
-                        }, 3200)
-                        Vue.swal({
-                            title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                            html: 'Anda akan diarahkan ke halaman masuk.',
-                            timer: 3000
-                        })
-                    }else if(response.status === 400){
-                        resolve({
-                            success: false,
-                            message: response.data.error,
-                        });
-                    }else {
-                        resolve({
-                            success: false,
-                            message: response.message,
-                        });
-                    }
-                });
         });
     },
     /**
      *
-     * @param {*} param0
+     * @param {*} state
      * @param {*} body
      * @returns
      */
     [DELETE_NASABAH]({commit}, body) {
         return new Promise((resolve) => {
             ApiService.delete(`nasabah/${body.id}`, body)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
+                .then(({success,message}) => {
+                    resolve({success: success, message: message});
+                    if (success) {
+
                         commit(REMOVE_NASABAH, body);
-                        resolve({success: true, message: "Berhasil"});
-                    } else {
-                        resolve({
-                            success: false,
-                            message: "Gagal menhapus,pastikan data sudah benar!",
-                        });
                     }
                 })
-                .catch(({response}) => {
-                    if (response.status === 401) {
-                        resolve({
-                            success: false,
-                            message: "Anda tidak memeiliki izin melakuka operasi ini!",
-                        });
-                        setTimeout(() => {
-                            router.push({path: "/unlock"})
-                        }, 3200)
-                        Vue.swal({
-                            title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                            html: 'Anda akan diarahkan ke halaman masuk.',
-                            timer: 3000
-                        })
-                    }else if(response.status === 400){
-                        resolve({
-                            success: false,
-                            message: response.data.error,
-                        });
-                    }else {
-                        resolve({
-                            success: false,
-                            message: response.message,
-                        });
-                    }
-                });
         });
     },
 };
@@ -270,7 +173,7 @@ const mutations = {
         state.currentpage = state.currentpage + 1;
     },
     [ADD_NASABAH](state, data) {
-        var exsts = state.datanasabah.some((nasabah) => {
+        const exsts = state.datanasabah.some((nasabah) => {
             return nasabah.id === data.id;
         });
         if (!exsts) {
@@ -278,14 +181,15 @@ const mutations = {
         }
     },
     [EDIT_NASABAH](state, {data, olddata}) {
-        var index = state.datanasabah
+        const index = state.datanasabah
             .map((nasabah) => nasabah.id)
             .indexOf(olddata.id);
         Object.assign(state.datanasabah[index], data);
     },
     [REMOVE_NASABAH](state, data) {
-        var index = state.datanasabah.map((nasabah) => nasabah.id).indexOf(data.id);
-        state.datanasabah.splice(index);
+        const index = state.datanasabah.map((nasabah) => nasabah.id).indexOf(data.id);
+
+        state.datanasabah.splice(index,1);
     },
 };
 
