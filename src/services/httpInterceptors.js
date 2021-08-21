@@ -19,7 +19,7 @@ const defaultResponse = {
     shouldNext:false
 }
 export const responseInterceptor=(response)=>{
-    console.log("response",response)
+  //  console.log("response",response)
     let shouldNext=false
     let message =""
     let data = []
@@ -55,7 +55,7 @@ export const responseInterceptor=(response)=>{
  * catch every error
  * **/
 export const errorInterceptor=(error)=>{
-    console.log("error",error.response)
+  //  console.log("error",error.response)
 
-    return Promise.resolve(error.response)
+    return Promise.resolve(defaultResponse)
 }
