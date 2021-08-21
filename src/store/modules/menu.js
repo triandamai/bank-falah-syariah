@@ -2,7 +2,6 @@
 import ApiServices from "@/services/api.service";
 
 const state = {
-
   searchData: [],
   togglesidebar: true,
   menu: []
@@ -109,21 +108,12 @@ const actions = {
   getMenu: ({ commit }) => {
     return new Promise((resolve) => {
       ApiServices.get(`/route?param=dsvgdv`)
-        .then(({status,data}) => {
-          if (status === 201 || status === 200) {
-            resolve({ success: true, message: "sukses" });
-            commit("setMenu", data.data.data);
-          } else {
-            resolve({ success: false, message: status });
+        .then(({success,message,data}) => {
+          resolve({ success: success, message: message });
+          if (success) {
+            commit("setMenu", data);
           }
-        }).catch(() => {
-
-            resolve({
-              success: false,
-              message: "Terjadi kesalahan coba lagi nanti!",
-            });
-
-        });
+        })
     });
   }
 };

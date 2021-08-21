@@ -52,28 +52,16 @@ const actions = {
      * @returns Should goto next page ?
      */
     [GET_NASABAH]({commit, state}, data) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
             ApiService.get(`nasabah${page}?zx=4sc43f8sdnds7er`)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
-                        if (state.currentpage >= data.last_page) {
-                            //jangan ambil data lagi
-                            resolve(false);
-                        } else {
-                            commit(INCREMENT_PAGE);
-                            resolve(true);
-                        }
-                        data.data.map((item) => {
-                            commit(ADD_NASABAH, item);
-                        });
-                    } else {
-                        resolve(false);
-                    }
+                .then(({data,shouldNext}) => {
+                     resolve(shouldNext)
+                     //loop and add to datatable
+                     data.map((item) => {
+                        commit(ADD_NASABAH, item);
+                     });
                 })
-                .catch((e) => {
-                    resolve(false);
-                });
         });
     },
     /**

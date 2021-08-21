@@ -2,6 +2,7 @@ import Vue from "vue";
 import axios from "axios";
 import VueAxios from "vue-axios";
 import  {getToken} from "@/services/jwt.service";
+import {responseInterceptor,errorInterceptor} from "@/services/httpInterceptors"
 
 /**
  * Service to call HTTP request via Axios
@@ -10,6 +11,7 @@ import  {getToken} from "@/services/jwt.service";
 const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
+    Vue.axios.interceptors.response.use(responseInterceptor,errorInterceptor)
 
     this.setHeader();
   },

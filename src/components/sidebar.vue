@@ -414,7 +414,8 @@ export default {
   },
   computed: {
     ...mapState({
-      menuItems: (state) =>  state.menu.menu,
+      menuItems: (state) => state.menu.menu
+      ,
       layout: (state) => state.layout.layout,
       sidebar: (state) => state.layout.sidebarType,
     }),
