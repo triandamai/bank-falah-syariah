@@ -18,6 +18,13 @@
  * **/
 import Vue from "vue"
 import i81n from "@/plugins/i18n"
+
+/**
+ * response interceptor
+ * all request (2xx) before passing to `store` will be filter first in this interceptor
+ * @param response
+ *
+***/
 export const responseInterceptor=(response)=>{
 
     let shouldNext=false
@@ -77,8 +84,11 @@ export const responseInterceptor=(response)=>{
     }
 }
 /**
- * catch every error
- * **/
+ * error interceptor
+ * all request fail (4xx,5xx) before passing to `store` will be filter first in this interceptor
+ * @param error
+ *
+ ***/
 export const errorInterceptor=(error)=>{
   //  console.log("error",error.response)
 
