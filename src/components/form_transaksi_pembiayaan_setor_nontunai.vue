@@ -89,19 +89,8 @@ export default {
       this.form.tgl_transaksi = getTodayDate()
       this.form.petugas_id = getCurrendUserId()
       this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:PEMBIAYAAN_SETOR_NONTUNAI})
-          .then(({success,message})=>{
+          .then(()=>{
             this.overlay = false
-            this.$toasted.show(
-                success
-                    ? this.$t("Success Message", { context: `${message}` })
-                    : this.$t("Failed Message", { context: `${message}` }),
-                {
-                  theme: "bubble",
-                  position: "top-right",
-                  type: success ? "success" : "error",
-                  duration: 4000,
-                }
-            );
           })
     },
   }

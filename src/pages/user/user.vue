@@ -99,17 +99,7 @@ export default {
           }
         )
         .then(({ success, message }) => {
-          this.$toasted.show(
-            success
-              ? this.$t("Success Message", { context: `${message}` })
-              : this.$t("Failed Message", { context: `${message}` }),
-            {
-              theme: "bubble",
-              position: "top-right",
-              type: success ? "success" : "error",
-              duration: 4000,
-            }
-          );
+
           if (success) {
             this.form = false;
             this.body = {};
@@ -134,19 +124,7 @@ export default {
 
               body: data,
             })
-            .then(({ success, message }) => {
-              this.$toasted.show(
-                success
-                  ? this.$t("Success Message", { context: `${message}` })
-                  : this.$t("Failed Message", { context: `${message}` }),
-                {
-                  theme: "bubble",
-                  position: "top-right",
-                  type: success ? "success" : "error",
-                  duration: 4000,
-                }
-              );
-            });
+
         }
       });
     },

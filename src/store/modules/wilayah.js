@@ -52,30 +52,18 @@ const actions = {
           break;
       }
       ApiService.getWilayah(resource)
-        .then(({ status, data }) => {
-          if (status === 200 || status === 201) {
-            if (data.data.current_page >= data.data.last_page) {
-              stillPaging = false;
-              resolve(false);
-            } else {
+        .then(({  data,shouldNext }) => {
+            resolve(shouldNext);
+            if (shouldNext) {
               commit(INCREMENT_PAGE, { type: type });
-              resolve(true);
-              stillPaging = true;
             }
-            data.data.data.map((wilayah) => {
+            data.map((wilayah) => {
               commit(ADD_DATA_WILAYAH, {
                 type: type,
-                page: stillPaging,
                 data: wilayah,
               });
             });
-          } else {
-            resolve(false);
-          }
         })
-        .catch(() => {
-          resolve(false);
-        });
     });
   },
 };

@@ -92,19 +92,6 @@ export default {
         if (value) {
           this.$store
             .dispatch(ACTION_DELETE_NASABAH, nasabah)
-            .then(({ success, message }) => {
-              this.$toasted.show(
-                success
-                  ? this.$t("Success Message", { context: `${message}` })
-                  : this.$t("Failed Message", { context: `${message}` }),
-                {
-                  theme: "bubble",
-                  position: "top-right",
-                  type: success ? "success" : "error",
-                  duration: 4000,
-                }
-              );
-            });
         }
       });
     },

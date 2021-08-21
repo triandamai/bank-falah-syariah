@@ -139,5 +139,12 @@
   "Import Siswa": "Import Siswa",
   "Data User": "Data Pengguna",
   "subtitleuser": "Data Pengguna Bank Falah Syariah",
-  "HTTP_500": "Gagal Mendapatkan respon dari server"
+  "HTTP_500": "Gagal Mendapatkan respon dari server",
+  "HTTP_VALIDATION": "Beberapa isian wajib diisi {context}",
+  "HTTP_UNAUTHORIZED": "Anda tidak memiliki akses untuk proses ini !",
+  "UNAUTHORIZED": "Access Ditolak",
+  "FAILED": "Gagal",
+  "ERROR": "Terjadi kesalahan",
+  "SUCCESS": "Sukses",
+  "VALIDATION": "Validasi gagal"
 }

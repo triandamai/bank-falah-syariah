@@ -8,6 +8,8 @@
       </div>
     </div>
     <!-- Loader ends-->
+<!--    notif     -->
+    <notifications group="bp" />
     <!--<Main/>-->
     <v-app>
       <router-view></router-view>

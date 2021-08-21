@@ -71,18 +71,7 @@ export default {
                     username: username,
                     password: password,
                 })
-                .then(({ success, message }) => {
-                    this.$toasted.show(
-                        success
-                            ? this.$t("Success Message", { context: `${message}` })
-                            : this.$t("Failed Message", { context: `${message}` }),
-                        {
-                            theme: "bubble",
-                            position: "top-right",
-                            type: success ? "success" : "error",
-                            duration: 2000,
-                        }
-                    );
+                .then(({ success }) => {
                     this.overlay = false;
                     if (success) {
 

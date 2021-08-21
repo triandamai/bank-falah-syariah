@@ -118,7 +118,7 @@ const actions = {
                     let transaksi = 0;
                     let nasabah = 0;
                     let max = 0;
-                    data.data.map(item => {
+                    data.map(item => {
                         if (item.nasabah > max) {
                             max = item.nasabah;
                         }

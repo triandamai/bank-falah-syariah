@@ -139,5 +139,12 @@
   "Import Siswa": "Import Student",
   "Data User": "Data User",
   "subtitleuser": "Data user Bank Falah Syariah",
-  "HTTP_500": "Failed get response from server"
+  "HTTP_500": "Failed get response from server",
+  "HTTP_VALIDATION": "Some fill is required {context}",
+  "HTTP_UNAUTHORIZED": "You don't have permission for this action !",
+  "UNAUTHORIZED": "Access Deny",
+  "FAILED": "Failed",
+  "ERROR": "Error",
+  "SUCCESS": "Success",
+  "VALIDATION": "Error Validation"
 }

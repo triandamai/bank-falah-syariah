@@ -118,7 +118,7 @@ const actions = {
                 .then(({data, shouldNext}) => {
                     //success
                     resolve(shouldNext)
-                    data.data.map((item) => {
+                    data.map((item) => {
                         commit(ADD_DATA_REKENING, {
                             type: type,
                             item: item,
