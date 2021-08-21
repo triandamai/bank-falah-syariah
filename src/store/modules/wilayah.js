@@ -33,7 +33,6 @@ const actions = {
    */
   [GET_WILAYAH]({ commit, state }, { type, query }) {
     return new Promise((resolve) => {
-      let stillPaging = false;
       let resource = ``;
       switch (type) {
         case WPROVINSI:

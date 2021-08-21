@@ -98,7 +98,7 @@ export default {
             body: data,
           }
         )
-        .then(({ success, message }) => {
+        .then(({ success }) => {
 
           if (success) {
             this.form = false;

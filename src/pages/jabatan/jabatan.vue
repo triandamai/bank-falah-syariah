@@ -84,7 +84,7 @@ export default {
           this.isEdit ? ACTION_PUT_DATA_MASTER : ACTION_POST_DATA_MASTER,
           { type: MJABATAN, body: data }
         )
-        .then(({ success, message }) => {
+        .then(({ success }) => {
           if (success) {
             this.form = false;
             this.body = {};

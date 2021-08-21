@@ -8,7 +8,6 @@
       </div>
     </div>
     <!-- Loader ends-->
-<!--    notif     -->
     <notifications group="bp" />
     <!--<Main/>-->
     <v-app>
@@ -147,6 +146,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
 .loader-wrapper.loderhide {
   display: none;
 }
