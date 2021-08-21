@@ -96,44 +96,34 @@ const mutations = {
     }
   },
   [ADD_DATA_WILAYAH](state, { type, data }) {
-    switch (type) {
-      case WPROVINSI:
-        // eslint-disable-next-line no-redeclare
-        var exist = state.provinsi.data.some((provinsi) => {
-          return provinsi.provIdProvinsi === data.provIdProvinsi;
-        });
-        if (!exist) {
-          state.provinsi.data.push(data);
-        }
-        break;
-      case WKABUPATEN:
-        // eslint-disable-next-line no-redeclare
-        var exist = state.kabupaten.data.some((kabupaten) => {
-          return kabupaten.kabIdKabupaten === data.kabIdKabupaten;
-        });
-        if (!exist) {
-          state.kabupaten.data.push(data);
-        }
-        break;
-      case WKECAMATAN:
-        // eslint-disable-next-line no-redeclare
-        var exist = state.kecamatan.data.some((kecamatan) => {
-          return kecamatan.kecIdKecamatan === data.kecIdKecamatan;
-        });
-        if (!exist) {
-          state.kecamatan.data.push(data);
-        }
-        break;
-      case WDESA:
-        // eslint-disable-next-line no-redeclare
-        var exist = state.desa.data.some((desa) => {
-          return desa.desIdDesa === data.desIdDesa;
-        });
-        if (!exist) {
-          state.desa.data.push(data);
-        }
-        break;
+    if(type === WPROVINSI) {        // eslint-disable-next-line no-redeclare
+      const exist = state.provinsi.data.some((provinsi) =>provinsi.provIdProvinsi === data.provIdProvinsi);
+      if (!exist) {
+        state.provinsi.data.push(data);
+      }
     }
+    if(type === WKABUPATEN) {
+      // eslint-disable-next-line no-redeclare
+      const exist = state.kabupaten.data.some((kabupaten) =>kabupaten.kabIdKabupaten === data.kabIdKabupaten);
+      if (!exist) {
+        state.kabupaten.data.push(data);
+      }
+    }
+    if(type === WKECAMATAN) {
+      // eslint-disable-next-line no-redeclare
+      const exist = state.kecamatan.data.some((kecamatan) =>kecamatan.kecIdKecamatan === data.kecIdKecamatan);
+      if (!exist) {
+        state.kecamatan.data.push(data);
+      }
+    }
+    if(type === WDESA) {
+      // eslint-disable-next-line no-redeclare
+      const exist = state.desa.data.some((desa) =>desa.desIdDesa === data.desIdDesa);
+      if (!exist) {
+        state.desa.data.push(data);
+      }
+    }
+
   },
 };
 
