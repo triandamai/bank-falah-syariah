@@ -4,8 +4,7 @@
  *
  */
 import ApiService from "@/services/api.service.js";
-import router from "@/router";
-import Vue from "vue";
+
 
 export const TABUNGAN_TARIK_TUNAI = "TABUNGAN_TARIK_TUNAI";
 export const TABUNGAN_TARIK_NONTUNAI = "TABUNGAN_TARIK_NONTUNAI";
@@ -26,7 +25,7 @@ const actions = {
     // eslint-disable-next-line no-unused-vars
     [TRANSACTION]({commit}, {payload, type}) {
         return new Promise((resolve) => {
-            var endpoint = "";
+            let endpoint = "";
             switch (type) {
                 case  TABUNGAN_TARIK_TUNAI:
                     endpoint = "/transaksi/simpanan/tarik_tunai"
@@ -54,16 +53,9 @@ const actions = {
                     break
             }
 
-            ApiService.post(`${endpoint}`, payload).then(({status, data}) => {
-                if (status === 200 || status === 201) {
-                    if (data.status === 200 || data.status === 201) {
-                        resolve({success: true, message: "Berhasil menyimpan"});
-                    } else {
-                        resolve({success: false, message: "Terjadi Kesalahan"})
-                    }
-                } else {
-                    resolve({success: false, message: "Terjadi Kesalahan"})
-                }
+            ApiService.post(`${endpoint}`, payload)
+                .then(({success, message}) => {
+                    resolve({success: success, message: message});
             })
         });
     }
