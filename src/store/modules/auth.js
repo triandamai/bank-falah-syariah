@@ -41,35 +41,23 @@ const actions = {
    *
    */
   [LOGIN]({ commit }, credentials) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve,) => {
       ApiService.post("login", {
         username: credentials.username,
         password: credentials.password,
       })
-        .then(({ status, data }) => {
-          // console.log(res);
-          if (status == 200 || status == 201) {
-            commit(SET_AUTH, data);
+        .then(({ success,message,data }) => {
 
-            resolve({ success: true, message: "Berhasil Masuk" });
-          } else {
-            resolve({
-              success: false,
-              message: "Username dan Password tidak dikenali!",
-            });
+          resolve({ success: success, message: message });
+          if (success) {
+            commit(SET_AUTH, data);
           }
         })
-        .catch((e) => {
-          resolve({
-            success: false,
-            message: "Terjadi kesalahan silahkan coba lagi nanti!",
-          });
-        });
     });
   },
   /***
    * Logout
-   * @param
+   * @params {}
    * @return action logout
    *
    */

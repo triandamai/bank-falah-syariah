@@ -56,14 +56,11 @@ const state = {
 const actions = {
     /***
      * get data
-     * @param {type,path,id}
+     * @params {type,path,id}
      * @todo
      * @returns promise true/false if true get data always repeat until last_page
-     *
-     * @param type
-     * @param id
      */
-    [GET_DATA_SYSTEM]({commit, state}, {type, id}) {
+    [GET_DATA_SYSTEM]({commit, state}, {type}) {
         return new Promise((resolve) => {
             //get pagination
             let page = `?page=`;
@@ -81,70 +78,32 @@ const actions = {
             }
 
             ApiService.get(`${type}${page}`)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
-                        if (data.current_page >= data.last_page) {
-                            //jangan ambil data lagi
-                            resolve(false);
-
-                        } else {
-                            resolve(true);
-
-                        }
-                        data.data.map((item) => {
+                .then(({shouldNext, data}) => {
+                       resolve(shouldNext);
+                        data.map((item) => {
                             commit(ADD_DATA_SYSTEM, {
                                 type: type,
                                 data: item,
                             });
                         });
-                    } else {
-                        resolve(false);
-                    }
+
                 })
-                .catch((e) => {
-                    resolve(false);
-                });
+
         });
     },
     [POST_IMPORT_USER]({commit, state}, {data}) {
         return new Promise((resolve) => {
-            ApiService.post(`user/siswa/import`, {siswa: data}).then(({status, data}) => {
-                if (status === 200 || status === 201) {
+            ApiService.post(`user/siswa/import`, {siswa: data})
+                .then(({success,message, data}) => {
+                    resolve({success: success, message: message})
+                if (success) {
 
-                    data.data.map(siswa => {
-
+                    data.map(siswa => {
                         commit(ADD_DATA_SYSTEM, {type: SUSER, data: siswa})
                     })
-                    resolve({success: true, message: "Berhasil Meng-import siswa"})
-                } else {
-                    resolve({success: false, message: "Berhasil Meng-import siswa"})
+
                 }
-            }).catch(({response}) => {
-                if (response.status === 401) {
-                    resolve({
-                        success: false,
-                        message: "Anda tidak memeiliki izin melakuka operasi ini!",
-                    });
-                    setTimeout(() => {
-                        router.push({path: "/unlock"})
-                    }, 3200)
-                    Vue.swal({
-                        title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                        html: 'Anda akan diarahkan ke halaman masuk.',
-                        timer: 3000
-                    })
-                }else if(response.status === 400){
-                    resolve({
-                        success: false,
-                        message: response.data.error,
-                    });
-                }else {
-                    resolve({
-                        success: false,
-                        message: response.message,
-                    });
-                }
-            });
+            })
         })
     },
     /***
@@ -156,37 +115,17 @@ const actions = {
      * @param body
      */
     [POST_DATA_SYSTEM]({commit}, {type, body}) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             ApiService.post(`${type === SUSER ? 'user' : type === SROLE ? 'role' : 'group'}`, body)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
+                .then(({success,message, data}) => {
+                    resolve({success: success, message: message});
+                    if (success) {
                         commit(ADD_DATA_SYSTEM, {
                             type: type,
-                            data: data.data[0],
-                        });
-                        resolve({success: true, message: "Berhasil menyimpan"});
-                    } else {
-                        resolve({
-                            success: false,
-                            message: "Gagal menyimpan,pastikan data sudah benar!",
+                            data: data[0],
                         });
                     }
-                }).catch(({response}) => {
-                resolve({
-                    success: false,
-                    message: "Terjadi kesalahan silahkan coba lagi nanti!",
-                });
-                if (response.status === 401) {
-                    setTimeout(() => {
-                        router.push({path: "/unlock"})
-                    }, 3200)
-                    Vue.swal({
-                        title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                        html: 'Anda akan diarahkan ke halaman masuk.',
-                        timer: 3000
-                    })
-                }
-            });
+                })
         });
     },
     /***
@@ -202,38 +141,17 @@ const actions = {
     [PUT_DATA_SYSTEM]({commit}, {type, body}) {
         return new Promise((resolve) => {
             ApiService.put(`${type === SUSER ? 'user' : type === SROLE ? 'role' : 'group'}/${body.id}`, body)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
-
+                .then(({success,message, data}) => {
+                    resolve({success: success, message: message});
+                    if (success) {
                         commit(EDIT_DATA_SYSTEM, {
                             type: type,
-                            data: data.data[0],
+                            data:data[0],
                             olddata: body,
                         });
-                        resolve({success: true, message: "Berhasil mengubah!"});
-                    } else {
-                        resolve({
-                            success: false,
-                            message: "Gagal mengubah,pastikan data sudah benar!",
-                        });
+
                     }
                 })
-                .catch(({response}) => {
-                    resolve({
-                        success: false,
-                        message: "Terjadi kesalahan silahkan coba lagi nanti!",
-                    });
-                    if (response.status === 401) {
-                        setTimeout(() => {
-                            router.push({path: "/unlock"})
-                        }, 3200)
-                        Vue.swal({
-                            title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                            html: 'Anda akan diarahkan ke halaman masuk.',
-                            timer: 3000
-                        })
-                    }
-                });
         });
     },
     /***
@@ -246,36 +164,16 @@ const actions = {
     [DELETE_DATA_SYSTEM]({commit}, {type, body}) {
         return new Promise((resolve) => {
             ApiService.delete(`${type === SUSER ? 'user' : type === SROLE ? 'role' : 'group'}/${body.id}`)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
+                .then(({success, message}) => {
+                    resolve({success: success, message: message});
+                    if (success) {
                         commit(REMOVE_DATA_SYSTEM, {
                             type: type,
                             data: body,
                         });
-                        resolve({success: true, message: "Berhasil menghapus!"});
-                    } else {
-                        resolve({
-                            success: false,
-                            message: "Gagal menghapus,pastikan data sudah benar!",
-                        });
+
                     }
                 })
-                .catch(({response}) => {
-                    resolve({
-                        success: false,
-                        message: "Terjadi kesalahan silahkan coba lagi nanti!",
-                    });
-                    if (response.status === 401) {
-                        setTimeout(() => {
-                            router.push({path: "/unlock"})
-                        }, 3200)
-                        Vue.swal({
-                            title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                            html: 'Anda akan diarahkan ke halaman masuk.',
-                            timer: 3000
-                        })
-                    }
-                });
         });
     },
 };
@@ -301,32 +199,25 @@ const mutations = {
      * @param state
      */
     [ADD_DATA_SYSTEM](state, {type, data}) {
-        switch (type) {
-            case SUSER:
-                var exist = state.datausers.some((user) => {
-                    return user.id === data.id;
-                });
-                if (!exist) {
-                    state.datausers.push(data);
-                }
-                break;
-            case SROLE:
-                var exist = state.dataroles.some((role) => {
-                    return role.id === data.id;
-                });
-                if (!exist) {
-                    state.dataroles.push(data);
-                }
-                break;
-            case SGROUP:
-                var exist = state.datagroups.some((group) => {
-                    return group.id === data.id;
-                });
-                if (!exist) {
-                    state.datagroups.push(data);
-                }
-                break;
+        if(type === SUSER) {
+            const exist = state.datausers.some((user) => user.id === data.id);
+            if (!exist) {
+                state.datausers.push(data);
+            }
         }
+        if(type === SROLE) {
+            const exist = state.dataroles.some((role) => role.id === data.id);
+            if (!exist) {
+                state.dataroles.push(data);
+            }
+        }
+        if(type === SGROUP) {
+            const exist = state.datagroups.some((group) => group.id === data.id);
+            if (!exist) {
+                state.datagroups.push(data);
+            }
+        }
+
     },
     /***
      * add updated data to existing data
@@ -334,22 +225,21 @@ const mutations = {
      * @param state
      */
     [EDIT_DATA_SYSTEM](state, {type, data, olddata}) {
-        switch (type) {
-            case SUSER:
-                var index = state.datausers.map((user) => user.id).indexOf(olddata.id);
-                Object.assign(state.datausers[index], data);
-                break;
-            case SGROUP:
-                var index = state.datagroups
-                    .map((group) => group.id)
-                    .indexOf(olddata.id);
-                Object.assign(state.datagroups[index], data);
-                break;
-            case SROLE:
-                var index = state.dataroles.map((role) => role.id).indexOf(olddata.id);
-                Object.assign(state.dataroles[index], data);
-                break;
-        }
+    if(type === SUSER) {
+        const index = state.datausers.map((user) => user.id).indexOf(olddata.id);
+        Object.assign(state.datausers[index], data);
+    }
+    if(type === SGROUP) {
+        const index = state.datagroups
+            .map((group) => group.id)
+            .indexOf(olddata.id);
+        Object.assign(state.datagroups[index], data);
+    }
+    if(type === SROLE) {
+        const index = state.dataroles.map((role) => role.id).indexOf(olddata.id);
+        Object.assign(state.dataroles[index], data);
+    }
+
     },
 
     /***
@@ -359,20 +249,19 @@ const mutations = {
      * @param state
      */
     [REMOVE_DATA_SYSTEM](state, {type, data}) {
-        switch (type) {
-            case SUSER:
-                var index = state.datausers.map((user) => user.id).indexOf(data.id);
-                state.datausers.splice(index);
-                break;
-            case SGROUP:
-                var index = state.datagroups.map((group) => group.id).indexOf(data.id);
-                state.datagroups.splice(index);
-                break;
-            case SROLE:
-                var index = state.dataroles.map((role) => role.id).indexOf(data.id);
-                state.dataroles.splice(index);
-                break;
+        if(type === SUSER) {
+            const index = state.datausers.map((user) => user.id).indexOf(data.id);
+            state.datausers.splice(index,1);
         }
+        if(type === SGROUP) {
+            const index = state.datagroups.map((group) => group.id).indexOf(data.id);
+            state.datagroups.splice(index,1);
+        }
+        if(type === SROLE) {
+            const index = state.dataroles.map((role) => role.id).indexOf(data.id);
+            state.dataroles.splice(index,1);
+        }
+
     },
 };
 

@@ -8,8 +8,6 @@
 import ApiService from "@/services/api.service";
 import {decrypt} from "@/services/jwt.service"
 import {formatCurrency} from "@/utils/utils";
-import router from "@/router";
-import Vue from "vue";
 
 /***
  * dspatch type
@@ -97,7 +95,7 @@ const actions = {
      * @param type
      */
     [GET_DATA_REKENING]({commit, state}, {type}) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             //cek pagination (get current page)
             let page = `?page=`;
             //for mutation the pagination going forward or stop
@@ -117,32 +115,17 @@ const actions = {
 
             //get
             ApiService.get(`${type}${page}`)
-                .then(({status, data}) => {
+                .then(({data, shouldNext}) => {
                     //success
-                    if (status === 200 || status === 201) {
-                        if (data.current_page >= data.last_page) {
-                            resolve(false);
-                            stillPaging = false;
-                        } else {
-                            commit(INCREMENT_PAGE);
-                            resolve(true);
-                            stillPaging = true;
-                        }
-                        data.data.map((item) => {
-                            commit(ADD_DATA_REKENING, {
-                                type: type,
-                                item: item,
-                                page: stillPaging,
-                            });
+                    resolve(shouldNext)
+                    data.data.map((item) => {
+                        commit(ADD_DATA_REKENING, {
+                            type: type,
+                            item: item,
+                            page: stillPaging,
                         });
-                    } else {
-                        //failed
-                        resolve(false);
-                    }
+                    });
                 })
-                .catch((e) => {
-                    resolve(false);
-                });
         });
     },
 
@@ -150,23 +133,13 @@ const actions = {
         return new Promise((resolve) => {
             const decrypt_no_rekening = decrypt(no_rekening)
             ApiService.get(`${type}${decrypt_no_rekening}/mutasi?t=${new Date().getMilliseconds()}`)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
-                        resolve(true)
+                .then(({success, data}) => {
+                    resolve(success)
+                    data.data.map(mutasi => {
 
-                        data.data.map(mutasi => {
+                        commit(MUTASI_REKENING, {type: type, mutasi: mutasi})
+                    })
 
-                            commit(MUTASI_REKENING, {type: type, mutasi: mutasi})
-                        })
-                    } else {
-                        resolve(false)
-                    }
-                })
-                .catch(() => {
-                    resolve({
-                        success: false,
-                        message: "Terjadi kesalahan coba lagi nanti!",
-                    });
                 })
         })
     },
@@ -174,12 +147,9 @@ const actions = {
         return new Promise((resolve) => {
             const decrypt_no_rekening = decrypt(no_rekening)
             ApiService.get(`${type}${decrypt_no_rekening}/saldo?t=${new Date().getMilliseconds()}`)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
-                        resolve(true)
-                        commit(SET_SALDO, {type: type, saldo: data.data})
-
-                    }
+                .then(({success, data}) => {
+                    resolve(success)
+                    commit(SET_SALDO, {type: type, saldo: data})
                 })
         })
     },
@@ -190,49 +160,19 @@ const actions = {
      * @param body
      */
     [POST_DATA_REKENING]({commit}, {type, body}) {
-        return new Promise((resolve, reject) => {
-
-
+        return new Promise((resolve) => {
             ApiService.post(`${type}`, body)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
-                        console.log(data)
+                .then(({success, message, data}) => {
+                    resolve({success: success, message: message});
+                    if (success) {
                         commit(ADD_DATA_REKENING, {
                             type: type,
-                            item: data.data[0],
+                            item: data[0],
                             page: false,
                         });
-                        resolve({success: true, message: "Berhasil"});
-                    } else {
-                        resolve({success: false, message: "Gagal"});
+
                     }
                 })
-                .catch(({response}) => {
-                    if (response.status === 401) {
-                        resolve({
-                            success: false,
-                            message: "Anda tidak memeiliki izin melakuka operasi ini!",
-                        });
-                        setTimeout(() => {
-                            router.push({path: "/unlock"})
-                        }, 3200)
-                        Vue.swal({
-                            title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                            html: 'Anda akan diarahkan ke halaman masuk.',
-                            timer: 3000
-                        })
-                    }else if(response.status === 400){
-                        resolve({
-                            success: false,
-                            message: response.data.error,
-                        });
-                    }else {
-                        resolve({
-                            success: false,
-                            message: response.message,
-                        });
-                    }
-                });
         });
     },
     /***
@@ -241,44 +181,18 @@ const actions = {
     [PUT_DATA_REKENING]({commit}, {type, body}) {
         return new Promise((resolve, reject) => {
             ApiService.put(`${type}/${body.id}`, body)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
+                .then(({success, message, data}) => {
+                    resolve({success: success, message: message});
+                    if (success) {
                         commit(EDIT_DATA_REKENING, {
                             type: type,
-                            data: data.data[0],
+                            data: data[0],
                             olddata: body,
                         });
-                        resolve({success: true, message: "Berhasil"});
-                    } else {
-                        resolve({success: false, message: "Berhasil"});
+
                     }
                 })
-                .catch(({response}) => {
-                    if (response.status === 401) {
-                        resolve({
-                            success: false,
-                            message: "Anda tidak memeiliki izin melakuka operasi ini!",
-                        });
-                        setTimeout(() => {
-                            router.push({path: "/unlock"})
-                        }, 3200)
-                        Vue.swal({
-                            title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                            html: 'Anda akan diarahkan ke halaman masuk.',
-                            timer: 3000
-                        })
-                    }else if(response.status === 400){
-                        resolve({
-                            success: false,
-                            message: response.data.error,
-                        });
-                    }else {
-                        resolve({
-                            success: false,
-                            message: response.message,
-                        });
-                    }
-                });
+
         });
     },
     /***
@@ -288,45 +202,18 @@ const actions = {
      * @param body
      */
     [DELETE_DATA_REKENING]({commit}, {type, body}) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             ApiService.delete(`${type}/${body.id}`)
-                .then(({status, data}) => {
-                    if (status === 200 || status === 201) {
+                .then(({success, message}) => {
+                    resolve({success: success, message: message});
+                    if (success) {
                         commit(REMOVE_DATA_REKENING, {
                             type: type,
                             data: body,
                         });
-                        resolve({success: true, message: "Berhasil"});
-                    } else {
-                        resolve({success: false, message: "Berhasil"});
+
                     }
                 })
-                .catch(({response}) => {
-                    if (response.status === 401) {
-                        resolve({
-                            success: false,
-                            message: "Anda tidak memeiliki izin melakuka operasi ini!",
-                        });
-                        setTimeout(() => {
-                            router.push({path: "/unlock"})
-                        }, 3200)
-                        Vue.swal({
-                            title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                            html: 'Anda akan diarahkan ke halaman masuk.',
-                            timer: 3000
-                        })
-                    }else if(response.status === 400){
-                        resolve({
-                            success: false,
-                            message: response.data.error,
-                        });
-                    }else {
-                        resolve({
-                            success: false,
-                            message: response.message,
-                        });
-                    }
-                });
         });
     },
     /***
@@ -338,23 +225,20 @@ const mutations = {
     [MUTASI_REKENING](state, {type, mutasi}) {
 
         if (type === MUTASI_PEMBIAYAAN) {
-            var exist = state.mutasi.pembiayaan.some((pembiayaan) => {
-                return pembiayaan.id === mutasi.id;
-            });
+            const exist = state.mutasi.pembiayaan.some((pembiayaan) => pembiayaan.id === mutasi.id);
             if (exist) {
-                var index = state.mutasi.pembiayaan
+                const index = state.mutasi.pembiayaan
                     .map((pembiayaan) => pembiayaan.id)
                     .indexOf(mutasi.id);
                 Object.assign(state.mutasi.pembiayaan[index], mutasi);
             } else {
                 state.mutasi.pembiayaan.push(mutasi)
             }
-        } else {
-            var exist = state.mutasi.simpanan.some((simpanan) => {
-                return simpanan.id === mutasi.id;
-            });
+        }
+        if (type === MUTASI_SIMPANAN) {
+            const exist = state.mutasi.simpanan.some((simpanan) => simpanan.id === mutasi.id);
             if (exist) {
-                var index = state.mutasi.simpanan
+                const index = state.mutasi.simpanan
                     .map((simpanan) => simpanan.id)
                     .indexOf(mutasi.id);
                 Object.assign(state.mutasi.simpanan[index], mutasi);
@@ -403,32 +287,25 @@ const mutations = {
      */
     [ADD_DATA_REKENING](state, {type, item, page}) {
         //push data with type rekening assosiated
-        switch (type) {
-            case RPEMBIAYAAN:
-                var exist = state.datapembiayaan.some((pembiayaan) => {
-                    return pembiayaan.id === item.id;
-                });
-                if (!exist) {
-                    state.datapembiayaan.push(item);
-                }
-                break;
-            case RTABUNGAN:
-                var exist = state.datasimpanan.some((tabungan) => {
-                    return tabungan.id === item.id;
-                });
-                if (!exist) {
-                    state.datasimpanan.push(item);
-                }
-                break;
-            case RDEPOSITO:
-                var exist = state.datadeposito.some((deposito) => {
-                    return deposito.id === item.id;
-                });
-                if (!exist) {
-                    state.datadeposito.push(item);
-                }
-                break;
+        if (type === RPEMBIAYAAN) {
+            const exist = state.datapembiayaan.some((pembiayaan) => pembiayaan.id === item.id);
+            if (!exist) {
+                state.datapembiayaan.push(item);
+            }
         }
+        if (type === RTABUNGAN) {
+            const exist = state.datasimpanan.some((tabungan) => tabungan.id === item.id);
+            if (!exist) {
+                state.datasimpanan.push(item);
+            }
+        }
+        if (type === RDEPOSITO) {
+            const exist = state.datadeposito.some((deposito) => deposito.id === item.id);
+            if (!exist) {
+                state.datadeposito.push(item);
+            }
+        }
+
     },
     /***
      * update data
@@ -440,54 +317,52 @@ const mutations = {
      */
     [EDIT_DATA_REKENING](state, {type, data, olddata}) {
         //get type rekening
-        switch (type) {
-            case RTABUNGAN:
-                //update to data
-                var index = state.datasimpanan
-                    .map((tabungan) => tabungan.id)
-                    .indexOf(olddata.id);
-                Object.assign(state.datasimpanan[index], data);
-                break;
-            case RDEPOSITO:
-                var index = state.datadeposito
-                    .map((deposito) => deposito.id)
-                    .indexOf(olddata.id);
-                Object.assign(state.datadeposito[index], data);
-                break;
-            case RPEMBIAYAAN:
-                var index = state.datapembiayaan
-                    .map((pembiayaan) => pembiayaan.id)
-                    .indexOf(olddata.id);
-                Object.assign(state.datapembiayaan[index], data);
-
-                break;
+        if (type === RTABUNGAN) {
+            //update to data
+            const index = state.datasimpanan
+                .map((tabungan) => tabungan.id)
+                .indexOf(olddata.id);
+            Object.assign(state.datasimpanan[index], data);
         }
+        if (type === RDEPOSITO) {
+            const index = state.datadeposito
+                .map((deposito) => deposito.id)
+                .indexOf(olddata.id);
+            Object.assign(state.datadeposito[index], data);
+        }
+        if (type === RPEMBIAYAAN) {
+            const index = state.datapembiayaan
+                .map((pembiayaan) => pembiayaan.id)
+                .indexOf(olddata.id);
+            Object.assign(state.datapembiayaan[index], data);
+
+        }
+
     },
     /***
      * delete data
      * @param {rekenigntype,data}
      */
     [REMOVE_DATA_REKENING](state, {type, data}) {
-        switch (type) {
-            case RDEPOSITO:
-                var index = state.datadeposito
-                    .map((deposito) => deposito.id)
-                    .indexOf(data.id);
-                state.datadeposito.splice(index);
-                break;
-            case RPEMBIAYAAN:
-                var index = state.datapembiayaan
-                    .map((deposito) => deposito.id)
-                    .indexOf(data.id);
-                state.datapembiayaan.splice(index);
-                break;
-            case RTABUNGAN:
-                var index = state.datasimpanan
-                    .map((deposito) => deposito.id)
-                    .indexOf(data.id);
-                state.datasimpanan.splice(index);
-                break;
+        if (type === RDEPOSITO) {
+            const index = state.datadeposito
+                .map((deposito) => deposito.id)
+                .indexOf(data.id);
+            state.datadeposito.splice(index, 1);
         }
-    },
-};
+        if (type === RPEMBIAYAAN) {
+            const index = state.datapembiayaan
+                .map((deposito) => deposito.id)
+                .indexOf(data.id);
+            state.datapembiayaan.splice(index, 1);
+        }
+        if (type === RTABUNGAN) {
+            const index = state.datasimpanan
+                .map((deposito) => deposito.id)
+                .indexOf(data.id);
+            state.datasimpanan.splice(index, 1);
+        }
+
+    }
+}
 export default {namespaced: true, state, getters, actions, mutations};

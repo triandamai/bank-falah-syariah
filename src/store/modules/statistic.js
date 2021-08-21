@@ -106,11 +106,12 @@ const state = {
 const getters = {};
 const actions = {
     // eslint-disable-next-line no-unused-vars,no-empty-pattern
-    [STATISTIC]({commit, state}, {}) {
+    [STATISTIC]({commit}, {}) {
         return new Promise((resolve) => {
-            ApiService.get("/statistics?days=10").then(({status, data}) => {
+            ApiService.get("/statistics?days=10")
+                .then(({success, data}) => {
 
-                if (status === 200 || status === 201) {
+                if (success) {
                     const data_nasabah = []
                     const data_transaksi = []
                     const data_label = []
@@ -133,17 +134,12 @@ const actions = {
                     })
                     commit(STATISTIC, {nasabah: nasabah, transaksi: transaksi})
                     resolve({
-                        success: true,
+                        success: success,
                         data: {label: data_label, transaksi: data_transaksi, nasabah: data_nasabah, max: max}
                     });
                 } else {
-                    resolve({success: false, data: []});
+                    resolve({success: success, data: []});
                 }
-            }).catch(() => {
-                resolve({
-                    success: false,
-                    message: "Terjadi kesalahan coba lagi nanti!",
-                });
             })
 
         })

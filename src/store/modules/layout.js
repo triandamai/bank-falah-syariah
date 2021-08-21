@@ -20,12 +20,12 @@ const mutations = {
     document
       .getElementsByTagName("html")[0]
       .setAttribute("dir", state.layout.settings.layout_type);
-    var primaryColor =
+    const primaryColor =
       localStorage.getItem("primary_color") || state.layout.color.primary_color;
-    var secondaryColor =
+    const secondaryColor =
       localStorage.getItem("secondary_color") ||
       state.layout.color.secondary_color;
-    var layoutVersion =
+    const layoutVersion =
       localStorage.getItem("layoutVersion") ||
       state.layout.color.layout_version;
     if (primaryColor || secondaryColor) {
