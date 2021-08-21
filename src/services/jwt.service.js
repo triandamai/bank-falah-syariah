@@ -1,7 +1,9 @@
 /* eslint-disable */
-/**
- * Author Trian Damai
- * Bakaran Project
+/***
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
  */
 import CryptoJS from "crypto-js";
 const ID_TOKEN_KEY = "f6da7ebas9c00s";

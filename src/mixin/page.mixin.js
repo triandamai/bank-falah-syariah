@@ -1,3 +1,9 @@
+/***
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ */
 import {formatCurrency} from "@/utils/utils"
 import {decrypt, encrypt} from "@/services/jwt.service";
 

@@ -1,3 +1,9 @@
+/***
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ */
 import ApiService from "@/services/api.service";
 const GET_WILAYAH = `WILAYAH`;
 const ADD_DATA_WILAYAH = `ADDWILAYAH`;

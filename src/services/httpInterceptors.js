@@ -1,4 +1,8 @@
-/**
+/***
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
  * catch every response
  * step intercept
  * 1. check status code
@@ -12,12 +16,7 @@
  *     "shouldNext":boolean,
  * }
  * **/
-const defaultResponse = {
-    success:false,
-    data:[],
-    message:"",
-    shouldNext:false
-}
+import i81n from "@/plugins/i18n"
 export const responseInterceptor=(response)=>{
   //  console.log("response",response)
     let shouldNext=false
@@ -57,5 +56,15 @@ export const responseInterceptor=(response)=>{
 export const errorInterceptor=(error)=>{
   //  console.log("error",error.response)
 
-    return Promise.resolve(defaultResponse)
+    let message =""
+    let data = []
+    if(error.response.status === 500){
+        message = i81n.t("HTTP_500")
+    }
+    return Promise.resolve({
+        success:false,
+        data:data,
+        message:message,
+        shouldNext:false
+    })
 }

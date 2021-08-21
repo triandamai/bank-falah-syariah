@@ -138,6 +138,6 @@
   "Modal *": "Modal *",
   "Import Siswa": "Import Siswa",
   "Data User": "Data Pengguna",
-  "subtitleuser": "Data Pengguna Bank Falah Syariah"
-
+  "subtitleuser": "Data Pengguna Bank Falah Syariah",
+  "HTTP_500": "Gagal Mendapatkan respon dari server"
 }

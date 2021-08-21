@@ -1,3 +1,4 @@
+
 <template>
   <div id="app" @contextmenu.prevent="openMenu">
     <!-- Loader starts-->

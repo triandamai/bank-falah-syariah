@@ -1,3 +1,9 @@
+/***
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ */
 import {LOGIN} from "@/store";
 import {getCurrendUsername} from "@/services/jwt.service";
 

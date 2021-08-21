@@ -1,5 +1,11 @@
-import Vue from "vue";
+/***
+ * Author Bakaran Project
+ * Made by Trian Damai
+ * 28 Jan 2021 - 10:14
+ *
+ */
 
+import Vue from "vue";
 // Multi Language Add
 import VueI18n from "vue-i18n";
 import en from "@/locales/en.json";
