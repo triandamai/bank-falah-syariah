@@ -4,8 +4,9 @@
  * 28 Jan 2021 - 10:14
  *
  */
-import {LOGIN} from "@/store";
+import {LOGIN, LOGOUT} from "@/store";
 import {getCurrendUsername} from "@/services/jwt.service";
+
 
 export default {
     data() {
@@ -85,6 +86,11 @@ export default {
                     this.disable = false;
 
                 });
+        },
+        signOut(){
+            this.$store.dispatch(`auth/${LOGOUT}`).then(() => {
+                this.$router.replace({ name: "login" });
+            });
         }
     },
 }

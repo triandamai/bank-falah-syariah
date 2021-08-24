@@ -47,7 +47,9 @@ export const responseInterceptor=(response)=>{
         }
 
         if(response.config.method === "get" || response.config.method === "GET"){
-            shouldNext = false
+            if(response.data.current_page){
+                shouldNext = response.data.current_page < response.data.last_page
+            }
             message = "Success Get Data"
         }else {
             message = "Berhasil Proses"

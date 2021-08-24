@@ -144,7 +144,7 @@
   </div>
 </template>
 <script>
-var body = document.getElementsByTagName("body")[0];
+const body = document.getElementsByTagName("body")[0];
 import { mapActions, mapState } from "vuex";
 import { getUser } from "@/services/jwt.service";
 import { LOGOUT } from "@/store/modules/auth";
@@ -195,7 +195,7 @@ export default {
   computed: {
     ...mapState({
       menuItems: (state) => state.menu.searchData,
-      megamenuItems: (state) => state.menu.megamenu,
+     // megamenuItems: (state) => state.menu.megamenu,
     }),
   },
   methods: {

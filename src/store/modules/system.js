@@ -36,18 +36,18 @@ export const SGROUP = "groups";
 const state = {
     datausers: [],
     user: {
-        current_page: 0,
+        current_page: 1,
         last_page: 0,
     },
     datagroups: [],
     group: {
-        current_page: 0,
+        current_page: 1,
         last_page: 0,
         dialog: false,
     },
     dataroles: [],
     role: {
-        current_page: 0,
+        current_page: 1,
         last_page: 0,
         dialog: false,
     },

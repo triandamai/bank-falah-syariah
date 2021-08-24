@@ -53,19 +53,19 @@ const state = {
     datadeposito: [],
     deposito: {
         dialog: false,
-        current_page: 0,
+        current_page: 1,
         last_page: 0,
     },
     datapembiayaan: [],
     pembiayaan: {
         dialog: false,
-        current_page: 0,
+        current_page: 1,
         last_page: 0,
     },
     datasimpanan: [],
     tabungan: {
         dialog: false,
-        current_page: 0,
+        current_page: 1,
         last_page: 0,
     },
     mutasi: {

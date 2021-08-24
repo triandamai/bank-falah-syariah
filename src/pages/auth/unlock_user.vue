@@ -27,7 +27,7 @@
                       <div class="form-group mb-0">
 
                         <button  :disabled="disable" class="btn btn-primary btn-block" type="submit">{{$t('Process Unlock')}}</button>
-                        <button  :disabled="disable" class="btn btn-primary btn-block" type="submit">{{$t('Process Unlock')}}</button>
+                        <button  :disabled="disable" class="btn btn-primary btn-block" @click="signOut" type="button">{{$t('Logout')}}</button>
                       </div>
                       <p class="mt-4 mb-0">{{ $t('Butuh Bantuan') }}
                         <router-link class="ml-2" tag="a" to="/auth/login" >

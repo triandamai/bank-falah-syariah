@@ -35,12 +35,12 @@ export const MJENISTRANSAKSI = "jenis-transaksi";
 const state = {
     dataakad: [],
     akad: {
-        current_page: 0,
+        current_page: 1,
         last_page: 0,
     },
     datajenistransaksi: [],
     jenistransaksi: {
-        current_page: 0,
+        current_page: 1,
         last_page: 0,
     },
     dataproduk: [],
@@ -50,12 +50,12 @@ const state = {
     },
     datajabatan: [],
     jabatan: {
-        current_page: 0,
+        current_page: 1,
         last_page: 0,
     },
     datapegawai: [],
     pegawai: {
-        current_page: 0,
+        current_page: 1,
         last_page: 0,
     },
     formpegawai: {},

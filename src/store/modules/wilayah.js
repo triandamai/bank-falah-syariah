@@ -18,11 +18,11 @@ export const WKECAMATAN = `KECAMATAN`;
 export const WDESA = `DESA`;
 export const WDUSUN = `DUSUN`;
 const state = {
-  kecamatan: { current_page: 0, data: [] },
-  provinsi: { current_page: 0, data: [] },
-  kabupaten: { current_page: 0, data: [] },
-  desa: { current_page: 0, data: [] },
-  dusun: { current_page: 0, data: [] },
+  kecamatan: { current_page: 1, data: [] },
+  provinsi: { current_page: 1, data: [] },
+  kabupaten: { current_page: 1, data: [] },
+  desa: { current_page: 1, data: [] },
+  dusun: { current_page: 1, data: [] },
 };
 const actions = {
   /**

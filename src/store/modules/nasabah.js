@@ -37,7 +37,7 @@ export const MUTATION_DELETE_NASABAH = `nasabah/${REMOVE_NASABAH}`;
 //
 const state = {
     errors: null,
-    currentpage: 0,
+    currentpage: 1,
     lastpage: "",
     datanasabah: [],
 };
@@ -53,10 +53,11 @@ const actions = {
      */
     [GET_NASABAH]({commit, state}, data) {
         return new Promise((resolve) => {
-            let page = state.currentpage >= 1 ? "" : `?page=${state.currentpage}`;
+            let page = `?page=${state.currentpage}`;
             ApiService.get(`nasabah${page}?zx=4sc43f8sdnds7er`)
                 .then(({data,shouldNext}) => {
                      resolve(shouldNext)
+                    if(shouldNext) commit(INCREMENT_PAGE,{})
                      //loop and add to datatable
                      data.map((item) => {
                         commit(ADD_NASABAH, item);
@@ -169,7 +170,7 @@ const mutations = {
     [SET_ERROR](state, data) {
         state.errors = data;
     },
-    [INCREMENT_PAGE](state) {
+    [INCREMENT_PAGE](state,{}) {
         state.currentpage = state.currentpage + 1;
     },
     [ADD_NASABAH](state, data) {
