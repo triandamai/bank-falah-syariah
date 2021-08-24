@@ -44,6 +44,22 @@
       },
       "children": [
         {
+          "path": "/main/akad",
+          "title": "Akad",
+          "type": "link",
+          "privilage": {
+            "roles": ["admin", "bp_root","siswa"]
+          }
+        },
+        {
+          "path": "/main/jenistransaksi",
+          "title": "Type of Transaction",
+          "type": "link",
+          "privilage": {
+            "roles": ["admin", "bp_root","siswa"]
+          }
+        },
+        {
           "path": "/main/pegawai",
           "title": "Employees",
           "type": "link",
