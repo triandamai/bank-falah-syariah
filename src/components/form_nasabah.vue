@@ -7,18 +7,22 @@
             {{$t('Data Umum')}}
           </v-stepper-step>
 
-          <v-divider></v-divider>
+          <v-divider/>
 
           <v-stepper-step editable :complete="step > 2" step="2">
             {{$t('Data Alamat')}}
           </v-stepper-step>
 
-          <v-divider></v-divider>
+          <v-divider/>
 
           <v-stepper-step editable :complete="step > 3" step="3">
             {{ $t('Data Pekerjaan') }}
           </v-stepper-step>
 
+          <v-divider/>
+          <v-stepper-step editable :complete="step > 4" step="4">
+            {{ $t('Data Pendukung') }}
+          </v-stepper-step>
         </v-stepper-header>
 
         <v-stepper-items>
@@ -335,6 +339,69 @@
 
                 </v-col>
               </v-row>
+              <v-btn @click="goForward" outlined small> {{$t('Selanjutnya')}} </v-btn>
+
+              <v-btn @click="goBack" text> {{$t('Sebelumnya')}} </v-btn>
+            </v-container>
+          </v-stepper-content>
+
+          <v-stepper-content step="4">
+            <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
+              <v-row>
+                <v-col cols="12" sm="12" md="6" lg="4">
+                  <v-select
+                      :items="jenis_pekerjaan"
+                      v-model="form.jenis_pekerjaan_id"
+                      item-text="label"
+                      item-value="value"
+                      label="Pekerjaan"
+                      auto-select-first
+                      dense
+                      outlined
+                      small-chips
+                  />
+                </v-col>
+                <v-col cols="12" sm="12" md="6" lg="4">
+                  <v-text-field
+                      v-model="form.nama_perusahaan"
+                      label="Nama Perusahaan"
+                      placeholder="Nama Perusahaan"
+                      outlined
+                      dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12" md="6" lg="4">
+                  <v-text-field
+                      v-model="form.nama_atasan"
+                      label="Nama Atasan"
+                      placeholder="Nama Atasan"
+                      outlined
+                      dense
+                  />
+                </v-col>
+                <v-col cols="12" sm="12" md="6" lg="6">
+                  <vuetify-money
+                      v-model="form.penghasilan_perbulan"
+                      :label="$t('Penghasilan Perbulan')"
+                      v-bind:options="options"
+                      v-bind:outlined="'outlined'"
+                      dense
+                      required
+                  ></vuetify-money>
+
+                </v-col>
+                <v-col cols="12" sm="12" md="6" lg="6">
+                  <vuetify-money
+                      v-model="form.penghasilan_pertahun"
+                      :label="$t('Penghasilan Pertahun')"
+                      v-bind:options="options"
+                      v-bind:outlined="'outlined'"
+                      dense
+                      required
+                  ></vuetify-money>
+
+                </v-col>
+              </v-row>
               <v-btn @click="onSubmit" outlined small> {{$t('Save')}} </v-btn>
 
               <v-btn @click="goBack" text> {{$t('Sebelumnya')}} </v-btn>
@@ -386,8 +453,8 @@ mixins:[componentmixin],
   created() {
     window.addEventListener("keydown", (e) => {
       //if Enter go to next
-      if (e.key == "Enter") {
-        if (this.step == 5) return this.onSubmit();
+      if (e.key === "Enter") {
+        if (this.step === 5) return this.onSubmit();
         this.goForward();
       }
     });
@@ -416,8 +483,7 @@ mixins:[componentmixin],
             }
           }
         })
-          // eslint-disable-next-line no-unused-vars
-        .catch((e) => {});
+
     },
     getProvinsi() {
       this.$store

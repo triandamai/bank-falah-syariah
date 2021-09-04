@@ -22,7 +22,7 @@ mixin
 services
 utils
 page
-compontent
+component
 store
 ```
 

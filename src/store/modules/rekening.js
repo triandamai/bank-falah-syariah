@@ -135,7 +135,7 @@ const actions = {
             ApiService.get(`${type}${decrypt_no_rekening}/mutasi?t=${new Date().getMilliseconds()}`)
                 .then(({success, data}) => {
                     resolve(success)
-                    data.data.map(mutasi => {
+                    data.map(mutasi => {
 
                         commit(MUTASI_REKENING, {type: type, mutasi: mutasi})
                     })
@@ -179,7 +179,7 @@ const actions = {
      * update/edit data
      */
     [PUT_DATA_REKENING]({commit}, {type, body}) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             ApiService.put(`${type}/${body.id}`, body)
                 .then(({success, message, data}) => {
                     resolve({success: success, message: message});
@@ -341,7 +341,8 @@ const mutations = {
     },
     /***
      * delete data
-     * @param {rekenigntype,data}
+     * @param {state,type,data}
+     * @param state
      */
     [REMOVE_DATA_REKENING](state, {type, data}) {
         if (type === RDEPOSITO) {
