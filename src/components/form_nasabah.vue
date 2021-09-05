@@ -3,22 +3,22 @@
     <div class="col-sm-12">
       <v-stepper v-model="step" non-linear class="elevation-0">
         <v-stepper-header class="elevation-0">
-          <v-stepper-step editable :complete="step > 1" step="1">
+          <v-stepper-step editable :complete="step > 1" :step="1">
             {{$t('Data Umum')}}
           </v-stepper-step>
           <v-divider/>
 
-          <v-stepper-step editable :complete="step > 2" step="2">
+          <v-stepper-step editable :complete="step > 2" :step="2">
             {{$t('Data Alamat')}}
           </v-stepper-step>
           <v-divider/>
 
-          <v-stepper-step editable :complete="step > 3" step="3">
+          <v-stepper-step editable :complete="step > 3" :step="3">
             {{ $t('Data Pekerjaan') }}
           </v-stepper-step>
           <v-divider/>
 
-          <v-stepper-step editable :complete="step > 4" step="4">
+          <v-stepper-step editable :complete="step > 4" :step="4">
             {{ $t('Data Pendukung') }}
           </v-stepper-step>
         </v-stepper-header>
@@ -499,13 +499,11 @@ mixins:[componentmixin],
       })
     },
     goBack() {
-      if (this.step > 1) {
-        this.step = this.step - 1;
-      }
+      if (this.step > 1) this.step = parseInt( this.step- 1)
+
     },
     goForward() {
-      if (this.step === 5) return;
-      this.step = this.step + 1;
+      if(this.step < 4) this.step = parseInt( this.step + 1)
     },
     removeBackStack(){
       this.$router.go(-1)
