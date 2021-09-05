@@ -38,7 +38,6 @@ const ApiService = {
   },
   /**
    * @param resource
-   * @returns {*}
    */
   get(resource) {
     // if(slug){
