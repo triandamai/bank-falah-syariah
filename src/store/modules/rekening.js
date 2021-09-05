@@ -225,7 +225,10 @@ const mutations = {
     [MUTASI_REKENING](state, {type, mutasi}) {
 
         if (type === MUTASI_PEMBIAYAAN) {
-            const exist = state.mutasi.pembiayaan.some((pembiayaan) => pembiayaan.id === mutasi.id);
+            const exist = state
+                .mutasi
+                .pembiayaan
+                .some((pembiayaan) => pembiayaan.id === mutasi.id);
             if (exist) {
                 const index = state.mutasi.pembiayaan
                     .map((pembiayaan) => pembiayaan.id)
@@ -236,7 +239,10 @@ const mutations = {
             }
         }
         if (type === MUTASI_SIMPANAN) {
-            const exist = state.mutasi.simpanan.some((simpanan) => simpanan.id === mutasi.id);
+            const exist = state
+                .mutasi
+                .simpanan
+                .some((simpanan) => simpanan.id === mutasi.id);
             if (exist) {
                 const index = state.mutasi.simpanan
                     .map((simpanan) => simpanan.id)

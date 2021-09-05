@@ -22,8 +22,8 @@
       }
     },
     {
-      "path": "/main/nasabah",
-      "title": "Customer",
+      "path": "/main/nasabah/add",
+      "title": "Form Nasabah",
       "icon": "users",
       "type": "link",
       "active": false,

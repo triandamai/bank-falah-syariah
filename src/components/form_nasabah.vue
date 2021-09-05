@@ -6,20 +6,18 @@
           <v-stepper-step editable :complete="step > 1" step="1">
             {{$t('Data Umum')}}
           </v-stepper-step>
-
           <v-divider/>
 
           <v-stepper-step editable :complete="step > 2" step="2">
             {{$t('Data Alamat')}}
           </v-stepper-step>
-
           <v-divider/>
 
           <v-stepper-step editable :complete="step > 3" step="3">
             {{ $t('Data Pekerjaan') }}
           </v-stepper-step>
-
           <v-divider/>
+
           <v-stepper-step editable :complete="step > 4" step="4">
             {{ $t('Data Pendukung') }}
           </v-stepper-step>
@@ -348,52 +346,65 @@
           <v-stepper-content step="4">
             <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
               <v-row>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-select
-                      :items="jenis_pekerjaan"
-                      v-model="form.jenis_pekerjaan_id"
-                      item-text="label"
+                <v-col cols="12" sm="12" md="12" lg="12">
+                  <v-autocomplete
+                      label="Pilih Jenis Rekening yang akan dibuat"
+                      :items="[
+                          {
+                            key:'Simpanan',
+                            value:'simpanan'
+                          },
+                          {
+                            key:'Pembiayaan',
+                            value:'pembiayaan'
+                          }
+                      ]"
+                      item-text="key"
                       item-value="value"
-                      label="Pekerjaan"
-                      auto-select-first
-                      dense
-                      outlined
-                      small-chips
-                  />
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-text-field
-                      v-model="form.nama_perusahaan"
-                      label="Nama Perusahaan"
-                      placeholder="Nama Perusahaan"
-                      outlined
-                      dense
-                  />
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="4">
-                  <v-text-field
-                      v-model="form.nama_atasan"
-                      label="Nama Atasan"
-                      placeholder="Nama Atasan"
-                      outlined
-                      dense
-                  />
-                </v-col>
-                <v-col cols="12" sm="12" md="6" lg="6">
-                  <vuetify-money
-                      v-model="form.penghasilan_perbulan"
-                      :label="$t('Penghasilan Perbulan')"
-                      v-bind:options="options"
-                      v-bind:outlined="'outlined'"
+                      @change="getDataProductByTypeRekening"
                       dense
                       required
-                  ></vuetify-money>
-
+                      outlined/>
+                </v-col>
+                <v-col cols="12" sm="12" md="12" lg="12">
+                  <v-autocomplete
+                      v-model="form.product"
+                      label="Produk *"
+                      :items="itemsproduk"
+                      item-text="nama_produk"
+                      return-object
+                      dense
+                      required
+                      outlined
+                  />
                 </v-col>
                 <v-col cols="12" sm="12" md="6" lg="6">
+                  <v-text-field
+                      v-model="rasio_nasabah"
+                      label="Rasio Nasabah*"
+                      suffix="%"
+                      dense
+                      required
+                      outlined
+                      type="number"
+                  />
+                </v-col>
+                <v-col cols="12" sm="12" md="6" lg="6">
+                  <v-text-field
+                      v-model="rasio_bank"
+                      label="Rasio Bank*"
+                      suffix="%"
+                      dense
+                      required
+                      outlined
+                      type="number"
+                  />
+
+                </v-col>
+                <v-col cols="12" sm="12" md="12" lg="12">
                   <vuetify-money
-                      v-model="form.penghasilan_pertahun"
-                      :label="$t('Penghasilan Pertahun')"
+                      v-model="form.nominal"
+                      :label="$t('Nominal')"
                       v-bind:options="options"
                       v-bind:outlined="'outlined'"
                       dense
@@ -407,7 +418,6 @@
               <v-btn @click="goBack" text> {{$t('Sebelumnya')}} </v-btn>
             </v-container>
           </v-stepper-content>
-
         </v-stepper-items>
       </v-stepper>
     </div>
@@ -431,7 +441,7 @@ mixins:[componentmixin],
     return {
       step: 1,
       datepicker: false,
-
+      itemsproduct:[],
       form: {
         nama_lengkap: "",
         nama_panggilan: "",
@@ -441,6 +451,7 @@ mixins:[componentmixin],
         active: 1,
         rasio_nasabah: null,
         rasio_bank: null,
+        nominal:null
       },
     };
   },
@@ -460,13 +471,39 @@ mixins:[componentmixin],
     });
   },
   methods: {
+    getDataProductByTypeRekening(type){
+      ApiService.get(`/produk?type=${type}`).then(({success,data})=>{
+        if(success){
+          this.itemsproduct = data
+          // {
+          //   "id": 3,
+          //     "tipe_produk": 1,
+          //     "kode_produk": "0101",
+          //     "nama_produk": "Simpanan Wadi'ah",
+          //     "tipe_akad": "",
+          //     "kode_akad": "",
+          //     "nama_akad": "",
+          //     "administrasi": 1000,
+          //     "saldo_minimum": 10000,
+          //     "setoran": 0,
+          //     "nisbah": "",
+          //     "zakat": 0,
+          //     "pajak": 0,
+          //     "bonus": 2,
+          //     "jangka_waktu": "",
+          //     "created_at": "2021-05-20 21:44:00",
+          //     "updated_at": "2021-05-20 21:44:49"
+          // }
+        }
+      })
+    },
     goBack() {
       if (this.step > 1) {
         this.step = this.step - 1;
       }
     },
     goForward() {
-      if (this.step === 3) return;
+      if (this.step === 5) return;
       this.step = this.step + 1;
     },
     removeBackStack(){
