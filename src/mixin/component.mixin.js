@@ -99,11 +99,31 @@ export default {
 
         },
         rasio_nasabah: function(newVal) {
+            if(newVal <= 0) {
+                this.rasio_bank = 100
+                this.rasio_nasabah = 0
+                return
+            }
+            if(newVal >=100){
+                this.rasio_bank = 0
+                this.rasio_nasabah = 100
+                return;
+            }
             this.form.rasio_bank = 100 - newVal;
             this.rasio_bank = 100 - newVal;
             this.form.rasio_nasabah = newVal;
         },
         rasio_bank: function(newVal) {
+            if(newVal <= 0) {
+                this.rasio_nasabah = 100
+                this.rasio_bank =0
+                return
+            }
+            if(newVal >=100){
+                this.rasio_nasabah = 0
+                this.rasio_bank = 100
+                return;
+            }
             this.form.rasio_nasabah = 100 - newVal;
             this.rasio_nasabah = 100 - newVal;
             this.form.rasio_bank = newVal;
