@@ -273,7 +273,8 @@
                     outlined
                     dense
                   /> </v-col
-              ></v-row>
+              >
+              </v-row>
               <v-btn @click="goForward" outlined small> {{$t('Selanjutnya')}} </v-btn>
 
               <v-btn @click="goBack" text> {{$t('Sebelumnya')}} </v-btn>

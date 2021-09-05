@@ -80,32 +80,7 @@ const actions = {
                         commit(ADD_NASABAH, data[0]);
                     }
                 })
-                // .catch(({response}) => {
-                //     if (response.status === 401) {
-                //         resolve({
-                //             success: false,
-                //             message: "Anda tidak memeiliki izin melakuka operasi ini!",
-                //         });
-                //         setTimeout(() => {
-                //             router.push({path: "/unlock"})
-                //         }, 3200)
-                //         Vue.swal({
-                //             title: 'Sesi Berakhir atau Akun terhubung di perangkat lain!',
-                //             html: 'Anda akan diarahkan ke halaman masuk.',
-                //             timer: 3000
-                //         })
-                //     }else if(response.status === 400){
-                //         resolve({
-                //             success: false,
-                //             message: response.data.error,
-                //         });
-                //     }else {
-                //         resolve({
-                //             success: false,
-                //             message: response.message,
-                //         });
-                //     }
-                // });
+
         });
     },
     /**
