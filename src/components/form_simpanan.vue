@@ -45,7 +45,7 @@
                         small-chips
                     ></v-select>
                   </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
+                  <v-col cols="12" xs="12" sm="6" md="6" lg="6">
                     <v-select
                         :items="jenis_identitas"
                         v-model="formnasabah.jenis_identitas_id"
@@ -57,7 +57,7 @@
                         small-chips
                     />
                   </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
+                  <v-col cols="12" xs="12" sm="6" md="6" lg="6">
                     <v-text-field
                         v-model="formnasabah.no_identitas"
                         label="Nomor Identitas"
@@ -140,7 +140,7 @@
                       ></v-date-picker>
                     </v-menu>
                   </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
+                  <v-col cols="12" xs="12" sm="6" md="6" lg="6">
                     <v-autocomplete
                         v-model="formnasabah.provinsi"
                         label="Provinsi *"
@@ -154,7 +154,7 @@
                         small-chips
                     ></v-autocomplete>
                   </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
+                  <v-col cols="12" xs="12" sm="6" md="6" lg="6">
                     <v-autocomplete
                         label="Kabupaten *"
                         v-model="formnasabah.kabupaten"
@@ -168,7 +168,7 @@
                         small-chips
                     ></v-autocomplete>
                   </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
+                  <v-col cols="12" xs="12" sm="6" md="6" lg="6">
                     <v-autocomplete
                         label="Kecamatan *"
                         v-model="formnasabah.kecamatan"
@@ -182,7 +182,7 @@
                         small-chips
                     ></v-autocomplete>
                   </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
+                  <v-col cols="12" xs="12" sm="6" md="6" lg="6">
                     <v-autocomplete
                         label="Desa *"
                         v-model="formnasabah.desa"
@@ -232,135 +232,6 @@
                         dense
                     /> </v-col
                   >
-                  <v-col cols="12" sm="12" md="6" lg="4">
-                    <v-text-field
-                        v-model="formnasabah.kode_nasabah"
-                        label="Kode Nasabah"
-                        placeholder="kode Nasabah"
-                        dense
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
-                    <v-text-field
-                        v-model="formnasabah.nama_lengkap"
-                        label="Nama Lengkap"
-                        placeholder="Nama Lengkap"
-                        dense
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
-                    <v-text-field
-                        v-model="formnasabah.nama_panggilan"
-                        label="Nama panggilan"
-                        placeholder="Nama Panggilan"
-                        dense
-                    ></v-text-field>
-                  </v-col>
-
-                  <v-col cols="12" sm="12" md="6" lg="4">
-                    <v-select
-                        :items="jenis_kelamin"
-                        v-model="formnasabah.jenis_kelamin"
-                        item-text="label"
-                        item-value="value"
-                        label="Jenis Kelamin"
-                        auto-select-first
-                        dense
-                        small-chips
-                    ></v-select>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
-                    <v-select
-                        :items="jenis_identitas"
-                        v-model="formnasabah.jenis_identitas_id"
-                        item-text="label"
-                        item-value="value"
-                        label="Jenis Identitas"
-                        auto-select-first
-                        dense
-                        small-chips
-                    />
-                  </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
-                    <v-text-field
-                        v-model="formnasabah.no_identitas"
-                        label="Nomor Identitas"
-                        placeholder="Nomor Identitas"
-                        dense
-                    ></v-text-field>
-                  </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
-                    <v-select
-                        :items="agama"
-                        v-model="formnasabah.agama_id"
-                        item-text="label"
-                        item-value="value"
-                        label="Agama"
-                        auto-select-first
-                        dense
-                        small-chips
-                    />
-                  </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
-                    <v-select
-                        :items="pendidikan"
-                        v-model="formnasabah.pendidikan_id"
-                        item-text="label"
-                        item-value="value"
-                        label="Pendidikan"
-                        auto-select-first
-                        small-chips
-                        dense
-                    />
-                  </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
-                    <v-select
-                        :items="status_martial"
-                        v-model="formnasabah.status_martial_id"
-                        item-text="label"
-                        item-value="value"
-                        label="Status Martial"
-                        auto-select-first
-                        small-chips
-                        dense
-                    />
-                  </v-col>
-                  <v-col cols="12" sm="12" md="6" lg="4">
-                    <v-text-field
-                        v-model="formnasabah.nama_ibu_kandung"
-                        label="Nama Ibu Kandung"
-                        placeholder="Nama Ibu Kandung"
-                        dense
-                    ></v-text-field>
-                  </v-col>
-
-                  <v-col cols="12" sm="12" md="6" lg="4">
-                    <v-menu
-                        ref="datepicker"
-                        v-model="datepicker"
-                        :close-on-content-click="false"
-                        transition="scale-transition"
-                        offset-y
-                        min-width="auto"
-                    >
-                      <template v-slot:activator="{ on, attrs }">
-                        <v-text-field
-                            v-model="formnasabah.tanggal_lahir"
-                            label="Tanggal Lahir"
-                            readonly
-                            v-bind="attrs"
-                            v-on="on"
-                            dense
-                        ></v-text-field>
-                      </template>
-                      <v-date-picker
-                          ref="picker"
-                          v-model="formnasabah.tanggal_lahir"
-                          :max="new Date().toISOString().substr(0, 10)"
-                          min="1950-01-01"
-                      ></v-date-picker>
-                    </v-menu>
-                  </v-col>
                   <v-col cols="12" sm="12" md="6" lg="4">
                     <v-select
                         :items="jenis_pekerjaan"
@@ -447,7 +318,7 @@
                   </v-col>
                   <v-col cols="12" sm="12" md="6" lg="6">
                     <vuetify-money
-                        v-model="form.nominal"
+                        v-model="form.setoran_awal"
                         :label="$t('Nominal')"
                         v-bind:options="options"
                         dense
