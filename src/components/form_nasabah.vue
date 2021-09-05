@@ -368,9 +368,9 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="12" lg="12">
                   <v-autocomplete
-                      v-model="form.product"
+                      v-model="form.produk"
                       label="Produk *"
-                      :items="itemsproduk"
+                      :items="itemsproduct"
                       item-text="nama_produk"
                       return-object
                       dense
@@ -451,7 +451,7 @@ mixins:[componentmixin],
         active: 1,
         rasio_nasabah: null,
         rasio_bank: null,
-        nominal:null
+        nominal:null,
       },
     };
   },
@@ -475,6 +475,7 @@ mixins:[componentmixin],
       ApiService.get(`/produk?type=${type}`).then(({success,data})=>{
         if(success){
           this.itemsproduct = data
+          console.log(this.itemsproduct)
           // {
           //   "id": 3,
           //     "tipe_produk": 1,
@@ -574,6 +575,7 @@ mixins:[componentmixin],
       this.$refs.datepicker.save(date);
     },
     onSubmit() {
+      this.form.active = 1
       this.$emit("submit", this.form);
     },
   },
