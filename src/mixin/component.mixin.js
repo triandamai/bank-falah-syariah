@@ -10,6 +10,9 @@ import {decrypt, encrypt} from "@/services/jwt.service"
 
 export default {
     props: ["show", "body","edit"],
+    /**
+     * this section in future will make confuse to other contributor
+     * */
     data: () => {
         return {
             loading: false,
