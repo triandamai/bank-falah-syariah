@@ -503,9 +503,6 @@ export default {
         this.getNasabah()
         this.getProvinsi()
       }
-    },
-    form:function(newVal){
-      console.log(newVal)
     }
   },
   mounted() {
