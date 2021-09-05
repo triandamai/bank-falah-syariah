@@ -42,10 +42,7 @@ const ApiService = {
    * @returns {*}
    */
   get(resource, slug) {
-    if(slug){
-      return Vue.axios.get(`${resource}/${slug}`);
-    }
-    return  Vue.axios.get(`${resource}`);
+
 
   },
 
