@@ -16,6 +16,7 @@
               <data-table
                 :items="items"
                 :headers="headers"
+                :hideadd="true"
                 @add="onAdd"
                 @edit="onEdit"
                 @delete="onDelete"
