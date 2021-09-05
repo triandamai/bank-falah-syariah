@@ -19,7 +19,11 @@
           <v-divider/>
 
           <v-stepper-step editable :complete="step > 4" :step="4">
-            {{ $t('Data Pendukung') }}
+            {{ $t('Simpanan') }}
+          </v-stepper-step>
+          <v-divider/>
+          <v-stepper-step editable :complete="step > 5" :step="5">
+            {{ $t('Pembiayaan') }}
           </v-stepper-step>
         </v-stepper-header>
 
@@ -347,26 +351,62 @@
           <v-stepper-content step="4">
             <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
               <v-row>
+
                 <v-col cols="12" sm="12" md="12" lg="12">
                   <v-autocomplete
-                      label="Pilih Jenis Rekening yang akan dibuat"
-                      :items="[
-                          {
-                            key:'Simpanan',
-                            value:'simpanan'
-                          },
-                          {
-                            key:'Pembiayaan',
-                            value:'pembiayaan'
-                          }
-                      ]"
-                      item-text="key"
-                      item-value="value"
-                      @change="getDataProductByTypeRekening"
+                      v-model="form.produk"
+                      label="Produk *"
+                      :items="itemsproduct"
+                      item-text="nama_produk"
+                      return-object
                       dense
                       required
-                      outlined/>
+                      outlined
+                  />
                 </v-col>
+                <v-col cols="12" sm="12" md="6" lg="6">
+                  <v-text-field
+                      v-model="rasio_nasabah"
+                      label="Rasio Nasabah*"
+                      suffix="%"
+                      dense
+                      required
+                      outlined
+                      type="number"
+                  />
+                </v-col>
+                <v-col cols="12" sm="12" md="6" lg="6">
+                  <v-text-field
+                      v-model="rasio_bank"
+                      label="Rasio Bank*"
+                      suffix="%"
+                      dense
+                      required
+                      outlined
+                      type="number"
+                  />
+
+                </v-col>
+                <v-col cols="12" sm="12" md="12" lg="12">
+                  <vuetify-money
+                      v-model="form.nominal"
+                      :label="$t('Nominal')"
+                      v-bind:options="options"
+                      v-bind:outlined="'outlined'"
+                      dense
+                      required
+                  ></vuetify-money>
+
+                </v-col>
+              </v-row>
+              <v-btn @click="goForward" outlined small> {{$t('Selanjutnya')}} </v-btn>
+
+              <v-btn @click="goBack" text> {{$t('Sebelumnya')}} </v-btn>
+            </v-container>
+          </v-stepper-content>
+          <v-stepper-content step="5">
+            <v-container class="pt-md-4 pt-lg-4 pt-sm-4">
+              <v-row>
                 <v-col cols="12" sm="12" md="12" lg="12">
                   <v-autocomplete
                       v-model="form.produk"
@@ -461,6 +501,8 @@ mixins:[componentmixin],
       this.getDataById();
     }
     this.getProvinsi();
+    this.getDataProductByTypeRekening("simpanan")
+    this.getDataProductByTypeRekening("pembiayaan")
   },
   created() {
     window.addEventListener("keydown", (e) => {
