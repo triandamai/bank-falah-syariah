@@ -546,7 +546,7 @@ mixins:[componentmixin],
 
     },
     goForward() {
-      if(this.step < 4) this.step = parseInt( this.step + 1)
+      if(this.step < 5) this.step = parseInt( this.step + 1)
     },
     removeBackStack(){
       this.$router.go(-1)
