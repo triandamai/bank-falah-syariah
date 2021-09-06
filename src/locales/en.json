@@ -149,6 +149,8 @@
   "VALIDATION": "Error Validation",
   "Name of Akad": "Name of Akad *",
   "Type of Akad": "Type of Akad *",
-  "Nominal": "Nominal"
+  "Nominal": "Nominal",
+  "Rekening": "Rekening",
+  "Nasabah": "Customer"
 
 }

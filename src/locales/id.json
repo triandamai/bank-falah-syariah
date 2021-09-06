@@ -149,5 +149,7 @@
   "VALIDATION": "Validasi gagal",
   "Name of Akad": "Nama Akad *",
   "Type of Akad": "Tipe Akad *",
-  "Nominal": "Nominal"
+  "Nominal": "Nominal",
+  "Rekening": "Rekening",
+  "Nasabah": "Nasabah"
 }

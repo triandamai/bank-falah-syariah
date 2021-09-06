@@ -454,6 +454,7 @@ export default {
       this.$refs.datepicker.save(date);
     },
     submit(){
+      this.formnasabah.active = 1
       this.$store.dispatch(ACTION_PUT_NASABAH,this.formnasabah).then(({success})=>{
         if(success){
           this.saveRekening()
