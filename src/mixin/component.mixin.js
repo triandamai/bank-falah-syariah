@@ -21,6 +21,10 @@ export default {
             no_rekening:"",
             rasio_nasabah: null,
             rasio_bank: null,
+            simpanan_rasio_bank :null,
+            simpanan_rasio_nasabah : null,
+            pembiayaan_rasio_bank:null,
+            pembiayaan_rasio_nasabah:null,
             modal_tgl_buka: false,
             modal_tgl_pencairan: false,
             modal_tgl_jatuh_tempo: false,
@@ -131,6 +135,66 @@ export default {
             this.rasio_nasabah = 100 - newVal;
             this.form.rasio_bank = newVal;
         },
+        simpanan_rasio_bank:function(newVal){
+            if(newVal <= 0) {
+                this.simpanan_rasio_nasabah = 100
+                this.simpanan_rasio_bank =0
+                return
+            }
+            if(newVal >=100){
+                this.simpanan_rasio_nasabah = 0
+                this.simpanan_rasio_bank = 100
+                return;
+            }
+            this.form.rasio_nasabah_simpanan = 100 - newVal;
+            this.simpanan_rasio_nasabah = 100 - newVal;
+            this.form.rasio_bank_simpanan = newVal;
+        },
+        simpanan_rasio_nasabah:function(newVal){
+            if(newVal <= 0) {
+                this.simpanan_rasio_bank = 100
+                this.simpanan_rasio_nasabah =0
+                return
+            }
+            if(newVal >=100){
+                this.simpanan_rasio_bank = 0
+                this.simpanan_rasio_nasabah = 100
+                return;
+            }
+            this.form.rasio_bank_simpanan = 100 - newVal;
+            this.simpanan_rasio_bank = 100 - newVal;
+            this.form.rasio_nasabah_simpanan= newVal;
+        },
+        pembiayaan_rasio_bank:function(newVal){
+            if(newVal <= 0) {
+                this.pembiayaan_rasio_nasabah = 100
+                this.pembiayaan_rasio_bank =0
+                return
+            }
+            if(newVal >=100){
+                this.pembiayaan_rasio_nasabah = 0
+                this.pembiayaan_rasio_bank = 100
+                return;
+            }
+            this.form.rasio_nasabah_pembiayaan = 100 - newVal;
+            this.simpanan_rasio_nasabah = 100 - newVal;
+            this.form.rasio_bank_pembiayaan = newVal;
+        },
+        pembiayaan_rasio_nasabah:function(newVal){
+            if(newVal <= 0) {
+                this.pembiayaan_rasio_bank = 100
+                this.pembiayaan_rasio_nasabah =0
+                return
+            }
+            if(newVal >=100){
+                this.pembiayaan_rasio_bank = 0
+                this.pembiayaan_rasio_nasabah = 100
+                return;
+            }
+            this.form.rasio_bank_pembiayaan = 100 - newVal;
+            this.pembiayaan_rasio_bank = 100 - newVal;
+            this.form.rasio_nasabah_pembiayaan= newVal;
+        }
     },
     created() {
         window.addEventListener("keydown", (e) => {

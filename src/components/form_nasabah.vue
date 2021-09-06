@@ -354,9 +354,9 @@
 
                 <v-col cols="12" sm="12" md="12" lg="12">
                   <v-autocomplete
-                      v-model="form.produk"
+                      v-model="form.produk_simpanan"
                       label="Produk *"
-                      :items="itemsproduct"
+                      :items="itemsproductsimpanan"
                       item-text="nama_produk"
                       return-object
                       dense
@@ -366,7 +366,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="6" lg="6">
                   <v-text-field
-                      v-model="rasio_nasabah"
+                      v-model="simpanan_rasio_nasabah"
                       label="Rasio Nasabah*"
                       suffix="%"
                       dense
@@ -377,7 +377,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="6" lg="6">
                   <v-text-field
-                      v-model="rasio_bank"
+                      v-model="simpanan_rasio_bank"
                       label="Rasio Bank*"
                       suffix="%"
                       dense
@@ -389,7 +389,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="12" lg="12">
                   <vuetify-money
-                      v-model="form.nominal"
+                      v-model="nominalsimpanan"
                       :label="$t('Nominal')"
                       v-bind:options="options"
                       v-bind:outlined="'outlined'"
@@ -409,9 +409,9 @@
               <v-row>
                 <v-col cols="12" sm="12" md="12" lg="12">
                   <v-autocomplete
-                      v-model="form.produk"
+                      v-model="form.produk_pembiayaan"
                       label="Produk *"
-                      :items="itemsproduct"
+                      :items="itemsproductpembiayaan"
                       item-text="nama_produk"
                       return-object
                       dense
@@ -421,7 +421,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="6" lg="6">
                   <v-text-field
-                      v-model="rasio_nasabah"
+                      v-model="pembiayaan_rasio_nasabah"
                       label="Rasio Nasabah*"
                       suffix="%"
                       dense
@@ -432,7 +432,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="6" lg="6">
                   <v-text-field
-                      v-model="rasio_bank"
+                      v-model="pembiayaan_rasio_bank"
                       label="Rasio Bank*"
                       suffix="%"
                       dense
@@ -444,7 +444,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="12" lg="12">
                   <vuetify-money
-                      v-model="form.nominal"
+                      v-model="nominalpembiayaan"
                       :label="$t('Nominal')"
                       v-bind:options="options"
                       v-bind:outlined="'outlined'"
@@ -482,7 +482,8 @@ mixins:[componentmixin],
     return {
       step: 1,
       datepicker: false,
-      itemsproduct:[],
+      itemsproductpembiayaan:[],
+      itemsproductsimpanan:[],
       form: {
         nama_lengkap: "",
         nama_panggilan: "",
@@ -493,8 +494,26 @@ mixins:[componentmixin],
         rasio_nasabah: null,
         rasio_bank: null,
         nominal:null,
+        itemsproductsimpanan:0,
+        itemsproductpembiayaan:0,
+        produk_simpanan:{
+          nominal:null
+        },
+        produk_pembiayaan:{
+          nominal:null
+        }
       },
+      nominalpembiayaan:null,
+      nominalsimpanan:null
     };
+  },
+  watch:{
+    nominalsimpanan:function (newVal){
+      this.form.produk_simpanan.nominal = newVal
+    },
+    nominalpembiayaan:function (newVal){
+      this.form.produk_pembiayaan.nominal = newVal
+    }
   },
   mounted() {
     if (this.isEdit) {
@@ -517,8 +536,13 @@ mixins:[componentmixin],
     getDataProductByTypeRekening(type){
       ApiService.get(`/produk?type=${type}`).then(({success,data})=>{
         if(success){
-          this.itemsproduct = data
-          console.log(this.itemsproduct)
+          if(type === "pembiayaan"){
+            this.itemsproductpembiayaan = data
+          }else {
+            this.itemsproductsimpanan = data
+          }
+
+
           // {
           //   "id": 3,
           //     "tipe_produk": 1,
