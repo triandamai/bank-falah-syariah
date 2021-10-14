@@ -93,15 +93,9 @@ const ApiService = {
   /**
    * download
    * **/
-  downloadFile(url="",namaFile=""){
-    return axios.get(url).then((response)=>{
-      const url = window.URL.createObjectURL(new Blob([response.data]));
-      const link = document.createElement('a');
-      link.href = url;
-      link.setAttribute('download',namaFile)
-      document.body.appendChild(link)
-      link.click()
-    });
+  downloadFile(url="https://bfsservice.bakaranproject.com/rekening_simpanan/cetak/01100001/merge_buku_tabungan",namaFile="mutasi.pdf"){
+    let request = axios.create()
+    return request({url:url,method:"GET",responseType:"blob"})
   },
 
   /**

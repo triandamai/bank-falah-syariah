@@ -46,9 +46,22 @@ export const responseInterceptor=(response)=>{
             }
         }
 
+        /**
+         * check if request should be recursive for pagination or no
+         * and some case the response come with different type
+         *
+         * **/
         if(response.config.method === "get" || response.config.method === "GET"){
-            if(response.data.current_page){
-                shouldNext = response.data.current_page < response.data.last_page
+            //check if the data inside nested object
+            if(response.data.data){
+                if(response.data.data.current_page){
+                    shouldNext = response.data.data.current_page < response.data.data.last_page
+                }
+            }else {
+                if(response.data.current_page){
+
+                    shouldNext = response.data.current_page < response.data.last_page
+                }
             }
             message = "Success Get Data"
         }else {

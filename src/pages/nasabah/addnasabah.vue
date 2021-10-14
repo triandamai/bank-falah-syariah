@@ -17,6 +17,11 @@
         </div>
       </div>
     </div>
+<!--    -->
+    <dialog-cetak
+        :show="form"
+        :body="pdf"
+    />
     <!-- Container-fluid Ends-->
     <v-overlay :value="overlay">
       <v-progress-circular
@@ -29,19 +34,37 @@
 
 <script>
 import { ACTION_POST_NASABAH } from "@/store/modules/nasabah";
+import ApiService from "@/services/api.service";
 export default {
-  data:()=>{return{
-    overlay:false,
-  }},
+  data:()=>{
+    return{
+      overlay:false,
+      body:{},
+      form:true,
+      pdf:null
+    }
+  },
+  created() {
+    this.onSubmit({})
+  },
   methods: {
     onSubmit(data) {
-      this.overlay = true
-      this.$store
-        .dispatch(ACTION_POST_NASABAH, data)
-        .then(() => {
-          this.overlay = false
-
-        });
+    ApiService.downloadFile().then((response)=>{
+        const url = window.URL.createObjectURL(new Blob([response.data]));
+        const link = document.createElement('a');
+        link.href = url;
+        this.pdf = url
+        link.setAttribute('download',"tes.pdf")
+        document.body.appendChild(link)
+       // link.click()
+      });
+      // this.overlay = true
+      // this.$store
+      //   .dispatch(ACTION_POST_NASABAH, data)
+      //   .then(() => {
+      //     this.overlay = false
+      //
+      //   });
     },
   },
 };

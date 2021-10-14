@@ -389,7 +389,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="12" lg="12">
                   <vuetify-money
-                      v-model="nominalsimpanan"
+                      v-model="form.nominal_simpanan"
                       :label="$t('Nominal')"
                       v-bind:options="options"
                       v-bind:outlined="'outlined'"
@@ -444,7 +444,7 @@
                 </v-col>
                 <v-col cols="12" sm="12" md="12" lg="12">
                   <vuetify-money
-                      v-model="nominalpembiayaan"
+                      v-model="form.nominal_pembiayaan"
                       :label="$t('Nominal')"
                       v-bind:options="options"
                       v-bind:outlined="'outlined'"
@@ -491,29 +491,25 @@ mixins:[componentmixin],
         alamat: "",
         no_hp: "",
         active: 1,
-        rasio_nasabah: null,
-        rasio_bank: null,
+        rasio_nasabah_simpanan: null,
+        rasio_nasabah_pembiayaan: null,
+        rasio_bank_simpanan: null,
+        rasio_bank_pembiayaan: null,
         nominal:null,
         itemsproductsimpanan:0,
         itemsproductpembiayaan:0,
         produk_simpanan:{
-          nominal:null
+          id:"",
+          kode:"0101"
         },
         produk_pembiayaan:{
           nominal:null
-        }
+        },
+        nominal_pembiayaan:null,
+        nominal_simpanan:null
       },
-      nominalpembiayaan:null,
-      nominalsimpanan:null
+
     };
-  },
-  watch:{
-    nominalsimpanan:function (newVal){
-      this.form.produk_simpanan.nominal = newVal
-    },
-    nominalpembiayaan:function (newVal){
-      this.form.produk_pembiayaan.nominal = newVal
-    }
   },
   mounted() {
     if (this.isEdit) {

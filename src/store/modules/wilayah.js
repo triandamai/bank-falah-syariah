@@ -52,6 +52,7 @@ const actions = {
       }
       ApiService.getWilayah(resource)
         .then(({  data,shouldNext }) => {
+
             resolve(shouldNext);
             if (shouldNext) {
               commit(INCREMENT_PAGE, { type: type });
