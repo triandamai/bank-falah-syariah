@@ -35,14 +35,13 @@
 </template>
 <script>
 
-import pdf from "vue-pdf-cdn";
 import VuePdfApp from "vue-pdf-app"
 import "vue-pdf-app/dist/icons/main.css";
 import componentMixins from "@/mixin/component.mixin"
 export default {
   mixins:[componentMixins],
   components: {
-    pdf,
+
     VuePdfApp
   },
   data: () => {

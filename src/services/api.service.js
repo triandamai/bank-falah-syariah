@@ -93,9 +93,11 @@ const ApiService = {
   /**
    * download
    * **/
-  downloadFile(url="https://bfsservice.bakaranproject.com/rekening_simpanan/cetak/01100001/merge_buku_tabungan",namaFile="mutasi.pdf"){
+  downloadFile(url="tes"){
+    let request_url = `https://bfsservice.bakaranproject.com/rekening_simpanan/cetak/${url}/merge_buku_tabunga`
+
     let request = axios.create()
-    return request({url:url,method:"GET",responseType:"blob"})
+    return request({url:request_url,method:"GET",responseType:"blob"})
   },
 
   /**

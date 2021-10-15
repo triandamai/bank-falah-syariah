@@ -75,8 +75,7 @@ const actions = {
         return new Promise((resolve) => {
             ApiService.post("nasabah", body)
                 .then(({success, data,message}) => {
-            ApiService.downloadFile()
-                    resolve({success:success,message:message,data:data})
+                    resolve({success:success,message:message,data:data[0]})
                     if (success) {
                         commit(ADD_NASABAH, data[0]);
                     }
