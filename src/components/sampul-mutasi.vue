@@ -1,40 +1,34 @@
 <template>
   <v-dialog
-    transition="dialog-bottom-transition"
-    max-width="600"
     v-model="show"
     persistent
-    scrollable
+    fullscreen
+    hide-overlay
+    transition="dialog-bottom-transition"
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>{{$t('Form Akad')}}</v-toolbar>
-        <v-card-text>
-          <v-container>
-            <v-row>
-              <v-col cols="12">
-<!--                <pdf-->
-<!--                    :src="body"-->
-<!--                />-->
-                <div id="pageContainer">
-                  <div id="viewer" class="pdfViewer"></div>
-                </div>
-              </v-col>
-            </v-row>
-          </v-container>
-          <small>{{$t('indicates required field')}}</small>
-        </v-card-text>
-        <v-card-actions class="justify-end">
-          <v-spacer></v-spacer>
-          <v-btn
-            color="blue darken-1"
-            text
-            @click="close(dialog.value)"
-          >
-            {{ $t('Close') }}
+        <v-toolbar color="primary" dark>
+          <v-btn dark icon @click="hidden">
+            <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-btn color="blue darken-1" text @click="submit"> {{ $t('Save') }} </v-btn>
-        </v-card-actions>
+          <v-toolbar-title>{{$t('Cetak Mutasi')}}</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-toolbar-items>
+            <v-btn dark text @click="onSubmit">
+              {{$t('Save')}}
+            </v-btn>
+          </v-toolbar-items>
+        </v-toolbar>
+        <v-card-text>
+            <vue-pdf-app
+                style="height: 90vh;"
+                :pdf="body"
+                :config="config"
+            >
+
+            </vue-pdf-app>
+        </v-card-text>
       </v-card>
     </template>
   </v-dialog>
@@ -42,40 +36,77 @@
 <script>
 
 import pdf from "vue-pdf-cdn";
-import pdfjslib from "pdfjs-dist/build/pdf"
-import {PDFViewer} from "pdfjs-dist/web/pdf_viewer"
-import "pdfjs-dist/web/pdf_viewer.css";
-pdfjsLib.GlobalWorkerOptions.workerSrc =
-    "https://cdn.jsdelivr.net/npm/pdfjs-dist@2.0.943/build/pdf.worker.min.js";
-
+import VuePdfApp from "vue-pdf-app"
+import "vue-pdf-app/dist/icons/main.css";
 import componentMixins from "@/mixin/component.mixin"
 export default {
   mixins:[componentMixins],
   components: {
-    pdf
+    pdf,
+    VuePdfApp
   },
   data: () => {
     return {
-
+      config:{
+        errorWrapper:true,
+        toolbar: {
+          toolbarViewerLeft: {
+            findbar: false,
+            previous: true,
+            next: true,
+            pageNumber: true
+          },
+          toolbarViewerRight: {
+            presentationMode: true,
+            openFile: false,
+            print: false,
+            download: true,
+            viewBookmark: false
+          },
+          toolbarViewerMiddle: {
+            zoomOut: false,
+            zoomIn: false,
+            scaleSelectContainer: false
+          }
+        },
+        sidebar: {
+          viewThumbnail: true,
+          viewOutline: true,
+          viewAttachments: true
+        },
+        secondaryToolbar: {
+          secondaryPresentationMode: true,
+          secondaryOpenFile: true,
+          secondaryPrint: true,
+          secondaryDownload: true,
+          secondaryViewBookmark: true,
+          firstPage: true,
+          lastPage: true,
+          pageRotateCw: true,
+          pageRotateCcw: true,
+          cursorSelectTool: true,
+          cursorHandTool: true,
+          scrollVertical: true,
+          scrollHorizontal: true,
+          scrollWrapped: true,
+          spreadNone: true,
+          spreadOdd: true,
+          spreadEven: true,
+          documentProperties: true
+        },
+      }
     };
   },
   created() {
-    this.render()
+
   },
 
   computed: {
 
   },
-  methods:{
-   async render(){
-      let container = document.getElementById("pageContainer");
-      let pdfViewer = new PDFViewer({
-        container: container
-      });
-      let loadingTask = pdfjslib.getDocument(this.body);
-      let pdf = await loadingTask.promise;
-      pdfViewer.setDocument(pdf);
-    }
-  }
+  methods:{}
+
 };
+
+
 </script>
