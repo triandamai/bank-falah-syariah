@@ -49,23 +49,36 @@ export default {
   },
   methods: {
     onSubmit(data) {
-    ApiService.downloadFile().then((response)=>{
-        const url = window.URL.createObjectURL(new Blob([response.data]));
-        const link = document.createElement('a');
-        link.href = url;
-        this.pdf = url
-        link.setAttribute('download',"tes.pdf")
-        document.body.appendChild(link)
-       // link.click()
-      });
-      // this.overlay = true
-      // this.$store
-      //   .dispatch(ACTION_POST_NASABAH, data)
-      //   .then(() => {
-      //     this.overlay = false
-      //
-      //   });
+
+      this.overlay = true
+      this.$store
+        .dispatch(ACTION_POST_NASABAH, data)
+        .then(({success,message,data}) => {
+          this.overlay = false
+          ApiService.downloadFile("","").then((response)=>{
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+           // const link = document.createElement('a');
+
+            this.pdf = url
+            //link.href = url;
+            // link.setAttribute('download',"tes.pdf")
+            // document.body.appendChild(link)
+            // // link.click()
+          });
+
+        });
     },
+    downloadFile(){
+      if(this.pdf) {
+        const createDownloadElement = document.createElement("a")
+        createDownloadElement.href = this.pdf
+        createDownloadElement.setAttribute("", "")
+        document.body.appendChild(createDownloadElement)
+        createDownloadElement.click()
+      }else {
+        //file doesn't exist
+      }
+    }
   },
 };
 </script>
