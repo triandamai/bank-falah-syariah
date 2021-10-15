@@ -22,7 +22,7 @@
         :show="form"
         :body="pdf"
         @close="form = false"
-        @download="downloadFile"
+        @submit="downloadFile"
     />
     <!-- Container-fluid Ends-->
     <v-overlay :value="overlay">

@@ -15,7 +15,7 @@
           <v-toolbar-title>{{$t('Cetak Mutasi')}}</v-toolbar-title>
           <v-spacer></v-spacer>
           <v-toolbar-items>
-            <v-btn dark text @click="onSubmit">
+            <v-btn dark text @click="submit">
               {{$t('Save')}}
             </v-btn>
           </v-toolbar-items>
@@ -26,7 +26,6 @@
                 :pdf="body"
                 :config="config"
             >
-
             </vue-pdf-app>
         </v-card-text>
       </v-card>
@@ -103,7 +102,8 @@ export default {
   computed: {
 
   },
-  methods:{}
+  methods:{
+  }
 
 };
 
