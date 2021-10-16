@@ -134,6 +134,8 @@ export default {
             }).catch(()=>{
               this.overlay = false
             });
+          }else {
+            this.overlay = false
           }
 
         });
