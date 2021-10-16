@@ -59,7 +59,7 @@
                         <div class="col-sm-6">
                           <div class="text-md-right">
                             <h3>
-                              Mutasi
+                              {{nasabah.nama_lengkap}}
                               <span class="digits counter">#{{decryptPlain($route.query.r)}}</span>
                             </h3>
                             <p>
@@ -155,7 +155,8 @@ export default {
   computed:{
     ...mapState({
       mutasi:(state)=> state.rekening.mutasi.pembiayaan,
-      saldo:(state)=> state.rekening.saldo.pembiayaan
+      saldo:(state)=> state.rekening.saldo.pembiayaan,
+      nasabah:(state)=> state.rekening.mutasi.nasabah
     }),
 
   },

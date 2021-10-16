@@ -56,7 +56,7 @@
                               <div class="col-sm-6">
                                 <div class="text-md-right">
                                   <h3>
-                                    Mutasi
+                                    {{nasabah.nama_lengkap}}
                                     <span class="digits counter">#{{decryptPlain($route.query.r)}}</span>
                                   </h3>
                                   <p>
@@ -142,7 +142,8 @@ export default {
   mixins:[pageMixin],
   computed:{
     ...mapState({
-      mutasi:(state)=> state.rekening.mutasi.simpanan
+      mutasi:(state)=> state.rekening.mutasi.simpanan,
+      nasabah:(state)=> state.rekening.mutasi.nasabah
     }),
     ...mapGetters({
       saldo:'rekening/saldoSimpanan'

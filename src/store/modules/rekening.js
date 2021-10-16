@@ -35,6 +35,7 @@ const INCREMENT_PAGE = `INCREMENT`;
 const MUTASI_REKENING = "MUTASI_REKENING"
 const DESTROY_MUTASI = "DESTROY MUTASI"
 const SET_SALDO = "SETSALDO"
+const SET_MUTASI_NASABAH = "SETMUTASINASABAH"
 
 export const MUTATION_ADD_DATA_REKENING = `rekening/${ADD_DATA_REKENING}`;
 export const MUTATION_UPDATE_DATA_REKENING = `rekening/${EDIT_DATA_REKENING}`;
@@ -70,7 +71,8 @@ const state = {
     },
     mutasi: {
         pembiayaan: [],
-        simpanan: []
+        simpanan: [],
+        nasabah:{}
     },
     saldo: {
         pembiayaan: {
@@ -135,6 +137,9 @@ const actions = {
             ApiService.get(`${type}${decrypt_no_rekening}/mutasi?t=${new Date().getMilliseconds()}`)
                 .then(({success, data}) => {
                     resolve(success)
+                    if(data.length > 0){
+                        commit(SET_MUTASI_NASABAH,data[0].nasabah)
+                    }
                     data.map(mutasi => {
 
                         commit(MUTASI_REKENING, {type: type, mutasi: mutasi})
@@ -282,6 +287,9 @@ const mutations = {
         } else {
             state.saldo.simpanan = saldo
         }
+    },
+    [SET_MUTASI_NASABAH](state,nasabah){
+      state.mutasi.nasabah = nasabah
     },
     /***
      * Rekening add data dynamicly
