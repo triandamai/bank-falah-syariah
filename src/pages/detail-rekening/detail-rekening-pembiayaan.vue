@@ -48,9 +48,9 @@
                             <div class="media-body m-l-20">
                               <h5 class="media-heading">Bank Falah Syariah</h5>
                               <p>
-                                bakaran project
+                                Bakaran Project
                                 <br />
-                                <span class="digits">(+62)81-226-809-435</span>
+                                <span class="digits">(+62)81-226-xxx-xxx</span>
                               </p>
                             </div>
                           </div>
