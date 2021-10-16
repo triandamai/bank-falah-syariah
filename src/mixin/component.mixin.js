@@ -177,7 +177,7 @@ export default {
                 return;
             }
             this.form.rasio_nasabah_pembiayaan = 100 - newVal;
-            this.simpanan_rasio_nasabah = 100 - newVal;
+            this.pembiayaan_rasio_nasabah = 100 - newVal;
             this.form.rasio_bank_pembiayaan = newVal;
         },
         pembiayaan_rasio_nasabah:function(newVal){
