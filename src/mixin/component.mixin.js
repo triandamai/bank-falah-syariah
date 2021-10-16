@@ -9,7 +9,7 @@ import {formatCurrency} from "@/utils/utils";
 import {decrypt, encrypt} from "@/services/jwt.service"
 
 export default {
-    props: ["show", "body","edit"],
+    props: ["show", "body","edit","name"],
     /**
      * this section in future will make confuse to other contributor
      * */

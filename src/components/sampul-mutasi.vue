@@ -25,6 +25,8 @@
                 style="height: 90vh;"
                 :pdf="body"
                 :config="config"
+                :file-name="name"
+                theme="light"
             >
             </vue-pdf-app>
         </v-card-text>

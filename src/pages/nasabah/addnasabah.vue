@@ -21,6 +21,7 @@
     <dialog-cetak
         :show="form"
         :body="pdf"
+        :name="namaFile"
         @close="form = false"
         @submit="downloadFile"
     />
@@ -43,6 +44,7 @@ export default {
       overlay:false,
       body:{},
       nasabah:{},
+      namaFile:"",
       form:false,
       pdf:null,
       //this data just for testing
@@ -125,6 +127,7 @@ export default {
                 .then((response)=>{
                   this.overlay = false
                   this.nasabah = data
+                     this.namaFile = `${this.nasabah.nama_lengkap}-${this.nasabah.no_rekening}.pdf`
                   const pdfCacheUrl = window.URL.createObjectURL(new Blob([response.data]));
                   this.pdf = pdfCacheUrl
                   this.form = true
@@ -139,7 +142,7 @@ export default {
       if(this.pdf) {
         const createDownloadElement = document.createElement("a")
         createDownloadElement.href = this.pdf
-        createDownloadElement.setAttribute("download", `${this.nasabah.nama_lengkap}-${this.nasabah.no_rekening}`)
+        createDownloadElement.setAttribute("download", `${this.nasabah.nama_lengkap}-${this.nasabah.no_rekening}.pdf`)
         document.body.appendChild(createDownloadElement)
         createDownloadElement.click()
       }else {
