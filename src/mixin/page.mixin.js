@@ -18,7 +18,7 @@ export default {
         decryptPlain:(plain)=>decrypt(plain),
         formatCurrency:(total)=>formatCurrency(total),
         getMonthString(){
-           const date = new Date();
+           const date = new Date.now();
            return date.toLocaleString('id-ID',{month:'long'});
         },
         getDateMutasi(){
