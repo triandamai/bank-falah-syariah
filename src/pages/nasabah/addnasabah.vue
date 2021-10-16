@@ -119,18 +119,17 @@ export default {
         .then(({success,message,data}) => {
           console.log(data)
           console.log(message)
-          this.overlay = false
-          this.nasabah = data
+
           if(success){
-            ApiService.downloadFile(data.no_rekening).then((response)=>{
-              const url = window.URL.createObjectURL(new Blob([response.data]));
-              // const link = document.createElement('a');
-              this.pdf = url
-              //link.href = url;
-              // link.setAttribute('download',"tes.pdf")
-              // document.body.appendChild(link)
-              // // link.click()
-              this.form = true
+            ApiService.downloadFile(data.no_rekening)
+                .then((response)=>{
+                  this.overlay = false
+                  this.nasabah = data
+                  const pdfCacheUrl = window.URL.createObjectURL(new Blob([response.data]));
+                  this.pdf = pdfCacheUrl
+                  this.form = true
+            }).catch(()=>{
+              this.overlay = false
             });
           }
 
