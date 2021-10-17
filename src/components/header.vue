@@ -1,7 +1,7 @@
 <template>
   <div
     class="header-wrapper row m-0"
-    style="padding-top: 5px; padding-bottom:5px;"
+    style="padding-top: 5px;"
   >
 
     <div class="header-logo-wrapper">

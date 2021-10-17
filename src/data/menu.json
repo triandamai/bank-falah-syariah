@@ -36,7 +36,7 @@
       "icon": "monitor",
       "type": "sub",
       "badgeType": "primary",
-      "badgeValue": "5",
+      "badgeValue": "4",
       "active": false,
       "path": "Master Data",
       "privilage": {
@@ -82,7 +82,7 @@
       "icon": "book-open",
       "type": "sub",
       "badgeType": "primary",
-      "badgeValue": "5",
+      "badgeValue": "2",
       "active": false,
       "path": "Transaction",
       "privilage": {
@@ -181,7 +181,7 @@
       "icon": "printer",
       "type": "sub",
       "badgeType": "primary",
-      "badgeValue": "5",
+      "badgeValue": "1",
       "active": false,
       "path": "Report",
       "privilage": {
@@ -212,7 +212,7 @@
       "icon": "settings",
       "type": "sub",
       "badgeType": "primary",
-      "badgeValue": "3",
+      "badgeValue": "2",
       "active": false,
       "path": "System",
       "privilage": {

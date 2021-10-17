@@ -1,7 +1,7 @@
 <template>
   <div class="card-body">
     <div class="col-sm-12">
-      <v-stepper v-model="step" non-linear class="elevation-0">
+      <v-stepper flat :dark="theme" v-model="step" non-linear class="elevation-0">
         <v-stepper-header class="elevation-0">
           <v-stepper-step editable :complete="step > 1" :step="1">
             {{$t('Data Umum')}}
@@ -474,10 +474,11 @@ import {
   WKECAMATAN,
   WDESA,
 } from "@/store/modules/wilayah";
-import componentmixin from "@/mixin/component.mixin"
+import componentMixin from "@/mixin/component.mixin"
+import {mapState} from "vuex";
 
 export default {
-mixins:[componentmixin],
+mixins:[componentMixin],
   data() {
     return {
       step: 1,
@@ -510,6 +511,12 @@ mixins:[componentmixin],
       },
 
     };
+  },
+  computed:{
+    ...mapState({
+      theme: (state) => state.layout.isDark,
+      loadingtable:(state)=>  state.loadingtable
+    }),
   },
   mounted() {
     if (this.isEdit) {
