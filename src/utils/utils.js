@@ -29,14 +29,14 @@ export const formatCurrency=(total)=>{
 }
 
 
-export const checkPrivilage=(privilage)=> {
+export const checkPrivileges=(privileges)=> {
   const { role } = getUser();
   if(role[0]){
-    const haveAllRole = privilage.roles.includes("public");
+    const haveAllRole = privileges.roles.includes("public");
     if (haveAllRole) return true;
     if (role[0]) {
       const current_role = role[0].name;
-      return  privilage.roles.includes(current_role);
+      return  privileges.roles.includes(current_role);
     }
   }
   return false;

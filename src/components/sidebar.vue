@@ -96,14 +96,14 @@
             <label
               :class="'badge badge-' + menuItem.badgeType"
               v-if="menuItem.badgeType"
-              v-show="checkPrivilage(menuItem.privilage)"
+              v-show="checkPrivileges(menuItem.privileges)"
               >{{ menuItem.badgeValue }}</label
             >
             <a
               href="javascript:void(0)"
               class="sidebar-link sidebar-title"
               v-if="menuItem.type === 'sub'"
-              v-show="checkPrivilage(menuItem.privilage)"
+              v-show="checkPrivileges(menuItem.privileges)"
               @click="setNavActive(menuItem, index)"
             >
               <feather :type="menuItem.icon" class="top"></feather>
@@ -119,7 +119,7 @@
               :to="menuItem.path"
               class="sidebar-link sidebar-title"
               v-if="menuItem.type === 'link'"
-              v-show="checkPrivilage(menuItem.privilage)"
+              v-show="checkPrivileges(menuItem.privileges)"
               router-link-exact-active
             >
               <feather :type="menuItem.icon" class="top"></feather>
@@ -138,7 +138,7 @@
             <a
                 class="sidebar-link sidebar-title"
                 v-if="menuItem.type === 'button'"
-                v-show="checkPrivilage(menuItem.privilage)"
+                v-show="checkPrivileges(menuItem.privileges)"
                 @click="showForm(menuItem.path)"
 
             >
@@ -160,7 +160,7 @@
               :href="menuItem.path"
               class="sidebar-link sidebar-title"
               v-if="menuItem.type === 'extLink'"
-              v-show="checkPrivilage(menuItem.privilage)"
+              v-show="checkPrivileges(menuItem.privileges)"
               @click="setNavActive(menuItem, index)"
             >
               <feather :type="menuItem.icon" class="top"></feather>
@@ -178,7 +178,7 @@
               target="_blank"
               class="sidebar-link sidebar-title"
               v-if="menuItem.type === 'extTabLink'"
-              v-show="checkPrivilage(menuItem.privilage)"
+              v-show="checkPrivileges(menuItem.privileges)"
               @click="setNavActive(menuItem, index)"
             >
               <feather :type="menuItem.icon" class="top"></feather>
@@ -206,7 +206,7 @@
                   class="submenu-title"
                   href="javascript:void(0)"
                   v-if="childrenItem.type === 'sub'"
-                  v-show="checkPrivilage(childrenItem.privilage)"
+                  v-show="checkPrivileges(childrenItem.privileges)"
                   @click="setNavActive(childrenItem, index)"
                 >
                   {{ $t(childrenItem.title) }}
@@ -228,7 +228,7 @@
                   class="submenu-title"
                   :to="childrenItem.path"
                   v-if="childrenItem.type === 'link'"
-                  v-show="checkPrivilage(childrenItem.privilage)"
+                  v-show="checkPrivileges(childrenItem.privileges)"
                   router-link-exact-active
                 >
                   {{ $t(childrenItem.title) }}
@@ -248,7 +248,7 @@
                 <a
                   :href="childrenItem.path"
                   v-if="childrenItem.type === 'extLink'"
-                  v-show="checkPrivilage(childrenItem.privilage)"
+                  v-show="checkPrivileges(childrenItem.privileges)"
                   class="submenu-title"
                 >
                   {{ $t(childrenItem.title) }}
@@ -271,7 +271,7 @@
                   :href="childrenItem.path"
                   target="_blank"
                   v-if="childrenItem.type === 'extTabLink'"
-                  v-show="checkPrivilage(childrenItem.privilage)"
+                  v-show="checkPrivileges(childrenItem.privileges)"
                 >
                   {{ $t(childrenItem.title) }}
                   <label
@@ -300,7 +300,7 @@
                     <router-link
                       :to="childrenSubItem.path"
                       v-if="childrenSubItem.type === 'link'"
-                      v-show="checkPrivilage(childrenSubItem.privilage)"
+                      v-show="checkPrivileges(childrenSubItem.privileges)"
                       router-link-exact-active
                     >
                       {{ $t(childrenSubItem.title) }}
@@ -322,7 +322,7 @@
                     <a
                       @click="showForm(childrenSubItem.path)"
                       v-if="childrenSubItem.type === 'button'"
-                      v-show="checkPrivilage(childrenSubItem.privilage)"
+                      v-show="checkPrivileges(childrenSubItem.privileges)"
 
                     >
                       {{ $t(childrenSubItem.title) }}
@@ -345,7 +345,7 @@
                     <router-link
                       :to="childrenSubItem.path"
                       v-if="childrenSubItem.type === 'extLink'"
-                      v-show="checkPrivilage(childrenSubItem.privilage)"
+                      v-show="checkPrivileges(childrenSubItem.privileges)"
                       router-link-exact-active
                     >
                       {{ $t(childrenSubItem.title) }}
@@ -367,7 +367,7 @@
                     <router-link
                       :to="childrenSubItem.path"
                       v-if="childrenSubItem.type === 'extLink'"
-                      v-show="checkPrivilage(childrenSubItem.privilage)"
+                      v-show="checkPrivileges(childrenSubItem.privileges)"
                       router-link-exact-active
                     >
                       {{ $t(childrenSubItem.title) }}
@@ -413,7 +413,7 @@
   </div>
 </template>
 <script>
-import {checkPrivilage} from "@/utils/utils"
+import {checkPrivileges} from "@/utils/utils"
 import {getAppname} from "@/services/jwt.service";
 import { mapState } from "vuex";
 export default {
@@ -493,7 +493,7 @@ export default {
   },
   methods: {
     //check if user already logged in is have privilage for acces those menu
-    checkPrivilage:(privilage)=>checkPrivilage(privilage),
+    checkPrivileges:(privilage)=>checkPrivileges(privilage),
     showForm(form) {
       this.$store.commit("showForm", form);
     },

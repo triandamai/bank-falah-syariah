@@ -6,7 +6,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import ApiService from "@/services/api.service";
 import { getUser } from "@/services/jwt.service";
-import {checkPrivilage} from "@/utils/utils";
+import {checkPrivileges} from "@/utils/utils";
 // component
 
 Vue.use(Router);
@@ -273,7 +273,7 @@ router.beforeEach((to, from, next) => {
   if (to.meta.title) document.title = to.meta.title;
   if (to.meta.reqiresAuth) {
     if (user) {
-      if(checkPrivilage({roles:to.meta.roles})){
+      if(checkPrivileges({roles:to.meta.roles})){
         next();
       }else {
         next({path:"/main/not-authorized"})

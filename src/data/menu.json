@@ -5,7 +5,7 @@
       "headTitle2": "Dashboards,features & data.",
       "type": "headtitle",
       "path": "General",
-      "privilage": {
+      "privileges": {
         "roles": ["admin", "bp_root","siswa","public"]
 
       }
@@ -16,7 +16,7 @@
       "icon": "codesandbox",
       "type": "link",
       "active": false,
-      "privilage": {
+      "privileges": {
         "roles": ["admin", "bp_root","siswa","public"]
 
       }
@@ -27,7 +27,7 @@
       "icon": "users",
       "type": "link",
       "active": false,
-      "privilage": {
+      "privileges": {
         "roles": ["admin", "bp_root","siswa","cs"]
       }
     },
@@ -39,7 +39,7 @@
       "badgeValue": "4",
       "active": false,
       "path": "Master Data",
-      "privilage": {
+      "privileges": {
         "roles": ["admin", "bp_root","siswa","public"]
       },
       "children": [
@@ -47,7 +47,7 @@
           "path": "/main/pegawai",
           "title": "Employees",
           "type": "link",
-          "privilage": {
+          "privileges": {
             "roles": ["admin", "bp_root","siswa"]
           }
         },
@@ -55,7 +55,7 @@
           "path": "/main/jabatan",
           "title": "Departement",
           "type": "link",
-          "privilage": {
+          "privileges": {
             "roles": ["admin", "bp_root","siswa"]
           }
         },
@@ -63,7 +63,7 @@
           "path": "/main/simpanan",
           "title": "Simpanan",
           "type": "link",
-          "privilage": {
+          "privileges": {
             "roles": ["admin", "bp_root","siswa","cs","teller"]
           }
         },
@@ -71,7 +71,7 @@
           "path": "/main/pembiayaan",
           "title": "Pembiayaan",
           "type": "link",
-          "privilage": {
+          "privileges": {
             "roles": ["admin", "bp_root","siswa","cs","teller"]
           }
         }
@@ -84,7 +84,7 @@
       "badgeType": "primary",
       "active": false,
       "path": "Transaction",
-      "privilage": {
+      "privileges": {
         "roles": ["admin", "bp_root","siswa","teller"]
       }
     },
@@ -96,7 +96,7 @@
       "badgeValue": "1",
       "active": false,
       "path": "Report",
-      "privilage": {
+      "privileges": {
         "roles": ["admin", "bp_root","siswa"]
       },
       "children": [
@@ -104,7 +104,7 @@
           "path": "/main/laporan-teller",
           "title": "Report Teller",
           "type": "link",
-          "privilage": {
+          "privileges": {
             "roles": ["admin", "bp_root","siswa","teller"]
           }
         }
@@ -115,7 +115,7 @@
       "headTitle2": "Settings,Role & Group",
       "type": "headtitle",
       "path": "Advance",
-      "privilage": {
+      "privileges": {
         "roles": ["admin", "bp_root"]
       }
     },
@@ -127,7 +127,7 @@
       "badgeValue": "2",
       "active": false,
       "path": "System",
-      "privilage": {
+      "privileges": {
         "roles": ["admin", "bp_root","siswa"]
       },
       "children": [
@@ -135,7 +135,7 @@
           "path": "/main/user",
           "title": "User",
           "type": "link",
-          "privilage": {
+          "privileges": {
             "roles": ["admin", "bp_root"]
           }
         },
@@ -143,7 +143,7 @@
           "path": "/main/preferences",
           "title": "Preferences",
           "type": "link",
-          "privilage": {
+          "privileges": {
             "roles": ["admin", "bp_root"]
           }
         }
