@@ -17,11 +17,20 @@ export const PEMBIAYAAN_SETOR_TUNAI = "PEMBIAYAAN_SETOR_TUNAI";
 export const PEMBIAYAAN_SETOR_NONTUNAI = "PEMBIAYAAN_SETOR_NONTUNAI";
 
 const TRANSACTION = "TRANSACTION"
+const GET_REKENING_TRANSACTION = "GET_REKENING_TRANSACTION"
+const SET_REKENING_TRANSACTION = "SET_REKENING_TRANSACTION"
 export const ACTION_TRANSACTION = `transaksi/${TRANSACTION}`
 
-const state = {};
+const state = {
+    rekening:[]
+};
 const getters = {};
 const actions = {
+    [GET_REKENING_TRANSACTION]({commit},transaction){
+        return new Promise((resolve)=>{
+            commit(SET_REKENING_TRANSACTION,{})
+        })
+    },
     // eslint-disable-next-line no-unused-vars
     [TRANSACTION]({commit}, {payload, type}) {
         return new Promise((resolve) => {
@@ -60,7 +69,11 @@ const actions = {
         });
     }
 };
-const mutations = {};
+const mutations = {
+    [SET_REKENING_TRANSACTION](state,data){
+        state.rekening.rekening = data
+    }
+};
 export default {
     namespaced: true,
     state,

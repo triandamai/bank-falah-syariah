@@ -24,11 +24,11 @@
           <v-row>
             <v-col cols="12" sm="12" md="6" lg="4">
               <v-autocomplete
-                  v-model="form.nasabah_id"
+                  v-model="transactionsSelected"
                   label="Pilih Transaksi *"
-                  :items="nasabah"
-                  item-text="nama_lengkap"
-                  item-value="id"
+                  :items="transactions"
+                  item-text="text"
+                  item-value="value"
                   auto-select-first
                   outlined
                   required
@@ -93,11 +93,38 @@ export default {
   data: () => {
     return {
       overlay:false,
+      transactionsSelected:"",
+      transactions:[
+        {
+          text:"Stor Tunai",
+          value:"Setor Tunai"
+        },
+        {
+          text:"Tarik Tunai",
+          value:"Tarik Tunai"
+        },
+        {
+          text:"Transfer",
+          value:"Transfer"
+        },
+        {
+          text:"Deposito",
+          value:"Deposito"
+        },
+        {
+          text:"Tarik Pembiayaan",
+          value:"Tarik Pembiayaan"
+        },
+        {
+          text:"Setor Pembiayaan",
+          value:"Setor Pembiayaan"
+        },
+      ],
       form:{}
     };
   },
   methods: {
-    getRekening(){
+    getRekeningByType(){
 
     },
     onSubmit(){
