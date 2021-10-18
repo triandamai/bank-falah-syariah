@@ -5,11 +5,12 @@
  *
  */
 import ApiServices from "@/services/api.service";
+import Menu from "@/data/menu.json"
 
 const state = {
   searchData: [],
   togglesidebar: true,
-  menu: []
+  menu: Menu.data,//[]
 };
 
 // getters
@@ -89,7 +90,7 @@ const mutations = {
     });
   },
   setMenu: (state, data) => {
-    state.menu = data;
+  //  state.menu = data;
   }
 };
 

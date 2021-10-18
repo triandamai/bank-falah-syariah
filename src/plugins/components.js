@@ -34,31 +34,7 @@ Vue.component("Breadcrumbs", () => import("@/components/bread_crumbs.vue"));
 Vue.component("apexchart", () => import("vue-apexcharts"));
 Vue.component("PxCard", () => import("@/components/Pxcard.vue"));
 
-//tabungan
-Vue.component("form-transaksi-tabungan-setor-tunai", () =>
-  import("@/components/form_transaksi_tabungan_setor_tunai.vue")
-);
-Vue.component("form-transaksi-tabungan-setor-nontunai", () =>
-  import("@/components/form_transaksi_tabungan_setor_nontunai.vue")
-);
-Vue.component("form-transaksi-tabungan-tarik-nontunai", () =>
-  import("@/components/form_transaksi_tabungan_tarik_nontunai.vue")
-);
-Vue.component("form-transaksi-tabungan-tarik-tunai", () =>
-  import("@/components/form_transaksi_tabungan_tarik_tunai.vue")
-);
-//pembiayaan
-Vue.component("form-transaksi-pembiayaan-setor-tunai", () =>
-  import("@/components/form_transaksi_pembiayaan_setor_tunai.vue")
-);
-Vue.component("form-transaksi-pembiayaan-tarik-tunai", () =>
-  import("@/components/form_transaksi_pembiayaan_tarik_tunai.vue")
-);
-Vue.component("form-transaksi-pembiayaan-setor-nontunai", () =>
-  import("@/components/form_transaksi_pembiayaan_setor_nontunai.vue")
-);
-Vue.component("form-transaksi-pembiayaan-tarik-nontunai", () =>
-  import("@/components/form_transaksi_pembiayaan_tarik_nontunai.vue")
-);
+Vue.component("form-transaksi",()=> import("@/components/form_transaksi.vue"))
+
 
 export default {};

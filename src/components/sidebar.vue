@@ -131,7 +131,31 @@
                 v-if="menuItem.children"
               ></i>
             </router-link>
-            <!-- External Link -->
+            <!-- Button
+              @click="showForm(childrenSubItem.path)"
+                      v-if="childrenSubItem.type === 'button'"
+            -->
+            <a
+                class="sidebar-link sidebar-title"
+                v-if="menuItem.type === 'button'"
+                v-show="checkPrivilage(menuItem.privilage)"
+                @click="showForm(menuItem.path)"
+
+            >
+              <feather :type="menuItem.icon" class="top"></feather>
+              <span>
+                {{ $t(menuItem.title) }}
+              </span>
+              <i
+                  class="fa fa-angle-right pull-right"
+                  v-if="menuItem.children"
+              ></i>
+            </a>
+
+            <!-- External Link
+             @click="showForm(childrenSubItem.path)"
+                     v-if="childrenSubItem.type === 'button'"
+           -->
             <a
               :href="menuItem.path"
               class="sidebar-link sidebar-title"

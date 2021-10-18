@@ -80,101 +80,13 @@
     {
       "title": "Transaction",
       "icon": "book-open",
-      "type": "sub",
+      "type": "button",
       "badgeType": "primary",
-      "badgeValue": "2",
       "active": false,
       "path": "Transaction",
       "privilage": {
         "roles": ["admin", "bp_root","siswa","teller"]
-      },
-      "children": [
-        {
-          "title": "Tabungan",
-          "type": "sub",
-          "active": false,
-          "privilage": {
-            "roles": ["admin", "bp_root","siswa","teller"]
-          },
-          "children": [
-            {
-              "path": "tabunganformsetortunai",
-              "title": "Setor Tunai",
-              "type": "button",
-              "privilage": {
-                "roles": ["admin", "bp_root","siswa","teller"]
-              }
-            },
-            {
-              "path": "tabunganformsetornontunai",
-              "title": "Setor Non-Tunai",
-              "type": "button",
-              "privilage": {
-                "roles": ["admin", "bp_root","siswa","teller"]
-              }
-            },
-            {
-              "path": "tabunganformtariktunai",
-              "title": "Tarik Tunai",
-              "type": "button",
-              "privilage": {
-                "roles": ["admin", "bp_root","siswa","teller"]
-              }
-            },
-            {
-              "path": "tabunganformtariknontunai",
-              "title": "Tarik Non-Tunai",
-              "type": "button",
-              "privilage": {
-                "roles": ["admin", "bp_root","siswa","teller"]
-              }
-            }
-
-          ]
-        },
-        {
-          "title": "Pembiayaan",
-          "type": "sub",
-          "active": false,
-          "privilage": {
-            "roles": ["admin", "bp_root","siswa","cs","teller"]
-          },
-          "children": [
-            {
-              "path": "pembiayaanformsetortunai",
-              "title": "Setor Tunai",
-              "type": "button",
-              "privilage": {
-                "roles": ["admin", "bp_root","siswa","teller"]
-              }
-            },
-            {
-              "path": "pembiayaanformsetornontunai",
-              "title": "Setor Non-Tunai",
-              "type": "button",
-              "privilage": {
-                "roles": ["admin", "bp_root","siswa","teller"]
-              }
-            },
-            {
-              "path": "pembiayaanformtariktunai",
-              "title": "Tarik Tunai",
-              "type": "button",
-              "privilage": {
-                "roles": ["admin", "bp_root","siswa","teller"]
-              }
-            },
-            {
-              "path": "pembiayaanformtariknontunai",
-              "title": "Tarik Non-Tunai",
-              "type": "button",
-              "privilage": {
-                "roles": ["admin", "bp_root","siswa","teller"]
-              }
-            }
-          ]
-        }
-      ]
+      }
     },
     {
       "title": "Report",
