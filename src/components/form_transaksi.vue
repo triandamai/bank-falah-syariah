@@ -8,7 +8,7 @@
     >
 
       <v-card>
-        <v-toolbar color="primary" dark>
+        <v-toolbar color="orange" dark flat>
           <v-btn dark icon @click="hidden">
             <v-icon>mdi-close</v-icon>
           </v-btn>
@@ -17,7 +17,6 @@
         </v-toolbar>
         <v-container class="pt-md-6 pt-lg-6 pt-sm-6">
           <v-row>
-
             <v-col cols="12">
               <div class="card">
                 <div class="card-header">
@@ -78,7 +77,9 @@
                     </v-col>
                     <v-col cols="12" sm="12" md="12" lg="12">
                       <v-btn
-                          color="primary"
+                          outlined
+                          color="indigo"
+
                       >
                         Prosess
                       </v-btn>
