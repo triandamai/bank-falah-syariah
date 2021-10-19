@@ -10,12 +10,12 @@ import Vuex from "vuex";
 import layout from "./modules/layout";
 import menu from "./modules/menu";
 import auth from "./modules/auth";
-import nasabah from "./modules/nasabah";
+import nasabah from "./modules/customer";
 import master from "./modules/master";
-import rekening from "./modules/rekening";
+import rekening from "./modules/account";
 import system from "./modules/system";
 import wilayah from "./modules/wilayah";
-import transaksi from "./modules/transaksi";
+import transaksi from "./modules/transaction";
 import statistic from "./modules/statistic";
 
 Vue.use(Vuex);
@@ -76,10 +76,10 @@ export const store = new Vuex.Store({
 export * from "./modules/layout";
 export * from "./modules/menu";
 export * from "./modules/auth";
-export * from "./modules/nasabah";
+export * from "./modules/customer";
 export * from "./modules/master";
-export * from "./modules/rekening";
+export * from "./modules/account";
 export * from "./modules/system";
 export * from "./modules/wilayah";
-export * from "./modules/transaksi";
+export * from "./modules/transaction";
 export * from "./modules/statistic"

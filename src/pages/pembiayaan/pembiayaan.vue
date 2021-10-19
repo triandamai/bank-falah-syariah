@@ -44,7 +44,7 @@ import {
   ACTION_POST_DATA_REKENING,
   ACTION_PUT_DATA_REKENING,
   RPEMBIAYAAN,
-} from "@/store/modules/rekening";
+} from "@/store/modules/account";
 import pageMixin from "@/mixin/page.mixin"
 
 import { mapState } from "vuex";

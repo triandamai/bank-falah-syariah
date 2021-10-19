@@ -36,7 +36,7 @@
 </template>
 
 <script>
-import { ACTION_POST_NASABAH } from "@/store/modules/nasabah";
+import { ACTION_POST_NASABAH } from "@/store/modules/customer";
 import ApiService from "@/services/api.service";
 export default {
   data:()=>{

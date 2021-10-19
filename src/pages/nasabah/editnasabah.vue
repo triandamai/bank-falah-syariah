@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { ACTION_PUT_NASABAH } from "@/store/modules/nasabah";
+import { ACTION_PUT_NASABAH } from "@/store/modules/customer";
 import ApiService from "@/services/api.service";
 export default {
   data: () => {
