@@ -20,6 +20,7 @@ const TRANSACTION = "TRANSACTION"
 const GET_REKENING_TRANSACTION = "GET_REKENING_TRANSACTION"
 const SET_REKENING_TRANSACTION = "SET_REKENING_TRANSACTION"
 export const ACTION_TRANSACTION = `transaksi/${TRANSACTION}`
+export const ACTION_GET_REKENING_TRANSACTION = `transaksi/${GET_REKENING_TRANSACTION}`
 
 const state = {
     rekening:[]
@@ -28,7 +29,17 @@ const getters = {};
 const actions = {
     [GET_REKENING_TRANSACTION]({commit},transaction){
         return new Promise((resolve)=>{
-            commit(SET_REKENING_TRANSACTION,{})
+
+            let endPoint = ()=>{
+                if(transaction === "") return ``
+            }
+            ApiService.get(endPoint()).then(({success,data,message})=>{
+                if(success){
+                    resolve({success:success,data:data,message:message})
+                    commit(SET_REKENING_TRANSACTION,data)
+                }
+            })
+
         })
     },
     // eslint-disable-next-line no-unused-vars
