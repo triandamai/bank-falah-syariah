@@ -78,17 +78,6 @@
       ]
     },
     {
-      "title": "Transaction",
-      "icon": "book-open",
-      "type": "button",
-      "badgeType": "primary",
-      "active": false,
-      "path": "Transaction",
-      "privileges": {
-        "roles": ["admin", "bp_root","siswa","teller"]
-      }
-    },
-    {
       "title": "Report",
       "icon": "printer",
       "type": "sub",
@@ -109,6 +98,17 @@
           }
         }
       ]
+    },
+    {
+      "title": "Transaction",
+      "icon": "book-open",
+      "type": "button",
+      "badgeType": "primary",
+      "active": false,
+      "path": "Transaction",
+      "privileges": {
+        "roles": ["admin", "bp_root","siswa","teller"]
+      }
     },
     {
       "headTitle1": "Advance",

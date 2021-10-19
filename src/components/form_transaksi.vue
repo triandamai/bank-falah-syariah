@@ -14,72 +14,95 @@
           </v-btn>
           <v-toolbar-title>{{$t('Transaksi Pembiayaan Setor NonTunai')}}</v-toolbar-title>
           <v-spacer></v-spacer>
-          <v-toolbar-items>
-            <v-btn dark text @click="onSubmit">
-              {{$t('Save')}}
-            </v-btn>
-          </v-toolbar-items>
         </v-toolbar>
         <v-container class="pt-md-6 pt-lg-6 pt-sm-6">
           <v-row>
-            <v-col cols="12" sm="12" md="4" lg="4">
-              <v-autocomplete
-                  v-model="transactionsSelected"
-                  label="Pilih Transaksi *"
-                  :items="transactions"
-                  item-text="text"
-                  item-value="value"
-                  auto-select-first
-                  outlined
-                  required
-                  dense
-                  small-chips
-              />
-            </v-col>
-            <v-col cols="12" sm="12" md="4" lg="4">
-              <v-autocomplete
-                  v-model="form.nasabah_id"
-                  label="Nasabah/Rekening *"
-                  :items="nasabah"
-                  item-text="nama_lengkap"
-                  item-value="id"
-                  auto-select-first
-                  outlined
-                  required
-                  dense
-                  small-chips
-              />
+
+            <v-col cols="12">
+              <div class="card">
+                <div class="card-header">
+                  <h5>Transaksi</h5>
+                  <span
+                  >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
+                  >
+                </div>
+                <div class="card-body">
+                  <v-row>
+                    <v-col cols="12" sm="12" md="4" lg="4">
+                      <v-autocomplete
+                          v-model="transactionsSelected"
+                          label="Pilih Transaksi *"
+                          :items="transactions"
+                          item-text="text"
+                          item-value="value"
+                          auto-select-first
+                          outlined
+                          required
+                          dense
+                          small-chips
+                      />
+                    </v-col>
+                    <v-col cols="12" sm="12" md="4" lg="4">
+                      <v-autocomplete
+                          v-model="form.nasabah_id"
+                          label="Nasabah/Rekening *"
+                          :items="nasabah"
+                          item-text="nama_lengkap"
+                          item-value="id"
+                          auto-select-first
+                          outlined
+                          required
+                          dense
+                          small-chips
+                      />
+                    </v-col>
+
+                    <v-col cols="12" sm="12" md="4" lg="4">
+                      <v-text-field
+                          v-model="form.nomor_rekening"
+                          label="Nomor Rekening Tujuan"
+                          placeholder="01100XXXX"
+                          dense
+                          outlined
+                      />
+                    </v-col>
+                    <v-col cols="12" sm="12" md="4" lg="4">
+                      <vuetify-money
+                          v-model="form.value"
+                          :label="$t('Jumlah')"
+                          v-bind:options="options"
+                          v-bind:outlined="'outlined'"
+                          dense
+                          required
+                      />
+                    </v-col>
+                    <v-col cols="12" sm="12" md="12" lg="12">
+                      <v-btn
+                          color="primary"
+                      >
+                        Prosess
+                      </v-btn>
+                    </v-col>
+                  </v-row>
+                </div>
+              </div>
             </v-col>
 
-            <v-col cols="12" sm="12" md="4" lg="4">
-              <v-text-field
-                  v-model="form.nomor_rekening"
-                  label="Nomor Rekening Tujuan"
-                  placeholder="01100XXXX"
-                  dense
-                  outlined
-              />
-            </v-col>
-            <v-col cols="12" sm="12" md="4" lg="4">
-              <vuetify-money
-                  v-model="form.value"
-                  :label="$t('Jumlah')"
-                  v-bind:options="options"
-                  v-bind:outlined="'outlined'"
-                  dense
-                  required
-              />
-            </v-col>
+
 
             <v-col cols="12">
               <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-xs-12 box-col-12">
                   <div class="file-content">
                     <div class="card">
+                      <div class="card-header">
+                        <h5>Result</h5>
+                        <span
+                        >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
+                        >
+                      </div>
                       <div class="card-body">
                         <div class="invoice">
-
-
                               <div class="row">
                                 <div class="col-sm-6">
                                   <div class="media">
@@ -105,7 +128,7 @@
                                   <div class="text-md-right">
                                     <h3>
                                       Trian Damai
-                                      <span class="digits counter">#{{decryptPlain($route.query.r)}}</span>
+                                      <span class="digits counter">#01.001.032.5000</span>
                                     </h3>
                                     <p>
                                       {{getMonthString()}}
