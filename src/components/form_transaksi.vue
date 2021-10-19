@@ -22,7 +22,7 @@
         </v-toolbar>
         <v-container class="pt-md-6 pt-lg-6 pt-sm-6">
           <v-row>
-            <v-col cols="12" sm="12" md="6" lg="4">
+            <v-col cols="12" sm="12" md="4" lg="4">
               <v-autocomplete
                   v-model="transactionsSelected"
                   label="Pilih Transaksi *"
@@ -32,11 +32,11 @@
                   auto-select-first
                   outlined
                   required
-
+                  dense
                   small-chips
               />
             </v-col>
-            <v-col cols="12" sm="12" md="6" lg="4">
+            <v-col cols="12" sm="12" md="4" lg="4">
               <v-autocomplete
                   v-model="form.nasabah_id"
                   label="Nasabah/Rekening *"
@@ -46,26 +46,27 @@
                   auto-select-first
                   outlined
                   required
-
+                  dense
                   small-chips
               />
             </v-col>
 
-            <v-col cols="12" sm="12" md="6" lg="4">
+            <v-col cols="12" sm="12" md="4" lg="4">
               <v-text-field
                   v-model="form.nomor_rekening"
                   label="Nomor Rekening Tujuan"
                   placeholder="01100XXXX"
+                  dense
                   outlined
-
               />
             </v-col>
-            <v-col cols="12" sm="12" md="6" lg="4">
+            <v-col cols="12" sm="12" md="4" lg="4">
               <vuetify-money
                   v-model="form.value"
                   :label="$t('Jumlah')"
                   v-bind:options="options"
                   v-bind:outlined="'outlined'"
+                  dense
                   required
               />
             </v-col>
@@ -77,8 +78,8 @@
                     <div class="card">
                       <div class="card-body">
                         <div class="invoice">
-                          <div>
-                            <div>
+
+
                               <div class="row">
                                 <div class="col-sm-6">
                                   <div class="media">
@@ -170,8 +171,6 @@
                           </div>
                           <!-- End Invoice-->
                           <!-- End Invoice Holder-->
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
