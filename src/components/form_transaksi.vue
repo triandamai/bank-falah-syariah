@@ -234,27 +234,27 @@ export default {
       transactions:[
         {
           text:"Stor Tunai",
-          value:"Setor Tunai"
+          value:"SIMPANAN"
         },
         {
           text:"Tarik Tunai",
-          value:"Tarik Tunai"
+          value:"SIMPANAN"
         },
         {
           text:"Transfer",
-          value:"Transfer"
+          value:"SIMPANAN"
         },
         {
           text:"Deposito",
-          value:"Deposito"
+          value:"SIMPANAN"
         },
         {
           text:"Tarik Pembiayaan",
-          value:"Tarik Pembiayaan"
+          value:"PEMBIAYAAN"
         },
         {
           text:"Setor Pembiayaan",
-          value:"Setor Pembiayaan"
+          value:"PEMBIAYAAN"
         },
       ],
       form:{}
