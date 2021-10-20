@@ -5,16 +5,20 @@
  */
 import ApiService from "@/services/api.service.js";
 
-
+//equiv simpanan
 export const TABUNGAN_TARIK_TUNAI = "TABUNGAN_TARIK_TUNAI";
 export const TABUNGAN_TARIK_NONTUNAI = "TABUNGAN_TARIK_NONTUNAI";
 export const TABUNGAN_SETOR_TUNAI = "TABUNGAN_SETOR_TUNAI";
 export const TABUNGAN_SETOR_NONTUNAI = "TABUNGAN_SETOR_NONTUNAI";
+export const TABUNGAN_TRANSFER = "TABUNGAN_TRANSFER";
 
-export const PEMBIAYAAN_TARIK_TUNAI = "PEMBIAYAAN_TARIK_TUNAI";
-export const PEMBIAYAAN_TARIK_NONTUNAI = "PEMBIAYAAN_TARIK_NONTUNAI";
-export const PEMBIAYAAN_SETOR_TUNAI = "PEMBIAYAAN_SETOR_TUNAI";
-export const PEMBIAYAAN_SETOR_NONTUNAI = "PEMBIAYAAN_SETOR_NONTUNAI";
+//equiv
+export const PEMBIAYAAN_SETOR = "PEMBIAYAAN_SETOR";
+export const PEMBIAYAAN_TARIK = "PEMBIAYAAN_TARIK";
+
+export const PEMBIAYAAN = "PEMBIAYAAN"
+export const SIMPANAN = "SIMPANAN"
+
 
 const TRANSACTION = "TRANSACTION"
 const GET_REKENING_TRANSACTION = "GET_REKENING_TRANSACTION"
@@ -31,7 +35,8 @@ const actions = {
         return new Promise((resolve)=>{
 
             let endPoint = ()=>{
-                if(transaction === "") return ``
+                if(transaction === PEMBIAYAAN) return `/rekening_pembiayaan`
+                if(transaction === SIMPANAN) return `/rekening_simpanan`
             }
             ApiService.get(endPoint()).then(({success,data,message})=>{
                 if(success){
@@ -59,17 +64,14 @@ const actions = {
                 case  TABUNGAN_SETOR_NONTUNAI:
                     endpoint = "/transaksi/simpanan/setor_nontunai"
                     break
-                case  PEMBIAYAAN_TARIK_TUNAI:
+                case  PEMBIAYAAN_SETOR:
                     endpoint = "/transaksi/pembiayaan/pencairan_tunai"
                     break
-                case  PEMBIAYAAN_TARIK_NONTUNAI:
+                case  PEMBIAYAAN_TARIK:
                     endpoint = "/transaksi/pembiayaan/pencairan_nontunai"
                     break
-                case  PEMBIAYAAN_SETOR_TUNAI:
+                case  TABUNGAN_TRANSFER:
                     endpoint = "/transaksi/pembiayaan/setor_angsuran_tunai"
-                    break
-                case  PEMBIAYAAN_SETOR_NONTUNAI:
-                    endpoint = "/transaksi/pembiayaan/setor_angsuran_nontunai"
                     break
             }
 

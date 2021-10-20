@@ -32,6 +32,7 @@
                           v-model="transactionsSelected"
                           label="Pilih Transaksi *"
                           :items="transactions"
+                          @change="getRekeningByType"
                           item-text="text"
                           item-value="value"
                           auto-select-first
@@ -45,7 +46,7 @@
                       <v-autocomplete
                           v-model="form.nasabah_id"
                           label="Nasabah/Rekening *"
-                          :items="nasabah"
+                          :items="rekening"
                           item-text="nama_lengkap"
                           item-value="id"
                           auto-select-first
@@ -214,10 +215,11 @@
   </v-row>
 </template>
 <script>
-import { ACTION_TRANSACTION, PEMBIAYAAN_SETOR_NONTUNAI} from "@/store"
+import {ACTION_GET_REKENING_TRANSACTION, ACTION_TRANSACTION, PEMBIAYAAN_SETOR_NONTUNAI} from "@/store"
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"
 import componentMixin from "@/mixin/component.mixin"
+import {mapState} from "vuex";
 export default {
   mixins:[componentMixin],
   data: () => {
@@ -258,9 +260,19 @@ export default {
       form:{}
     };
   },
+  computed:{
+    ...mapState({
+      rekening: (state) => state.transaksi.rekening
+    })
+  },
   methods: {
     getRekeningByType(){
-      this.$store.dispatch()
+      this.$store.dispatch(ACTION_GET_REKENING_TRANSACTION,this.transactionsSelected).then(({success,data,message})=>{
+        if(success){
+          console.log(data)
+          console.log(message)
+        }
+      })
     },
     onSubmit(){
       this.overlay = true
