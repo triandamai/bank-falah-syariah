@@ -4,20 +4,18 @@
  *
  */
 import ApiService from "@/services/api.service.js";
+import {Promise} from "es6-promise";
 
 //equiv simpanan
-export const TABUNGAN_TARIK_TUNAI = "TABUNGAN_TARIK_TUNAI";
-export const TABUNGAN_TARIK_NONTUNAI = "TABUNGAN_TARIK_NONTUNAI";
-export const TABUNGAN_SETOR_TUNAI = "TABUNGAN_SETOR_TUNAI";
-export const TABUNGAN_SETOR_NONTUNAI = "TABUNGAN_SETOR_NONTUNAI";
+export const TABUNGAN_TARIK = "TABUNGAN_TARIK";
+export const TABUNGAN_SETOR = "TABUNGAN_SETOR";
+export const TABUNGAN_DEPOSITO = "TABUNGAN_DEPOSITO";
 export const TABUNGAN_TRANSFER = "TABUNGAN_TRANSFER";
 
 //equiv
 export const PEMBIAYAAN_SETOR = "PEMBIAYAAN_SETOR";
 export const PEMBIAYAAN_TARIK = "PEMBIAYAAN_TARIK";
 
-export const PEMBIAYAAN = "PEMBIAYAAN"
-export const SIMPANAN = "SIMPANAN"
 
 
 const TRANSACTION = "TRANSACTION"
@@ -35,8 +33,12 @@ const actions = {
         return new Promise((resolve)=>{
 
             let endPoint = ()=>{
-                if(transaction === PEMBIAYAAN) return `/rekening_pembiayaan`
-                if(transaction === SIMPANAN) return `/rekening_simpanan`
+                if(transaction === PEMBIAYAAN_TARIK) return `/rekening_pembiayaan`
+                if(transaction === PEMBIAYAAN_SETOR) return `/rekening_pembiayaan`
+                if(transaction === TABUNGAN_TARIK) return `/rekening_simpanan`
+                if(transaction === TABUNGAN_SETOR) return `/rekening_simpanan`
+                if(transaction === TABUNGAN_DEPOSITO) return `/rekening_simpanan`
+                if(transaction === TABUNGAN_TRANSFER) return `/rekening_simpanan`
             }
             ApiService.get(endPoint()).then(({success,data,message})=>{
                 if(success){
@@ -52,16 +54,16 @@ const actions = {
         return new Promise((resolve) => {
             let endpoint = "";
             switch (type) {
-                case  TABUNGAN_TARIK_TUNAI:
+                case  TABUNGAN_TARIK:
                     endpoint = "/transaksi/simpanan/tarik_tunai"
                     break
-                case  TABUNGAN_TARIK_NONTUNAI:
-                    endpoint = "/transaksi/simpanan/tarik_nontunai"
-                    break
-                case  TABUNGAN_SETOR_TUNAI:
+                case  TABUNGAN_SETOR:
                     endpoint = "/transaksi/simpanan/setor_tunai"
                     break
-                case  TABUNGAN_SETOR_NONTUNAI:
+                case  TABUNGAN_TRANSFER:
+                    endpoint = "/transaksi/pembiayaan/setor_angsuran_tunai"
+                    break
+                case  TABUNGAN_DEPOSITO:
                     endpoint = "/transaksi/simpanan/setor_nontunai"
                     break
                 case  PEMBIAYAAN_SETOR:
@@ -70,9 +72,7 @@ const actions = {
                 case  PEMBIAYAAN_TARIK:
                     endpoint = "/transaksi/pembiayaan/pencairan_nontunai"
                     break
-                case  TABUNGAN_TRANSFER:
-                    endpoint = "/transaksi/pembiayaan/setor_angsuran_tunai"
-                    break
+
             }
 
             ApiService.post(`${endpoint}`, payload)
@@ -84,7 +84,7 @@ const actions = {
 };
 const mutations = {
     [SET_REKENING_TRANSACTION](state,data){
-        state.rekening.rekening = data
+        state.rekening = data
     }
 };
 export default {

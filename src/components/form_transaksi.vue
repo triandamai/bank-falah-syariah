@@ -12,7 +12,7 @@
           <v-btn dark icon @click="hidden">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>{{$t('Transaksi Pembiayaan Setor NonTunai')}}</v-toolbar-title>
+          <v-toolbar-title>{{$t('Transaksi')}}</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-container class="pt-md-6 pt-lg-6 pt-sm-6">
@@ -44,17 +44,33 @@
                     </v-col>
                     <v-col cols="12" sm="12" md="4" lg="4">
                       <v-autocomplete
-                          v-model="form.nasabah_id"
+                          v-model="selectedRekening"
                           label="Nasabah/Rekening *"
-                          :items="rekening"
-                          item-text="nama_lengkap"
-                          item-value="id"
+                          :items="rekenings"
+                          return-object
                           auto-select-first
                           outlined
                           required
                           dense
                           small-chips
-                      />
+                      >
+                        <template v-slot:item="{ item }">
+                          <v-list-item-content>
+                            <v-list-item-title>
+                              {{
+                                item.no_rekening + " - " + item.nasabah.nama_lengkap
+                              }}</v-list-item-title
+                            >
+                          </v-list-item-content>
+                        </template>
+                        <template v-slot:selection="{ item }">
+                          <v-list-item-content>
+                            <v-list-item-title>
+                              {{ item.no_rekening + " - " + item.nasabah.nama_lengkap }}
+                            </v-list-item-title>
+                          </v-list-item-content>
+                        </template>
+                      </v-autocomplete>
                     </v-col>
 
                     <v-col cols="12" sm="12" md="4" lg="4">
@@ -89,9 +105,6 @@
                 </div>
               </div>
             </v-col>
-
-
-
             <v-col cols="12">
               <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-xs-12 box-col-12">
@@ -215,7 +228,16 @@
   </v-row>
 </template>
 <script>
-import {ACTION_GET_REKENING_TRANSACTION, ACTION_TRANSACTION, PEMBIAYAAN_SETOR_NONTUNAI} from "@/store"
+import {
+  ACTION_GET_REKENING_TRANSACTION,
+  ACTION_TRANSACTION,
+    TABUNGAN_TARIK,
+    TABUNGAN_TRANSFER,
+    TABUNGAN_SETOR,
+    TABUNGAN_DEPOSITO,
+    PEMBIAYAAN_SETOR,
+    PEMBIAYAAN_TARIK
+} from "@/store"
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"
 import componentMixin from "@/mixin/component.mixin"
@@ -226,59 +248,60 @@ export default {
     return {
       overlay:false,
       transactionsSelected:"",
-      mutasi: [
-        {
-
-        }
-      ],
+      selectedRekening:{},
+      mutasi: [],
       transactions:[
         {
-          text:"Stor Tunai",
-          value:"SIMPANAN"
+          text:"Setor Tunai",
+          value:TABUNGAN_SETOR
         },
         {
           text:"Tarik Tunai",
-          value:"SIMPANAN"
+          value:TABUNGAN_TARIK
         },
         {
           text:"Transfer",
-          value:"SIMPANAN"
+          value:TABUNGAN_TRANSFER
         },
         {
           text:"Deposito",
-          value:"SIMPANAN"
+          value:TABUNGAN_DEPOSITO
         },
         {
           text:"Tarik Pembiayaan",
-          value:"PEMBIAYAAN"
+          value:PEMBIAYAAN_TARIK
         },
         {
           text:"Setor Pembiayaan",
-          value:"PEMBIAYAAN"
+          value:PEMBIAYAAN_SETOR
         },
       ],
-      form:{}
+      form:{},
+
     };
+  },
+  watch:{
+    selectedRekening:function (newVal){
+      this.form.nasabah = newVal.nasabah
+      this.form.rekening = newVal.no_rekening
+    }
   },
   computed:{
     ...mapState({
-      rekening: (state) => state.transaksi.rekening
+      rekenings: (state) => state.transaksi.rekening
     })
   },
   methods: {
     getRekeningByType(){
-      this.$store.dispatch(ACTION_GET_REKENING_TRANSACTION,this.transactionsSelected).then(({success,data,message})=>{
-        if(success){
-          console.log(data)
-          console.log(message)
-        }
+      this.$store.dispatch(ACTION_GET_REKENING_TRANSACTION,this.transactionsSelected).then(({data})=>{
+
       })
     },
     onSubmit(){
       this.overlay = true
       this.form.tgl_transaksi = getTodayDate()
       this.form.petugas_id = getCurrendUserId()
-      this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:PEMBIAYAAN_SETOR_NONTUNAI})
+      this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:this.transactionsSelected})
           .then(()=>{
             this.overlay = false
           })

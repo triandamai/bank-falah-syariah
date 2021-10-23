@@ -27,13 +27,13 @@ const routes = [
    */
   { path: "", redirect: { name: "dashboard" } },
   /**
-   * in this route all children reqiresAuth for access
+   * in this route all children requireAuth for access
    */
   {
     path: "/main",
     component: () => import("@/components/body"),
     meta: {
-      reqiresAuth: true,
+      requireAuth: true,
     },
     children: [
       {
@@ -46,7 +46,7 @@ const routes = [
         component: () => import("@/pages/dashboard/dashboard.vue"),
         meta: {
           title: "Dashboard | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["public"]
         },
       },
@@ -57,7 +57,7 @@ const routes = [
         component: () => import("@/pages/preferences/preferences.vue"),
         meta: {
           title: "Personalisasi | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root"]
         },
       },
@@ -68,7 +68,7 @@ const routes = [
         component: () => import("@/pages/nasabah/nasabah.vue"),
         meta: {
           title: "Nasabah | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","cs","siswa"]
         },
       },
@@ -78,7 +78,7 @@ const routes = [
         component: () => import("@/pages/nasabah/addnasabah.vue"),
         meta: {
           title: "Nasabah | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa","cs"]
         },
       },
@@ -88,7 +88,7 @@ const routes = [
         component: () => import("@/pages/nasabah/editnasabah.vue"),
         meta: {
           title: "Nasabah | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa","cs"]
         },
       },
@@ -102,7 +102,7 @@ const routes = [
         component: () => import("@/pages/laporan-teller/laporan-teller.vue"),
         meta: {
           title: "Laporan | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa","teller"]
         },
       },
@@ -113,7 +113,7 @@ const routes = [
         component: () => import("@/pages/akad/akad.vue"),
         meta: {
           title: "Akad | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa"]
         },
       },
@@ -124,7 +124,7 @@ const routes = [
         component: () => import("@/pages/jenistransaksi/jenistransaksi.vue"),
         meta: {
           title: "Jenis Transaksi | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa"]
         },
       },
@@ -134,7 +134,7 @@ const routes = [
         component: () => import("@/pages/jabatan/jabatan.vue"),
         meta: {
           title: "Jabatan | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa"]
         },
       },
@@ -145,7 +145,7 @@ const routes = [
         component: () => import("@/pages/pegawai/pegawai.vue"),
         meta: {
           title: "Pegawai | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa"]
         },
       },
@@ -156,7 +156,7 @@ const routes = [
         component: () => import("@/pages/deposito/deposito.vue"),
         meta: {
           title: "Deposito | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa","cs","teller"]
         },
       },
@@ -167,7 +167,7 @@ const routes = [
         component: () => import("@/pages/pembiayaan/pembiayaan.vue"),
         meta: {
           title: "Pembiayaan | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa","cs","teller"]
         },
       },
@@ -178,7 +178,7 @@ const routes = [
         component: () => import("@/pages/simpanan/simpanan.vue"),
         meta: {
           title: "Simpanan | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa","cs","teller"]
         },
       },
@@ -188,7 +188,7 @@ const routes = [
         component:()=>import("@/pages/detail-rekening/detail-rekening-pembiayaan.vue"),
         meta: {
           title: "Mutasi | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa","cs","teller"]
         }
       },
@@ -198,7 +198,7 @@ const routes = [
         component:()=>import("@/pages/detail-rekening/detail-rekening-simpanan.vue"),
         meta: {
           title: "Mutasi | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root","siswa","cs","teller"]
         }
       },
@@ -209,7 +209,7 @@ const routes = [
         component: () => import("@/pages/user/user.vue"),
         meta: {
           title: "User | Bank Falah Syariah",
-          reqiresAuth: true,
+          requireAuth: true,
           roles: ["admin","bp_root"]
         },
       },
@@ -219,7 +219,7 @@ const routes = [
         component:()=> import("@/pages/error/not-authorized.vue"),
         meta: {
           title: "Unlock | Bank Falah Syariah",
-          reqiresAuth: false,
+          requireAuth: false,
           roles: ["public"]
         },
       }
@@ -232,7 +232,7 @@ const routes = [
     component: () => import("@/pages/auth/login.vue"),
     meta: {
       title: "Login | Bank Falah Syariah",
-      reqiresAuth: false,
+      requireAuth: false,
       roles: ["admin","bp_root","siswa","public"]
     },
   },
@@ -242,7 +242,7 @@ const routes = [
     component:()=> import("@/pages/auth/unlock_user"),
     meta: {
       title: "Unlock | Bank Falah Syariah",
-      reqiresAuth: true,
+      requireAuth: true,
       roles: ["admin","bp_root","siswa","public"]
     },
   },
@@ -251,7 +251,7 @@ const routes = [
 
 /**
  * instance router
- * mode use instead useing history must use hash for desktop
+ * mode use instead using history must use hash for desktop
  */
 const router = new Router({
   routes,
@@ -271,7 +271,8 @@ router.beforeEach((to, from, next) => {
   ApiService.setHeader();
   const user = getUser();
   if (to.meta.title) document.title = to.meta.title;
-  if (to.meta.reqiresAuth) {
+  
+  if (to.meta.requireAuth) {
     if (user) {
       if(checkPrivileges({roles:to.meta.roles})){
         next();
@@ -285,7 +286,6 @@ router.beforeEach((to, from, next) => {
   } else {
     next();
   }
-
 });
 router.afterEach((to)=>{
 
