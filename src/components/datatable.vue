@@ -124,7 +124,8 @@ export default {
       return "Tidak diketahui"
     },
     getRouteMutasi(mutasi){
-      if(mutasi.tipe_angsuran){
+      console.log(mutasi)
+      if(mutasi.tipe_angsuran === ""){
 
         const data ={
          path: `/main/mutasi/pembiayaan`,

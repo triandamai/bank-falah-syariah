@@ -47,7 +47,7 @@
                                     <p>
                                       bakaran project
                                       <br />
-                                      <span class="digits">(+62)81-226-809-435</span>
+                                      <span class="digits">(+62)81-226-xxx-xxx</span>
                                     </p>
                                   </div>
                                 </div>

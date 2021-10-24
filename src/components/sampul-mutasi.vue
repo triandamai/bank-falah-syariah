@@ -9,7 +9,7 @@
     <template v-slot:default="dialog">
       <v-card>
         <v-toolbar color="primary" dark>
-          <v-btn dark icon @click="hidden">
+          <v-btn dark icon @click="close">
             <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-toolbar-title>{{$t('Cetak Mutasi')}}</v-toolbar-title>

@@ -321,6 +321,7 @@ export default {
             this.overlay = false
             this.isTransactionSuccess = success
             if(success){
+              this.form = {}
               this.mutasi = data
             }
           })
