@@ -79,17 +79,22 @@ export default {
   },
   // props:['sidebar_toggle_var'],
   created() {
-
     window.addEventListener("resize", this.handleResize);
+    window.addEventListener("keypress",this.doCommand)
     this.handleResize();
     this.resized = this.sidebar_toggle_var;
     this.$store.dispatch("layout/set");
     //get data nasabah
     this.getNasabah()
   },
+  destroyed() {
+    window.removeEventListener("resize",this.handleResize)
+    window.removeEventListener("keypress",this.doCommand)
+  },
   computed:{
     ...mapState({
       isOnline:(state)=>state.isOnline,
+      formShow:(state) => state.formtransaksi
     }),
     notifConnection:{
       get(){
@@ -131,6 +136,13 @@ export default {
     },
     handleResize() {
       this.$store.dispatch("menu/resizetoggle");
+    },
+    doCommand(e){
+      if(e.keyCode === 20){
+        if(!this.formShow) {
+          this.$store.commit('showForm',{})
+        }
+      }
     },
     getNasabah(){
       this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {

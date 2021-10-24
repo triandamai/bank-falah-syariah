@@ -120,21 +120,34 @@ export const errorInterceptor=(error)=>{
     }
     if(error.response.status === 400){
         const errors = error.response.data.errors
-        let fill =""
-        const keys =  Object.keys(errors)
-        keys.forEach(key=>{
-            if(key){
-                fill += `${key.replace("_"," ")},`
-            }
+        const isArray = errors instanceof Array
 
-        })
-        message = i81n.t("HTTP_VALIDATION",{context:fill})
-        Vue.notify({
-            group:"bp",
-            title:i81n.t("VALIDATION"),
-            type:"error",
-            text:message
-        })
+       if(isArray){
+           const validation = error.response.data.message
+           message = i81n.t("TRANSACTION_VALIDATION",{context: validation})
+           Vue.notify({
+               group:"bp",
+               title:i81n.t("VALIDATION"),
+               type:"error",
+               text:message
+           })
+       }else {
+           let fill =""
+           const keys =  Object.keys(errors)
+           keys.forEach(key=>{
+               if(key){
+                   fill += `${key.replace("_"," ")},`
+               }
+
+           })
+           message = i81n.t("HTTP_VALIDATION",{context:fill})
+           Vue.notify({
+               group:"bp",
+               title:i81n.t("VALIDATION"),
+               type:"error",
+               text:message
+           })
+       }
     }
     if(error.response.status === 401){
         message = i81n.t("HTTP_UNAUTHORIZED")

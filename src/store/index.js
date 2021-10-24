@@ -49,6 +49,7 @@ export const store = new Vuex.Store({
       state.formtransaksi= false;
 
     },
+    // eslint-disable-next-line no-empty-pattern
     showForm(state,{}) {
       state.body = {};
      state.formtransaksi = true

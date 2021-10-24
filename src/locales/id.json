@@ -141,6 +141,7 @@
   "subtitleuser": "Data Pengguna Bank Falah Syariah",
   "HTTP_500": "Gagal Mendapatkan respon dari server",
   "HTTP_VALIDATION": "Beberapa isian wajib diisi {context}",
+  "TRANSACTION_VALIDATION": "Gagal Melakukan Transaksi {context}",
   "HTTP_UNAUTHORIZED": "Anda tidak memiliki akses untuk proses ini !",
   "UNAUTHORIZED": "Access Ditolak",
   "FAILED": "Gagal",

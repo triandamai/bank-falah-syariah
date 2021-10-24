@@ -141,6 +141,7 @@
   "subtitleuser": "Data user Bank Falah Syariah",
   "HTTP_500": "Failed get response from server",
   "HTTP_VALIDATION": "Some fill is required {context}",
+  "TRANSACTION_VALIDATION": "Error Transaction {context}",
   "HTTP_UNAUTHORIZED": "You don't have permission for this action !",
   "UNAUTHORIZED": "Access Deny",
   "FAILED": "Failed",

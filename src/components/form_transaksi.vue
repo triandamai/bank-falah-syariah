@@ -173,10 +173,10 @@
                                       <h6 class="p-2 mb-0">Jenis Transaksi</h6>
                                     </td>
                                     <td class="subtotal">
-                                      <h6 class="p-2 mb-0">Angsuran</h6>
+                                      <h6 class="p-2 mb-0">Jumlah</h6>
                                     </td>
                                     <td class="subtotal">
-                                      <h6 class="p-2 mb-0">Angsuran Harus Dibayar</h6>
+                                      <h6 class="p-2 mb-0">Sisa Saldo</h6>
                                     </td>
                                   </tr>
                                   <tr v-for="(mutasi,index) in mutasi" :key="index">
@@ -187,13 +187,13 @@
                                       <p class="itemtext digits">{{getType(mutasi.type)}}</p>
                                     </td>
                                     <td>
-                                      <p class="itemtext digits">{{mutasi.jenis_transaksi.nama_transaksi}}</p>
+                                      <p class="itemtext digits">{{mutasi.jenis_transaksi}}</p>
                                     </td>
                                     <td>
-                                      <p class="itemtext digits">Rp {{formatCurrency(10000) }}</p>
+                                      <p class="itemtext digits">Rp {{formatCurrency(mutasi.value) }}</p>
                                     </td>
                                     <td>
-                                      <p class="itemtext digits">Rp {{formatCurrency(20000) }}</p>
+                                      <p class="itemtext digits">Rp {{formatCurrency(mutasi.saldo) }}</p>
                                     </td>
                                   </tr>
 
