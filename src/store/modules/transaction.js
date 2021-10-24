@@ -52,32 +52,18 @@ const actions = {
     // eslint-disable-next-line no-unused-vars
     [TRANSACTION]({commit}, {payload, type}) {
         return new Promise((resolve) => {
-            let endpoint = "";
-            switch (type) {
-                case  TABUNGAN_TARIK:
-                    endpoint = "/transaksi/simpanan/tarik_tunai"
-                    break
-                case  TABUNGAN_SETOR:
-                    endpoint = "/transaksi/simpanan/setor_tunai"
-                    break
-                case  TABUNGAN_TRANSFER:
-                    endpoint = "/transaksi/pembiayaan/setor_angsuran_tunai"
-                    break
-                case  TABUNGAN_DEPOSITO:
-                    endpoint = "/transaksi/simpanan/setor_nontunai"
-                    break
-                case  PEMBIAYAAN_SETOR:
-                    endpoint = "/transaksi/pembiayaan/pencairan_tunai"
-                    break
-                case  PEMBIAYAAN_TARIK:
-                    endpoint = "/transaksi/pembiayaan/pencairan_nontunai"
-                    break
 
+            const endPoint=()=>{
+                if(type ===  TABUNGAN_TARIK) return   "/transaksi/simpanan/tarik_tunai"
+                if(type ===  TABUNGAN_SETOR) return   "/transaksi/simpanan/setor_tunai"
+                if(type ===  TABUNGAN_TRANSFER) return   "/transaksi/simpanan/pemindahan_buku"
+                if(type ===  TABUNGAN_DEPOSITO) return   "/transaksi/simpanan/setor_nontunai"
+                if(type ===  PEMBIAYAAN_SETOR) return   "/transaksi/pembiayaan/setor_angsuran_tunai"
+                if(type ===  PEMBIAYAAN_TARIK) return   "/transaksi/pembiayaan/pencairan_tunai"
             }
-
-            ApiService.post(`${endpoint}`, payload)
-                .then(({success, message}) => {
-                    resolve({success: success, message: message});
+            ApiService.post(endPoint(), payload)
+                .then(({success,data, message}) => {
+                    resolve({success: success, data:data,message: message});
             })
         });
     }

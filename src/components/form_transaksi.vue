@@ -48,7 +48,6 @@
                           label="Nasabah/Rekening *"
                           :items="rekenings"
                           return-object
-                          auto-select-first
                           outlined
                           required
                           dense
@@ -73,9 +72,9 @@
                       </v-autocomplete>
                     </v-col>
 
-                    <v-col cols="12" sm="12" md="4" lg="4">
+                    <v-col v-show="isTransfer" cols="12" sm="12" md="4" lg="4">
                       <v-text-field
-                          v-model="form.nomor_rekening"
+                          v-model="form.nomor_rekening_tujuan"
                           label="Nomor Rekening Tujuan"
                           placeholder="01100XXXX"
                           dense
@@ -95,6 +94,7 @@
                     <v-col cols="12" sm="12" md="12" lg="12">
                       <v-btn
                           outlined
+                          @click="onSubmit"
                           color="indigo"
 
                       >
@@ -105,7 +105,7 @@
                 </div>
               </div>
             </v-col>
-            <v-col cols="12">
+            <v-col v-show="isTransactionSuccess" cols="12">
               <div class="row">
                 <div class="col-xl-12 col-md-12 col-sm-12 col-xs-12 box-col-12">
                   <div class="file-content">
@@ -142,8 +142,10 @@
                                 <div class="col-sm-6">
                                   <div class="text-md-right">
                                     <h3>
-                                      Trian Damai
-                                      <span class="digits counter">#01.001.032.5000</span>
+                                      {{nasabahName}}
+                                      <span class="digits counter">#{{
+                                          selectedRekening.no_rekening ? selectedRekening.no_rekening : ""
+                                        }}</span>
                                     </h3>
                                     <p>
                                       {{getMonthString()}}
@@ -249,6 +251,9 @@ export default {
       overlay:false,
       transactionsSelected:"",
       selectedRekening:{},
+      isTransfer:false,
+      isTransactionSuccess:false,
+      nasabahName:"",
       mutasi: [],
       transactions:[
         {
@@ -276,14 +281,28 @@ export default {
           value:PEMBIAYAAN_SETOR
         },
       ],
-      form:{},
-
+      form:{
+        tgl_transaksi:null,
+        value:null,
+        nasabah_id:null,
+        nomor_rekening:null,
+        nomor_rekening_tujuan:null,
+        petugas_id:null
+      },
     };
   },
   watch:{
     selectedRekening:function (newVal){
-      this.form.nasabah = newVal.nasabah
-      this.form.rekening = newVal.no_rekening
+      this.form.nasabah_id = newVal.nasabah_id
+      this.nasabahName = newVal.nasabah.nama_lengkap
+      this.form.nomor_rekening = newVal.no_rekening
+    },
+    transactionsSelected:function(newVal){
+      if (newVal === TABUNGAN_TRANSFER) {
+        this.isTransfer = true
+      }else {
+        this.isTransfer = false
+      }
     }
   },
   computed:{
@@ -302,8 +321,12 @@ export default {
       this.form.tgl_transaksi = getTodayDate()
       this.form.petugas_id = getCurrendUserId()
       this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:this.transactionsSelected})
-          .then(()=>{
+          .then(({success,data})=>{
             this.overlay = false
+            this.isTransactionSuccess = success
+            if(success){
+              this.mutasi = data
+            }
           })
     },
   }
