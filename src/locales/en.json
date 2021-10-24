@@ -151,6 +151,8 @@
   "Type of Akad": "Type of Akad *",
   "Nominal": "Nominal",
   "Rekening": "Rekening",
-  "Nasabah": "Customer"
+  "Nasabah": "Customer",
+  "Transaksi": "Transaction"
+
 
 }
