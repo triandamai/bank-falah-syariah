@@ -15,6 +15,10 @@ export default {
     }},
     methods:{
         encryptPlain:(plain)=>encrypt(plain),
+        getType:(type)=> {
+            if (type === 1) return `DEBET`
+            return `KREDIT`
+        },
         decryptPlain:(plain)=>decrypt(plain),
         formatCurrency:(total)=>formatCurrency(total),
         getMonthString(){

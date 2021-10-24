@@ -184,20 +184,16 @@
                                       <label>12/20/2020</label>
                                     </td>
                                     <td>
-                                      <p class="itemtext digits">type</p>
+                                      <p class="itemtext digits">{{getType(mutasi.type)}}</p>
                                     </td>
                                     <td>
-                                      <p class="itemtext digits">pembiayaan</p>
+                                      <p class="itemtext digits">{{mutasi.jenis_transaksi.nama_transaksi}}</p>
                                     </td>
                                     <td>
-                                      <p class="itemtext digits">Rp {{
-                                          formatCurrency(10000)
-                                        }}</p>
+                                      <p class="itemtext digits">Rp {{formatCurrency(10000) }}</p>
                                     </td>
                                     <td>
-                                      <p class="itemtext digits">Rp {{
-                                          formatCurrency(20000)
-                                        }}</p>
+                                      <p class="itemtext digits">Rp {{formatCurrency(20000) }}</p>
                                     </td>
                                   </tr>
 
@@ -233,12 +229,12 @@
 import {
   ACTION_GET_REKENING_TRANSACTION,
   ACTION_TRANSACTION,
-    TABUNGAN_TARIK,
-    TABUNGAN_TRANSFER,
-    TABUNGAN_SETOR,
-    TABUNGAN_DEPOSITO,
-    PEMBIAYAAN_SETOR,
-    PEMBIAYAAN_TARIK
+  TABUNGAN_TARIK,
+  TABUNGAN_TRANSFER,
+  TABUNGAN_SETOR,
+  TABUNGAN_DEPOSITO,
+  PEMBIAYAAN_SETOR,
+  PEMBIAYAAN_TARIK
 } from "@/store"
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"

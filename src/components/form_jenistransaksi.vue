@@ -50,7 +50,7 @@ export default {
   mixins:[componentMixin],
   data: () => {
     return {
-      form: {      },
+      form: {},
     };
   },
 };

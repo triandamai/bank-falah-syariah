@@ -93,7 +93,7 @@
                                     <label>{{mutasi.tgl_transaksi}}</label>
                                     </td>
                                   <td>
-                                    <p class="itemtext digits">{{mutasi.type}}</p>
+                                    <p class="itemtext digits">{{getType(mutasi.type)}}</p>
                                   </td>
                                   <td>
                                     <p class="itemtext digits">{{mutasi.jenis_transaksi.nama_transaksi}}</p>

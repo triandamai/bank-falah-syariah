@@ -229,6 +229,10 @@ export default {
         encryptPlain:(plain)=>encrypt(plain),
         decryptPlain:(plain)=>decrypt(plain),
         formatCurrency: (total) => formatCurrency(total),
+        getType:(type)=> {
+            if (type === 1) return `DEBET`
+            return `KREDIT`
+        },
         getMonthString() {
             const date = new Date();
             return date.toLocaleString('id-ID', {month: 'long'});
