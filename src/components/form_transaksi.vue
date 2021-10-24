@@ -312,7 +312,7 @@ export default {
   },
   methods: {
     getRekeningByType(){
-      this.$store.dispatch(ACTION_GET_REKENING_TRANSACTION,this.transactionsSelected).then(({data})=>{
+      this.$store.dispatch(ACTION_GET_REKENING_TRANSACTION,this.transactionsSelected).then(()=>{
 
       })
     },
