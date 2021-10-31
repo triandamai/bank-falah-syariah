@@ -124,7 +124,6 @@ export default {
       return "Tidak diketahui"
     },
     getRouteMutasi(mutasi){
-      console.log(mutasi)
       if(mutasi.tipe_angsuran === ""){
 
         const data ={
