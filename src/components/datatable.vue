@@ -114,7 +114,6 @@ export default {
     getColor (active) {
       if (active > 0) return 'green'
       return 'orange'
-
     },
     getTipeProduk(tipe){
       if(tipe === 1) return "Simpanan"
