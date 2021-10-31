@@ -8,6 +8,7 @@
 import ApiService from "@/services/api.service";
 import {decrypt} from "@/services/jwt.service"
 import {formatCurrency} from "@/utils/utils";
+import {Promise} from "es6-promise";
 
 /***
  * dspatch type

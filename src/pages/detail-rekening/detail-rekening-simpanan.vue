@@ -161,7 +161,7 @@ export default {
           .then(()=>{
 
           })
-      this.$store.dispatch(ACTION_GET_SALDO,{type:MUTASI_PEMBIAYAAN,no_rekening:no_rekening})
+      this.$store.dispatch(ACTION_GET_SALDO,{type:MUTASI_SIMPANAN,no_rekening:no_rekening})
           .then(()=>{})
     }
   },
