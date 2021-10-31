@@ -39,8 +39,6 @@ export const formatCurrency=(total)=>{
     }
     return "0,00.00"
 }
-
-
 export const checkPrivileges=(privileges)=> {
   const haveAllRole = privileges.roles.includes("public");
   if(haveAllRole) return true

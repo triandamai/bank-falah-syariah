@@ -13,6 +13,19 @@ import id from "@/locales/id.json";
 import {defaultLocale, localeOptions} from "@/utils/utils.js";
 
 const messages = {en: en, id: id};
+
+const numberFormatting = {
+    'en-IN': {
+        maximumSignificantDigits: 3
+    },
+    'ja-JP': {
+        currency: {
+            style: 'currency',
+            currency: 'JPY',
+            currencyDisplay: 'symbol'
+        }
+    }
+}
 Vue.use(VueI18n);
 const locale =
     window.localStorage.getItem("currentLanguage") &&
@@ -26,5 +39,6 @@ export default  new VueI18n({
     locale: locale,
     fallbackLocale: "en",
     messages: messages,
+    numberFormats:numberFormatting
 });
 

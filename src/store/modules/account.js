@@ -81,13 +81,14 @@ const state = {
             jumlah_pinjaman: 0
         },
         simpanan: {
+            saldo:0,
             jumlahpinjaman: 0
         }
     }
 };
 const getters = {
-    saldoPembiayaan: state => formatCurrency(state.mutasi.pembiayaan.map(mutasi => mutasi.value).reduce((prev, next) => prev + next, 0)),
-    saldoSimpanan: state => formatCurrency(state.mutasi.simpanan.map(mutasi => mutasi.value).reduce((prev, next) => prev + next, 0))
+    saldoPembiayaan: state => formatCurrency(state.saldo.pembiayaan.saldo),
+    saldoSimpanan: state => formatCurrency(state.saldo.simpanan.saldo)
 };
 const actions = {
     /***
@@ -142,7 +143,6 @@ const actions = {
                         commit(SET_MUTASI_NASABAH,data[0].nasabah)
                     }
                     data.map(mutasi => {
-
                         commit(MUTASI_REKENING, {type: type, mutasi: mutasi})
                     })
 
@@ -283,10 +283,9 @@ const mutations = {
     [SET_SALDO](state, {saldo, type}) {
 
         if (type === MUTASI_PEMBIAYAAN) {
-
-            state.saldo.pembiayaan = saldo
+            state.saldo.pembiayaan.saldo = saldo
         } else {
-            state.saldo.simpanan = saldo
+            state.saldo.simpanan.saldo = saldo
         }
     },
     [SET_MUTASI_NASABAH](state,nasabah){

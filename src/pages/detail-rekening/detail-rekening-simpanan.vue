@@ -135,7 +135,7 @@
 
 
 <script>
-import {ACTION_GET_SALDO, ACTION_MUTASI, MUTASI_PEMBIAYAAN, MUTASI_SIMPANAN, MUTATION_DESTROY_MUTASI} from "@/store"
+import {ACTION_GET_SALDO, ACTION_MUTASI, MUTASI_SIMPANAN, MUTATION_DESTROY_MUTASI} from "@/store"
 import {mapState,mapGetters} from "vuex"
 import pageMixin from "@/mixin/page.mixin"
 export default {
