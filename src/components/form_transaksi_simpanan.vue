@@ -9,7 +9,7 @@
 
       <v-card class="grey lighten-3">
         <v-toolbar color="orange" dark flat>
-          <v-btn dark icon @click="hidden('PEMBIAYAAN')">
+          <v-btn dark icon @click="hidden('SIMPANAN')">
             <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-toolbar-title>{{$t('Transaksi Simpanan')}}</v-toolbar-title>

@@ -45,7 +45,6 @@ export const checkPrivileges=(privileges)=> {
   const haveAllRole = privileges.roles.includes("public");
   if(haveAllRole) return true
   const user = getUser();
-  console.log(user)
   if(user){
     if(user.role.length > 0){
       if (user.role[0]) {

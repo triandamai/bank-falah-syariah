@@ -104,7 +104,7 @@
       "icon": "monitor",
       "type": "sub",
       "badgeType": "primary",
-      "badgeValue": "4",
+      "badgeValue": "2",
       "active": false,
       "path": "Master Data",
       "privileges": {
