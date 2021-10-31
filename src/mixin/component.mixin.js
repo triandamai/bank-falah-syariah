@@ -217,7 +217,7 @@ export default {
             menuItems: (state) => state.menu.menu,
             layout: (state) => state.layout.layout,
             togglesidebar: (state) => state.menu.togglesidebar,
-            showForm: (state) => state.formtransaksi,
+            showForm: (state) => state.formtransaksipembiayaan,
             provinsi: (state) => state.wilayah.provinsi.data,
             kabupaten: (state) => state.wilayah.kabupaten.data,
             kecamatan: (state) => state.wilayah.kecamatan.data,
@@ -245,8 +245,8 @@ export default {
             const date = new Date(param);
             return `${date.toLocaleString("id-ID")}`
         },
-        hidden() {
-            this.$store.commit("hideForm", {});
+        hidden(type) {
+            this.$store.commit("hideForm", type);
         },
         close(val = true) {
             this.$emit('close', val)

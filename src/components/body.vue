@@ -38,7 +38,8 @@
         </div>
         <Footer />
       </div>
-      <form-transaksi :show="showForm"/>
+      <form-transaksi-pembiayaan :show="formShowPembiayaan"/>
+      <form-transaksi-simpanan :show="formShowSimpanan"/>
 
       <Customizer />
       <v-snackbar
@@ -94,7 +95,8 @@ export default {
   computed:{
     ...mapState({
       isOnline:(state)=>state.isOnline,
-      formShow:(state) => state.formtransaksi
+      formShowPembiayaan:(state) => state.formtransaksipembiayaan,
+      formShowSimpanan:(state) => state.formtransaksisimpanan
     }),
     notifConnection:{
       get(){
@@ -138,8 +140,8 @@ export default {
       this.$store.dispatch("menu/resizetoggle");
     },
     doCommand(e){
-      if(e.keyCode === 20){
-        if(!this.formShow) {
+      if(e.keyCode === 20 ){
+        if(!this.formShowPembiayaan) {
           this.$store.commit('showForm',{})
         }
       }

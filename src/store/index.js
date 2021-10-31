@@ -22,7 +22,8 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
   state: {
-    formtransaksi:false,
+    formtransaksipembiayaan:true,
+    formtransaksisimpanan:false,
     loadingtable:true,
     isOnline:true,
     notifConnection:false
@@ -45,14 +46,22 @@ export const store = new Vuex.Store({
       window.location.reload();
     },
     // eslint-disable-next-line no-empty-pattern
-    hideForm(state, {}) {
-      state.formtransaksi= false;
+    hideForm(state, type) {
+      if(type == "PEMBIAYAAN"){
+        state.formtransaksipembiayaan = false
+      }else {
+        state.formtransaksisimpanan = false
+      }
 
     },
     // eslint-disable-next-line no-empty-pattern
-    showForm(state,{}) {
-      state.body = {};
-     state.formtransaksi = true
+    showForm(state,type) {
+      if(type == "PEMBIAYAAN"){
+        state.formtransaksipembiayaan = true
+      }else {
+        state.formtransaksisimpanan = true
+      }
+
     }
   },
   actions: {

@@ -9,7 +9,7 @@
 
       <v-card>
         <v-toolbar color="orange" dark flat>
-          <v-btn dark icon @click="hidden">
+          <v-btn dark icon @click="hidden('SIMPANAN')">
             <v-icon>mdi-close</v-icon>
           </v-btn>
           <v-toolbar-title>{{$t('Transaksi')}}</v-toolbar-title>

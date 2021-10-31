@@ -101,14 +101,33 @@
     },
     {
       "title": "Transaction",
-      "icon": "book-open",
-      "type": "button",
+      "icon": "monitor",
+      "type": "sub",
       "badgeType": "primary",
+      "badgeValue": "4",
       "active": false,
-      "path": "Transaction",
+      "path": "Master Data",
       "privileges": {
-        "roles": ["admin", "bp_root","siswa","teller"]
-      }
+        "roles": ["admin", "bp_root","siswa","cs","teller"]
+      },
+      "children": [
+        {
+          "path": "SIMPANAN",
+          "title": "Simpanan",
+          "type": "button",
+          "privileges": {
+            "roles": ["admin", "bp_root","siswa","cs","teller"]
+          }
+        },
+        {
+          "path": "PEMBIAYAAN",
+          "title": "Pembiayaan",
+          "type": "button",
+          "privileges": {
+            "roles": ["admin", "bp_root","siswa","cs","teller"]
+          }
+        }
+      ]
     },
     {
       "headTitle1": "Advance",

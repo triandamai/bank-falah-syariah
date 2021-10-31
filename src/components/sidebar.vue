@@ -286,6 +286,27 @@
                     v-if="childrenItem.children"
                   ></i>
                 </a>
+
+                <!-- Button -->
+                <a
+                    class="submenu-title"
+                    v-if="childrenItem.type === 'button'"
+                    v-show="checkPrivileges(childrenItem.privileges)"
+                    @click="showForm(childrenItem.path)"
+                >
+                  {{ $t(childrenItem.title) }}
+                  <label
+                      :class="
+                      'badge badge-' + childrenItem.badgeType + ' pull-right'
+                    "
+                      v-if="childrenItem.badgeType"
+                  >{{ childrenItem.badgeValue }}</label
+                  >
+                  <i
+                      class="fa fa-angle-right pull-right mt-1"
+                      v-if="childrenItem.children"
+                  ></i>
+                </a>
                 <!-- 3rd Level Menu -->
                 <ul
                   class="nav-sub-childmenu submenu-content"

@@ -34,7 +34,8 @@ Vue.component("Breadcrumbs", () => import("@/components/bread_crumbs.vue"));
 Vue.component("apexchart", () => import("vue-apexcharts"));
 Vue.component("PxCard", () => import("@/components/Pxcard.vue"));
 
-Vue.component("form-transaksi",()=> import("@/components/form_transaksi.vue"))
+Vue.component("form-transaksi-pembiayaan",()=> import("@/components/form_transaksi_pembiayaan.vue"))
+Vue.component("form-transaksi-simpanan",()=> import("@/components/form_transaksi_simpanan"))
 
 
 export default {};
