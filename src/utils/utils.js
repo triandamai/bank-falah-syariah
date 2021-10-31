@@ -14,7 +14,19 @@ export const localeOptions = [
 
 export const getTodayDate=()=>{
   const date = new Date()
-  return `${date.getFullYear()}-${date.getMonth()+1}-${date.getDate()}`
+  const getMonth=(month)=>{
+    if(month < 10){
+      return `0${month}`
+    }
+    return month
+  }
+  const getDate=(date)=>{
+    if(date < 10){
+      return `0${date}`
+    }
+    return date
+  }
+  return `${date.getFullYear()}-${getMonth(date.getMonth()+1)}-${getDate(date.getDate())}`
 }
 //currency
 
@@ -33,10 +45,14 @@ export const checkPrivileges=(privileges)=> {
   const haveAllRole = privileges.roles.includes("public");
   if(haveAllRole) return true
   const user = getUser();
+  console.log(user)
   if(user){
-    if (user.role[0]) {
-      const current_role = user.role[0].name;
-      return  privileges.roles.includes(current_role);
+    if(user.role.length > 0){
+      if (user.role[0]) {
+        const current_role = user.role[0].name;
+        return  privileges.roles.includes(current_role);
+      }
+      return false
     }
     return false
   }

@@ -153,5 +153,7 @@
   "Nominal": "Nominal",
   "Rekening": "Rekening",
   "Nasabah": "Nasabah",
-  "Transaksi": "Transaksi"
+  "Transaksi": "Transaksi",
+  "Transaksi Simpanan": "Transaksi Tabungan",
+  "Transaksi Pembiayaan": "Transaksi Pembiayaan"
 }

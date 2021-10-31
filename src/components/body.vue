@@ -140,9 +140,18 @@ export default {
       this.$store.dispatch("menu/resizetoggle");
     },
     doCommand(e){
-      if(e.keyCode === 20 ){
+
+      //20=CTRL +T
+      // 16 CTRL + P
+      if(e.keyCode === 16 ){
         if(!this.formShowPembiayaan) {
-          this.$store.commit('showForm',{})
+          this.$store.commit('showForm',"PEMBIAYAAN")
+        }
+      }
+
+      if(e.keyCode === 20 ){
+        if(!this.formShowSimpanan) {
+          this.$store.commit('showForm',"SIMPANAN")
         }
       }
     },
