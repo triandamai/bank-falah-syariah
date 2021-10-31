@@ -213,6 +213,9 @@
                                           <h6 class="p-2 mb-0">Jenis Transaksi</h6>
                                         </td>
                                         <td class="subtotal">
+                                          <h6 class="p-2 mb-0">Description</h6>
+                                        </td>
+                                        <td class="subtotal">
                                           <h6 class="p-2 mb-0">Jumlah</h6>
                                         </td>
                                         <td class="subtotal">
