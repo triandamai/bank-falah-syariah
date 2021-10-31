@@ -221,7 +221,7 @@
                                         </tr>
                                         <tr v-for="(mutasi,index) in mutasi" :key="index">
                                           <td>
-                                            <label>12/20/2020</label>
+                                            <label>{{mutasi.tgl_transaksi}}</label>
                                           </td>
                                           <td>
                                             <p class="itemtext digits">{{getType(mutasi.type)}}</p>
@@ -229,6 +229,7 @@
                                           <td>
                                             <p class="itemtext digits">{{mutasi.jenis_transaksi}}</p>
                                           </td>
+
                                           <td>
                                             <p class="itemtext digits">Rp {{formatCurrency(mutasi.value) }}</p>
                                           </td>
