@@ -87,7 +87,6 @@ const state = {
     }
 };
 const getters = {
-    saldoPembiayaan: state => formatCurrency(state.saldo.pembiayaan.saldo),
     saldoSimpanan: state => formatCurrency(state.saldo.simpanan.saldo)
 };
 const actions = {
@@ -283,7 +282,8 @@ const mutations = {
     [SET_SALDO](state, {saldo, type}) {
 
         if (type === MUTASI_PEMBIAYAAN) {
-            state.saldo.pembiayaan.saldo = saldo
+            state.saldo.pembiayaan.saldo = saldo.saldo
+            state.saldo.pembiayaan.jumlah_pinjaman = saldo.jumlah_pinjaman
         } else {
             state.saldo.simpanan.saldo = saldo
         }
