@@ -96,15 +96,6 @@ export default {
       }
     };
   },
-  created() {
-
-  },
-
-  computed: {
-
-  },
-  methods:{
-  }
 
 };
 

@@ -221,12 +221,11 @@ export default {
             itemsMenus: (state) => state.menu.menu,
             layout: (state) => state.layout.layout,
             togglesidebar: (state) => state.menu.togglesidebar,
-            isFormTransactionPembiayaanShow: (state) => state.formtransaksipembiayaan,
+            theme: (state) => state.layout.isDark,
             lazyLoad:(state)=> state.lazyLoad,
             isOnline:(state)=>state.isOnline,
             formShowPembiayaan:(state) => state.formtransaksipembiayaan,
             formShowSimpanan:(state) => state.formtransaksisimpanan,
-            theme: (state) => state.layout.isDark,
             isDataTableLoading:(state)=>  state.loadingtable,
 
         }),

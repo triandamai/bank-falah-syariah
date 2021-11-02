@@ -475,8 +475,6 @@ import {
   WDESA,
 } from "@/store/modules/wilayah";
 import componentMixin from "@/mixin/component.mixin"
-import {mapState} from "vuex";
-
 export default {
 mixins:[componentMixin],
   data() {
@@ -511,12 +509,6 @@ mixins:[componentMixin],
       },
 
     };
-  },
-  computed:{
-    ...mapState({
-      theme: (state) => state.layout.isDark,
-      loadingtable:(state)=>  state.loadingtable
-    }),
   },
   mounted() {
     if (this.isEdit) {
