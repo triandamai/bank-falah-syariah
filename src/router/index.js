@@ -106,18 +106,6 @@ const routes = [
           roles: ["admin","bp_root","siswa","teller"]
         },
       },
-      //
-      {
-        path: "akad",
-        name: "akad",
-        component: () => import("@/pages/akad/akad.vue"),
-        meta: {
-          title: "Akad | Bank Falah Syariah",
-          requireAuth: true,
-          roles: ["admin","bp_root","siswa"]
-        },
-      },
-      //
       {
         path: "jenistransaksi",
         name: "jenistransaksi",
@@ -149,18 +137,6 @@ const routes = [
           roles: ["admin","bp_root","siswa"]
         },
       },
-      //
-      {
-        path: "deposito",
-        name: "deposito",
-        component: () => import("@/pages/deposito/deposito.vue"),
-        meta: {
-          title: "Deposito | Bank Falah Syariah",
-          requireAuth: true,
-          roles: ["admin","bp_root","siswa","cs","teller"]
-        },
-      },
-      //
       {
         path: "pembiayaan",
         name: "pembiayaan",
