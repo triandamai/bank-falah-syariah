@@ -279,7 +279,6 @@ export default {
   },
   watch: {
     "$i18n.locale"(to, from) {
-      console.log(to);
       this.$i18n.locale = to;
       if (from !== to) {
         this.$router.go(this.$route.path);

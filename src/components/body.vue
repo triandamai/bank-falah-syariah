@@ -11,7 +11,7 @@
       "
     >
       <div class="page-header" :class="{ close_icon: !togglesidebar }">
-        <Header @clicked="sidebar_toggle" />
+        <Header @clicked="onToggleSidebar" />
       </div>
       <div
         class="page-body-wrapper"
@@ -29,7 +29,7 @@
           ]"
           :sidebar-layout="layout.settings.sidebar_setting"
         >
-          <Sidebar @clicked="sidebar_toggle" />
+          <Sidebar @clicked="onToggleSidebar" />
         </div>
         <div class="page-body">
           <transition name="fadeIn" enter-active-class="animated fadeIn">
@@ -59,45 +59,44 @@
         </template>
       </v-snackbar>
     </div>
+
+    <!--    overlay Loading -->
+    <v-overlay :value="lazyLoad">
+      <v-progress-circular
+          indeterminate
+          size="64"
+      ></v-progress-circular>
+    </v-overlay>
+    <!--    -->
   </div>
 </template>
 
 <script>
 
-import {ACTION_GET_NASABAH} from "@/store";
 import componentMixin from "@/mixin/component.mixin"
-import {mapState} from "vuex";
 export default {
-  name: "mainpage",
+  name: "mainPage",
   mixins:[componentMixin],
   data() {
     return {
-      mobileheader_toggle_var: false,
-      sidebar_toggle_var: false,
-      horizontal_Sidebar: true,
+      toggleHeaderMobile: false,
+      toggleSidebar: false,
+      horizontalSidebar: true,
       resized: false,
     };
   },
-  // props:['sidebar_toggle_var'],
   created() {
     window.addEventListener("resize", this.handleResize);
     window.addEventListener("keypress",this.doCommand)
     this.handleResize();
-    this.resized = this.sidebar_toggle_var;
+    this.resized = this.toggleSidebar;
     this.$store.dispatch("layout/set");
-    //get data nasabah
-    this.getNasabah()
   },
   destroyed() {
     window.removeEventListener("resize",this.handleResize)
     window.removeEventListener("keypress",this.doCommand)
   },
   computed:{
-    ...mapState({
-      isOnline:(state)=>state.isOnline,
-      formShowPembiayaan:(state) => state.formtransaksipembiayaan,
-      formShowSimpanan:(state) => state.formtransaksisimpanan
-    }),
     notifConnection:{
       get(){
         return this.$store.state.notifConnection
@@ -109,7 +108,7 @@ export default {
   },
   watch: {
     $route() {
-      this.menuItems.filter((items) => {
+      this.itemsMenus.filter((items) => {
         if (items.path === this.$route.path)
           this.$store.dispatch("menu/setActiveRoute", items);
         if (!items.children) return false;
@@ -126,15 +125,15 @@ export default {
     },
     sidebar_toggle_var: function () {
       this.resized =
-        this.width <= 991 ? !this.sidebar_toggle_var : this.sidebar_toggle_var;
+        this.width <= 991 ? !this.toggleSidebar : this.toggleSidebar;
     },
   },
   methods: {
-    sidebar_toggle(value) {
-      this.sidebar_toggle_var = !value;
+    onToggleSidebar(value) {
+      this.toggleSidebar = !value;
     },
-    mobiletoggle_toggle(value) {
-      this.mobileheader_toggle_var = value;
+    onToggleMobileHeader(value) {
+      this.toggleHeaderMobile = value;
     },
     handleResize() {
       this.$store.dispatch("menu/resizetoggle");
@@ -154,13 +153,6 @@ export default {
           this.$store.commit('showForm',"SIMPANAN")
         }
       }
-    },
-    getNasabah(){
-      this.$store.dispatch(ACTION_GET_NASABAH).then((isNext) => {
-        if (isNext) {
-          this.getNasabah();
-        }
-      })
     }
   },
 };

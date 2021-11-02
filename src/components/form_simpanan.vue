@@ -144,7 +144,7 @@
                     <v-autocomplete
                         v-model="formnasabah.provinsi"
                         label="Provinsi *"
-                        :items="provinsi"
+                        :items="itemsProvinsi"
                         item-text="provNama"
                         @change="provinsiChange"
                         auto-select-first
@@ -158,7 +158,7 @@
                     <v-autocomplete
                         label="Kabupaten *"
                         v-model="formnasabah.kabupaten"
-                        :items="kabupaten"
+                        :items="itemsKabupaten"
                         item-text="kabNama"
                         @change="kabupatenChange"
                         auto-select-first
@@ -172,7 +172,7 @@
                     <v-autocomplete
                         label="Kecamatan *"
                         v-model="formnasabah.kecamatan"
-                        :items="kecamatan"
+                        :items="itemsKecamatan"
                         item-text="kecNama"
                         @change="kecamatanChange"
                         auto-select-first
@@ -186,7 +186,7 @@
                     <v-autocomplete
                         label="Desa *"
                         v-model="formnasabah.desa"
-                        :items="desa"
+                        :items="itemsDesa"
                         item-text="desNama"
                         auto-select-first
                         return-object
@@ -292,7 +292,7 @@
                     <v-autocomplete
                         v-model="form.produk_id"
                         label="Produk *"
-                        :items="itemsproduk"
+                        :items="itemsProduk"
                         item-text="nama_produk"
                         item-value="id"
                         required

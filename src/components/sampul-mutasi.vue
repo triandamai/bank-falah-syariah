@@ -42,7 +42,6 @@ import componentMixins from "@/mixin/component.mixin"
 export default {
   mixins:[componentMixins],
   components: {
-
     VuePdfApp
   },
   data: () => {

@@ -105,7 +105,7 @@ export default {
                   nasabah["Status Martial"]
                 ),
                 nama_ibu_kandung: nasabah["Ibu Kandung"],
-                tanggal_lahir: this.ExcelDateToJSDate(
+                tanggal_lahir: this.excelDateToJSDate(
                   nasabah["Tanggal Lahir"],
                   false
                 ),

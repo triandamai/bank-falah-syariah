@@ -185,7 +185,7 @@
                   <v-autocomplete
                     v-model="form.provinsi"
                     label="Provinsi *"
-                    :items="provinsi"
+                    :items="itemsProvinsi"
                     item-text="provNama"
                     @change="provinsiChange"
                     auto-select-first
@@ -200,7 +200,7 @@
                   <v-autocomplete
                     label="Kabupaten *"
                     v-model="form.kabupaten"
-                    :items="kabupaten"
+                    :items="itemsKabupaten"
                     item-text="kabNama"
                     @change="kabupatenChange"
                     auto-select-first
@@ -215,7 +215,7 @@
                   <v-autocomplete
                     label="Kecamatan *"
                     v-model="form.kecamatan"
-                    :items="kecamatan"
+                    :items="itemsKecamatan"
                     item-text="kecNama"
                     @change="kecamatanChange"
                     auto-select-first
@@ -230,7 +230,7 @@
                   <v-autocomplete
                     label="Desa *"
                     v-model="form.desa"
-                    :items="desa"
+                    :items="itemsDesa"
                     item-text="desNama"
                     auto-select-first
                     return-object

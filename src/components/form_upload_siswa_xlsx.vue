@@ -58,8 +58,6 @@ export default {
  mixins:[componentMixin],
   data: () => {
     return {
-
-
       datasiswa: [],
     };
   },

@@ -155,7 +155,10 @@
   "Nasabah": "Customer",
   "Transaksi": "Transaction",
   "Transaksi Simpanan": "Transaction Saving",
-  "Transaksi Pembiayaan": "Transaction Cost"
+  "Transaksi Pembiayaan": "Transaction Cost",
+  "Aktif": "Active",
+  "Non-Aktif": "Non-Active",
+  "Download Format": "Download Format"
 
 
 }

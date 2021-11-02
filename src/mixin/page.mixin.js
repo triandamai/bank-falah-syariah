@@ -14,23 +14,29 @@ export default {
         form:false
     }},
     methods:{
-        encryptPlain:(plain)=>encrypt(plain),
-        getType:(type)=> {
+        startLoading(){
+            this.$store.commit('setLazyLoad',true)
+        },
+        stopLoading(){
+            this.$store.commit('setLazyLoad',false)
+        },
+        encrypt:(plain)=>encrypt(plain),
+        getTypeTransaction:(type)=> {
            // if (type === 1) return `DEBET`
             //return `KREDIT`
             return type
         },
-        decryptPlain:(plain)=>decrypt(plain),
+        decrypt:(plain)=>decrypt(plain),
         formatCurrency:(total)=>formatCurrency(total),
         getMonthString(){
            const date = new Date();
            return date.toLocaleString('id-ID',{month:'long'});
         },
-        getDateMutasi(){
+        getTodayDateMutasi(){
             const  date = new Date()
             return `${date.getDate()}, ${date.getFullYear()}`
         },
-        convertReadableDate(param){
+        formatReadableDate(param){
             const date = new Date(param);
             return `${date.toLocaleString("id-ID")}`
         },

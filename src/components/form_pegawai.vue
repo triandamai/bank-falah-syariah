@@ -63,7 +63,7 @@
               <v-col cols="12">
                 <v-autocomplete
                   v-model="form.jabatan_id"
-                  :items="itemsjabatan"
+                  :items="itemsJabatan"
                   item-value="id"
                   item-text="nama_jabatan"
                   label="Jabatan*"

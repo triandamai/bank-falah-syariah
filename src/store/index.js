@@ -26,7 +26,8 @@ export const store = new Vuex.Store({
     formtransaksisimpanan:false,
     loadingtable:true,
     isOnline:true,
-    notifConnection:false
+    notifConnection:false,
+    lazyLoad:false,
   },
   mutations: {
     // eslint-disable-next-line no-unused-vars
@@ -47,16 +48,19 @@ export const store = new Vuex.Store({
     },
     // eslint-disable-next-line no-empty-pattern
     hideForm(state, type) {
-      if(type == "PEMBIAYAAN"){
+      if(type === "PEMBIAYAAN"){
         state.formtransaksipembiayaan = false
       }else {
         state.formtransaksisimpanan = false
       }
 
     },
+    setLazyLoad(state,isLoading){
+      state.lazyLoad = isLoading
+    },
     // eslint-disable-next-line no-empty-pattern
     showForm(state,type) {
-      if(type == "PEMBIAYAAN"){
+      if(type === "PEMBIAYAAN"){
         state.formtransaksipembiayaan = true
         state.formtransaksisimpanan = false
       }else {

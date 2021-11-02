@@ -38,7 +38,7 @@
               <v-col cols="12">
                 <v-autocomplete
                     v-model="form.role_id"
-                    :items="itemsrole"
+                    :items="itemsRoles"
                     item-text="name"
                     item-value="id"
                     label="Role*"

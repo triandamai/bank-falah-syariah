@@ -57,7 +57,7 @@
                                 <div class="text-md-right">
                                   <h3>
                                     {{nasabah.nama_lengkap}}
-                                    <span class="digits counter">#{{decryptPlain($route.query.r)}}</span>
+                                    <span class="digits counter">#{{ decrypt($route.query.r) }}</span>
                                   </h3>
                                   <p>
                                      May
@@ -93,7 +93,7 @@
                                     <label>{{mutasi.tgl_transaksi}}</label>
                                     </td>
                                   <td>
-                                    <p class="itemtext digits">{{getType(mutasi.type)}}</p>
+                                    <p class="itemtext digits">{{ getTypeTransaction(mutasi.type) }}</p>
                                   </td>
                                   <td>
                                     <p class="itemtext digits">{{mutasi.jenis_transaksi.nama_transaksi}}</p>
@@ -143,7 +143,8 @@ export default {
   computed:{
     ...mapState({
       mutasi:(state)=> state.rekening.mutasi.simpanan,
-      nasabah:(state)=> state.rekening.mutasi.nasabah
+      nasabah:(state)=> state.rekening.mutasi.nasabah,
+      isLoading:(state)=>state.lazyLoad
     }),
     ...mapGetters({
       saldo:'rekening/saldoSimpanan'
@@ -152,6 +153,7 @@ export default {
   created() {
     this.$store.commit(MUTATION_DESTROY_MUTASI,{type:MUTASI_SIMPANAN})
     if(this.$route.query.r){
+      this.startLoading()
       this.getData(this.$route.query.r)
     }
   },
@@ -159,10 +161,16 @@ export default {
     getData(no_rekening){
       this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_SIMPANAN,no_rekening:no_rekening})
           .then(()=>{
-
+            if(this.isLoading){
+              this.stopLoading()
+            }
           })
       this.$store.dispatch(ACTION_GET_SALDO,{type:MUTASI_SIMPANAN,no_rekening:no_rekening})
-          .then(()=>{})
+          .then(()=>{
+            if(this.isLoading){
+              this.stopLoading()
+            }
+          })
     }
   },
 };

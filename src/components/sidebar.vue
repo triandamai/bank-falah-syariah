@@ -132,14 +132,14 @@
               ></i>
             </router-link>
             <!-- Button
-              @click="showForm(childrenSubItem.path)"
+              @click="showFormTransaction(childrenSubItem.path)"
                       v-if="childrenSubItem.type === 'button'"
             -->
             <a
                 class="sidebar-link sidebar-title"
                 v-if="menuItem.type === 'button'"
                 v-show="checkPrivileges(menuItem.privileges)"
-                @click="showForm(menuItem.path)"
+                @click="showFormTransaction(menuItem.path)"
 
             >
               <feather :type="menuItem.icon" class="top"></feather>
@@ -153,7 +153,7 @@
             </a>
 
             <!-- External Link
-             @click="showForm(childrenSubItem.path)"
+             @click="showFormTransaction(childrenSubItem.path)"
                      v-if="childrenSubItem.type === 'button'"
            -->
             <a
@@ -292,7 +292,7 @@
                     class="submenu-title"
                     v-if="childrenItem.type === 'button'"
                     v-show="checkPrivileges(childrenItem.privileges)"
-                    @click="showForm(childrenItem.path)"
+                    @click="showFormTransaction(childrenItem.path)"
                 >
                   {{ $t(childrenItem.title) }}
                   <label
@@ -341,7 +341,7 @@
                     </router-link>
                     <!-- Link -->
                     <a
-                      @click="showForm(childrenSubItem.path)"
+                      @click="showFormTransaction(childrenSubItem.path)"
                       v-if="childrenSubItem.type === 'button'"
                       v-show="checkPrivileges(childrenSubItem.privileges)"
 
@@ -436,9 +436,11 @@
 <script>
 import {checkPrivileges} from "@/utils/utils"
 import {getAppname} from "@/services/jwt.service";
+import componentMixin from "@/mixin/component.mixin"
 import { mapState } from "vuex";
 export default {
   name: "Sidebar",
+  mixins:[componentMixin],
   data() {
     return {
       width: 0,
@@ -455,14 +457,21 @@ export default {
     };
   },
   beforeMount() {
-   this.$store.dispatch('menu/getMenu')
+    this.startLoading()
+    this.$store.dispatch('menu/getMenu').then(({ success })=>{
+     if(success){
+       if(this.isLoading){
+         this.stopLoading()
+       }
+     }
+   })
   },
   computed: {
     ...mapState({
-      menuItems: (state) => state.menu.menu
-      ,
+      menuItems: (state) => state.menu.menu,
       layout: (state) => state.layout.layout,
       sidebar: (state) => state.layout.sidebarType,
+      isLoading:(state)=>state.lazyLoad
     }),
   },
   created() {
@@ -497,7 +506,7 @@ export default {
     window.removeEventListener("resize", this.handleResize);
   },
   mounted() {
-    this.menuItems.filter((items) => {
+    this.itemsMenus.filter((items) => {
       if (items.path === this.$route.path)
         this.$store.dispatch("menu/setActiveRoute", items);
       if (!items.children) return false;
@@ -515,7 +524,7 @@ export default {
   methods: {
     //check if user already logged in is have privilage for acces those menu
     checkPrivileges:(privilage)=>checkPrivileges(privilage),
-    showForm(form) {
+    showFormTransaction(form) {
       this.$store.commit("showForm", form);
     },
     toggle_sidebar() {

@@ -15,7 +15,7 @@
                 <v-autocomplete
                   v-model="form.nasabah_id"
                   label="Nasabah *"
-                  :items="itemsnasabah"
+                  :items="itemsNasabah"
                   item-text="nama_lengkap"
                   item-value="id"
                   required
@@ -91,7 +91,7 @@
                 <v-autocomplete
                   v-model="form.produk_id"
                   label="Produk *"
-                  :items="itemsproduk"
+                  :items="itemsProduk"
                   item-text="nama_produk"
                   item-value="id"
                   required
@@ -101,7 +101,7 @@
                 <v-autocomplete
                   v-model="form.pegawai_id"
                   label="Pegawai *"
-                  :items="itemspegawai"
+                  :items="itemsPegawai"
                   item-text="fullname"
                   item-value="id"
                   required

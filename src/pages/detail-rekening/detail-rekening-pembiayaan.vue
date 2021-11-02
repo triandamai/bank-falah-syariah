@@ -19,7 +19,6 @@
                   <img
                       class="bg-img"
                       :src="require('../../assets/images/dashboard/folder1.png')"
-
                       alt=""
                   />
                 </div>
@@ -60,11 +59,11 @@
                           <div class="text-md-right">
                             <h3>
                               {{nasabah.nama_lengkap}}
-                              <span class="digits counter">#{{decryptPlain($route.query.r)}}</span>
+                              <span class="digits counter">#{{ decrypt($route.query.r) }}</span>
                             </h3>
                             <p>
                             {{getMonthString()}}
-                              <span class="digits">{{ getDateMutasi() }}</span>
+                              <span class="digits">{{ getTodayDateMutasi() }}</span>
                               <br />
                             </p>
                           </div>
@@ -99,20 +98,16 @@
                               <label>{{mutasi.tgl_transaksi}}</label>
                             </td>
                             <td>
-                              <p class="itemtext digits">{{getType(mutasi.type)}}</p>
+                              <p class="itemtext digits">{{ getTypeTransaction(mutasi.type) }}</p>
                             </td>
                             <td>
                               <p class="itemtext digits">{{mutasi.jenis_transaksi.nama_transaksi}}</p>
                             </td>
                             <td>
-                              <p class="itemtext digits">Rp {{
-                                  formatCurrency(mutasi.value)
-                                }}</p>
+                              <p class="itemtext digits">Rp {{formatCurrency(mutasi.value) }}</p>
                             </td>
                             <td>
-                              <p class="itemtext digits">Rp {{
-                                  formatCurrency(mutasi.saldo)
-                                }}</p>
+                              <p class="itemtext digits">Rp {{formatCurrency(mutasi.saldo) }}</p>
                             </td>
                           </tr>
 
@@ -156,13 +151,15 @@ export default {
     ...mapState({
       mutasi:(state)=> state.rekening.mutasi.pembiayaan,
       saldo:(state)=> state.rekening.saldo.pembiayaan,
-      nasabah:(state)=> state.rekening.mutasi.nasabah
+      nasabah:(state)=> state.rekening.mutasi.nasabah,
+      isLoading:(state)=>state.lazyLoad
     }),
 
   },
   created() {
     this.$store.commit(MUTATION_DESTROY_MUTASI,{type:MUTASI_PEMBIAYAAN})
     if(this.$route.query.r){
+      this.startLoading()
       this.getData(this.$route.query.r)
     }
   },
@@ -170,10 +167,16 @@ export default {
     getData(no_rekening){
       this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_PEMBIAYAAN,no_rekening:no_rekening})
           .then(()=>{
-
+            if(this.isLoading){
+              this.stopLoading()
+            }
           })
       this.$store.dispatch(ACTION_GET_SALDO,{type:MUTASI_PEMBIAYAAN,no_rekening:no_rekening})
-          .then(()=>{})
+          .then(()=>{
+            if(this.isLoading){
+              this.stopLoading()
+            }
+          })
     },
   },
 };

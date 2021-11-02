@@ -108,15 +108,6 @@
                                             small-chips
                                         />
                                       </v-col>
-                                      <v-col v-show="isTransfer" cols="12" sm="12" md="12" lg="12">
-                                        <v-text-field
-                                            v-model="form.nomor_rekening_tujuan"
-                                            label="Nomor Rekening Tujuan"
-                                            placeholder="01100XXXX"
-                                            dense
-                                            outlined
-                                        />
-                                      </v-col>
                                       <v-col cols="12" sm="12" md="12" lg="12">
                                         <vuetify-money
                                             v-model="form.value"
@@ -145,7 +136,7 @@
                           </div>
                         </div>
                       </v-col>
-                      <v-col v-show="isTransactionSuccess" cols="12">
+                      <v-col  cols="12">
                         <div class="row">
                           <div class="col-xl-12 col-md-12 col-sm-12 col-xs-12 box-col-12">
                             <div class="file-content">
@@ -292,7 +283,6 @@ export default {
       transactionsSelected:"",
       selectedRekening:{},
       isTransfer:false,
-      isTransactionSuccess:false,
       nasabahName:"",
       mutasi: [],
       transactions:[
@@ -322,11 +312,7 @@ export default {
       this.form.nomor_rekening = newVal.no_rekening
     },
     transactionsSelected:function(newVal){
-      if (newVal === TABUNGAN_TRANSFER) {
-        this.isTransfer = true
-      }else {
-        this.isTransfer = false
-      }
+      this.isTransfer = newVal === TABUNGAN_TRANSFER;
     }
   },
   mounted() {
@@ -350,7 +336,6 @@ export default {
       this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:this.transactionsSelected})
           .then(({success,data})=>{
             this.overlay = false
-            this.isTransactionSuccess = success
             if(success){
               this.form = {}
               this.mutasi = data

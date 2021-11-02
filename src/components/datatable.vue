@@ -19,7 +19,7 @@
     </v-card-title>
 
     <v-data-table
-        :loading="loadingtable"
+        :loading="isDataTableLoading"
         :loading-text="$t('Wait Loading')"
         flat :headers="headers" :items="items" :search="search">
       <template v-slot:item.tempat_lahir="{item}">
@@ -44,10 +44,10 @@
         {{item.jabatan.nama_jabatan}}
       </template>
       <template v-slot:item.tipe_produk="{ item }">
-        {{getTipeProduk(item.tipe_produk)}}
+        {{ getTypeProduk(item.tipe_produk) }}
       </template>
       <template v-slot:item.lama_angsuran="{ item }">
-        {{item.tipe_angsuran === 1 ? `${item.lama_angsuran} ${$t('Weeks')}`:`${item.lama_angsuran} ${$t('Days')}`}}
+        {{ item.tipe_angsuran === 1 ? `${item.lama_angsuran} ${$t('Weeks')}` : `${item.lama_angsuran} ${$t('Days')}` }}
       </template>
       <template v-slot:item.nasabah="{ item }">
         {{item.nasabah.nama_lengkap}}
@@ -60,7 +60,7 @@
             :color="getColor(item.active)"
             dark
         >
-          {{ item.active > 0 ? 'Aktif':'Non-Aktif' }}
+          {{ item.active > 0 ? $t('Aktif'):$t('Non-Aktif') }}
         </v-chip>
       </template>
       <template v-slot:item.updated_at="{ item }">
@@ -94,7 +94,7 @@
   </v-card>
 </template>
 <script>
-import { mapState } from "vuex";
+
 import componentMixin from "@/mixin/component.mixin"
 export default {
   mixins:[componentMixin],
@@ -104,18 +104,12 @@ export default {
       search: "",
     };
   },
-  computed: {
-    ...mapState({
-      theme: (state) => state.layout.isDark,
-      loadingtable:(state)=>  state.loadingtable
-    }),
-  },
   methods:{
     getColor (active) {
       if (active > 0) return 'green'
       return 'orange'
     },
-    getTipeProduk(tipe){
+    getTypeProduk(tipe){
       if(tipe === 1) return "Simpanan"
       if (tipe === 2) return "Pembiayaan"
       if(tipe === 3) return "Deposito"
@@ -124,18 +118,17 @@ export default {
     },
     getRouteMutasi(mutasi){
       if(mutasi.tipe_angsuran === ""){
-
-        const data ={
-         path: `/main/mutasi/pembiayaan`,
+        return {
+          path: `/main/mutasi/pembiayaan`,
           query:{
             r:this.encryptPlain(mutasi.no_rekening),
             q:Date.now(),
             s:'f6ce8d9efde6'
           }
         }
-        return data
       }
-      const data ={
+
+      return {
         path: `/main/mutasi/simpanan`,
         query:{
           r:this.encryptPlain(mutasi.no_rekening),
@@ -143,7 +136,6 @@ export default {
           s:'f6ce8d9efde6'
         }
       }
-      return data
     }
   }
 };

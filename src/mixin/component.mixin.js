@@ -200,7 +200,6 @@ export default {
         window.addEventListener("keydown", (e) => {
             //if Enter go to next
             if (e.key === "Enter") {
-
                 if (this.show) {
                     this.onSubmit()
                 }
@@ -209,26 +208,39 @@ export default {
     },
     computed: {
         ...mapState({
-            itemsjabatan: (state) => state.master.datajabatan,
-            itemsproduk: (state) => state.master.dataproduk,
-            itemsnasabah: (state) => state.nasabah.datanasabah,
-            itemspegawai: (state) => state.master.datapegawai,
-            nasabah: (state) => state.nasabah.datanasabah,
-            menuItems: (state) => state.menu.menu,
+            itemsJabatan: (state) => state.master.datajabatan,
+            itemsProduk: (state) => state.master.dataproduk,
+            itemsNasabah: (state) => state.nasabah.datanasabah,
+            itemsPegawai: (state) => state.master.datapegawai,
+            itemsRoles: (state) => state.system.dataroles,
+            itemRekening: (state) => state.transaksi.rekening,
+            itemsProvinsi: (state) => state.wilayah.provinsi.data,
+            itemsKabupaten: (state) => state.wilayah.kabupaten.data,
+            itemsKecamatan: (state) => state.wilayah.kecamatan.data,
+            itemsDesa: (state) => state.wilayah.desa.data,
+            itemsMenus: (state) => state.menu.menu,
             layout: (state) => state.layout.layout,
             togglesidebar: (state) => state.menu.togglesidebar,
-            showForm: (state) => state.formtransaksipembiayaan,
-            provinsi: (state) => state.wilayah.provinsi.data,
-            kabupaten: (state) => state.wilayah.kabupaten.data,
-            kecamatan: (state) => state.wilayah.kecamatan.data,
-            desa: (state) => state.wilayah.desa.data,
-            itemsrole: (state) => state.system.dataroles,
+            isFormTransactionPembiayaanShow: (state) => state.formtransaksipembiayaan,
+            lazyLoad:(state)=> state.lazyLoad,
+            isOnline:(state)=>state.isOnline,
+            formShowPembiayaan:(state) => state.formtransaksipembiayaan,
+            formShowSimpanan:(state) => state.formtransaksisimpanan,
+            theme: (state) => state.layout.isDark,
+            isDataTableLoading:(state)=>  state.loadingtable,
+
         }),
     },
     methods: {
         encryptPlain:(plain)=>encrypt(plain),
         decryptPlain:(plain)=>decrypt(plain),
         formatCurrency: (total) => formatCurrency(total),
+        startLoading(){
+            this.$store.commit('setLazyLoad',true)
+        },
+        stopLoading(){
+            this.$store.commit('setLazyLoad',false)
+        },
         getType:(type)=> {
             if (type === 1) return `DEBET`
             return `KREDIT`
@@ -257,21 +269,21 @@ export default {
         unAuthorize() {
 
         },
-        ExcelDateToJSDate(serial, todate) {
-            var utc_days = Math.floor(serial - 25569);
-            var utc_value = utc_days * 86400;
-            var date_info = new Date(utc_value * 1000);
+        excelDateToJSDate(serial, todate) {
+            let utc_days = Math.floor(serial - 25569);
+            let utc_value = utc_days * 86400;
+            let date_info = new Date(utc_value * 1000);
 
-            var fractional_day = serial - Math.floor(serial) + 0.0000001;
+            let fractional_day = serial - Math.floor(serial) + 0.0000001;
 
-            var total_seconds = Math.floor(86400 * fractional_day);
+            let total_seconds = Math.floor(86400 * fractional_day);
 
-            var seconds = total_seconds % 60;
+            let seconds = total_seconds % 60;
 
             total_seconds -= seconds;
 
-            var hours = Math.floor(total_seconds / (60 * 60));
-            var minutes = Math.floor(total_seconds / 60) % 60;
+            let hours = Math.floor(total_seconds / (60 * 60));
+            let minutes = Math.floor(total_seconds / 60) % 60;
             if (todate)
                 return new Date(
                     date_info.getFullYear(),
