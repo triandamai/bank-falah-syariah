@@ -88,19 +88,19 @@
                                     <h6 class="p-2 mb-0">Saldo</h6>
                                   </td>
                                 </tr>
-                                <tr v-for="(itemsMutasi,index) in mutasi" :key="index">
+                                <tr v-for="(itemsMutasiPembiayaan,index) in mutasi" :key="index">
                                   <td>
-                                    <label>{{itemsMutasi.tgl_transaksi}}</label>
+                                    <label>{{itemsMutasiPembiayaan.tgl_transaksi}}</label>
                                     </td>
                                   <td>
-                                    <p class="itemtext digits">{{ getTypeTransaction(itemsMutasi.type) }}</p>
+                                    <p class="itemtext digits">{{ getTypeTransaction(itemsMutasiPembiayaan.type) }}</p>
                                   </td>
                                   <td>
-                                    <p class="itemtext digits">{{itemsMutasi.jenis_transaksi.nama_transaksi}}</p>
+                                    <p class="itemtext digits">{{itemsMutasiPembiayaan.jenis_transaksi.nama_transaksi}}</p>
                                   </td>
                                   <td>
                                     <p class="itemtext digits">Rp {{
-                                        formatCurrency(itemsMutasi.value)
+                                        formatCurrency(itemsMutasiPembiayaan.value)
                                       }}</p>
                                   </td>
                                 </tr>

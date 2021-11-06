@@ -219,7 +219,8 @@ export default {
             itemsKecamatan: (state) => state.wilayah.kecamatan.data,
             itemsDesa: (state) => state.wilayah.desa.data,
             itemsMenus: (state) => state.menu.menu,
-            itemsMutasi:(state)=> state.rekening.mutasi.pembiayaan,
+            itemsMutasiPembiayaan:(state)=> state.rekening.mutasi.pembiayaan,
+            itemsMutasiSimpanan:(state)=> state.rekening.mutasi.simpanan,
             layout: (state) => state.layout.layout,
             togglesidebar: (state) => state.menu.togglesidebar,
             theme: (state) => state.layout.isDark,
@@ -236,6 +237,12 @@ export default {
         encryptPlain:(plain)=>encrypt(plain),
         decryptPlain:(plain)=>decrypt(plain),
         formatCurrency: (total) => formatCurrency(total),
+        getJenisTransaksi:(jenistransaksi)=>{
+            if(jenistransaksi.nama_transaksi){
+                return jenistransaksi.nama_transaksi
+            }
+            return jenistransaksi
+        },
         startLoading(){
             this.$store.commit('setLazyLoad',true)
         },

@@ -222,7 +222,7 @@
                                           <h6 class="p-2 mb-0">Sisa Saldo</h6>
                                         </td>
                                       </tr>
-                                      <tr v-for="(mutasi,index) in itemsMutasi" :key="index">
+                                      <tr v-for="(mutasi,index) in itemsMutasiSimpanan" :key="index">
                                         <td>
                                           <label>{{mutasi.tgl_transaksi}}</label>
                                         </td>
@@ -230,7 +230,7 @@
                                           <p class="itemtext digits">{{getType(mutasi.type)}}</p>
                                         </td>
                                         <td>
-                                          <p class="itemtext digits">{{mutasi.jenis_transaksi}}</p>
+                                          <p class="itemtext digits">{{getJenisTransaksi(mutasi.jenis_transaksi)}}</p>
                                         </td>
                                         <td v-if="isTransfer">
                                           <p class="itemtext digits">{{mutasi.description}}</p>
@@ -347,7 +347,8 @@ export default {
   },
   methods: {
     getMutasiByAccount(no_account){
-      this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_SIMPANAN,no_rekening:no_account})
+      const no_rekening = this.encryptPlain(no_account)
+      this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_SIMPANAN,no_rekening:no_rekening})
           .then(()=>{
             if(this.isLoading){
               this.stopLoading()
@@ -369,7 +370,7 @@ export default {
             if(success){
               this.form = {}
               data.map(mutasi => {
-                this.$store.commit(MUTATION_ADD_MUTASI,{type: this.transactionsSelected, mutasi: mutasi})
+                this.$store.commit(MUTATION_ADD_MUTASI,{type: MUTASI_SIMPANAN, mutasi: mutasi})
               })
             }
           })

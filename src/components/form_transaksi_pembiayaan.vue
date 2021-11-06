@@ -210,7 +210,7 @@
                                             <h6 class="p-2 mb-0">Sisa Saldo</h6>
                                           </td>
                                         </tr>
-                                        <tr v-for="(mutasi,index) in itemsMutasi" :key="index">
+                                        <tr v-for="(mutasi,index) in itemsMutasiPembiayaan" :key="index">
                                           <td>
                                             <label>{{mutasi.tgl_transaksi}}</label>
                                           </td>
@@ -218,7 +218,7 @@
                                             <p class="itemtext digits">{{getType(mutasi.type)}}</p>
                                           </td>
                                           <td>
-                                            <p class="itemtext digits">{{mutasi.jenis_transaksi}}</p>
+                                            <p class="itemtext digits">{{getJenisTransaksi(mutasi.jenis_transaksi)}}</p>
                                           </td>
 
                                           <td>
@@ -274,7 +274,6 @@ import {
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"
 import componentMixin from "@/mixin/component.mixin"
-import {mapState} from "vuex";
 export default {
   mixins:[componentMixin],
   data: () => {
@@ -320,7 +319,8 @@ export default {
   },
   methods: {
     getMutasiByAccount(no_account){
-      this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_PEMBIAYAAN,no_rekening:no_account})
+      const no_rekening = this.encryptPlain(no_account)
+      this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_PEMBIAYAAN,no_rekening:no_rekening})
           .then(()=>{
             if(this.isLoading){
               this.stopLoading()
@@ -342,7 +342,7 @@ export default {
             if(success){
               this.form = {}
               data.map(mutasi => {
-                this.$store.commit(MUTATION_ADD_MUTASI,{type: this.transactionsSelected, mutasi: mutasi})
+                this.$store.commit(MUTATION_ADD_MUTASI,{type: MUTASI_PEMBIAYAAN, mutasi: mutasi})
 
               })
 
