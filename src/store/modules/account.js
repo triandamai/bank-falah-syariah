@@ -42,6 +42,7 @@ export const MUTATION_ADD_DATA_REKENING = `rekening/${ADD_DATA_REKENING}`;
 export const MUTATION_UPDATE_DATA_REKENING = `rekening/${EDIT_DATA_REKENING}`;
 export const MUTATION_DELETE_DATA_REKENING = `rekening/${REMOVE_DATA_REKENING}`;
 export const MUTATION_DESTROY_MUTASI = `rekening/${DESTROY_MUTASI}`;
+export const MUTATION_ADD_MUTASI = `rekening/${MUTASI_REKENING}`;
 /***
  *
  * type Action

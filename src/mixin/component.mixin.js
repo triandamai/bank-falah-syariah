@@ -219,6 +219,7 @@ export default {
             itemsKecamatan: (state) => state.wilayah.kecamatan.data,
             itemsDesa: (state) => state.wilayah.desa.data,
             itemsMenus: (state) => state.menu.menu,
+            itemsMutasi:(state)=> state.rekening.mutasi.pembiayaan,
             layout: (state) => state.layout.layout,
             togglesidebar: (state) => state.menu.togglesidebar,
             theme: (state) => state.layout.isDark,
@@ -227,6 +228,7 @@ export default {
             formShowPembiayaan:(state) => state.formtransaksipembiayaan,
             formShowSimpanan:(state) => state.formtransaksisimpanan,
             isDataTableLoading:(state)=>  state.loadingtable,
+
 
         }),
     },

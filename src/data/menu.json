@@ -101,7 +101,7 @@
     },
     {
       "title": "Transaction",
-      "icon": "monitor",
+      "icon": "file-minus",
       "type": "sub",
       "badgeType": "primary",
       "badgeValue": "2",

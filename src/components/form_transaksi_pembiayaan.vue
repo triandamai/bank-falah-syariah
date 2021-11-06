@@ -26,7 +26,7 @@
                       <v-autocomplete
                           v-model="selectedRekening"
                           label="Nasabah/Rekening *"
-                          :items="rekenings"
+                          :items="itemRekening"
                           return-object
                           outlined
                           required
@@ -210,7 +210,7 @@
                                             <h6 class="p-2 mb-0">Sisa Saldo</h6>
                                           </td>
                                         </tr>
-                                        <tr v-for="(mutasi,index) in mutasi" :key="index">
+                                        <tr v-for="(mutasi,index) in itemsMutasi" :key="index">
                                           <td>
                                             <label>{{mutasi.tgl_transaksi}}</label>
                                           </td>
@@ -269,7 +269,7 @@ import {
   ACTION_TRANSACTION,
   TABUNGAN_TRANSFER,
   PEMBIAYAAN_SETOR,
-  PEMBIAYAAN_TARIK
+  PEMBIAYAAN_TARIK, ACTION_MUTASI, MUTASI_PEMBIAYAAN, MUTATION_ADD_MUTASI
 } from "@/store"
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"
@@ -284,7 +284,6 @@ export default {
       selectedRekening:{},
       isTransfer:false,
       nasabahName:"",
-      mutasi: [],
       transactions:[
         {
           text:"Tarik Pembiayaan",
@@ -310,6 +309,7 @@ export default {
       this.form.nasabah_id = newVal.nasabah_id
       this.nasabahName = newVal.nasabah.nama_lengkap
       this.form.nomor_rekening = newVal.no_rekening
+      this.getMutasiByAccount(newVal.no_rekening)
     },
     transactionsSelected:function(newVal){
       this.isTransfer = newVal === TABUNGAN_TRANSFER;
@@ -318,12 +318,15 @@ export default {
   mounted() {
     this.getRekeningByType()
   },
-  computed:{
-    ...mapState({
-      rekenings: (state) => state.transaksi.rekening
-    })
-  },
   methods: {
+    getMutasiByAccount(no_account){
+      this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_PEMBIAYAAN,no_rekening:no_account})
+          .then(()=>{
+            if(this.isLoading){
+              this.stopLoading()
+            }
+          })
+    },
     getRekeningByType(){
       this.$store.dispatch(ACTION_GET_REKENING_TRANSACTION,PEMBIAYAAN_SETOR).then(()=>{
 
@@ -338,7 +341,11 @@ export default {
             this.overlay = false
             if(success){
               this.form = {}
-              this.mutasi = data
+              data.map(mutasi => {
+                this.$store.commit(MUTATION_ADD_MUTASI,{type: this.transactionsSelected, mutasi: mutasi})
+
+              })
+
             }
           })
     },
