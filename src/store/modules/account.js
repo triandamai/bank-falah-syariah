@@ -147,7 +147,6 @@ const actions = {
             const decrypt_no_rekening = decrypt(no_rekening)
             ApiService.get(`${type}${decrypt_no_rekening}/mutasi?t=${new Date().getMilliseconds()}`)
                 .then(({success, data}) => {
-                    console.log(data)
                     resolve(success)
                     if(data.length > 0){
                         commit(SET_MUTASI_NASABAH,data[0].nasabah)
