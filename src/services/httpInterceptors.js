@@ -60,7 +60,7 @@ export const responseInterceptor=(response)=>{
 
                return response.data.data.current_page <= response.data.data.last_page
             }
-            console.log(response.config.url,getPagination())
+            // console.log(response.config.url,getPagination())
             shouldNext = getPagination()
             message = "Success Get Data"
         }else {
