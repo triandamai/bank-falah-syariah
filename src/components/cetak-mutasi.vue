@@ -8,7 +8,7 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>
+        <v-toolbar color="orange" dark>
           <v-btn dark icon @click="close">
             <v-icon>mdi-close</v-icon>
           </v-btn>

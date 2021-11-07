@@ -40,8 +40,8 @@
       </div>
       <form-transaksi-pembiayaan :show="formShowPembiayaan"/>
       <form-transaksi-simpanan :show="formShowSimpanan"/>
-
-      <Customizer />
+<!-- TODO:show option for costumizer -->
+<!--      <Customizer />-->
       <v-snackbar
           v-model="notifConnection"
       >

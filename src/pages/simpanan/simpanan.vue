@@ -114,7 +114,7 @@ export default {
     },
     onDelete(data) {
       this.$swal({
-        text: this.$t("Delete Message",{ who: `Rekening Pembiayaan ${data.nasabah.nama_lengkap}` }),
+        text: this.$t("Delete Message",{ who: `Rekening Simpanan ${data.nasabah.nama_lengkap}` }),
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",
