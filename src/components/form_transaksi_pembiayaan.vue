@@ -269,7 +269,7 @@ import {
   ACTION_TRANSACTION,
   TABUNGAN_TRANSFER,
   PEMBIAYAAN_SETOR,
-  PEMBIAYAAN_TARIK, ACTION_MUTASI, MUTASI_PEMBIAYAAN, MUTATION_ADD_MUTASI
+  PEMBIAYAAN_TARIK, ACTION_MUTASI, MUTASI_PEMBIAYAAN, MUTATION_ADD_MUTASI, MUTATION_DESTROY_MUTASI
 } from "@/store"
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"
@@ -319,6 +319,7 @@ export default {
   },
   methods: {
     getMutasiByAccount(no_account){
+      this.$store.commit(MUTATION_DESTROY_MUTASI,{type:MUTASI_PEMBIAYAAN})
       const no_rekening = this.encryptPlain(no_account)
       this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_PEMBIAYAAN,no_rekening:no_rekening})
           .then(()=>{
