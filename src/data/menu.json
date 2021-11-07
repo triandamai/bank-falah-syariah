@@ -147,7 +147,7 @@
       "active": false,
       "path": "System",
       "privileges": {
-        "roles": ["admin", "bp_root","siswa"]
+        "roles": ["admin", "bp_root"]
       },
       "children": [
         {

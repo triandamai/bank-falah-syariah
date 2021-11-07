@@ -5,7 +5,7 @@
         <div class="row">
           <div class="col-md-12 col-lg-12 col-sm-12 col-12 col-xs-12 footer-copyright text-center">
             <p class="mb-5">
-              Copyright 2020 © Bank Falah Syariah by BakaranProject
+              Copyright 2020 © Bank Falah Syariah by <a target="_blank" href="https://bakaranproject.com">BakaranProject</a>
             </p>
           </div>
         </div>
