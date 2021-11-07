@@ -119,9 +119,17 @@ const actions = {
 
             //get
             ApiService.get(`${type}${page}`)
-                .then(({data, shouldNext}) => {
-                    //success
-                    resolve(shouldNext)
+                .then(({success,data, shouldNext}) => {
+
+                    if (success) {
+                        resolve(shouldNext)
+                        if (shouldNext) {
+                            commit(INCREMENT_PAGE, {type: type})
+                        }
+
+                    }else {
+                        resolve(false)
+                    }
                     data.map((item) => {
                         commit(ADD_DATA_REKENING, {
                             type: type,
@@ -129,6 +137,7 @@ const actions = {
                             page: stillPaging,
                         });
                     });
+
                 })
         });
     },

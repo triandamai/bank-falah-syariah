@@ -9,6 +9,7 @@
 import ApiService from "@/services/api.service";
 import router from "@/router";
 import Vue from "vue";
+import {Promise} from "es6-promise";
 
 const GET_DATA_SYSTEM = "GETDATASYSTEM";
 const POST_DATA_SYSTEM = "POGETDATASYSTEM";
@@ -78,8 +79,15 @@ const actions = {
             }
 
             ApiService.get(`${type}${page}`)
-                .then(({shouldNext, data}) => {
-                       resolve(shouldNext);
+                .then(({success,shouldNext, data}) => {
+                    if(success) {
+                        resolve(shouldNext);
+                        if (shouldNext) {
+                            commit(INCREMENT_PAGE, {type: type})
+                        }
+                    }else {
+                        resolve(false)
+                    }
                         data.map((item) => {
                             commit(ADD_DATA_SYSTEM, {
                                 type: type,

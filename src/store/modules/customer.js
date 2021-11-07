@@ -55,9 +55,13 @@ const actions = {
         return new Promise((resolve) => {
             let page = `?page=${state.currentpage}`;
             ApiService.get(`nasabah${page}?zx=4sc43f8sdnds7er`)
-                .then(({data,shouldNext}) => {
-                     resolve(shouldNext)
-                    if(shouldNext) commit(INCREMENT_PAGE,{})
+                .then(({success,data,shouldNext}) => {
+                    if(success) {
+                        resolve(shouldNext)
+                        if (shouldNext) {commit(INCREMENT_PAGE, {})}
+                    }else{
+                        resolve(false)
+                    }
                      //loop and add to datatable
                      data.map((item) => {
                         commit(ADD_NASABAH, item);

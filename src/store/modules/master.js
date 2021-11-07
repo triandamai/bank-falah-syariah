@@ -96,7 +96,7 @@ const actions = {
                     if (success) {
                         if (shouldNext) {
                             commit(INCREMENT_PAGE, {type: type});
-                            resolve(true);
+                            resolve(shouldNext);
                         } else {
                             resolve(false);
                         }

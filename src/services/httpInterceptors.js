@@ -53,16 +53,15 @@ export const responseInterceptor=(response)=>{
          * **/
         if(response.config.method === "get" || response.config.method === "GET"){
             //check if the data inside nested object
-            if(response.data.data){
-                if(response.data.data.current_page){
-                    shouldNext = response.data.data.current_page < response.data.data.last_page
-                }
-            }else {
-                if(response.data.current_page){
+            const getPagination = () => {
+              if(response.data.current_page) {
+                  return response.data.current_page <= response.data.last_page
+              }
 
-                    shouldNext = response.data.current_page < response.data.last_page
-                }
+               return response.data.data.current_page <= response.data.data.last_page
             }
+            console.log(response.config.url,getPagination())
+            shouldNext = getPagination()
             message = "Success Get Data"
         }else {
             message = "Berhasil Proses"
