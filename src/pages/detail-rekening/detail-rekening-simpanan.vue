@@ -135,15 +135,15 @@
 
 
 <script>
-import {ACTION_GET_SALDO, ACTION_MUTASI, MUTASI_SIMPANAN, MUTATION_DESTROY_MUTASI} from "@/store"
+import {ACTION_GET_SALDO, ACTION_GET_DETAIL_REKENING, DETAIL_REKENING_SIMPANAN, MUTATION_DESTROY_MUTASI} from "@/store"
 import {mapState,mapGetters} from "vuex"
 import pageMixin from "@/mixin/page.mixin"
 export default {
   mixins:[pageMixin],
   computed:{
     ...mapState({
-      mutasi:(state)=> state.rekening.mutasi.simpanan,
-      nasabah:(state)=> state.rekening.mutasi.nasabah,
+      mutasi:(state)=> state.rekening.detailrekening.simpanan,
+      nasabah:(state)=> state.rekening.detailrekening.nasabah,
       isLoading:(state)=>state.lazyLoad
     }),
     ...mapGetters({
@@ -151,7 +151,7 @@ export default {
     })
   },
   created() {
-    this.$store.commit(MUTATION_DESTROY_MUTASI,{type:MUTASI_SIMPANAN})
+    this.$store.commit(MUTATION_DESTROY_MUTASI,{type:DETAIL_REKENING_SIMPANAN})
     if(this.$route.query.r){
       this.startLoading()
       this.getData(this.$route.query.r)
@@ -159,13 +159,13 @@ export default {
   },
   methods: {
     getData(no_rekening){
-      this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_SIMPANAN,no_rekening:no_rekening})
+      this.$store.dispatch(ACTION_GET_DETAIL_REKENING,{type:DETAIL_REKENING_SIMPANAN,no_rekening:no_rekening})
           .then(()=>{
             if(this.isLoading){
               this.stopLoading()
             }
           })
-      this.$store.dispatch(ACTION_GET_SALDO,{type:MUTASI_SIMPANAN,no_rekening:no_rekening})
+      this.$store.dispatch(ACTION_GET_SALDO,{type:DETAIL_REKENING_SIMPANAN,no_rekening:no_rekening})
           .then(()=>{
             if(this.isLoading){
               this.stopLoading()

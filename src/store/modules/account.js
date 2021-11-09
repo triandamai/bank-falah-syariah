@@ -18,31 +18,36 @@ const POST_DATA_REKENING = "POSTREKENINGDATA";
 const PUT_DATA_REKENING = "PUTDATAREKENING";
 const DELETE_DATA_REKENING = "DELETEDATAREKENING";
 const GET_SALDO_REKENING = "GET_SALDO_REKENING";
-const MUTASI = "MUTASI"
-export const MUTASI_PEMBIAYAAN = 'rekening_pembiayaan/'
-export const MUTASI_SIMPANAN = 'rekening_simpanan/'
+const GET_MUTASI_REKENING = "GET_MUTASI_REKENING"
+
+const DETAIL_REKENING = "DETAIL_REKENING"
+export const DETAIL_REKENING_PEMBIAYAAN = 'rekening_pembiayaan/'
+export const DETAIL_REKENING_SIMPANAN = 'rekening_simpanan/'
+
+export const ACTION_GET_MUTASI = `rekening/${GET_MUTASI_REKENING}`
 
 export const ACTION_GET_DATA_REKENING = `rekening/${GET_DATA_REKENING}`;
 export const ACTION_POST_DATA_REKENING = `rekening/${POST_DATA_REKENING}`;
 export const ACTION_PUT_DATA_REKENING = `rekening/${PUT_DATA_REKENING}`;
 export const ACTION_DELETE_DATA_REKENING = `rekening/${DELETE_DATA_REKENING}`;
-export const ACTION_MUTASI = `rekening/${MUTASI}`;
+export const ACTION_GET_DETAIL_REKENING = `rekening/${DETAIL_REKENING}`;
 export const ACTION_GET_SALDO = `rekening/${GET_SALDO_REKENING}`
 
 const ADD_DATA_REKENING = "MADDDATAREKENING";
 const EDIT_DATA_REKENING = "MUPDATEREKENING";
 const REMOVE_DATA_REKENING = "MDELETEDATAREKENING";
 const INCREMENT_PAGE = `INCREMENT`;
-const MUTASI_REKENING = "MUTASI_REKENING"
+const SET_DETAIL_REKENING = "DETAIL_REKENING"
+const SET_MUTASI="SET_MUTASI_REKENING"
 const DESTROY_MUTASI = "DESTROY MUTASI"
 const SET_SALDO = "SETSALDO"
-const SET_MUTASI_NASABAH = "SETMUTASINASABAH"
+const SET_DETAIL_REKENING_NASABAH = "SETDETAILREKENINGNASABAH"
 
 export const MUTATION_ADD_DATA_REKENING = `rekening/${ADD_DATA_REKENING}`;
 export const MUTATION_UPDATE_DATA_REKENING = `rekening/${EDIT_DATA_REKENING}`;
 export const MUTATION_DELETE_DATA_REKENING = `rekening/${REMOVE_DATA_REKENING}`;
 export const MUTATION_DESTROY_MUTASI = `rekening/${DESTROY_MUTASI}`;
-export const MUTATION_ADD_MUTASI = `rekening/${MUTASI_REKENING}`;
+export const MUTATION_ADD_MUTASI = `rekening/${SET_DETAIL_REKENING}`;
 /***
  *
  * type Action
@@ -71,10 +76,14 @@ const state = {
         current_page: 1,
         last_page: 0,
     },
-    mutasi: {
+    detailrekening: {
         pembiayaan: [],
         simpanan: [],
         nasabah:{}
+    },
+    mutasi:{
+        pembiayaan: [],
+        simpanan: [],
     },
     saldo: {
         pembiayaan: {
@@ -141,18 +150,28 @@ const actions = {
                 })
         });
     },
+    [GET_MUTASI_REKENING]({commit,state},{type,no_rekening,start,end}){
+        return new Promise((resolve)=>{
+            ApiService.get(`${type}/${no_rekening}/mutasi?start_date=${start}&end_date=${end}`)
+                .then(({success,data}) => {
+                    resolve(success)
 
-    [MUTASI]({commit}, {type, no_rekening}) {
+                    commit(SET_MUTASI,{type:type,data:data})
+
+                })
+        })
+    },
+    [DETAIL_REKENING]({commit}, {type, no_rekening}) {
         return new Promise((resolve) => {
             const decrypt_no_rekening = decrypt(no_rekening)
             ApiService.get(`${type}${decrypt_no_rekening}/mutasi?t=${new Date().getMilliseconds()}`)
                 .then(({success, data}) => {
                     resolve(success)
                     if(data.length > 0){
-                        commit(SET_MUTASI_NASABAH,data[0].nasabah)
+                        commit(SET_DETAIL_REKENING_NASABAH,data[0].nasabah)
                     }
-                    data.map(mutasi => {
-                        commit(MUTASI_REKENING, {type: type, mutasi: mutasi})
+                    data.map(data => {
+                        commit(SET_DETAIL_REKENING, {type: type, detail: data})
                     })
 
                 })
@@ -237,41 +256,52 @@ const actions = {
      */
 };
 const mutations = {
-    [MUTASI_REKENING](state, {type, mutasi}) {
+    [SET_MUTASI](state,{type,data}){
+
+        if (type === RPEMBIAYAAN) {
+            state.mutasi.pembiayaan =data
+        }
+        if (type === RTABUNGAN) {
+            state.mutasi.simpanan = data
+        }
 
 
-        if (type === MUTASI_PEMBIAYAAN) {
+    },
+    [SET_DETAIL_REKENING](state, {type, detail}) {
+
+
+        if (type === DETAIL_REKENING_PEMBIAYAAN) {
             const exist = state
-                .mutasi
+                .detailrekening
                 .pembiayaan
-                .some((pembiayaan) => pembiayaan.id === mutasi.id);
+                .some((pembiayaan) => pembiayaan.id === detail.id);
             if (exist) {
-                const index = state.mutasi.pembiayaan
+                const index = state.detailrekening.pembiayaan
                     .map((pembiayaan) => pembiayaan.id)
-                    .indexOf(mutasi.id);
-                Object.assign(state.mutasi.pembiayaan[index], mutasi);
+                    .indexOf(detail.id);
+                Object.assign(state.detailrekening.pembiayaan[index], detail);
             } else {
-                state.mutasi.pembiayaan.push(mutasi)
+                state.detailrekening.pembiayaan.push(detail)
             }
         }
-        if (type === MUTASI_SIMPANAN) {
+        if (type === DETAIL_REKENING_SIMPANAN) {
             const exist = state
-                .mutasi
+                .detailrekening
                 .simpanan
-                .some((simpanan) => simpanan.id === mutasi.id);
+                .some((simpanan) => simpanan.id === detail.id);
             if (exist) {
-                const index = state.mutasi.simpanan
+                const index = state.detailrekening.simpanan
                     .map((simpanan) => simpanan.id)
-                    .indexOf(mutasi.id);
-                Object.assign(state.mutasi.simpanan[index], mutasi);
+                    .indexOf(detail.id);
+                Object.assign(state.detailrekening.simpanan[index], detail);
             } else {
-                state.mutasi.simpanan.push(mutasi)
+                state.detailrekening.simpanan.push(detail)
             }
 
         }
     },
     [DESTROY_MUTASI](state, {type}) {
-        if (type === MUTASI_PEMBIAYAAN) {
+        if (type === DETAIL_REKENING_PEMBIAYAAN) {
             state.mutasi.pembiayaan = []
         } else {
             state.mutasi.simpanan = []
@@ -292,14 +322,14 @@ const mutations = {
     },
     [SET_SALDO](state, {saldo, type}) {
 
-        if (type === MUTASI_PEMBIAYAAN) {
+        if (type === DETAIL_REKENING_PEMBIAYAAN) {
             state.saldo.pembiayaan.saldo = saldo.saldo
             state.saldo.pembiayaan.jumlah_pinjaman = saldo.jumlah_pinjaman
         } else {
             state.saldo.simpanan.saldo = saldo
         }
     },
-    [SET_MUTASI_NASABAH](state,nasabah){
+    [SET_DETAIL_REKENING_NASABAH](state,nasabah){
       state.mutasi.nasabah = nasabah
     },
     /***

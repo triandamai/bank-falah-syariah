@@ -8,6 +8,7 @@
 import ApiService from "@/services/api.service";
 import router from "@/router";
 import Vue from "vue";
+import {Promise} from "es6-promise";
 // action types
 
 const POST_NASABAH = "createUser";

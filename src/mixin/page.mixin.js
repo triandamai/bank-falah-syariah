@@ -6,13 +6,28 @@
  */
 import {formatCurrency} from "@/utils/utils"
 import {decrypt, encrypt} from "@/services/jwt.service";
+import {mapState} from "vuex";
 
 export default {
-    data:()=>{return{
+    data:()=>{
+        return{
         body: {},
+        options: {
+            locale: "id-ID",
+            prefix: "Rp",
+            suffix: "",
+            length: 11,
+            precision: 1
+        },
         isEdit: false,
         form:false
-    }},
+    }
+    },
+    computed:{
+        ...mapState({
+            lazyLoad:(state)=> state.lazyLoad,
+        })
+    },
     methods:{
         startLoading(){
             this.$store.commit('setLazyLoad',true)
@@ -31,6 +46,10 @@ export default {
         getMonthString(){
            const date = new Date();
            return date.toLocaleString('id-ID',{month:'long'});
+        },
+        getDateMutasi() {
+            const date = new Date()
+            return `${date.getDate()}, ${date.getFullYear()}`
         },
         getTodayDateMutasi(){
             const  date = new Date()

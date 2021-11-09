@@ -116,7 +116,7 @@ export default {
 
       return "Tidak diketahui"
     },
-    getRouteMutasi(mutasi){
+    getRouteMutasi(detailrekening){
       if(mutasi.tipe_angsuran === ""){
         return {
           path: `/main/mutasi/pembiayaan`,

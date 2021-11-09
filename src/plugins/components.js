@@ -13,6 +13,7 @@ Vue.component("Customizer",()=>import("@/components/customizer"))
 Vue.component("data-table", () => import("@/components/datatable.vue"));
 Vue.component("form-akad", () => import("@/components/form_akad.vue"));
 Vue.component("dialog-cetak", () => import("@/components/cetak-mutasi.vue"));
+Vue.component("dialog-option-mutasi", () => import("@/components/dialog_mutasi.vue"));
 Vue.component("form-deposito", () => import("@/components/form_deposito.vue"));
 Vue.component("form-jenistransaksi", () =>
   import("@/components/form_jenistransaksi.vue")

@@ -210,22 +210,22 @@
                                             <h6 class="p-2 mb-0">Sisa Saldo</h6>
                                           </td>
                                         </tr>
-                                        <tr v-for="(mutasi,index) in itemsMutasiPembiayaan" :key="index">
+                                        <tr v-for="(detailrekening,index) in itemsDetailRekeningPembiayaan" :key="index">
                                           <td>
-                                            <label>{{mutasi.tgl_transaksi}}</label>
+                                            <label>{{detailrekening.tgl_transaksi}}</label>
                                           </td>
                                           <td>
-                                            <p class="itemtext digits">{{getType(mutasi.type)}}</p>
+                                            <p class="itemtext digits">{{getType(detailrekening.type)}}</p>
                                           </td>
                                           <td>
-                                            <p class="itemtext digits">{{getJenisTransaksi(mutasi.jenis_transaksi)}}</p>
+                                            <p class="itemtext digits">{{getJenisTransaksi(detailrekening.jenis_transaksi)}}</p>
                                           </td>
 
                                           <td>
-                                            <p class="itemtext digits">Rp {{formatCurrency(mutasi.value) }}</p>
+                                            <p class="itemtext digits">Rp {{formatCurrency(detailrekening.value) }}</p>
                                           </td>
                                           <td>
-                                            <p class="itemtext digits">Rp {{formatCurrency(mutasi.saldo) }}</p>
+                                            <p class="itemtext digits">Rp {{formatCurrency(detailrekening.saldo) }}</p>
                                           </td>
                                         </tr>
 
@@ -269,7 +269,7 @@ import {
   ACTION_TRANSACTION,
   TABUNGAN_TRANSFER,
   PEMBIAYAAN_SETOR,
-  PEMBIAYAAN_TARIK, ACTION_MUTASI, MUTASI_PEMBIAYAAN, MUTATION_ADD_MUTASI, MUTATION_DESTROY_MUTASI
+  PEMBIAYAAN_TARIK, ACTION_GET_DETAIL_REKENING, DETAIL_REKENING_PEMBIAYAAN, MUTATION_ADD_MUTASI, MUTATION_DESTROY_MUTASI
 } from "@/store"
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"
@@ -319,9 +319,9 @@ export default {
   },
   methods: {
     getMutasiByAccount(no_account){
-      this.$store.commit(MUTATION_DESTROY_MUTASI,{type:MUTASI_PEMBIAYAAN})
+      this.$store.commit(MUTATION_DESTROY_MUTASI,{type:DETAIL_REKENING_PEMBIAYAAN})
       const no_rekening = this.encryptPlain(no_account)
-      this.$store.dispatch(ACTION_MUTASI,{type:MUTASI_PEMBIAYAAN,no_rekening:no_rekening})
+      this.$store.dispatch(ACTION_GET_DETAIL_REKENING,{type:DETAIL_REKENING_PEMBIAYAAN,no_rekening:no_rekening})
           .then(()=>{
             if(this.isLoading){
               this.stopLoading()
@@ -342,8 +342,8 @@ export default {
             this.overlay = false
             if(success){
               this.form = {}
-              data.map(mutasi => {
-                this.$store.commit(MUTATION_ADD_MUTASI,{type: MUTASI_PEMBIAYAAN, mutasi: mutasi})
+              data.map(detailrekening => {
+                this.$store.commit(MUTATION_ADD_MUTASI,{type: DETAIL_REKENING_PEMBIAYAAN, mutasi: mutasi})
 
               })
 
