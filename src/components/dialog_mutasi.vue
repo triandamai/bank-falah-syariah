@@ -14,7 +14,7 @@
 
               <v-col cols="12">
                 <v-text-field
-
+                    v-model="form.total"
                     :label="$t('Total Row')"
                     :rules="rules"
                     type="number"
@@ -23,7 +23,7 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
-
+                    v-model="form.first"
                     :label="$t('First Row')"
                     :rules="rules"
                     type="number"
@@ -32,7 +32,7 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
-
+                    v-model="form.last"
                     :label="$t('End Row')"
                     :rules="rules"
                     type="number"
@@ -69,8 +69,6 @@ export default {
     return {
       max:2,
       form: {
-        nama_akad: "",
-        akad_id: "",
       },
       rules: [
         value => !!value || 'Required.',

@@ -99,6 +99,12 @@ const ApiService = {
     let request = axios.create()
     return request({url:request_url,method:"GET",responseType:"blob"})
   },
+  downloadFileMutasi(url="tes"){
+    let request_url = `https://bfsservice.bakaranproject.com/${url}`
+
+    let request = axios.create()
+    return request({url:request_url,method:"GET",responseType:"blob"})
+  },
 
   /**
    * get wilayah service

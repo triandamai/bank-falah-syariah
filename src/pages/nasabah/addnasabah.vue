@@ -38,7 +38,9 @@
 <script>
 import { ACTION_POST_NASABAH } from "@/store/modules/customer";
 import ApiService from "@/services/api.service";
+import pageMixin from "@/mixin/page.mixin"
 export default {
+  mixins:[pageMixin],
   data:()=>{
     return{
       overlay:false,
@@ -115,27 +117,24 @@ export default {
   },
   methods: {
     onSubmit(data) {
-      this.overlay = true
+     this.startLoading()
       this.$store
         .dispatch(ACTION_POST_NASABAH, data)
-        .then(({success,message,data}) => {
-          console.log(data)
-          console.log(message)
-
+        .then(({success,data}) => {
           if(success){
             ApiService.downloadFile(data.no_rekening)
                 .then((response)=>{
-                  this.overlay = false
+                 this.stopLoading()
                   this.nasabah = data
                      this.namaFile = `${this.nasabah.nama_lengkap}-${this.nasabah.no_rekening}.pdf`
                   const pdfCacheUrl = window.URL.createObjectURL(new Blob([response.data]));
                   this.pdf = pdfCacheUrl
                   this.form = true
             }).catch(()=>{
-              this.overlay = false
+              this.stopLoading()
             });
           }else {
-            this.overlay = false
+            this.stopLoading()
           }
 
         });

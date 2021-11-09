@@ -1,11 +1,11 @@
 <template>
   <div>
-    <Breadcrumbs title="Nasabah" />
+    <Breadcrumbs title="Laporan" />
     <!-- Container-fluid starts-->
-    <div class="container">
+    <div class="container-fluid">
       <div class="card">
             <div class="card-header">
-              <h5>Data Nasabah</h5>
+              <h5>Laporan Pembiayaan</h5>
               <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               >
@@ -89,7 +89,7 @@
                  </v-row>
                 </v-col>
                 <v-col cols="12" sm="12" md="12" lg="12">
-                  <v-row>
+                  <v-row class="ml-3">
 
                       <v-btn
                           @click="getMutasi"
@@ -116,7 +116,7 @@
               </v-row>
             </div>
       </div>
-      <div class="card">
+      <div class="card" v-show="shouldShowResult">
         <div class="card-body">
           <div class="invoice">
             <div class="row">
@@ -144,7 +144,7 @@
                 <div class="text-md-right">
                   <h3>
                     Nama
-                    <span class="digits counter">#0000000</span>
+                    <span class="digits counter">#{{selectedRekening}}</span>
                   </h3>
                   <p>
                     {{getMonthString()}}
@@ -201,7 +201,18 @@
 
       </div>
     </div>
-    <dialog-option-mutasi :show="optionMutasi" @close="optionMutasi = false"/>
+    <dialog-option-mutasi
+        :show="optionMutasi"
+        @close="optionMutasi = false"
+        @submit="printMutasi"
+    />
+    <dialog-cetak
+        :show="showCetak"
+        :body="pdfFile"
+        :name="pdfName"
+        @close="showCetak = false"
+        @submit="downloadFile"
+    />
     <!-- Container-fluid Ends-->
   </div>
 </template>
@@ -210,6 +221,8 @@
 import pageMixin from "@/mixin/page.mixin"
 import {mapState} from "vuex";
 import {ACTION_GET_DATA_REKENING, ACTION_GET_MUTASI, RPEMBIAYAAN} from "@/store";
+import ApiService from "@/services/api.service";
+
 export default {
   mixins:[pageMixin],
   data: () => {
@@ -219,6 +232,10 @@ export default {
       optionMutasi:false,
       selectedRekening:null,
       shouldShowButtonCetak:false,
+      shouldShowResult:false,
+      pdfName:"",
+      pdfFile:null,
+      showCetak:false
     };
   },
   created() {
@@ -241,14 +258,39 @@ export default {
         no_rekening:this.selectedRekening,
         start:start,
         end:end
-      }
-      ).then(()=>{
+      }).then(()=>{
         this.shouldShowButtonCetak = true
+        this.shouldShowResult = true
         if(this.lazyLoad){
           this.stopLoading()
-          console.log(this.itemsMutasiPembiayaan)
         }
       })
+    },
+    printMutasi(data){
+      this.optionMutasi=false
+      this.startLoading()
+      let start = this.dates[0]
+      let end = this.dates[this.dates.length -1]
+      ApiService.downloadFileMutasi(`rekening_pembiayaan/cetak/${this.selectedRekening}/buku_tabungan?start_date=${start}&end_date=${end}&total_first_row=${data.total}&first_row=${data.first}&end_row=${data.last}`)
+      .then((response)=>{
+        this.pdfName = `${this.selectedRekening}-${this.dates.join('-')}.pdf`
+        this.pdfFile = window.URL.createObjectURL(new Blob([response.data]))
+        this.stopLoading()
+        this.showCetak = true
+      }).catch(()=>{
+        this.stopLoading()
+      })
+    },
+    downloadFile(){
+      if(this.pdf) {
+        const createDownloadElement = document.createElement("a")
+        createDownloadElement.href = this.pdfFile
+        createDownloadElement.setAttribute("download",`${this.selectedRekening}-${this.dates.join('-')}.pdf`)
+        document.body.appendChild(createDownloadElement)
+        createDownloadElement.click()
+      }else {
+        //file doesn't exist
+      }
     }
   },
   computed: {

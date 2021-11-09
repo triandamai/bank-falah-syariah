@@ -117,11 +117,11 @@ export default {
       return "Tidak diketahui"
     },
     getRouteMutasi(detailrekening){
-      if(mutasi.tipe_angsuran === ""){
+      if(detailrekening.tipe_angsuran === ""){
         return {
-          path: `/main/mutasi/pembiayaan`,
+          path: `/main/detailrekening/pembiayaan`,
           query:{
-            r:this.encryptPlain(mutasi.no_rekening),
+            r:this.encryptPlain(detailrekening.no_rekening),
             q:Date.now(),
             s:'f6ce8d9efde6'
           }
@@ -129,9 +129,9 @@ export default {
       }
 
       return {
-        path: `/main/mutasi/simpanan`,
+        path: `/main/detailrekening/simpanan`,
         query:{
-          r:this.encryptPlain(mutasi.no_rekening),
+          r:this.encryptPlain(detailrekening.no_rekening),
           q:Date.now(),
           s:'f6ce8d9efde6'
         }
