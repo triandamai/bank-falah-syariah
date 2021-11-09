@@ -36,7 +36,6 @@
       "icon": "monitor",
       "type": "sub",
       "badgeType": "primary",
-      "badgeValue": "4",
       "active": false,
       "path": "Master Data",
       "privileges": {
@@ -82,16 +81,23 @@
       "icon": "printer",
       "type": "sub",
       "badgeType": "primary",
-      "badgeValue": "1",
       "active": false,
       "path": "Report",
       "privileges": {
-        "roles": ["admin", "bp_root","siswa"]
+        "roles": ["admin", "bp_root"]
       },
       "children": [
         {
-          "path": "/main/laporan-teller",
-          "title": "Report Teller",
+          "path": "/main/laporan-simpanan",
+          "title": "Laporan Simpanan",
+          "type": "link",
+          "privileges": {
+            "roles": ["admin", "bp_root","siswa","teller"]
+          }
+        },
+        {
+          "path": "/main/laporan-pembiayaan",
+          "title": "Report Pembiayaan",
           "type": "link",
           "privileges": {
             "roles": ["admin", "bp_root","siswa","teller"]
@@ -104,7 +110,6 @@
       "icon": "file-minus",
       "type": "sub",
       "badgeType": "primary",
-      "badgeValue": "2",
       "active": false,
       "path": "Master Data",
       "privileges": {
@@ -143,7 +148,6 @@
       "icon": "settings",
       "type": "sub",
       "badgeType": "primary",
-      "badgeValue": "2",
       "active": false,
       "path": "System",
       "privileges": {

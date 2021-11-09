@@ -8,6 +8,7 @@ import ApiServices from "@/services/api.service";
 
 import {Promise} from "es6-promise";
 
+
 const state = {
   searchData: [],
   togglesidebar: true,

@@ -97,9 +97,19 @@ const routes = [
        *
        */
       {
-        path: "laporan-teller",
-        name: "laporan-teller",
-        component: () => import("@/pages/laporan-teller/laporan-teller.vue"),
+        path: "laporan-simpanan",
+        name: "laporan-simpanan",
+        component: () => import("@/pages/laporan/laporan-simpanan.vue"),
+        meta: {
+          title: "Laporan | Bank Falah Syariah",
+          requireAuth: true,
+          roles: ["admin","bp_root","siswa","teller"]
+        },
+      },
+      {
+        path: "laporan-pembiayaan",
+        name: "laporan-pembiayaan",
+        component: () => import("@/pages/laporan/laporan-pembiayaan.vue"),
         meta: {
           title: "Laporan | Bank Falah Syariah",
           requireAuth: true,

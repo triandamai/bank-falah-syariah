@@ -97,7 +97,7 @@
               :class="'badge badge-' + menuItem.badgeType"
               v-if="menuItem.badgeType"
               v-show="checkPrivileges(menuItem.privileges)"
-              >{{ menuItem.badgeValue }}</label
+              >{{ menuItem.children.length }}</label
             >
             <a
               href="javascript:void(0)"
@@ -215,7 +215,7 @@
                       'badge badge-' + childrenItem.badgeType + ' pull-right'
                     "
                     v-if="childrenItem.badgeType"
-                    >{{ childrenItem.badgeValue }}</label
+                    >{{ childrenItem.children.length }}</label
                   >
                   <i
                     class="fa fa-angle-right pull-right mt-1"
@@ -237,7 +237,7 @@
                       'badge badge-' + childrenItem.badgeType + ' pull-right'
                     "
                     v-if="childrenItem.badgeType"
-                    >{{ childrenItem.badgeValue }}</label
+                    >{{ childrenItem.children.length }}</label
                   >
                   <i
                     class="fa fa-angle-right pull-right mt-1"
@@ -257,8 +257,7 @@
                       'badge badge-' + childrenItem.badgeType + ' pull-right'
                     "
                     v-if="childrenItem.badgeType"
-                    >{{ childrenItem.badgeValue }}</label
-                  >
+                    >{{ childrenItem.children.length }}</label>
                   <i
                     class="fa fa-angle-right pull-right mt-1"
                     v-if="childrenItem.children"
@@ -279,7 +278,7 @@
                       'badge badge-' + childrenItem.badgeType + ' pull-right'
                     "
                     v-if="childrenItem.badgeType"
-                    >{{ childrenItem.badgeValue }}</label
+                    >{{ childrenItem.children.length }}</label
                   >
                   <i
                     class="fa fa-angle-right pull-right mt-1"
@@ -300,7 +299,7 @@
                       'badge badge-' + childrenItem.badgeType + ' pull-right'
                     "
                       v-if="childrenItem.badgeType"
-                  >{{ childrenItem.badgeValue }}</label
+                  >{{ childrenItem.children.length }}</label
                   >
                   <i
                       class="fa fa-angle-right pull-right mt-1"
@@ -332,7 +331,7 @@
                             ' pull-right'
                         "
                         v-if="childrenSubItem.badgeType"
-                        >{{ childrenSubItem.badgeValue }}</label
+                        >{{ childrenSubItem.children.length }}</label
                       >
                       <i
                         class="fa fa-angle-right pull-right"
@@ -354,7 +353,7 @@
                             ' pull-right'
                         "
                         v-if="childrenSubItem.badgeType"
-                        >{{ childrenSubItem.badgeValue }}</label
+                        >{{ childrenSubItem.children.length }}</label
                       >
                       <i
                         class="fa fa-angle-right pull-right"
@@ -377,7 +376,7 @@
                             ' pull-right'
                         "
                         v-if="childrenSubItem.badgeType"
-                        >{{ childrenSubItem.badgeValue }}</label
+                        >{{ childrenSubItem.children.length }}</label
                       >
                       <i
                         class="fa fa-angle-right pull-right"
@@ -399,7 +398,7 @@
                             ' pull-right'
                         "
                         v-if="childrenSubItem.badgeType"
-                        >{{ childrenSubItem.badgeValue }}</label
+                        >{{ childrenSubItem.children.length }}</label
                       >
                       <i
                         class="fa fa-angle-right pull-right"
