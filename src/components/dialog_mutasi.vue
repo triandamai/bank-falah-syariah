@@ -15,7 +15,7 @@
               <v-col cols="12">
                 <v-text-field
                     v-model="form.total"
-                    :label="$t('Total Row')"
+                    :label="$t('Total Baris Pertama')"
                     :rules="rules"
                     type="number"
                     required
@@ -24,7 +24,7 @@
               <v-col cols="12">
                 <v-text-field
                     v-model="form.first"
-                    :label="$t('First Row')"
+                    :label="$t('Baris Mulai')"
                     :rules="rules"
                     type="number"
                     required
@@ -33,7 +33,7 @@
               <v-col cols="12">
                 <v-text-field
                     v-model="form.last"
-                    :label="$t('End Row')"
+                    :label="$t('Jumlah Baris')"
                     :rules="rules"
                     type="number"
                     required

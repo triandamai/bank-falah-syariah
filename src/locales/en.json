@@ -162,6 +162,9 @@
   "Laporan Simpanan": "Laporan Simpanan",
   "Report Pembiayaan": "Laporan Pembiayaan",
   "Cari": "Search",
-  "Cetak": "Print"
+  "Cetak": "Print",
+  "Total Baris Pertama": "Total First Rows",
+  "Baris Mulai": "Start From Row",
+  "Jumlah Baris": "Total Rows"
 
 }
