@@ -212,7 +212,7 @@
                                         <td class="Rate">
                                           <h6 class="p-2 mb-0">Jenis Transaksi</h6>
                                         </td>
-                                        <td class="subtotal">
+                                        <td class="subtotal" v-if="isTransfer">
                                           <h6 class="p-2 mb-0">Description</h6>
                                         </td>
                                         <td class="subtotal">
@@ -336,6 +336,7 @@ export default {
       this.form.nasabah_id = newVal.nasabah_id
       this.nasabahName = newVal.nasabah.nama_lengkap
       this.form.nomor_rekening = newVal.no_rekening
+  
       this.getMutasiByAccount(newVal.no_rekening)
     },
     transactionsSelected:function(newVal){
@@ -369,9 +370,10 @@ export default {
           .then(({success,data})=>{
             this.overlay = false
             if(success){
+              this.transactionsSelected = ""
               this.form = {}
               data.map(detailrekening => {
-                this.$store.commit(MUTATION_ADD_MUTASI,{type: DETAIL_REKENING_SIMPANAN, mutasi: mutasi})
+                this.$store.commit(MUTATION_ADD_MUTASI,{type: DETAIL_REKENING_SIMPANAN, detail: detailrekening})
               })
             }
           })

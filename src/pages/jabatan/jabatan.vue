@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs title="Simpanan" />
+    <Breadcrumbs title="Jabatan" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">
@@ -8,9 +8,9 @@
           <div class="card">
             <div class="card-header">
               <h5>Master Data Jabatan</h5>
-              <span
+              <!-- <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
-              >
+              > -->
             </div>
             <div class="card-body">
               <data-table

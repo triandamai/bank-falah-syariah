@@ -8,9 +8,9 @@
           <div class="card">
             <div class="card-header">
               <h5>Aplikasi</h5>
-              <span
+              <!-- <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
-              >
+              > -->
             </div>
             <div class="card-body">
               <form class="form theme-form" @submit.prevent="submit">

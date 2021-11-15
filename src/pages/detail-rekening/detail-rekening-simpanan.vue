@@ -16,7 +16,6 @@
                       <img
                           class="bg-img"
                           :src="require('../../assets/images/dashboard/folder1.png')"
-
                           alt=""
                       />
                     </div>

@@ -67,9 +67,9 @@
                         <div class="card">
                           <div class="card-header">
                             <h5>Transaksi</h5>
-                            <span
+                            <!-- <span
                             >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
-                            >
+                            > -->
                           </div>
                           <div class="card-body">
                             <v-row>
@@ -269,7 +269,11 @@ import {
   ACTION_TRANSACTION,
   TABUNGAN_TRANSFER,
   PEMBIAYAAN_SETOR,
-  PEMBIAYAAN_TARIK, ACTION_GET_DETAIL_REKENING, DETAIL_REKENING_PEMBIAYAAN, MUTATION_ADD_MUTASI, MUTATION_DESTROY_MUTASI
+  PEMBIAYAAN_TARIK, 
+  ACTION_GET_DETAIL_REKENING,
+   DETAIL_REKENING_PEMBIAYAAN, 
+   MUTATION_ADD_MUTASI, 
+   MUTATION_DESTROY_MUTASI
 } from "@/store"
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"
@@ -341,9 +345,11 @@ export default {
           .then(({success,data})=>{
             this.overlay = false
             if(success){
+              this.transactionsSelected = ""
               this.form = {}
               data.map(detailrekening => {
-                this.$store.commit(MUTATION_ADD_MUTASI,{type: DETAIL_REKENING_PEMBIAYAAN, mutasi: mutasi})
+              
+                this.$store.commit(MUTATION_ADD_MUTASI,{type: DETAIL_REKENING_PEMBIAYAAN, detail: detailrekening})
 
               })
 

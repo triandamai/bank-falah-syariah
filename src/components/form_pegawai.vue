@@ -7,7 +7,7 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar color="primary" dark>Form User</v-toolbar>
+        <v-toolbar color="primary" dark>Form Pegawai</v-toolbar>
         <v-card-text>
           <v-container>
             <v-row>

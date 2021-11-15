@@ -7,6 +7,7 @@
 import {mapState} from "vuex";
 import {formatCurrency} from "@/utils/utils";
 import {decrypt, encrypt} from "@/services/jwt.service"
+import { MUTATION_DESTROY_MUTASI,DETAIL_REKENING_SIMPANAN,DETAIL_REKENING_PEMBIAYAAN} from "@/store";
 
 export default {
     props: ["show", "body","edit","name"],
@@ -268,7 +269,11 @@ export default {
             return `${date.toLocaleString("id-ID")}`
         },
         hidden(type) {
+            this.form = {}
+            this.$store.commit(MUTATION_DESTROY_MUTASI,{type:DETAIL_REKENING_PEMBIAYAAN})
+            this.$store.commit(MUTATION_DESTROY_MUTASI,{type:DETAIL_REKENING_SIMPANAN})
             this.$store.commit("hideForm", type);
+
         },
         close(val = true) {
             this.$emit('close', val)

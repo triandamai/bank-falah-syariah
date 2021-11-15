@@ -288,7 +288,9 @@ const mutations = {
             const exist = state
                 .detailrekening
                 .simpanan
-                .some((simpanan) => simpanan.id === detail.id);
+                .some((simpanan) => simpanan.id === detail.id
+                
+                );
             if (exist) {
                 const index = state.detailrekening.simpanan
                     .map((simpanan) => simpanan.id)
@@ -303,8 +305,11 @@ const mutations = {
     [DESTROY_MUTASI](state, {type}) {
         if (type === DETAIL_REKENING_PEMBIAYAAN) {
             state.mutasi.pembiayaan = []
+            state.detailrekening.pembiayaan =[]
         } else {
             state.mutasi.simpanan = []
+            state.detailrekening.simpanan=[]
+
         }
     },
     [INCREMENT_PAGE](state, {type}) {
