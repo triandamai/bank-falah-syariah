@@ -231,7 +231,7 @@ export default {
             lazyLoad:(state)=> state.lazyLoad,
             isOnline:(state)=>state.isOnline,
             formShowPembiayaan:(state) => state.formtransaksipembiayaan,
-            formShowSimpanan:(state) => state.formtransaksisimpanan,
+            formShowTabungan:(state) => state.formtransaksitabungan,
             isDataTableLoading:(state)=>  state.loadingtable,
 
 

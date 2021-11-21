@@ -51,7 +51,7 @@ export const store = new Vuex.Store({
       if(type === "PEMBIAYAAN"){
         state.formtransaksipembiayaan = false
       }else {
-        state.formtransaksisimpanan = false
+        state.formtransaksitabungan = false
       }
 
     },
@@ -62,9 +62,9 @@ export const store = new Vuex.Store({
     showForm(state,type) {
       if(type === "PEMBIAYAAN"){
         state.formtransaksipembiayaan = true
-        state.formtransaksisimpanan = false
+        state.formtransaksitabungan = false
       }else {
-        state.formtransaksisimpanan = true
+        state.formtransaksitabungan = true
         state.formtransaksipembiayaan = false
       }
 

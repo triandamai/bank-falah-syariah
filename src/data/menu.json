@@ -59,8 +59,8 @@
           }
         },
         {
-          "path": "/main/simpanan",
-          "title": "Simpanan",
+          "path": "/main/tabungan",
+          "title": "Tabungan",
           "type": "link",
           "privileges": {
             "roles": ["admin", "bp_root","siswa","cs","teller"]
@@ -125,8 +125,8 @@
       },
       "children": [
         {
-          "path": "SIMPANAN",
-          "title": "Simpanan",
+          "path": "TABUNGAN",
+          "title": "Tabungan",
           "type": "button",
           "privileges": {
             "roles": ["admin", "bp_root","siswa","cs","teller"]

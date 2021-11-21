@@ -39,7 +39,7 @@
         <Footer />
       </div>
       <form-transaksi-pembiayaan :show="formShowPembiayaan"/>
-      <form-transaksi-simpanan :show="formShowSimpanan"/>
+      <form-transaksi-tabungan :show="formShowTabungan"/>
 <!-- TODO:show option for costumizer -->
 <!--      <Customizer />-->
       <v-snackbar

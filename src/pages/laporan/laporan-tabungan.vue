@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="card">
         <div class="card-header">
-          <h5>{{$t('Laporan Simpanan')}}</h5>
+          <h5>{{$t('Laporan Tabungan')}}</h5>
           <!-- <span
           >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
           > -->
@@ -220,7 +220,7 @@
 <script>
 import pageMixin from "@/mixin/page.mixin"
 import {mapState} from "vuex";
-import {ACTION_GET_DATA_REKENING, ACTION_GET_MUTASI, RPEMBIAYAAN, RTABUNGAN} from "@/store";
+import {ACTION_GET_DATA_REKENING, ACTION_GET_MUTASI, RTABUNGAN} from "@/store";
 import ApiService from "@/services/api.service";
 
 export default {

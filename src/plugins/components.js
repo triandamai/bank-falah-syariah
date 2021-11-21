@@ -27,7 +27,7 @@ Vue.component("form-import-nasabah", () =>
 );
 
 Vue.component("form-import-siswa",()=> import("@/components/form_upload_siswa_xlsx.vue"))
-Vue.component("form-simpanan", () => import("@/components/form_simpanan.vue"));
+Vue.component("form-simpanan", () => import("@/components/form_tabungan.vue"));
 Vue.component("form-user", () => import("@/components/form_user.vue"));
 Vue.component("form-jabatan", () => import("@/components/form_jabatan.vue"));
 Vue.component("form-pegawai", () => import("@/components/form_pegawai.vue"));
@@ -36,7 +36,7 @@ Vue.component("apexchart", () => import("vue-apexcharts"));
 Vue.component("PxCard", () => import("@/components/Pxcard.vue"));
 
 Vue.component("form-transaksi-pembiayaan",()=> import("@/components/form_transaksi_pembiayaan.vue"))
-Vue.component("form-transaksi-simpanan",()=> import("@/components/form_transaksi_simpanan"))
+Vue.component("form-transaksi-tabungan",()=> import("@/components/form_transaksi_tabungan.vue"))
 
 
 export default {};

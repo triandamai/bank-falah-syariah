@@ -7,7 +7,7 @@
         <div class="col-md-12">
           <div class="card">
             <div class="card-header">
-              <h5>{{$t('Master data Simpanan')}}</h5>
+              <h5>{{$t('Master data Tabungan')}}</h5>
               <!-- <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               > -->
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import header from "@/data/headersimpanan.json";
+import header from "@/data/headertabungan.json";
 import {
   ACTION_DELETE_DATA_REKENING,
   ACTION_GET_DATA_REKENING,
@@ -114,7 +114,7 @@ export default {
     },
     onDelete(data) {
       this.$swal({
-        text: this.$t("Delete Message",{ who: `Rekening Simpanan ${data.nasabah.nama_lengkap}` }),
+        text: this.$t("Delete Message",{ who: `Rekening Tabungan ${data.nasabah.nama_lengkap}` }),
         showCancelButton: true,
         confirmButtonText: "Oke",
         confirmButtonColor: "#4466f2",

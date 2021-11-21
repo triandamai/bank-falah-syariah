@@ -9,10 +9,10 @@
 
       <v-card class="grey lighten-3">
         <v-toolbar color="orange" dark flat>
-          <v-btn dark icon @click="hidden('SIMPANAN')">
+          <v-btn dark icon @click="hidden('TABUNGAN')">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>{{$t('Transaksi Simpanan')}}</v-toolbar-title>
+          <v-toolbar-title>{{$t('Transaksi Tabungan')}}</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-container >
@@ -286,7 +286,7 @@ import {
   TABUNGAN_SETOR,
   TABUNGAN_DEPOSITO,
   ACTION_GET_DETAIL_REKENING,
-  DETAIL_REKENING_SIMPANAN, MUTATION_ADD_MUTASI, MUTATION_DESTROY_MUTASI, DETAIL_REKENING_PEMBIAYAAN
+  DETAIL_REKENING_SIMPANAN, MUTATION_ADD_MUTASI, MUTATION_DESTROY_MUTASI
 } from "@/store"
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"
