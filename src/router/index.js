@@ -97,9 +97,9 @@ const routes = [
        *
        */
       {
-        path: "laporan-simpanan",
-        name: "laporan-simpanan",
-        component: () => import("@/pages/laporan/laporan-simpanan.vue"),
+        path: "laporan-tabungan",
+        name: "laporan-tabungan",
+        component: () => import("@/pages/laporan/laporan-tabungan.vue"),
         meta: {
           title: "Laporan | Bank Falah Syariah",
           requireAuth: true,

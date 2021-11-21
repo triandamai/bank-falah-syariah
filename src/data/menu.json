@@ -88,8 +88,8 @@
       },
       "children": [
         {
-          "path": "/main/laporan-simpanan",
-          "title": "Laporan Simpanan",
+          "path": "/main/laporan-tabungan",
+          "title": "Laporan Tabungan",
           "type": "link",
           "privileges": {
             "roles": ["admin", "bp_root","siswa","teller"]
