@@ -23,7 +23,7 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     formtransaksipembiayaan:false,
-    formtransaksisimpanan:false,
+    formtransaksitabungan:false,
     loadingtable:true,
     isOnline:true,
     notifConnection:false,

@@ -25,28 +25,46 @@
                     <v-divider class="my-2"></v-divider>
                     <v-autocomplete
                         v-model="selectedRekening"
-                        label="Nasabah/Rekening *"
-                        :items="itemRekening"
+                        :items="rekening"
+                        :loading="isLoading"
+                        :search-input.sync="search"
+                        chips
+                        hide-details
+                        hide-selected
                         return-object
-                        outlined
-                        required
+                        label="Cari Nasabah atau No rekening..."
                         dense
-                        small-chips
+                        outlined
                     >
-                      <template v-slot:item="{ item }">
-                        <v-list-item-content>
+                      <template v-slot:no-data>
+                        <v-list-item>
                           <v-list-item-title>
-                            {{
-                              item.no_rekening + " - " + item.nasabah.nama_lengkap
-                            }}</v-list-item-title
-                          >
-                        </v-list-item-content>
-                      </template>
-                      <template v-slot:selection="{ item }">
-                        <v-list-item-content>
-                          <v-list-item-title>
-                            {{ item.no_rekening + " - " + item.nasabah.nama_lengkap }}
+                            Cari Nasabah atau
+                            <strong>No Rekening</strong>
                           </v-list-item-title>
+                        </v-list-item>
+                      </template>
+                      <template v-slot:selection="{ attr, on, item, selected }">
+                        <v-chip
+                            v-bind="attr"
+                            :input-value="selected"
+                            color="blue-grey"
+                            class="white--text"
+                            v-on="on"
+                        >
+                          <span v-text="item.nasabah.nama_lengkap"></span>
+                        </v-chip>
+                      </template>
+                      <template v-slot:item="{ item }">
+                        <v-list-item-avatar
+                            color="indigo"
+                            class="text-h5 font-weight-light white--text"
+                        >
+                          {{ item.nasabah.nama_lengkap.charAt(0) }}
+                        </v-list-item-avatar>
+                        <v-list-item-content>
+                          <v-list-item-title v-text="item.nasabah.nama_lengkap"></v-list-item-title>
+                          <v-list-item-subtitle v-text="item.no_rekening"></v-list-item-subtitle>
                         </v-list-item-content>
                       </template>
                     </v-autocomplete>
@@ -279,7 +297,6 @@
 </template>
 <script>
 import {
-  ACTION_GET_REKENING_TRANSACTION,
   ACTION_TRANSACTION,
   TABUNGAN_TARIK,
   TABUNGAN_TRANSFER,
@@ -291,11 +308,15 @@ import {
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"
 import componentMixin from "@/mixin/component.mixin"
+import ApiService from "@/services/api.service";
 
 export default {
   mixins:[componentMixin],
   data: () => {
     return {
+      isLoading: false,
+      search: null,
+      rekening:[],
       overlay:false,
       transactionsSelected:"",
       selectedRekening:{},
@@ -332,21 +353,40 @@ export default {
     };
   },
   watch:{
+    search (val) {
+      // Items have already been loaded
+      if (this.rekening.length > 0) return
+
+      this.isLoading = true
+
+      // Lazily load input items
+      ApiService.get(`rekening_simpanan?cari=${val}`)
+          .then(({success,data,message})=>{
+        if(success){
+          this.rekening = data
+         console.log(data)
+         console.log(message)
+        }
+      })
+    },
     selectedRekening:function (newVal){
-      if(newVal.no_rekening){
-        this.form.nasabah_id = newVal.nasabah_id
-        this.nasabahName = newVal.nasabah.nama_lengkap
-        this.form.nomor_rekening = newVal.no_rekening
-        this.getMutasiByAccount(newVal.no_rekening)
+      if(newVal) {
+        if (newVal.no_rekening) {
+          this.form.nasabah_id = newVal.nasabah_id
+          this.nasabahName = newVal.nasabah.nama_lengkap
+          this.form.nomor_rekening = newVal.no_rekening
+          this.getMutasiByAccount(newVal.no_rekening)
+        }
       }
     },
     transactionsSelected:function(newVal){
-      this.isTransfer = newVal === TABUNGAN_TRANSFER;
+      if(newVal) {
+        this.isTransfer = newVal === TABUNGAN_TRANSFER;
+      }
     }
   },
   mounted() {
     this.selectedRekening={}
-    this.getRekeningByType()
   },
   methods: {
     getMutasiByAccount(no_account){
@@ -358,11 +398,6 @@ export default {
               this.stopLoading()
             }
           })
-    },
-    getRekeningByType(){
-      this.$store.dispatch(ACTION_GET_REKENING_TRANSACTION,TABUNGAN_TRANSFER).then(()=>{
-
-      })
     },
     onSubmit(){
       this.overlay = true
