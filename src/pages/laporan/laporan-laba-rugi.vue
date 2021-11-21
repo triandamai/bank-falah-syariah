@@ -220,7 +220,7 @@
 <script>
 import pageMixin from "@/mixin/page.mixin"
 import {mapState} from "vuex";
-import {ACTION_GET_DATA_REKENING, ACTION_GET_MUTASI, RPEMBIAYAAN, RTABUNGAN} from "@/store";
+import {ACTION_GET_DATA_REKENING, ACTION_GET_MUTASI, RTABUNGAN} from "@/store";
 import ApiService from "@/services/api.service";
 
 export default {
