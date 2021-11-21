@@ -117,6 +117,16 @@ const routes = [
         },
       },
       {
+        path: "laporan-kas",
+        name: "laporan-kas",
+        component: () => import("@/pages/laporan/laporan-kas.vue"),
+        meta: {
+          title: "Laporan | Bank Falah Syariah",
+          requireAuth: true,
+          roles: ["admin","bp_root","siswa","teller"]
+        },
+      },
+      {
         path: "jenistransaksi",
         name: "jenistransaksi",
         component: () => import("@/pages/jenistransaksi/jenistransaksi.vue"),

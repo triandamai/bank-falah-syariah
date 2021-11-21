@@ -165,6 +165,10 @@
   "Cetak": "Print",
   "Total Baris Pertama": "Total First Rows",
   "Baris Mulai": "Start From Row",
-  "Jumlah Baris": "Total Rows"
+  "Jumlah Baris": "Total Rows",
+  "Report Kas" : "Report Kas",
+  "Laporan": "Report",
+  "Type": "Type",
+  "Pilih Tanggal": "Choose Date"
 
 }

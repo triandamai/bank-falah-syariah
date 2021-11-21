@@ -283,6 +283,9 @@ export default {
         submit() {
             this.$emit("submit", this.form);
         },
+        submitWithValue(value) {
+            this.$emit("submit", value);
+        },
         unAuthorize() {
 
         },

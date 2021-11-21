@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="card">
             <div class="card-header">
-              <h5>Laporan Pembiayaan</h5>
+              <h5>{{$t('Report Simpanan')}}</h5>
               <!-- <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               > -->
@@ -282,7 +282,7 @@ export default {
       })
     },
     downloadFile(){
-      if(this.pdf) {
+      if(this.pdfFile) {
         const createDownloadElement = document.createElement("a")
         createDownloadElement.href = this.pdfFile
         createDownloadElement.setAttribute("download",`${this.selectedRekening}-${this.dates.join('-')}.pdf`)

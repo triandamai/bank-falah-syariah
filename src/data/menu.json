@@ -102,6 +102,14 @@
           "privileges": {
             "roles": ["admin", "bp_root","siswa","teller"]
           }
+        },
+        {
+          "path": "/main/laporan-kas",
+          "title": "Report Kas",
+          "type": "link",
+          "privileges": {
+            "roles": ["admin", "bp_root","siswa","teller"]
+          }
         }
       ]
     },
