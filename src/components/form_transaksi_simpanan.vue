@@ -67,9 +67,9 @@
                       <div class="card">
                         <div class="card-header">
                           <h5>Transaksi</h5>
-                          <span
+                          <!-- <span
                           >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
-                          >
+                          > -->
                         </div>
                         <div class="card-body">
                           <v-row>
@@ -333,17 +333,19 @@ export default {
   },
   watch:{
     selectedRekening:function (newVal){
-      this.form.nasabah_id = newVal.nasabah_id
-      this.nasabahName = newVal.nasabah.nama_lengkap
-      this.form.nomor_rekening = newVal.no_rekening
-  
-      this.getMutasiByAccount(newVal.no_rekening)
+      if(newVal.no_rekening){
+        this.form.nasabah_id = newVal.nasabah_id
+        this.nasabahName = newVal.nasabah.nama_lengkap
+        this.form.nomor_rekening = newVal.no_rekening
+        this.getMutasiByAccount(newVal.no_rekening)
+      }
     },
     transactionsSelected:function(newVal){
       this.isTransfer = newVal === TABUNGAN_TRANSFER;
     }
   },
   mounted() {
+    this.selectedRekening={}
     this.getRekeningByType()
   },
   methods: {

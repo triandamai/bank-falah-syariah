@@ -16,6 +16,7 @@ export default {
      * */
     data: () => {
         return {
+            selectedRekening:{},
             loading: false,
             dialog: false,
             files: null,
@@ -270,6 +271,7 @@ export default {
         },
         hidden(type) {
             this.form = {}
+            this.selectedRekening={}
             this.$store.commit(MUTATION_DESTROY_MUTASI,{type:DETAIL_REKENING_PEMBIAYAAN})
             this.$store.commit(MUTATION_DESTROY_MUTASI,{type:DETAIL_REKENING_SIMPANAN})
             this.$store.commit("hideForm", type);
