@@ -25,8 +25,8 @@ export const extractBankTransaction=(data)=>{
 
                 return {
                     index:index,
-                    first:{nama_transaksi : data['POS'], nominal : firstData, waktu_masuk: getFiltered[0], type_waktu_masuk: 'tahun', detail_transaksi:[], type:data['TYPE']},
-                    second:{nama_transaksi : data['POS'], nominal : secondData, waktu_masuk: getFiltered[1], type_waktu_masuk: 'tahun', detail_transaksi:[], type:data['TYPE']}
+                    first:{nama_transaksi : data['POS'], nominal : firstData, waktu_masuk: getFiltered[0], type_waktu_masuk: 'tahun', detail_transaksi:[], type:data['TYPE'].toUpperCase()},
+                    second:{nama_transaksi : data['POS'], nominal : secondData, waktu_masuk: getFiltered[1], type_waktu_masuk: 'tahun', detail_transaksi:[], type:data['TYPE'].toUpperCase()}
                 }
             }
             return null
