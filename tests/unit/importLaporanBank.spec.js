@@ -1,6 +1,6 @@
 import {arrayData} from './arrayData'
-describe('Populate data laporan bank',()=>{
-    it('should populateData', function () {
+describe('Populate data transaksi bank',()=>{
+    it('should get array from file excel', function () {
         let finalResult =[]
         const removeNoData = arrayData()
             .filter((val)=>val['POS'] !== '-' && val['POS'] !== '' && val['POS'] !== '+')
@@ -9,45 +9,29 @@ describe('Populate data laporan bank',()=>{
             return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
                 !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
         }
-        const getGroupingData =
-            removeNoData
+        const getGroupingData = removeNoData
             .map((data,index)=>{
                 let availableTransaction = data['POS']
-            if(availableTransaction){
-                let keys = Object.keys(data) // its will become ['2020','2019','NO','POS POS']
+                if(availableTransaction){
+                    let keys = Object.keys(data) // its will become ['2020','2019','NO','POS POS']
+                    //getting only ['2020','2019']
+                    const getFiltered = keys.filter((val)=>{
+                        return isNumeric(val)
+                    })
+                    const firstData = data[getFiltered[0]]
+                    const secondData = data[getFiltered[1]]
 
-                //getting only ['2020','2019']
-                const getFiltered = keys.filter((val)=>{
-                    return isNumeric(val)
-                })
-                const firstData = data[getFiltered[0]]
-                const secondData = data[getFiltered[1]]
-
-                return {
-                    index:index,
-                    first:{
-                        nama_transaksi : data['POS'],
-                        nominal : firstData,
-                        waktu_masuk: getFiltered[0],
-                        type_waktu_masuk: 'tahun',
-                        detail_transaksi:[],
-                        type:data['TYPE']
-                    },
-                    second:{
-                        nama_transaksi : data['POS'],
-                        nominal : secondData,
-                        waktu_masuk: getFiltered[1],
-                        type_waktu_masuk: 'tahun',
-                        detail_transaksi:[],
-                        type:data['TYPE']
+                    return {
+                        index:index,
+                        first:{nama_transaksi : data['POS'], nominal : firstData, waktu_masuk: getFiltered[0], type_waktu_masuk: 'tahun', detail_transaksi:[], type:data['TYPE']},
+                        second:{nama_transaksi : data['POS'], nominal : secondData, waktu_masuk: getFiltered[1], type_waktu_masuk: 'tahun', detail_transaksi:[], type:data['TYPE']}
                     }
                 }
-            }
-            return null
-        }).filter((val)=>val!==null)
+                return null
+            }).filter((val)=>val!==null)
 
-        getGroupingData
-            .map((parent,index)=>{
+            getGroupingData
+                .map((parent,index)=>{
                     if(index < getGroupingData.length){
                         let indexNextParentData = getGroupingData[index+1]
 
@@ -65,25 +49,19 @@ describe('Populate data laporan bank',()=>{
                                         nominal: getSubData[parent.second.waktu_masuk]
                                     })
                                 }
-
                             }
-
-
                             return parent
                         }
                         return null
                     }
-
                     return null
-
-            })
-            .filter(val => val !== null)
-            .forEach(data=>{
-                finalResult.push(data.first)
-                finalResult.push(data.second)
-            })
-
-
+                })
+                .filter(val => val !== null)
+                .forEach(data=>{
+                    finalResult.push(data.first)
+                    finalResult.push(data.second)
+                })
+        //final test
         expect(finalResult).toBeInstanceOf(Array)
     });
 
