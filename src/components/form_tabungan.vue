@@ -8,7 +8,7 @@
   >
     <template v-slot:default="dialog">
       <v-card>
-        <v-toolbar elevation="0" color="primary" dark>Form Simpanan</v-toolbar>
+        <v-toolbar elevation="0" color="primary" dark>Form Tabungan</v-toolbar>
         <v-card-text>
           <v-tabs>
             <v-tab>{{$t('Nasabah')}}</v-tab>

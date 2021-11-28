@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs :title="$t('Simpanan')" />
+    <Breadcrumbs :title="$t('Tabungan')" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">

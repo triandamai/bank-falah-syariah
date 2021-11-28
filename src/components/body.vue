@@ -40,6 +40,7 @@
       </div>
       <form-transaksi-pembiayaan :show="formShowPembiayaan"/>
       <form-transaksi-tabungan :show="formShowTabungan"/>
+      <form-transaksi-bank :show="formShowTransaksiBank"/>
 <!-- TODO:show option for costumizer -->
 <!--      <Customizer />-->
       <v-snackbar

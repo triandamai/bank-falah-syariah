@@ -37,6 +37,7 @@ Vue.component("PxCard", () => import("@/components/Pxcard.vue"));
 
 Vue.component("form-transaksi-pembiayaan",()=> import("@/components/form_transaksi_pembiayaan.vue"))
 Vue.component("form-transaksi-tabungan",()=> import("@/components/form_transaksi_tabungan.vue"))
+Vue.component("form-transaksi-bank",()=> import("@/components/form_transaksi_bank.vue"))
 
 
 export default {};

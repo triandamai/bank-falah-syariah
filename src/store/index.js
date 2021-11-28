@@ -24,6 +24,7 @@ export const store = new Vuex.Store({
   state: {
     formtransaksipembiayaan:false,
     formtransaksitabungan:false,
+    formtransaksibank:false,
     loadingtable:true,
     isOnline:true,
     notifConnection:false,
@@ -50,7 +51,9 @@ export const store = new Vuex.Store({
     hideForm(state, type) {
       if(type === "PEMBIAYAAN"){
         state.formtransaksipembiayaan = false
-      }else {
+      }else if(type === "TRANSAKSI_BANK"){
+        state.formtransaksibank = false
+      }else if(type === "TABUNGAN"){
         state.formtransaksitabungan = false
       }
 
@@ -63,9 +66,15 @@ export const store = new Vuex.Store({
       if(type === "PEMBIAYAAN"){
         state.formtransaksipembiayaan = true
         state.formtransaksitabungan = false
-      }else {
+        state.formtransaksibank=false
+      }else if(type === "TRANSAKSI_BANK"){
+        state.formtransaksibank = true
+        state.formtransaksipembiayaan = false
+        state.formtransaksitabungan = false
+      }else if(type === "TABUNGAN"){
         state.formtransaksitabungan = true
         state.formtransaksipembiayaan = false
+        state.formtransaksibank = false
       }
 
     }

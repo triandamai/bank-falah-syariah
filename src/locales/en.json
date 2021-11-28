@@ -50,7 +50,6 @@
   "Transaction Financing": "Transaksi Financing",
   "Simpanan": "Savings",
   "Pembiayaan": "Cost",
-  "Tabungan": "Deposit",
   "Setor": "Payout",
   "Tarik": "Withdraw",
   "Preferences": "Preferences",
@@ -169,6 +168,9 @@
   "Report Kas" : "Report Kas",
   "Laporan": "Report",
   "Type": "Type",
-  "Pilih Tanggal": "Choose Date"
+  "Pilih Tanggal": "Choose Date",
+  "Master data Tabungan": "Master Data Tabungan",
+  "Tabungan": "Deposit",
+  "Transaksi Bank": "Transaction Bank"
 
 }

@@ -103,7 +103,7 @@ export default {
       fileReader.readAsBinaryString(file);
     },
     onSubmit() {
-      console.log(this.datanasabah);
+
       this.$store
         .dispatch(ACTION_IMPORT_USER, { data: this.datasiswa })
         .then(({ success, message }) => {
