@@ -220,268 +220,268 @@ export const arrayData=()=>{
 }
 
 export const expectResult=()=>{
-   return [
-       {
-           "nama_transaksi": "PENDAPATAN OPERASIONAL",
-           "nominal": 36220214,
-           "waktu_masuk": "2019",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [
-               {
-                   "nama_transaksi": "Pendapatan dari Penyaluran Dana",
-                   "nominal": 31403678
-               },
-               {
-                   "nama_transaksi": " Pendapatan dari pihak ketiga bukan bank",
-                   "nominal": 30238140
-               },
-               {
-                   "nama_transaksi": " Pendapatan dari bank lain",
-                   "nominal": 1165538
-               },
-               {
-                   "nama_transaksi": "Pendapatan operasional lainnya",
-                   "nominal": 4816536
-               }
-           ],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "PENDAPATAN OPERASIONAL",
-           "nominal": 31841092,
-           "waktu_masuk": "2020",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [
-               {
-                   "nama_transaksi": "Pendapatan dari Penyaluran Dana",
-                   "nominal": 27580596
-               },
-               {
-                   "nama_transaksi": " Pendapatan dari pihak ketiga bukan bank",
-                   "nominal": 26516624
-               },
-               {
-                   "nama_transaksi": " Pendapatan dari bank lain",
-                   "nominal": 1063972
-               },
-               {
-                   "nama_transaksi": "Pendapatan operasional lainnya",
-                   "nominal": 4260496
-               }
-           ],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "HAK PIHAK KETIGA BAGI HASIL",
-           "nominal": 10647272,
-           "waktu_masuk": "2019",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [
-               {
-                   "nama_transaksi": "Pihak Ketiga Bukan Bank",
-                   "nominal": 2018610
-               },
-               {
-                   "nama_transaksi": "Hak tabungan mudharabah",
-                   "nominal": 20446
-               },
-               {
-                   "nama_transaksi": "Hak deposito mudharabah",
-                   "nominal": 1998164
-               },
-               {
-                   "nama_transaksi": "Hak bank lainnya",
-                   "nominal": 8628662
-               }
-           ],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "HAK PIHAK KETIGA BAGI HASIL",
-           "nominal": 10144001,
-           "waktu_masuk": "2020",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [
-               {
-                   "nama_transaksi": "Pihak Ketiga Bukan Bank",
-                   "nominal": 1309141
-               },
-               {
-                   "nama_transaksi": "Hak tabungan mudharabah",
-                   "nominal": 18295
-               },
-               {
-                   "nama_transaksi": "Hak deposito mudharabah",
-                   "nominal": 1290846
-               },
-               {
-                   "nama_transaksi": "Hak bank lainnya",
-                   "nominal": 8834860
-               }
-           ],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "PENDAPATAN BANK SEBAGAI PENGELOLA (MUDHARIB)",
-           "nominal": 25572942,
-           "waktu_masuk": "2019",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "PENDAPATAN BANK SEBAGAI PENGELOLA (MUDHARIB)",
-           "nominal": 21697091,
-           "waktu_masuk": "2020",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "BEBAN OPERASIONAL",
-           "nominal": 10403552,
-           "waktu_masuk": "2019",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [
-               {
-                   "nama_transaksi": "Beban wadiah",
-                   "nominal": 911442
-               },
-               {
-                   "nama_transaksi": "Beban administrasi dan umum",
-                   "nominal": 3967778
-               },
-               {
-                   "nama_transaksi": "Beban personalia",
-                   "nominal": 5477036
-               },
-               {
-                   "nama_transaksi": "Beban penghapusan penyisihan aktiva produktif",
-                   "nominal": 47296
-               }
-           ],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "BEBAN OPERASIONAL",
-           "nominal": 7372584,
-           "waktu_masuk": "2020",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [
-               {
-                   "nama_transaksi": "Beban wadiah",
-                   "nominal": 775747
-               },
-               {
-                   "nama_transaksi": "Beban administrasi dan umum",
-                   "nominal": 2683767
-               },
-               {
-                   "nama_transaksi": "Beban personalia",
-                   "nominal": 3877460
-               },
-               {
-                   "nama_transaksi": "Beban penghapusan penyisihan aktiva produktif",
-                   "nominal": 35610
-               }
-           ],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "LABA RUGI OPERASIONAL",
-           "nominal": 15169390,
-           "waktu_masuk": "2019",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "LABA RUGI OPERASIONAL",
-           "nominal": 14324507,
-           "waktu_masuk": "2020",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "PENDAPATAN NON OPERASIONAL",
-           "nominal": 497727,
-           "waktu_masuk": "2019",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "PENDAPATAN NON OPERASIONAL",
-           "nominal": 381742,
-           "waktu_masuk": "2020",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "BEBAN NON OPERASIONAL",
-           "nominal": 42596,
-           "waktu_masuk": "2019",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "BEBAN NON OPERASIONAL",
-           "nominal": 37393,
-           "waktu_masuk": "2020",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "LABA RUGI SEBELUM PAJAK",
-           "nominal": 15624521,
-           "waktu_masuk": "2019",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "LABA RUGI SEBELUM PAJAK",
-           "nominal": 14668856,
-           "waktu_masuk": "2020",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "ZAKAT",
-           "nominal": 956785,
-           "waktu_masuk": "2019",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "ZAKAT",
-           "nominal": 767893,
-           "waktu_masuk": "2020",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "TAKSIRAN PAJAK PENGHASILAN",
-           "nominal": 2601500,
-           "waktu_masuk": "2019",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       },
-       {
-           "nama_transaksi": "TAKSIRAN PAJAK PENGHASILAN",
-           "nominal": 2587460,
-           "waktu_masuk": "2020",
-           "type_waktu_masuk": "tahun",
-           "detail_transaksi": [],
-           "type": "KREDET"
-       }
-   ]
+  return  [
+        {
+            "nama_transaksi": "PENDAPATAN OPERASIONAL",
+            "nominal": 36220214,
+            "waktu_masuk": "2019",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [
+                {
+                    "nama_transaksi": "Pendapatan dari Penyaluran Dana",
+                    "nominal": 31403678
+                },
+                {
+                    "nama_transaksi": " Pendapatan dari pihak ketiga bukan bank",
+                    "nominal": 30238140
+                },
+                {
+                    "nama_transaksi": " Pendapatan dari bank lain",
+                    "nominal": 1165538
+                },
+                {
+                    "nama_transaksi": "Pendapatan operasional lainnya",
+                    "nominal": 4816536
+                }
+            ],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "PENDAPATAN OPERASIONAL",
+            "nominal": 31841092,
+            "waktu_masuk": "2020",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [
+                {
+                    "nama_transaksi": "Pendapatan dari Penyaluran Dana",
+                    "nominal": 27580596
+                },
+                {
+                    "nama_transaksi": " Pendapatan dari pihak ketiga bukan bank",
+                    "nominal": 26516624
+                },
+                {
+                    "nama_transaksi": " Pendapatan dari bank lain",
+                    "nominal": 1063972
+                },
+                {
+                    "nama_transaksi": "Pendapatan operasional lainnya",
+                    "nominal": 4260496
+                }
+            ],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "HAK PIHAK KETIGA BAGI HASIL",
+            "nominal": 10647272,
+            "waktu_masuk": "2019",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [
+                {
+                    "nama_transaksi": "Pihak Ketiga Bukan Bank",
+                    "nominal": 2018610
+                },
+                {
+                    "nama_transaksi": "Hak tabungan mudharabah",
+                    "nominal": 20446
+                },
+                {
+                    "nama_transaksi": "Hak deposito mudharabah",
+                    "nominal": 1998164
+                },
+                {
+                    "nama_transaksi": "Hak bank lainnya",
+                    "nominal": 8628662
+                }
+            ],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "HAK PIHAK KETIGA BAGI HASIL",
+            "nominal": 10144001,
+            "waktu_masuk": "2020",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [
+                {
+                    "nama_transaksi": "Pihak Ketiga Bukan Bank",
+                    "nominal": 1309141
+                },
+                {
+                    "nama_transaksi": "Hak tabungan mudharabah",
+                    "nominal": 18295
+                },
+                {
+                    "nama_transaksi": "Hak deposito mudharabah",
+                    "nominal": 1290846
+                },
+                {
+                    "nama_transaksi": "Hak bank lainnya",
+                    "nominal": 8834860
+                }
+            ],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "PENDAPATAN BANK SEBAGAI PENGELOLA (MUDHARIB)",
+            "nominal": 25572942,
+            "waktu_masuk": "2019",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "PENDAPATAN BANK SEBAGAI PENGELOLA (MUDHARIB)",
+            "nominal": 21697091,
+            "waktu_masuk": "2020",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "BEBAN OPERASIONAL",
+            "nominal": 10403552,
+            "waktu_masuk": "2019",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [
+                {
+                    "nama_transaksi": "Beban wadiah",
+                    "nominal": 911442
+                },
+                {
+                    "nama_transaksi": "Beban administrasi dan umum",
+                    "nominal": 3967778
+                },
+                {
+                    "nama_transaksi": "Beban personalia",
+                    "nominal": 5477036
+                },
+                {
+                    "nama_transaksi": "Beban penghapusan penyisihan aktiva produktif",
+                    "nominal": 47296
+                }
+            ],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "BEBAN OPERASIONAL",
+            "nominal": 7372584,
+            "waktu_masuk": "2020",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [
+                {
+                    "nama_transaksi": "Beban wadiah",
+                    "nominal": 775747
+                },
+                {
+                    "nama_transaksi": "Beban administrasi dan umum",
+                    "nominal": 2683767
+                },
+                {
+                    "nama_transaksi": "Beban personalia",
+                    "nominal": 3877460
+                },
+                {
+                    "nama_transaksi": "Beban penghapusan penyisihan aktiva produktif",
+                    "nominal": 35610
+                }
+            ],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "LABA RUGI OPERASIONAL",
+            "nominal": 15169390,
+            "waktu_masuk": "2019",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "LABA RUGI OPERASIONAL",
+            "nominal": 14324507,
+            "waktu_masuk": "2020",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "PENDAPATAN NON OPERASIONAL",
+            "nominal": 497727,
+            "waktu_masuk": "2019",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "PENDAPATAN NON OPERASIONAL",
+            "nominal": 381742,
+            "waktu_masuk": "2020",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "BEBAN NON OPERASIONAL",
+            "nominal": 42596,
+            "waktu_masuk": "2019",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "BEBAN NON OPERASIONAL",
+            "nominal": 37393,
+            "waktu_masuk": "2020",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "LABA RUGI SEBELUM PAJAK",
+            "nominal": 15624521,
+            "waktu_masuk": "2019",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "LABA RUGI SEBELUM PAJAK",
+            "nominal": 14668856,
+            "waktu_masuk": "2020",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "ZAKAT",
+            "nominal": 956785,
+            "waktu_masuk": "2019",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "ZAKAT",
+            "nominal": 767893,
+            "waktu_masuk": "2020",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "TAKSIRAN PAJAK PENGHASILAN",
+            "nominal": 2601500,
+            "waktu_masuk": "2019",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        },
+        {
+            "nama_transaksi": "TAKSIRAN PAJAK PENGHASILAN",
+            "nominal": 2587460,
+            "waktu_masuk": "2020",
+            "type_waktu_masuk": "tahun",
+            "detail_transaksi": [],
+            "type": "KREDET"
+        }
+    ]
 }

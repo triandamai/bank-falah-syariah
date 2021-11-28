@@ -66,9 +66,7 @@
   </v-row>
 </template>
 <script>
-import {
-  ACTION_TRANSACTION,
-} from "@/store"
+import {ACTION_TRANSACTION, TRANSACTION_BANK} from "@/store"
 
 import componentMixin from "@/mixin/component.mixin"
 import {extractBankTransaction} from "@/utils/TransactionBankExtractFromExcel"
@@ -81,6 +79,7 @@ export default {
     return {
       file:null,
       overlay:false,
+      form:[]
     };
   },
   created() {
@@ -104,13 +103,12 @@ export default {
             const workbook = XLSX.read(data, { type: "binary" });
             const sheetName = workbook.SheetNames[0];
             const sheet = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-            const result = extractBankTransaction(sheet)
+            this.form = extractBankTransaction(sheet)
+            console.log(this.form)
 
-            console.log('sheet',sheet)
-            console.log('result',result)
             // eslint-disable-next-line no-empty
           } catch (error) {
-            console.log('err',error)
+
           }
         };
         fileReader.onprogress = () => {
@@ -121,9 +119,19 @@ export default {
     },
     onSubmit(){
 
-      this.$store.dispatch(ACTION_TRANSACTION,{payload:this.form,type:this.transactionsSelected})
-          .then(()=>{
-
+      this.$store.dispatch(ACTION_TRANSACTION,{
+        payload:{
+          transaksi:this.form
+        },
+        type:TRANSACTION_BANK
+      })
+          .then(({success})=>{
+            this.overlay = false
+            if(success){
+             console.log("sukes")
+            }else {
+              console.log("gagal")
+            }
 
           })
     },

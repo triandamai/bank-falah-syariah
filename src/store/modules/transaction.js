@@ -17,6 +17,7 @@ export const PEMBIAYAAN_SETOR = "PEMBIAYAAN_SETOR";
 export const PEMBIAYAAN_TARIK = "PEMBIAYAAN_TARIK";
 
 
+export const TRANSACTION_BANK = "TRANSACTION_BANK"
 
 const TRANSACTION = "TRANSACTION"
 const GET_REKENING_TRANSACTION = "GET_REKENING_TRANSACTION"
@@ -60,6 +61,7 @@ const actions = {
                 if(type ===  TABUNGAN_DEPOSITO) return   "/transaksi/simpanan/setor_nontunai"
                 if(type ===  PEMBIAYAAN_SETOR) return   "/transaksi/pembiayaan/setor_angsuran_tunai"
                 if(type ===  PEMBIAYAAN_TARIK) return   "/transaksi/pembiayaan/pencairan_tunai"
+                if(type === TRANSACTION_BANK) return "/transaksi_bank/data/import"
             }
             ApiService.post(endPoint(), payload)
                 .then(({success,data, message}) => {
