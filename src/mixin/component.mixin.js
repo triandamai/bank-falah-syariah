@@ -238,6 +238,16 @@ export default {
         }),
     },
     methods: {
+        getSelectedRekening(selected){
+            if (selected !== null) {
+                if (selected.no_rekening) {
+                    return  selected.no_rekening
+                } else {
+                    return  ""
+                }
+            }
+            return ""
+        },
         encryptPlain:(plain)=>encrypt(plain),
         decryptPlain:(plain)=>decrypt(plain),
         formatCurrency: (total) => formatCurrency(total),

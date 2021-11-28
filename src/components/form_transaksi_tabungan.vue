@@ -32,6 +32,7 @@
                         hide-details
                         hide-selected
                         return-object
+                        no-filter
                         label="Cari Nasabah atau No rekening..."
                         dense
                         outlined
@@ -94,9 +95,6 @@
                             <v-col cols="12" sm="12" md="12" lg="12">
                               <v-row>
                                 <v-col cols="12" sm="6" md="6" lg="6">
-
-
-
                                   <v-list>
                                     <v-subheader>
                                       Nasabah
@@ -104,7 +102,7 @@
                                     <v-list-item>
                                       <v-list-item-content>
                                         <v-list-item-title>{{ nasabahName ? nasabahName : 'Nama Nasabah' }}</v-list-item-title>
-                                        <v-list-item-subtitle>{{selectedRekening.no_rekening ? selectedRekening.no_rekening:'No Rekening' }}</v-list-item-subtitle>
+                                        <v-list-item-subtitle>{{getSelectedRekening(selectedRekening) }}</v-list-item-subtitle>
                                       </v-list-item-content>
                                     </v-list-item>
                                   </v-list>
@@ -202,7 +200,7 @@
                                         <h3>
                                           {{nasabahName}}
                                           <span class="digits counter">#{{
-                                              selectedRekening.no_rekening ? selectedRekening.no_rekening : ""
+                                              getSelectedRekening(selectedRekening)
                                             }}</span>
                                         </h3>
                                         <p>
@@ -317,9 +315,9 @@ export default {
       isLoading: false,
       search: null,
       rekening:[],
+      selectedRekening:null,
       overlay:false,
       transactionsSelected:"",
-      selectedRekening:{},
       isTransfer:false,
       isTransactionSuccess:false,
       nasabahName:"",
@@ -355,22 +353,24 @@ export default {
   watch:{
     search (val) {
       // Items have already been loaded
-      if (this.rekening.length > 0) return
+      // if (this.rekening.length > 0) return
 
       this.isLoading = true
 
       // Lazily load input items
       ApiService.get(`rekening_simpanan?cari=${val}`)
-          .then(({success,data,message})=>{
-        if(success){
-          this.rekening = data
-         console.log(data)
-         console.log(message)
-        }
-      })
+          .then(({success,data})=>{
+            this.isLoading = false
+            if(success){
+              this.rekening = data
+            }
+          }).catch((a)=>{
+            console.log(a)
+            this.isLoading = false
+          })
     },
     selectedRekening:function (newVal){
-      if(newVal) {
+      if(newVal !== null) {
         if (newVal.no_rekening) {
           this.form.nasabah_id = newVal.nasabah_id
           this.nasabahName = newVal.nasabah.nama_lengkap
@@ -380,7 +380,7 @@ export default {
       }
     },
     transactionsSelected:function(newVal){
-      if(newVal) {
+      if(newVal !== null) {
         this.isTransfer = newVal === TABUNGAN_TRANSFER;
       }
     }

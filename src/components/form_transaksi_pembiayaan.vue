@@ -25,28 +25,47 @@
                       <v-divider class="my-2"></v-divider>
                       <v-autocomplete
                           v-model="selectedRekening"
-                          label="Nasabah/Rekening *"
-                          :items="itemRekening"
+                          :items="rekening"
+                          :loading="isLoading"
+                          :search-input.sync="search"
+                          chips
+                          hide-details
+                          hide-selected
                           return-object
-                          outlined
-                          required
+                          no-filter
+                          label="Cari Nasabah atau No rekening..."
                           dense
-                          small-chips
+                          outlined
                       >
-                        <template v-slot:item="{ item }">
-                          <v-list-item-content>
+                        <template v-slot:no-data>
+                          <v-list-item>
                             <v-list-item-title>
-                              {{
-                                item.no_rekening + " - " + item.nasabah.nama_lengkap
-                              }}</v-list-item-title
-                            >
-                          </v-list-item-content>
-                        </template>
-                        <template v-slot:selection="{ item }">
-                          <v-list-item-content>
-                            <v-list-item-title>
-                              {{ item.no_rekening + " - " + item.nasabah.nama_lengkap }}
+                              Cari Nasabah atau
+                              <strong>No Rekening</strong>
                             </v-list-item-title>
+                          </v-list-item>
+                        </template>
+                        <template v-slot:selection="{ attr, on, item, selected }">
+                          <v-chip
+                              v-bind="attr"
+                              :input-value="selected"
+                              color="blue-grey"
+                              class="white--text"
+                              v-on="on"
+                          >
+                            <span v-text="item.nasabah.nama_lengkap"></span>
+                          </v-chip>
+                        </template>
+                        <template v-slot:item="{ item }">
+                          <v-list-item-avatar
+                              color="indigo"
+                              class="text-h5 font-weight-light white--text"
+                          >
+                            {{ item.nasabah.nama_lengkap.charAt(0) }}
+                          </v-list-item-avatar>
+                          <v-list-item-content>
+                            <v-list-item-title v-text="item.nasabah.nama_lengkap"></v-list-item-title>
+                            <v-list-item-subtitle v-text="item.no_rekening"></v-list-item-subtitle>
                           </v-list-item-content>
                         </template>
                       </v-autocomplete>
@@ -86,7 +105,7 @@
                                         <v-list-item>
                                           <v-list-item-content>
                                             <v-list-item-title>{{ nasabahName ? nasabahName : 'Nama Nasabah' }}</v-list-item-title>
-                                            <v-list-item-subtitle>{{selectedRekening.no_rekening ? selectedRekening.no_rekening:'No Rekening' }}</v-list-item-subtitle>
+                                            <v-list-item-subtitle>{{getSelectedRekening(selectedRekening) }}</v-list-item-subtitle>
                                           </v-list-item-content>
                                         </v-list-item>
                                       </v-list>
@@ -175,7 +194,7 @@
                                           <h3>
                                             {{nasabahName}}
                                             <span class="digits counter">#{{
-                                                selectedRekening.no_rekening ? selectedRekening.no_rekening : ""
+                                                getSelectedRekening(selectedRekening)
                                               }}</span>
                                           </h3>
                                           <p>
@@ -278,13 +297,17 @@ import {
 import {getCurrendUserId} from "@/services/jwt.service"
 import {getTodayDate} from "@/utils/utils"
 import componentMixin from "@/mixin/component.mixin"
+import ApiService from "@/services/api.service";
 export default {
   mixins:[componentMixin],
   data: () => {
     return {
       overlay:false,
       transactionsSelected:"",
-      selectedRekening:{},
+      isLoading:false,
+      rekening:[],
+      selectedRekening:null,
+      search:null,
       isTransfer:false,
       nasabahName:"",
       transactions:[
@@ -308,17 +331,39 @@ export default {
     };
   },
   watch:{
+    search (val) {
+      // Items have already been loaded
+      // if (this.rekening.length > 0) return
+
+      this.isLoading = true
+
+      // Lazily load input items
+      ApiService.get(`rekening_simpanan?cari=${val}`)
+          .then(({success,data})=>{
+            this.isLoading = false
+            if(success){
+              this.rekening = data
+            }
+          }).catch((a)=>{
+        console.log(a)
+        this.isLoading = false
+      })
+    },
     selectedRekening:function (newVal){
-      if(newVal.no_rekening){
-        this.form.nasabah_id = newVal.nasabah_id
-        this.nasabahName = newVal.nasabah.nama_lengkap
-        this.form.nomor_rekening = newVal.no_rekening
-        this.getMutasiByAccount(newVal.no_rekening)
+      if(newVal !== null) {
+        if(newVal.no_rekening){
+          this.form.nasabah_id = newVal.nasabah_id
+          this.nasabahName = newVal.nasabah.nama_lengkap
+          this.form.nomor_rekening = newVal.no_rekening
+          this.getMutasiByAccount(newVal.no_rekening)
+        }
       }
       
     },
     transactionsSelected:function(newVal){
-      this.isTransfer = newVal === TABUNGAN_TRANSFER;
+      if(newVal !== null) {
+        this.isTransfer = newVal === TABUNGAN_TRANSFER;
+      }
     }
   },
   mounted() {
@@ -326,6 +371,7 @@ export default {
     this.getRekeningByType()
   },
   methods: {
+
     getMutasiByAccount(no_account){
       this.$store.commit(MUTATION_DESTROY_MUTASI,{type:DETAIL_REKENING_PEMBIAYAAN})
       const no_rekening = this.encryptPlain(no_account)
