@@ -71,6 +71,7 @@ import {
 } from "@/store"
 
 import componentMixin from "@/mixin/component.mixin"
+import {extractBankTransaction} from "@/utils/TransactionBankExtractFromExcel"
 import xlsx from "xlsx";
 
 
@@ -103,63 +104,10 @@ export default {
             const workbook = XLSX.read(data, { type: "binary" });
             const sheetName = workbook.SheetNames[0];
             const sheet = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-            let transaksi = []
+            const result = extractBankTransaction(sheet)
 
-            console.log(sheet)
-            sheet.map((data) => {
-
-              //check pertransaction
-              let availableTransaction = data['NO'];
-              if(availableTransaction){
-                let keys = Object.keys(data) // its will become ['2020','2019','NO','POS POS']
-
-                //getting only ['2020','2019']
-                const getFiltered = keys.filter((val)=>{
-                     return this.isNumeric(val)
-                })
-                const subTransaction = data['POS']
-
-                const firstData = data[getFiltered[0]]
-                const secondData = data[getFiltered[1]]
-                let detailFirstTransaction = []
-                let detailSecondTransaction = []
-
-                let firstPerData ={
-                  nama_transaksi : availableTransaction,
-                  nominal : firstData,
-                  waktu_masuk: getFiltered[0],
-                  type_waktu_masuk: 'tahun',
-                  type: data['TYPE'],
-                  detail_transaksi: [
-                    {
-                      nama_transaksi: 'ste',
-                      nominal: 'nominal',
-                    }
-                  ]
-                }
-                let secondPerData ={
-                  nama_transaksi : availableTransaction,
-                  nominal : secondData,
-                  waktu_masuk: getFiltered[1],
-                  type_waktu_masuk: 'tahun',
-                  type: data['TYPE'],
-                  detail_transaksi: [
-                    {
-                      nama_transaksi: 'ste',
-                      nominal: 'nominal',
-                    }
-                  ]
-                }
-
-                transaksi.push(firstPerData)
-                transaksi.push(secondPerData)
-              }
-
-              //asosiate ke objek nasabah
-
-
-            });
-          //  console.log('transaksi',transaksi)
+            console.log('sheet',sheet)
+            console.log('result',result)
             // eslint-disable-next-line no-empty
           } catch (error) {
             console.log('err',error)
