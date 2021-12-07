@@ -134,11 +134,11 @@ export default {
       })
           .then(({success})=>{
             this.overlay = false
-            if(success){
-             console.log("sukes")
-            }else {
-              console.log("gagal")
-            }
+            // if(success){
+            //
+            // }else {
+            //
+            // }
 
           })
     },
