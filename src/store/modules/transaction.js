@@ -42,12 +42,14 @@ const actions = {
                 if(transaction === TABUNGAN_DEPOSITO) return `/rekening_simpanan`
                 if(transaction === TABUNGAN_TRANSFER) return `/rekening_simpanan`
             }
-            ApiService.get(endPoint()).then(({success,data,message})=>{
-                if(success){
-                    resolve({success:success,data:data,message:message})
-                    commit(SET_REKENING_TRANSACTION,data)
-                }
-            })
+            ApiService
+                .get(endPoint())
+                .then(({success,data,message})=>{
+                    if(success){
+                        resolve({success:success,data:data,message:message})
+                        commit(SET_REKENING_TRANSACTION,data)
+                    }
+                })
 
         })
     },

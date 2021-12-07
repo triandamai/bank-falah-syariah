@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Breadcrumbs title="Simpanan" />
+    <Breadcrumbs title="Pegawai" />
     <!-- Container-fluid starts-->
     <div class="container-fluid">
       <div class="row">

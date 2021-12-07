@@ -1,7 +1,3 @@
-/*
-* Extract data from excel for transaction bank
-* 28 Nov 2021
-* */
 import {isNumeric} from "./utils"
 
 /**
@@ -50,7 +46,8 @@ export const extractNeracaTransaction=(data)=>{
                         saldo: data[headerFirstData],
                         sub_neraca:[]
                     },
-                    second:{  nama : data[headerDataName],
+                    second:{
+                        nama : data[headerDataName],
                         waktu_masuk: headerSecondData,
                         saldo: data[headerSecondData],
                         sub_neraca:[]
@@ -91,33 +88,32 @@ export const extractNeracaTransaction=(data)=>{
             }
 
             for (let i =parenData.index; i < untilIndex(); i++){
-                    const subData = removeNoData[i]
-                    const subDataExist = subData[headerSub]
 
-                    if(subDataExist){
-                        subDatas.push({
-                            index:i,
-                            first:{
-                                nama:subData[headerDataName],
-                                waktu_masuk:headerFirstData,
-                                saldo:subData[headerFirstData],
-                                sub_neraca:[]
-                            },
-                            second:{
-                                nama:subData[headerDataName],
-                                waktu_masuk:headerSecondData,
-                                saldo:subData[headerSecondData],
-                                sub_neraca:[]
-                            }
-                        })
-                    }
+                const subData = removeNoData[i]
+                const subDataExist = subData[headerSub]
+                if(subDataExist){
+                    subDatas.push({
+                        index:i,
+                        first:{
+                            nama:subData[headerDataName],
+                            waktu_masuk:headerFirstData,
+                            saldo:subData[headerFirstData],
+                            sub_neraca:[]
+                        },
+                        second:{
+                            nama:subData[headerDataName],
+                            waktu_masuk:headerSecondData,
+                            saldo:subData[headerSecondData],
+                            sub_neraca:[]
+                        }
+                    })
                 }
-
-                //getting third sub data
+            }
+            //getting third sub data
             const getKatSub = subDatas.map((ketData,index)=>{
                 let ketSubData = ketData
                 if(index < subDatas.length){
-                        const nextKat = subDatas[index+1]
+                    const nextKat = subDatas[index+1]
 
                     /**
                      * if next index unfortunately null or we assume the sub is last but not the last data
@@ -134,34 +130,32 @@ export const extractNeracaTransaction=(data)=>{
                      * when loop reach parent data 1 the next data will be null/undefined
                      * so we will use current parent data index until the latest index data
                      */
-                        const untilIndexKat =()=>{
-                            if(nextKat === undefined){
-                                return subDatas.index -1
-                            }
-                            return nextKat.index
+                    const untilIndexKat =()=>{
+                        if(nextKat === undefined){
+                            return subDatas.index -1
                         }
-                        if(nextKat !== undefined){
+                        return nextKat.index
+                    }
 
-                            for (let j = ketSubData.index+1; j < untilIndexKat();j++){
-                                let getKatData = removeNoData[j]
+                    for (let j = ketSubData.index+1; j < untilIndexKat();j++){
+                        let getKatData = removeNoData[j]
 
-                                ketSubData.first.sub_neraca.push({
-                                     nama:getKatData[headerDataName],
-                                     saldo:getKatData[headerFirstData]
-                                })
-                                ketSubData.second.sub_neraca.push({
-                                    nama:getKatData[headerDataName],
-                                    saldo:getKatData[headerFirstData]
-                                })
-                            }
-                        }
+                        ketSubData.first.sub_neraca.push({
+                            nama:getKatData[headerDataName],
+                            saldo:getKatData[headerFirstData]
+                        })
+                        ketSubData.second.sub_neraca.push({
+                            nama:getKatData[headerDataName],
+                            saldo:getKatData[headerFirstData]
+                        })
+                    }
+
                 }
                 return ketSubData
             })
             getKatSub.forEach(ket=>{
                 parenData.first.sub_neraca.push(ket.first)
                 parenData.second.sub_neraca.push(ket.first)
-
             })
 
         }

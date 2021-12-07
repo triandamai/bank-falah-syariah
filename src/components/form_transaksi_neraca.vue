@@ -110,7 +110,7 @@ export default {
             const sheetName = workbook.SheetNames[0];
             const sheet = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
             this.form = extractNeracaTransaction(sheet)
-            console.log(this.form)
+
 
 
             // eslint-disable-next-line no-empty

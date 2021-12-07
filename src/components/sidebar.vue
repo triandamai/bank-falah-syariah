@@ -524,7 +524,6 @@ export default {
     //check if user already logged in is have privilage for acces those menu
     checkPrivileges:(privilage)=>checkPrivileges(privilage),
     showFormTransaction(form) {
-      console.log(form)
       this.$store.commit("showForm", form);
     },
     toggle_sidebar() {
