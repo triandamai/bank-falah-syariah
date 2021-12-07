@@ -41,6 +41,7 @@
       <form-transaksi-pembiayaan :show="formShowPembiayaan"/>
       <form-transaksi-tabungan :show="formShowTabungan"/>
       <form-transaksi-bank :show="formShowTransaksiBank"/>
+      <form-transaksi-neraca :show="formShowTransaksiNeraca" />
 <!-- TODO:show option for costumizer -->
 <!--      <Customizer />-->
       <v-snackbar

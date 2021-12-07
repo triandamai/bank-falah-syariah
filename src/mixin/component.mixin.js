@@ -233,6 +233,7 @@ export default {
             formShowPembiayaan:(state) => state.formtransaksipembiayaan,
             formShowTabungan:(state) => state.formtransaksitabungan,
             formShowTransaksiBank:(state)=> state.formtransaksibank,
+            formShowTransaksiNeraca:(state)=>state.formtransaksineraca,
             isDataTableLoading:(state)=>  state.loadingtable
         }),
     },

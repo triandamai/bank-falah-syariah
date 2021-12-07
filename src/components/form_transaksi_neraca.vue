@@ -9,10 +9,10 @@
 
       <v-card class="grey lighten-3">
         <v-toolbar color="orange" dark flat>
-          <v-btn dark icon @click="hidden('TRANSAKSI_BANK')">
+          <v-btn dark icon @click="hidden('TRANSAKSI_NERACA')">
             <v-icon>mdi-close</v-icon>
           </v-btn>
-          <v-toolbar-title>{{$t('Transaksi Bank')}}</v-toolbar-title>
+          <v-toolbar-title>{{$t('Transaksi Neraca')}}</v-toolbar-title>
           <v-spacer></v-spacer>
         </v-toolbar>
         <v-container >
@@ -72,10 +72,10 @@
   </v-row>
 </template>
 <script>
-import {ACTION_TRANSACTION, TRANSACTION_BANK} from "@/store"
+import {ACTION_TRANSACTION, TRANSACTION_NERACA} from "@/store"
 
 import componentMixin from "@/mixin/component.mixin"
-import {extractBankTransaction} from "@/utils/TransactionBankExtractFromExcel"
+import {extractNeracaTransaction} from "@/utils/TransactionNeracaExtractFromExcel"
 import xlsx from "xlsx";
 
 
@@ -109,7 +109,9 @@ export default {
             const workbook = XLSX.read(data, { type: "binary" });
             const sheetName = workbook.SheetNames[0];
             const sheet = XLSX.utils.sheet_to_json(workbook.Sheets[sheetName]);
-            this.form = extractBankTransaction(sheet)
+            this.form = extractNeracaTransaction(sheet)
+            console.log(this.form)
+
 
             // eslint-disable-next-line no-empty
           } catch (error) {
@@ -126,9 +128,9 @@ export default {
 
       this.$store.dispatch(ACTION_TRANSACTION,{
         payload:{
-          transaksi:this.form
+          neraca:this.form
         },
-        type:TRANSACTION_BANK
+        type:TRANSACTION_NERACA
       })
           .then(({success})=>{
             this.overlay = false

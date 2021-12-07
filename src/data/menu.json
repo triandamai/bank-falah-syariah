@@ -147,6 +147,14 @@
           "privileges": {
             "roles": ["admin", "bp_root","siswa","cs","teller"]
           }
+        },
+        {
+          "path": "TRANSAKSI_NERACA",
+          "title": "Neraca",
+          "type": "button",
+          "privileges": {
+            "roles": ["admin", "bp_root","siswa","cs","teller"]
+          }
         }
       ]
     },

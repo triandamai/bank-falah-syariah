@@ -25,6 +25,7 @@ export const store = new Vuex.Store({
     formtransaksipembiayaan:false,
     formtransaksitabungan:false,
     formtransaksibank:false,
+    formtransaksineraca:false,
     loadingtable:true,
     isOnline:true,
     notifConnection:false,
@@ -55,26 +56,36 @@ export const store = new Vuex.Store({
         state.formtransaksibank = false
       }else if(type === "TABUNGAN"){
         state.formtransaksitabungan = false
+      }else if(type === "TRANSAKSI_NERACA"){
+        state.formtransaksineraca = false
       }
 
     },
     setLazyLoad(state,isLoading){
       state.lazyLoad = isLoading
     },
-    // eslint-disable-next-line no-empty-pattern
+    //eslint-disable-next-line no-empty-pattern
     showForm(state,type) {
       if(type === "PEMBIAYAAN"){
         state.formtransaksipembiayaan = true
         state.formtransaksitabungan = false
         state.formtransaksibank=false
+        state.formtransaksineraca = false
       }else if(type === "TRANSAKSI_BANK"){
-        state.formtransaksibank = true
         state.formtransaksipembiayaan = false
         state.formtransaksitabungan = false
-      }else if(type === "TABUNGAN"){
-        state.formtransaksitabungan = true
+        state.formtransaksibank=true
+        state.formtransaksineraca = false
+      }else if(type === "TRANSAKSI_NERACA"){
         state.formtransaksipembiayaan = false
-        state.formtransaksibank = false
+        state.formtransaksitabungan = false
+        state.formtransaksibank=false
+        state.formtransaksineraca = true
+      }else if(type === "TABUNGAN"){
+        state.formtransaksipembiayaan = false
+        state.formtransaksitabungan = true
+        state.formtransaksibank=false
+        state.formtransaksineraca = false
       }
 
     }

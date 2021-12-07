@@ -19,7 +19,7 @@
           <v-divider/>
 
           <v-stepper-step editable :complete="step > 4" :step="4">
-            {{ $t('Simpanan') }}
+            {{ $t('Tabungan') }}
           </v-stepper-step>
           <v-divider/>
           <v-stepper-step editable :complete="step > 5" :step="5">

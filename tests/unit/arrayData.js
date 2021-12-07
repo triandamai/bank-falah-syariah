@@ -485,3 +485,446 @@ export const expectResult=()=>{
         }
     ]
 }
+
+
+export const arrayNeraca=()=>{
+    return [
+        {
+            "2019": 239701289,
+            "2020": 204948977,
+            "NO": 1,
+            "POS": "AKTIVA"
+        },
+        {
+            "2019": 43367293,
+            "2020": 49947589,
+            "SUB": 1,
+            "POS": "AKTIVA LANCAR"
+        },
+        {
+            "2019": 23607594,
+            "2020": 21555862,
+            "KAT": 1,
+            "POS": "Kas"
+        },
+        {
+            "2019": 14624395,
+            "2020": 25179532,
+            "KAT": 2,
+            "POS": "Penempatan Pada Bank Lain"
+        },
+        {
+            "2019": 5135304,
+            "2020": 3212195,
+            "KAT": 3,
+            "POS": "Persediaan"
+        },
+        {
+            "2019": 182519962,
+            "2020": 143939689,
+            "SUB": 2,
+            "POS": "AKTIVA PRODUKTIF"
+        },
+        {
+            "2019": 77870189,
+            "2020": 63165836,
+            "KAT": 1,
+            "POS": "Piutang Murabahah"
+        },
+        {
+            "2019": 46722113,
+            "2020": 37899502,
+            "KAT": 2,
+            "POS": "Piutang Salam"
+        },
+        {
+            "2019": 31148075,
+            "2020": 25266334,
+            "KAT": 3,
+            "POS": "Piutang Istishna"
+        },
+        {
+            "2019": 1689020,
+            "2020": 978295,
+            "KAT": 4,
+            "POS": "Pembiayaan Mudharabah"
+        },
+        {
+            "2019": 1126013,
+            "2020": 652197,
+            "KAT": 5,
+            "POS": "Pembiayaan Musyarakah"
+        },
+        {
+            "2019": 2567652,
+            "2020": 1606098,
+            "KAT": 6,
+            "POS": "Ijarah"
+        },
+        {
+            "2019": 17973565,
+            "2020": 11242683,
+            "KAT": 7,
+            "POS": "Qardh"
+        },
+        {
+            "2019": 2383750,
+            "2020": 2363919,
+            "KAT": 8,
+            "POS": "Penyisihan Pengahapusan Aktiva Produktif"
+        },
+        {
+            "2019": 1039585,
+            "2020": 764825,
+            "KAT": 9,
+            "POS": "Aktiva Istishna"
+        },
+        {
+            "2019": 9655692,
+            "2020": 8002397,
+            "SUB": 3,
+            "POS": "AKTIVA TETAP"
+        },
+        {
+            "2019": 6214305,
+            "2020": 5126989,
+            "KAT": 1,
+            "POS": "Aktiva Tetap dan Inventaris"
+        },
+        {
+            "2019": 3441387,
+            "2020": 2875408,
+            "KAT": 2,
+            "POS": "Akumulasi penghapusan Aktiva Tetap"
+        },
+        {
+            "2019": 4158342,
+            "2020": 3059302,
+            "SUB": 4,
+            "POS": "AKTIVA LAINYA"
+        },
+        {
+            "2019": 227635053,
+            "2020": 193635474,
+            "NO": 2,
+            "POS": "PASIVA"
+        },
+        {
+            "2019": 113851651,
+            "2020": 96007715,
+            "SUB": 1,
+            "POS": "KEWAJIBAN"
+        },
+        {
+            "2019": 27231368,
+            "2020": 19443650,
+            "KAT": 1,
+            "POS": "Kewajiban Jangka Pendek"
+        },
+        {
+            "2019": 644998,
+            "2020": 99508,
+            "KAT": 2,
+            "POS": "Kewajiban segera"
+        },
+        {
+            "2019": 26586370,
+            "2020": 19344142,
+            "KAT": 3,
+            "POS": "Tabungan wadiah"
+        },
+        {
+            "2019": 86620283,
+            "2020": 76564065,
+            "KAT": 4,
+            "POS": "Kewajiban Jangka Panjang"
+        },
+        {
+            "2019": 86620283,
+            "2020": 76564065,
+            "KAT": 5,
+            "POS": "Kewajiban Pada Bank Muamalat"
+        },
+        {
+            "2019": 35988114,
+            "2020": 37494254,
+            "SUB": 2,
+            "POS": "INVESTASI TIDAK TERIKAT"
+        },
+        {
+            "2019": 264960,
+            "2020": 389836,
+            "KAT": 1,
+            "POS": "Tabungan Mudharabah"
+        },
+        {
+            "2019": 35723154,
+            "2020": 37104418,
+            "KAT": 2,
+            "POS": "Deposito Mudharabah"
+        },
+        {
+            "2019": 77795288,
+            "2020": 60133505,
+            "SUB": 3,
+            "POS": "MODAL"
+        },
+        {
+            "2019": 60005000,
+            "2020": 40005000,
+            "KAT": 1,
+            "POS": "Modal Disetor"
+        },
+        {
+            "2019": 8000000,
+            "2020": 10000000,
+            "KAT": 2,
+            "POS": "Tambahan Modal Disetor"
+        },
+        {
+            "2019": 9790288,
+            "2020": 10128505,
+            "KAT": 3,
+            "POS": "Cadangan"
+        },
+        {
+            "2019": 0,
+            "2020": 0,
+            "KAT": 4,
+            "POS": "Saldo Laba Rugi"
+        }
+    ]
+}
+
+export const expectResultNeraca=()=>{
+    return [
+        {
+            "index": 0,
+            "first": {
+                "nama": "AKTIVA",
+                "waktu_masuk": "2019",
+                "saldo": 239701289,
+                "sub_neraca": [
+                    {
+                        "nama": "AKTIVA LANCAR",
+                        "saldo": 43367293,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA PRODUKTIF",
+                        "saldo": 182519962,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA TETAP",
+                        "saldo": 9655692,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA LAINYA",
+                        "saldo": 4158342,
+                        "sub_neraca": []
+                    }
+                ]
+            },
+            "second": {
+                "nama": "AKTIVA",
+                "waktu_masuk": "2020",
+                "saldo": 204948977,
+                "sub_neraca": [
+                    {
+                        "nama": "AKTIVA LANCAR",
+                        "saldo": 43367293,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA PRODUKTIF",
+                        "saldo": 182519962,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA TETAP",
+                        "saldo": 9655692,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA LAINYA",
+                        "saldo": 4158342,
+                        "sub_neraca": []
+                    }
+                ]
+            }
+        },
+        {
+            "index": 0,
+            "first": {
+                "nama": "AKTIVA",
+                "waktu_masuk": "2019",
+                "saldo": 239701289,
+                "sub_neraca": [
+                    {
+                        "nama": "AKTIVA LANCAR",
+                        "saldo": 43367293,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA PRODUKTIF",
+                        "saldo": 182519962,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA TETAP",
+                        "saldo": 9655692,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA LAINYA",
+                        "saldo": 4158342,
+                        "sub_neraca": []
+                    }
+                ]
+            },
+            "second": {
+                "nama": "AKTIVA",
+                "waktu_masuk": "2020",
+                "saldo": 204948977,
+                "sub_neraca": [
+                    {
+                        "nama": "AKTIVA LANCAR",
+                        "saldo": 43367293,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA PRODUKTIF",
+                        "saldo": 182519962,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA TETAP",
+                        "saldo": 9655692,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA LAINYA",
+                        "saldo": 4158342,
+                        "sub_neraca": []
+                    }
+                ]
+            }
+        },
+        {
+            "index": 0,
+            "first": {
+                "nama": "AKTIVA",
+                "waktu_masuk": "2019",
+                "saldo": 239701289,
+                "sub_neraca": [
+                    {
+                        "nama": "AKTIVA LANCAR",
+                        "saldo": 43367293,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA PRODUKTIF",
+                        "saldo": 182519962,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA TETAP",
+                        "saldo": 9655692,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA LAINYA",
+                        "saldo": 4158342,
+                        "sub_neraca": []
+                    }
+                ]
+            },
+            "second": {
+                "nama": "AKTIVA",
+                "waktu_masuk": "2020",
+                "saldo": 204948977,
+                "sub_neraca": [
+                    {
+                        "nama": "AKTIVA LANCAR",
+                        "saldo": 43367293,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA PRODUKTIF",
+                        "saldo": 182519962,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA TETAP",
+                        "saldo": 9655692,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA LAINYA",
+                        "saldo": 4158342,
+                        "sub_neraca": []
+                    }
+                ]
+            }
+        },
+        {
+            "index": 0,
+            "first": {
+                "nama": "AKTIVA",
+                "waktu_masuk": "2019",
+                "saldo": 239701289,
+                "sub_neraca": [
+                    {
+                        "nama": "AKTIVA LANCAR",
+                        "saldo": 43367293,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA PRODUKTIF",
+                        "saldo": 182519962,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA TETAP",
+                        "saldo": 9655692,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA LAINYA",
+                        "saldo": 4158342,
+                        "sub_neraca": []
+                    }
+                ]
+            },
+            "second": {
+                "nama": "AKTIVA",
+                "waktu_masuk": "2020",
+                "saldo": 204948977,
+                "sub_neraca": [
+                    {
+                        "nama": "AKTIVA LANCAR",
+                        "saldo": 43367293,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA PRODUKTIF",
+                        "saldo": 182519962,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA TETAP",
+                        "saldo": 9655692,
+                        "sub_neraca": []
+                    },
+                    {
+                        "nama": "AKTIVA LAINYA",
+                        "saldo": 4158342,
+                        "sub_neraca": []
+                    }
+                ]
+            }
+        }
+    ]
+}
