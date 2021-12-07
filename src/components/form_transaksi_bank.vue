@@ -130,6 +130,7 @@ export default {
         },
         type:TRANSACTION_BANK
       })
+          // eslint-disable-next-line no-unused-vars
           .then(({success})=>{
             this.overlay = false
             // if(success){

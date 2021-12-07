@@ -38,7 +38,7 @@
                         </v-col>
                         <v-col cols="12" sm="12" md="12" lg="12">
                         <v-btn color="green darken-1" text small>
-                                    <a href="https://bfsservice.bakaranproject.com/upload/format_import_transaksi_bank.xlsx">
+                                    <a href="https://bfsservice.bakaranproject.com/upload/format_import_transaksi_neraca.xlsx">
                                       {{$t('Download Format')}}
                                     </a>
 
@@ -132,6 +132,7 @@ export default {
         },
         type:TRANSACTION_NERACA
       })
+          // eslint-disable-next-line no-unused-vars
           .then(({success})=>{
             this.overlay = false
             // if(success){
