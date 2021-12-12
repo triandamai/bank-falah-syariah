@@ -26,7 +26,7 @@
                   </div>
 
                   <div class="col-xl-12 p-0 left-btn">
-                    <a class="btn btn-gradient">{{$t('Summary')}}</a>
+                    <a @click="$router.push({path:'/main/statistic'})" class="btn btn-gradient">{{$t('Summary')}}</a>
                   </div>
                 </div>
               </div>

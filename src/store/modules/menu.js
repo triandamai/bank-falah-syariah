@@ -5,6 +5,7 @@
  *
  */
 import ApiServices from "@/services/api.service";
+//import Menu from "@/data/menu.json"
 
 import {Promise} from "es6-promise";
 
@@ -12,7 +13,7 @@ import {Promise} from "es6-promise";
 const state = {
   searchData: [],
   togglesidebar: true,
-  menu: []//Menu.data
+  menu:[]// Menu.data
 };
 
 // getters

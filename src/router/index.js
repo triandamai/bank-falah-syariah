@@ -50,6 +50,16 @@ const routes = [
           roles: ["public"]
         },
       },
+      {
+        path: "statistic",
+        name: "statistic",
+        component: () => import("@/pages/statistic/statistic.vue"),
+        meta: {
+          title: "Dashboard | Bank Falah Syariah",
+          requireAuth: true,
+          roles: ["public"]
+        },
+      },
       //
       {
         path: "preferences",
@@ -120,6 +130,26 @@ const routes = [
         path: "laporan-kas",
         name: "laporan-kas",
         component: () => import("@/pages/laporan/laporan-kas.vue"),
+        meta: {
+          title: "Laporan | Bank Falah Syariah",
+          requireAuth: true,
+          roles: ["admin","bp_root","siswa","teller"]
+        },
+      },
+      {
+        path: "laporan-laba-rugi",
+        name: "laporan-laba-rugi",
+        component: () => import("@/pages/laporan/laporan-laba-rugi.vue"),
+        meta: {
+          title: "Laporan | Bank Falah Syariah",
+          requireAuth: true,
+          roles: ["admin","bp_root","siswa","teller"]
+        },
+      },
+      {
+        path: "laporan-neraca",
+        name: "laporan-neraca",
+        component: () => import("@/pages/laporan/laporan-neraca.vue"),
         meta: {
           title: "Laporan | Bank Falah Syariah",
           requireAuth: true,

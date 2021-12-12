@@ -22,6 +22,17 @@
       }
     },
     {
+      "path": "/main/statistic",
+      "title": "Statistic",
+      "icon": "codesandbox",
+      "type": "link",
+      "active": false,
+      "privileges": {
+        "roles": ["admin", "bp_root","super_admin"]
+
+      }
+    },
+    {
       "path": "/main/nasabah/add",
       "title": "Form Nasabah",
       "icon": "users",
@@ -106,6 +117,22 @@
         {
           "path": "/main/laporan-kas",
           "title": "Report Kas",
+          "type": "link",
+          "privileges": {
+            "roles": ["admin", "bp_root","siswa","teller"]
+          }
+        },
+        {
+          "path": "/main/laporan-laba-rugi",
+          "title": "Report Laba Rugi",
+          "type": "link",
+          "privileges": {
+            "roles": ["admin", "bp_root","siswa","teller"]
+          }
+        },
+        {
+          "path": "/main/laporan-neraca",
+          "title": "Report Neraca",
           "type": "link",
           "privileges": {
             "roles": ["admin", "bp_root","siswa","teller"]
