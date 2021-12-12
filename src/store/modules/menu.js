@@ -13,7 +13,7 @@ import {Promise} from "es6-promise";
 const state = {
   searchData: [],
   togglesidebar: true,
-  menu:[]// Menu.data
+  menu: []//Menu.data
 };
 
 // getters

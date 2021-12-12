@@ -13,7 +13,7 @@
     {
       "path": "/main/dashboard",
       "title": "Dashboard",
-      "icon": "codesandbox",
+      "icon": "home",
       "type": "link",
       "active": false,
       "privileges": {
@@ -24,7 +24,7 @@
     {
       "path": "/main/statistic",
       "title": "Statistic",
-      "icon": "codesandbox",
+      "icon": "pie-chart",
       "type": "link",
       "active": false,
       "privileges": {
@@ -44,7 +44,7 @@
     },
     {
       "title": "Master Data",
-      "icon": "monitor",
+      "icon": "database",
       "type": "sub",
       "badgeType": "primary",
       "active": false,
