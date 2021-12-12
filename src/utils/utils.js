@@ -23,6 +23,7 @@ export const isNumeric=(str)=>{
 
 export const getTodayDate=()=>{
   const date = new Date()
+
   const getMonth=(month)=>{
     if(month < 10){
       return `0${month}`
@@ -36,6 +37,28 @@ export const getTodayDate=()=>{
     return date
   }
   return `${date.getFullYear()}-${getMonth(date.getMonth()+1)}-${getDate(date.getDate())}`
+}
+
+export const getLastMontDate=()=>{
+  let now = new Date()
+  console.log('Today: ' + now.toUTCString())
+  let last30days = new Date(now.setDate(now.getDate() - 30))
+  console.log('Last 30th day: ' + last30days.toUTCString())
+
+
+  const getMonth=(month)=>{
+    if(month < 10){
+      return `0${month}`
+    }
+    return month
+  }
+  const getDate=(date)=>{
+    if(date < 10){
+      return `0${date}`
+    }
+    return date
+  }
+  return `${last30days.getFullYear()}-${getMonth(last30days.getMonth()+1)}-${getDate(last30days.getDate())}`
 }
 //currency
 

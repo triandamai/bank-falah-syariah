@@ -16,15 +16,6 @@
                     <h5>{{ $t('Transaksi') }}</h5>
                     <p class="font-roboto">{{$t('overview10day')}}</p>
                   </div>
-                  <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>{{ totalnasabah }}</h5>
-                    <p class="font-roboto">{{$t('Customer')}}</p>
-                  </div>
-                  <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>{{ totaltransaksi }}</h5>
-                    <p class="font-roboto">{{$t('Transaction')}}</p>
-                  </div>
-
                   <div class="col-xl-12 p-0 left-btn">
                     <a class="btn btn-gradient">{{$t('Summary')}}</a>
                   </div>
@@ -34,9 +25,9 @@
                 <div class="chart-right">
                       <div class="card-body">
                         <div class="current-sale-container">
-                          <div id="chart-currently">
+                          <div id="chart-transaction">
                             <apexchart
-                                ref="chart_statistic"
+                                ref="chart_transaction"
 
                                 :options="options"
                                 :series="series"
@@ -63,15 +54,6 @@
                     <h5>{{ $t('Nasabah') }}</h5>
                     <p class="font-roboto">{{$t('overview10day')}}</p>
                   </div>
-                  <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>{{ totalnasabah }}</h5>
-                    <p class="font-roboto">{{$t('Customer')}}</p>
-                  </div>
-                  <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>{{ totaltransaksi }}</h5>
-                    <p class="font-roboto">{{$t('Transaction')}}</p>
-                  </div>
-
                   <div class="col-xl-12 p-0 left-btn">
                     <a class="btn btn-gradient">{{$t('Summary')}}</a>
                   </div>
@@ -81,9 +63,9 @@
                 <div class="chart-right">
                   <div class="card-body">
                     <div class="current-sale-container">
-                      <div id="chart-currently">
+                      <div id="chart-account">
                         <apexchart
-                            ref="chart_statistic"
+                            ref="chart_nasabah"
 
                             :options="options"
                             :series="series"
@@ -110,14 +92,6 @@
                     <h5>{{ $t('Simpanan') }}</h5>
                     <p class="font-roboto">{{$t('overview10day')}}</p>
                   </div>
-                  <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>{{ totalnasabah }}</h5>
-                    <p class="font-roboto">{{$t('Customer')}}</p>
-                  </div>
-                  <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>{{ totaltransaksi }}</h5>
-                    <p class="font-roboto">{{$t('Transaction')}}</p>
-                  </div>
 
                   <div class="col-xl-12 p-0 left-btn">
                     <a class="btn btn-gradient">{{$t('Summary')}}</a>
@@ -128,9 +102,9 @@
                 <div class="chart-right">
                   <div class="card-body">
                     <div class="current-sale-container">
-                      <div id="chart-currently">
+                      <div id="chart-account-tabungan">
                         <apexchart
-                            ref="chart_statistic"
+                            ref="chart_account_tabungan"
 
                             :options="options"
                             :series="series"
@@ -153,68 +127,83 @@
 
 <script>
 
-import {ACTION_GET_STATISTIC} from "@/store"
-
+import {
+  ACTION_GET_STATISTIC_NASABAH,
+    ACTION_GET_STATISTIC_TRANSACTION,
+    ACTION_GET_STATISTIC_ACCOUN_TABUNGAN
+} from "@/store"
 import {mapState} from "vuex"
+import {getOptions} from "@/utils/AxisFormatter.js"
+import {getTodayDate,getLastMontDate} from "@/utils/utils.js"
+
 export default {
   data: () => {
     return {
-
+      series:[]
     };
   },
   computed:{
     ...mapState({
       options:(state)=>state.statistic.options,
-      series: (state)=> state.statistic.series,
-      totalnasabah:(state)=>state.statistic.totalnasabah,
-      totaltransaksi:(state)=>state.statistic.totaltransaksi,
     })
 
   },
   created() {
-    this.$store.dispatch(ACTION_GET_STATISTIC,{}).then(({success,data})=>{
+    this.$store.dispatch(ACTION_GET_STATISTIC_NASABAH,{
+      from:getLastMontDate(),
+      to:getTodayDate()
+    }).then(({success,data})=>{
       if(success){
-        this.$refs.chart_statistic.updateOptions({
-          xaxis: {
-          type: "datetime",
-              low: 0,
-              offsetX: 0,
-              offsetY: 0,
-              show: true,
-              categories: data.label,
-              labels: {
-            low: 0,
-                offsetX: 0,
-                show: false,
-          },
-          axisBorder: {
-            low: 0,
-                offsetX: 0,
-                show: false,
-          },
-        },
-          yaxis: {
-            low: 0,
-            offsetX: 0,
-            offsetY: 0,
-            show: false,
-            max:data.max+2,
-            labels: {
-              low: 0,
-              offsetX: 0,
-              show: false,
-            },
-            axisBorder: {
-              low: 0,
-              offsetX: 0,
-              show: false,
-            },
-          },
-        })
-        this.$refs.chart_statistic.updateSeries([{name:this.$t("Customer"),data:data.nasabah},{name:this.$t("Transaction"),data:data.transaksi}])
+        this.$refs.chart_nasabah.updateOptions(getOptions(data.label,data.max))
+        this.$refs.chart_nasabah.updateSeries(
+            [
+                {
+                  name:this.$t("Customer"),
+                  data:data.nasabah
+                }
+            ]
+        )
       }
-
-
+    })
+    this.$store.dispatch(ACTION_GET_STATISTIC_TRANSACTION,{
+      from:getLastMontDate(),
+      to:getTodayDate()
+    }).then(({success,data})=>{
+      if(success){
+        this.$refs.chart_transaction.updateOptions(getOptions(data.label,data.max))
+        this.$refs.chart_transaction.updateSeries(
+            [
+              {
+                name:this.$t("Transaction"),
+                data:data.transaction
+              },
+              {
+                name:this.$t("Transaction Kredit"),
+                data:data.transaction_kredit
+              },
+              {
+                name:this.$t("Transaction Debit"),
+                data:data.transaction_debit
+              }
+            ]
+        )
+      }
+    })
+    this.$store.dispatch(ACTION_GET_STATISTIC_ACCOUN_TABUNGAN,{
+      from:getLastMontDate(),
+      to:getTodayDate()
+    }).then(({success,data})=>{
+      if(success){
+        this.$refs.chart_account_tabungan.updateOptions(getOptions(data.label,data.max))
+        this.$refs.chart_account_tabungan.updateSeries(
+            [
+              {
+                name:this.$t("Account"),
+                data:data.account
+              }
+            ]
+        )
+      }
     })
 
   }

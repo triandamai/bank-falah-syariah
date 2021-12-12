@@ -62,18 +62,17 @@
 <script>
 
 import {ACTION_GET_STATISTIC} from "@/store"
-
 import {mapState} from "vuex"
+import {getOptions} from "@/utils/AxisFormatter.js"
 export default {
   data: () => {
     return {
-
+      series:[]
     };
   },
   computed:{
     ...mapState({
       options:(state)=>state.statistic.options,
-      series: (state)=> state.statistic.series,
       totalnasabah:(state)=>state.statistic.totalnasabah,
       totaltransaksi:(state)=>state.statistic.totaltransaksi,
     })
@@ -82,43 +81,7 @@ export default {
   created() {
     this.$store.dispatch(ACTION_GET_STATISTIC,{}).then(({success,data})=>{
       if(success){
-        this.$refs.chart_statistic.updateOptions({
-          xaxis: {
-          type: "datetime",
-              low: 0,
-              offsetX: 0,
-              offsetY: 0,
-              show: true,
-              categories: data.label,
-              labels: {
-            low: 0,
-                offsetX: 0,
-                show: false,
-          },
-          axisBorder: {
-            low: 0,
-                offsetX: 0,
-                show: false,
-          },
-        },
-          yaxis: {
-            low: 0,
-            offsetX: 0,
-            offsetY: 0,
-            show: false,
-            max:data.max+2,
-            labels: {
-              low: 0,
-              offsetX: 0,
-              show: false,
-            },
-            axisBorder: {
-              low: 0,
-              offsetX: 0,
-              show: false,
-            },
-          },
-        })
+        this.$refs.chart_statistic.updateOptions(getOptions(data.label,data.max))
         this.$refs.chart_statistic.updateSeries([{name:this.$t("Customer"),data:data.nasabah},{name:this.$t("Transaction"),data:data.transaksi}])
       }
 
