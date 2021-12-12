@@ -7,6 +7,7 @@
 
 var primary = localStorage.getItem("primary_color") || "#7366ff";
 var secondary = localStorage.getItem("secondary_color") || "#f73164";
+var variant = localStorage.getItem("variant_color") || "#3a9f47";
 
 export const getOptions =(label,max) =>{
     return {
@@ -62,7 +63,7 @@ export const defaultOptions =  {
             show: false,
         },
     },
-    colors: [primary, secondary],
+    colors: [primary, secondary,variant],
         dataLabels: {
         enabled: false,
     },

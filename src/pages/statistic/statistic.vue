@@ -14,10 +14,7 @@
                 <div class="row m-0 chart-left">
                   <div class="col-xl-12 p-0 left_side_earning">
                     <h5>{{ $t('Transaksi') }}</h5>
-                    <p class="font-roboto">{{$t('overview10day')}}</p>
-                  </div>
-                  <div class="col-xl-12 p-0 left-btn">
-                    <a class="btn btn-gradient">{{$t('Summary')}}</a>
+                    <p class="font-roboto">{{$t('overview30day')}}</p>
                   </div>
                 </div>
               </div>
@@ -52,10 +49,7 @@
                 <div class="row m-0 chart-left">
                   <div class="col-xl-12 p-0 left_side_earning">
                     <h5>{{ $t('Nasabah') }}</h5>
-                    <p class="font-roboto">{{$t('overview10day')}}</p>
-                  </div>
-                  <div class="col-xl-12 p-0 left-btn">
-                    <a class="btn btn-gradient">{{$t('Summary')}}</a>
+                    <p class="font-roboto">{{$t('overview30day')}}</p>
                   </div>
                 </div>
               </div>
@@ -89,13 +83,10 @@
               <div class="col-xl-3 earning-content p-0">
                 <div class="row m-0 chart-left">
                   <div class="col-xl-12 p-0 left_side_earning">
-                    <h5>{{ $t('Simpanan') }}</h5>
-                    <p class="font-roboto">{{$t('overview10day')}}</p>
+                    <h5>{{ $t('Tabungan') }}</h5>
+                    <p class="font-roboto">{{$t('overview30day')}}</p>
                   </div>
 
-                  <div class="col-xl-12 p-0 left-btn">
-                    <a class="btn btn-gradient">{{$t('Summary')}}</a>
-                  </div>
                 </div>
               </div>
               <div class="col-xl-9 p-0">

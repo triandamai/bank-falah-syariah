@@ -65,6 +65,7 @@ new Vue({
     vuetify,
     render: (h) => h(App),
     created() {
+        console.log("Bakaran Project","this is developer mode only")
       window.addEventListener("offline",()=>{
           store.commit("setConnection", false);
       })

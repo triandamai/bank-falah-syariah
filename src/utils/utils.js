@@ -41,9 +41,9 @@ export const getTodayDate=()=>{
 
 export const getLastMontDate=()=>{
   let now = new Date()
-  console.log('Today: ' + now.toUTCString())
+ // console.log('Today: ' + now.toUTCString())
   let last30days = new Date(now.setDate(now.getDate() - 30))
-  console.log('Last 30th day: ' + last30days.toUTCString())
+ // console.log('Last 30th day: ' + last30days.toUTCString())
 
 
   const getMonth=(month)=>{

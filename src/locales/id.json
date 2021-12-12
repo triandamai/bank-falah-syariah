@@ -172,5 +172,13 @@
   "Master data Tabungan": "Master Data Tabungan",
   "Tabungan": "Tabungan",
   "Transaksi Bank": "Transaksi Bank",
-  "Bank": "Bank"
+  "Bank": "Bank",
+  "Statistic": "Statistik",
+  "Transaksi Neraca": "Transaksi Neraca",
+  "overview30day": "Data 30 Hari Terakhir",
+  "Report Laba Rugi": "Laporan Laba Rugi",
+  "Neraca": "Neraca",
+  "Transaction Debit": "Transaksi Debit",
+  "Transaction Kredit": "Transaksi Kredit",
+  "Report Neraca": "Laporan Neraca"
 }
