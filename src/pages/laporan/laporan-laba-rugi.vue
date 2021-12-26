@@ -71,7 +71,7 @@
         :body="pdfFile"
         :name="pdfName"
         @close="closeForm"
-        @submit="downloadFile"
+        @submit="saveFile"
     />
     <!-- Container-fluid Ends-->
   </div>
@@ -132,19 +132,15 @@ export default {
             this.pdfFile = window.URL.createObjectURL(new Blob([response.data]))
             this.stopLoading()
             this.showCetak = true
-          }).catch((e)=>{
+          }).catch(()=>{
 
             this.stopLoading()
       })
     },
-    downloadFile(fileName){
+    saveFile(){
       if(this.pdfFile) {
-      this.clearForm()
-        const createDownloadElement = document.createElement("a")
-        createDownloadElement.href = this.pdfFile
-        createDownloadElement.setAttribute("download",fileName)
-        document.body.appendChild(createDownloadElement)
-        createDownloadElement.click()
+        this.clearForm()
+        this.downloadFile(this.pdfFile,this.pdfName)
       }else {
         //file doesn't exist
       }

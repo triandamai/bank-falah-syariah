@@ -257,7 +257,7 @@
         :body="pdfFile"
         :name="pdfName"
         @close="showCetak = false"
-        @submit="downloadFile"
+        @submit="saveFile"
     />
     <!-- Container-fluid Ends-->
   </div>
@@ -335,16 +335,13 @@ export default {
             this.stopLoading()
             this.showCetak = true
           }).catch(()=>{
-        this.stopLoading()
-      })
+            this.stopLoading()
+          })
     },
-    downloadFile(){
+    saveFile(){
       if(this.pdfFile) {
-        const createDownloadElement = document.createElement("a")
-        createDownloadElement.href = this.pdfFile
-        createDownloadElement.setAttribute("download",`${this.selectedRekening}-${this.dates.join('-')}.pdf`)
-        document.body.appendChild(createDownloadElement)
-        createDownloadElement.click()
+        const fileName = `${this.selectedRekening}-${this.dateFrom}-${this.dateTo}.pdf`
+        this.downloadFile(this.pdfFile,fileName)
       }else {
         //file doesn't exist
       }

@@ -59,6 +59,13 @@ export default {
             const date = new Date(param);
             return `${date.toLocaleString("id-ID")}`
         },
+        downloadFile(file,fileName){
+            const createDownloadElement = document.createElement("a")
+            createDownloadElement.href = file
+            createDownloadElement.setAttribute("download",fileName)
+            document.body.appendChild(createDownloadElement)
+            createDownloadElement.click()
+        }
 
     }
 }

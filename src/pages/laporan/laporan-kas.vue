@@ -121,7 +121,7 @@
               <v-row>
 
                 <v-btn
-                    @click="printLaporan"
+                    @click="printReport"
                     class="ml-3"
                     outlined
                     color="indigo"
@@ -182,7 +182,7 @@ export default {
     };
   },
   methods: {
-    printLaporan(){
+    printReport(){
       this.startLoading()
       let start = this.dateFrom
       let end = this.dateTo
@@ -205,22 +205,19 @@ export default {
           this.stopLoading()
       })
     },
-    downloadFile(fileName){
+    saveFile(){
       if(this.pdfFile) {
       this.clearForm()
-        const createDownloadElement = document.createElement("a")
-        createDownloadElement.href = this.pdfFile
-        createDownloadElement.setAttribute("download",fileName)
-        document.body.appendChild(createDownloadElement)
-        createDownloadElement.click()
+        const fileName = `KAS-${this.dateFrom}-${this.dateTo}.pdf`
+        this.downloadFile(this.pdfFile,fileName)
       }else {
         //file doesn't exist
       }
     },
     clearForm(){
       this.type = ""
-      this.dates = []
-},closeForm(){
+    },
+    closeForm(){
       this.showCetak = false
       this.clearForm()
     }
