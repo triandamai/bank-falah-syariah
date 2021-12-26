@@ -44,18 +44,20 @@
                           </template>
                         </v-autocomplete>
                     </v-col>
-                   <v-col cols="12" sm="12" md="12" lg="12">
-                     <v-dialog
-                         ref="dialog"
-                         v-model="modal"
-                         :return-value.sync="dates"
-                         persistent
-                         width="290px"
+                   <v-col cols="12" sm="6" md="6" lg="12">
+                     <v-menu
+                         ref="refDatePickerFrom"
+                         v-model="datePickerFrom"
+                         :close-on-content-click="false"
+                         :return-value.sync="dateFrom"
+                         transition="scale-transition"
+                         offset-y
+                         min-width="auto"
                      >
                        <template v-slot:activator="{ on, attrs }">
                          <v-text-field
-                             v-model="dateRangeText"
-                             label="Pilih Tanggal"
+                             v-model="dateFrom"
+                             :label="$t('From Date')"
                              readonly
                              v-bind="attrs"
                              v-on="on"
@@ -64,27 +66,71 @@
                          ></v-text-field>
                        </template>
                        <v-date-picker
-                           v-model="dates"
+                           v-model="dateFrom"
+                           no-title
                            scrollable
-                           range
                        >
                          <v-spacer></v-spacer>
                          <v-btn
                              text
                              color="primary"
-                             @click="modal = false"
+                             @click="datePickerFrom = false"
                          >
                            Cancel
                          </v-btn>
                          <v-btn
                              text
                              color="primary"
-                             @click="$refs.dialog.save(dates)"
+                             @click="$refs.refDatePickerFrom.save(dateFrom)"
                          >
                            OK
                          </v-btn>
                        </v-date-picker>
-                     </v-dialog>
+                     </v-menu>
+                   </v-col>
+                   <v-col cols="12" sm="6" md="6" lg="12">
+                     <v-menu
+                         ref="refDatePickerTo"
+                         v-model="datePickerTo"
+                         :close-on-content-click="false"
+                         :return-value.sync="dateTo"
+                         transition="scale-transition"
+                         offset-y
+                         min-width="auto"
+                     >
+                       <template v-slot:activator="{ on, attrs }">
+                         <v-text-field
+                             v-model="dateTo"
+                             :label="$t('To Date')"
+                             readonly
+                             v-bind="attrs"
+                             v-on="on"
+                             outlined
+                             dense
+                         ></v-text-field>
+                       </template>
+                       <v-date-picker
+                           v-model="dateTo"
+                           no-title
+                           scrollable
+                       >
+                         <v-spacer></v-spacer>
+                         <v-btn
+                             text
+                             color="primary"
+                             @click="datePickerTo = false"
+                         >
+                           Cancel
+                         </v-btn>
+                         <v-btn
+                             text
+                             color="primary"
+                             @click="$refs.refDatePickerTo.save(dateTo)"
+                         >
+                           OK
+                         </v-btn>
+                       </v-date-picker>
+                     </v-menu>
                    </v-col>
                  </v-row>
                 </v-col>
@@ -227,8 +273,10 @@ export default {
   mixins:[pageMixin],
   data: () => {
     return {
-      dates:[],
-      modal:false,
+      dateFrom:"",
+      dateTo:"",
+      datePickerFrom:false,
+      datePickerTo:false,
       optionMutasi:false,
       selectedRekening:null,
       shouldShowButtonCetak:false,
@@ -251,8 +299,8 @@ export default {
     },
     getMutasi(){
       this.startLoading()
-      let start = this.dates[0]
-      let end = this.dates[this.dates.length -1]
+      let start = this.dateFrom
+      let end = this.dateTo
       this.$store.dispatch(ACTION_GET_MUTASI,{
         type:RPEMBIAYAAN,
         no_rekening:this.selectedRekening,
@@ -269,11 +317,11 @@ export default {
     printMutasi(data){
       this.optionMutasi=false
       this.startLoading()
-      let start = this.dates[0]
-      let end = this.dates[this.dates.length -1]
+      let start = this.dateFrom
+      let end = this.dateTo
       ApiService.downloadFileMutasi(`rekening_pembiayaan/cetak/${this.selectedRekening}/buku_tabungan?start_date=${start}&end_date=${end}&total_first_row=${data.total}&first_row=${data.first}&end_row=${data.last}`)
       .then((response)=>{
-        this.pdfName = `${this.selectedRekening}-${this.dates.join('-')}.pdf`
+        this.pdfName = `${this.selectedRekening}-${start}-${end}.pdf`
         this.pdfFile = window.URL.createObjectURL(new Blob([response.data]))
         this.stopLoading()
         this.showCetak = true

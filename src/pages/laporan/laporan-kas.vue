@@ -27,18 +27,20 @@
                   required
                   />
                 </v-col>
-                <v-col cols="12" sm="12" md="12" lg="12">
-                  <v-dialog
-                      ref="dialog"
-                      v-model="modal"
-                      :return-value.sync="dates"
-                      persistent
-                      width="290px"
+                <v-col cols="12" sm="6" md="6" lg="12">
+                  <v-menu
+                      ref="refDatePickerFrom"
+                      v-model="datePickerFrom"
+                      :close-on-content-click="false"
+                      :return-value.sync="dateFrom"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
                   >
                     <template v-slot:activator="{ on, attrs }">
                       <v-text-field
-                          v-model="dateRangeText"
-                          :label="$t('Pilih Tanggal')"
+                          v-model="dateFrom"
+                          :label="$t('From Date')"
                           readonly
                           v-bind="attrs"
                           v-on="on"
@@ -47,27 +49,71 @@
                       ></v-text-field>
                     </template>
                     <v-date-picker
-                        v-model="dates"
+                        v-model="dateFrom"
+                        no-title
                         scrollable
-                        range
                     >
                       <v-spacer></v-spacer>
                       <v-btn
                           text
                           color="primary"
-                          @click="modal = false"
+                          @click="datePickerFrom = false"
                       >
                         Cancel
                       </v-btn>
                       <v-btn
                           text
                           color="primary"
-                          @click="$refs.dialog.save(dates)"
+                          @click="$refs.refDatePickerFrom.save(dateFrom)"
                       >
                         OK
                       </v-btn>
                     </v-date-picker>
-                  </v-dialog>
+                  </v-menu>
+                </v-col>
+                <v-col cols="12" sm="6" md="6" lg="12">
+                  <v-menu
+                      ref="refDatePickerTo"
+                      v-model="datePickerTo"
+                      :close-on-content-click="false"
+                      :return-value.sync="dateTo"
+                      transition="scale-transition"
+                      offset-y
+                      min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                          v-model="dateTo"
+                          :label="$t('To Date')"
+                          readonly
+                          v-bind="attrs"
+                          v-on="on"
+                          outlined
+                          dense
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                        v-model="dateTo"
+                        no-title
+                        scrollable
+                    >
+                      <v-spacer></v-spacer>
+                      <v-btn
+                          text
+                          color="primary"
+                          @click="datePickerTo = false"
+                      >
+                        Cancel
+                      </v-btn>
+                      <v-btn
+                          text
+                          color="primary"
+                          @click="$refs.refDatePickerTo.save(dateTo)"
+                      >
+                        OK
+                      </v-btn>
+                    </v-date-picker>
+                  </v-menu>
                 </v-col>
               </v-row>
             </v-col>
@@ -111,7 +157,6 @@ export default {
   mixins:[pageMixin],
   data: () => {
     return {
-      dates:[],
       itemsType:[
         {
           text:"Kredit&Debet",
@@ -126,23 +171,21 @@ export default {
           value:"DEBET"
         }
       ],
-      modal:false,
       pdfName:"",
       pdfFile:null,
       showCetak:false,
+      dateFrom:"",
+      dateTo:"",
+      datePickerFrom:false,
+      datePickerTo:false,
       type:""
     };
-  },
-  computed: {
-    dateRangeText () {
-      return this.dates.join(' ~ ')
-    },
   },
   methods: {
     printLaporan(){
       this.startLoading()
-      let start = this.dates[0]
-      let end = this.dates[this.dates.length -1]
+      let start = this.dateFrom
+      let end = this.dateTo
 
       const getType =()=>{
         if(this.type === "KREDETDEBET") return ""
@@ -153,12 +196,13 @@ export default {
           `laporan/transaksi?start_date=${start}&end_date=${end}&type=${getType()}`
       )
           .then((response)=>{
-            this.pdfName = `KAS-${this.dates.join('-')}-${getType()}.pdf`
+            this.pdfName = `KAS-${start}-${end}-${getType()}.pdf`
             this.pdfFile = window.URL.createObjectURL(new Blob([response.data]))
             this.stopLoading()
             this.showCetak = true
           }).catch(()=>{
-        this.stopLoading()
+
+          this.stopLoading()
       })
     },
     downloadFile(fileName){
