@@ -56,7 +56,7 @@ export const getSeries=()=>{
 
 export const defaultOptions =  {
     chart: {
-        width: 685,
+            width: 685,
             height: 230,
             type: "area",
             toolbar: {

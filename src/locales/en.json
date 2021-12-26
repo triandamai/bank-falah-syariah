@@ -180,7 +180,10 @@
   "Neraca": "Neraca",
   "Transaction Debit": "Transaction Debit",
   "Transaction Kredit": "Transaction Kredit",
-  "Report Neraca": "Report Neraca"
+  "Report Neraca": "Report Neraca",
+  "Detail": "Details",
+  "From Date": "From Tanggal",
+  "To Date": "To Tanggal"
 
 
 }

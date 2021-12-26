@@ -5,7 +5,7 @@
     <div class="container-fluid">
       <div class="card">
             <div class="card-header">
-              <h5>{{$t('Report Simpanan')}}</h5>
+              <h5>{{$t('Report Pembiayaan')}}</h5>
               <!-- <span
                 >lorem ipsum dolor sit amet, consectetur adipisicing elit</span
               > -->

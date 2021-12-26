@@ -26,14 +26,14 @@
                   </div>
 
                   <div class="col-xl-12 p-0 left-btn">
-                    <a @click="$router.push({path:'/main/statistic'})" class="btn btn-gradient">{{$t('Summary')}}</a>
+                    <a @click="$router.push({path:'/main/statistic'})" class="btn btn-gradient">{{$t('Detail')}}</a>
                   </div>
                 </div>
               </div>
               <div class="col-xl-9 p-0">
-                <div class="chart-right">
+
                       <div class="card-body">
-                        <div class="current-sale-container">
+
                           <div id="chart-currently">
                             <apexchart
                                 ref="chart_statistic"
@@ -42,8 +42,8 @@
                                 :series="series"
                             ></apexchart>
                           </div>
-                        </div>
-                      </div>
+
+
                 </div>
               </div>
             </div>

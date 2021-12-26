@@ -180,5 +180,8 @@
   "Neraca": "Neraca",
   "Transaction Debit": "Transaksi Debit",
   "Transaction Kredit": "Transaksi Kredit",
-  "Report Neraca": "Laporan Neraca"
+  "Report Neraca": "Laporan Neraca",
+  "Detail": "Detail",
+  "From Date": "Dari Tanggal",
+  "To Date": "Sampai Tanggal"
 }
