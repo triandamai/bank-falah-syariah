@@ -180,7 +180,7 @@
                             <v-btn
                                 text
                                 color="primary"
-                                @click="$refs.refDateNasabahFrom.save(dateTransactionTo)"
+                                @click="$refs.refDateNasabahFrom.save(dateNasabahFrom)"
                             >
                               OK
                             </v-btn>
@@ -303,7 +303,7 @@
                             <v-btn
                                 text
                                 color="primary"
-                                @click="$refs.refDateTabunganFrom.save(dateTransactionTo)"
+                                @click="$refs.refDateTabunganFrom.save(dateTabunganFrom)"
                             >
                               OK
                             </v-btn>
@@ -349,7 +349,7 @@
                             <v-btn
                                 text
                                 color="primary"
-                                @click="$refs.refDateTabunganTo.save(dateNasabahTo)"
+                                @click="$refs.refDateTabunganTo.save(dateTabunganTo)"
                             >
                               OK
                             </v-btn>
@@ -400,16 +400,19 @@ export default {
       datePickerTransactionTo:false,
       dateTransactionTo :"",
       infoTransaction:"",
+
       datePickerNasabahFrom:false,
       dateNasabahFrom :"",
       datePickerNasabahTo:false,
       dateNasabahTo :"",
       infoNasabah:"",
+
       datePickerTabunganFrom:false,
       dateTabunganFrom :"",
       datePickerTabunganTo:false,
       dateTabunganTo :"",
       infoTabungan:"",
+
       series:[]
     };
   },
@@ -424,6 +427,7 @@ export default {
       this.getStatisticTransaction(this.dateTransactionFrom,newVal)
     },
     dateNasabahTo(newVal){
+
       this.infoNasabah =  `Data ${this.dateNasabahFrom} sampai ${newVal}`
       this.getStatisticNasabah(this.dateNasabahFrom,newVal)
     },
