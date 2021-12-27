@@ -27,7 +27,7 @@
                   required
                   />
                 </v-col>
-                <v-col cols="12" sm="6" md="6" lg="12">
+                <v-col cols="12" sm="6" md="6" lg="12" xl="12">
                   <v-menu
                       ref="refDatePickerFrom"
                       v-model="datePickerFrom"
@@ -71,7 +71,7 @@
                     </v-date-picker>
                   </v-menu>
                 </v-col>
-                <v-col cols="12" sm="6" md="6" lg="12">
+                <v-col cols="12" sm="6" md="6" lg="12" xl="12">
                   <v-menu
                       ref="refDatePickerTo"
                       v-model="datePickerTo"

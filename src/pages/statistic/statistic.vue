@@ -452,24 +452,6 @@ export default {
   },
   methods:{
     getStatisticTransaction(from,to){
-      this.$store.dispatch(ACTION_GET_STATISTIC_NASABAH,{
-        from:from,
-        to:to
-      }).then(({success,data})=>{
-        if(success){
-          this.$refs.chart_nasabah.updateOptions(getOptions(data.label,data.max))
-          this.$refs.chart_nasabah.updateSeries(
-              [
-                {
-                  name:this.$t("Customer"),
-                  data:data.nasabah
-                }
-              ]
-          )
-        }
-      })
-    },
-    getStatisticNasabah(from,to){
       this.$store.dispatch(ACTION_GET_STATISTIC_TRANSACTION,{
         from:from,
         to:to
@@ -494,6 +476,26 @@ export default {
           )
         }
       })
+
+    },
+    getStatisticNasabah(from,to){
+      this.$store.dispatch(ACTION_GET_STATISTIC_NASABAH,{
+        from:from,
+        to:to
+      }).then(({success,data})=>{
+        if(success){
+          this.$refs.chart_nasabah.updateOptions(getOptions(data.label,data.max))
+          this.$refs.chart_nasabah.updateSeries(
+              [
+                {
+                  name:this.$t("Customer"),
+                  data:data.nasabah
+                }
+              ]
+          )
+        }
+      })
+
     },
     getStatisticTabungan(from,to){
       this.$store.dispatch(ACTION_GET_STATISTIC_ACCOUN_TABUNGAN,{
