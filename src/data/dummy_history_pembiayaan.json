@@ -1,0 +1,91 @@
+{
+  "status": 200,
+  "message": "Request sukses",
+  "total_data": 5,
+  "count_data": 5,
+  "data": {
+    "history_angsuran": [
+      {
+        "periode": 0,
+        "cicilan_perbulan": "",
+        "cicilan_pokok": "",
+        "margin": "",
+        "saldo": 475000
+      },
+      {
+        "periode": 1,
+        "cicilan_perbulan": 52250,
+        "cicilan_pokok": 47500,
+        "margin": 4750,
+        "saldo": 427500
+      },
+      {
+        "periode": 2,
+        "cicilan_perbulan": 52250,
+        "cicilan_pokok": 47500,
+        "margin": 4750,
+        "saldo": 380000
+      },
+      {
+        "periode": 3,
+        "cicilan_perbulan": 52250,
+        "cicilan_pokok": 47500,
+        "margin": 4750,
+        "saldo": 332500
+      },
+      {
+        "periode": 4,
+        "cicilan_perbulan": 52250,
+        "cicilan_pokok": 47500,
+        "margin": 4750,
+        "saldo": 285000
+      },
+      {
+        "periode": 5,
+        "cicilan_perbulan": 52250,
+        "cicilan_pokok": 47500,
+        "margin": 4750,
+        "saldo": 237500
+      },
+      {
+        "periode": 6,
+        "cicilan_perbulan": 52250,
+        "cicilan_pokok": 47500,
+        "margin": 4750,
+        "saldo": 190000
+      },
+      {
+        "periode": 7,
+        "cicilan_perbulan": 52250,
+        "cicilan_pokok": 47500,
+        "margin": 4750,
+        "saldo": 142500
+      },
+      {
+        "periode": 8,
+        "cicilan_perbulan": 52250,
+        "cicilan_pokok": 47500,
+        "margin": 4750,
+        "saldo": 95000
+      },
+      {
+        "periode": 9,
+        "cicilan_perbulan": 52250,
+        "cicilan_pokok": 47500,
+        "margin": 4750,
+        "saldo": 47500
+      },
+      {
+        "periode": 10,
+        "cicilan_perbulan": 52250,
+        "cicilan_pokok": 47500,
+        "margin": 4750,
+        "saldo": 0
+      }
+    ],
+    "cicilan_perbulan": 522500,
+    "cicilan_pokok": 475000,
+    "margin": 47500,
+    "saldo": 2137500
+  }
+}

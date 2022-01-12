@@ -9,6 +9,8 @@ import ApiService from "@/services/api.service";
 import {decrypt} from "@/services/jwt.service"
 import {formatCurrency} from "@/utils/utils";
 import {Promise} from "es6-promise";
+import dummy_history_pembiayaan from "@/data/dummy_history_pembiayaan.json"
+import dummy_detail from "@/data/dummy_detail_rekening.json"
 
 /***
  * dspatch type
@@ -19,20 +21,22 @@ const PUT_DATA_REKENING = "PUTDATAREKENING"
 const DELETE_DATA_REKENING = "DELETEDATAREKENING"
 const GET_SALDO_REKENING = "GET_SALDO_REKENING"
 const GET_MUTASI_REKENING = "GET_MUTASI_REKENING"
-const GET_LAPORAN_LABA_RUGI = "GET_LAPORAN_LABA"
+const GET_HISTORY_PEMBIAYAAN = "GETHISTORYPEMBIAYAAN"
+const GET_DETAIL_REKENING_PEMBIAYAAN = "GET_DETAIL_REKENING_PEMBIAYAAN "
 
 const DETAIL_REKENING = "DETAIL_REKENING"
 export const DETAIL_REKENING_PEMBIAYAAN = 'rekening_pembiayaan/'
 export const DETAIL_REKENING_SIMPANAN = 'rekening_simpanan/'
 
 export const ACTION_GET_MUTASI = `rekening/${GET_MUTASI_REKENING}`
-
 export const ACTION_GET_DATA_REKENING = `rekening/${GET_DATA_REKENING}`;
 export const ACTION_POST_DATA_REKENING = `rekening/${POST_DATA_REKENING}`;
 export const ACTION_PUT_DATA_REKENING = `rekening/${PUT_DATA_REKENING}`;
 export const ACTION_DELETE_DATA_REKENING = `rekening/${DELETE_DATA_REKENING}`;
 export const ACTION_GET_DETAIL_REKENING = `rekening/${DETAIL_REKENING}`;
 export const ACTION_GET_SALDO = `rekening/${GET_SALDO_REKENING}`
+export const ACTION_GET_HISTORY_PEMBIAYAAN = `rekening/${GET_HISTORY_PEMBIAYAAN}`
+export const ACTION_GET_DETAIL_REKENING_PEMBIAYAAN = `rekening/${GET_DETAIL_REKENING_PEMBIAYAAN}`
 
 const ADD_DATA_REKENING = "MADDDATAREKENING";
 const EDIT_DATA_REKENING = "MUPDATEREKENING";
@@ -42,6 +46,8 @@ const SET_DETAIL_REKENING = "DETAIL_REKENING"
 const SET_MUTASI="SET_MUTASI_REKENING"
 const DESTROY_MUTASI = "DESTROY MUTASI"
 const SET_SALDO = "SETSALDO"
+const SET_JUMLAH_PINJAMAN = "JUMLAHPINJAMAN"
+const SET_HISTORY_PEMBIAYAAN = "SETHISTORYPEMBIAYAAN"
 const SET_DETAIL_REKENING_NASABAH = "SETDETAILREKENINGNASABAH"
 
 export const MUTATION_ADD_DATA_REKENING = `rekening/${ADD_DATA_REKENING}`;
@@ -49,22 +55,16 @@ export const MUTATION_UPDATE_DATA_REKENING = `rekening/${EDIT_DATA_REKENING}`;
 export const MUTATION_DELETE_DATA_REKENING = `rekening/${REMOVE_DATA_REKENING}`;
 export const MUTATION_DESTROY_MUTASI = `rekening/${DESTROY_MUTASI}`;
 export const MUTATION_ADD_MUTASI = `rekening/${SET_DETAIL_REKENING}`;
+
 /***
  *
  * type Action
  *
  */
 export const RTABUNGAN = "rekening_simpanan";
-export const RDEPOSITO = "rekening_deposito";
 export const RPEMBIAYAAN = "rekening_pembiayaan";
 
 const state = {
-    datadeposito: [],
-    deposito: {
-        dialog: false,
-        current_page: 1,
-        last_page: 0,
-    },
     datapembiayaan: [],
     pembiayaan: {
         dialog: false,
@@ -72,6 +72,10 @@ const state = {
         last_page: 0,
     },
     datasimpanan: [],
+    mutasi:{
+        pembiayaan:[],
+        simpanan:[]
+    },
     tabungan: {
         dialog: false,
         current_page: 1,
@@ -82,14 +86,14 @@ const state = {
         simpanan: [],
         nasabah:{}
     },
-    mutasi:{
-        pembiayaan: [],
-        simpanan: [],
-    },
+    history_pembiayaan:[],
     saldo: {
         pembiayaan: {
             saldo: 0,
-            jumlah_pinjaman: 0
+            jumlah_pinjaman: 0,
+            cicilan_perbulan:0,
+            cicilan_pokok:0,
+            margin:0
         },
         simpanan: {
             saldo:0,
@@ -189,6 +193,39 @@ const actions = {
                 })
         })
     },
+    [GET_DETAIL_REKENING_PEMBIAYAAN]({commit},no_rekening){
+        return new Promise((resolve)=>{
+            const decrypt_no_rekening = decrypt(no_rekening)
+                ApiService.get(`rekening_pembiayaan/detail?no_rekening=${decrypt_no_rekening}`)
+                    .then(({success,data})=> {
+                        resolve(success)
+                        let datas = dummy_detail
+                        commit(SET_JUMLAH_PINJAMAN,{
+                            jumlah_pinjaman:datas.data[0].jumlah_angsuran,
+                            uang_muka : datas.data[0].total_uang_muka
+                        })
+
+                    })
+        })
+    },
+    [GET_HISTORY_PEMBIAYAAN]({commit},no_rekening){
+        return new Promise((resolve)=>{
+            const decrypt_no_rekening = decrypt(no_rekening)
+            ApiService.get(`rekening_pembiayaan/history_angsuran?no_rekening=${decrypt_no_rekening}`)
+                .then(({success,data})=>{
+                    resolve(success)
+                    let datas = dummy_history_pembiayaan.data
+                    let set =   {
+                        saldo: datas.saldo,
+                        cicilan_perbulan:datas.cicilan_perbulan,
+                        cicilan_pokok :datas.cicilan_pokok,
+                        margin:datas.margin,
+                    }
+                    commit(SET_HISTORY_PEMBIAYAAN,datas.history_angsuran)
+                    commit(SET_SALDO,{type:DETAIL_REKENING_PEMBIAYAAN,saldo:set})
+                })
+        })
+    },
     /***
      * save data
      * @param commit
@@ -211,6 +248,7 @@ const actions = {
                 })
         });
     },
+
     /***
      * update/edit data
      */
@@ -327,11 +365,20 @@ const mutations = {
                 break;
         }
     },
+    [SET_JUMLAH_PINJAMAN](state,jumlah){
+        state.saldo.pembiayaan.jumlah_pinjaman = jumlah.jumlah_pinjaman
+        state.saldo.pembiayaan.uang_muka = jumlah.uang_muka
+    },
+    [SET_HISTORY_PEMBIAYAAN](state,history){
+        state.history_pembiayaan = history
+    },
     [SET_SALDO](state, {saldo, type}) {
-
         if (type === DETAIL_REKENING_PEMBIAYAAN) {
             state.saldo.pembiayaan.saldo = saldo.saldo
-            state.saldo.pembiayaan.jumlah_pinjaman = saldo.jumlah_pinjaman
+            state.saldo.pembiayaan.margin = saldo.margin
+            state.saldo.pembiayaan.cicilan_perbulan = saldo.cicilan_perbulan
+            state.saldo.pembiayaan.cicilan_pokok = saldo.cicilan_pokok
+
         } else {
             state.saldo.simpanan.saldo = saldo
         }
@@ -386,12 +433,6 @@ const mutations = {
                 .indexOf(olddata.id);
             Object.assign(state.datasimpanan[index], data);
         }
-        if (type === RDEPOSITO) {
-            const index = state.datadeposito
-                .map((deposito) => deposito.id)
-                .indexOf(olddata.id);
-            Object.assign(state.datadeposito[index], data);
-        }
         if (type === RPEMBIAYAAN) {
             const index = state.datapembiayaan
                 .map((pembiayaan) => pembiayaan.id)
@@ -407,12 +448,6 @@ const mutations = {
      * @param state
      */
     [REMOVE_DATA_REKENING](state, {type, data}) {
-        if (type === RDEPOSITO) {
-            const index = state.datadeposito
-                .map((deposito) => deposito.id)
-                .indexOf(data.id);
-            state.datadeposito.splice(index, 1);
-        }
         if (type === RPEMBIAYAAN) {
             const index = state.datapembiayaan
                 .map((deposito) => deposito.id)

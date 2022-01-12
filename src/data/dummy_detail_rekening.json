@@ -1,0 +1,40 @@
+{
+  "status": 200,
+  "message": "Request sukses",
+  "total_data": 1,
+  "count_data": 1,
+  "data": [
+    {
+      "id": 22,
+      "status_pencairan": 0,
+      "status_rekening": "",
+      "tgl_pencairan": "",
+      "tgl_jatuh_tempo": "",
+      "no_urut": "",
+      "no_rekening": "01.0101.00026",
+      "no_akad": "26",
+      "uang_muka": 5,
+      "total_uang_muka": 25000,
+      "modal": 500000,
+      "pendapatan": "",
+      "nisbah": "",
+      "lama_angsuran": 10,
+      "tipe_angsuran": "bulan",
+      "cabang_id": "",
+      "nasabah_id": 48,
+      "produk_id": 5,
+      "pegawai_id": "",
+      "jaminan_id": "",
+      "program_id": "",
+      "rasio_nasabah": 50,
+      "rasio_bank": 80,
+      "jumlah_margin": 4750,
+      "margin": 10,
+      "harga_jual": 547500,
+      "jumlah_angsuran": 52250,
+      "pembiayaan": 475000,
+      "created_at": "2022-01-12T14:55:55.000000Z",
+      "updated_at": "2022-01-12T14:55:55.000000Z"
+    }
+  ]
+}
