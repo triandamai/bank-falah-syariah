@@ -515,7 +515,6 @@ mixins:[componentMixin],
         produk_pembiayaan:{
           nominal:null,
         },
-
         nominal_pembiayaan:null,
         nominal_simpanan:null,
         lama_angsuran:null,
