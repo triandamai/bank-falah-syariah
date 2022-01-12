@@ -453,6 +453,28 @@
                       type="number"
                   />
                 </v-col>
+                <v-col cols="12" sm="12" md="6" lg="6">
+                  <v-text-field
+                      v-model="form.margin"
+                      label="Margin*"
+                      suffix="%"
+                      dense
+                      required
+                      outlined
+                      type="number"
+                  />
+                </v-col>
+                <v-col cols="12" sm="12" md="6" lg="6">
+                  <v-text-field
+                      v-model="form.dp"
+                      label="Dp*"
+                      suffix="%"
+                      dense
+                      required
+                      outlined
+                      type="number"
+                  />
+                </v-col>
                 <v-col cols="12" sm="12" md="12" lg="12">
                   <vuetify-money
                       v-model="form.nominal_pembiayaan"
