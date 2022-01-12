@@ -120,23 +120,12 @@
                     </div>
                     <!-- End InvoiceBot-->
                   </div>
-                  <div class="col-sm-12 text-center mt-3">
-
-                    <button class="btn btn-secondary" @click="$router.go(-1)" type="button">kembali</button>
-                  </div>
                   <!-- End Invoice-->
                   <!-- End Invoice Holder-->
                 </div>
               </div>
             </div>
-
-
-          </div>
-        </div>
-        <!--        -->
-<!--        detail-->
-        <div class="col-xl-9 col-md-8 col-sm-12 col-xs-12 box-col-12">
-          <div class="file-content">
+<!--            -->
             <div class="card">
               <div class="card-body">
                 <div class="invoice">
@@ -170,7 +159,7 @@
                               <span class="digits counter">#{{ decrypt($route.query.r) }}</span>
                             </h3>
                             <p>
-                            {{getMonthString()}}
+                              {{getMonthString()}}
                               <span class="digits">{{ getTodayDateMutasi() }}</span>
                               <br />
                             </p>
@@ -181,7 +170,7 @@
                     </div>
                     <hr />
                     <div>
-                      <div class="table-responsive invoice-table" id="table">
+                      <div class="table-responsive invoice-table" id="table2">
                         <table class="table table-bordered table-striped">
                           <tbody>
                           <tr>
@@ -227,20 +216,15 @@
                     </div>
                     <!-- End InvoiceBot-->
                   </div>
-                  <div class="col-sm-12 text-center mt-3">
-
-                    <button class="btn btn-secondary" @click="$router.go(-1)" type="button">kembali</button>
-                  </div>
                   <!-- End Invoice-->
                   <!-- End Invoice Holder-->
                 </div>
               </div>
             </div>
-
-
+<!--            -->
           </div>
         </div>
-<!--        -->
+        <!--        -->
       </div>
     </div>
     <!-- Container-fluid Ends-->

@@ -165,6 +165,7 @@ const actions = {
     [DETAIL_REKENING]({commit}, {type, no_rekening}) {
         return new Promise((resolve) => {
             const decrypt_no_rekening = decrypt(no_rekening)
+            console.log(decrypt_no_rekening)
             ApiService.get(`${type}${decrypt_no_rekening}/mutasi?t=${new Date().getMilliseconds()}`)
                 .then(({success, data}) => {
                     resolve(success)

@@ -31,7 +31,7 @@
           <v-stepper-content step="1">
             <v-container class="pt-md-2 pt-lg-2 pt-sm-2">
               <v-row>
-                <v-col cols="12" sm="12" md="6" lg="4">
+                <!-- <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.kode_nasabah"
                     label="Kode Nasabah"
@@ -39,7 +39,7 @@
                     outlined
                     dense
                   ></v-text-field>
-                </v-col>
+                </v-col> -->
                 <v-col cols="12" sm="12" md="6" lg="4">
                   <v-text-field
                     v-model="form.nama_lengkap"
@@ -443,6 +443,17 @@
 
                 </v-col>
                 <v-col cols="12" sm="12" md="12" lg="12">
+                  <v-text-field
+                      v-model="form.lama_angsuran"
+                      label="Lama Angsuran*"
+                      suffix="Bulan"
+                      dense
+                      required
+                      outlined
+                      type="number"
+                  />
+                </v-col>
+                <v-col cols="12" sm="12" md="12" lg="12">
                   <vuetify-money
                       v-model="form.nominal_pembiayaan"
                       :label="$t('Nominal')"
@@ -502,12 +513,15 @@ mixins:[componentMixin],
           kode:"0101"
         },
         produk_pembiayaan:{
-          nominal:null
+          nominal:null,
         },
-        nominal_pembiayaan:null,
-        nominal_simpanan:null
-      },
 
+        nominal_pembiayaan:null,
+        nominal_simpanan:null,
+        lama_angsuran:null,
+        margin:null,
+        dp:null
+      },
     };
   },
   mounted() {
