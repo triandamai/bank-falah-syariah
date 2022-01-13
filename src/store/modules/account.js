@@ -123,9 +123,6 @@ const actions = {
                 case RTABUNGAN:
                     page += state.tabungan.current_page;
                     break;
-                case RDEPOSITO:
-                    page += state.deposito.current_page;
-                    break;
                 case RPEMBIAYAAN:
                     page += state.pembiayaan.current_page;
                     break;
@@ -408,12 +405,7 @@ const mutations = {
                 state.datasimpanan.push(item);
             }
         }
-        if (type === RDEPOSITO) {
-            const exist = state.datadeposito.some((deposito) => deposito.id === item.id);
-            if (!exist) {
-                state.datadeposito.push(item);
-            }
-        }
+
 
     },
     /***
