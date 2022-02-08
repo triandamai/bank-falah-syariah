@@ -208,7 +208,7 @@ const actions = {
     [GET_HISTORY_PEMBIAYAAN]({commit},no_rekening){
         return new Promise((resolve)=>{
             const decrypt_no_rekening = decrypt(no_rekening)
-            ApiService.get(`rekening_pembiayaan/history_angsuran?no_rekening=${decrypt_no_rekening}`)
+            ApiService.get(`rekening_pembiayaan/history_angsuran/detail?no_rekening=${decrypt_no_rekening}`)
                 .then(({success,data})=>{
                     resolve(success)
                     let datas = dummy_history_pembiayaan.data
